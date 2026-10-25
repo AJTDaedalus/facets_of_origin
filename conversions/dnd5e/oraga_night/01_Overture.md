@@ -149,9 +149,9 @@ helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
 
 **Every enemy** carries what it wants and what it does when its morale breaks, as well as
 its numbers. No fight in this module has to be fought to the end: every card has outs, and
-most foes break. After midnight, though, some of them can kill. How hard that bites is a
-dial with three settings, Gentle, Sharp (the one the book is written at) and Merciless
-(see chapter V, "Down, Not Out").
+most foes break. A character can die tonight, but only in a fight, or doing something
+particularly dangerous, which is about as deadly as most published adventures for
+this game (see chapter V, "Down, Not Out").
 
 **Gaps on purpose.** Some answers are left out deliberately (see "What the DM Knows",
 below).
@@ -303,8 +303,11 @@ Human characters (and every character here is human) begin with it and regain it
 Long Rest, which tonight they will not get. *At a 2014 table, this is plain
 Inspiration, and it grants Advantage instead of a reroll.*
 
-**Rests.** There is no Long Rest tonight; a character who spends a Movement in the
-chapel (B6) may take a Short Rest, the only one the ball offers.
+**Rests.** There is no Long Rest tonight. A character who spends half a Movement in the
+chapel (B6) may take a Short Rest, the only one the ball offers, and every snake line the
+table has been shown gains one heat while they sit. At the toast each character may
+spend one Hit Die. The kitchens (B10) hold one Potion of Healing for each character (see
+chapter IV).
 
 ## What the Night Pays
 
@@ -337,7 +340,7 @@ these rows, not an extra award.
 | An omen read before it is explained (the quiet guest's habits count) | 100 to that character |
 | A closed room entered without a fight — Corval's gratitude, Anha's passages, an audience-earned pass, a festival hire's livery | 100 to each character who went in |
 | A fight finished, or ended by an out | The card's XP for the party, split evenly, as if every foe had fallen. An out marked "(no XP)" on its card (walking away, or letting the foes have their way) pays nothing |
-| A person carried out in Movement VII | 100 to the carrier, for each person they bring out |
+| A person carried out in Movement VII | 100 to the carrier, for each person they bring out. Holding S11's door counts once, as one person, for each character who held it |
 | Standing outside at dawn | 1,000 to each character |
 
 **Milestone is how this module is built.** The party starts at 2,700 XP (4th level). If
@@ -385,7 +388,8 @@ wary ally who can become a fight if somebody provokes her.
 
 ### The Fights, and How to Offer Them
 
-Every fight in this module is visible before it starts and optional once it has.
+Every fight in this module is foreshadowed before it starts, and nearly every one is
+optional once it has.
 Still, a table that came for damage dice and Initiative should not have to go home
 without touching them. Here is how to put each fight in front of the characters
 without pushing.

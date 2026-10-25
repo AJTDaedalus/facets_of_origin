@@ -27,7 +27,7 @@ him before the boat clears, and he is worth no XP.
 
 **Every block has four lines after its numbers**: **Wants** (what ends the fight without a body), **Tells** (what a watchful
 character sees before it happens), **Breaks** (when it stops, and what it does
-instead), and **Nastier** (one dial, for a table that wants it harder). Read the
+instead), and **Nastier** (one step harder, for a table that wants it). Read the
 Breaks line before you run the block. Most of these people would rather be anywhere
 else, and most of them break long before the end.
 
@@ -39,7 +39,9 @@ else, and most of them break long before the end.
   instead, see its *To the Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
   somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight, see
-  chapter V, "Down, Not Out".
+  chapter V, "Down, Not Out". Any attacker at this ball may also knock out rather than
+  kill, as the SRD's Knocking Out a Creature, with any attack roll; never with an area
+  effect (see chapter IX, "Running the Snakes").
 - **Down, Not Out.** The Uninvited set most people aside instead of killing them: a
   creature one of them drops is thrown clear, and a companion or the crowd gets it up,
   unless it has made itself a threat to that one. The Attendant sets aside whoever it
@@ -290,10 +292,9 @@ was made to go round.
 
 ***Removes Interruptions.*** A creature the Attendant reduces to 0 Hit Points while it
 is Idle is set aside, Unconscious and Stable (see chapter V, "Down, Not Out"). While it is
-Focused, the creature uses the ordinary rules for dying. At **Sharp**, a Focused Attendant
+Focused, the creature uses the ordinary rules for dying. A Focused Attendant
 attacks a creature at 0 Hit Points only if that creature interfered since the
-Attendant's last turn. At **Gentle** it never does; at **Merciless** it attacks any
-fallen creature its orders still cover (*Literal Orders*). It doesn't hunt.
+Attendant's last turn. It doesn't hunt.
 
 ***Where the Three Go.*** It stays in the scene of the first Uninvited the party
 interrupts (card S14), and it follows its three anywhere, the Root included: nothing
@@ -350,7 +351,7 @@ looks round, briefly, for the master it is supposed to have.
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
 > them tonight. What it is, for the DM alone: chapter VII. Card: S14. Chapter V.*
-> *Its CR 8 is for the Focused Attendant: more than twice High for three 4th-level
+> *Its CR 8 is for the Focused Attendant: 2.6 times High for three 4th-level
 > characters, on purpose (card S14). Idle, it is about CR 5 by the yardstick. Award
 > the full XP however the party gets it out of the way. With four characters it has
 > 229 Hit Points (card S14).*
@@ -2279,6 +2280,10 @@ before it is a reward.*
   have a standing interest in. Worth 2d6 × 25 GP in Rekuzan to a fence, and nothing
   to the table that gives the rings back. In S5, where they came off the fallen,
   giving them back is the reward.
+- **The kitchen's remedy box** *(B10).* Three **Potions of Healing** (four if four
+  characters are playing), on the shelf above the hearth, for a party that goes looking
+  (see chapter IV, B10). Each restores 2d4 + 2 Hit Points (the SRD's Potion of Healing).
+  Nobody claims them, and nobody stops a guest who takes one.
 - **Tavva's charges.** Whichever of her *Dark-Burst* and *Door-Seal* she has not
   spent (Table X–3).
 - **The grandmother's soul-crystal** *(Agenda 5).* A lifetime of light in a lattice

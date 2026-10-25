@@ -596,3 +596,81 @@ Read first: DECISIONS TP56 (*Palace brief and the quiet rooms*), the visual brie
 ### Checks (from `M/` unless noted)
 - `lint_5e.py --check` OK 0; `fact_check.py --check` OK 0; `pregen_check.py` 0 issues; `bestiary_check.py` 0 mismatches; `pytest tools -q` **489 passed** (481 + 8). `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` **42 passed**.
 - No commit or staging. M/art/ and references/house_raunu.jpeg untouched.
+
+## 2026-10-25 — WP6 (T6.2–T6.4, T6.7–T6.15)
+
+Read first: TASKS (header, SA, SIM, WP6), DESIGN §2, DECISIONS TP1–TP56 and TPN notes, this LOG's tail. Baseline from `M/`: lint 0, fact_check 0, bestiary 0, pregen 0, `pytest tools` 489 passed.
+
+**Mid-task owner ruling TP57 (via coordinator):** the Gentle / Sharp / Merciless dial is cut; one difficulty level ("death is possible, but only if you get into a fight or do something particularly dangerous", about standard published 5e danger). Exact before/after-midnight lethality wording pending. So: T6.1 ✕ superseded (nothing had been written); T6.5 and T6.6 and 05's *Everyone else's steel* / dial lines untouched (coordinator handles); sims and labels target one level, labelled by the SRD budget.
+
+### T6.2 Rule 2 rewritten; one snake everywhere
+- 09 rule 2: **Every ambush is foreshadowed.** No snake moves on a character whose tell the table has not been shown (plus: most fights are someone else's trouble; a snake that comes for a character, the *Heat 4* row, has been seen coming). 09 DM note "how many snakes": "The dial" → "For a table that came for steel: show two or three … the only place the count changes". 04 *Snakes at a Glance* "one line"; the three "show one or two" run-ins → "show one"; Movement II run box drops "a second snake line". 01 *The Fights*: "foreshadowed before it starts, and nearly every one is optional".
+- `facts.yaml` fact `risk_dial` (id per the task; TP57 cut the dial itself): forbids the old rule 2 phrases and "show one or two"; requires the new rule in 09. New test file `tools/test_wp6.py` (5 tests).
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 494 passed.
+
+### T6.17 TP57: strip the dial (added by the coordinator)
+- **05:** *Down, Not Out* loses the "That is the Sharp setting…" paragraph (its Gentle/Merciless threat cells); *Hitting someone who is down* "The ordinary rules hold" and the Gentle sentence cut; *Everyone else's steel* "A snake at heat 4 finishes…", the Gentle/Merciless paragraph cut to "Fire is the exception: it never finishes anyone"; say-it line "**Say it when the lights die**, at every table"; the Attendant bullet (no setting); the Radiant-at-the-gate dial parenthesis deleted; Movement VII DM note "The dial:" → "For a table that came for steel:".
+- **01:** the dial sentence → "A character can die tonight, but only in a fight, or doing something particularly dangerous, which is about as deadly as most published adventures for this game". **04:** Movement V run box "at every setting of the dial" cut. **08:** Down, Not Out line without "at Sharp"; the "Tonight's setting" checkbox removed. **09:** Movement V DM note, "After midnight" pointer, S14 *DM Note — how it plays* (Sharp content only), S14 *Tactics*, *Nastier* gloss "one step harder". **10:** *Removes Interruptions* (Sharp sentence only), *Nastier* gloss.
+- **facts.yaml:** `crowd_rule_scope` truth and why reworded; the threat-rule fact's "at Sharp" dropped; new fact `one_level` (forbids Gentle/Merciless, "at Sharp", "Sharp setting", "Tonight's setting", "setting(s) of the dial"; requires the unconditional say-it line in 05). `tools/test_wp6.py::TestOneLevel` (6 tests, one confirms the guard fires on HEAD's 05).
+- **Sims:** `s14.py` `DIALS` → `LEGACY_DIALS` (kept, so WP5's seeded runs reproduce: the seed tag still carries "sharp"); CLI `--dial` → `--legacy-dial` (default sharp); docstring states one level. `test_smoke.py`: the two dial tests renamed/documented as legacy. README run lines updated. `pytest research/oraga_5e_sim` 24 passed.
+- Left alone, per the coordinator: T6.5 (before-midnight drop costs), TP58 (Corval), TP60 (S10 stair). The dial strip touched only the dial sentences in 05/09/10; the S14 *Adjusting* lines don't name a setting.
+- INVENTIONS **#101** (TP57), **#102** (T6.2).
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 500 passed. `software/`: docs-consistency + private-canon **41 passed, 1 failed** — `test_no_tracked_file_names_private_canon` flags `docs/REFERENCE_oraga_palace_visual_brief.md` lines ~1843–1845 (two private names). That file is unmodified since HEAD 057998f; not a WP6 change. Flagged to the coordinator.
+
+### T6.3–T6.4 Heat-4 rows (incl. TP24)
+- 09: a **Heat 4** row closes each of the six line tables (Circle S7; Church S8's two wardens, to the chapel, detaining; Draunel S9's Draunel side on the terrace; Boranis S6 without Essin; Phern and Thenya "They come for nobody", pointing at S11's / S10's existing *At heat 4* lines). *What the heat means at midnight*, item 4, points to the rows and repeats rule 2's limit (only a character who crossed it, only after its tell). S7 gains an *At heat 4* line.
+- **TP24:** the nursery sale sends the knives to the east wing's service door at the lights, into the Radiant's path; S12 does not happen in that case (S12 *Where and when*, Table IX–2's Circle cell, 05 Table V–7's Circle row). No character meets Veier ("They never reach Veier: the household has her").
+- 08 Table VIII–5 gains a "Heat 4: they come for" column (six cells), and the Circle's heat 3–4 cell names the nursery exception.
+- INVENTIONS **#103** (all six staging choices; flagged for owner review: the chapel as the Church's destination, Phern/Thenya targeting nobody). TPN call: Phern and Thenya get a row that says they come for nobody, rather than inventing a target for two factions printed as nobody's snake (TPN-50a below).
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 500 passed.
+
+### T6.7 Two cards live by default
+- `facts.yaml` fact `default_live_cards` written first; `fact_check --report` listed 7 hits on the old text (09 Table IX–2 Circle start, 09 "does nothing" paragraph ×3, 08 Table VIII–5, 08 paragraph). Then: Circle starts at **2** (Table IX–2, Table VIII–5); the "does nothing" heats read Circle 3, and "by default **two** cards are live in the dark: S11 … and S12" (09, 08); 08 Table VIII–2's snakes row and Table VIII–11's "Snakes live in the dark" row (☐ S11 · ☐ S12 · others) name the defaults (T2.6's deferred row). `flow.json`: kd-circle and kd-phern say "live by default"; new edge kd-circle → S7 "nursery sold" (TP24). Flow page rebuilt.
+- One 09 paragraph split (lint long_paras). `tools/test_wp6.py::TestDefaultLiveCards` (5 tests).
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 505 passed.
+
+### T6.8 Resources: chapel rest, Hit Die, potions
+- 04 B6: a Short Rest takes half a Movement, and every faction whose line the table has been shown gains one heat (TPN-50b reads "visible snake clock" as the heat clock). 04 Movement IV: **A plate and a chair** (one Hit Die each, as at the end of a Short Rest). 04 B10: the kitchen's remedy box, three Potions of Healing (four at four), found by searching, no check. 10 *The Night's Loot*: the remedy box bullet (SRD Potion of Healing 2d4 + 2). 01 *Rests*: all three in one paragraph.
+- No new room or NPC. INVENTIONS **#104** (the box is a new prop; flagged for owner review).
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 505 passed.
+
+### T6.15 S11 door XP, balustrade, non-lethal, *Sleep*
+- 09 S11 *Development* and 01 Table I–4: holding the door counts once, as one person carried out, per character who held it. 09 S6 and S9 balustrade: "unless the creature going over makes a DC 13 Strength (Athletics) check to catch the rail". 09 *Steel at the ball* and 10 *Knocked out, not killed*: the SRD's Knocking Out a Creature, any attack roll, never an area effect. 05 *Two Hundred People*: "anyone left Unconscious on the floor at the end of a round". INVENTIONS **#105**.
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 505 passed.
+
+### T6.9 Update `skirm.py` / `chain.py`
+- Tests first: 8 new smoke tests (all-off reproduces baseline in skirm and chain; potion drunk when low; potion fed to a dying ally; heat-4 finish on a downed PC; finish raises deaths; Hit Die and Short Rest; WP6 cards exist; chain WP6 runs and is deterministic). Red (8 failed), then green.
+- `skirm.py`: `WP6` (frozen dataclass: `potions`, `heat4_finish`); `spend_hit_die`, `short_rest` (Hit Dice by pregen: Dassa d10+3, Andra d6+2, the rest d8+2; Second Wind +1, Action Surge, Channel Divinity +1, Andra's Arcane Recovery one 2nd-level slot), `try_potion` (Bonus Action; feeds a dying ally after midnight, else drinks at ≤35% HP; 2d4 + 2), `finish_attack` (Advantage; hit = two failures; ends Stable). A wiped party with `heat4_finish` is finished for up to three rounds. Foes that detain or fight *To the Terms* never finish. New cards (canon-capped rosters): `S7_wp6` (all four knives), `S9_wp6` (three duelists + three Cousin's Blades), `S13_wp6` (Draunel + two duelists, half down), `S3_wp6`, `S5`/`S5_wp6`, `S7_dark`, `S8_dark`, `S12`/`S12_wp6`/`S12_h4_wp6`. CLI `--wp6`. "After midnight lethal" was already the harness's `lethal` card flag; "half down" is the existing `half_down` end rule.
+- `chain.py`: `ChainWP6` (`s14_new`, `potions`, `hit_die`, `chapel`, `finish`, `cards`; `full()`), optional `early_card` before the toast; CLI `--wp6`, `--early`. Potions between scenes for anyone under half HP.
+- Reproducibility: the seed string gains a tag only when a switch is on. Checked: `skirm.py --card S8 --party C3 --n 4000 --seed 1` 22.7% (README); `chain.py --party C1 --n 2000 --seed 1` byte-identical before and after (HP at gate 80.6%, death 18.2%).
+- `pytest research/oraga_5e_sim` **32 passed** (24 before).
+
+### T6.10 Before-midnight re-budget sims
+- Commands: `python <scratchpad>/t610.py` (loops `skirm.simulate(card, party, 2000, 1)` over S2, S4, S4_clock, S7, S7_wp6, S7_wp6_last, S8, S9, S9_wp6, S9_wp6_last, S10 × C1–C5, 4P); 34 s. Seed 1, n = 2,000. Full table: `research/oraga_5e_simulation_notes.md`, "WP6".
+- Rosters capped by printed headcounts (no new people): **S7** all four knives (800, Low); **S9** three duelists + three Cousin's Blades (900, between Low and Moderate). S3, S8, S10 and S4 (TP29) keep their rosters; S2 (Tavva's crew of four: max 650), S1 and S6 (fist fights, not modelled) can't reach Low within canon headcounts.
+- Rates (drop %, C1–C5): S2 10–44 (plays Low); S4 fought out 28–69 (Moderate), clock-ended 10–28 (Low); S7 WP6 0–7 on its morale, 45–85 to the last; S8 11–65 (Low; Moderate for C1); S9 WP6 1–7 on morale, 61–92 to the last; S10 7–52 (Low; Moderate for C1).
+
+### T6.13 After-midnight re-budget sims; chain run
+- Commands: `python <scratchpad>/t613.py` (skirm cards with WP6 switches and the chain, 88 s) and `t613b.py` (chain decomposition). Seed 1, n = 2,000.
+- Cards (drop / death %, C1–C5): S3 13–47 / 0.6–2.2; S5 10–46 / 0.7–7; S8 dark 11–66 / 0; S12 at half down 0–6 / ≤0.1; S12 heat 4 with finish 6–40 / 4–12; **S13 WP6 (Draunel + two duelists, half down, 1,100 XP)** 23–66 / 1–2, at heat 4 with the finish 14–27 % deaths; S7 in the dark (nursery) 6–39 / 4–13.
+- Chain S14 → S13 → S3 (HP at gate / any death): old rules 58–82 / 5–20; + resources 58–86 / 7–17; all of WP6 (WP5 S14, resources, S13 WP6 at heat 4 with the finish) 45–62 / 26–63; after a Movement V S2, 38–53 / 37–75. TUNING's 5–21 % HP was never reproduced by the rebuild. Written up, with the caveat that the chain is a worst case.
+- **Finding for the owner:** under TP57 ("approximately in line with other D&D modules") the heat-4 finish (a Sharp rule TP57 kept) multiplies a card's death rate by ~10 (S13: 1–2 % → 14–27 %), and the strict crowd rule leaves the dying unhelped in snake fights. ⛔ OWNER question recorded in TASKS under T6.14.
+
+### T6.11 Before-midnight card text, labels, CR
+- 09: **S7** all four knives (the fourth "out of sight ahead of the party or behind it"; moved from the old four-character line), 800 XP, Low, "plays High to the last knife"; solo and 3rd-level lines keep the three in the read-aloud (600); four characters "all four, as printed" (the Circle brought no more). **S9** three a side (900 XP; Rewards 900 / 600 / 300; Nastier 1,450, just under High; solo two a side). Play lines from the re-sim: S2 "plays Low", S8 and S10 "Moderate for a party light on damage". Table IX–3 rows for S2, S7, S8, S9, S10.
+- **CR (TPN-50d):** not re-derived (no SRD procedure); a *Running the Snakes* bullet names the five blocks that read a step generous, and says the play line is the correction. `bestiary_check` unchanged (no test needed).
+- The 09 Draunel heat-4 row and 08 Table VIII–5's cells say "Draunel's / S9's duelists" (no count). **Fixed in passing:** T6.3's 08 Table VIII–5 cells had not applied (header only; my script's pipe count was off); now all six cells are in.
+
+### T6.12 S4 roster and label
+- TP29: roster kept (two guards, four coming). Label stays "between Low and Moderate" (900); the card and Table IX–3 add the play line: fought out, Moderate; ended when the house answers, Low (re-sim 28–69 % vs 10–28 %).
+
+### T6.14 After-midnight card text and labels
+- 09 **S13**: Essar Draunel and two Draunel Duelists ("the two men in good coats"), 1,100 XP, between Low and Moderate; morale "when half of the Draunel side is down"; "At heat 4 it is the deadliest card of the night … keep someone free to reach the fallen"; both sides 1,850, beyond High; Rewards 1,100; 3rd level "Draunel and one duelist (900)". **S12** morale "when half of them are down". *Running the Snakes* morale bullet: "After midnight the cards' first trigger is half down." **S14** "2.6 times High" (09 Table IX–3, 09 S14 *Budget*, 10 the Attendant). S3, S5, S8 dark keep rosters and labels.
+- ⛔ OWNER follow-ups **W1** (rosters capped by headcount) and **W2** (lethality of the heat-4 finish under TP57) written into TASKS after T6.17. INVENTIONS **#106**, DECISIONS **TPN-50**.
+- Checks: lint 0; fact_check 0; bestiary 0; pregen 0; `pytest tools` 505 passed.
+
+### WP6 close (this run)
+- Facets edition: F/04 Undercurrent C "sell it" now carries TP24 in lore terms ("when the lights die its knives go for the east wing's service door, into the Radiant's path"). No other WP6 change is lore (heat, rosters, potions, rests and the dial are 5e mechanics).
+- Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **505 passed** (489 at start; 16 new in `tools/test_wp6.py`). Repo root: `pytest research/oraga_5e_sim` **32 passed**. `software/`: docs-consistency + private-canon **41 passed, 1 failed**: `test_no_tracked_file_names_private_canon` on `docs/REFERENCE_oraga_palace_visual_brief.md` (~1843–1845); it fails the same way on a clean HEAD (checked with a stash), so it predates WP6.
+- Done: T6.2, T6.3, T6.4, T6.7, T6.8, T6.9, T6.10, T6.11, T6.12, T6.13, T6.14, T6.15, T6.17. ✕ T6.1 (TP57). Held: T6.5 (coordinator). Open: T6.16 (commit; not done, per brief). ⛔ OWNER: W1, W2 (TASKS, after T6.17).
+- No commit or staging.

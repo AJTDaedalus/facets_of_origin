@@ -20,6 +20,7 @@ Pure standard library; deterministic for a given --seed.
 """
 import argparse
 import random
+from dataclasses import dataclass
 
 # ----------------------------------------------------------------------------- dice
 
@@ -57,6 +58,7 @@ OPTIONS = dict(ilesse_attack_slots=False, targeting="sticky")
 
 PREGENS = {
     "Dassa": dict(
+        hd=(10, 3),
         hp=40, ac=16, init=3, init_adv=True, role="front", melee=True,
         saves=dict(str=6, dex=1, con=5, wis=1), medicine=3, athletics=6,
         second_wind=3, action_surge=1, slots={},
@@ -65,6 +67,7 @@ PREGENS = {
                 ("argue its orders", 2, False, False)],
     ),
     "Pello": dict(
+        hd=(8, 2),
         hp=31, ac=16, init=4, init_adv=False, role="striker", melee=True,
         saves=dict(str=-1, dex=6, con=2, wis=2), medicine=2, athletics=1, slots={},
         tricks=[("lift its cup", 8, True, False),
@@ -72,6 +75,7 @@ PREGENS = {
                 ("argue its orders", 3, False, False)],
     ),
     "Serane": dict(
+        hd=(8, 2),
         hp=31, ac=14, init=4, init_adv=False, role="talker", melee=False,
         saves=dict(str=-1, dex=4, con=2, wis=1), medicine=2, athletics=0,
         slots={1: 4, 2: 3}, bi=4, healing_word=True,
@@ -81,6 +85,7 @@ PREGENS = {
                 ("crystal light from Prestidigitation", 1, True, True)],
     ),
     "Andra": dict(
+        hd=(6, 2),
         hp=26, ac=15, init=2, init_adv=False, role="arcane", melee=False,
         saves=dict(str=-1, dex=2, con=2, wis=3), medicine=3, athletics=-1,
         slots={1: 3, 2: 3}, shield=True,
@@ -89,6 +94,7 @@ PREGENS = {
                 ("argue its orders", 6, False, False)],
     ),
     "Ilesse": dict(
+        hd=(8, 2),
         hp=31, ac=14, init=3, init_adv=False, role="healer", melee=False,
         saves=dict(str=-1, dex=1, con=2, wis=6), medicine=6, athletics=-1,
         slots={1: 4, 2: 3}, healing_word=True, channel=2,
@@ -130,6 +136,9 @@ class PC:
         self.action_surge = d.get("action_surge", 0)
         self.tricks = d["tricks"]
         self.hi = True                      # Heroic Inspiration (Resourceful)
+        self.hd = d["hd"]                   # (die size, Con modifier); T6.9
+        self.hit_dice = 4                   # 4th level
+        self.potions = 0                    # WP6: given by the caller when modelled
         if attrited:                        # TUNING Appendix: 70% HP, half slots, HI 50%
             self.hp = int(round(self.max_hp * 0.7))
             self.slots = {k: v // 2 for k, v in self.slots.items()}
@@ -336,6 +345,35 @@ def _solo_s13(k):
     return [E("Essar Draunel")]
 
 
+# --- WP6 (T6.10, T6.13) three-player rosters, from existing blocks and the printed
+# headcounts only (the Circle brought four knives, Draunel three duelists, Boranis three
+# Cousin's Blades; S13's line says "Draunel and two of his duelists").
+
+def _r_s7_wp6(k):
+    return [E("Circle Hired Knife") for _ in range(4)]          # all four (cap: four)
+
+
+def _r_s9_wp6(k):
+    if k >= 4:
+        return _r_s9(k)
+    return [E("Draunel Duelist") for _ in range(3)] + \
+        [E("Boranis Cousin's Blade") for _ in range(3)]
+
+
+def _r_s13_wp6(k):
+    if k >= 4:
+        return _r_s13(k)
+    return [E("Essar Draunel"), E("Draunel Duelist"), E("Draunel Duelist")]
+
+
+def _r_s12(k, heat4=False):
+    return [E("Circle Hired Knife") for _ in range(3 if heat4 else 2)]
+
+
+def _r_s5(k):
+    return [E("Tavva")] + [E("Gallery Knife") for _ in range(2)]
+
+
 # The Veteran Draunel Duelist block is approximated (58 HP, AC 16, two +6 1d8+4);
 # it appears only in the four-player S9/S13 lines.
 
@@ -364,6 +402,21 @@ CARDS = {
     "S13": dict(roster=_r_s13, lethal=True, end="draunel_bloodied", focus="leader",
                 smoke=True),
     "S13_last": dict(roster=_r_s13, lethal=True, end="last", focus="low", smoke=True),
+    # WP6 (T6.10, T6.13): canon-capped rosters; after midnight, morale at "half down".
+    "S7_wp6": dict(roster=_r_s7_wp6, lethal=False, end="first_bloodied", focus="low"),
+    "S7_wp6_last": dict(roster=_r_s7_wp6, lethal=False, end="last", focus="low"),
+    "S9_wp6": dict(roster=_r_s9_wp6, lethal=False, end="s9", focus="duelist"),
+    "S9_wp6_last": dict(roster=_r_s9_wp6, lethal=False, end="last", focus="low"),
+    "S3_wp6": dict(roster=_r_s3, lethal=True, end="s3", focus="low", single_file=True),
+    "S5": dict(roster=_r_s5, lethal=True, end="tavva", focus="leader"),
+    "S5_wp6": dict(roster=_r_s5, lethal=True, end="half_down", focus="low"),
+    "S7_dark": dict(roster=_r_s7, lethal=True, end="half_down", focus="low"),
+    "S8_dark": dict(roster=_r_s8, lethal=True, end="half_down", focus="low"),
+    "S12": dict(roster=_r_s12, lethal=True, end="first_bloodied", focus="low"),
+    "S12_wp6": dict(roster=_r_s12, lethal=True, end="half_down", focus="low"),
+    "S12_h4_wp6": dict(roster=lambda k: _r_s12(k, heat4=True), lethal=True, end="half_down",
+                       focus="low"),
+    "S13_wp6": dict(roster=_r_s13_wp6, lethal=True, end="half_down", focus="low", smoke=True),
     # T3.10 solo lines (see above). S7 and S9 keep their three-character rosters.
     "S2_solo": dict(roster=_solo_s2, lethal=False, end="first_bloodied", focus="leader"),
     "S4_solo": dict(roster=_solo_s4, lethal=False, end="last", focus="low"),
@@ -374,6 +427,92 @@ CARDS = {
     "S13_solo": dict(roster=_solo_s13, lethal=True, end="draunel_bloodied", focus="leader",
                      smoke=True),
 }
+
+
+# ------------------------------------------------------------------------ WP6 (T6.9)
+
+@dataclass(frozen=True)
+class WP6:
+    """WP6 switches for a skirmish (all off = the T3.1 model, draw for draw).
+    potions:      each PC may drink its Potion of Healing (2d4 + 2) as a Bonus Action when
+                  at 35% HP or less, or feed it to a dying ally (SRD 5.2.1: drinking or
+                  administering a potion is a Bonus Action). The caller hands out the potions.
+    heat4_finish: a heat-4 snake finishes a downed character who crossed it (05 "Everyone
+                  else's steel"): after midnight, a foe whose target dropped keeps attacking
+                  it (Advantage; a hit within 5 ft is a critical: two failed death saves)
+                  until it is dead, then moves on. Foes that detain never do."""
+    potions: bool = False
+    heat4_finish: bool = False
+
+
+def spend_hit_die(pc, rng):
+    """Spend one Hit Die: roll it and add the Constitution modifier (minimum 0)."""
+    if pc.dead or pc.hit_dice <= 0:
+        return False
+    pc.hit_dice -= 1
+    size, con = pc.hd
+    heal_pc(pc, max(0, roll(rng, 1, size) + con))
+    return True
+
+
+def short_rest(pc, rng):
+    """The chapel's Short Rest (T6.8): spend Hit Dice while a die's average still fits under
+    the maximum; Second Wind regains one use, Action Surge its use, Channel Divinity one
+    use, and Andra's Arcane Recovery one 2nd-level slot."""
+    if pc.dead:
+        return
+    if pc.down:
+        heal_pc(pc, 1)
+    size, con = pc.hd
+    avg = (size + 1) / 2 + con
+    while pc.hit_dice > 0 and pc.max_hp - pc.hp >= avg:
+        spend_hit_die(pc, rng)
+    base = PREGENS[pc.name]
+    if base.get("second_wind"):
+        pc.second_wind = min(base["second_wind"], pc.second_wind + 1)
+    if base.get("action_surge"):
+        pc.action_surge = base["action_surge"]
+    if base.get("channel"):
+        pc.channel = min(base["channel"], pc.channel + 1)
+    if pc.name == "Andra":
+        pc.slots[2] = min(base["slots"][2], pc.slots.get(2, 0) + 1)
+
+
+def try_potion(pc, pcs, ctx):
+    """WP6 potions: feed a dying ally, else drink when low. Bonus Action. True if used."""
+    w = getattr(ctx, "wp6", None)
+    if not (w and w.potions) or pc.potions <= 0 or getattr(pc, "_bonus_used", False):
+        return False
+    if not pc.up:
+        return False
+    dying = [p for p in pcs if p.down and not p.dead and not p.stable and p.in_fight]
+    if ctx.lethal and dying:
+        tgt = dying[0]
+    elif pc.hp <= int(pc.max_hp * 0.35):
+        tgt = pc
+    else:
+        return False
+    pc.potions -= 1
+    heal_pc(tgt, roll(ctx.rng, 2, 4) + 2)
+    pc._bonus_used = True
+    return True
+
+
+def finish_attack(en, pc, atk, ctx):
+    """WP6 heat4_finish: one attack on a downed PC. True on a hit."""
+    if pc.dead or not pc.down:
+        return False
+    to_hit = atk[0]
+    nat = d20(ctx.rng, 1)                    # Unconscious: attacks have Advantage
+    if nat == 1 or (nat != 20 and nat + to_hit < pc.ac):
+        return False
+    pc.stable = False                        # a Stable creature that takes damage is dying again
+    pc.stable_round = None
+    pc.ds_fail += 2                          # within 5 ft: a critical hit, two failures
+    if pc.ds_fail >= 3:
+        pc.dead = True
+        ctx.deaths += 1
+    return True
 
 
 # ------------------------------------------------------------------------ the fight
@@ -388,6 +527,7 @@ class Ctx:
         self.dropped = set()
         self.deaths = 0
         self.haul_hi_given = False
+        self.wp6 = WP6()
 
 
 # --- damage, dropping, death saves, the crowd rule (chapter V "Down, Not Out") ---
@@ -812,7 +952,7 @@ def choose_pc_target(card, enemies, ctx):
     return min(act, key=lambda e: e.hp)
 
 
-def run_fight(card_name, pcs, rng, crowd="strict", max_rounds=30):
+def run_fight(card_name, pcs, rng, crowd="strict", max_rounds=30, wp6=None):
     """Fight one card with the given (persistent) PCs. Mutates the PCs. Returns a
     per-fight result dict."""
     card = CARDS[card_name]
@@ -823,6 +963,8 @@ def run_fight(card_name, pcs, rng, crowd="strict", max_rounds=30):
             if e.kind == "captain":
                 e.arrive = card["captain_round"]
     ctx = Ctx(rng, card["lethal"], crowd)
+    if wp6 is not None:
+        ctx.wp6 = wp6
     for p in pcs:
         p.reset_fight()
         p.in_fight = not card.get("single_file")
@@ -878,7 +1020,18 @@ def run_fight(card_name, pcs, rng, crowd="strict", max_rounds=30):
                 break
         if not any(p.up for p in pcs):
             # everyone down: the foes walk away (nobody finishes anyone); dying
-            # PCs keep rolling until stable or dead, unaided
+            # PCs keep rolling until stable or dead, unaided. WP6 heat4_finish: the
+            # foes that kill finish the fallen first, for up to three rounds.
+            if ctx.wp6.heat4_finish and ctx.lethal:
+                for _ in range(3):
+                    for e in enemies:
+                        if not e.active or e.detain or e.terms:
+                            continue
+                        for atk in e.attacks:
+                            down = [p for p in pcs if p.down and not p.dead]
+                            if not down:
+                                break
+                            finish_attack(e, rng.choice(down), atk, ctx)
             for _ in range(10):
                 ctx.round += 1
                 crowd_start_of_round(pcs, ctx)
@@ -923,6 +1076,8 @@ def pc_turn(pc, pcs, enemies, card, ctx):
     second_wind(pc, ctx) if pc.name == "Dassa" else None
     if try_bonus_heal(pc, pcs, ctx):
         pass
+    else:
+        try_potion(pc, pcs, ctx)
     if smoke_lost:
         return
     if try_action_heal(pc, pcs, ctx):
@@ -976,6 +1131,11 @@ def enemy_turn(en, pcs, enemies, card, ctx):
 def _enemy_attacks(en, pcs, enemies, ctx):
     sneak_ok = True
     for atk in en.attacks:
+        t = en.target
+        if (ctx.wp6.heat4_finish and ctx.lethal and not en.detain and not en.terms
+                and t is not None and t.down and not t.dead):
+            finish_attack(en, t, atk, ctx)
+            continue
         tgt = pick_target(en, pcs, ctx)
         if tgt is None:
             return
@@ -988,13 +1148,24 @@ def _enemy_attacks(en, pcs, enemies, ctx):
 
 # ----------------------------------------------------------------------- simulate
 
-def simulate(card, party="C1", n=2000, seed=1, solo=None, crowd="strict", attrited=False):
-    """Run n fights of one card. Returns rates over runs."""
-    rng = random.Random(f"skirm|{card}|{party}|{solo}|{crowd}|{attrited}|{seed}")
+def _wp6_tag(wp6):
+    if wp6 is None or not (wp6.potions or wp6.heat4_finish):
+        return ""
+    return f"|wp6:{int(wp6.potions)}{int(wp6.heat4_finish)}"
+
+
+def simulate(card, party="C1", n=2000, seed=1, solo=None, crowd="strict", attrited=False,
+             wp6=None):
+    """Run n fights of one card. Returns rates over runs. wp6: a WP6 (None or all off =
+    the T3.1 model, same seed stream)."""
+    rng = random.Random(f"skirm|{card}|{party}|{solo}|{crowd}|{attrited}|{seed}" + _wp6_tag(wp6))
     tot = dict(any_drop=0, drops=0, deaths=0, wiped=0, broke=0, rounds=0)
     for _ in range(n):
         pcs = make_party(party, attrited, rng, solo)
-        r = run_fight(card, pcs, rng, crowd)
+        if wp6 is not None and wp6.potions:
+            for p in pcs:
+                p.potions = 1
+        r = run_fight(card, pcs, rng, crowd, wp6=wp6)
         tot["any_drop"] += r["any_drop"]
         tot["drops"] += r["drops"]
         tot["deaths"] += 1 if r["deaths"] else 0
@@ -1022,14 +1193,16 @@ def main(argv=None):
     ap.add_argument("--all", action="store_true", help="every card x every party")
     ap.add_argument("--n", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--wp6", default=None, help="comma list of WP6 switches: potions,heat4_finish")
     a = ap.parse_args(argv)
-    print(f"skirm.py seed={a.seed} n={a.n} crowd={a.crowd}")
+    wp6 = WP6(**{k: True for k in a.wp6.split(",")}) if a.wp6 else None
+    print(f"skirm.py seed={a.seed} n={a.n} crowd={a.crowd} wp6={a.wp6}")
     if a.all:
         for c in sorted(CARDS):
             for p in sorted(PARTIES):
-                print(_fmt(simulate(c, p, a.n, a.seed, crowd=a.crowd)))
+                print(_fmt(simulate(c, p, a.n, a.seed, crowd=a.crowd, wp6=wp6)))
     else:
-        print(_fmt(simulate(a.card, a.party, a.n, a.seed, a.solo, a.crowd)))
+        print(_fmt(simulate(a.card, a.party, a.n, a.seed, a.solo, a.crowd, wp6=wp6)))
 
 
 if __name__ == "__main__":

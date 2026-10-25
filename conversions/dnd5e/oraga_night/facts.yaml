@@ -250,7 +250,7 @@ facts:
       it, earns Delay against it three times in one scene, or deals its last blow; the DM says
       the mark aloud ("She looks at you — properly, for the first time."). Unmarked, a creature
       dropped to 0 HP is set aside, Unconscious and Stable, and the crowd rule applies. Marked,
-      normal dying rules apply; at Sharp the Uninvited finishes a marked creature only if it is
+      normal dying rules apply; the Uninvited finishes a marked creature only if it is
       still in the way on its next turn. The quarry is unchanged; the mark lasts the scene. The
       crowd rouses a dropped creature at the start of "the round after" the round it was still
       down, never "the round after next". Nothing prints "only ever in mortal danger by choice"
@@ -655,9 +655,8 @@ facts:
     truth: >-
       T6.6 / DESIGN §2.1-§2.2: after midnight the snakes and the Bought use the ordinary rules
       for dying; the crowd rule covers only creatures an Uninvited (or the Attendant, while Idle)
-      set aside. At Sharp a heat-4 snake finishes a downed character who crossed it. Gentle: no
-      snake finishes anyone and the crowd rule covers everyone; Merciless: a snake finishes whoever
-      crossed it and the crowd rule reaches nobody while a fight is on. The fire alone never
+      set aside. A heat-4 snake finishes a downed character who crossed it (TP57: one level, the
+      old Sharp wording; no Gentle or Merciless). The fire alone never
       finishes anyone. The rule is printed once, in chapter V; 09 and 10 point to it.
     source: owner TP2 (2026-10-20); DESIGN_oraga_5e_3p_pass §2.1, §2.2 option 3; T6.6; polish review B3
     phrases: ["Everyone else's steel", "it covers only the set-aside"]
@@ -672,7 +671,7 @@ facts:
         file: 05_The_Longest_Night.md
         pattern: '\*\*Everyone else.s steel\.\*\*'
         anchor: 'Down, Not Out'
-        why: T6.6 — the dial paragraph for snake and Bought fights lives in chapter V
+        why: T6.6 — the paragraph for snake and Bought fights lives in chapter V
 
   - id: wept_freeze
     truth: >-
@@ -722,6 +721,79 @@ facts:
         files: ["04"]
         all: ["(?i)\\b(?:knotted cords|duty rota|carters' tokens)\\b", '(?i)\b(?:written|writing|lettered|inscribed|letters|names? on)\b']
         why: TP56 — the rota cords and the carters' tokens carry no writing (knots and tokens only)
+
+  - id: risk_dial
+    truth: >-
+      T6.2 / TP2: chapter IX's rule 2 is "Every ambush is foreshadowed. No snake moves on a
+      character whose tell the table has not been shown." The old rule (no snake ambushes a
+      character, and no snake is the reason a character dies before midnight) is retired. The
+      count of snake lines shown per Movement is one, with the "more for a steel table" change
+      printed once, in chapter IX's DM note. (The id keeps T6.2's name; TP57 cut the dial itself.)
+    source: owner TP2 (2026-10-20); DESIGN_oraga_5e_3p_pass §2.2 option 1; T6.2; L-011, L-066
+    phrases: ["Every ambush is foreshadowed"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bno snake is the reason a character dies\b|\bNo snake ambushes a character\b'
+        why: T6.2 — rule 2 is retired; snakes can come for a character whose tell was shown
+      - type: forbid
+        pattern: '(?i)\bshow (?:the table )?one or two\b'
+        why: T6.2 / L-066 — one snake line per Movement; the steel-table count lives in chapter IX only
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: '\*\*Every ambush is foreshadowed\.\*\* No snake moves on a character whose tell'
+        anchor: 'The Snakes at the Ball'
+        why: T6.2 — the new rule 2
+
+  - id: one_level
+    truth: >-
+      TP57 (2026-10-25): one difficulty level. A character can die, but only in a fight or doing
+      something particularly dangerous, at about the danger of a published 5e adventure. The
+      Gentle / Sharp / Merciless dial is cut: no setting is named anywhere, Sharp's rules are the
+      only rules, and the say-it line ("From here on the knives are real.") is said at every table
+      when the lights die. Before midnight the palace's two mercies (detain, eject) still hold.
+    source: owner TP57 (2026-10-25); supersedes DESIGN §2.1, TPN-35, T6.1
+    phrases: ["From here on the knives are real"]
+    checks:
+      - type: forbid
+        pattern: '\b(?:Gentle|Merciless)\b'
+        why: TP57 — the dial is cut; no Gentle or Merciless setting
+      - type: forbid
+        pattern: '(?i)\bat \**sharp\b|\bSharp setting\b|\bTonight.s setting\b|\bsettings? of the dial\b|\bdial with three settings\b'
+        why: TP57 — one level; no setting is named and there is no setting checkbox
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\*\*Say it when the lights die\*\*, at every table'
+        anchor: 'Everyone else'
+        why: TP57 — the say-it line is unconditional
+
+  - id: default_live_cards
+    truth: >-
+      T6.7 / DESIGN §2.2 option 5 (L-017): by default two snake cards are live in the dark, S11
+      (Phern) and S12 (the Circle), plus the gate. The Circle starts at heat 2, so the toast's
+      automatic box puts it at 3 by midnight. A table that does nothing reaches midnight with the
+      Circle at 3, the Church at 2, Draunel at 2, House Boranis at 1, Phern at 3 and the Thenya at
+      3 (spent at the half-bell on S10).
+    source: DESIGN_oraga_5e_3p_pass §2.2 option 5; T6.7; L-017
+    phrases: ["the Circle at 3"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bby default \**one\** card is live\b|\bthe only card live in the dark by default\b|\bmidnight arrives (?:like this: |with )the Circle at 2\b'
+        why: T6.7 — two cards are live by default (S11 and S12); the Circle reaches midnight at 3
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: '\| \*\*The Circle\*\* ☐☐☐☐ \| 2 \|'
+        anchor: 'Table IX–2'
+        why: T6.7 — the Circle starts at heat 2 (Table IX–2)
+      - type: require
+        file: 08_Handouts.md
+        pattern: '\| \*\*The Circle\*\* \| ☐☐☐☐ \| 2 \|'
+        anchor: 'Table VIII–5'
+        why: T6.7 — Table VIII–5 matches
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: '\bby default \*\*two\*\* cards are live in the dark\b'
+        anchor: 'If the table does nothing'
+        why: T6.7 — the default heats paragraph names two live cards
 
 maps:
   court:          # B2 (05 General Features, Sizes)

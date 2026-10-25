@@ -154,22 +154,23 @@ after X.
 | T5.10 | WP5 | done | S14 text from the re-sim |
 | T5.11 | WP5 | done | Vell's immunities |
 | T5.12 | WP5 | open | Commit WP5 |
-| T6.1 | WP6 | open | "How Hard to Go" dial box |
-| T6.2 | WP6 | open | Rule 2 rewritten; one snake everywhere |
-| T6.3 | WP6 | open | Heat-4 rows, part 1 (incl. TP24 Circle beat) |
-| T6.4 | WP6 | open | Heat-4 rows, part 2 |
-| T6.5 | WP6 | open | A drop costs something before midnight |
+| T6.1 | WP6 | ✕ superseded by TP57 (dial cut) | "How Hard to Go" dial box |
+| T6.2 | WP6 | done | Rule 2 rewritten; one snake everywhere |
+| T6.3 | WP6 | done | Heat-4 rows, part 1 (incl. TP24 Circle beat) |
+| T6.4 | WP6 | done | Heat-4 rows, part 2 |
+| T6.5 | WP6 | held (coordinator: waits on the TP57 lethality wording) | A drop costs something before midnight |
 | T6.6 | WP6 | done (polish B) | Lethal after midnight |
-| T6.7 | WP6 | open | Two cards live by default |
-| T6.8 | WP6 | open | Resources: chapel rest, Hit Die, potions |
-| T6.9 | WP6 | open | Update `skirm.py` / `chain.py` |
-| T6.10 | WP6 | open | Before-midnight re-budget sims |
-| T6.11 | WP6 | open | Before-midnight card text, labels, CR |
-| T6.12 | WP6 | open | S4 roster and label |
-| T6.13 | WP6 | open | After-midnight re-budget sims; chain run |
-| T6.14 | WP6 | open | After-midnight card text and labels |
-| T6.15 | WP6 | open | S11 door XP, balustrade, non-lethal, *Sleep* |
+| T6.7 | WP6 | done | Two cards live by default |
+| T6.8 | WP6 | done | Resources: chapel rest, Hit Die, potions |
+| T6.9 | WP6 | done | Update `skirm.py` / `chain.py` |
+| T6.10 | WP6 | done | Before-midnight re-budget sims |
+| T6.11 | WP6 | done (⛔ OWNER follow-ups W1, W2 below) | Before-midnight card text, labels, CR |
+| T6.12 | WP6 | done | S4 roster and label |
+| T6.13 | WP6 | done | After-midnight re-budget sims; chain run |
+| T6.14 | WP6 | done (⛔ OWNER follow-ups W1, W2 below) | After-midnight card text and labels |
+| T6.15 | WP6 | done | S11 door XP, balustrade, non-lethal, *Sleep* |
 | T6.16 | WP6 | open | Commit WP6 |
+| T6.17 | WP6 | done | TP57: strip the dial |
 | T7.1 | WP7 | open | Propagate TP11 |
 | T7.2 | WP7 | done | The Root (TP8, TP17, TP18) |
 | T7.3 | WP7 | open | The garden doors (TP9) |
@@ -800,7 +801,7 @@ T4.14).
 
 ## WP6: Risk options, re-budget and re-sims (DESIGN §2; TP24 midnight beat)
 
-### ☐ T6.1 "How Hard to Go" dial box *(L-011, `DIAL`)*
+### ✕ T6.1 "How Hard to Go" dial box *(L-011, `DIAL`)* — **SUPERSEDED by TP57 (2026-10-25):** the Gentle / Sharp / Merciless dial is cut; one difficulty level. Nothing below is to be done.
 - **Do:** add the box to chapter I with the §2.1 table (Gentle / Sharp / Merciless × snakes,
   dying, Uninvited, Attendant) and the session-zero line ("tonight the knives are real"). Add a
   dial-word line to the DM sheet.
@@ -808,7 +809,7 @@ T4.14).
 - **Accept:** the box matches §2.1 cell for cell, and the book says it is written at Sharp.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T6.2 Rule 2 rewritten; one snake everywhere *(L-011, L-066)*
+### ☑ T6.2 Rule 2 rewritten; one snake everywhere *(L-011, L-066)*
 - **Do:** chapter IX rule 2 (09:53–58) becomes "Every ambush is foreshadowed. No snake moves on a
   character whose tell the table has not been shown." The snake-per-Movement count becomes "one"
   everywhere (04:908, 940, 975, 1133; 09:71), with the dial in one place.
@@ -817,7 +818,7 @@ T4.14).
   `risk_dial`) for "no snake is the reason a character dies".
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T6.3 Heat-4 rows, part 1 (incl. TP24) *(L-011; TP24)*
+### ☑ T6.3 Heat-4 rows, part 1 (incl. TP24) *(L-011; TP24)*
 - **Do:** for half the factions (the Circle first), add a *Heat 4: they come for you* row naming
   who, where and which existing card. **The Circle (TP24):** when Callun is sold the nursery, the
   Circle goes to heat 4, and in the dark its knives go for the east wing's service door, into the
@@ -828,7 +829,7 @@ T4.14).
   staging choice.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T6.4 Heat-4 rows, part 2 *(L-011)*
+### ☑ T6.4 Heat-4 rows, part 2 *(L-011)*
 - **Do:** as T6.3 for the remaining factions (the Draunel row uses S9's duelists on the terrace,
   per §2.2).
 - **Files:** `M/09_The_Snakes.md`, `M/08_Handouts.md`.
@@ -853,7 +854,7 @@ T4.14).
 - **Accept:** no text half-promises a rescue. The dial cells match T6.1.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T6.7 Two cards live by default *(L-017, `FACTS`)*
+### ☑ T6.7 Two cards live by default *(L-017, `FACTS`)*
 - **Do:** first add `facts.yaml` fact `default_live_cards` (S11 and S12; the Circle starts at heat
   2). Then move the default heats (09:475–481), update Table VIII–2 and `flow/flow.json`, and
   rebuild the flow page.
@@ -861,7 +862,7 @@ T4.14).
 - **Accept:** the guard is clean; the flow page is rebuilt.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T6.8 Resources: chapel rest, Hit Die, potions *(L-014)*
+### ☑ T6.8 Resources: chapel rest, Hit Die, potions *(L-014)*
 - **Do:**
   - **The chapel short rest** costs half a Movement and advances every visible snake clock by one
     (01:285–286; 04:286–287).
@@ -874,14 +875,14 @@ T4.14).
   No new room or NPC.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T6.9 Update `skirm.py` / `chain.py` *(`SIM`)*
+### ☑ T6.9 Update `skirm.py` / `chain.py` *(`SIM`)*
 - **Do:** model the after-midnight lethal rules, morale "half down" after midnight, the heat-4
   finish at Sharp, the potions, the Hit Die and the chapel rest. Add smoke tests.
 - **Files:** `S/skirm.py`, `S/chain.py`, `S/test_smoke.py`.
 - **Accept:** tests pass.
 - **Checks:** `pytest research/oraga_5e_sim`. **Time:** 30 min.
 
-### ☐ T6.10 Before-midnight re-budget sims *(L-015, L-016, `SIM`)*
+### ☑ T6.10 Before-midnight re-budget sims *(L-015, L-016, `SIM`)*
 - **Do:** for S1, S2, S4, S6, S7, S8, S9 and S10 (09:537's "before midnight" list) at three PCs,
   target Low or Moderate (750 / 1,125). **S3, S8 and S10 keep their rosters** (DECISIONS
   withdrawal). Only their labels move up. S4 is run both ways for C2. Build new three-player
@@ -890,7 +891,7 @@ T4.14).
 - **Accept:** each card has a roster, XP, label and drop rate logged.
 - **Time:** 30 min.
 
-### ☐ T6.11 Before-midnight card text, labels, CR *(L-015, L-016)*
+### ☑ T6.11 Before-midnight card text, labels, CR *(L-015, L-016)*
 - **Do:** print T6.10's rosters, budgets and corrected labels. Settle the CR question: re-derive
   the five blocks whose CR reads a step high (10:312–313; RULES §1) by the SRD method, or state
   that the labels read high. Record it as a TPN note, and extend `bestiary_check` (test first) if
@@ -899,12 +900,12 @@ T4.14).
 - **Accept:** labels match the re-sim. `bestiary_check` passes.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T6.12 S4 roster and label *(L-016, L-079; C2)*
+### ☑ T6.12 S4 roster and label *(L-016, L-079; C2)*
 - **Do (after C2):** if confirmed withdrawn, keep S4's roster and correct the label upward from
   T6.10. If the owner allows the cut, print TUNING F12's line.
 - **Files:** `M/09_The_Snakes.md`. **Checks:** SA. **Time:** 10 min.
 
-### ☐ T6.13 After-midnight re-budget sims; chain run *(L-015, L-016, L-014, `SIM`)*
+### ☑ T6.13 After-midnight re-budget sims; chain run *(L-015, L-016, L-014, `SIM`)*
 - **Do:** S3, S5, S8's dark half, S11, S12 and S13 at three PCs, targeting Moderate or High
   (1,125 / 1,500), with morale at "half down". Then run `chain.py` (S14 → S13 → S3) with the WP6
   resources and report the HP at the gate per dial (TUNING's 5–21% was the old figure).
@@ -912,13 +913,13 @@ T4.14).
 - **Accept:** rates logged per card, and the chain result per dial.
 - **Time:** 30 min.
 
-### ☐ T6.14 After-midnight card text and labels *(L-015, L-016)*
+### ☑ T6.14 After-midnight card text and labels *(L-015, L-016)*
 - **Do:** print T6.13's rosters, budgets, morale triggers and labels. S14's "nearly twice High"
   becomes the true multiple.
 - **Files:** `M/09_The_Snakes.md`. **Accept:** labels match the re-sim. **Checks:** SA.
   **Time:** 30 min.
 
-### ☐ T6.15 S11 door XP, balustrade, non-lethal, *Sleep* *(L-045, L-080, L-081, L-082)*
+### ☑ T6.15 S11 door XP, balustrade, non-lethal, *Sleep* *(L-045, L-080, L-081, L-082)*
 - **Do:**
   - **S11:** "Holding the door counts once, as one person carried out, for each character who
     held it" (09:1583–1584; Table I–4).
@@ -931,6 +932,36 @@ T4.14).
   `M/05_The_Longest_Night.md`.
 - **Accept:** all four are applied.
 - **Checks:** SA. **Time:** 20 min.
+
+### ☑ T6.17 TP57: strip the dial *(TP57; added 2026-10-25 by the coordinator)*
+- **Do:** one difficulty level, the existing Sharp wording. Remove Gentle and Merciless, the
+  dial's three names and the "Tonight's setting" checkbox from `M/01`, 05, 08, 09, 10,
+  `facts.yaml` and `S/` (s14.py, test_smoke.py; old runs reproducible behind switches). Keep
+  every Sharp rule without the word ("At Sharp, X" becomes X). The say-it line is said at every
+  table when the lights die. 01's dial sentence describes one level (death possible only in a
+  fight or doing something particularly dangerous, about standard 5e danger). S14's per-dial DM
+  note keeps only its Sharp content. Dial guards in `facts.yaml` enforce "no Gentle/Merciless".
+  INVENTIONS row. Before midnight unchanged (detain, eject). TP58 and TP60 are not in scope.
+- **Accept:** "Gentle", "Merciless", "Sharp" (as a setting) and "Tonight's setting" appear 0
+  times in M/; the guard fires on the old text.
+- **Checks:** SA; `pytest research/oraga_5e_sim`.
+
+### ⛔ OWNER follow-ups from WP6 (2026-10-25; the tasks above are done within the printed canon)
+- **W1 (rosters capped by headcount).** Six cards cannot reach DESIGN §2.2's targets (before
+  midnight Low 750 / Moderate 1,125; after midnight Moderate 1,125 / High 1,500) without people the
+  book does not put there: S1 (six Feuding Kinsmen, 175 XP), S2 and S5 (Tavva's crew of four: 650
+  at most), S6 (Essin's three cousins: 600 at most), S11 (Phern's "two or three" bodyguards: 625 at
+  most), S12 and S8's dark half (the Circle's and the Church's four: 800 at most). **Question:**
+  may these fights draw extra unnamed hands from "the season's hired swords" idling at the edge of
+  the Gatehouse Court (09's opening), to reach the budgets, or do they stay under their targets
+  with honest labels, as the text now prints?
+- **W2 (lethality under TP57).** TP57 kept the Sharp rule that a heat-4 snake finishes a downed
+  character who crossed it, and the crowd rule doesn't reach snake fights. In the re-sim, a heat-4
+  card kills a character 4–27% of the time (S13 at heat 4: 14–27%, against 1–2% without the
+  finish), and the worst-case chain S14 → S13 (heat 4) → S3 kills someone 26–63% of the time.
+  **Question:** is that "approximately in line with other D&D modules"? If not, the smallest fix
+  is to cut the heat-4 finish (snakes leave the fallen where they lie; ordinary death saves only),
+  which brings S13 back to 1–2%.
 
 ### ☐ T6.16 Commit WP6
 - `Oraga 5e 3p pass: WP6 risk dial, lethal after midnight, three-player budgets`.

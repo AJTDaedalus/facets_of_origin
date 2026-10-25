@@ -682,7 +682,7 @@
    "label": "Snakes in the dark: the Circle's delivery",
    "phase": "m6",
    "kind": "snake",
-   "summary": "Heat 3–4: Hired Knives walk a Tithe-carrying minister out through the smoke to Callun. Heat 0–2: they just get Callun out.",
+   "summary": "Live by default (the Circle starts at heat 2; the toast makes 3). Heat 3–4: Hired Knives walk a Tithe-carrying minister out through the smoke to Callun. If the nursery was sold, they go for the east wing's service door instead (S7). Heat 0–2: they just get Callun out.",
    "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S12)",
    "optional": true,
    "faction": "circle"
@@ -722,7 +722,7 @@
    "label": "Snakes in the dark: the Phern door",
    "phase": "m6",
    "kind": "snake",
-   "summary": "Heat 3–4: Bodyguards hold a gallery-side service door off B2 for Corro alone, and the crowd crushes. Turn it: no check if Corro trusts you, anyone else needs a DC 15 Charisma (Persuasion) check.",
+   "summary": "Live by default (the omens make heat 3). Heat 3–4: Bodyguards hold a gallery-side service door off B2 for Corro alone, and the crowd crushes. Turn it: no check if Corro trusts you, anyone else needs a DC 15 Charisma (Persuasion) check.",
    "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S11)",
    "optional": true,
    "faction": "phern"
@@ -2181,6 +2181,12 @@
    "from": "kd-circle",
    "to": "S12",
    "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-circle",
+   "to": "S7",
+   "label": "nursery sold",
    "kind": "optional"
   },
   {

@@ -203,3 +203,95 @@ character to the outs first.
 Uninvited's own threat rule never bites in S14; control spells; Idle tricks (no policy tries
 one; the switches are unit-tested). After the card, standing allies stabilise the dying; with
 the whole party down, the dying roll it out unaided (Gentle: the crowd reaches everyone).
+
+## WP6: three-player budgets, lethal after midnight, resources (T6.9–T6.13)
+
+*Harness: `research/oraga_5e_sim/` with the T6.9 switches (`skirm.WP6`, `chain.ChainWP6`).
+Seed 1, n = 2,000 a cell. "Drop" = at least one character at 0 HP; "death" = at least one
+character dead. Parties C1 Dassa/Ilesse/Serane, C2 Dassa/Ilesse/Andra, C3 Dassa/Pello/Ilesse,
+C4 Dassa/Pello/Andra, C5 Serane/Andra/Pello, 4P = C1 + Andra. TP57 (2026-10-25) left one
+difficulty level (the old Sharp rules), so there is one column per card, not three.*
+
+**Rosters are capped by printed headcounts.** The Circle brought four knives, the Church four
+wardens, Draunel three duelists, Boranis three cousins, Tavva a crew of four, Phern "two or
+three" bodyguards. No roster below adds a person the book doesn't already put at the ball.
+That cap means several cards cannot reach DESIGN §2.2's target (before midnight Low 750 or
+Moderate 1,125; after midnight Moderate 1,125 or High 1,500): S1, S2, S6 before midnight, and
+S5, S8's dark half, S11, S12 after. They keep their sums and say so.
+
+### Before midnight (T6.10): drop % / mean drops
+
+| Card | XP (label) | C1 | C2 | C3 | C4 | C5 | 4P |
+|---|---|---|---|---|---|---|---|
+| S2 printed (Tavva + 2) | 550 (under Low) | 44.4/0.71 | 23.7/0.26 | 24.3/0.28 | 10.1/0.10 | 25.6/0.28 | 17.1/0.19 |
+| S4 fought out (2 guards; TP29 keeps the roster) | 900 (between Low and Moderate) | 68.9/1.67 | 46.3/0.62 | 42.5/0.56 | 28.0/0.32 | 53.1/0.72 | 28.7/0.39 |
+| S4 ended by *Call the House* | 900 | 28.1/0.42 | 14.9/0.16 | 17.8/0.20 | 10.2/0.10 | 17.8/0.20 | 9.3/0.11 |
+| S7 printed (3 knives) | 600 (under Low) | 3.8/0.05 | 0.5/0.01 | 0.5/0.01 | 0.0/0.00 | 0.2/0.00 | 0.4/0.00 |
+| **S7 WP6 (all 4 knives)** | **800 (Low)** | 7.3/0.10 | 1.2/0.01 | 1.1/0.01 | 0.2/0.00 | 0.7/0.01 | 0.2/0.00 |
+| S7 WP6, to the last knife | 800 | 84.5/3.07 | 58.8/1.07 | 50.0/0.76 | 45.0/0.58 | 76.5/1.53 | 39.7/0.60 |
+| S8 printed (2 wardens + 1) | 600 (under Low) | 65.0/1.71 | 26.8/0.34 | 22.2/0.27 | 11.2/0.13 | 27.1/0.33 | 29.5/0.43 |
+| S9 printed (2 + 2) | 600 (under Low) | 1.2/0.01 | 0.3/0.00 | 0.2/0.00 | 0.1/0.00 | 0.3/0.00 | 1.8/0.02 |
+| **S9 WP6 (3 duelists + 3 blades)** | **900 (between Low and Moderate)** | 6.7/0.07 | 3.1/0.03 | 3.8/0.04 | 0.9/0.01 | 3.6/0.04 | 1.5/0.02 |
+| S9 WP6, both sides to the last | 900 | 91.6/4.62 | 72.5/1.70 | 64.0/1.29 | 61.3/1.20 | 88.3/2.56 | 94.2/3.80 |
+| S10 printed (Maiven + 2) | 900 (between Low and Moderate) | 51.9/0.86 | 24.9/0.29 | 19.3/0.21 | 6.7/0.07 | 20.6/0.23 | 24.3/0.30 |
+
+Reading (the book's own scale: Low drops a character now and then, Moderate fairly often, High
+usually): S2 plays Low (Moderate for C1, the party light on damage). S4 fought out plays
+Moderate; ended by its clock it plays Low. S7 and S9 end in a round or two on their printed
+morale whatever the roster, and fought to the last they play High; the four-knife and
+three-and-three rosters raise the sums to Low and between Low and Moderate. S8 plays Low
+(Moderate for C1); nobody dies (the wardens detain). S10 plays Low (Moderate for C1).
+**S1 and S6 are not modelled:** both are fist fights (no steel on either side), which the
+harness's weapon offence can't represent; their sums stay 175 and 400. All before-midnight
+drops are Stable at once (the palace's mercies), so no death column.
+
+### After midnight (T6.13): drop % / death %
+
+| Card | XP (label) | C1 | C2 | C3 | C4 | C5 | 4P |
+|---|---|---|---|---|---|---|---|
+| S3 printed (sergeant + 4; captain round 3) | 850 / 1,950 | 39.1/2.2 | 23.1/0.8 | 13.1/0.6 | 12.6/0.6 | 46.9/1.8 | 43.8/0.8 |
+| S3 to the last | 1,950 | 100/48.5 | 99.9/45.0 | 97.6/25.4 | 97.4/32.9 | 100/43.4 | 100/47.9 |
+| S5 printed (Tavva + 2) | 550 | 45.9/7.0 | 24.0/2.6 | 24.7/2.2 | 10.0/0.7 | 24.5/2.1 | 14.9/1.1 |
+| S5, morale at half down | 550 | 20.9/0.5 | 7.0/0.2 | 5.5/0.4 | 1.9/0.1 | 5.7/0.1 | 5.2/0.1 |
+| S8 dark (3 wardens, half down) | 600 | 66.1/0.0 | 27.8/0.0 | 23.4/0.0 | 11.3/0.0 | 26.8/0.0 | 30.9/0.0 |
+| S12 printed (2 knives, first Bloodied) | 400 | 1.2/0.0 | 0.1/0.0 | 0.1/0.0 | 0.0/0.0 | 0.0/0.0 | 0.1/0.0 |
+| **S12, half down** | 400 | 6.1/0.1 | 1.8/0.0 | 0.7/0.1 | 0.3/0.0 | 0.9/0.0 | 0.5/0.0 |
+| **S12 heat 4 (3 knives), half down, finish** | 600 | 39.6/11.7 | 17.8/10.2 | 14.1/6.0 | 6.3/4.2 | 19.4/9.7 | 7.8/1.2 |
+| S13 printed (Draunel + 1, Draunel Bloodied) | 900 | 35.1/0.4 | 11.1/0.2 | 12.8/0.5 | 4.7/0.1 | 9.0/0.1 | 14.6/0.1 |
+| **S13 WP6 (Draunel + 2, half down)** | **1,100 (between Low and Moderate)** | 66.4/2.2 | 43.0/1.6 | 39.9/2.0 | 22.9/1.2 | 40.8/2.0 | 74.7/1.9 |
+| S13 WP6 at heat 4 (finish) | 1,100 | 65.2/27.0 | 41.2/19.6 | 40.0/16.2 | 22.1/14.0 | 40.9/20.6 | 73.1/27.3 |
+| S13 WP6 at heat 4, potions | 1,100 | 63.4/20.8 | 40.5/11.8 | 39.8/9.0 | 19.6/5.1 | 36.4/11.3 | 70.7/17.9 |
+| S7 in the dark (nursery sold; 3 knives, heat 4, finish) | 600 | 38.8/12.8 | 17.6/11.8 | 14.0/6.7 | 6.2/3.9 | 17.2/8.9 | 21.0/6.7 |
+
+S11 is not modelled (the crush clock is the fight; its Phern bodyguards don't press an
+attack). **The heat-4 finish is the deadliest rule in the night.** Without it, every
+after-midnight card kills a character 0–2% of the time (S5 printed 1–7%). With it, a heat-4
+card kills 4–27%: the foes that finish attack a downed character with Advantage, every hit
+is two failed death saves, and the party has to get to the fallen in the same round.
+
+### The chain (T6.13): S14 → S13 → S3, HP at the gate / any PC death / S14 win
+
+| Party | Old rules (T3.1) | S14 at WP5 only | + resources (potions, Hit Die, chapel) | + WP6 cards (S13 Draunel + 2, half down) | + heat-4 finish in S13 (all of WP6) | all of WP6, after S2 in Movement V |
+|---|---|---|---|---|---|---|
+| C1 | 80.6 / 18.2 / 87.5 | 78.7 / 18.9 | 82.6 / 15.0 | 69.2 / 26.7 | 60.6 / 46.6 / 97.4 | 39.6 / 69.0 / 97.0 |
+| C2 | 76.4 / 19.5 / 91.4 | 73.4 / 20.7 | 78.6 / 16.7 | 64.9 / 27.0 | 58.2 / 45.2 / 96.9 | 45.4 / 58.8 / 96.8 |
+| C3 | 78.9 / 4.7 / 92.6 | 70.7 / 10.9 | 78.0 / 7.3 | 64.8 / 13.9 | 62.0 / 26.4 / 94.2 | 53.3 / 36.9 / 92.0 |
+| C4 | 58.2 / 12.4 / 94.2 | 48.8 / 19.1 | 58.5 / 12.3 | 44.7 / 24.4 | 45.0 / 36.4 / 96.5 | 39.0 / 46.0 / 95.7 |
+| C5 | 66.8 / 17.2 / 93.5 | 59.9 / 21.2 | 70.4 / 13.7 | 52.4 / 26.1 | 50.0 / 42.0 / 95.5 | 38.3 / 57.6 / 95.9 |
+| 4P | 82.2 / 16.7 / 84.5 | 80.7 / 18.0 | 85.9 / 10.0 | 55.9 / 43.8 | 48.8 / 63.4 / 92.5 | 36.2 / 74.7 / 92.6 |
+
+TUNING's "5–21% of HP at the gate" was never reproduced by the rebuilt harness (it gave 57–82%
+for the old rules, T3.1). The WP6 resources buy back about 5–10 points of HP at the gate and a
+few points of death. The heavier S13 and its heat-4 finish take far more: with everything on,
+the party reaches the gate with 45–62% of its HP, and **a character dies somewhere in the
+chain 26–63% of the time** (37–75% after a Movement V fight). The chain is a worst case: it
+runs S13 at heat 4 every time, the party always fights it rather than taking an out, the gate
+is fought, and nobody runs. Even so, that is well past the TP57 aim ("approximately in line
+with other D&D modules"). The death toll comes from two rules the text already carries: the
+strict crowd rule (no help for the dying in a snake fight) and the heat-4 finish. Both were
+kept as the old Sharp wording by TP57; whether to soften either is an owner call (LOG, WP6
+OWNER questions).
+
+**Not modelled:** control spells; outs and clocks (fights run to morale); S1, S6, S11; S14's
+own use of potions (they are used between scenes and in the snake fights only); the chapel's
+cost (one heat per shown line) is a table effect, not a chain effect.

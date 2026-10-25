@@ -69,7 +69,7 @@ once before midnight.)*
 | **Maiven** | Toward the east wing, whatever her heat | Dies there unless somebody competent goes with her |
 | **Vorlain** | B3 | Hauls guests out of the burning banquet gallery. S13 if Draunel heat is 3–4 |
 | **Anha** | The service passages | The other way out, if anyone befriended her |
-| **The snakes** | Heat 0–2: get their principal out | Heat 3–4: their card is live (Snake Tracker, below) |
+| **The snakes** | Heat 0–2: get their principal out | Heat 3–4: their card is live (Snake Tracker, below). By default that is S11 (Phern) and S12 (the Circle) |
 
 *The order of the night after the lights is printed once, in chapter V (see chapter V,
 "The Midnight Clock").*
@@ -86,7 +86,7 @@ secret**: no faction learns of the child unless a player character tells them.
   they drop (a companion or the crowd gets them up) unless it is their quarry or has
   become a threat: it landed a Stop on that one, earned Delay against them three times
   this scene, or dealt the last blow. Say it: *"She looks at you — properly, for the
-  first time."* A threat dies like anyone; at Sharp they finish it only if it is still
+  first time."* A threat dies like anyone; they finish it only if it is still
   in their way. The Attendant sets aside whoever it drops while Idle; Focused, its
   drops are dying. Whoever deals an Uninvited's last blow may be thrown when it returns.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
@@ -256,19 +256,19 @@ snake.*
 
 **Table VIII–5: The Snake Tracker**
 
-| Faction | Heat | Starts | Rises (+1) — ✱ automatic | Falls | At heat 3–4 |
-|---|---|---|---|---|---|
-| **The Circle** | ☐☐☐☐ | 1 | ✱ the toast · Callun's coin refused (Mv III) · **to 4:** S7's clock filled, or the nursery sold to her | −1 per knife turned or caught quietly · **to 0:** Agenda 1 delivered, the Tithe told to Callun, or Callun told what her knife did to an under-cook | **S12** |
-| **The Church** | ☐☐☐☐ | 1 | ✱ the Radiant's blessing · a warden refused or humiliated before guests · S8's tell shown and not stepped on by midnight | −1 if Kovaun is given something true to file about the gray masks · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2 delivered | **S8**, in the dark |
-| **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face · S9's clock filled (on the terrace or offstage) | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** |
-| **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited, or drunk, by one of the characters · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled (on the terrace or offstage) | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 |
-| **Phern** | ☐☐☐☐ | 0 | ✱ once each in Mv II, III and IV (the omens) | −1 if a player character walked the room with Corro · −1 if Corro trusts one enough to take an instruction at midnight | **S11** |
-| **The Thenya** | ☐☐☐☐ | 1 | ✱ the toast · ✱ the audience refused · a player character lies to Maiven, or refuses her and says so | −1 if a player character promises to go with her and means it · **to 0:** proof of Veier | **S10** in Mv V *(at midnight she goes east whatever her heat)* |
+| Faction | Heat | Starts | Rises (+1) — ✱ automatic | Falls | At heat 3–4 | Heat 4: they come for |
+|---|---|---|---|---|---|---|
+| **The Circle** | ☐☐☐☐ | 2 | ✱ the toast · Callun's coin refused (Mv III) · **to 4:** S7's clock filled, or the nursery sold to her | −1 per knife turned or caught quietly · **to 0:** Agenda 1 delivered, the Tithe told to Callun, or Callun told what her knife did to an under-cook | **S12** *(nursery sold: S7 at the east wing's service door instead)* | Whoever turned or caught a knife, or told Callun: S7's knives |
+| **The Church** | ☐☐☐☐ | 1 | ✱ the Radiant's blessing · a warden refused or humiliated before guests · S8's tell shown and not stepped on by midnight | −1 if Kovaun is given something true to file about the gray masks · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2 delivered | **S8**, in the dark | Whoever refused or humiliated a warden, or turned them back: two wardens, to the chapel (they detain) |
+| **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face · S9's clock filled (on the terrace or offstage) | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** | Whoever embarrassed Draunel or spent Iron 2: S9's duelists, on the terrace |
+| **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited, or drunk, by one of the characters · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled (on the terrace or offstage) | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 | Whoever baited Vorlain or beat a cousin: S6, without Essin |
+| **Phern** | ☐☐☐☐ | 0 | ✱ once each in Mv II, III and IV (the omens) | −1 if a player character walked the room with Corro · −1 if Corro trusts one enough to take an instruction at midnight | **S11** | Nobody |
+| **The Thenya** | ☐☐☐☐ | 1 | ✱ the toast · ✱ the audience refused · a player character lies to Maiven, or refuses her and says so | −1 if a player character promises to go with her and means it · **to 0:** proof of Veier | **S10** in Mv V *(at midnight she goes east whatever her heat)* | Nobody |
 
-**If the table does nothing,** midnight arrives with the Circle at 2, the Church at 2,
+**If the table does nothing,** midnight arrives with the Circle at 3, the Church at 2,
 Draunel at 2, Boranis at 1, Phern at 3 and the Thenya at 3. The Thenya spend theirs at
-the half-bell in Movement V (S10), so the only card live in the dark by default is
-**S11**, plus the gate, the looters and the Attendant if the party interferes.
+the half-bell in Movement V (S10), so by default two cards are live in the dark,
+**S11** and **S12**, plus the gate, the looters and the Attendant if the party interferes.
 
 ## Where Everyone Stands (Movements I–V)
 
@@ -453,8 +453,6 @@ of the midnight hour that drifts if you carry it in your head. The boxes only co
 the rules behind them are in chapter V ("Midnight Rules", "The Fractures"), on card S14
 and on card S3. Numbers are for three characters, with four in parentheses.*
 
-**Tonight's setting:** ☐ Gentle · ☐ Sharp · ☐ Merciless
-
 **Table VIII–10: The Midnight Tracker — the Three**
 
 | | The Wept | The Radiant | The Hollow |
@@ -483,7 +481,7 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 | The Root (B11) | ☐ found | Any ward-point in the palace, from below |
 | **Raunu** | ☐ falls · ☐ saved | The main doors open; the bells of Oraga begin |
 | **The leash** | ☐ the boat is out of reach | All three go, finished or not |
-| **Snakes live in the dark** | | Heat 3–4 at midnight (Table VIII–5) |
+| **Snakes live in the dark** | ☐ S11 · ☐ S12 · others: | Heat 3–4 at midnight (Table VIII–5). By default S11 and S12 |
 | **S3:** the fire clock | ○ ○ ○ ○ | Ticks only on rounds nobody fights or talks |
 | **S3:** the sect guard's arrival | ○ ○ ○ ○ ○ ○ | The captain at the second circle or when the sergeant falls. The last bell on the sixth, or when the gate is decided |
 | **S3:** Blades taken off | | One per retinue talked round at the gate |

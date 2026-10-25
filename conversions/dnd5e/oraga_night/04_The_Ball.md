@@ -290,8 +290,10 @@ notices that the eighth niche, Elanna's, holds fresh offerings, tended recently 
 with care. Elanna is the death-goddess the northern tribes honor. A successful DC 13
 Intelligence (Religion) check knows what it means for a chief's chapel to tend
 Elanna's niche. Someone in this house has been sitting with mortality. *(Quiet scenes, confessions, and Mother Sella: a good place
-for the characters to catch their breath, with one deniable omen. A character who spends a
-Movement here may take a Short Rest, which is the only one the ball offers.)*
+for the characters to catch their breath, with one deniable omen. A character who spends
+half a Movement here may take a Short Rest, the only one the ball offers. The snakes
+don't wait while they sit: every faction whose line the table has been shown gains one
+heat (see chapter IX, "The Snake Tracker").)*
 
 ---
 
@@ -400,6 +402,13 @@ through everything, and at midnight the difference between a tragedy and a massa
 Finding one's way through them without a guide takes a DC 15 Wisdom (Survival) check
 the first time and is automatic after that. With Anha or any of the skeleton staff,
 there is no check. See map VIII–5 for the run to the east wing.)*
+
+*(A kitchen this short of hands keeps its own remedies. In a plain box on the shelf
+above the hearth, beside the burn salve, are three **Potions of
+Healing** (four if four characters are playing). A character who searches the kitchens
+finds the box with no check; nobody on the staff will stop a guest who looks like they
+need it. They are the night's only healing that isn't a spell (chapter X, "The Night's
+Loot").)*
 
 *(Anha, once she trusts a character, can tell them about Veier's traveling pack. For
 the first year it stood packed by her door, ready, a border woman's plain statement
@@ -530,8 +539,8 @@ works only if nobody sits idle.
 ## The Snakes at a Glance
 
 Six parties came armed, and chapter IX runs each one's line, its heat and its fight cards
-(see chapter IX, "Running the Snakes"): once per Movement, show the table one or two
-lines from that Movement's "The Snakes This Movement" section.
+(see chapter IX, "Running the Snakes"): once per Movement, show the table one
+line from that Movement's "The Snakes This Movement" section.
 
 **Table IV–1: Who Came Armed**
 
@@ -1003,7 +1012,7 @@ the next one as printed.
 
 #### The Snakes This Movement — I
 
-*Optional; show one or two, then let them be.*
+*Optional; show one, then let them be.*
 
 - **The Circle.** Mistress Callun waits in the line like everyone else, iron-gray and
   cordial. The **Circle Hired Knives** with her do not talk and do not look at
@@ -1036,7 +1045,7 @@ the next one as printed.
 
 > **About 45 minutes** (starts 0:35). *Run:* one agenda beat for each character, the omen,
 > the quiet guest at the crystal wall, one snake line, S1 if someone wants it. *If you have time:* an Undercurrent a character
-> is already on, a second snake line.
+> is already on.
 
 The ball proper: music in the Crystal Court, feasting in the galleries, lanterns on
 the terraces. The host has still not appeared, and his absence becomes the room's
@@ -1074,7 +1083,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 
 #### The Snakes This Movement — II
 
-*Optional; show one or two, then let them be.*
+*Optional; show one, then let them be.*
 
 - **The Circle.** Callun is in the B3 alcove with Corro. One of her Hired Knives is
   not: he is ten paces behind Corval, all Movement, through the kitchens and the
@@ -1237,7 +1246,7 @@ good thing I have left to give anyone."
 
 #### The Snakes This Movement — III
 
-*Optional; show one or two, then let them be.*
+*Optional; show one, then let them be.*
 
 - **The Circle.** A Hired Knife has joined the line outside the Audience Hall
   without any intention of going in: he is there to see who is summoned. Any player
@@ -1319,6 +1328,10 @@ one for the seat; Kovaun's question acquires teeth; Vorlain goes quiet and drink
 And everyone saw the two plates, and the gossip about them is feral: he
 feeds the mad wife, he feeds a prisoner, he feeds the thing in the east wing.
 Only the characters who have run Undercurrent C know the tender truth of it.
+
+**A plate and a chair.** The banquet is the one time the night sits everyone down. Each
+character may spend one Hit Die now, rolling it and adding their Constitution modifier,
+as at the end of a Short Rest. It is not a rest, and nothing else comes back.
 
 For Agenda 4 and the Thenya, the night sharpens: still no Veier, and now a midnight
 pronouncement coming. Maiven formally requests an audience; Corval, with genuine
@@ -1409,8 +1422,7 @@ her voice only, as at the outer doors.
 > time:* last Undercurrent beats. Take the break as the bells begin to ring midnight.
 >
 > *Past 2:40,* at most one card on screen. The others resolve offstage with their
-> consequence (clock filled, heat moved). That holds at every setting of the dial (see
-> chapter V, "Down, Not Out"), because it cuts table time and leaves the risk alone.
+> consequence (clock filled, heat moved). It cuts table time and leaves the risk alone.
 
 The old custom, and the palace keeps it in full: the lamps are lowered, the music
 turns slow and strange, and the **Dead Dance** begins. Every guest is masked, dancing

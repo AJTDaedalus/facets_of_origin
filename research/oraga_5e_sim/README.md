@@ -16,8 +16,9 @@ given `--seed`.
 | File | What it models |
 |---|---|
 | `skirm.py` | Generic snake-card skirmish: a card's roster against the party, run until the card's morale trigger fires or one side is down. It also holds what the other two share: dice, the five pregens, the party codes, PC offence and healing, dropping, death saves and the crowd rule. |
-| `s14.py` | Card S14, the Attendant. `Rules` switches: `OLD` (default) is the T3.1 model of the rules before WP5, draw for draw; `NEW` is the WP5 text (lethal Focused drops by dial, *Clears the Way* as an action, Help, DC 18, the edge rules, the cap, the tie rule). See its docstring and T5.8. |
+| `s14.py` | Card S14, the Attendant. `Rules` switches: `OLD` (default) is the T3.1 model of the rules before WP5, draw for draw; `NEW` is the WP5 text (lethal Focused drops; TP57 left one level, the old "sharp", with `--legacy-dial` only to reproduce WP5; *Clears the Way* as an action, Help, DC 18, the edge rules, the cap, the tie rule). See its docstring and T5.8. |
 | `chain.py` | The night's attrition chain, with HP and resources carried forward and no rest: an optional Movement V card, then S14, then S13, then the S3 gate fight. |
+| WP6 (T6.9) | `skirm.WP6` (`potions`, `heat4_finish`) and `chain.ChainWP6` (`s14_new`, `potions`, `hit_die`, `chapel`, `finish`, `cards`), plus the canon-capped WP6 cards (`S7_wp6`, `S9_wp6`, `S13_wp6`, `S3_wp6`, `S5`, `S5_wp6`, `S7_dark`, `S8_dark`, `S12`, `S12_wp6`, `S12_h4_wp6`). All off = T3.1. Results: `research/oraga_5e_simulation_notes.md`, "WP6". |
 | `test_smoke.py` | Written first (TDD). Each script runs at N=200 with a fixed seed and returns a sane structure, and each carries one regression assertion. It also checks determinism and the CLI. |
 
 ## How to run
@@ -29,7 +30,7 @@ python research/oraga_5e_sim/s14.py --party C1 --policy engaged --n 4000 --seed 
 python research/oraga_5e_sim/s14.py --all --n 4000 --seed 1            # Appendix table
 python research/oraga_5e_sim/s14.py --all --n 4000 --seed 1 --clock tight
 python research/oraga_5e_sim/s14.py --party C1 --n 4000 --seed 1 --attrited
-python research/oraga_5e_sim/s14.py --party C1 --rules new --dial merciless --n 4000 --seed 1
+python research/oraga_5e_sim/s14.py --party C1 --rules new --legacy-dial merciless --n 4000 --seed 1   # WP5 legacy only
 python research/oraga_5e_sim/s14.py --party C1 --rules help,dc18 --n 4000 --seed 1   # any switches
 python research/oraga_5e_sim/s14.py --party 5P --rules new --hp 260 --dc 19 --n 2000 --seed 1
 python research/oraga_5e_sim/s14.py --wp5 --n 4000 --seed 1          # T5.9 tables (~6 min)
@@ -41,6 +42,10 @@ python research/oraga_5e_sim/skirm.py --all --n 2000 --seed 1          # slow (~
 
 python research/oraga_5e_sim/chain.py --party C1 --n 4000 --seed 1
 python research/oraga_5e_sim/chain.py --all --n 2000 --seed 1 --crowd generous
+
+# WP6 (T6.9): switches, all off by default (old runs reproduce draw for draw)
+python research/oraga_5e_sim/skirm.py --card S13_wp6 --party C1 --wp6 potions,heat4_finish --n 2000 --seed 1
+python research/oraga_5e_sim/chain.py --party C1 --wp6 full --n 2000 --seed 1
 ```
 
 From Python, call `s14.simulate(party, policy, n, seed, clock, attrited)`,

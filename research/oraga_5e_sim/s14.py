@@ -36,11 +36,13 @@ Modelled under OLD (the rules as printed before WP5):
 
 WP5 switches (`Rules`, all on in NEW):
 - lethal:        TP5. Idle, a PC it drops is set aside, Stable. Focused, ordinary
-                 dying rules (death saves, massive damage). The dial decides who it
-                 finishes and who the crowd reaches (see DIALS). Allies stabilise
+                 dying rules (death saves, massive damage). It finishes only a
+                 PC that interfered since its last turn (TP57: one level; the
+                 legacy `dial` switch, see LEGACY_DIALS, reproduces WP5's other
+                 two settings). Allies stabilise
                  (Spare the Dying, Medicine DC 10) or rouse (an action, 1 HP).
-                 Damage to a downed PC follows T5.3: none at Gentle; at Sharp and
-                 Merciless a death-save failure (two on a crit) that ends Stable.
+                 Damage to a downed PC follows T5.3: a death-save failure (two
+                 on a crit) that ends Stable.
 - clears_action: Clears the Way costs the turn's action, at its start, no adjacency
                  test. Idle: it clears when nobody struck it since its last turn.
                  Focused: it attacks on its first turn and clears on its second; with
@@ -75,7 +77,7 @@ Policies (TUNING §2): slug, engaged, naive, smart. See README.md.
 Usage:
     python s14.py --party C1 --policy engaged --n 4000 --seed 1
     python s14.py --all --n 4000 --seed 1                  # the T3.1 table (OLD)
-    python s14.py --all --n 4000 --seed 1 --rules new --dial sharp
+    python s14.py --all --n 4000 --seed 1 --rules new
     python s14.py --wp5 --n 4000 --seed 1                  # the T5.9 tables
 Pure standard library; deterministic for a given --seed.
 """
@@ -88,7 +90,11 @@ from skirm import (PARTIES, PC, Ctx, Enemy, crowd_start_of_round, d20, damage_pc
                    second_wind, try_bonus_heal)
 
 POLICIES = ("engaged", "naive", "smart", "slug")
-DIALS = ("gentle", "sharp", "merciless")
+# TP57 (2026-10-25): one difficulty level, the old "sharp" setting. The dial argument stays
+# only so that the WP5 runs (T5.9) reproduce draw for draw: "sharp" is the default and the
+# rules as printed; "gentle" and "merciless" are LEGACY switches for those old tables.
+LEGACY_DIALS = ("gentle", "sharp", "merciless")
+DIALS = LEGACY_DIALS
 PARTIES = PARTIES  # re-export: C1..C5 and 4P
 # T5.10's adjusting lines: five characters (all five pregens). "Four at 3rd level"
 # is approximated by simulate(level3=True): 80% HP and one fewer 2nd-level slot.
@@ -431,7 +437,7 @@ class S14:
             return
         for pc in self.pcs:
             if pc.down and not pc.dead and self.crowd_covers(pc):
-                if pc.stable_round is None:          # Gentle: a dying PC is dragged clear
+                if pc.stable_round is None:          # legacy dial: a dying PC is dragged clear
                     pc.stable_round = pc.down_round
                 if self.ctx.round >= pc.stable_round + 2:
                     pc.stable = True
@@ -486,7 +492,7 @@ class S14:
                 if self.interf_clock[p.name] > self.att_clock:
                     out.append(p)
             else:
-                # Merciless: any interruption still inside its orders' window
+                # legacy dial: any interruption still inside its orders' window
                 if self.R.orders_window:
                     if self.interf_round[p.name] >= self.ctx.round - 1:
                         out.append(p)
@@ -510,7 +516,7 @@ class S14:
             damage_pc(pc, dmg, self.ctx, nonlethal=True)   # Down, Not Out
             return
         if pc.down:
-            # T5.3: Gentle never damages a set-aside creature; Sharp and Merciless,
+            # T5.3: the legacy gentle dial never damages a set-aside creature; otherwise,
             # the rules as written (a failure, two on a crit; ends Stable)
             if self.dial == "gentle" or pc.dead:
                 return
@@ -534,7 +540,7 @@ class S14:
             if not self.focused:
                 self.set_aside.add(pc.name)
             elif self.dial == "gentle":
-                # Gentle: the crowd rule covers everyone; dragged clear, Stable
+                # legacy dial: the crowd rule covers everyone; dragged clear, Stable
                 pc.stable = True
                 pc.stable_round = self.ctx.round
 
@@ -813,7 +819,7 @@ def _parse_rules(name):
 
 
 def wp5_tables(n, seed):
-    """T5.9: current against WP5, every party, engaged and slugging, every dial."""
+    """T5.9 (legacy, pre-TP57): current against WP5, every party, all three old dial settings."""
     for pol in ("engaged", "slug", "naive", "smart"):
         print(f"\n## {pol}: current (old rules) -> WP5 at gentle / sharp / merciless")
         for p in ("C1", "C2", "C3", "C4", "C5", "4P"):
@@ -830,7 +836,8 @@ def main(argv=None):
     ap.add_argument("--attrited", action="store_true")
     ap.add_argument("--rules", default="old",
                     help="old, new, or a comma list of switches: " + ",".join(SWITCHES))
-    ap.add_argument("--dial", default="sharp", choices=DIALS)
+    ap.add_argument("--legacy-dial", dest="dial", default="sharp", choices=LEGACY_DIALS,
+                    help="TP57: one level (sharp). The others only reproduce the WP5 runs")
     ap.add_argument("--hp", type=int, default=None)
     ap.add_argument("--moves", type=int, default=None)
     ap.add_argument("--solo", default=None)

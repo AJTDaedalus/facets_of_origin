@@ -184,6 +184,7 @@ def test_s14_every_switch_runs_and_new_differs():
 
 
 def test_s14_lethal_kills_only_when_lethal():
+    """TP57: one level (sharp). The legacy dial values still order as WP5 ran them."""
     old = s14.simulate("C3", "slug", n=N, seed=SEED, rules=replace(s14.NEW, lethal=False))
     assert old["pc_death"] == 0.0
     sharp = s14.simulate("C3", "slug", n=N, seed=SEED, rules=s14.NEW, dial="sharp")
@@ -207,7 +208,8 @@ def test_s14_idle_drop_is_set_aside_focused_drop_is_dying():
     assert q.down and not q.stable
 
 
-def test_s14_damage_to_downed_by_dial():
+def test_s14_damage_to_downed_by_legacy_dial():
+    """TP57: one level; "sharp" is the rule. The legacy values reproduce WP5."""
     for dial, expect in (("gentle", 0), ("sharp", 2), ("merciless", 2)):
         f, pcs = _fight(s14.NEW, dial=dial)
         pc = pcs[1]
@@ -290,3 +292,90 @@ def test_s14_regression_wp5_targets_at_sharp():
     slug = s14.simulate("C2", "slug", n=N, seed=SEED, rules=s14.NEW)
     assert eng["win"] >= 0.85 and eng["pc_death"] <= 0.12
     assert slug["win"] <= 0.3
+
+
+# --------------------------------------------------------------------------- WP6 (T6.9)
+
+def test_wp6_all_off_reproduces_baseline():
+    base = skirm.simulate("S13", "C1", n=N, seed=SEED)
+    off = skirm.simulate("S13", "C1", n=N, seed=SEED, wp6=skirm.WP6())
+    assert base == off
+    c0 = chain.simulate("C1", n=50, seed=SEED)
+    c1 = chain.simulate("C1", n=50, seed=SEED, wp6=chain.ChainWP6())
+    assert c0 == c1
+
+
+def test_wp6_potion_drunk_when_low():
+    import random
+    rng = random.Random(1)
+    pcs = skirm.make_party("C1")
+    pcs[0].hp = 5
+    pcs[0].potions = 1
+    ctx = skirm.Ctx(rng, lethal=True)
+    ctx.wp6 = skirm.WP6(potions=True)
+    pcs[0]._bonus_used = False
+    assert skirm.try_potion(pcs[0], pcs, ctx)
+    assert pcs[0].potions == 0 and pcs[0].hp >= 9
+
+
+def test_wp6_potion_fed_to_dying_ally():
+    import random
+    rng = random.Random(2)
+    pcs = skirm.make_party("C1")
+    ally = pcs[1]
+    ally.hp, ally.down, ally.stable = 0, True, False
+    pcs[0].potions = 1
+    pcs[0]._bonus_used = False
+    ctx = skirm.Ctx(rng, lethal=True)
+    ctx.wp6 = skirm.WP6(potions=True)
+    assert skirm.try_potion(pcs[0], pcs, ctx)
+    assert ally.up and ally.hp >= 4
+
+
+def test_wp6_heat4_finish_hits_a_downed_pc():
+    import random
+    rng = random.Random(3)
+    pcs = skirm.make_party("C1")
+    pc = pcs[2]
+    pc.hp, pc.down, pc.stable = 0, True, True
+    en = skirm.E("Draunel Duelist")
+    en.target = pc
+    ctx = skirm.Ctx(rng, lethal=True)
+    ctx.wp6 = skirm.WP6(heat4_finish=True)
+    for _ in range(20):
+        if skirm.finish_attack(en, pc, en.attacks[0], ctx):
+            break
+    assert pc.ds_fail >= 2 and not pc.stable
+
+
+def test_wp6_finish_raises_deaths():
+    a = skirm.simulate("S13_last", "C5", n=N, seed=SEED, wp6=skirm.WP6())
+    b = skirm.simulate("S13_last", "C5", n=N, seed=SEED, wp6=skirm.WP6(heat4_finish=True))
+    assert b["pc_death"] >= a["pc_death"]
+
+
+def test_wp6_hit_die_and_short_rest():
+    import random
+    rng = random.Random(4)
+    pcs = skirm.make_party("C1")
+    d = pcs[0]
+    d.hp = 10
+    skirm.spend_hit_die(d, rng)
+    assert d.hit_dice == 3 and 14 <= d.hp <= 23           # 1d10 + 3
+    d.hp, d.second_wind = 5, 0
+    skirm.short_rest(d, rng)
+    assert d.second_wind == 1 and d.hit_dice < 3 and d.hp > 5
+
+
+def test_wp6_half_down_morale_cards_exist():
+    for c in ("S3_wp6", "S13_wp6", "S7_wp6", "S9_wp6"):
+        assert c in skirm.CARDS
+        r = skirm.simulate(c, "C1", n=50, seed=SEED)
+        assert r["runs"] == 50
+
+
+def test_wp6_chain_runs_and_reports():
+    r = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.full())
+    assert _is_rate(r["hp_at_gate"]) and _is_rate(r["pc_death"])
+    r2 = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.full())
+    assert r == r2

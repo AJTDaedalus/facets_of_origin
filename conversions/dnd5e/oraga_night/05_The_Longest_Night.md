@@ -250,19 +250,12 @@ Say it aloud when it happens: *"She looks at you — properly, for the first tim
 - **Their quarry** (Raunu for the Wept, Veier for the Radiant) was never covered by
   this rule, and still isn't.
 
-That is the Sharp setting, the one the book is written at. At **Gentle**, only a
-landed Stop marks a threat, and they never finish anyone: a marked creature at
-0 Hit Points is set aside like everyone else. At **Merciless**, the first trigger is
-enough (one Delay earned against them marks the one who earned it), and they finish
-a marked creature wherever it lies.
-
-**Hitting someone who is down.** At Sharp and Merciless the ordinary rules hold:
+**Hitting someone who is down.** The ordinary rules hold:
 damage to a creature at 0 Hit Points is a failed Death Saving Throw (two on a critical
 hit), and a Stable creature that takes damage is dying again. The Uninvited never aim
 at a creature they set aside, and the Attendant aims at one only as its block says. The
 rest of the night is not so careful: the Crossing's crossfire, a crowd's trampling feet
-and a character's own area spell all reach a body on the floor. At **Gentle**, a
-creature that has been set aside takes no damage until it is back on its feet.
+and a character's own area spell all reach a body on the floor.
 
 - **Help them up.** Any creature within 5 feet can take an action to rouse a Stable
   creature. It regains 1 Hit Point and can stand, with no check. A healing spell or a
@@ -291,17 +284,13 @@ up the same way. Focused, it can kill (see chapter X, "The Attendant").
 **Everyone else's steel.** The snakes and the Bought use the ordinary rules for dying,
 and the crowd rule does not reach their fights: a character they drop is dying until
 somebody stabilizes them, unless the attack detains (chapter X, "The palace's two
-mercies"). At **Sharp**, a snake at heat 4 finishes a downed character who
+mercies"). A snake at heat 4 finishes a downed character who
 crossed it tonight; the rest leave the fallen where they lie, because they have
 somewhere to be.
 
-At **Gentle**, no snake finishes anyone, and the crowd rule covers
-everyone after midnight. At **Merciless**, a snake finishes whoever crossed it, the
-crowd rule reaches nobody while a fight is on, and Death Saving Throws are rolled in
-the open. Fire is the exception at every setting: it never finishes anyone ("General
-Features", below).
+Fire is the exception: it never finishes anyone ("General Features", below).
 
-**Say it when the lights die** (at Sharp or Merciless): *"From here on the knives are
+**Say it when the lights die**, at every table: *"From here on the knives are
 real. A character who goes down in a fight can die."*
 
 #### Buying Time
@@ -466,8 +455,8 @@ The attack happens in a crowd, and the crowd has rules too.
   each square it covers, and at 4 Hit Points almost anything kills them: a
   *Thunderwave* at the dais is up to nine people. A guest a character kills is
   seen by somebody, and the inquest hears of it. A spell that drops people without
-  harming them (*Sleep*, say) drops them into a crush: anyone still on the floor at the
-  end of the round is trampled, unless somebody gets them up. A trampled guest dies, and
+  harming them (*Sleep*, say) drops them into a crush: anyone left Unconscious on the floor
+  at the end of a round is trampled, unless somebody gets them up. A trampled guest dies, and
   a trampled character takes 5 (2d4) Bludgeoning damage (one already down: see "Down,
   Not Out", *Hitting someone who is down*).
 - **The crowd as ground.** Moving through it is Difficult Terrain; card S11 has the
@@ -520,9 +509,8 @@ player who came to this ball wanting a real fight.
   times in a night and it wanders off to a window to watch the fires. That is a win.
   It is meant to be hard: one character or more will usually go down on the way.
 - **It can kill.** Whoever it drops while Idle is set aside, Stable ("Down, Not Out").
-  Focused, a creature it drops is dying, and at Sharp it strikes a fallen creature only if
-  that creature got in its way since its last turn (Gentle: never; Merciless: anyone its
-  orders still cover). At 0 Hit Points it loses interest in being here and steps into the
+  Focused, a creature it drops is dying, and it strikes a fallen creature only if
+  that creature got in its way since its last turn. At 0 Hit Points it loses interest in being here and steps into the
   shadow. There is no body.
 
 Run it from **card S14** (see chapter IX), which has the full distraction rule and the
@@ -729,10 +717,6 @@ they choose to fight. Run it in three beats down the garden's three levels:
    it. Either way the boat is out of reach, and the escape holds. It fails only when a
    player character chooses to stop it: see ⟨The child is taken⟩.)*
 
-   *(At **Gentle**, his turn at the river gate sets aside whoever stands there, marked or
-   not. At **Sharp**, as above. At **Merciless**, a marked creature anywhere at the gate is
-   the one in his way, and any attack he has left once it drops goes into it where it
-   lies.)*
 
    *(Two things change the river gate. If the crowd has reached the gardens (the garden
    doors open when the Hollow's End lands or the Wept's work is done), he is*
@@ -1059,7 +1043,7 @@ the faction does the frightened, sensible thing and gets its principal out. **He
 
 | Faction | Heat 0–2 | Heat 3–4 — where, and what the characters see | If nobody stops it | Card |
 |---|---|---|---|---|
-| **The Circle** | The knives get Callun out through the service passages | B3 → B10: two plain good coats half-carrying an old man the wrong way through the smoke | A Tithe-carrier leaves the palace in Circle hands | **S12** |
+| **The Circle** | The knives get Callun out through the service passages | B3 → B10: two plain good coats half-carrying an old man the wrong way through the smoke | A Tithe-carrier leaves the palace in Circle hands (if the nursery was sold, the knives are at the east wing's service door instead, card S7) | **S12** |
 | **The Church** | The **Church Wardens** come down for the Prelate and get her out | B8: wardens coming down the dark-wing stair with a written record of the mist map, the slate wiped behind them | The Church has the map in writing, and the slate is wiped by dawn | **S8** |
 | **House Draunel** | Draunel gets out, and remembers what he saw | B3: three blades pulling a man out of a burning room while he shouts for the people still inside | Essin's cousins fight for him; Vorlain is not taken | **S13** |
 | **House Boranis** | Essin and the cousins go with Vorlain into the fire | B3, only if Draunel's heat is 3–4 too: cousins, blades out, between Vorlain and Draunel's men | As Draunel | **S13** |
@@ -1098,7 +1082,7 @@ refusing to leave the city without her cousin or a body.
 > at most, and never two in the same beat. The attack stays in the foreground, and a snake
 > is something the characters pass on the way to it.
 >
-> **The dial:** a table that came for combat, and has learned it cannot touch the gray
+> **For a table that came for steel:** a table that came for combat, and has learned it cannot touch the gray
 > masks, should be shown the Circle's delivery and the fourth iron early. Both are
 > fights the characters can end on their own terms, and both are about someone the table has
 > met.

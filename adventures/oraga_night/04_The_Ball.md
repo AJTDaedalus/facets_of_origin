@@ -587,9 +587,10 @@ reads those rooms stops investigating a scandal and starts guarding a family.
 sentence Raunu will die without finishing. He means to announce it at midnight;
 he never gets to; so the players who bottom this thread may be the *only guests
 in the palace* who ever know what the night was for. What a player *does* with
-that is the thread's real payload: sell it (the Circle would reprice the room),
-guard it, warn the Thenya, or carry it silently into the Unmasking knowing what
-the recluse is about to say. The players who found the nursery tend to appoint
+that is the thread's real payload: sell it (the Circle would reprice the room, and
+when the lights die its knives go for the east wing's service door, into the Radiant's
+path), guard it, warn the Thenya, or carry it silently into the Unmasking knowing
+what the recluse is about to say. The players who found the nursery tend to appoint
 themselves its protectors, which is exactly where Chapter V wants them standing.
 
 **At midnight:** knowing the east wing's layout, its inner guards by name, and its
