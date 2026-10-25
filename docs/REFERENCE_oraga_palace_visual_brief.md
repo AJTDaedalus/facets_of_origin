@@ -3,8 +3,10 @@
 *Oraga Night, D&D 5e edition (`conversions/dnd5e/oraga_night/`). A working brief for an
 image-generation agent: site plan, floors, every keyed room, the key scenes, the cast and
 the objects that matter. Drafted 2026-10-25 against the module text and the owner's
-rulings TP1–TP55 (`docs/DECISIONS.md`). Not a module file: nothing here is canon until
-the owner approves it.*
+rulings TP1–TP55 (`docs/DECISIONS.md`). Not a module file. The owner approved the quiet
+rooms in TP56 and the §7 extrapolations in TP64 (after the architecture review,
+`docs/REVIEW_oraga_palace_architecture.md`); those approvals are for art, not module canon.
+Four questions are still open (end of §7).*
 
 ---
 
@@ -12,7 +14,7 @@ the owner approves it.*
 
 ### 0.1 The three tags
 
-Every statement in this brief is one of three kinds, plus a fourth tag for approved
+Every statement in this brief is one of three kinds, plus two tags for approved
 extrapolations. The artist may treat the first two as fixed; the third is a proposal.
 
 - **[PRINTED]**: stated in the module or in an owner ruling (TP1–TP55). Sizes, rooms,
@@ -31,6 +33,11 @@ extrapolations. The artist may treat the first two as fixed; the third is a prop
 - **[APPROVED TP56]**: a [VX] room the owner approved as placed in ruling TP56 (the quiet
   rooms), now printed in chapter IV, "The Rest of the Palace". Treat it as fixed, like
   [PRINTED]; its one **Detail:** line is the only story detail it may show.
+- **[APPROVED TP64]**: a [VX] decision the owner approved in ruling TP64 (the fifteen items
+  of §7, as amended by the architecture review). Treat it as fixed for art, like [MAP]. It
+  is still architecture, decor and scale only, and it is not module canon. A [VX] tag that
+  remains in the brief is either outside §7's fifteen items or one of the four questions
+  still open (end of §7).
 
 A heading marked [VX] means the whole section under it is extrapolated unless a line inside
 is tagged otherwise.
@@ -38,11 +45,16 @@ is tagged otherwise.
 ### 0.2 Palette and mood
 
 **The owner's visual anchor** (a reference image the owner keeps): a towering gothic
-palace of dark violet-charcoal and grown crystal, many spired towers and pinnacles, tall
-pointed-arch windows, a great rose window, every pane and crystal glowing hot pink to
-magenta from within; a broad, steep grand staircase from the street to an arched entrance,
-crystal lanterns on posts; night, rain, wet cobbles; half-timbered gabled townhouses with
-warm amber shopfronts on both sides; carriages; guests in dark formal dress. Match it.
+palace of dark violet-charcoal and grown crystal, two big towers flanking a central front,
+spires, pinnacles and buttress arcs, tall pointed-arch windows, a great tall pointed window
+headed by a rosette, every pane and crystal glowing hot pink to magenta from within; a
+steep grand staircase about 20 feet wide climbing straight from the street to a tall arched
+entrance, crystal lanterns on posts at its foot and along it; carriages waiting at street
+level beside the stair foot (no ramps); night, rain, wet cobbles; half-timbered jettied
+townhouses with warm amber shopfronts on both sides; guests in dark formal dress. Match it.
+**Rain** is the image's, not the module's: keep it to the street plates (Scene 1, and
+Scenes 2 and 14 on the same ground) if the owner wants it, and never carry it into the
+gardens, the Crossing or the boat.
 
 **What the module says about the light [PRINTED]:**
 
@@ -60,13 +72,15 @@ warm amber shopfronts on both sides; carriages; guests in dark formal dress. Mat
   draining away from the crystal like water out of a cracked basin."
 - From the river at the end, the palace is "burning rose-colored behind them."
 
-**Reconciling the two [VX]:** the palace's massive courses (buttresses, piers, tower
-bodies, roofs) are dense, smoky crystal that reads as dark violet-charcoal at night, almost
-like stone. The tracery, glazing, window-crystal, pinnacle tips, lantern-crystals and the
-inner faces of the walls are clearer crystal that glows rose-pink, deepening to magenta
-where the crystal is thick. Up close the glow is soft and shell-like (pearly pink, warm);
-from a distance and through rain it reads hot pink to magenta. Nothing glows white or blue
-except as noted for wards.
+**Reconciling the two [APPROVED TP64]:** one material, pink grown crystal. Where it is
+thick, unlit or seen against the night sky it reads deep violet to charcoal (the owner's
+image); wherever it is thinner or lit from within it glows rose to magenta up close and from
+the street. Before midnight rose leads and the dark mass supports it; up close the light is
+warm and shell-like. After the drain the crystal is colorless, milky, gray-violet dead glass
+everywhere; any rose after midnight is fire seen through or reflected in it, never the
+walls' own glow. Ward-light is a hard white-rose. Nothing glows white or blue except as
+noted for wards. Draw the palace warm, not as a horror castle: it is "the color of the
+inside of a shell" until midnight.
 
 **Mood by hour:**
 
@@ -75,10 +89,10 @@ except as noted for wards.
 | Dusk to Movement IV | rose and magenta crystal, amber candle and hearth light, black and jewel-toned formal dress, gold on the high table | splendor stretched thin: lavish food and music in a house that is plainly too empty |
 | Movement V, the Dead Dance | lamps down; walls alone light the hall in shell-pink; faces are masks in silhouette | the most beautiful hour of the year, and the easiest to move unseen in |
 | Midnight onward | crystal drained to colorless, milky gray-violet glass; candle and fire orange; smoke; sudden ward-flares | the burning building with three killers out of another age in it |
-| The gardens after midnight | dark; lanterns going out one by one; mist off the river; the palace glowing and burning rose behind | the open, the chase, the one collision |
+| The gardens after midnight | dark; lanterns going out one by one; the palace dark above, burning behind (any rose is firelight through dead crystal) | the open, the chase, the one collision |
 | Dawn | fires out; gray light; soot on crystal | the counting |
 
-**Ward-light [VX]:** the module calls it ward-fire, ward-light, light flooding stairwells,
+**Ward-light [APPROVED TP64]:** the module calls it ward-fire, ward-light, light flooding stairwells,
 crystal barriers sealing corridors, wards flaring over huddled guests, but gives no color.
 Proposal: a hard white-rose blaze, brighter and colder than the walls ever were, with the
 crystal of a sealed doorway visibly growing shut across it like frost in fast motion.
@@ -117,8 +131,10 @@ crystal of a sealed doorway visibly growing shut across it like frost in fast mo
 - **Light is crystal and fire.** The walls glow; lanterns in the gardens are crystal
   lanterns (they "burst in a line" at the Crossing); great hearths burn; candles on the
   tables and sconces. The dais's four ward-points are sconces:
-  turning one is "turn a sconce" (Table V–2). [VX] Draw every ward-point the same way, as a
-  crystal wall sconce brighter than the wall around it.
+  turning one is "turn a sconce" (Table V–2). Only the dais's ward-points are printed as
+  sconces; draw them as crystal wall sconces brighter than the wall around them. [VX] Other
+  ward-points (B7, the dark wing, the doors Raunu sealed) are never called sconces; their
+  look is a proposal.
 - **Humans only.** Every person in Rekuzan is human. No pointed ears, horns, tails, scales
   or non-human anatomy, on guests, staff, the Uninvited or the Attendant.
 - **Masks.** On the last night of Oraga everyone wears a spirit-face: "the dead of the
@@ -147,47 +163,53 @@ top of a hill; the street (Gate Street) climbs to it, and on the night the carri
 step down in terraces to a river and a modest, always-locked iron gate onto the river
 walk. Vell's boat goes from there "north up the tributary to the foothills."
 
-**[VX] The neighborhood.** Gate Street is steep and cobbled, lined both sides with tall
+**[APPROVED TP64] The neighborhood.** Gate Street is steep and cobbled, lined both sides with tall
 half-timbered, gabled townhouses: jettied upper storeys, steep slate roofs, warm amber
 shop windows at street level (the owner's anchor). Rekuzan's own grown-crystal district
-walls glow pink on the skyline behind. The second gate is a squat crystal gate-arch in a
-district wall a few hundred feet down the hill. A narrow lane runs along each side of the
-palace's street front: the **West Lane** to the stable yard and the servants' postern,
-the **East Lane** to the kitchen yard gate. The river at the garden's foot is the
-tributary itself, running north; mist rises off it at night.
+walls glow pink on the skyline behind. [VX, still open] Whether Gate Street lies inside or
+outside the Boranis district's crystal walls is the owner's to confirm; the image's timber
+houses stand either way. The second gate is a squat crystal gate-arch in a district wall a
+few hundred feet down the hill. A narrow lane runs along each side of the palace's street
+front: the **West Lane** to the stable yard and the servants' postern (carriages set down
+at the stair foot and go round by it to the stable yard), the **East Lane** to the kitchen
+yard gate. At the garden's foot the river runs past the river walk; Vell's boat goes
+upstream, north, up the tributary toward the foothills (the tributary flows south). No river
+mist, except perhaps a thin line on the water in the boat scene (owner to decide).
 
 ### 1.2 The plan in one paragraph
 
 The core is printed: the **Gatehouse Court** behind the street gate, the **Crystal Court**
 (the great hall) straight ahead of it with its two **banquet galleries**, the **gardens**
 beyond the Court's far end stepping down to the river, and the **east wing** running north
-along the gardens' east side at gallery level. **[VX]** Around that core this brief builds
+along the gardens' east side at gallery level. **[APPROVED TP64]** Around that core this brief builds
 a palace: a long **West Range** (the Audience Hall, its antechamber, the chapel, shut state
-rooms, and on its second floor the **dark wing** with Raunu's study in a corner tower), a
+rooms, and on its second floor, the storey above the ground, the **dark wing** with
+Raunu's study in a corner tower), a
 **garden wing** mirroring the east wing on the gardens' west side (the trophy gallery
-above, the lower gallery beneath, the falcon mews behind), an **East Range** behind the
+and two drawing rooms above, the lower gallery beneath, the falcon mews behind), an **East Range** behind the
 gatehouse (kitchens, servants' hall, household offices, the dormitories of a staff that is
 mostly gone), a **street front** of towers and a grand stair, and a ring of service
 passages threading all of it. The shape is a broad **U opening north**: the Crystal Court
 is the bar, the two wings are the arms, and the upper terraces lie cupped between them.
 
-### 1.3 Overall footprint [VX]
+### 1.3 Overall footprint [APPROVED TP64]
 
 - **Built footprint:** about **370 ft east–west × 290 ft north–south** (x −170 to +200,
   y −60 to +230), not counting the grand stair and gardens.
 - **With the grand stair and the gardens:** about **400 × 580 ft**, some five acres, from
   the foot of the grand stair (y −150) to the river walk (y +430).
 - **Height:** Crystal Court vault 50 ft inside [PRINTED]; its roof ridge about 85 ft; the
-  twin towers flanking its south gable about 120 ft to the parapet and 165 ft to the spire
-  tips; a slender crystal flèche over the dais end about 150 ft; the bell tower about
-  130 ft; the study tower about 110 ft; gate towers about 70 ft (95 ft with spires); wing
-  turrets about 60 ft. Dozens of pinnacles on every buttress.
+  twin towers flanking its south front about 120 ft to the parapet and 165 ft to the spire
+  tips; the bell tower about 130 ft; the study tower about 110 ft; gate towers about 70 ft (95 ft with spires); wing
+  turrets about 60 ft. Dozens of pinnacles on every buttress. No flèche.
+- **The blocks of §1.4 do not overlap** on any one level (corrected after the architecture
+  review); the footprint itself is unchanged.
 
 ### 1.4 Coordinates of every block
 
 Feet, in the book maps' frame (x east, y north, origin at the south-west corner of the
-Court floor). [PRINTED] and [MAP] rows match `maps/build_maps.py` exactly; [VX] rows are
-proposals.
+Court floor). [PRINTED] and [MAP] rows match `maps/build_maps.py` exactly; the rest were
+approved in TP56 or TP64, with the overlaps the architecture review found corrected.
 
 | Block | x (west → east) | y (south → north) | Level | Tag |
 |---|---|---|---|---|
@@ -205,67 +227,70 @@ proposals.
 | East wing corridor | 100 → 110 | 114 → 214 | +12 | PRINTED (10 × 100) |
 | East wing rooms (Veier's, Raunu's, the nursery, south to north) | 110 → 135 | 118 → 148, 148 → 178, 178 → 208 | +12 | PRINTED 20–30 ft across; MAP 25 × 30 and order |
 | Service stair hall, with the wing's service door at its head | 110 → 120 | 86 → 118 | 0 → +12 | MAP |
-| Service run (5 ft) toward the service stair | ~100 → 125 | −40 → 92 | 0 | PRINTED width; MAP schematic; VX route (§2.12) |
+| Service run (5 ft) toward the service stair | 114 → 119 (from the kitchens, y −10 → 11); 100 → 119 (cross-leg, y 6 → 11); 100 → 105 (the plank stretch behind the east aisle, y 6 → 26); 100 → 115 (cross-leg south of the east stair's foot, y 21 → 26); 110 → 115 (beside the east stair and on, y 21 → 86) | as given | 0 | PRINTED width; MAP schematic; route APPROVED TP64 (§B10); clears the east stair and the SE Court tower |
 | Garden stair (the private stair), down the wing's west wall | 93 → 99 | ~212 → ~164 | +12 → upper terrace | PRINTED; MAP position |
 | B9's west wall line = the terraces' east end | x 100 | — | — | MAP |
 | West wall door to B4 (double, 10 ft) | at x −20 | 56 → 66 | 0 | MAP |
 | West service door (5 ft, card S11's door) | at x −20 | 96 → 101 | 0 | PRINTED width; MAP position |
 | Garden walk (railed) | −20 → 100 | 140 → 150 | 0 | MAP depth (10 ft) |
-| Upper terrace | −20 → 100 | 150 → 190 | −8 [VX height] | PRINTED 40 × 120 |
+| Upper terrace | −20 → 100 | 150 → 190 | −8 [APPROVED TP64 height] | PRINTED 40 × 120 |
 | Second terrace | −20 → 100 | 190 → 230 | −18 | PRINTED 10-ft drop |
 | Third terrace | −20 → 100 | 230 → 270 | −28 | PRINTED |
-| Lower garden | −20 → 100 | 270 → 420 | −38, falling gently to −42 at the gate [VX] | PRINTED ~150 ft |
+| Lower garden | −20 → 100 | 270 → 420 | −38, falling gently to −42 at the gate [APPROVED TP64] | PRINTED ~150 ft |
 | River gate (iron) | 35 → 45 | at y 420 | river-walk level | PRINTED; MAP position |
-| River walk and river | all | 420 → 440 and beyond | water ~4 ft below the walk [VX] | PRINTED |
+| River walk and river | all | 420 → 440 and beyond | water ~4 ft below the walk [VX] | PRINTED; the tributary flows south, so upstream is north |
 | Gatehouse Court (B1 / B12) | 10 → 70 | −45 → 0 | 0 | MAP (~60 × 45) |
 | Gatehouse: the cell / the arch / the stair tower | 20 → 32.5 / 32.5 → 47.5 / 47.5 → 60 | −60 → −45 | gate-walk +15 | PRINTED heights; MAP plan |
 | The gate (two leaves, wicket in the court-side left leaf) | 32.5 → 47.5 | at y −60 | 0 | PRINTED; MAP |
-| Gate landing (head of Gate Street) | 0 → 80 | −90 → −60 | 0 | VX (the Blades stand 10 ft out on it: PRINTED) |
-| Grand stair, with carriage ramps either side | 15 → 65 (stair); ramps to x −30 and +110 | −150 → −90 | 0 → −25 | VX |
-| Gate towers | 6 → 20 and 60 → 74 | −64 → −46 | to +70 | VX |
-| Court towers (SW and SE), flanking the south gable | −34 → −14 and 94 → 114 | −14 → 6 | to +120 | VX |
-| Bell tower | 94 → 112 | 134 → 152 | to +130 | APPROVED TP56 |
-| West Range: B4 antechamber | −50 → −20 | 46 → 76 | 0 | VX |
-| West Range: B4 Audience Hall | −160 → −50 | 36 → 86 | 0 (ceiling ~35) | VX |
-| West Range: B6 Chapel (octagon), off the antechamber by a 10-ft passage | −72 → −30 | −6 → 36 | 0 | VX |
-| West Range: shut state rooms (ground) and the dark wing (second floor) | −170 → −30 (south of y −6); −170 → −72 (y −6 → 36) | −60 → 36 | 0 and +30 | APPROVED TP56 |
-| Study tower (B8 on its second floor) | −176 → −146 | −66 → −36 | to +110 | VX |
-| West service passage (S11's door to the gallery corridor's back stair), its branch west to the servants' postern, and its link south behind the Audience Hall's dais wall | −30 → −20 (y 86 → 140); −170 → −20 (y 86 → 96); −170 → −160 (y 36 → 86) | as given | 0 | VX |
-| Garden wing (lower gallery below, trophy gallery B7 above) | −55 → −20 | 150 → 214 | −8 and +12 | APPROVED TP56 |
+| Gate landing (head of Gate Street) | 0 → 80 | −90 → −60 | 0 | APPROVED TP64 (the Blades stand 10 ft out on it: PRINTED) |
+| Grand stair (steep, about 20 ft wide; no carriage ramps; carriages set down at its foot) | 30 → 50 | −150 → −90 | 0 → −25 | APPROVED TP64 |
+| Gate towers | 6 → 20 and 60 → 74 | −64 → −46 | to +70 | APPROVED TP64 |
+| Court towers (SW and SE), flanking the south front | −34 → −14 and 94 → 114 | −14 → 6 | to +120 | APPROVED TP64 (the chapel and state rooms now start west of the SW tower; the East Range starts east of the SE tower) |
+| Bell tower, on the east gallery's north end, clear of the east wing | 82 → 100 | 122 → 140 | to +130 | APPROVED TP56 (existence); position APPROVED TP64. Its base is the last 18 ft of the east aisle and gallery bay; the gallery's MAP extent is unchanged |
+| West Range: B4 antechamber | −50 → −20 | 46 → 76 | 0 | APPROVED TP64 |
+| West Range: B4 Audience Hall | −160 → −50 | 36 → 86 | 0 (ceiling ~35) | APPROVED TP64 |
+| West Range: B6 Chapel (octagon), off the antechamber by a 10-ft passage | −76 → −34 | −6 → 36 | 0 | APPROVED TP64 |
+| West Range: shut state rooms (ground), with the dark-wing stair rising from among them, and the dark wing (second floor) | −170 → −34 (south of y −6, west of the SW tower); −170 → −76 (y −6 → 36) | −60 → 36 | 0 and +15 | APPROVED TP56; heights APPROVED TP64 |
+| Study tower (B8 on its second floor) | −176 → −146 | −66 → −36 | to +110 | APPROVED TP64 |
+| West service passage (S11's door to the gallery corridor's back stair), its branch west to the servants' postern, and its link south behind the Audience Hall's dais wall | −30 → −20 (y 86 → 140); −170 → −20 (y 86 → 96); −170 → −160 (y 36 → 86) | as given | 0 | APPROVED TP64 |
+| Garden wing (lower gallery below; trophy gallery B7, 30 × 40, then the two drawing rooms at the north end, above) | −55 → −20 | 150 → 214 (B7 150 → 190; drawing rooms 190 → 214) | −8 and +12 | APPROVED TP56; sizes APPROVED TP64 |
 | Falcon mews and weathering yard | −120 → −55 | 150 → 230 | terrace level | APPROVED TP56 (mews PRINTED "behind the garden wing") |
 | Stable and carriage yard | −170 → −60 | 96 → 150 | 0 | APPROVED TP56 |
-| East Range: kitchens, sculleries, kitchen yard | 100 → 200 | −60 → −10 | 0 | VX |
-| East Range: servants' hall and household offices | 100 → 170 | −10 → 30 | 0; dormitories at +30 | APPROVED TP56 |
-| Wine cellar / lower cellar / the Root (B11) | under the East Range and the Court's south half | see §2.13 | −15 / −30 / −45 | VX positions; route PRINTED |
-| Garden below the east wing (card S10) | 110 → 220 | 92 → 270 | ~−8, falling north [VX] | PRINTED existence; MAP position |
+| East Range: kitchens, sculleries, kitchen yard | 114 → 200 | −60 → −10 | 0 | APPROVED TP64 |
+| East Range: servants' hall and household offices | 119 → 170 | −10 → 30 | 0; dormitories above at +30 | APPROVED TP56; heights APPROVED TP64 |
+| Wine cellars / lower cellar / the Root (B11) | the wine cellars run from under the kitchens west beneath the Gatehouse Court to the Court's south end; the lower cellar under their west end; the Root beneath that, under the Court's south half | see B11 | −15 / −30 / −45 | APPROVED TP64; route PRINTED |
+| Garden below the east wing (card S10) | 135 → 220 | 92 → 270 | about −5, falling north [APPROVED TP64] | PRINTED existence; MAP position |
 
 ### 1.5 Levels and how they connect
 
 | Level | Elevation | What is on it |
 |---|---|---|
-| The Root (B11) | about −45 [VX] | the hidden laboratory, beneath the cellars [PRINTED: "beneath the wine cellars"] |
-| Lower cellar | about −30 [VX] | reached by "the lower cellar stair" that Anha is barred from sweeping; its far wall of living crystal holds the seam [PRINTED] |
-| Wine cellar | about −15 [VX] | under the kitchens [PRINTED: kitchens → wine cellar → lower cellar stair → seam] |
-| Terrace level | −8 [VX] | the upper terrace; the lower gallery and B13 in the garden wing; the mews; the garden below the east wing |
+| The Root (B11) | about −45 [APPROVED TP64] | the hidden laboratory, beneath the wine cellars' west end, under the Court's south half [PRINTED: "beneath the wine cellars"] |
+| Lower cellar | about −30 [APPROVED TP64] | reached by "the lower cellar stair" that Anha is barred from sweeping; its far wall of living crystal holds the seam [PRINTED] |
+| Wine cellars | about −15 [APPROVED TP64] | from under the kitchens west beneath the Gatehouse Court to the Court's south end [PRINTED route: kitchens → wine cellar → lower cellar stair → seam] |
+| Terrace level | −8 [APPROVED TP64] | the upper terrace; the lower gallery and B13 in the garden wing; the mews (the garden below the east wing is a little higher, about −5) |
 | Ground | 0 | the Gatehouse Court, the Crystal Court and its aisles, the garden walk, the Audience Hall, the chapel, the kitchens [PRINTED: the Court and its garden doors are at ground level] |
-| Gallery level | +12 | the banquet galleries, the musicians' gallery [VX position], the gallery corridor, the east wing, the trophy gallery [PRINTED for B3 and B9] |
+| Second floor: gallery level | +12 | the storey above the ground floor, the module's "second floor" in its American usage: the banquet galleries, the musicians' gallery [APPROVED TP64 position], the gallery corridor, the east wing (S10's lit window "on the second floor"), the trophy gallery [PRINTED for B3 and B9] |
+| Second floor: the dark wing | about +15 [APPROVED TP64] | the dark wing with Raunu's study [PRINTED: "second floor, in the dark wing"], roughly level with the banquet galleries but with no door to them; reached only by the dark-wing stair from the ground-floor state rooms |
 | Gate-walk | +15 | the walk over the gate arch [PRINTED] |
-| High gallery and second floor | about +30 [VX height] | the high gallery above the Crystal Court [PRINTED existence]; the dark wing with Raunu's study [PRINTED: "second floor, in the dark wing"]; the empty servants' dormitories |
-| Towers | +45 and up | tower rooms, bell chamber, spires [VX] |
+| High gallery | about +30 [APPROVED TP64 height] | the high gallery above the Crystal Court [PRINTED existence]; the empty servants' dormitories above the East Range's tall kitchens and hall |
+| Towers | +45 and up | tower rooms, bell chamber, spires [APPROVED TP64] |
 
-**Why the terraces sit below the Court [VX, reconciling two printed facts]:** the Court's
-garden doors open on a railed walk at ground level and "the upper terrace lies below that
-rail," by a height the book never gives. Card S10 says the wall from the garden below the
-east wing up to a lit window is 20 feet of grown crystal, while the wing's floor is 12 feet
-above the Court. Both are true if the hill falls away north and east: the upper terrace and
-the garden below the wing lie about **8 feet below** the Court floor, so the wing's windows
-are 20 feet above that garden, and the garden stair falls 20 feet from the wing's corridor
-to the upper terrace. Draw the walk's rail as a waist-high balustrade over an 8-foot
-retaining wall, with flights down at either end [VX].
+**Why the terraces sit below the Court [APPROVED TP64, reconciling two printed facts]:**
+the Court's garden doors open on a railed walk at ground level and "the upper terrace lies
+below that rail," by a height the book never gives. Card S10 says the wall from the garden
+below the east wing up to a lit window is 20 feet of grown crystal, while the wing's floor
+is 12 feet above the Court. Both are true if the hill falls away north and east: the upper
+terrace lies about **8 feet below** the Court (so the garden stair falls 20 feet from the
+wing's corridor), and the garden below the east wing about **5 feet below** the Court, so
+the wing's lit window (sill about 3 feet above the +12 floor) is 20 feet above that garden,
+as card S10 prints. The wing's gallery level is the "second floor" S10 names, in the
+module's American usage. Draw the walk's rail as a waist-high balustrade over an 8-foot
+retaining wall, with flights down at either end.
 
 **Stairs and passages:**
 
-- **Public stairs [VX positions]:** two grand stairs from the Court's south corners
+- **Public stairs [APPROVED TP64 positions]:** two grand stairs from the Court's south corners
   (beside the main doors, in the aisles) up to the banquet galleries and the musicians'
   gallery. The module never says how guests reach the galleries; these are proposals.
 - **The east stair [PRINTED]:** from the Court's east doors, a stair rises 12 feet to the
@@ -274,79 +299,87 @@ retaining wall, with flights down at either end [VX].
   wing's service door at its head and runs down and out to the garden below the wing.
 - **The garden stair [PRINTED]:** the east wing's private stair, from the far end of the
   wing's corridor down the wing's outer (west) wall to the upper terrace.
-- **The dark-wing stair [PRINTED existence; VX position]:** the stair the Church wardens
-  come down after midnight. Place it at the south end of the west banquet gallery, rising
-  from gallery level to the second floor.
-- **The gallery corridor [PRINTED existence; VX position]:** the private corridor B7 is
+- **The dark-wing stair [PRINTED existence; APPROVED TP64 position]:** the stair the Church
+  wardens come down after midnight. It rises from among the ground-floor shut state rooms
+  (TP56's clean path through their dust leads to it) to the dark wing on the second floor
+  (+15). It has no door to the banquet galleries.
+- **The gallery corridor [PRINTED existence; APPROVED TP64 position]:** the private corridor B7 is
   off. Place it at gallery level, running west then north from the west banquet gallery's
   north end into the garden wing.
-- **The lower gallery [PRINTED existence; VX position]:** B13 is off it. Place it at
+- **The lower gallery [PRINTED existence; APPROVED TP64 position]:** B13 is off it. Place it at
   terrace level beneath the gallery corridor, with a narrow stair up into B7.
 - **The terrace stairs [PRINTED]:** each terrace has a stair at either end down to the
   next. Two flights also go down from the garden walk to the upper terrace [MAP].
 - **The service passages [PRINTED]:** "thread the whole palace, including the east wing and
   the garden stair." 5 feet wide, "one lamp in three", one stretch with a wall to the Court
-  "one plank thick." See §2.12 for the route this brief proposes.
-- **The cellar stairs [PRINTED order; VX positions]:** kitchens → wine cellar → the lower
-  cellar stair → the sealed seam → the Root.
+  "one plank thick." See B10 for the approved route.
+- **The cellar stairs [PRINTED order; APPROVED TP64 positions]:** kitchens → wine cellars
+  (west, under the Gatehouse Court) → the lower cellar stair at their west end → the sealed
+  seam → the Root.
 
 ### 1.6 Site plan (north up; schematic, not to scale)
 
 ```
-                              ~ ~ ~ THE RIVER (the tributary, running north) ~ ~ ~        N
+               ~ ~ ~ THE RIVER (the tributary, flowing south; upstream is north) ~ ~ ~     N
    ..............................river walk...........[RG]...........................     ^
                  |                                                  |   :
                  |                LOWER GARDEN                       |   :  GARDEN
                  |       about 150 ft from the third terrace          |   :  BELOW THE
                  |              to the river gate                    |   :  EAST WING
                  |                                                  |   :  (dark beds;
-                 |===st=========== balustrade, 10-ft drop ======st===|   :   card S10)
-                 |   THIRD TERRACE           40 x 120 ft             |   :
+                 |===st=========== balustrade, 10-ft drop ======st===|   :   card S10;
+                 |   THIRD TERRACE           40 x 120 ft             |   :   about -5)
                  |===st=========== balustrade, 10-ft drop ======st===|   :
      FALCON      |   SECOND TERRACE          40 x 120 ft             |   :
      MEWS   +----+                                                  +---+---+
-     (VX)   |GARD|===st=========== balustrade, 10-ft drop ======st===| E | t |
-            | EN |   UPPER TERRACE           40 x 120 ft         gs <| A | u |
+            |GARD|===st=========== balustrade, 10-ft drop ======st===| E | t |
+            | EN |   UPPER TERRACE  (lawn)   40 x 120 ft         gs <| A | u |
             |WING|                                               gs <| S | r |
-            |(VX)|===st=st========= rail, ~8-ft drop =====st=st======| T | s |
+            |    |===st=st========= rail, ~8-ft drop =====st=st======| T | s |
             | B7 |   GARDEN WALK  (10 ft deep, ground level)         |   |   |
-   STABLE   +----+---[gd]---------------------------[gd]-------[BELL]| W |   |
-   YARD     |    |  W  |                                     |  E  | I | R |
-   (VX)     |WEST|  E  |              CRYSTAL COURT  (B2)    |  A  | N | O |
-            |SVC |  S  |   dais (30 ft, 3 ft high) at north  |  S  | G | O |
-   +--------+PASS|  T  |                                     |  T  |   | M |
-   | AUDIENCE    |     |       dance floor 80 x 140 ft       |     |B9 | S |
+   STABLE   +----+---[gd]---------------------------[gd]-------------| W |   |
+   YARD     |    |  W  |                                     |BELL | I | R |
+            |WEST|  E  |              CRYSTAL COURT  (B2)    |  E  | N | O |
+            |SVC |  S  |   dais (30 ft, 3 ft high) at north  |  A  | G | O |
+   +--------+PASS|  T  |                                     |  S  |   | M |
+   | AUDIENCE    |     |       dance floor 80 x 140 ft       |  T  |B9 | S |
    | HALL (B4) [ante]--|          vault 50 ft                |  B3 |   |   |
-   |   (VX)      |  B3 |                                     | +12 +---+---+
+   |             |  B3 |                                     | +12 +---+---+
    +-------------+ +12 |                                     |     |svc stair
    |  CHAPEL B6  |     |                                     |[east doors]->east stair
    |  (octagon)  |     |                                     |     | -> cleared corridor
    +-------------+-----+-----------[main doors]--------------+-----+
-   | STATE ROOMS |[SW tower]   +------------------+   [SE tower]|  EAST RANGE (VX)
-   | (shut)      |             | GATEHOUSE COURT  |             |  servants' hall,
-   | dark wing   |             | (B1; B12 after   |             |  offices; KITCHENS
-   | above, B8 in|             |  midnight) 60x45 |             |  and kitchen yard,
-   | STUDY TOWER |             +--[cell][arch][stair]-----------+  wine cellar below
-   +-------------+          [gate tower]  GATE  [gate tower]       (the Root beneath)
-     West Lane                      GATE LANDING (VX)                 East Lane
-                                  GRAND STAIR + carriage ramps (VX)
+   | STATE ROOMS |[SW tower]   +------------------+   [SE tower]|  EAST RANGE
+   | (shut), the |             | GATEHOUSE COURT  |             |  servants' hall,
+   | dark-wing   |             | (B1; B12 after   |             |  offices; KITCHENS
+   | stair; dark |             |  midnight) 60x45 |             |  and kitchen yard
+   | wing above; |             +--[cell][arch][stair]-----------+
+   | STUDY TOWER |          [gate tower]  GATE  [gate tower]
+   +-------------+                                                     East Lane
+     West Lane                      GATE LANDING
+                          GRAND STAIR (steep, about 20 ft wide)
+                carriages set down at the stair foot, then round by the West Lane
                               G A T E   S T R E E T   (down the hill)
                        half-timbered townhouses, amber shopfronts (owner's anchor)
                                  ... the second gate, far below
 ```
 
 Legend: `gs <` the garden stair down the east wing's west wall; `[gd]` garden doors; `st`
-terrace stairs; `[RG]` river gate; `+12` gallery level; `WEST SVC PASS` the west service
-passage behind the Court's west wall (S11's door opens into it). The kitchens are in the
-East Range, behind the gatehouse (§2.12).
+terrace stairs; `[RG]` river gate; `+12` gallery level (the second floor); `BELL` the bell
+tower on the east gallery's north end; `WEST SVC PASS` the west service passage behind the
+Court's west wall (S11's door opens into it). The kitchens are in the East Range, behind the
+gatehouse (B10). Not shown: the wine cellars run from under the kitchens west beneath the
+Gatehouse Court to the Court's south end, and the Root lies beneath their west end, under the
+Court's south half (B11). Everything outside the printed core is [APPROVED TP56] or
+[APPROVED TP64].
 
 ### 1.7 Floor adjacency diagrams
 
 **Ground (0) and terrace level (−8):**
 
 ```
- [Gate Street] -> (grand stair, VX) -> [gate landing] -> GATE/wicket -> [arch]
-                                                                          |
+ [Gate Street] -> (grand stair) -> [gate landing] -> GATE/wicket -> [arch]
+                                                                      |
      [the cell]--(door)--[GATEHOUSE COURT B1]--(door)--[gatehouse stair]--> gate-walk (+15)
                                   |
                            [MAIN DOORS, 10 ft]
@@ -363,26 +396,27 @@ East Range, behind the gatehouse (§2.12).
                                                \                     ^
                                          [KITCHENS B10] ----------  (garden stair foot)
                                           |        \
-                                   [wine cellar]   [kitchen yard -> East Lane]
+                                   [wine cellars]  [kitchen yard -> East Lane]
+                     (west, under the Gatehouse Court, to the Court's south end)
                                           |
-                                 (lower cellar stair) -> [lower cellar] -> (seam) -> [THE ROOT B11]
+                     (lower cellar stair, at their west end) -> [lower cellar] -> (seam) -> [THE ROOT B11]
 
- Terrace level, west: [upper terrace]--[lower gallery (VX)]--[B13 door]--[service run branch]
+ West Range: [state rooms, shut] --(TP56's clean path)--> (dark-wing stair up) --> [THE DARK WING, second floor, +15]
+
+ Terrace level, west: [upper terrace]--[lower gallery]--[B13 door]--[service run branch]
                                               |
                                    (narrow stair up into B7)
- Terrace level, east: [garden below the east wing] <- (door at the foot of the service stair)
+ Terrace level, east: [garden below the east wing, about -5] <- (door at the foot of the service stair)
 ```
 
-**Gallery level (+12):**
+**Second floor: gallery level (+12):**
 
 ```
-   [dark-wing stair up to +30] 
+   [WEST BANQUET GALLERY B3]--[musicians' gallery over the main doors]--[EAST BANQUET GALLERY B3]
+   (wine court, alcoves)                                      (alcoves at its north end only; bell tower base)
               |
-   [WEST BANQUET GALLERY B3]--[musicians' gallery over the main doors, VX]--[EAST BANQUET GALLERY B3]
-   (wine court, alcoves)                                                  (alcoves)
-              |                                                                 
-   [gallery corridor, VX] --> [TROPHY GALLERY B7, garden wing]       EAST STAIR (from the east doors)
-                                                                              |
+   [gallery corridor] --> [TROPHY GALLERY B7] --> [two drawing rooms]       EAST STAIR (from the east doors)
+                          (garden wing)          (wing's north end)                  |
                                                [CLEARED CORRIDOR 10 x 60] --(door)-- [service stair]
                                                          |                                |
                                               [DOUBLE DOORS: guarded; seal at midnight]   |
@@ -392,18 +426,20 @@ East Range, behind the gatehouse (§2.12).
                                      |-- Raunu's rooms
                                      |-- the nursery
                                      `-- (far end) door -> GARDEN STAIR down the west wall -> upper terrace
+
+   No door joins the banquet galleries to the dark wing.
 ```
 
-**Second floor (+30) and above [VX except where tagged]:**
+**Second floor: the dark wing (+15); the high level (+30) and above [APPROVED TP64 except where tagged]:**
 
 ```
-   [STUDY TOWER: B8 Raunu's study, PRINTED "second floor, in the dark wing"]
-              |
-   [THE DARK WING: shut apartments, shrouded] --(dark-wing stair down)--> west banquet gallery
-              |
-   [HIGH GALLERY above the Crystal Court, PRINTED existence] -- along both long walls and across
-              |                                                  the north end, above the dais
-   [BELL TOWER stair] -- [East Range dormitories, mostly empty]
+   [shut state rooms, ground] --(dark-wing stair up)--> [THE DARK WING: shut apartments, shrouded, +15]
+                                                                   |
+                                     [STUDY TOWER: B8 Raunu's study, PRINTED "second floor, in the dark wing"]
+
+   [HIGH GALLERY above the Crystal Court, +30, PRINTED existence] -- along both long walls and across
+              |                                                        the north end, above the dais
+   [Court tower stairs]        [BELL TOWER stair]        [East Range dormitories above the kitchens, mostly empty]
 ```
 
 ---
@@ -435,29 +471,35 @@ invited, hired or smuggled in; the line to the gate is "the best gossip hour of 
 - Card S3's ground: Gate Street directly outside the gate, where three Bought Blades will
   stand "in a loose line across Gate Street, 10 feet out from the gate" after midnight.
 
-**Size and shape [VX]:** Gate Street is about 30 feet wide between house fronts, cobbled,
-climbing at a stiff grade. At the top it opens onto the **gate landing**, a level paved
-apron 80 feet wide and 30 feet deep before the gatehouse. The landing is reached from below
-by the **grand stair**: a broad flight of shallow crystal-edged steps, 50 feet wide and
-about 60 feet long, rising 25 feet, with heavy balustrades and **crystal lanterns on posts**
-every 15 feet down both sides (the owner's anchor). Two **carriage ramps** curve up either
-side of the stair to the landing, so carriages set down at the gate itself. At night the
-stair is the focal approach: wet steps throwing back the magenta of the facade.
+**Size and shape [APPROVED TP64]:** Gate Street is about 30 feet wide between house fronts,
+cobbled, climbing at a stiff grade. At the top it reaches the **gate landing** (80 × 30 feet,
+the head of Gate Street), a level paved apron before the gatehouse. The landing is reached
+from below by a steep **grand stair** about 20 feet wide, rising 25 feet in about 60 feet,
+with heavy balustrades and **crystal lanterns on posts** at its foot and up both sides,
+matching the owner's image. It is one stair in one hand and one style. There are **no
+carriage ramps**: carriages set down at the stair foot and go round by the West Lane to the
+stable yard. At night the stair is the focal approach, its wet steps throwing back the
+magenta of the facade.
 
-**Surfaces and light [VX]:** wet black cobbles; rain; the townhouse shopfronts warm amber
+**Surfaces and light [APPROVED TP64; rain is the owner's image, street plates only]:** wet black cobbles; rain; the townhouse shopfronts warm amber
 (lamplit windows of chandlers, vintners, mask-sellers); the palace above glowing hot pink
 through the rain; lantern crystals on the stair posts pink-white. Carriages with black
 lacquer and brass lamps; sedan chairs; horses steaming.
 
-**The facade seen from the street [VX]:** at the top of the stair the **gatehouse**: a
-pointed arch 15 feet wide [MAP] under the gate-walk (15 feet up [PRINTED]), flanked by two slender **gate towers** with crystal spires. Behind and above
-the gatehouse rises the great **south gable of the Crystal Court**, about 85 feet to its
-peak, filled by a **great rose window** some 30 feet across, glowing magenta, with tall
-pointed lancets below it; the gable is flanked by the twin **Court towers**, 120 feet to
-their pierced parapets and 165 to their spire tips. Beyond them, the spires and pinnacles of
-the wings and the bell tower and the slim flèche over the dais end. Flying buttresses down
-the Court's flanks, each with a crystal pinnacle. To the left the long West Range with the
-study tower at its corner; to the right the lower East Range with its kitchen chimneys.
+**The facade seen from the street [APPROVED TP64]:** at the stair head the **gatehouse
+arch** is the tall arched entrance of the owner's image: a pointed arch 15 feet wide [MAP]
+under the gate-walk (15 feet up [PRINTED]), flanked by two slender **gate towers** with
+crystal spires. The stair does not run into the Court's main doors: the Gatehouse Court lies
+hidden behind the arch, and the Court's **south front** rises above it, about 85 feet to its
+peak, with a **great tall pointed window of grown tracery headed by a rosette**, glowing
+magenta. The front is flanked by the twin **Court towers**, 120 feet to their pierced
+parapets and 165 to their spire tips. Beyond them, the spires and pinnacles of the wings and
+the bell tower at the Court's north-east corner. Buttress arcs down the Court's flanks, each
+with a crystal pinnacle. All of it is grown, not cut: facets and growth lines, no mortar
+joints, no carved figures or gargoyles. Each wing may show a slightly different crystal
+habit, since each was one ancestor's working life. No flèche. To the left the long West
+Range with the study tower at its corner; to the right the lower East Range with its kitchen
+chimneys.
 
 **Before midnight:** dusk going to night; the line; masked guests in dark formal dress,
 jewel-toned linings, crystal pins; liveried footmen; hired swords loitering in unmatched
@@ -491,8 +533,8 @@ street along the street face. From the walk it is a **15-foot drop** to the stre
 
 **Surfaces and light:** "The court's crystal wall, lit" is Bright Light [PRINTED, S3]: the
 court is the brightest place outdoors, and anyone in it is silhouetted to the street.
-[VX] The court walls are tall grown crystal, smoky violet at the base, clearing to glowing
-rose above; a ring of crystal lanterns on posts; a paving of dark stone with a rose-crystal
+[VX] The court walls are tall grown crystal, deep violet where it is thickest at the base,
+glowing rose above; a ring of crystal lanterns on posts; a paving of dark stone with a rose-crystal
 inlay in a radiating pattern leading to the main doors. The **cell** [PRINTED: where a
 detained guest wakes, "without mask or invitation"]: a bare 12-by-15-foot room with a crystal
 grille, a bench, no window to the street.
@@ -508,7 +550,9 @@ the unhurried spacing of people who have done this before. One of them is holdin
 case up where you can see it, the way you would hold a lantern, and he is reading aloud."
 The sergeant at the wicket, reading through its grille; three Blades in a loose line across
 Gate Street, 10 feet out; the fourth on the gate-walk. The court packed with frightened
-guests (one per 5-foot square), smoke drifting out of the main doors behind them; the bells
+guests (one per 5-foot square: the court holds about a hundred, and the rest of the two
+hundred are packed back into the Crystal Court behind them), smoke drifting out of the main
+doors behind them; the bells
 of Oraga tolling; the city's fires red on the clouds. When the gallery fire reaches the
 Court's doors, the crowd's back is to the heat [PRINTED: the fire clock].
 
@@ -538,7 +582,8 @@ doors are about 30 feet from the main-doors end of the east wall, through a pass
 the east gallery. The west wall carries the double door to the Audience Hall (around 56–66
 feet from the main doors) and the 5-foot service door (around 96 feet).
 
-**Architecture [VX]:** a gothic hall in three tiers, all grown crystal.
+**Architecture [APPROVED TP64]:** a gothic hall in three tiers, all grown crystal (grown,
+not cut: facets and growth lines, no mortar joints, no carved figures).
 - *Ground:* the dance floor, a single sweep of polished crystal paving, rose-veined, with a
   great radiating pattern converging on the dais. Along each long side, a row of seven
   clustered piers on the floor's edge line carries the galleries; behind them the shadowy
@@ -549,17 +594,18 @@ feet from the main doors) and the 5-foot service door (around 96 feet).
 - *High gallery (about +30):* a narrow walkway (5 feet wide) in the wall thickness above
   the banquet galleries along both long walls and across the north end above the dais,
   behind a screen of tracery. This is "the high gallery above the Crystal Court" where Raunu
-  is glimpsed in Movement III [PRINTED existence; VX form].
-- *Clerestory and vault:* tall pointed windows of glowing rose crystal above the high
-  gallery; a ribbed crystal vault, 50 feet at the crown [PRINTED height], the ribs carrying
-  the glow up into a starburst boss over the floor's center. The great **rose window** fills
-  the south gable above the main doors, seen from inside behind the musicians' gallery. The
-  north wall above the dais: three tall lancets.
-- *The musicians' gallery [PRINTED existence; VX position]:* a carved crystal balcony at
-  gallery level over the main doors, spanning between the two banquet galleries, 15 feet
-  deep; "dancers under a gallery of musicians."
-- *Hearths [PRINTED "fire in the great hearths"; VX position]:* two great hearths in the
-  side aisles, mid-hall, hooded in dark crystal.
+  is glimpsed in Movement III [PRINTED existence; APPROVED TP64 form].
+- *Upper windows and vault:* tall windows of clearer, brighter crystal above the high
+  gallery (the walls are the light; windows are where the crystal is thinnest, never holes
+  in a dark wall); a ribbed crystal vault, 50 feet at the crown [PRINTED height], the ribs
+  carrying the glow up into a starburst boss over the floor's center. The great tall pointed
+  window headed by a rosette fills the south front above the main doors, seen from inside
+  behind the musicians' gallery. The north wall above the dais: three tall lancets.
+- *The musicians' gallery [PRINTED existence; APPROVED TP64 position]:* a grown crystal
+  balcony at gallery level over the main doors, spanning between the two banquet galleries,
+  15 feet deep; "dancers under a gallery of musicians."
+- *Hearths [PRINTED "fire in the great hearths"; APPROVED TP64 position]:* two great hearths
+  in the side aisles, mid-hall, hooded in dark crystal.
 
 **The dais and high table [PRINTED]:** "a high table on a dais at the far end, laid and
 canopied and empty." Four ward-points on the dais, shown as sconces [PRINTED: "turn a
@@ -597,7 +643,7 @@ burning" (the Radiant going east). Raunu on the dais snapping wards alight, "spe
 house's stored centuries like coin"; seven honor guards dying or falling around the dais.
 The canopy may come down; the high table may be tipped; fire in the linen [Table V–2]. A
 rectangle of lamplight opens on the west side: the 5-foot service door, two big men in it
-with blades out (S11). [VX] The drained crystal looks like dead glass: colorless, milky,
+with blades out (S11). [APPROVED TP64] The drained crystal looks like dead glass: colorless, milky,
 violet-gray, every reflection gone; the vault is suddenly a black cave above the candles.
 Ward-flares throw hard white-rose light in bursts around the dais.
 
@@ -622,9 +668,12 @@ and, after midnight, the fire and Vorlain's rescue (S13) happen here.
 
 **Size and shape:** two halls, each running the Court's full **140 feet**, **20 feet deep**
 [MAP], their floors at **+12** with a **waist-high rail over a 12-foot drop** into the Court
-[PRINTED, S1]. [VX] Ceiling about 14 feet, ribbed. In each outer wall, six deep **alcoves**
-(about 8 × 10 feet), each a half-octagon bay with a crystal window and a cushioned bench,
-half-curtained. The **wine court** [PRINTED name; VX form]: a wider bay at the north end of
+[PRINTED, S1]. [APPROVED TP64] Ceiling about 14 feet, ribbed. In the west gallery's outer
+wall, six deep **alcoves** (about 8 × 10 feet), each a half-octagon bay with a crystal window
+and a cushioned bench, half-curtained. The east banquet gallery has no alcoves and no doors
+in its outer wall south of y 114, where the east stair and cleared corridor run behind it;
+its alcoves sit in its north end or within its 20-foot depth (screened bays on the gallery
+floor). The bell tower rises from its last 18 feet at the north end. The **wine court** [PRINTED name; VX form]: a wider bay at the north end of
 the west gallery, 20 × 25 feet, with the wine tables and great crystal decanters.
 
 **Furniture [PRINTED]:** fixed, crowded **benches** (S1: Difficult Terrain); long tables;
@@ -664,7 +713,7 @@ throwing back a little of the light from the door behind you. A dais at the far 
 smooth down the middle where several centuries of people have knelt. One chair on it.
 Somebody is sitting in the chair, and the length of the room is between you and them."
 
-**Size and shape [VX]:** the **antechamber** is a 30 × 30-foot vestibule entered from the
+**Size and shape [APPROVED TP64]:** the **antechamber** is a 30 × 30-foot vestibule entered from the
 Court's west double door, with a bench along each wall for the waiting line and a door south
 to the chapel. The **hall** runs west from it: **110 feet long × 50 feet wide**, ceiling
 about 35 feet, a ribbed crystal barrel vault. The dais at the far (west) end: 20 feet
@@ -679,6 +728,11 @@ is a barrier.
 
 **Mood:** "quiet in the particular way of a room that a great many people are deliberately
 not entering." The long walk is the scene.
+
+**The rest of the West Range [APPROVED TP56; heights APPROVED TP64]:** shut state rooms on the
+ground floor, with the dark-wing stair rising from among them (TP56's clean path leads to
+it); the dark wing on the second floor, the storey above the ground floor (about +15,
+roughly level with the banquet galleries but with no door to them).
 
 **After midnight [VX]:** dark and empty; nothing happens here in the printed attack.
 
@@ -709,24 +763,26 @@ terrace that go out one after another and burst in a line at the Crossing; the f
 **mews** "behind the garden wing" erupt in Movement IV (TP34). The gardens are "cold after
 the Court."
 
-**Garden design [VX]:**
+**Garden design [APPROVED TP64]:**
 - *Garden walk:* a broad paved promenade at the Court's foot, its balustrade of dark crystal
   with rose-crystal finials, crystal lanterns on the newels; the "rail crowd" watches the
   duel from here (S9).
-- *Upper terrace (−8):* formal parterre: four low clipped-box beds around a central gravel
-  cross, late roses and autumn asters, crystal lanterns on iron poles strung between with
-  smaller lanterns on cords. The foot of the garden stair is at its north-east corner.
-- *Second terrace (−18):* a long grass walk between two flower borders, with stone benches
-  in yew niches against the retaining wall.
-- *Third terrace (−28):* an orchard walk of pleached fruit trees (apples ripe for Oraga),
-  gravel between.
+- *Upper terrace (−8):* an open lawn, the duelling ground of S9 ("anyone on the grass";
+  Draunel "will not set foot on the grass"), framed by gravel paths and low flower borders
+  of late roses and autumn asters against the balustrades; crystal lanterns on poles, with
+  smaller lanterns on cords strung between. No hedges on the lawn. The foot of the garden
+  stair is at its north-east corner.
+- *Second terrace (−18):* a parterre of low clipped beds around a gravel cross, with stone
+  benches against the retaining wall.
+- *Third terrace (−28):* an orchard walk of pleached apples (ripe for Oraga), gravel
+  between.
 - *Lower garden (−38):* a looser garden: a central gravel path straight to the river gate
   between deep flower beds, clumps of ornamental trees, a few lanterns that stop short of the
-  gate, so the last stretch is dark. High garden walls of smoky crystal on both sides.
+  gate, so the last stretch is dark. High garden walls of crystal on both sides.
 - *River gate:* a modest wrought-iron gate, about 8 feet wide and 9 feet high, in a 12-foot
   wall [VX sizes; MAP draws a 10-foot opening], an old lock [PRINTED: DC 15 with Thieves'
   Tools], steps down to the **river walk**: a paved quay along the water, mooring rings.
-  Mist on the water at night.
+  No river mist.
 - *Retaining walls:* each 10-foot drop is a battered wall of dark crystal, rose-glowing
   faintly at its coping, with climbing roses.
 
@@ -737,7 +793,8 @@ them, a knot of masks at the walk's rail looking down).
 
 **After midnight:** dark terraces, lanterns going out one after another as the Radiant comes
 out of the smoke; the duel tearing the garden apart; the boat at the river walk; the palace
-burning rose-colored above and behind (see scenes 10 and 11).
+"burning rose-colored" above and behind: firelight through dark, drained crystal, not the
+walls' own glow (see scenes 10 and 11).
 
 **Fight-card terrain:** S6 and S9 (balustrade drop 1d6, out of the scene; lantern pools;
 gravel Disadvantage on Stealth; the rail crowd sees everything); the Crossing sidebar (flying
@@ -757,7 +814,7 @@ hold what a house this rich would be expected to leave in them." The eighth, **E
 with care**; in Movement IV the Wept leaves a mourner's offering there in a rite centuries out
 of date.
 
-**Size and shape [VX]:** an **octagon about 40 feet across**, one niche in each of the eight
+**Size and shape [APPROVED TP64]:** an **octagon about 40 feet across**, one niche in each of the eight
 walls (the entrance is cut through the base of one wall beneath its niche), ceiling a ribbed
 crystal dome 35 feet high with a small oculus. Floor of dark crystal with a rose inlay star.
 Niches 6 feet wide, 9 feet high, each a pointed arch. **Fraden's niche** faces the door,
@@ -780,10 +837,11 @@ Movement I until Movement V (Table VIII–7). "The gallery's case" holds old sou
 (Tavva's target). It is in the private palace, "off the gallery corridor." Its wards gutter at
 midnight; two of Tavva's knives hit it.
 
-**Size and shape [VX]:** a long hall in the garden wing at gallery level, **30 feet wide ×
-60 feet long**, ceiling 22 feet, a ribbed crystal vault. Entered from the gallery corridor at
-its south end; a narrow stair in its north-west corner goes down to the lower gallery.
-Tall lancet windows on the east side look over the terraces.
+**Size and shape [APPROVED TP64]:** a long hall in the garden wing at gallery level, **30
+feet wide × 40 feet long**, ceiling 22 feet, a ribbed crystal vault. Entered from the
+gallery corridor at its south end; the two shut drawing rooms lie beyond it at the wing's
+north end (TP56: "beside the trophy gallery"); a narrow stair in its north-west corner goes
+down to the lower gallery. Tall lancet windows on the east side look over the terraces.
 
 **Contents:**
 - [PRINTED] **Banners** of old settlements and old wars, hung from the vault ribs [VX: faded,
@@ -794,10 +852,10 @@ Tall lancet windows on the east side look over the terraces.
   soul-crystals [VX: a long, low case of crystal panes on a dark plinth down the hall's
   center, a dozen or so palm-sized soul-crystals on dark velvet, each glowing faintly].
 - [PRINTED] **The grandmother's soul-crystal** (§5): heart-sized, "a lifetime of light in a
-  lattice the size of a heart," on its own ward. [VX] It stands alone at the far (north) end
-  on a slender crystal pedestal, inside a circle of ward-crystal set flush in the floor, 10
-  feet across, the "gallery ring of Raunu's own work" (the trap text names such a ring as
-  one place an Uninvited could be caught); the ring glows a thin bright line.
+  lattice the size of a heart," on its own ward. [APPROVED TP64] It stands alone at the far
+  (north) end on a slender crystal pedestal, on its own old ward: generations-old crystalwork
+  on its pedestal, not a ring of Raunu's. Draw no ring in the floor. Where "a gallery ring of
+  Raunu's own work" is, if anywhere, is the owner's to decide.
 - [PRINTED] **Wards** "teachable": light, seals, alarms. [VX] Ward-points as crystal sconces
   between the windows; the three guards stand by the door and the pedestal.
 
@@ -829,14 +887,14 @@ light in it is at the far end, a thin line of it under a door that ought to be d
 Movement V two figures in gray robes kneel at the door; one holds a small crystal against the
 lock "the way you wait for a kettle."
 
-**Size and shape [VX]:** a corner tower room on the second floor of the study tower (the
-West Range's south-west corner), **30 × 25 feet** plus a 10-foot window bay looking west over
-the city, ceiling 18 feet. The great table fills the room's center: about **14 × 7 feet**,
-waist-high, a single grown slab whose top is the coast in relief (§5). The work-slate on a
-low stand by the window. The instruments on a long bench along the north wall and on shelves
-of crystal (no books: the shelves hold only instruments). A plain chair, a stool. A cold
-fireplace, swept clean, with nothing in it. No bed: Raunu's cot is in the east wing, and the
-study is a workroom.
+**Size and shape [APPROVED TP64]:** a corner tower room on the second floor (about +15) of
+the study tower (the West Range's south-west corner), **30 × 25 feet** plus a 10-foot window
+bay looking west over the city, ceiling 18 feet. The great table fills the room's center:
+about **14 × 7 feet**, waist-high, a single grown slab whose top is the coast in relief (§5).
+The work-slate on a low stand by the window. The study has no shelves and no fireplace: the
+instruments stand on a long grown bench along the north wall and on ledges grown out of the
+wall. A plain chair, a stool. No bed: Raunu's cot is in the east wing, and the study is a
+workroom.
 
 **Light and mood:** dark wing, cold corridor; inside, the faint glow of the great table's
 lattice lines (colored threads of light across the relief) and of the instruments; otherwise
@@ -913,10 +971,10 @@ for one lit window on the second floor." Flower beds (Difficult Terrain); "the w
 of grown crystal to the window"; the lit window "is somebody's room. Anyone who reaches it
 sees warm light, a quiet household holding its breath, and nothing that looks like a prison."
 The slingers stand under it with a rope and a weighted end. [MAP] On the wing's east side,
-around the corner of the building from the terraces. [VX] Ground about 8 feet below the Court
-floor (§1.5), so a gallery-level window is 20 feet up. "Second floor" in S10 means the
-window's storey seen from this low garden; it is the east wing's gallery level, not B8's
-second floor. Do not identify whose window it is.
+around the corner of the building from the terraces. [APPROVED TP64] The garden lies about 5
+feet below the Court floor (§1.5), so the wing's lit window (sill about 3 feet above the +12
+floor) is 20 feet above it, as card S10 prints. The wing's gallery level is the "second
+floor" S10 names, in the module's American usage. Do not identify whose window it is.
 
 ### B10. Kitchens and Service Passages
 
@@ -934,23 +992,27 @@ of it." The cellar **tally-cords**: knotted cords counting what goes down the lo
 Supplies have gone down for two years: candles by the crate, lamp-oil, and once a salt-packed
 crate from the eastern coast that hissed (Undercurrent A).
 
-**Kitchens [VX]:** in the East Range, behind the gatehouse: a vaulted kitchen about **50 ×
+**Kitchens [APPROVED TP64]:** in the East Range, behind the gatehouse: a vaulted kitchen about **50 ×
 40 feet**, two roaring hearths with spits and cauldrons, a long scrubbed center table, copper
 pans, bread ovens in the side wall, a scullery and a pastry room off it, a kitchen yard with a
 gate onto the East Lane (the way the festival hires came in). The cellar stair goes down from
-a corner of the kitchen. The kitchens are hot, loud and amber-lit: the one room in the palace
+the kitchen's west end. The kitchens are hot, loud and amber-lit: the one room in the palace
 lit by fire more than crystal.
 
-**Servants' hall and offices [VX]:** beside the kitchens: a long servants' hall with tables
+**Servants' hall and offices [APPROVED TP64]:** beside the kitchens: a long servants' hall with tables
 laid for sixty and used by twenty-two (most places bare), Corval's office (a desk with no
 papers, tally-cords on pegs, a slate), the linen room, the laundry.
 
-**The service passages [VX route, consistent with S2, S7, S11 and map VIII–5]:** a ring:
-1. From the kitchens north along the outside of the Court's east wall; on one stretch, behind
-   the east aisle, the wall to the Court is an old doorway boarded with a single plank screen
-   (the plank-thin wall). This is "the service corridor behind the Dance."
-2. On north behind the east stair to the foot of the **service stair**, which climbs to the
-   wing's service door and also opens down onto the garden below the wing.
+**The service passages [APPROVED TP64 route, consistent with S2, S7, S11 and map VIII–5]:**
+a ring:
+1. From the kitchens north between the SE Court tower and the servants' hall, then west
+   along the tower's north face to the outside of the Court's east wall; on the stretch
+   behind the east aisle, south of the east stair's foot, the wall to the Court is an old
+   doorway boarded with a single plank screen (the plank-thin wall). This is "the service
+   corridor behind the Dance."
+2. East round the foot of the east stair and on north beside it to the foot of the
+   **service stair**, which climbs to the wing's service door and also opens down onto the
+   garden below the wing.
 3. A branch continues along the outside of the east wing, under its rooms, to the garden
    stair's foot (the passages "reach it too").
 4. From the kitchens west along a **south cross-passage** behind the Gatehouse Court and
@@ -961,9 +1023,14 @@ papers, tally-cords on pegs, a slate), the linen room, the laundry.
    passage** behind the Court's west wall, where the 5-foot service door (S11) opens. The west
    passage runs on north to the gallery corridor's back stair and to the lower gallery (B13's
    way in).
-All 5 feet wide, low vaulted (8 feet), plain plastered crystal gone dull, one small crystal
-lamp in every three niches, worn flagstones, doors with iron latches, stacked trays and linen
-crates in the bays.
+All 5 feet wide, low vaulted (8 feet), plain crystal gone dull with handling, not plaster;
+one small crystal lamp in every three niches, worn flagstones, doors with iron latches,
+stacked trays and linen crates in the bays.
+
+**After midnight, outside [PRINTED numbers; VX, still open]:** the Bought hold more than the
+gate: sixteen Blades, four at the gatehouse and twelve on the perimeter. That perimeter lies
+outside the lanes and gates; what it does at the servants' postern and the kitchen-yard gate
+is the owner's to decide, and no art should show it.
 
 **Mood:** "understaffed chaos"; the music through the wall "a pulse without a tune." After
 midnight [PRINTED]: Anha leads people out through them; smoke and dark that slow everyone
@@ -987,14 +1054,15 @@ The seam is a **door**, "grown, not locked"; Thieves' Tools find nothing to work
 not scratch; *Knock* fails. The lattice diagram from the study's slate, traced on the seam,
 opens it.
 
-**Cellars [VX]:** the wine cellar about **60 × 40 feet**, under the kitchens at −15, low
-barrel vaults of dark crystal sweating faintly, racks of bottles and great casks, tally-cords
-hung at the door. The lower cellar stair, narrow and steep, at its north end, down to the
-**lower cellar** at −30: a long, narrow vault (15 × 70 feet) running north-west under the
-Gatehouse Court, more casks, colder, the floor stone, ending in the **living-crystal wall**:
-glassy, warm to the touch, rose-glowing very faintly from deep inside, unlike every other
-wall down here, with a fine vertical seam like a closed eyelid. Beyond the seam a short stair
-of grown crystal descends to the Root.
+**Cellars [APPROVED TP64]:** the wine cellars, about **60 × 40 feet** at −15, run from
+under the kitchens west beneath the Gatehouse Court to the Court's south end: low barrel
+vaults of dark crystal sweating faintly, racks of bottles and great casks, tally-cords hung
+at the door. The lower cellar stair, narrow and steep, goes down at their west end to the
+**lower cellar** at −30: a long, narrow vault (15 × 70 feet) beneath the wine cellars' west
+end, more casks, colder, the floor stone, ending in the **living-crystal wall**: glassy, warm
+to the touch, rose-glowing very faintly from deep inside, unlike every other wall down here,
+with a fine vertical seam like a closed eyelid. Beyond the seam a short stair of grown
+crystal descends to the Root.
 
 **The Root [PRINTED]:** "Beneath the wine cellars, behind a seal of living crystal, lies the
 oldest place in Rekuzan: the chamber where the first Boranis ancestor grew the first crystal
@@ -1010,12 +1078,13 @@ four centuries of mist-lines; and at the center **the crystal orrery of two fami
 with the repeated figure of two streams falling into one pool woven into its base. "Candles
 by the crate, lamp-oil" went down for two years.
 
-**Size and shape [VX]:** the Root lies at about −45, beneath the Crystal Court's south half
-(the Court's walls are "the palace's oldest work," grown up from it). A **rotunda about 50 feet
-across**, domed 30 feet high, its walls a single continuous growth of crystal that rises from a
-massive **root-node** in the floor's center (the first crystal: a column of dense, ancient
-crystal as thick as a cart, flowing up and out into the walls and dome like the roots of a
-tree turned upside down). The orrery stands on a low plinth before the root-node. Around the
+**Size and shape [APPROVED TP64]:** the Root lies at about −45, beneath the wine cellars'
+west end, under the Crystal Court's south half (the Court's walls are "the palace's oldest
+work," grown up from it). A **rotunda about 50 feet across**, domed 30 feet high, its walls a
+single continuous growth of crystal that rises from a central **root-node** in the floor
+(owner to confirm the root-node's look; the proposal is the first crystal as a column of
+dense, ancient crystal as thick as a cart, flowing up and out into the walls and dome like
+the roots of a tree turned upside down). The orrery stands on a low plinth before the root-node. Around the
 walls, radiating bays: the recall-lattice racks (six bays of floor-to-vault racks of glowing
 lattice plates); the instrument bay with the chair, stool and Thenya blanket; the coast relief
 on a long grown table; the observation lattices in a single dated row on a ledge; and, opposite
@@ -1024,9 +1093,9 @@ on the floor and ledges: Raunu's working light, because the crystal's own glow i
 
 **Light and mood:** "lit from within," soft rose-white glow from every surface; quiet; warm;
 beautiful and devotional; the stillest room in the palace. At midnight it is "the
-strongest-warded place in the palace" [PRINTED]. [VX] It keeps its glow when every wall above
-goes dark, the one place that does not; and the glow strengthens, a deep steady pulse, when a ward-literate character steers
-the palace from it.
+strongest-warded place in the palace" [PRINTED]. [VX, still open] Whether the Root keeps its
+glow after the drain is the owner's to decide; until then, draw it after midnight lit by
+Raunu's candles and lamps.
 
 **Who:** nobody but Raunu, ever, before tonight; a dozen sheltering guests if a party brings
 them after midnight; the Attendant, unaffected; an Uninvited, if lured across the threshold,
@@ -1058,14 +1127,15 @@ of the Palace". Each approved room has at most one ordinary detail, given below 
 **Detail:**; draw that detail and nothing more. Rooms TP56 lists as "no detail" have none.
 
 - **The lower gallery** [APPROVED TP56; no detail] (garden wing, terrace level −8): a vaulted walk 10 feet wide and 60
-  feet long under the trophy gallery, plain crystal piers, cold, one lamp; B13's door on its
+  feet long under the trophy gallery and the drawing rooms, plain crystal piers, cold, one lamp; B13's door on its
   west side; a narrow stair up into B7; a door to the service passage at its south end.
-- **The gallery corridor** [VX; not in TP56] (+12): 10 feet wide, from the west banquet gallery's north end west
+- **The gallery corridor** [APPROVED TP64; not in TP56] (+12): 10 feet wide, from the west banquet gallery's north end west
   then north into the garden wing; crystal sconces, long unlit lengths, a few covered busts on
   plinths (no lettering).
 - **The garden wing** [APPROVED TP56] (−8 and +12): 35 feet wide, mirroring the east wing on
   the gardens' west side, ending in a turret over the second terrace. Upper floor: the trophy
-  gallery and two shut drawing rooms with dust sheets and cold hearths. Lower floor: the lower
+  gallery (30 × 40) and, beyond it at the wing's north end, two shut drawing rooms with dust
+  sheets and cold hearths. Lower floor: the lower
   gallery, store rooms. **Detail (drawing rooms):** tall windows looking straight down the
   terraces to the river gate.
 - **The falcon mews** [APPROVED TP56] (behind the garden wing, terrace level): a long, low
@@ -1082,13 +1152,14 @@ of the Palace". Each approved room has at most one ordinary detail, given below 
   smaller music room, a dining hall laid with dust sheets), dark tonight. **Detail (the shut
   state rooms):** two years of dust, except one clean path walked straight through toward the
   dark-wing stair. The music room and dining hall have no detail.
-- **The dark wing** [APPROVED TP56] (West Range, second floor, +30): a long corridor of shut
+- **The dark wing** [APPROVED TP56] (West Range, second floor, about +15, with no door to the
+  banquet galleries; reached by the dark-wing stair from the shut state rooms): a long corridor of shut
   apartments (former guest suites and the old household officers' rooms), furniture under
   sheets, crystal walls dimmed, dust on the floor showing two years of nobody; the study tower
   at its south-west end. **Detail:** at the far end, the one door kept free of dust, the
   study's (in Movement V, lamplight under it [PRINTED]).
 - **The East Range** [APPROVED TP56]: kitchens, servants' hall, offices and laundry at ground
-  level; above, the servants' dormitories, rows of stripped beds for the thirty-eight who were
+  level (east of the SE Court tower); above, the servants' dormitories, rows of stripped beds for the thirty-eight who were
   sent away, and the few slept-in cots huddled by the stair.
   - **Detail (servants' hall):** a table laid for 22; aprons on pegs; the duty rota on knotted
     cords by the door, where Corval's cord alone has an extra knot at the east-wing tray hour.
@@ -1103,9 +1174,9 @@ of the Palace". Each approved room has at most one ordinary detail, given below 
   quarter" is printed, and TP56 places its rope here); the study tower; the wing turrets.
   **Detail (bell tower):** the quarter-bell rope and a view over the city; in Movement V the
   first fires show in two districts at the quarter-bell (the Bought's contract task 1, B12).
-- **The roofscape** [APPROVED TP56 as a place, no detail; its materials stay VX]: steep roofs of dark crystal tiles, lead-gray crystal ridges, crestings of
-  rose crystal, flying buttresses, a forest of pinnacles each tipped with a glowing crystal
-  finial; the flèche over the dais end.
+- **The roofscape** [APPROVED TP56 as a place, no detail; its materials APPROVED TP64]: steep roofs of thick crystal tiles reading dark,
+  crystal ridges, crestings of rose crystal, buttress arcs, a forest of grown pinnacles each
+  tipped with a glowing crystal finial. No flèche.
 
 
 ---
@@ -1114,19 +1185,20 @@ of the Palace". Each approved room has at most one ordinary detail, given below 
 
 *Each brief is ready to hand to the image model. "Must" items are printed or ruled; "must
 not" items protect canon. Costume and architecture beyond the printed facts follow §1–§2 and
-§4 and are [VX].*
+§4 and are [APPROVED TP64] unless tagged [VX].*
 
 ### Scene 1. The Street Approach (Movement I, dusk into night)
 
 - **Composition:** low, wide, from the foot of the grand stair looking up Gate Street's last
-  stretch; the stair and its lantern posts lead the eye to the gatehouse arch; the Crystal
-  Court's south gable and rose window tower above, flanked by the twin Court towers; spires
-  and pinnacles against a dark, rain-heavy sky. Townhouses frame both edges.
-- **Focal point:** the glowing gatehouse arch and the rose window stacked above it.
+  stretch; the steep stair (about 20 feet wide) and its lantern posts lead the eye to the
+  tall gatehouse arch; the Crystal Court's south front and its great rosette-headed pointed
+  window tower above, flanked by the twin Court towers; spires, pinnacles and buttress arcs
+  against a dark, rain-heavy sky (rain is the owner's image). Townhouses frame both edges.
+- **Focal point:** the glowing gatehouse arch and the great pointed window stacked above it.
 - **Lighting:** the palace glowing hot pink to magenta from within, every window and spire
   tip lit; amber shopfronts left and right; crystal lanterns on the stair posts; wet cobbles
   and steps reflecting both colors; the last blue of dusk at the horizon.
-- **People:** a slow crowd climbing: carriages on the ramps, sedan chairs, guests on foot in
+- **People:** a slow crowd climbing: carriages setting down at the stair foot, sedan chairs, guests on foot in
   dark formal dress with jewel-toned linings, all **masked already** in spirit-faces
   (stylized faces of the dead, harvest spirits, luck and grief: wheat, leaves, bone-white
   faces, gilt tears, moons). A cluster of plainly dressed hired swords in unmatched colors
@@ -1171,7 +1243,7 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
 - **Focal point:** the empty high table under its canopy, small and bright at the vanishing
   point, with the whole ball turning in front of it.
 - **Lighting:** rose-lit crystal everywhere: walls, piers, the ribbed 50-foot vault glowing
-  shell-pink, deepening to magenta in the clerestory; candle stands and the two great hearths
+  shell-pink, brightest in the tall upper windows; candle stands and the two great hearths
   adding warm amber in the side aisles.
 - **People:** about two hundred masked guests in dark formal dress; dancers in sets; servants
   in livery threading through with trays (too few of them); musicians in the gallery in the
@@ -1188,7 +1260,7 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
 ### Scene 4. Raunu's Summons in the Audience Hall (Movement III)
 
 - **Composition:** from just inside the antechamber door, looking down the length of the
-  110-foot hall [VX length]; two masked characters (player characters, so keep their faces and
+  110-foot hall [APPROVED TP64 length]; two masked characters (player characters, so keep their faces and
   masks generic or in silhouette) have just stepped in and stand small in the doorway light.
   The hall is long, tall and almost empty. At the far end, a dais with steps worn down their
   middle, one chair, and a figure seated in it.
@@ -1313,13 +1385,12 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
   line, the balustrade going to gravel, force tearing the flower beds. In the foreground, on
   the stair down from the upper terrace, the party carries or supports Veier toward the lower
   garden and the river gate. The east wing's wall and the garden stair rise at the right;
-  above everything, the palace, dark-crystalled in parts, burning and still glowing rose in
-  others.
+  above everything, the palace, its crystal drained dark everywhere, burning in places, the
+  rose only firelight through dead glass.
 - **Focal points:** two: the collision above (Vell's stillness against the Radiant's motion);
   the party with Veier below.
 - **Lighting:** dark terraces, lanterns going out one after another behind them; bursts of
-  crystal light from the duel; fire glow from the palace windows; mist starting to rise from
-  the lower garden.
+  crystal light from the duel; fire glow from the palace windows. No mist.
 - **People:** **Vell**: tall, pale, in a trade factor's plain good clothes, moving "the way the
   gray masks move, arriving instead of running," bare-handed, **the enormous broadsword still
   wrapped in white cloth on his back**, untouched. **The Radiant**: mirror-bright gray mask,
@@ -1337,19 +1408,21 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
 ### Scene 11. The Boat at the River Gate (Movement VI)
 
 - **Composition:** from the river walk just outside the open river gate, looking out over the
-  water. A small fisher's rowing boat pulling away into mist: a pale man rowing hard, a woman
+  water. A small fisher's rowing boat pulling away into the dark: a pale man rowing hard, a woman
   bent over her own heartbeat in the stern. In the shallows, the Radiant stands knee-deep,
   stopped "as if hooked through the spine," watching the boat. At the gate behind, the
   characters (one holding the gate, or lying where they stood in his way). Above and behind, up
-  the terraces, the palace burning rose-colored.
+  the terraces, the palace "burning rose-colored" (fire through drained crystal).
 - **Focal point:** the boat leaving the light.
-- **Lighting:** mist on dark water; the palace's rose and fire-orange glow reflected in the
-  river; the boat passing into gray.
+- **Lighting:** dark water (at most a thin line of mist on it, if the owner wants); the
+  palace's fire glow, rose and orange through dead crystal, reflected in the river; the boat
+  passing into gray.
 - **People:** Vell at the oars (sword on his back); Veier; the Radiant in the shallows; option:
   the Wept at the water's edge "carved tears catching the fire-light," watching, not pursuing.
 - **Mood:** escape, loss, the leash about to take him "gone east with the mist."
-- **Must:** a small boat with one rower; the boat going north up the tributary (away from the
-  viewer, into mist); the palace burning rose behind.
+- **Must:** a small boat with one rower; the boat going upstream, north, up the tributary
+  (away from the viewer; the tributary flows south, toward the viewer); the palace burning
+  behind.
 - **Must not:** a large or four-oared boat; anyone else in the boat; any attack.
 
 ### Scene 12. The Burning Banquet Gallery (Movement VII)
@@ -1389,7 +1462,8 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
 - **Must:** gate shut, bar on the street side; wicket in the left leaf (left as seen from the
   court); gray coats; the chained case.
 - **Must not:** any writing legible on the contract; a bronze tablet or indenture plate (it is a
-  case of writing).
+  case of writing); two hundred people inside the gatehouse court (it holds about a hundred
+  at one per 5-foot square; the rest are in the Court behind).
 
 ### Scene 14. Dawn
 
@@ -1412,17 +1486,23 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
 
 ## 4. Characters
 
-*Printed traits first, then [VX] costume proposals. The module describes very few faces and
+*Printed traits first, then [APPROVED TP64] costume. The module describes very few faces and
 almost no clothes; most costume below is extrapolated and marked. Everyone is human.
 Before midnight every guest is masked; after the Unmasking every face is bare except the three
-gray masks. Player characters' masks are never fixed in art.*
+gray masks. Player characters' masks are never fixed in art. The costume below was a [VX]
+proposal, approved in TP64 as amended by the architecture review.*
 
-**House style for costume [VX]:** Orthaen formal dress for Oraga runs dark: black, charcoal,
-deep violet, oxblood and night-blue, with jewel-toned linings and small crystal ornaments that
-catch the walls' glow (crystal pins, buttons, hair ornaments). Long coats and fitted doublets
-for men, high-collared gowns and long coats for women, or either for anyone. Knives worn as
-dress at sash or thigh. **Boranis livery [VX]:** deep violet-charcoal coat, rose-pink crystal
-buttons, a narrow rose piping, no badge with lettering. The Thenya wear plain undyed or
+**No mask but the three may be plain gray.** Every other mask is a spirit-face: the year's
+dead, a harvest spirit, the season's luck or grief.
+
+**House style for costume [APPROVED TP64]:** Orthaen formal dress for Oraga runs dark: black,
+charcoal, deep violet, oxblood and night-blue, with jewel-toned linings and small crystal
+ornaments that catch the walls' glow (crystal pins, buttons, hair ornaments). Long tailored
+coats for men, high-collared gowns and long coats for women, or either for anyone. Knives worn
+as dress at sash or thigh. **Boranis livery [APPROVED TP64]:** deep violet-charcoal coat,
+rose-pink crystal buttons, a narrow rose piping, no badge with lettering. [VX, still open]
+Whether household staff and honor guards wear Oraga masks is the owner's to decide; until
+then, don't make a point of it either way. The Thenya wear plain undyed or
 earth-colored border wool, and slings are their mark.
 
 ### Raunu Boranis, the host
@@ -1437,7 +1517,7 @@ earth-colored border wool, and slings are their mark.
   that age" asked about dying well; his first crystal, grown at six, is "decades old."
 - **Pose:** stillness; hands at rest; a direct, unsettling gaze; at the end, commanding a
   burning room.
-- **[VX]:** early forties; lean; dark hair worn short, a little untidy; clean-shaven, pale from
+- **[APPROVED TP64]:** early forties; lean; dark hair worn short, a little untidy; clean-shaven, pale from
   two years indoors; a long plain coat of very dark violet-gray with no ornament but the house's
   rose-crystal buttons; the two wrist crystals on a plain cord or band of dark metal at the left
   wrist, each the size of a fingertip, rose-clear. No crown, no chain of office.
@@ -1452,7 +1532,7 @@ earth-colored border wool, and slings are their mark.
   or supported by a character. The Second Clause calls her "a woman in Thenya wool." In the
   boat: "a woman bent over her own heartbeat." Blunt, dry, funny, homesick; happy. Her worn
   border sling hangs in Raunu's room, not on her.
-- **[VX]:** late twenties; strong, weathered; dark hair in a long practical braid; a plain
+- **[APPROVED TP64]:** about thirty; strong, weathered; dark hair in a long practical braid; a plain
   long dress and over-tunic of undyed Thenya wool, belted high over the pregnancy, a wool
   shawl; a hand pressed to her side where the cut is, a dark stain under it.
 - **Must not:** any image of her inside the palace before midnight; any image of her in the
@@ -1464,7 +1544,8 @@ earth-colored border wool, and slings are their mark.
   a blade; Raunu's face "and none of his brother's stillness." Drinks harder through the night.
   After midnight: sleeves pushed up, soot to the elbows, hauling guests out of the burning
   gallery (S13).
-- **[VX]:** late thirties; handsome, restless; rich oxblood silk over a fitted breastplate;
+- **[APPROVED TP64]:** late thirties; Raunu's face, a few years younger and never still;
+  handsome, restless; rich oxblood silk over a fitted breastplate;
   a slim blade at the hip; mask (before midnight) a laughing gilt spirit-face.
 
 ### Minister Corval, the majordomo
@@ -1473,7 +1554,7 @@ earth-colored border wool, and slings are their mark.
   with "visible, dignified exhaustion"; greets every guest by name from memory; his hands
   steady. At the end: "bleeding, and he is counting his staff like a man counting his own
   fingers." Carries a key to the wing's service door (TP39).
-- **[VX]:** past seventy; white hair cropped close; long face; the house livery worn
+- **[APPROVED TP64]:** past seventy; white hair cropped close; long face; the house livery worn
   immaculately, a little loose on him; a single rose-crystal chain of office; no list, no
   slate in his hands at the gate.
 
@@ -1481,7 +1562,7 @@ earth-colored border wool, and slings are their mark.
 
 - **Printed:** "quick, practical, frightened in a low-grade chronic way she has stopped
   noticing." Four years in the kitchens. Her hands "going still on the tray" (S7).
-- **[VX]:** early twenties; sleeves rolled, a kitchen apron over a plain dark dress, hair tied
+- **[APPROVED TP64]:** early twenties; sleeves rolled, a kitchen apron over a plain dark dress, hair tied
   in a cloth; flour and burn-marks on her forearms; carrying a laden tray.
 
 ### The Uninvited
@@ -1491,26 +1572,26 @@ earth-colored border wool, and slings are their mark.
   Charming, gracious, antique manners and turns of speech; they eat, drink, dance "in a style
   centuries out of fashion." Near them Orthaen crystals go faint. They fight with their bare
   hands. They move by "arriving, not running."
-- **[VX] for all three:** formal dress of an antique cut, rich but subdued (high collars, long
+- **[APPROVED TP64] for all three:** formal dress of an antique cut, rich but subdued (high collars, long
   sleeves, fabrics a century or two out of fashion), in grays and faded black; the masks
   full-face, smooth, of a pale gray material like matte porcelain or ash-glazed stone with no
   visible ties.
 - **The Wept** — *"the gray mask with carved tears."* The tallest; a woman; leads. Warm, sure
   hands; dances flawlessly. When Bloodied, "the mask's carved tears begin to run — actually
   run," and she hums a cradle-song. During the attack, "under the carved tears, the mask is a
-  woman's face." [VX] Tall and stately; a long gown of dove-gray with a mourning veil of gray
+  woman's face." [APPROVED TP64] Tall and stately; a long gown of dove-gray with a mourning veil of gray
   gauze over the back of the head; the tears carved as shallow channels from the eyeholes.
   *Must not:* claws, rags, a ghostly or skeletal look, robes like a monk.
 - **The Radiant** — *"the mirror-bright mask."* A man; "warm, courtly, delightful on the
   subject of duty"; asks "Whom do you serve?"; blesses the food with an antique sign; "dances
   beautifully, where the light falls"; poses and savors when watched; stages kills "offered
-  upward, like rites." [VX] Tall, elegant; a long coat of pale gray silk; the mask the same
+  upward, like rites." [APPROVED TP64] Tall, elegant; a long coat of pale gray silk; the mask the same
   unornamented shape as the others but polished to a mirror sheen that throws back the light
   (gray-silver, not gold), reflecting whoever watches him. *Must not:* sculpted aristocratic
   features on the mask (it is unornamented), a weapon.
 - **The Hollow** — *"the blank gray mask."* A man; stands beside a different exit all night;
   "devastating flatness"; holds the doors, never advances; flinches from ward-fire "the way a
-  tired man flinches from being asked to try." [VX] Broad, heavy-shouldered; a plain dark-gray
+  tired man flinches from being asked to try." [APPROVED TP64] Broad, heavy-shouldered; a plain dark-gray
   coat of antique cut; the mask a perfectly blank gray oval, no features at all. *Must not:*
   plate armor or any armor (he passes as a guest at a ball).
 
@@ -1523,8 +1604,8 @@ earth-colored border wool, and slings are their mark.
   music that changes. At the Unmasking it sets the cloak down "neatly" on the nearest table and
   stands beside the three, "its hands empty now," looking "at the space between you and the
   three." It attacks with **Joined Hands** (fists joined).
-- **[VX]:** looks human, of middle height, unremarkable, neither young nor old; an
-  old-fashioned upper-servant's dark coat and breeches, good but dated; the cloak a heavy dark
+- **[APPROVED TP64]:** looks human, of middle height, unremarkable, neither young nor old; a
+  great house's upper-servant's dark coat, correct and current, nothing to remark on; the cloak a heavy dark
   traveling cloak, carefully folded; posture too still, eyes too steady; mask: a plain dark
   half-mask of a servant's kind, or none (owner to choose).
 - **Must not:** a cup or goblet (TP30); any monstrous feature.
@@ -1536,10 +1617,10 @@ earth-colored border wool, and slings are their mark.
   touches it and never unwraps it"; at the Crossing **the sword stays on his back** while he
   holds the Radiant (TP19). Unmemorable "and that is not luck." Courteous, brief. At the
   Crossing he "moves the way the gray masks move, arriving instead of running." Rows the boat.
-- **[VX]:** forties; very tall and spare; white-blond or ash hair, close-cut; a plain,
+- **[APPROVED TP64]:** forties; very tall and spare; white-blond or ash hair, close-cut; a plain,
   well-cut factor's coat of gray-brown, travel boots, nothing that draws the eye; the wrapped
   sword nearly as long as he is tall, its white wrappings bound with cord, the hilt also
-  wrapped; mask before midnight a plain, forgettable one.
+  wrapped; mask before midnight a plain, forgettable spirit-face, not gray.
 - **Must not:** his hand on the sword; the blade bare; a bone mask; a named people for him (the
   module never says where he is from).
 
@@ -1547,45 +1628,46 @@ earth-colored border wool, and slings are their mark.
 
 - **Printed:** "urbane, watchful, a career diplomat in vestments"; "works the room like a
   census-taker of souls"; a **staff of office**; her Wardens in gray robes.
-- **[VX]:** sixties; silver hair under a close cap; layered vestments of deep slate-gray and
-  white with a heavy pectoral of plain crystal (no inscriptions); the staff a tall plain rod
-  with a crystal head; mask a dignified white spirit-face.
+- **[APPROVED TP64]:** sixties; silver hair under a close cap; layered vestments of deep
+  slate-gray and white with a heavy plain metal pectoral (no inscriptions); the staff a tall
+  plain rod; mask a dignified white spirit-face.
 
 ### Mother Sella, the death-sister
 
 - **Printed:** a lay sister of Elanna; "calm as deep water, kind without softness"; the chapel
   is hers all night.
-- **[VX]:** old, small, upright; a plain undyed habit and a dark shawl, a simple wooden
-  token at her neck; unmasked or a plain gray mourning mask (owner to choose).
+- **[APPROVED TP64]:** old, small, upright; a plain undyed habit and a dark shawl; unmasked,
+  or a dark grief-spirit face (owner to choose); never gray.
 
 ### Mistress Rhaza Callun, the Merchant's Circle
 
 - **Printed:** "iron-gray, cordial, terrifyingly numerate"; a knife; pays on delivery.
-- **[VX]:** fifties; iron-gray hair severely dressed; a high-necked gown of steel-gray with a
-  short fitted coat; no jewelry but one plain ring; mask a narrow silver half-mask.
+- **[APPROVED TP64]:** fifties; iron-gray hair severely dressed; a high-necked gown of
+  steel-gray with a short fitted coat; no jewelry but one plain ring; mask a narrow silver
+  spirit-face of the year's dead.
 
 ### Master Pellin Corro, the Phern magnate
 
 - **Printed:** "small, merry, expansive," in "a merchant's coat"; increasingly wrong as the night
   goes on: losing sentences, glancing at doors, back to the wall; at midnight already moving,
   bodyguards closing round him.
-- **[VX]:** round-faced, quick, sixty; a bright, well-made merchant's coat in Phern colors
-  (warm ochre and green), rings; mask a cheerful painted harvest-spirit pushed up by evening's
+- **[APPROVED TP64]:** round-faced, quick, sixty; a bright, well-made merchant's coat in warm,
+  bright colors, rings; mask a cheerful painted harvest-spirit pushed up by evening's
   end.
 
 ### Lord Essar Draunel, the rival
 
 - **Printed:** "polished, obvious, ambitious in the standard noble key"; breastplate worn under
   silk; rapier. Will not set foot on the grass at the duel.
-- **[VX]:** forties; handsome in a groomed way; peacock-blue silk over the breastplate; rapier
-  with a jeweled guard; a gilt sun-faced mask.
+- **[APPROVED TP64]:** forties; handsome in a groomed way; peacock-blue silk over the
+  breastplate; rapier with a jeweled guard; a gilt harvest-spirit face.
 
 ### Essin Boranis, the cousin
 
 - **Printed:** "affable, forgettable on purpose, always somehow between Vorlain and whoever is
   working him"; a knife; "for the first time tonight, without a smile" after the toast.
-- **[VX]:** thirties; average height, average everything; dark, well-made but unmemorable
-  clothes; a plain mask.
+- **[APPROVED TP64]:** thirties; average height, average everything; dark, well-made but
+  unmemorable clothes; a plain spirit-face, not gray.
 
 ### Maiven Nolonaire, the cousin from the border, and her slingers
 
@@ -1594,7 +1676,7 @@ earth-colored border wool, and slings are their mark.
   wing. Her slingers: "plain border wool," slings at their belts; in Movement V two of them in
   the garden below the east wing, one paying out a rope "weighted at the end with something that
   is not quite a stone."
-- **[VX]:** Maiven about twenty; lean, sunburned; hair in Thenya braids; earth-brown wool tunic
+- **[APPROVED TP64]:** Maiven about twenty; lean, sunburned; hair in Thenya braids; earth-brown wool tunic
   over a leather jerkin; the sling wrapped at her wrist. Slingers in the same plain wool with
   hoods, slings at belts, coils of rope.
 
@@ -1603,7 +1685,7 @@ earth-colored border wool, and slings are their mark.
 - **Printed:** "somewhere in her forties, somewhere from the coast"; tonight "a steward in
   Boranis livery," armor under it; unhurried, courteous, forgettable; carries crystal charges (a
   *Dark-Burst* and a *Door-Seal*). Her knives: "livery that fits like a borrowed coat."
-- **[VX]:** weathered, sharp-eyed; the livery worn perfectly; a ring of keys; a sack after
+- **[APPROVED TP64]:** weathered, sharp-eyed; the livery worn perfectly; a sack after
   midnight.
 
 ### The Bought: the sergeant, the captain, the Blades
@@ -1615,7 +1697,7 @@ earth-colored border wool, and slings are their mark.
   recently than the case." A "very good sword."
 - **Printed — the Blades:** matched gray coats, company blades and cudgels; "the unhurried
   spacing of people who have done this before."
-- **[VX]:** the company's mark a simple shape (a closed hand or a ring), no letters; gray
+- **[APPROVED TP64]:** the company's mark a simple shape (a closed hand or a ring), no letters; gray
   coats to the knee over mail; the case a flat iron-bound leather document case the size of a
   large book, chained to a belt; the captain grizzled, scar across the jaw.
 
@@ -1625,7 +1707,7 @@ earth-colored border wool, and slings are their mark.
   belt (a *House Seal* and a *House Flare*); facing inward on the gate at dusk; three in the
   trophy gallery, two then four at the east wing doors, the rest with the household; at
   midnight seven to the dais (where they die or fall), two holding the east wing doors.
-- **[VX]:** violet-charcoal surcoats over mail, rose crystal at the shield boss, open-faced
+- **[APPROVED TP64]:** violet-charcoal surcoats over mail, rose crystal at the shield boss, open-faced
   helms; the two crystals in a belt holder like a pair of rose-glass eggs.
 
 ### The faction retainers, in brief
@@ -1645,7 +1727,7 @@ earth-colored border wool, and slings are their mark.
 - **Sect guard [PRINTED]:** cudgels; sect banners coming up Gate Street at the end.
 - **The midwife and the two Tithe ministers [PRINTED existence]:** the midwife "moving like a
   woman who counts hours," glimpsed once crossing the gallery; the ministers unnamed ("the
-  elder" and "the younger"). [VX] Keep all three plain and background.
+  elder" and "the younger"). [APPROVED TP64] Keep all three plain and background.
 
 
 ---
@@ -1659,7 +1741,8 @@ earth-colored border wool, and slings are their mark.
   on its own ward; "glows faintly at dusk, as all old crystal does"; not a magic item.
 - **[VX]:** a clear rose-gold crystal about 5 inches across, roughly heart-shaped but grown, not
   cut, its interior a dense lattice of fine planes like frost inside glass, each plane holding a
-  faint warm light; on a slim crystal pedestal inside a ring of ward-crystal.
+  faint warm light. [APPROVED TP64] On a slim crystal pedestal on its own old ward
+  (generations-old crystalwork on the pedestal); no ring in the floor.
 
 ### The great table and the work-slate (B8)
 - **Printed:** "A grown relief of the eastern coast, its mist-lines remembered in colored
@@ -1760,8 +1843,10 @@ earth-colored border wool, and slings are their mark.
   masks (above). Otta Vesh, the aftermath's mask-maker, "keeps a casting-blank of every face
   she has ever fitted."
 - **[VX]:** guest masks in lacquer, leather, papier-mâché and fine porcelain: bone-white
-  ancestor faces, wheat-and-leaf harvest masks, gilt sun and silver moon faces, masks with
-  painted tears, animal spirits, half-masks and full faces; ribbons and crystal beads.
+  ancestor faces, wheat-and-leaf harvest masks, gilt harvest-spirit and silver year's-dead
+  faces, masks with painted tears, animal spirits, half-masks and full faces; ribbons and
+  crystal beads. [APPROVED TP64] Every guest mask is a spirit-face, and none but the three is
+  plain gray.
 
 ### The invitation card (B0, B1; Player Handout 1)
 - **Printed:** a great house's formal invitation is one of the two exceptions to the written-word
@@ -1886,13 +1971,15 @@ the manifest should become. File names are under `conversions/dnd5e/oraga_night/
    (three figures labeled by people)" are invented and use non-canon peoples. Canon:
    banners, weapons, grown crystals taken in old settlements, "the gallery's case" of old
    soul-crystals, and one heart-sized soul-crystal on its own ward (the grandmother's). Make the
-   grandmother's crystal the single focal exhibit.
+   grandmother's crystal the single focal exhibit, on a pedestal on its own old ward, with no
+   ring in the floor (TP64).
 10. **`map_b8_raunus_study.png`: the hearth of scorched invitations.** Cut by **TP38**: no
     drawer or hearth of invitations, no papers of any kind. Remove the scorched cards. Also remove
     the "wall-mounted recall-lattices": recall-lattices are the Root's (B11), and putting them in
     the study gives away Undercurrent A. Keep the great table (the eastern coast with colored
     mist-lines), the work-slate with its half-erased lattice diagram, and the unnameable
-    instruments.
+    instruments. Draw no shelves and no fireplace: the instruments stand on a long grown bench
+    and on ledges grown out of the wall (TP64).
 11. **`map_b11_root_of_the_house.png`: the orrery and the slate.** The "Orrery of the Seven
     World-Anchors" with "6 massive crystal roots converging" contradicts the text. Canon: a
     **crystal orrery of two family trees**, Boranis and Nolonaire, in light, intertwining down to
@@ -1904,7 +1991,11 @@ the manifest should become. File names are under `conversions/dnd5e/oraga_night/
     The skeleton on its bier is right.
 12. **`map_viii_1_palace_overview.png`.** Check it against §1: dais end and gardens north, the east
     wing projecting north at gallery level along the terraces' east side, the gatehouse south,
-    the wine cellar and the Root below. It may also need the dark wing (B8) on the second floor.
+    the wine cellars running west from under the kitchens beneath the Gatehouse Court, and the
+    Root beneath their west end, under the Court's south half (TP64). It may also need the dark
+    wing (B8) on the second floor (about +15, the storey above the ground, with no door to the
+    banquet galleries), the bell tower on the east gallery's north end, and no carriage ramps
+    at the grand stair.
 
 ### 6.3 Cast, bestiary and pregens
 
@@ -1969,48 +2060,108 @@ the manifest should become. File names are under `conversions/dnd5e/oraga_night/
 
 ---
 
-## 7. Extrapolations for the Owner to Approve
+## 7. Extrapolations Approved by the Owner (TP64)
 
-A one-place list of every [VX] decision that shapes the maps. Approve, change or strike each.
-
-TP56 has since approved the quiet rooms as placed (the shut state rooms and dark wing in
-item 5, the garden wing's rooms and the mews in item 6, the East Range in item 7, and the bell
-tower in item 3); see "The rooms the brief adds". Their sizes, heights and decor here remain
-proposals.
+A one-place list of every extrapolation that shapes the maps. **All fifteen items are
+owner-approved (TP64)**, in the wording below: items 7 and 12 as first drafted, the other
+thirteen with the changes in the independent architecture review
+(`docs/REVIEW_oraga_palace_architecture.md`), which have been applied throughout this brief.
+Statements they cover are tagged [APPROVED TP64]. TP56 had already approved the quiet rooms as
+placed (the shut state rooms and dark wing in item 5, the garden wing's rooms and the mews in
+item 6, the East Range in item 7, and the bell tower in item 3); TP64 approves their sizes,
+heights and positions as given here. Four questions inside these items stay open; they are
+listed at the end and remain tagged [VX].
 
 1. **Footprint and shape:** about 370 × 290 ft built, a U opening north; about 400 × 580 ft with
-   the grand stair and gardens (§1.3).
-2. **The street front:** a gate landing (80 × 30 ft) and a grand stair (50 ft wide, rising 25 ft)
-   with carriage ramps and lantern posts below the gatehouse, matching the owner's image; two gate
-   towers.
-3. **The south gable and rose window** over the main doors, flanked by twin 120-ft Court towers;
-   a flèche over the dais end; a bell tower at the Court's north-east corner; pinnacles everywhere.
+   the grand stair and gardens (§1.3). The §1.4 block table must be corrected so that no two
+   blocks on the same level overlap (see the review's geometry list); the footprint itself is
+   unchanged.
+2. **The street front:** a gate landing (80 × 30 ft, the head of Gate Street) and a steep grand
+   stair about 20 ft wide rising 25 ft, heavy balustrades, crystal lanterns on posts at its foot
+   and up both sides, matching the owner's image; carriages set down at the stair foot and go
+   round by the West Lane to the stable yard (no carriage ramps). At the stair head, the
+   gatehouse arch is the tall arched entrance of the owner's image, flanked by two gate towers;
+   the Gatehouse Court lies hidden behind it and the Court's south front rises above it.
+3. **The south front** over the main doors, as in the owner's image: a great tall pointed window
+   of grown tracery headed by a rosette, flanked by twin 120-ft Court towers; the bell tower at
+   the Court's north-east corner (TP56), placed on the east gallery's north end so it clears the
+   east wing; pinnacles and buttress arcs throughout. All of it is grown, not cut: facets and
+   growth lines, no mortar joints, no carved figures or gargoyles. Each wing may show a slightly
+   different crystal habit, since each was one ancestor's working life (04:29–31). No flèche.
 4. **The Court's interior:** clear dance floor; piers on its edge lines; ground-level side aisles
-   beneath the banquet galleries; a high gallery at about +30 in the wall thickness; clerestory;
-   the musicians' gallery over the main doors; grand stairs to the galleries in the south corners;
-   two hearths in the aisles.
-5. **The West Range:** the B4 antechamber (30 × 30) and Audience Hall (110 × 50, ceiling 35) west
-   of the Court; the octagonal chapel (40 ft) off the antechamber; shut state rooms; the dark wing
-   on the second floor (+30) with Raunu's study in a south-west corner tower (30 × 25).
+   beneath the banquet galleries; a high gallery at about +30 in the wall thickness; tall windows
+   of clearer, brighter crystal above it (the walls are the light; windows are where the crystal
+   is thinnest); a grown crystal musicians' gallery over the main doors; grand stairs to the
+   galleries in the south corners; two hearths in the aisles. The east banquet gallery has no
+   alcoves and no doors in its outer wall south of y 114, where the east stair and cleared
+   corridor run behind it; its alcoves sit in its north end or within its 20-ft depth.
+5. **The West Range:** the B4 antechamber (30 × 30) and Audience Hall (110 × 50, ceiling 35)
+   west of the Court; the octagonal chapel (40 ft) off the antechamber; shut state rooms on the
+   ground floor, with the dark-wing stair rising from among them (TP56's clean path leads to
+   it); the dark wing on the second floor, the storey above the ground floor (about +15,
+   roughly level with the banquet galleries but with no door to them), with Raunu's study in a
+   south-west corner tower (30 × 25). The study has no shelves and no fireplace: the
+   instruments stand on a long grown bench and on ledges grown out of the wall.
 6. **The garden wing** mirroring the east wing on the terraces' west side: the trophy gallery
-   (30 × 60) at gallery level off the gallery corridor; the lower gallery and B13's door beneath;
-   the falcon mews behind it; a ward-ring in the trophy gallery's floor around the soul-crystal.
-7. **The East Range:** kitchens, servants' hall, offices and laundry behind the gatehouse, with a
-   kitchen gate on the East Lane; dormitories above.
+   (30 × 40) at gallery level off the gallery corridor, with the two drawing rooms beyond it at
+   the wing's north end; the lower gallery and B13's door beneath; the falcon mews behind it.
+   The soul-crystal stands on its own old ward (generations-old crystalwork on its pedestal),
+   not inside a ring of Raunu's. Where "a gallery ring of Raunu's own work" is, if anywhere, is
+   the owner's to decide.
+7. **The East Range:** kitchens, servants' hall, offices and laundry behind the gatehouse, with
+   a kitchen gate on the East Lane; dormitories above.
 8. **The service-passage ring** and its route, including where the plank-thin wall to the Court
-   is (behind the east aisle) and a servants' postern on the West Lane.
-9. **The ground falls north and east:** the upper terrace and the garden below the east wing about
-   8 ft below the Court, which reconciles S10's 20-ft wall with the wing's 12-ft floor and gives
-   the garden stair a 20-ft fall.
-10. **The cellars and the Root:** wine cellar (60 × 40, −15) under the kitchens; lower cellar
-    (−30) running north-west; the Root (a 50-ft domed rotunda, −45) beneath the Court's south
-    half, grown from a central root-node.
-11. **Materials and color:** dense smoky crystal reading violet-charcoal for the mass; clear
-    glowing rose-to-magenta crystal for glazing, tracery and inner walls; drained crystal as
-    colorless milky glass after midnight; ward-light as hard white-rose.
+   is (behind the east aisle) and a servants' postern on the West Lane. All passages are plain
+   crystal gone dull with handling, not plaster. After midnight the Bought's twelve-Blade
+   perimeter (facts.yaml) lies outside the lanes and gates; what it does at the postern and the
+   kitchen gate is the owner's to decide, and no art should show it.
+9. **The ground falls north and east:** the upper terrace about 8 ft below the Court (so the
+   garden stair falls 20 ft from the wing's corridor), and the garden below the east wing about
+   5 ft below the Court, so the wing's lit window (sill about 3 ft above the +12 floor) is 20 ft
+   above that garden, as card S10 prints. The wing's gallery level is the "second floor" S10
+   names, in the module's American usage.
+10. **The cellars and the Root:** the wine cellars (about 60 × 40, −15) run from under the
+    kitchens west beneath the Gatehouse Court to the Court's south end; the lower cellar stair
+    goes down at their west end to the lower cellar (−30) and its living-crystal wall; the Root
+    (a 50-ft domed rotunda, −45) lies beneath the wine cellars' west end, under the Court's
+    south half, grown from a central root-node (owner to confirm the root-node's look). Whether
+    the Root keeps its glow after the drain is the owner's to decide; until then, draw it lit by
+    Raunu's candles and lamps.
+11. **Materials and color:** one material, pink grown crystal. Where it is thick, unlit or seen
+    against the night sky it reads deep violet to charcoal (the owner's image); wherever it is
+    thinner or lit from within it glows rose to magenta up close and from the street. Before
+    midnight rose leads and the dark mass supports it; up close the light is warm and
+    shell-like. After the drain the crystal is colorless, milky, gray-violet dead glass
+    everywhere; any rose after midnight is fire seen through or reflected in it, never the
+    walls' own glow. Ward-light is a hard white-rose.
 12. **Boranis livery** (violet-charcoal, rose-crystal buttons) and the honor guard's surcoats.
-13. **All costume, age and hair** proposals in §4.
-14. **Garden planting:** parterre, flower borders, orchard walk, loose lower garden; garden walls.
+13. **All costume, age and hair proposals in §4, as amended** (long tailored coats, not
+    doublets; spirit-face masks only, and no mask but the three plain gray; the Attendant's
+    coat correct and current; Kovaun's pectoral plain metal; no Phern colors, wooden token or
+    ring of keys; Veier about thirty; Vorlain with Raunu's face).
+14. **Garden planting:** upper terrace an open lawn (the duelling ground, S9) framed by gravel
+    paths and low flower borders against the balustrades, lanterns on poles; second terrace a
+    parterre of low clipped beds around a gravel cross; third terrace an orchard walk of
+    pleached apples; lower garden looser, a central gravel path to the river gate between deep
+    flower beds; garden walls of crystal.
 15. **Neighborhood:** half-timbered townhouses and amber shopfronts on Gate Street (the owner's
-    image), the West and East Lanes, the stable yard; the river at the garden's foot as the
-    tributary itself.
+    image; owner to confirm the street lies outside or inside the Boranis district walls), the
+    West and East Lanes, the stable yard. At the garden's foot the river runs past the river
+    walk; Vell's boat goes upstream, north, up the tributary toward the foothills (the
+    tributary flows south). No river mist, except perhaps a thin line on the water in the boat
+    scene (owner to decide).
+
+**Also applied with TP64 (the review's findings outside §7):** the §1.4 overlaps are corrected
+(bell tower, SE Court tower, S10 garden, service run, SW tower); no glow on the walls after the
+drain in §0.2 or Scenes 10 and 11; rain kept to the street plates; the owner's image described
+as a rosette-headed pointed window, not a rose window; the Gatehouse Court shown holding about a
+hundred, not two hundred; and the sconce rule limited to the dais's ward-points.
+
+**Still open for the owner** (tagged [VX] where they appear):
+
+- Whether household staff and honor guards wear Oraga masks (§4, livery; item 12).
+- What the Bought's perimeter does at the servants' postern and the kitchen-yard gate after
+  midnight (B10; item 8). No art shows it until then.
+- Whether the Root keeps its glow after midnight (B11; item 10). Until then, draw it lit by
+  Raunu's candles and lamps.
+- Whether Gate Street lies inside or outside the Boranis district walls (§1.1; item 15).
