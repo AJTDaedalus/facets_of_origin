@@ -232,7 +232,7 @@ after X.
 | T11.8 | WP11 | done | B5 and B8 read-aloud |
 | T11.9 | WP11 | done | Read-aloud slips; blank cheque; Captain; DC names |
 | T11.10 | WP11 | done | Draft mid-tier speech habits (TP22) |
-| T11.11 | WP11 | ⛔ OWNER | Apply approved habits (TP22) |
+| T11.11 | WP11 | done (TP77) | Apply approved habits (TP22) |
 | T11.12 | WP11 | open | Final checks and commit |
 
 **Counts:** WP1 4 · WP2 6 · WP3 14 · WP4 17 · WP5 12 · WP6 16 · WP7 24 · WP8 6 · WP9 13 · WP10 7 ·
@@ -1510,7 +1510,7 @@ of each task.*
 - **Files:** `docs/LOG_oraga_5e_3p_pass.md`. **Accept:** nine habits, each cited.
 - **Time:** 25 min.
 
-### ⛔ T11.11 Apply approved habits (TP22) *(OWNER)*
+### ☑ T11.11 Apply approved habits (TP22) *(OWNER)*
 - **Do (after approval):** add each habit to its chapter VII entry (07:263, 301, 363, 418–420, 443,
   473, 671, 722, 752) and resolve the shared "forgettable on purpose" note. Habits are voice, not
   canon facts, so 5e only unless the owner says otherwise. Log them in INVENTIONS.

@@ -307,6 +307,9 @@ in the palace. She deals only in facts. **At the Unmasking:** she knows the serv
 passages, and becomes one of the night's quiet heroes if any character thought to
 befriend her.
 
+**Speech habit:** flat facts, one at a time, and never a guess. When a fact runs out she
+stops and says she doesn't know what it means.
+
 **What Anha Knows:** a character who wins her trust (family or kindness; pressure
 gets nothing) learns the following:
 
@@ -352,6 +355,10 @@ question, or for any breach of the writing law to hold over him (card S8).
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
 Lying to Kovaun about matters of faith takes a DC 20 Charisma (Deception) check.
 She has heard everything.
+
+**Speech habit:** she calls people by name and station before they have given either,
+and she ends an exchange by repeating the other person's answer back once, as if filing
+it.
 
 **What Kovaun Knows:** a character who works Agenda 2 for her, or who asks her
 about a gray mask's blessing over the food after Movement IV, can learn the following:
@@ -423,6 +430,9 @@ prepared, like her host.)
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
 human, a DC 10 Charisma (Deception) check.
 
+**Speech habit:** a compliment first, then the question, then an exact sum. She never
+rounds a number and never names a price she won't pay.
+
 **What Callun Knows:** working Agenda 1 for her earns a character these facts:
 
 - The Circle knows only that Raunu's ministers call his new decree "the Tithe of
@@ -486,6 +496,9 @@ Boranis party, and chapter IX names all three.
 noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
 insisting Vorlain hang for this.
 
+**Speech habit:** he talks around what he wants. He never says "seat" or "chieftaincy"
+aloud, and he praises Vorlain's year in a way that is really a question.
+
 **What Draunel Knows:** whoever carries Agenda 3 for him hears this much:
 
 - Vorlain ruled for a year and gave it back. Draunel wants to know if he liked the
@@ -510,10 +523,13 @@ the year of Vorlain's rule as fixer, and knows where its two bodies are
 buried. He has spent three years being pleasant to everyone in case that ever
 stops being a quiet matter.
 
-**Roleplaying Essin:** affable, forgettable on purpose, always somehow between Vorlain and
+**Roleplaying Essin:** affable, always somehow between Vorlain and
 whoever is working him. The Agenda 3 character's true opponent, and a fine sparring
 partner. Deceiving Essin takes a DC 20 Charisma (Deception) check, and he deceives back.
 Catching him at it takes a DC 18 Wisdom (Insight) check.
+
+**Speech habit:** he never says no. He moves instead: a step between, a hand at an
+elbow, a glass refilled, and the talk turned to the other person's mask.
 
 **What Essin Knows:** a character who helps him keep Vorlain sober and unbaited, or
 who goes to him on the terrace in Movement V, the one time he asks anyone for help,
@@ -552,6 +568,9 @@ formal request for an audience, declined by a miserable Corval, is the last
 diplomatic thing she does tonight. From there she is one bad hour from going over
 the east wing wall herself, which makes her the Agenda 4 character's natural ally or
 runaway problem. **At the Unmasking:** she goes toward the east wing, immediately.
+
+**Speech habit:** short, plain demands, and the same question asked again rather than
+rephrased. Refused, she stops talking instead of arguing.
 
 She carries the Thenya gift too (to reach, find or protect someone she
 loves who is in danger), and that is why she heads straight there when the lights die.
@@ -783,6 +802,9 @@ her the inquest's most convenient scapegoat, and she knows it before her
 questioners do. *(Stat blocks: **Tavva**, **Gallery Knife**, chapter X. Fight cards S2 and S5, chapter
 IX.)*
 
+**Speech habit:** she talks like someone quoting a job, courteous and unhurried, in
+costs and times. Cornered, she puts her one offer on the table at once.
+
 **What Tavva Knows:** caught and held, she bargains fast and honestly, and can tell
 her captors the following:
 
@@ -831,6 +853,9 @@ on fire for reasons that are not his business. He opens by naming the terms alou
 and expects to be believed, because in his experience the contract settles more
 arguments than the sword does.
 
+**Speech habit:** he answers with the terms. Asked anything, he says what the contract
+says, calmly, and says aloud any deal he is about to take.
+
 **The negotiation surface, printed:**
 
 - **What he wants:** to fulfill the contract and go home.
@@ -863,6 +888,9 @@ He does not know who she is or why, and he has been thinking about it all night.
 No heroics, no waste, and no cruelty. He never commits recklessly, tonight or ever. He
 spends his first round placing Blades and watching who the party protects, and on
 his second he starts talking while the attacks continue.
+
+**Speech habit:** he says little and asks more, slowly, while the fighting goes on, and
+his questions are about what the party is protecting and what the fires mean.
 
 **The negotiation surface, printed:**
 

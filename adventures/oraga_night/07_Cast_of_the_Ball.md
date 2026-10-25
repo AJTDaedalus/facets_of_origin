@@ -213,6 +213,9 @@ in the palace. She deals only in facts. **At the Unmasking:** she knows the serv
 passages, and becomes one of the night's quiet heroes if any player thought to
 befriend her.
 
+**Speech habit:** flat facts, one at a time, and never a guess. When a fact runs out she
+stops and says she doesn't know what it means.
+
 Two things she volunteers, unprompted, to anyone who wins her trust. One is the lower
 cellar stair she is forbidden to sweep, which makes no sense, because nothing is down
 there but wine. The other is Veier's traveling pack: for the first year it stood packed
@@ -233,6 +236,10 @@ she has not been told why the question is phrased that way.
 **Play her:** urbane, watchful, a career diplomat in vestments, who works the room like
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
 Lying to Kovaun about matters of faith is **Hard**; she has heard everything.
+
+**Speech habit:** she calls people by name and station before they have given either,
+and she ends an exchange by repeating the other person's answer back once, as if filing
+it.
 
 ### Mother Sella — the Death-Sister
 *A lay sister of Elanna, invited by name, in Raunu's hand, to everyone's surprise.*
@@ -262,6 +269,9 @@ not to act on it. (She would be horrified to be called a conspirator. She is mer
 delivery. Deceiving her about money is **Very Hard**; about anything human,
 **Easy**.
 
+**Speech habit:** a compliment first, then the question, then an exact sum. She never
+rounds a number and never names a price she won't pay.
+
 ### Master Pellin Corro — the Phern Magnate
 **Wants:** a pleasant evening among people who finally treat Phern money as money.
 **Fears:** the thing his gift keeps ringing about, all night, pointing nowhere.
@@ -286,15 +296,21 @@ Draunel never brings one plan to a Boranis party.
 noble key. Useful to the table as a patron, a foil, and by dawn (aftermath wing) the
 loudest voice insisting Vorlain hang for this.
 
+**Speech habit:** he talks around what he wants. He never says "seat" or "chieftaincy"
+aloud, and he praises Vorlain's year in a way that is really a question.
+
 ### Essin Boranis — the Cousin
 **Wants:** Vorlain sober, unrecorded, and unbaited — Essin is the keeper his cousin
 does not know he needs. **Fears:** House Draunel's patience. **Secret:** he served
 the year of Vorlain's rule as fixer, and knows exactly where its two bodies are buried. He has spent three years being pleasant to everyone in case it stops
 mattering quietly.
 
-**Play him:** affable, forgettable on purpose, always somehow between Vorlain and
+**Play him:** affable, always somehow between Vorlain and
 whoever is working him. The Agenda 3 player's true opponent, and a fine sparring
 partner: deceiving Essin is **Hard**, and he deceives back.
+
+**Speech habit:** he never says no. He moves instead: a step between, a hand at an
+elbow, a glass refilled, and the talk turned to the other person's mask.
 
 ### Maiven Nolonaire — the Cousin from the Border
 **Wants:** proof of Veier — alive, well, *unforced* — carried home in Thenya hands.
@@ -314,6 +330,9 @@ immediately. She carries the Thenya gift too (to reach, find or protect someone 
 loves who is in danger), and that is why she heads straight there when the lights die.
 She dies there unless somebody competent goes with her. The module
 would prefer somebody competent went with her.
+
+**Speech habit:** short, plain demands, and the same question asked again rather than
+rephrased. Refused, she stops talking instead of arguing.
 
 ---
 
@@ -433,6 +452,9 @@ information: she can prove she planned the gallery job for a season, which makes
 her the aftermath's most convenient scapegoat, and she knows it before her
 questioners do. *(Cards: `enemies/tavva.fof`, `enemies/gallery_knife.fof`.)*
 
+**Speech habit:** she talks like someone quoting a job, courteous and unhurried, in
+costs and times. Cornered, she puts her one offer on the table at once.
+
 ### Otta Vesh — the Mask-Maker *(aftermath)*
 The finest spirit-mask maker in Rekuzan; her workshop is Night One's best scene, and
 her wall of casting-blanks — one kept for every face she has ever fitted, her rite
@@ -465,6 +487,9 @@ on fire for reasons that are not his business. He opens by naming the terms alou
 and expects to be believed, because in his experience the contract settles more
 arguments than the sword does.
 
+**Speech habit:** he answers with the terms. Asked anything, he says what the contract
+says, calmly, and says aloud any deal he is about to take.
+
 **The negotiation surface, printed:**
 
 - **What he wants:** to fulfil the contract and go home.
@@ -490,6 +515,9 @@ He does not know who she is or why, and he has been thinking about it all night.
 No heroics, no waste, and no cruelty — he never commits recklessly, tonight or ever. He
 spends his first exchange placing Blades and watching who the party protects, and on
 his second he starts talking while the attacks continue.
+
+**Speech habit:** he says little and asks more, slowly, while the fighting goes on, and
+his questions are about what the party is protecting and what the fires mean.
 
 **The negotiation surface, printed:**
 
