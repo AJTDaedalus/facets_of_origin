@@ -866,3 +866,75 @@ Read first: TASKS WP10 and T7.25, DECISIONS TP1–TP74 and the TPN notes, this L
 ### Close
 - Done: T10.1–T10.6, T7.25. Open: T10.7 (commit; not done, per brief). OWNER: Raunu and the Charmed condition (above, non-blocking).
 - Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **576 passed, 1 skipped**. Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**. `copyright_scan` not run (no refs/srd directories on this machine). No commit or staging.
+
+## WP9 run (2026-10-25)
+
+Read first: TASKS WP9, DECISIONS TP1–TP76 and the TPN notes, this LOG's tail. Overrides applied: TP57 (no dial: "the dial" and "at every setting" dropped from T9.1–T9.2), TP61 (no heat-4 finish), TP66 (S12 "Corval in the Kitchens"), T6.7 (S11 and S12 live by default). Baseline from `M/`: lint 0, fact_check 0, bestiary 0, pregen 0, `pytest tools` 576 passed + 1 skipped.
+
+### T9.1 Prep box re-costed; 60-minute path
+- **Costing:** word counts of the exact ranges each step names, at 200 words a minute read and 400 skimmed (USABILITY §2's rate). Ch I to the end of "The Fights" 4,614 → 25; ch II truth + agendas 3,361 → 20; ch VIII sheet + "The Palace, Keyed" + tracker 4,012 → 20; ch V named sections 10,263 read + 1,921 skimmed → 55; ch IX three rules + Running + S14, S3, S11, S12 7,798 + three agenda cards skimmed → 45; ch IV 1,530 → 10; ch VII cues → 5; ch X Attendant + three Uninvited 6,141 skimmed → 15; print and lay out 15. **Total 210 minutes**, stated in the box.
+- **60-minute path** (10 + 5 + 15 + 15 + 15 = 60): ch I three sections (1,910 words), ch II two sections (864), the DM sheet both pages (2,662), ch V Midnight Clock + Buying Time + The Attendant + The Fractures to Table V–6 (2,756), S14 in full (2,423) and S3/S11/S12 to their objectives.
+- **Know these five:** the truth; Delay, Stop and End (Stop DC 15 +2 per tell, +4 at most; End two tells and the one method; the Radiant only the trap); the Attendant; the danger (the palace's two mercies before midnight; the say-it line at every table, TP57); the dark hour's cards (S3; S11 and S12 live by default, T6.7/TP66).
+- **Chapter VII contradiction:** "skim or skip" (box) vs "the chapter to skim again" (*Safety and the Table*) → step 7 "the two-line cue at the head of each entry" (T9.5) and the closing tip "skim its two-line cues again before you sit down". "Skim or skip" became "Leave for later"; chapter X moved to step 8.
+- "The palace diagram" in the box → "the maps (VIII–1 to VIII–5)" (T9.3 overlap). README "What to Read First" updated to match.
+- Checks: lint 0; fact_check 0.
+
+### T9.2 Three-player runtime; cut list; S14 cap
+- **Table I–1** is now three-player minutes: street 15, I 20, II 40, III 35, IV 25, V 45, break 10, VI 70, VII 40, epilogue 10 = **5 h 10** (was 4 h 50, budgeted for four). Basis (TPN-54a): USABILITY §3's three-player walk (social Movements 15–20% faster with fewer spotlight turns; fights no faster; S14 at three is the long pole), at the low end of each range because the cut list is used. "One session: about five hours, with a break." Toast checkpoint 2:15 → 2:10; midnight 3:15 kept. Same numbers in Table VIII–1, the five 04 run boxes, the two 05 run boxes and `flow.json` (page rebuilt).
+- **Cut list** (01 and 08, which also had the stale "east wing… Agenda 4" item): adds "in the dark, every snake card but one (the others happen offstage)" and S14's length: "let its errand finish… Never end it by letting the party off." No dial wording (TP57).
+- **S14:** a new paragraph after "about six rounds": running late, the errand is the only way to cut the fight short; the Attendant goes with its Uninvited (*Not Here*; no XP), chapter V's history goes on. Consistent with the card's own *One scene at a time* (no XP when it leaves).
+- **New tests** `tools/test_wp9.py` (`TestRuntime`, 6): Table I–1 contiguous and totals; DM sheet, run boxes, flow phases and checkpoints agree.
+- Checks: lint 0 (one SOFT long-paragraph hit in 09 fixed by splitting the paragraph); fact_check 0; test_wp9 passed.
+
+### T9.3 "The maps"; vague cross-refs; V–5 row 2; notation
+- **"The palace diagram"** → "the maps (VIII–1 to VIII–5)": 01 prep box (T9.1), 01 *What You Need* print line, 01 *Keyed rooms*, 04 *Palace Boranis* ("print them"); 04 B13 "on the palace map (VIII–1)" (B13 is drawn there, `build_maps.py`).
+- **08 opening (the print line)** now names the print build's packets: the DM packet (DM sheet, the palace keyed, the Midnight Tracker, the five maps), the handouts one to a page with cut lines, the card deck with stat blocks, and one sheet per pregen.
+- **Cross-references:** all 15 "→ the X's line, chapter IX" pointers in 04 now name the section, e.g. `(chapter IX, "The Merchant's Circle")` (the ledger counted six; the snake bullets have multiplied since). 04 "Play the summons per chapter VII" → `as chapter VII has it ("Roleplaying Raunu")`. 05 `(see chapter X, "Leashed")` → `(see chapter X, "The Hollow", *Leashed*)`. 04:1424's Maiven pointer no longer exists (TP35 rewrote it).
+- **Table V–5 row 2:** "(or the Crossing's first beat did)".
+- **Heat ticks:** one notation, ✱, in both tables: Table IX–2's header gains "— ✱ automatic", its seven *(automatic…)* italics became ✱, and the lead-in says "those marked ✱ are automatic".
+- Checks: lint 0 (xrefs resolve); fact_check 0; `pytest tools` 585 passed, 1 skipped (1 deselected by `-k`).
+
+### T9.4 Open R2 polish
+- **Svara:** glossed from printed text only: 01 *Canon and Your Table* "the history of Svara, the world it is set in" (README's own "The world of Svara and its canon belong to the setting's author"). No new fact, so no ⛔.
+- **The Vell skill list, one form:** 07 *Roleplaying Vell* and Table VIII–3 now follow 10 *Courteous and Finished*: Persuasion for bribery, flattery or charm, Intimidation for a threat, Deception for a lie, DC 25 each (was "Charisma (Deception, Intimidation, or Persuasion)" in 07 and 08).
+- **"Yardstick" cut:** 09 S14 *Budget* keeps CR 8 / 3,900 XP / 2.6 × High and the clock sentence, drops the offense-CR-4 / defense-CR-9 / "about CR 5 (1,800 XP)" commentary; 10 the Attendant's footnote drops "Idle, it is about CR 5 by the yardstick".
+- **N28 ruled (TPN-54b):** the Prickle tells you the direction and does not take away an unseen attacker's Advantage. One sentence in 03 *Phern Gift*; Pello's sheet in 11 "(the attacker keeps its Advantage)".
+- Checks: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues.
+
+### T9.5 Cast cues in chapter VII
+- All 18 entries open (after the italic subtitle) with **At a glance:** two sentences: what they want, in the entry's own **Wants** words, and where they are at midnight, from Table VIII–2 or the entry ("At Church heat 0–2 her people get her out; at 3–4 her card is live (card S8)" is Table VIII–2's snakes row plus the entry's card). Sella (the chapel, "hers all night"), Tavva (S5), the Uninvited (their three errands, Table VIII–2) and the Attendant ("beside the three… Idle until the party gets in the way") are the ones with no own row in Table VIII–2 or no Wants line, and each sentence is the entry's.
+- The chapter's opening note says each entry opens with the cue.
+- New tests in `tools/test_wp9.py` (`TestCastCues`, 3): 18 cues, each with "At midnight"; the cue is the first paragraph; every card or area a cue names is printed in the entry or Table VIII–2.
+- INVENTIONS #132. Checks: lint 0; fact_check 0; test_wp9 13 passed.
+
+### T9.6 Print build: tests and skeleton
+- **Tests first:** `tools/test_build_print.py` (73 tests, written before the module; first run: collection error, no module). Then `tools/build_print.py`, standard library only (`markdown` is not installed here; `markdown-it-py` is, but the book's subset needs no library): a small converter (headings, paragraphs, tables, block quotes, nested lists, figures, bold, italics, bold italics, code), `section()`, `strip_repo_paths()`, `strip_dm_lines()`, `safety_problems()`, `page()` (standalone HTML with a print stylesheet, `@page` Letter or Letter landscape), `cut()` (dashed cut line with ✂), the four packet builders, `build_all()`, `render_pdf()` (Playwright's headless Chromium, else WeasyPrint) and `pdf_pages()`.
+- **Safety:** each packet's visible text is checked before writing: repo paths, INVENTIONS, the canon guard's hashed private words (loaded from `software/tests/test_no_private_canon.py`, never named in the build), and for player material a DM-only list (the Uninvited and their names, the Attendant, the midwife, the heir, the nursery, Vell, the Root, the Second Clause, DM Note / Sidebar / Troubleshooting / Read this when / ⟨If History Breaks⟩). Any hit raises and nothing is written (a test plants one).
+- **Output:** `M/print/`, git-ignored in the root `.gitignore` (TPN-54d).
+- **Run:** from `M/`, `python tools/build_print.py` (HTML) or `python tools/build_print.py --pdf` (HTML and PDF, with page counts). README *For Contributors* and *What to Read First* say so.
+
+### T9.7 DM packet
+- `print/dm_packet.html`, landscape: DM sheet Page One, Page Two, "The Palace, Keyed" text, the five maps one to a page (embedded as data URIs), the Snake Tracker, the Midnight Tracker.
+- **"Two pages" made true** (TPN-54e): at 7 pt, Page One and Page Two each print on one landscape sheet (checked in the PDF: page 1 "Page One", page 2 "Page Two"). Iterations: 25 → 15 → 13 → 12 → **10 pages** (title page dropped, tracker pages compacted, map height 7.1 in).
+- 08's opening now names the DM packet's contents (T9.3).
+
+### T9.8 Player packet
+- `print/player_packet.html`: Handouts 1–5, one to a page; every wholly italic paragraph outside a quote (the DM's "when to hand it over" lines, and the section's own note) stripped; the invitation and each of the eight agenda cards in a cut box. **6 pages.** Tests assert the DM lines are gone and the visible text passes the player safety check. 08's "Everything from here to the end of the chapter" → "to the Midnight Tracker" (the tracker closes the chapter).
+
+### T9.9 Card deck
+- `print/card_deck.html`: S1–S14, each from a new page, each followed by "Stat blocks for Sn (chapter X)": every chapter X block the card names in bold, plurals matched (Kinsmen, Knives, Cousins of 3160, a name wrapped over a line). **56 pages.** Tests: 14 cards, every named block present on its card's page, and S3 / S14 checked by name.
+
+### T9.10 Pregen sheets
+- `print/pregen_sheets.html`: each of the five starts a page; chapter XI's "Common to all five" and "Masks" paragraphs merged in after the heading; an **On your turn** box under the heading; trackers (Hit Points, Hit Dice, slots, limited-use features, crystal charge, Heroic Inspiration, Death Saving Throws); "Spells, one line each" for the three casters (cantrips, prepared, always prepared, and Andra's lattice rituals); the SRD attribution on every sheet. **13 pages.** A spell with no line fails the build (TPN-54f, INVENTIONS #134). `pregen_check` 0 issues; no source line in 11 was needed.
+
+### T9.11 The flow page
+- Template: header eyebrow "a contributor tool, not for the table"; the provenance footer ("Generated from … by …") replaced by "A design map for contributors… To run the night, use the DM sheet in chapter VIII" (licence text kept); node references print as chapter and section names (`refText`: "04_The_Ball.md#the-public-rooms (B0)" → "chapter IV, the public rooms (B0)"; checked with node). README's `flow/` row is labelled a contributor tool. Page rebuilt; no repo path in its visible text. The book never points a DM at it.
+
+### T9.12 Two player handouts
+- **Player Handout 4: The Public Rooms** (08, embedded SVG): `maps/build_maps.py` gains `map_public_rooms` and `build_handouts()` (kept out of `MAPS`, so the five keyed maps and their tests are unchanged); `main()` builds it; SVG and PNG committed beside the maps. Gate Street, the grand stair, the Gatehouse Court, the Crystal Court with the dais and both galleries, the Audience Hall and antechamber, the chapel, the terraces and the river gate. No room codes, private rooms, tags, wards or service passages.
+- **Player Handout 5: Tonight's Customs** (08): masks, steel, the Dead Dance, the Unmasking, each from a printed line (02 *The Oraga Nights*, 02 *Before You Read This Chapter*, 04 B1 and *Steel at the ball*, 04 Movement V).
+- Both in the player packet. INVENTIONS #133. New tests in `tools/test_wp9.py`: `TestPublicRoomSketch` (3: builds; no private room or DM mark; committed copy matches the script) and `TestCustomsHandout` (3: four customs; each traces to printed text; no secret).
+
+### Close
+- Done: T9.1–T9.12. Open: T9.13 (commit; not done, per brief). No ⛔ OWNER items: Svara was glossable from printed text.
+- Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **668 passed, 1 skipped** (576 + 1 at start; +73 `test_build_print.py`, +19 `test_wp9.py`). Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**; the new untracked files and the generated packets also pass the canon detector. Print build: DM packet 10 pages, player packet 6, card deck 56, pregen sheets 13 (PDF via Playwright Chromium). No commit or staging; `M/art/` untouched.

@@ -1,41 +1,84 @@
 # I. Overture — How to Run Oraga Night
 
-> **How to prep in 90 minutes**
+> **How to prep: one hour, or an evening**
 >
 > You run this night from three things: **the two-page DM sheet** (see chapter VIII),
 > **the fight cards** (see chapter IX) and **the stat blocks** (see chapter X). Chapters IV
-> and V are the reference behind them. Read in this order:
+> and V are the reference behind them. The minutes below are honest ones, at an ordinary
+> reading pace.
 >
-> 1. **This chapter, to the end of "The Snakes in the Chicken Pen"** (15 minutes).
+> **If you have one hour.** Read only this, in this order:
+>
+> 1. **Chapter I: "What This Adventure Is", "The Night in Seven Movements" and "The
+>    First Five Minutes"** (10 minutes).
+> 2. **Chapter II: "What Is Coming" and "How the Night Ends (By Default)"** (5 minutes).
+> 3. **Chapter VIII: the DM sheet, both pages** (15 minutes). Everything else hangs off
+>    a line on it.
+> 4. **Chapter V: "The Midnight Clock", "Buying Time", "The Attendant", and "The
+>    Fractures" down to Table V–6** (15 minutes). The tells themselves are on the DM
+>    sheet, under Table VIII–1.
+> 5. **Chapter IX: S14 in full, then S3, S11 and S12 down to their objectives**
+>    (15 minutes). Read the rest of each card when it comes up.
+>
+> That is 60 minutes. Look everything else up at the table, from the DM sheet's
+> pointers.
+>
+> **Know these five things** before you sit down, whichever path you take:
+>
+> - **The truth.** What comes at midnight, and how the night ends if nobody changes it
+>   (chapter II).
+> - **Delay, Stop and End.** Delay buys time against the Uninvited and never beats them. A
+>   Stop reaches the person inside one of them, once a scene: a DC 15 Charisma
+>   (Persuasion) check, or whatever check the words fit, with +2 for each tell (+4
+>   at most). An End needs two tells and the one method that reaches that Uninvited;
+>   the Radiant has none, and only the trap holds him (chapter V).
+> - **The Attendant.** It comes only for a party that gets in the way. Break its focus
+>   four times or take its Hit Points; Focused, it can kill (card S14).
+> - **The danger.** Before midnight the palace detains and ejects. When the lights die,
+>   say it aloud at every table: *"From here on the knives are real. A character who
+>   goes down in a fight can die."*
+> - **The dark hour's cards.** The gate (S3) comes at almost every table, and S11 (the
+>   Phern door) and S12 (Corval in the Kitchens) are live in the dark unless the table
+>   has cooled them (chapter IX, "The Snake Tracker").
+>
+> **If you have an evening** (about three and a half hours), read in this order:
+>
+> 1. **This chapter, to the end of "The Snakes in the Chicken Pen"** (25 minutes).
 >    The shape of the night, the first five minutes, what pays, and the rules for
 >    steel.
 > 2. **Chapter II, "The Truth of the Night" (from "What Is Coming" to "What the
->    Module Never Says") and "The Eight Agendas"** (15 minutes). This is the truth you
+>    Module Never Says") and "The Eight Agendas"** (20 minutes). This is the truth you
 >    are hiding, the lines you hold and the cards you deal. "Adventure Background",
 >    below, is the short version.
-> 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both,
->    and the Midnight Tracker. From here on, everything you read is behind a line on that sheet.
-> 4. **Chapter V: "How to Run the Attack", Movement VI's opening, "Midnight Rules"
->    (read "Down, Not Out", "Buying Time" and "The Attendant"), "The Midnight Clock",
->    "The Fractures" in "You Cannot Beat Them" (the tells to show are on the DM sheet,
->    under Table VIII–1; skim the Room Tricks and "Two Hundred People": they are tables
->    to use live), "The Crossing", and Movement
->    VII's opening and Epilogue** (25 minutes).
+> 3. **Chapter VIII, the DM sheet, "The Palace, Keyed" and the maps (VIII–1 to
+>    VIII–5)** (20 minutes), and the Midnight Tracker. From here on, everything you
+>    read is behind a line on that sheet.
+> 4. **Chapter V: "How to Run the Attack" (with "The Midnight Clock"), Movement VI's
+>    opening, "Midnight Rules" (read "Down, Not Out", "Buying Time" and "The
+>    Attendant"; skim the Room Tricks and "Two Hundred People": they are tables to use
+>    live), "You Cannot Beat Them" and "The Fractures" (the Stop and the End), "The
+>    Crossing", and Movement VII's opening and Epilogue** (55 minutes).
 > 5. **Chapter IX: "The Snakes at the Ball" (the three rules) and "Running the
->    Snakes", then S14 and S3 in full** (the Attendant and the gate come up at almost
->    every table), **then skim the cards the characters' agendas point at** (15
->    minutes).
+>    Snakes", then S14, S3, S11 and S12 in full** (the Attendant, the gate and the two
+>    cards live in the dark), **then skim the cards the characters' agendas point
+>    at** (45 minutes).
 > 6. **Chapter IV: "The Palace on Alert", "When Somebody Draws Early", "Running the
 >    Room", and the box at the head of each Movement** (10 minutes). Each box says
 >    what to run and what to skip. The Undercurrents are for when you have
 >    time.
+> 7. **Chapter VII: the two-line cue at the head of each entry** (5 minutes). Read a
+>    whole entry when the characters meet that guest.
+> 8. **Chapter X: skim the Attendant and the three Uninvited** (15 minutes). Open any
+>    other block when its card comes up.
+> 9. **Print and lay out** the DM packet, the handouts and the cards (15 minutes; see
+>    chapter VIII).
 >
-> **Skim or skip:** chapter VII (look a guest up when the characters meet them), chapter
-> III (only if players build their own characters; hand out the agenda cards from
-> chapter VIII either way; the full agendas are in chapter II), chapter X beyond the Uninvited, the Attendant and the
-> Bought (open a block when its card comes up), chapter VI (read it when the session
-> ends), and chapter XI (hand it out). The rest of chapters IV and V is
-> depth: read it when a player goes looking for it.
+> That is 210 minutes.
+>
+> **Leave for later:** chapter III (only if players build their own characters; hand
+> out the agenda cards from chapter VIII either way; the full agendas are in chapter II),
+> chapter VI (read it when the session ends), and chapter XI (hand it out). The rest of
+> chapters IV, V and VII is depth: read it when a player goes looking for it.
 
 ---
 
@@ -51,7 +94,7 @@ the one line nearest your table; the lines are not cumulative.
 Every problem in the night can be solved by people with a good idea and the nerve to
 act on it, and most of them are better solved that way.
 
-**It is one session: four and a half to five hours.** Play starts in the street, with
+**It is one session: about five hours, with a break.** Play starts in the street, with
 the party walking up the hill toward the palace (see chapter IV, area B0), and ends at dawn
 outside the gate. Nothing is played before the street. Hooks and agendas are a
 five-minute pick at the start ("The First Five Minutes", below), not a scene.
@@ -95,8 +138,8 @@ Player Handout 3 (chapter VIII) carry everything a player needs about the tribes
 their gifts as origin feats and the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
 fight, and chapter X every stat block and every crystal charge ("Items of the Night").
 
-Print from chapter VIII before you sit down: the **two-page DM sheet** and the **palace
-diagram** and the **Midnight Tracker** (Tables VIII–10 and VIII–11) for yourself, and the agenda cards, the invitation and the crystal-charge
+Print from chapter VIII before you sit down: the **two-page DM sheet**, the **maps
+(VIII–1 to VIII–5)** and the **Midnight Tracker** (Tables VIII–10 and VIII–11) for yourself, and the agenda cards, the invitation and the crystal-charge
 page (Player Handout 3) for the table.
 
 ## Reading This Book
@@ -109,7 +152,7 @@ themselves. Italic paragraphs that are not indented are notes to you.
 
 **Keyed rooms** are headed **B1. The Room Name.** That is a code and a name, then what
 is there. The codes run from B0 to B13 and are the same in the text, the DM sheet, the
-palace diagram, the fight cards and every cross-reference.
+maps (VIII–1 to VIII–5), the fight cards and every cross-reference.
 
 **Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
@@ -190,27 +233,31 @@ when the table's energy says so. The budget tells you when you have spent too lo
 
 | Starts at | Movement | Minutes | By the end… | If you are behind, run only… |
 |---|---|---|---|---|
-| 0:00 | **The first five minutes**, then the street | 10 | Everyone has a character, an agenda and a hook; the street read-aloud is done | Agendas dealt face-down; hooks skipped |
-| 0:10 | **I. The Receiving Line** | 25 | Everyone is inside, and the honor guard is facing the wrong way | One check in the line, then the gate |
-| 0:35 | **II. The Empty Rooms** | 45 | The host's absence has stopped being funny | One agenda beat per player; S1 only if someone asks for it |
-| 1:20 | **III. The Summons** | 35 | Somebody at the table has met him | One summons, with two characters walked in together |
-| 1:55 | **IV. The Toast** | 25 | The room has been told something it does not know what to do with | The toast, and the one snake line that turned hardest |
-| 2:20 | **V. The Hour of Spirits** | 40 | Anyone who assembled the pattern has had one chance to act on it; it pays at midnight | The Dead Dance omen, and at most one fight card |
+| 0:00 | **The first five minutes**, then the street | 15 | Everyone has a character, an agenda and a hook; the street read-aloud is done | Agendas dealt face-down; hooks skipped |
+| 0:15 | **I. The Receiving Line** | 20 | Everyone is inside, and the honor guard is facing the wrong way | One check in the line, then the gate |
+| 0:35 | **II. The Empty Rooms** | 40 | The host's absence has stopped being funny | One agenda beat per player; S1 only if someone asks for it |
+| 1:15 | **III. The Summons** | 35 | Somebody at the table has met him | One summons, with two characters walked in together |
+| 1:50 | **IV. The Toast** | 25 | The room has been told something it does not know what to do with | The toast, and the one snake line that turned hardest |
+| 2:15 | **V. The Hour of Spirits** | 45 | Anyone who assembled the pattern has had one chance to act on it; it pays at midnight | The Dead Dance omen, and at most one fight card |
 | 3:00 | *Break* | 10 | Take it as the bells begin to ring midnight | — |
-| 3:10 | **VI. The Unmasking** | 50 | The host is dead, and the party is choosing who to save | The dais, the Crossing, one snake in the dark |
-| 4:00 | **VII. The Longest Night** | 40 | The party is standing outside with whatever and whoever they carried out | The gate (S3) |
-| 4:40 | **Epilogue** | 10 | 5th level, and one question around the table | The read-aloud and the question |
-| | | **4 h 50 min** | | |
+| 3:10 | **VI. The Unmasking** | 70 | The host is dead, and the party is choosing who to save | The dais, the Crossing, one snake in the dark |
+| 4:20 | **VII. The Longest Night** | 40 | The party is standing outside with whatever and whoever they carried out | The gate (S3) |
+| 5:00 | **Epilogue** | 10 | 5th level, and one question around the table | The read-aloud and the question |
+| | | **5 h 10 min** | | |
 
-**Two checkpoints.** If the toast has not happened by **2:15**, it happens now: Raunu is
+**Two checkpoints.** If the toast has not happened by **2:10**, it happens now: Raunu is
 standing at the high table, and whatever the characters were doing can wait a Movement.
 If the bells have not rung midnight by **3:15**, they ring now. Movements VI and VII are
 what the night builds toward, so protect them.
 
 **What to leave out, in order, when you are behind:** B13; the Undercurrents nobody is
 already on (chapter IV marks them *(if you have time)*); a second fight card in any one
-Movement; S1; B9's rooms, **unless somebody is on Undercurrent C**. Do not cut the
-gate: it is the only scene the ending needs, and the fight in it is still optional.
+Movement; S1; B9's rooms, **unless somebody is on Undercurrent C**; in the dark, every
+snake card but one (the others happen offstage; chapter IX, "The Snake Tracker"); and
+S14's length. If S14 runs long, let its errand finish: the Uninvited it guards is done
+with the room, and the Attendant goes with them (card S14). Never end it by letting the
+party off. Do not cut the gate: it is the only scene the ending needs, and the fight in
+it is still optional.
 
 ## The First Five Minutes
 
@@ -466,7 +513,8 @@ they saved, not on what they lost.
 
 ## Canon and Your Table
 
-Oraga Night dramatizes a real event in the history of Svara. History records it this
+Oraga Night dramatizes a real event in the history of Svara, the world it is set in.
+History records it this
 way: **Raunu Boranis died at his own ball. His wife and newborn child vanished that
 night. No one was ever charged, and no one ever learned the truth.**
 
@@ -581,4 +629,4 @@ described closer than the table has agreed to.
 
 One tip above all others: **know the cast, not the script.** The night survives any
 player plan if you know what each named guest wants, fears, and will do when the lights
-go out. That is chapter VII, and it is the chapter to skim again before you sit down.
+go out. That is chapter VII: skim its two-line cues again before you sit down.

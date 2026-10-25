@@ -4,55 +4,55 @@
   {
    "id": "pre",
    "label": "The Street",
-   "time": "0:00 · 10 min",
+   "time": "0:00 · 15 min",
    "summary": "Five minutes: each player picks a character, an agenda card and a hook. Then the street read-aloud. Nothing before the street is played."
   },
   {
    "id": "m1",
    "label": "I. The Receiving Line",
-   "time": "Dusk · 0:10 · 25 min",
+   "time": "Dusk · 0:15 · 20 min",
    "summary": "The line, the gate, Corval receiving by name. Nobody is disarmed. The honor guard faces inward."
   },
   {
    "id": "m2",
    "label": "II. The Empty Rooms",
-   "time": "Early night · 0:35 · 45 min",
+   "time": "Early night · 0:35 · 40 min",
    "summary": "The ball proper. Agendas breathe; the host does not appear; Corro's gift rings. S1 and S6 are the early steel."
   },
   {
    "id": "m3",
    "label": "III. The Summons",
-   "time": "Mid-night · 1:20 · 35 min",
+   "time": "Mid-night · 1:15 · 35 min",
    "summary": "A glimpse on the gallery; Corval fetches chosen guests to the Audience Hall. Three gray masks arrive."
   },
   {
    "id": "m4",
    "label": "IV. The Toast",
-   "time": "Dinner · 1:55 · 25 min",
+   "time": "Dinner · 1:50 · 25 min",
    "summary": "Raunu appears, promises words at the Unmasking, takes two plates and leaves. The mews scream."
   },
   {
    "id": "m5",
    "label": "V. The Hour of Spirits",
-   "time": "Approaching midnight · 2:20 · 40 min",
+   "time": "Approaching midnight · 2:15 · 45 min",
    "summary": "Lamps low, the Dead Dance, quarter-bells. Every thread comes taut; at most one fight card per group. Vell walks to the river gate. Break as the bells ring."
   },
   {
    "id": "m6",
    "label": "VI. The Unmasking",
-   "time": "Midnight · 3:10 · 50 min",
+   "time": "Midnight · 3:10 · 70 min",
    "summary": "The lights die mid-sentence. The Uninvited go to work and the Attendant stands by them; the snakes draw in the dark; the Crossing. Delay is what saves people. \"The Midnight Clock\" (chapter V) gives the order."
   },
   {
    "id": "m7",
    "label": "VII. The Longest Night",
-   "time": "After midnight · 4:00 · 40 min",
+   "time": "After midnight · 4:20 · 40 min",
    "summary": "Fire, rescue, and the gate held by the Bought. The last bell rings after the gate is decided."
   },
   {
    "id": "end",
    "label": "Endings",
-   "time": "Dawn · 4:40 · 10 min",
+   "time": "Dawn · 5:00 · 10 min",
    "summary": "The recorded history by default, the epilogue and 5th level; every If-History-Breaks branch; and a pointer for a table that wants more."
   }
  ],

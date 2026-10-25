@@ -109,6 +109,7 @@ coming from. Nearly all carry it.
   heartbeat before it does.
 - **The Prickle.** You never have Disadvantage on Initiative rolls, and when a creature
   you cannot see is about to attack you, you know which direction it is coming from.
+  Knowing the direction doesn't take away that creature's Advantage on the attack.
 
 #### Thenya Gift
 *Origin feat. Prerequisite: Thenya, gifted, and the DM's agreement.*

@@ -1,6 +1,7 @@
 # VII. Cast of the Ball
 
-*Every named guest, and one thing that is not a guest. Each entry: who they are, what they want, what they fear,
+*Every named guest, and one thing that is not a guest. Each entry opens with a cue, "At a
+glance": what they want, and where they are at midnight. Then: who they are, what they want, what they fear,
 their secret, how to play them, and, last, what happens if it comes to steel.
 Outside a fight NPCs never roll dice. Where an entry gives no DC, the DC to move that
 guest is 13, or 10 for a character approaching far above their station behind a mask
@@ -19,6 +20,10 @@ Honor Guard**), the city's (**Sect Guard**), and the brawlers of the seating feu
 
 ### Raunu Boranis — the Host
 *Chief of the Orthaen. Seen publicly exactly four times tonight, and the fourth is midnight.*
+
+**At a glance:** Wants one uninterrupted sentence at midnight, and does not get it. At
+midnight, on the dais, he spends his last charge sealing doors behind Veier and dies
+there, by his own choice.
 
 **Wants:** one uninterrupted sentence, at midnight, two years in the making, and he
 does not get it. **Fears:** something is coming for his family; he does not know
@@ -84,6 +89,10 @@ own choice (see chapter V), not a hit-point total.
 *Of the Thenya; one of five gifted Thenya alive, though almost no one knows it. Two
 years unseen, and she is not seen tonight either: she never enters the ball.*
 
+**At a glance:** Wants her child born safe, and her cousins to know she chose this. At
+midnight, in the east wing (B9), she is wounded once, and the household brings her down
+the private stair to Vell and out the river gate.
+
 **Wants:** her child born safe; her cousins to know she chose this. **Fears:** the
 same thing her husband fears, learned from watching him prepare. **Secret:** she is
 happy, genuinely and unfashionably, and rumor has no shelf for it.
@@ -141,6 +150,9 @@ is never a fight.
 ### Vorlain Boranis — the Brother
 *Ruled for the missing year; killed two cousins doing it; gave it back without a word.*
 
+**At a glance:** Wants the seat, and not like this. At midnight, in the banquet gallery
+(B3), he hauls guests out of the fire (card S13 if Draunel's heat is 3–4).
+
 **Wants:** the seat, forever, aching, and — this is the part House Draunel cannot
 imagine — not like this. **Fears:** Raunu. Comprehensively. Fear of his brother is
 the load-bearing wall of his personality. **Secret:** he has no plot tonight; he came
@@ -196,6 +208,10 @@ and it holds.
 
 ### Minister Corval — the Majordomo
 *The last of the old household's officers; runs the ball with the twenty-two who stayed.*
+
+**At a glance:** Wants the night to go perfectly. At midnight, Raunu's last order sends
+him to the stairs: he guides the characters nearest him in front of the Radiant, then
+leads his household out to the kitchen yard (card S12 if the Circle's heat is 3–4).
 
 **Wants:** the night to go perfectly, because it is the house's face and his life's
 work. **Fears:** that he no longer knows the house he serves. **Secret:** he knows
@@ -274,6 +290,10 @@ is too tired to check.
 ### Anha — the Under-Cook
 *Agenda 8's sister. Four years in the kitchens; two years in the silence.*
 
+**At a glance:** Wants to keep her head down and her triple wages flowing home. At
+midnight she goes for the service passages, the other way out, for anyone who befriended
+her.
+
 **Wants:** to keep her head down and her triple wages flowing home. **Fears:**
 giving the wrongness a name, in case naming is what makes it real. **Secret:** two
 years of eerie domestic detail (east wing lights burning all night, meals for two
@@ -318,6 +338,9 @@ lights die she goes for the service passages, because she knows them.
 ### Prelate Damaris Kovaun — the Church's Eye
 *Prelate of the Church; Agenda 2's patron.*
 
+**At a glance:** Wants to file Raunu Boranis under something. At midnight, at Church
+heat 0–2 her people get her out; at 3–4 her card is live (card S8).
+
 **Wants:** to file Raunu Boranis under something. Anything. **Fears:** the mists,
 which is to say, the one report from the east that reached her desk and was above her
 seal to read. **Secret:** the Church's interest tonight is not doctrinal; her
@@ -346,6 +369,9 @@ retinue. The Church is a snake; its line is in chapter IX (card S8).
 
 ### Mother Sella — the Death-Sister
 *A lay sister of Elanna, invited by name, in Raunu's hand, to everyone's surprise.*
+
+**At a glance:** Wants to tend the Oraga rite properly. At midnight, as all night, the
+chapel (B6) is hers, and it is where shaken characters wash up.
 
 **Wants:** to tend the Oraga rite properly: the masks, the year's dead, the sending-
 home. **Fears:** nothing; she is an Elanna follower of the old northern school, and
@@ -381,6 +407,10 @@ all of this:
 ### Mistress Rhaza Callun — the Circle's Reckoning
 *Mistress of the Merchant's Circle; Agenda 1's patron.*
 
+**At a glance:** Wants Raunu's next decree, before it lands on her margins. At midnight,
+at Circle heat 0–2 her people get her out; at 3–4 her knives catch Corval in the
+kitchens (card S12).
+
 **Wants:** Raunu's next decree, before it lands on her margins. **Fears:** an heir,
 a dynasty of Raunus: Raunu's politics outliving him, and the chieftaincy she has
 priced (below) never coming. That is why Movement IV turns her polite loathing into
@@ -409,6 +439,10 @@ block says so), with **Circle Hired Knife** for the people she pays. The Merchan
 Circle is a snake; its line is in chapter IX (cards S7 and S12).
 
 ### Master Pellin Corro — the Phern Magnate
+
+**At a glance:** Wants a pleasant evening among people who treat Phern money as money.
+At midnight he is moving three seconds before the dark: follow him and live (card S11 if
+Phern heat is 3–4).
 
 **Wants:** a pleasant evening among people who finally treat Phern money as money.
 **Fears:** the thing his gift keeps ringing about, all night, pointing nowhere.
@@ -440,6 +474,10 @@ keeps close.
 ### Lord Essar Draunel — the Rival
 *Lord of House Draunel; Agenda 3's patron.*
 
+**At a glance:** Wants House Draunel one seat closer to the chieftaincy. At midnight, at
+Draunel heat 0–2 his people get him out; at 3–4 his card is live (card S13, the arrest
+in the fire).
+
 **Wants:** House Draunel one seat closer to the chieftaincy, tonight if possible,
 patiently if not. **Fears:** being seen wanting it. **Secret:** Agenda 3 is his, and
 he has three other irons in tonight's fire. A Draunel never brings one plan to a
@@ -463,6 +501,9 @@ retinue. House Draunel is a snake; its line is in chapter IX (cards S9 and S13).
 
 ### Essin Boranis — the Cousin
 *Vorlain's cousin.*
+
+**At a glance:** Wants Vorlain sober, unrecorded and unbaited. At midnight, at House
+Boranis heat 0–2 his house gets out; at 3–4 its card is live (card S13).
 
 **Wants:** Vorlain sober, unrecorded, and unbaited: Essin is the keeper his cousin
 does not know he needs. **Fears:** House Draunel's patience. **Secret:** he served
@@ -494,6 +535,10 @@ S6, S9 and S13).
 
 ### Maiven Nolonaire — the Cousin from the Border
 *Veier's cousin; Agenda 4's patron.*
+
+**At a glance:** Wants proof of Veier carried home in Thenya hands. At midnight she goes
+toward the east wing, whatever her heat, and dies there unless somebody competent goes
+with her.
 
 **Wants:** proof of Veier (alive, well, unforced) carried home in Thenya hands.
 **Fears:** that the pact was a purchase and her kinswoman the price. **Secret:** the
@@ -541,6 +586,10 @@ A trade factor no one remembers inviting — carrying, of all things, an enormou
 broadsword wrapped in white cloth across his back, and big enough that it suits him.
 See chapter II: he is the second hidden power's whole presence at the ball.*
 
+**At a glance:** Wants the river gate open at midnight and no one ever remembering his
+face. At midnight he is at the river gate (B5), climbs to the foot of the garden stair
+to meet Veier, holds the Radiant at the Crossing, and takes the boat.
+
 **Wants:** the river gate open at midnight and no one ever remembering his face.
 **Fears:** nothing in this palace, but he treats the three gray masks with the
 respect of a man who knows what they cost. **Secret:** all of them.
@@ -560,9 +609,10 @@ unbeatable without touching his weapon), let them notice.)*
 
 **Roleplaying Vell:** courteous, brief, and finished. Every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
-questions, and he is immune to every lever: bribery, flattery, threat, charm. Make
-every check to move Vell a DC 25 Charisma (Deception, Intimidation, or Persuasion)
-check, and let even a success buy honesty rather than compliance (his quote, below). Characters who shadow
+questions, and he is immune to every lever: bribery, flattery, threat, charm. Moving
+him takes a DC 25 Charisma (Persuasion) check for bribery, flattery or charm, a DC 25
+Charisma (Intimidation) check for a threat, or a DC 25 Charisma (Deception) check for a
+lie, and even a success buys honesty rather than compliance (his quote, below). Characters who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
 night he does not fight, does not hurry, and is never once interesting to look
 at. That is not luck.
@@ -608,6 +658,10 @@ is never the party's fight.
 Uninvited, Before You Read Their Blocks" first). Their truth is chapter II; their
 Stops, Ends and full tell-tables are chapter V; their conduct before midnight is here.*
 
+**At a glance:** Until midnight they do nothing but attend the ball. At midnight the
+Wept goes to the dais for Raunu, the Radiant to the east wing (B9) for Veier, and the
+Hollow to the main doors and the garden doors.
+
 They arrive with the Movement III crush, and until midnight they do nothing but
 attend the ball. This is the thing to play correctly: **they are people, and
 good company.** They eat, and drink, and praise the vintage. They converse with
@@ -644,6 +698,10 @@ outcomes. That is the complete list; their Attendant, below, is another matter.
 *A great house's attendant, by its clothes: a cloak folded over one arm, standing apart
 and staring oddly, as if it expects a master nobody at the ball can find to arrive. It
 came in with the early guests.*
+
+**At a glance:** Wants nothing; after midnight its order is to keep the three from being
+interrupted. At midnight it stands beside the three, Idle until the party gets in the
+way (card S14).
 
 *DM only: the Attendant is a Namak-Zai. The module never uses the word at the table
 and never says more about what that is.* It is a made thing, not a born one, serving
@@ -699,6 +757,9 @@ as its block says: it removes interruptions, and it does not hunt.
 *Somewhere in her forties, somewhere from the coast, somewhere on every festival
 hiring list under a different name. Tonight she is a steward in Boranis livery,
 and she has been planning this room for a season.*
+
+**At a glance:** Wants the trophy gallery, or the portable case of it. At midnight she
+takes the chaos as a gift and works it: her looting is card S5.
 
 **Wants:** the trophy gallery, or the portable case of it, anyway. The first open
 Boranis door in two years is a professional opportunity that will not come twice,
@@ -759,6 +820,9 @@ stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, chapte
 *Gray wool, cut plainly, with the company's mark at the shoulder and a case chained at
 the hip, produced more readily than steel.*
 
+**At a glance:** Wants the contract satisfied, or voided. At midnight the Bought shut
+the outer gate (B12) from outside and hold it until the front gate is decided (card S3).
+
 **Wants:** the contract satisfied, or voided; either ends the fight, and he does not
 much mind which. **Fears:** nothing about tonight; what he fears is a company that breaks
 terms, because that is a company nobody hires again. **Secret:** he has not read the
@@ -786,6 +850,9 @@ arguments than the sword does.
 *Older than the sergeants and quieter than the Blades. The coat is very good, and the
 scar is older than the coat. The chain on the case has been replaced more recently
 than the case.*
+
+**At a glance:** Wants the company's reputation intact at dawn. At midnight he is with
+the Bought holding the outer gate (B12) (card S3).
 
 **Wants:** the company's reputation intact at dawn. That is the whole of it, and it
 explains everything he does tonight. **Fears:** exactly one thing: that somebody has

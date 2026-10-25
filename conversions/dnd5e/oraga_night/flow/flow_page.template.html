@@ -108,7 +108,7 @@ footer{color:var(--muted);font-size:12px;max-width:90ch}
 
 <div class="wrap">
   <header>
-    <span class="eyebrow">Oraga Night · fifth edition (SRD 5.2.1) · module flow</span>
+    <span class="eyebrow">Oraga Night · fifth edition (SRD 5.2.1) · module flow · a contributor tool, not for the table</span>
     <h1>The Snakes in the Chicken Pen</h1>
     <p class="lede">Raunu Boranis invited every enemy he has into his own house for one night. Read left to right through the seven Movements; each faction gets its own lane so you can see <strong>what every snake is doing, hour by hour</strong>, next to the fights you can walk into and the three guests nobody invited. Select any card to trace where it leads.</p>
   </header>
@@ -138,7 +138,7 @@ footer{color:var(--muted);font-size:12px;max-width:90ch}
   <h2 class="sec">Clocks</h2>
   <section class="lower" id="clocks"></section>
 
-  <footer>Generated from <span class="ref">conversions/dnd5e/oraga_night/flow/flow.json</span> by <span class="ref">flow/build_flow_page.py</span>. Oraga Night is part of Facets of Origin, released under GPLv3, and is compatible with fifth-edition rules. This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode. The module's rules and creatures adapt the SRD; see the module README for the changes. Not affiliated with, endorsed, sponsored or approved by Wizards of the Coast.</footer>
+  <footer>A design map for contributors: it checks that every branch of the night closes. To run the night, use the DM sheet in chapter VIII. Oraga Night is part of Facets of Origin, released under GPLv3, and is compatible with fifth-edition rules. This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode. The module's rules and creatures adapt the SRD; see the module README for the changes. Not affiliated with, endorsed, sponsored or approved by Wizards of the Coast.</footer>
 </div>
 
 <script>
@@ -256,6 +256,16 @@ const FLOW = /*FLOW_DATA*/null;
     selected = selected===id?null:id; redraw(); renderDetail();
     if(selected) try{ nodeEls[id].scrollIntoView({block:"nearest",inline:"nearest",behavior:"smooth"}); }catch(e){}
   }
+  const CH={"01":"I","02":"II","03":"III","04":"IV","05":"V","06":"VI","07":"VII","08":"VIII","09":"IX","10":"X","11":"XI"};
+  function refText(r){
+    return r.split(";").map(part=>{
+      const m=part.trim().match(/^(\d\d)_[^#\s]*\.md(?:#(\S*))?(.*)$/);
+      if(!m) return part.trim();
+      let s="chapter "+(CH[m[1]]||m[1]);
+      if(m[2]) s+=", "+m[2].replace(/-+/g," ").trim();
+      return s+(m[3]||"");
+    }).join("; ");
+  }
   function renderDetail(){
     const T=document.getElementById("dTitle"),H=document.getElementById("dHint"),M=document.getElementById("dMeta"),S=document.getElementById("dSum"),R=document.getElementById("dRef"),L=document.getElementById("dLinks");
     if(!selected){ T.textContent="Nothing yet"; H.hidden=false; M.innerHTML=S.textContent=R.textContent=L.innerHTML=""; return; }
@@ -264,7 +274,7 @@ const FLOW = /*FLOW_DATA*/null;
     M.innerHTML = `<span class="tag">${esc(KLABEL[n.kind]||n.kind)}</span><span class="tag">${esc(ph?ph.label:n.phase)}</span>`+
       (n.faction?`<span class="tag"><span class="dot" style="--c:${cvar(n.faction)}"></span>${esc(FNAME[n.faction]||n.faction)}</span>`:"")+
       (n.optional?`<span class="tag">optional</span>`:"");
-    S.textContent=n.summary; R.textContent=n.ref?("→ "+n.ref):"";
+    S.textContent=n.summary; R.textContent=n.ref?("→ "+refText(n.ref)):"";
     const list=(title,es,key)=> es&&es.length?`<h3>${title}</h3><ul>${es.map(e=>`<li><button data-go="${esc(e[key])}"><span class="ek">${esc(e.label||e.kind)}</span><span>${esc(byId[e[key]].label)}</span></button></li>`).join("")}</ul>`:"";
     L.innerHTML = list("Leads to",out[selected],"to")+list("Comes from",inc[selected],"from");
     L.querySelectorAll("button[data-go]").forEach(b=>b.onclick=()=>{selected=null;select(b.dataset.go);});

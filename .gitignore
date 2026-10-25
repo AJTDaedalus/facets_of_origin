@@ -50,3 +50,6 @@ references/oraga_night/
 
 # Test output artifacts (see tests/e2e/test_playtest_02.py)
 software/tests/_output/
+
+# Generated print packets (conversions/dnd5e/oraga_night/tools/build_print.py); rebuild, never commit
+conversions/dnd5e/oraga_night/print/

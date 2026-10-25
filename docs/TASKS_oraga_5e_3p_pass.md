@@ -209,18 +209,18 @@ after X.
 | T10.5 | WP10 | done | Serane's SRD wording |
 | T10.6 | WP10 | done | Charge text, moving charges, alignment, Gift Knack |
 | T10.7 | WP10 | open | Commit WP10 |
-| T9.1 | WP9 | open | Prep box re-costed; 60-minute path |
-| T9.2 | WP9 | open | Three-player runtime; cut list; S14 cap |
-| T9.3 | WP9 | open | "The maps"; vague cross-refs; V–5 row 2; notation |
-| T9.4 | WP9 | open | Open R2 polish |
-| T9.5 | WP9 | open | Cast cues in chapter VII |
-| T9.6 | WP9 | open | Print build: tests and skeleton |
-| T9.7 | WP9 | open | DM packet |
-| T9.8 | WP9 | open | Player packet |
-| T9.9 | WP9 | open | Card deck |
-| T9.10 | WP9 | open | Pregen sheets |
-| T9.11 | WP9 | open | The flow page |
-| T9.12 | WP9 | open | Two player handouts |
+| T9.1 | WP9 | done | Prep box re-costed; 60-minute path |
+| T9.2 | WP9 | done | Three-player runtime; cut list; S14 cap |
+| T9.3 | WP9 | done | "The maps"; vague cross-refs; V–5 row 2; notation |
+| T9.4 | WP9 | done | Open R2 polish |
+| T9.5 | WP9 | done | Cast cues in chapter VII |
+| T9.6 | WP9 | done | Print build: tests and skeleton |
+| T9.7 | WP9 | done | DM packet |
+| T9.8 | WP9 | done | Player packet |
+| T9.9 | WP9 | done | Card deck |
+| T9.10 | WP9 | done | Pregen sheets |
+| T9.11 | WP9 | done | The flow page |
+| T9.12 | WP9 | done | Two player handouts |
 | T9.13 | WP9 | open | Commit WP9 |
 | T11.1 | WP11 | open | "Words of the Night" glossary |
 | T11.2 | WP11 | open | Overloaded terms |
@@ -1343,7 +1343,7 @@ T4.14).
 
 ## WP9: Prep and runtime honesty; the print build
 
-### ☐ T9.1 Prep box re-costed; 60-minute path *(L-030)*
+### ☑ T9.1 Prep box re-costed; 60-minute path *(L-030)*
 - **Do:**
   - re-cost each prep step honestly (01:3–36);
   - add a true 60-minute path and a five-block "know these" list;
@@ -1353,14 +1353,14 @@ T4.14).
 - **Accept:** the minutes add up to the stated total.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T9.2 Three-player runtime; cut list; S14 cap *(L-031, `DIAL`)*
+### ☑ T9.2 Three-player runtime; cut list; S14 cap *(L-031, `DIAL`)*
 - **Do:** make the three-player runtime the printed column in Table I–1 (01:180–207; 08:13–30). Add
   S14 and the dark-hour cards to the cut list. Any S14 cap ends with the errand *completing*,
   never with the party let off. Say it applies at every setting.
 - **Files:** `M/01_Overture.md`, `M/08_Handouts.md`, `M/09_The_Snakes.md`.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T9.3 "The maps"; vague cross-refs; V–5 row 2; notation *(L-094, L-095, L-097, L-098)*
+### ☑ T9.3 "The maps"; vague cross-refs; V–5 row 2; notation *(L-094, L-095, L-097, L-098)*
 - **Do:**
   - "the palace diagram" becomes "the maps (VIII–1 to VIII–5)" (01:16, 109; 04:50, 407);
   - the 08:3–5 print line matches the print build (T9.6);
@@ -1370,7 +1370,7 @@ T4.14).
   - one notation for automatic heat ticks in Tables VIII–5 and IX–2.
 - **Files:** `M/01`, `M/04`, `M/05`, `M/08`, `M/09`. **Checks:** SA. **Time:** 25 min.
 
-### ☐ T9.4 Open R2 polish *(L-100, `CANON`)*
+### ☑ T9.4 Open R2 polish *(L-100, `CANON`)*
 - **Do:**
   - gloss Svara (01:438) using printed facts only. If the module prints none, mark this sub-item
     ⛔ OWNER in the LOG and skip it;
@@ -1380,14 +1380,14 @@ T4.14).
     record it as a TPN note.
 - **Files:** `M/01`, `M/07`, `M/08`, `M/09`, `M/10`, `M/03`. **Checks:** SA. **Time:** 20 min.
 
-### ☐ T9.5 Cast cues in chapter VII *(L-063)*
+### ☑ T9.5 Cast cues in chapter VII *(L-063)*
 - **Do:** open each chapter VII entry with a two-line cue (wants; where at midnight), drawn only
   from the printed entry and Table VIII–2. The speech habits are T11.10.
 - **Files:** `M/07_Cast_of_the_Ball.md`.
 - **Accept:** every cue sentence traces to the entry's own text.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T9.6 Print build: tests and skeleton *(L-033)*
+### ☑ T9.6 Print build: tests and skeleton *(L-033)*
 - **Do:** write `T/test_build_print.py` first (at least 3 tests per public function). Then write
   `T/build_print.py`: Markdown to standalone HTML with a print stylesheet (PDF via the browser's
   print, or `weasyprint` if installed), outputting to `M/print/` (gitignored, or committed: record
@@ -1396,38 +1396,38 @@ T4.14).
 - **Accept:** tests pass; `pytest tools` count rises.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T9.7 DM packet *(L-033)*
+### ☑ T9.7 DM packet *(L-033)*
 - **Do:** the build emits the DM packet: the DM sheet, the Midnight Tracker and the five maps. The
   DM-sheet tables become print-friendly (the sheet's "two pages" claim made true, or reworded).
 - **Files:** `T/build_print.py`, `M/08_Handouts.md`.
 - **Accept:** the packet renders, and its page count is logged.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T9.8 Player packet *(L-033)*
+### ☑ T9.8 Player packet *(L-033)*
 - **Do:** the build emits the handouts with cut lines and with DM italics stripped (08:289–290,
   317).
 - **Files:** `T/build_print.py`. **Accept:** no DM text in the player packet (a test asserts this).
   **Checks:** SA. **Time:** 25 min.
 
-### ☐ T9.9 Card deck *(L-033)*
+### ☑ T9.9 Card deck *(L-033)*
 - **Do:** the build emits one page per card, with that card's stat blocks appended from chapter X.
 - **Files:** `T/build_print.py`. **Accept:** every card's blocks are present (a test asserts this).
   **Checks:** SA. **Time:** 30 min.
 
-### ☐ T9.10 Pregen sheets *(L-064)*
+### ☑ T9.10 Pregen sheets *(L-064)*
 - **Do:** in the print build, merge the shared preamble (11:33–43) into each sheet and add HP,
   slot and charge trackers, one line per spell, and an "on your turn" line.
 - **Files:** `T/build_print.py`, `M/11_Pregenerated_Characters.md` if a source line is needed.
 - **Accept:** `pregen_check` passes, and each sheet prints standalone.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T9.11 The flow page *(L-065)*
+### ☑ T9.11 The flow page *(L-065)*
 - **Do:** label the flow page a contributor tool (README:89) and keep it out of the DM's path.
   Strip repo paths and the provenance footer from anything DM-facing.
 - **Files:** `M/README.md`, `M/flow/flow_page.template.html`. Rebuild the page.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T9.12 Two player handouts *(L-101, `CANON`)*
+### ☑ T9.12 Two player handouts *(L-101, `CANON`)*
 - **Do:** add a public-room sketch (from the public rooms on the maps only) and a one-page
   "tonight's customs" (no disarming, masks, the Unmasking, the Dead Dance), built from printed text
   only. Add both to the player packet. Log them in INVENTIONS.

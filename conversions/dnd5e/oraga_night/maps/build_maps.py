@@ -1328,6 +1328,107 @@ def map_palace(d: dict, grid=True) -> str:
     return svg.render("Map VIII–1: The Palace")
 
 
+def map_public_rooms(d: dict, grid=True) -> str:
+    """Player Handout 4 (T9.12): the public rooms only, as a guest would sketch them.
+
+    Drawn from the overview's own placings (map_palace), with every private room, room code,
+    fight tag, ward and service passage left out. `grid` is ignored: it is a sketch."""
+    scale = 1.55
+    x0, x1, y0, y1 = -182, 118, -160, 448
+    mw, mh = int((x1 - x0) * scale), int((y1 - y0) * scale)
+    W, H = mw + PAD * 2 + LEGEND_W, TOP + mh + 110
+    svg = Svg(W, H, scale)
+    svg.rect(0, 0, W, H, fill="#ffffff")
+    P = Plan(svg, PAD, TOP + 10, x0, y1, scale)
+
+    def room(x, y, w, h, fill, title, tx, ty, anchor="start", notes=(), size=10):
+        P.rect(x, y, w, h, fill=fill, stroke=WALL, stroke_width=1.3)
+        P.text(tx, ty, title, size=size, weight="bold", anchor=anchor, halo=True)
+        for i, ln in enumerate(notes):
+            P.text(tx, ty - 8.5 - 7 * i, ln, size=8.5, style="italic", fill=SOFT,
+                   anchor=anchor, halo=True)
+
+    def note(x, y, s, anchor="start", size=8.5):
+        P.text(x, y, s, size=size, style="italic", fill=SOFT, anchor=anchor, halo=True)
+
+    # the river, Gate Street and the hill
+    P.rect(x0, 432, x1 - x0, y1 - 432, fill=WATER)
+    P.rect(x0, 420, x1 - x0, 12, fill=STREET)
+    P.text(-30, 437, "THE RIVER", size=10.5, anchor="middle", weight="bold", fill=SOFT)
+    P.rect(x0, y0, x1 - x0, -60 - y0, fill=STREET, stroke=WALL, stroke_width=1)
+    P.text(-176, -80, "Gate Street", size=10, weight="bold", halo=True)
+    note(-176, -88.5, "the line climbs the hill to the gate")
+    P.stairs(30, -150, 20, 60, up="n", treads=16)
+    note(54, -120, "the grand stair")
+    P.rect(0, -90, 80, 30, fill="#ebe7df", stroke=WALL, stroke_width=0.8)
+    note(40, -82, "gate landing", anchor="middle")
+
+    # the gatehouse and its court
+    P.rect(20, -60, 40, 15, fill="#ece6d8", stroke=WALL, stroke_width=1)
+    note(40, -54, "gatehouse", anchor="middle", size=7.5)
+    room(10, -45, 60, 45, FLOOR, "Gatehouse Court", 13, -17, notes=["where guests", "are received"])
+
+    # the Crystal Court and its galleries
+    P.rect(-20, 0, 120, 140, fill=FLOOR, stroke=WALL, stroke_width=1.6)
+    room(0, 0, 80, 140, FLOOR, "The Crystal Court", 40, 78, anchor="middle", size=11,
+         notes=["the ballroom"])
+    P.rect(25, 120, 30, 15, fill="#e2d3b4", stroke=WALL, stroke_width=0.8)
+    note(40, 114, "the dais", anchor="middle")
+    for gx_ in (-20, 80):
+        P.rect(gx_, 0, 20, 140, fill=UPPER, opacity=0.6, stroke=SOFT, stroke_width=1.1,
+               stroke_dasharray="5 3")
+    note(-10, 74, "banquet", anchor="middle", size=7.5)
+    note(-10, 67, "gallery", anchor="middle", size=7.5)
+    note(90, 74, "banquet", anchor="middle", size=7.5)
+    note(90, 67, "gallery", anchor="middle", size=7.5)
+    P.stairs(-19.5, 3, 7, 22, up="n", treads=8)
+    P.stairs(92.5, 3, 7, 22, up="n", treads=8)
+    P.line(35, 0, 45, 0, stroke=FLOOR, stroke_width=4)                       # main doors
+    note(40, 4, "main doors", anchor="middle", size=7.5)
+    for gd in (8, 62):
+        P.line(gd, 140, gd + 10, 140, stroke=GARDEN, stroke_width=4)          # garden doors
+    P.line(-20, 56, -20, 66, stroke=FLOOR, stroke_width=4)                    # door to the hall
+
+    # the gardens
+    room(-20, 140, 120, 280, GARDEN, "The Garden Terraces", 40, 330, anchor="middle",
+         notes=["down to the river gate"])
+    for k, tint in enumerate((GARDEN, GARDEN2, GARDEN3)):
+        P.rect(-20, 150 + 40 * k, 120, 40, fill=tint, stroke=WALL, stroke_width=0.6)
+    P.walkrail(-20, 150, 100, down=1, step=6)
+    for k in (1, 2, 3):
+        P.rail(-20, 150 + 40 * k, 100, 150 + 40 * k)
+    note(40, 168, "upper terrace", anchor="middle")
+    note(40, 208, "second terrace", anchor="middle")
+    note(40, 248, "third terrace", anchor="middle")
+    note(40, 143, "garden walk", anchor="middle", size=7.5)
+    P.line(35, 420, 45, 420, stroke=ACCENT, stroke_width=3)
+    note(48, 412, "river gate")
+
+    # the West Range: the Audience Hall and the chapel
+    room(-160, 36, 110, 50, FLOOR, "The Audience Hall", -156, 72)
+    P.rect(-50, 46, 30, 30, fill=FLOOR, stroke=WALL, stroke_width=1)
+    note(-35, 63, "ante-", anchor="middle")
+    note(-35, 56, "chamber", anchor="middle")
+    P.svg.poly([(P.X(x_), P.Y(y_)) for x_, y_ in ((-64, -6), (-46, -6), (-34, 6), (-34, 24),
+                                                   (-46, 36), (-64, 36), (-76, 24), (-76, 6))],
+               fill=FLOOR, stroke=WALL, stroke_width=1.3)
+    P.text(-55, 16, "Chapel", size=10, weight="bold", anchor="middle", halo=True)
+
+    legend = [("fill", "Rooms open to guests", FLOOR), ("fill", "Galleries above the floor", UPPER),
+              ("fill", "Gardens", GARDEN), ("stairs", "Stairs (arrow points up)"),
+              ("walkrail", "The garden walk's rail"), ("rail", "Terrace balustrade")]
+    svg.open(id="overview-scale")
+    bx, by = PAD + 10, H - 56
+    svg.rect(bx, by, 100 * scale, 5, fill=INK)
+    svg.text(bx, by - 4, "0", size=9, anchor="middle")
+    svg.text(bx + 100 * scale, by - 4, "100 feet", size=9, anchor="middle")
+    svg.close()
+    caption = ["The public rooms of Palace Boranis: where the ball happens."]
+    frame(svg, "Player Handout 4: The Public Rooms", "Palace Boranis, as a guest sees it", legend,
+          caption, mw, scale_ft=None, east=True)
+    return svg.render("Player Handout 4: The Public Rooms")
+
+
 # --------------------------------------------------------------------------- build
 
 MAPS = {
@@ -1364,9 +1465,29 @@ def build_one(name: str, out: Path, png=True, grid=True, dims=None) -> Path:
     return path
 
 
+HANDOUTS = {
+    "handout_4_public_rooms": map_public_rooms,
+}
+
+
 def build_all(out=HERE, png=True, grid=True) -> list[Path]:
     dims = load_dims()
     return [build_one(name, out, png=png, grid=grid, dims=dims) for name in MAPS]
+
+
+def build_handouts(out=HERE, png=True) -> list[Path]:
+    """The player handouts drawn from the maps (T9.12), outside the five keyed maps."""
+    dims = load_dims()
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    paths = []
+    for name, fn in HANDOUTS.items():
+        path = out / f"{name}.svg"
+        path.write_text(fn(dims), encoding="utf-8")
+        if png:
+            rasterize(path, out / f"{name}.png")
+        paths.append(path)
+    return paths
 
 
 def main(argv=None) -> int:
@@ -1376,6 +1497,8 @@ def main(argv=None) -> int:
     ap.add_argument("--out", default=str(HERE), help="output folder (default: this folder)")
     a = ap.parse_args(argv)
     for p in build_all(Path(a.out), png=not a.no_png, grid=not a.no_grid):
+        print(p)
+    for p in build_handouts(Path(a.out), png=not a.no_png):
         print(p)
     return 0
 

@@ -10,7 +10,7 @@ pregenerated guests in chapter XI (which three: chapter I, "Three at the Table")
 Every fight is balanced for three; each card has lines for four or five characters
 and for 3rd or 5th level. The night ends at 5th level.
 
-**Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
+**Length:** one session, **about five hours** with a break. Play starts in the street outside the palace
 and ends at dawn (the runtime table is in chapter I).
 
 **Rules:** any fifth-edition core rules; written against the **SRD 5.2.1**. A 2014
@@ -73,7 +73,7 @@ Chapters VII to XI are the book's appendices.
 | File | What it is | Open it when… |
 |---|---|---|
 | `07_Cast_of_the_Ball.md` | Every named guest — wants, fears, secrets, how to play them, and which stat block is theirs | the characters meet a named guest |
-| `08_Handouts.md` | **The DM sheet**, the keyed palace maps, the Snake Tracker, the rumor table, and the player handouts: the invitation, the agenda cards and the crystal charges | you print before the session, and all through it |
+| `08_Handouts.md` | **The DM sheet**, the keyed palace maps, the Snake Tracker, the rumor table, and the player handouts: the invitation, the agenda cards, the crystal charges, the public rooms and tonight's customs | you print before the session, and all through it |
 | `09_The_Snakes.md` | The snakes chapter: each faction's threat line, the Snake Tracker, and every fight card, S1–S14 | a fight card comes up, or a snake shows its tell |
 | `10_Bestiary.md` | Every stat block, A to Z, in SRD format; "If It Comes to It"; "Items of the Night" | a card names a creature, or a charge is released |
 | `11_Pregenerated_Characters.md` | Five 4th-level guests, full sheets | players pick their characters in the first five minutes |
@@ -86,14 +86,19 @@ Chapters VII to XI are the book's appendices.
 | `STYLE_5e.md` | The house style sheet for the 5e text; the linter in `tools/` checks most of it |
 | `INVENTIONS_5e.md` | Every new fact the 5e text had to invent, for the setting author's review |
 | `maps/` | The five keyed palace maps of chapter VIII as SVG, with a PNG copy of each for printing; `build_maps.py` builds both from `facts.yaml` — rebuild with `python3 maps/build_maps.py`, never edit the SVGs by hand |
-| `flow/` | The visual workflow: `flow.json` (every Movement, scene, fight, branch and ending as nodes and edges), `build_flow_page.py`, its template, and the generated `oraga_night_flow.html` — rebuild with `python3 build_flow_page.py`, never edit the HTML by hand |
+| `tools/build_print.py` | The print build: `python3 tools/build_print.py` writes four standalone HTML packets to `print/` (git-ignored): the DM packet, the player handouts with cut lines, the fight-card deck with each card's stat blocks, and the pregen sheets. `--pdf` also prints each to PDF through headless Chromium (Playwright) or WeasyPrint; otherwise print the HTML from a browser |
+| `flow/` | **A contributor tool, not for the table.** The visual workflow: `flow.json` (every Movement, scene, fight, branch and ending as nodes and edges), `build_flow_page.py`, its template, and the generated `oraga_night_flow.html` — rebuild with `python3 build_flow_page.py`, never edit the HTML by hand |
 
 ## What to Read First
 
-**Ninety minutes of prep.** Chapter I opens with a box, "How to prep in 90 minutes":
-what to read, in what order, and what to skim. In short: the DM sheet in chapter VIII,
+**One hour of prep, or an evening.** Chapter I opens with a box, "How to prep": a
+60-minute path, the five things to know, and the full read in order (about three and a
+half hours). In short: the DM sheet in chapter VIII,
 the fight cards in chapter IX and the blocks in chapter X are what you run from;
 chapters IV and V are the reference behind them.
+
+**Printing.** `python3 tools/build_print.py` makes the four print packets in `print/`;
+chapter VIII says what goes in each.
 
 **At the table,** run the night from the sheet in chapter VIII, with chapter VII open
 for the cast and chapters IX and X to hand for the fights. Everything else is depth.

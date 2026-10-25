@@ -159,7 +159,7 @@ and around which laws. When it bears, the DM gives the answer without a check.
 **Feats.** *Skilled.* *Phern Gift* (Versatile): Advantage on checks to sense danger
 coming or where it comes from; knows *Guidance* (Wisdom); **The Prickle**: never has
 Disadvantage on Initiative, and knows the direction of an attack from a creature he
-can't see. *Ability Score Improvement* (4th level): Dexterity +2 (included).
+can't see (the attacker keeps its Advantage). *Ability Score Improvement* (4th level): Dexterity +2 (included).
 
 **Heritage.** Knows the caravan roads, who moves what along them, and the fair price of
 anything.

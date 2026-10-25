@@ -352,7 +352,7 @@ looks round, briefly, for the master it is supposed to have.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
 > them tonight. What it is, for the DM alone: chapter VII. Card: S14. Chapter V.*
 > *Its CR 8 is for the Focused Attendant: 2.6 times High for three 4th-level
-> characters, on purpose (card S14). Idle, it is about CR 5 by the yardstick. Award
+> characters, on purpose (card S14). Award
 > the full XP however the party gets it out of the way. With four characters it has
 > 229 Hit Points (card S14).*
 

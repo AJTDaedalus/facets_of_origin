@@ -104,7 +104,7 @@ is stated, and everything else in this chapter points here.
 
 ## Movement VI — The Unmasking
 
-> **About 50 minutes** (starts 3:10). If you are behind, run only the dais, the
+> **About 70 minutes** (starts 3:10). If you are behind, run only the dais, the
 > Crossing and one snake in the dark.
 
 Midnight. Bells. The east doors open and Raunu Boranis mounts the dais to lead the
@@ -283,7 +283,7 @@ and a character's own area spell all reach a body on the floor.
 - **The last blow.** When an Uninvited drops to 0 Hit Points they step into the
   world's shadow and return at the start of their next turn, at full Hit Points, in
   the space where they dropped (or the nearest unoccupied space); the Hollow returns
-  within 60 feet of the doors he holds (see chapter X, "Leashed"). At
+  within 60 feet of the doors he holds (see chapter X, "The Hollow", *Leashed*). At
   the start of that turn, whoever dealt the last blow makes a **DC 15 Strength or
   Dexterity saving throw** (their choice). On a failure they are pushed 15 feet in a
   direction the DM chooses and have the Prone condition. No damage. If no creature dealt it (fire, falling stone), nobody
@@ -446,7 +446,7 @@ Crossing; Delay earned here is spent at the gate)*
 | d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
 | 1 | **Light the stair.** Relight the lanterns down the garden stair, or carry light down it, so he is seen coming | Dexterity, or a charge and the Charisma check |
-| 2 | **The balustrade.** The duel has already smashed the terrace balustrade; push what is left down onto the stair behind the party | Strength (Athletics) |
+| 2 | **The balustrade.** The duel has already smashed the terrace balustrade (or the Crossing's first beat did); push what is left down onto the stair behind the party | Strength (Athletics) |
 | 3 | **Through the beds.** Take Veier off the gravel and through the flower beds in the dark. Slower for the characters, and slower for him | Wisdom (Survival) |
 | 4 | **Shut the river gate** once the boat is through, and hold it, or lock it | Strength (Athletics); or Thieves' Tools, DC 15; no check for the character with Agenda 6 |
 | 5 | **Push the boat off.** A character wades in and puts a shoulder to it | Strength (Athletics) |
@@ -1121,7 +1121,7 @@ refusing to leave the city without her cousin or a body.
 
 ## Movement VII — The Longest Night
 
-> **About 40 minutes** (starts 4:00). If you are behind, run only the gate (card S3).
+> **About 40 minutes** (starts 4:20). If you are behind, run only the gate (card S3).
 
 **Read this when the Uninvited have gone:**
 

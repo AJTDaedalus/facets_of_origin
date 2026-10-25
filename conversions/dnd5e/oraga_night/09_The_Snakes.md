@@ -489,20 +489,20 @@ Circle, Draunel, a Boranis cousin — is a possible better offer at that gate.
 one when the party steps on it. Read each row at midnight.*
 
 **Heat** runs from 0 to 4. Each faction starts where the table says, rises on the
-events in its *Rises* column (one box each unless it says "to 4", and several are
+events in its *Rises* column (one box each unless it says "to 4"; those marked ✱ are
 automatic), and falls on its *Falls* column. A faction set to **0** has what it came for, or has been talked
 out of wanting it, and stays at 0 unless something new happens to it.
 
 **Table IX–2: The Snake Tracker**
 
-| Faction | Starts | Rises (+1 each) | Falls | What heat 3–4 sets off |
+| Faction | Starts | Rises (+1 each) — ✱ automatic | Falls | What heat 3–4 sets off |
 |---|---|---|---|---|
-| **The Circle** ☐☐☐☐ | 2 | The toast *(automatic, Mv IV)* · Callun's coin refused in Mv III · **to 4:** S7's clock filled, or the nursery sold to her | −1 for each knife turned or caught quietly · **to 0:** Agenda 1 delivered, or the Tithe told to Callun, or Callun told to her face what her knife did to an under-cook | **S12** — the knives take Corval in the kitchens. *If the nursery was sold:* **S7** at the east wing's service door instead |
-| **The Church** ☐☐☐☐ | 1 | The Radiant's blessing *(automatic, Mv IV)* · a warden refused or humiliated in front of guests · S8's tell shown to the table and not stepped on by midnight | −1 if Kovaun is given something true about the three gray masks to file · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2's honest judgment delivered | **S8, in the dark** — the wardens carry the study out |
-| **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled, on the terrace or offstage (card S9) | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
-| **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled, on the terrace or offstage (card S9) | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends without a shout · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
-| **Phern** ☐☐☐☐ | 0 | Once each in Mv II, III and IV *(automatic — the omens)* | −1 if a character walked the room with Corro and took him seriously · −1 if Corro trusts a character enough to take an instruction at midnight | **S11** — the door held for Corro alone |
-| **The Thenya** ☐☐☐☐ | 1 | The toast *(automatic)* · the audience refused *(automatic, Mv IV)* · a character lies to Maiven, or refuses her and says so | −1 if a character promises to go with her at midnight and means it · **to 0:** proof of Veier — the ring delivered and an answer brought back, or anyone telling her what the empty traveling pack or the two slings mean | **S10** in Mv V — the wall. *(At midnight she goes toward the east wing whatever her heat.)* |
+| **The Circle** ☐☐☐☐ | 2 | ✱ the toast (Mv IV) · Callun's coin refused in Mv III · **to 4:** S7's clock filled, or the nursery sold to her | −1 for each knife turned or caught quietly · **to 0:** Agenda 1 delivered, or the Tithe told to Callun, or Callun told to her face what her knife did to an under-cook | **S12** — the knives take Corval in the kitchens. *If the nursery was sold:* **S7** at the east wing's service door instead |
+| **The Church** ☐☐☐☐ | 1 | ✱ the Radiant's blessing (Mv IV) · a warden refused or humiliated in front of guests · S8's tell shown to the table and not stepped on by midnight | −1 if Kovaun is given something true about the three gray masks to file · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2's honest judgment delivered | **S8, in the dark** — the wardens carry the study out |
+| **House Draunel** ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled, on the terrace or offstage (card S9) | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
+| **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · ✱ the appointment accepted (Mv IV) · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled, on the terrace or offstage (card S9) | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends without a shout · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
+| **Phern** ☐☐☐☐ | 0 | ✱ once each in Mv II, III and IV (the omens) | −1 if a character walked the room with Corro and took him seriously · −1 if Corro trusts a character enough to take an instruction at midnight | **S11** — the door held for Corro alone |
+| **The Thenya** ☐☐☐☐ | 1 | ✱ the toast · ✱ the audience refused (Mv IV) · a character lies to Maiven, or refuses her and says so | −1 if a character promises to go with her at midnight and means it · **to 0:** proof of Veier — the ring delivered and an answer brought back, or anyone telling her what the empty traveling pack or the two slings mean | **S10** in Mv V — the wall. *(At midnight she goes toward the east wing whatever her heat.)* |
 
 **If the table does nothing at all**, midnight arrives like this: the Circle at 3, the
 Church at 2, Draunel at 2, House Boranis at 1, Phern at 3 and the Thenya at 3. The
@@ -1936,6 +1936,10 @@ barricade aside, moves the guest who was in the way, opens the door somebody was
 to go round. When the Uninvited it guards is done with this room, so is it. At the
 table that is about six rounds.
 
+*If the night is running late,* the errand is the only way to cut this fight short: it
+finishes, the Attendant goes with its Uninvited (*Not Here*;
+no XP), and chapter V's history goes on. Never end the fight by letting the party off.
+
 **Enemy.** **The Attendant** (see chapter X). It is Idle when this card fires. From then
 on, at the start of each of its turns, it is **Focused** if any one of the three in
 the scene has no Delay: one of them glances at it, then at the party, and that is
@@ -1944,15 +1948,11 @@ scene keeps it Idle, and that is how Buying Time and this card feed each other. 
 Wept and the Attendant tie on Initiative, the Wept acts first.
 
 *Budget:* **beyond High while Focused; plays High while Idle.** The block is CR 8 (3,900 XP), and
-that CR is its Focused self: by the usual yardstick its offense rates about CR 4 (two
-turns a round, three blows in all, *Put Aside* on a recharge) and its defense about
-CR 9 (178 Hit Points, AC 17). 3,900 XP is 2.6 times High for three 4th-level characters
+that CR is its Focused self: 3,900 XP is 2.6 times High for three 4th-level characters
 (1,500).
 
-Idle, its offense drops to one blow at Disadvantage, but its
-defense does not move, so by the yardstick it is about CR 5 (1,800 XP), just over
-High. The clock is what keeps it there:
-few tables get through 178 Hit Points in the rounds an errand takes, and every one of
+Idle, it strikes once, at Disadvantage, but its 178 Hit Points and AC 17 do not move,
+and the clock is what keeps it dangerous: few tables get through 178 Hit Points in the rounds an errand takes, and every one of
 those rounds it is clearing the way. Award the full 3,900 XP however it is got out of
 the way.
 

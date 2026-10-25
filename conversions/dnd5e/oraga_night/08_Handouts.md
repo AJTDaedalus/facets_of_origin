@@ -1,9 +1,12 @@
 # VIII. The DM Sheet, the Palace and the Handouts
 
-*The first two pages are yours: everything the night needs, on two sheets, and the third is the palace.
-After those come the Snake Tracker, Where Everyone Stands, and the rumor table, then
+*The DM sheet comes first: everything the night needs, on two sheets. Then the palace,
+keyed, and after it the Snake Tracker, Where Everyone Stands, and the rumor table, then
 the handouts for the table. The Midnight Tracker closes the chapter on a page of its
-own. Print the first three pages and the tracker, and run the night from them.*
+own. The DM packet is the DM sheet, the palace keyed, the Midnight Tracker and the five
+maps (VIII–1 to VIII–5): print it and run the night from it. The handouts print for the
+table, one to a page with cut lines; the fight cards print as a deck, each card with its
+stat blocks; and each pregenerated character prints as a sheet of its own.*
 
 ---
 
@@ -15,20 +18,21 @@ own. Print the first three pages and the tracker, and run the night from them.*
 
 | Start | Movement | Scheduled | The omen | The quiet guest | Fights to show (chapter IX) |
 |---|---|---|---|---|---|
-| 0:00 | **The street** (10) | Pick character, agenda, hook (chapter I); read B0; "what does your mask look like?" | — | — | — |
-| 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Stands apart, waiting for a master who never comes | S4 if anyone draws |
-| 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
-| 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
-| 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
-| 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group,** sized to who walks in (alone: the card's *One character* line): S2 · S7 · S8 · S9 · S10 |
+| 0:00 | **The street** (15) | Pick character, agenda, hook (chapter I); read B0; "what does your mask look like?" | — | — | — |
+| 0:15 | **I. Receiving Line** (20) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Stands apart, waiting for a master who never comes | S4 if anyone draws |
+| 0:35 | **II. Empty Rooms** (40) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
+| 1:15 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
+| 1:50 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
+| 2:15 | **V. Hour of Spirits** (45) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group,** sized to who walks in (alone: the card's *One character* line): S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
-| 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak; stands by the three | S11 · **S14** if they interfere · S8 · S5 · S12 |
-| 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, when S3's sect-guard clock fills); word of other attacks with the sect guard | — | — | **S3** · S13 · S5 · S14 |
-| 4:40 | **Epilogue** (10) | Chapter V read-aloud; "what do you carry out?"; **5th level** | | | |
+| 3:10 | **VI. Unmasking** (70) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak; stands by the three | S11 · **S14** if they interfere · S8 · S5 · S12 |
+| 4:20 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, when S3's sect-guard clock fills); word of other attacks with the sect guard | — | — | **S3** · S13 · S5 · S14 |
+| 5:00 | **Epilogue** (10) | Chapter V read-aloud; "what do you carry out?"; **5th level** | | | |
 
-**Checkpoints:** the toast by **2:15**; midnight by **3:15**. If you are behind, cut B13,
-spare Undercurrents, a second card per Movement, S1, and the east wing only if nobody
-carries Agenda 4. Never the gate.
+**Checkpoints:** the toast by **2:10**; midnight by **3:15**. If you are behind, cut B13,
+spare Undercurrents, a second card per Movement, S1, B9's rooms unless somebody is on
+Undercurrent C, every snake card in the dark but one, and S14's length (its errand
+finishes; never let the party off). Never the gate.
 
 **The bells, in order.** The quarter-bells ring through Movement V: the first is
 Draunel's appointment (S9), and at the half-bell Thenya's slingers try the wall (S10).
@@ -165,7 +169,7 @@ can work its crystal lock (chapter IV, B8), or a DC 15 Intelligence (Arcana) che
 | A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (Thieves' Tools); an Orthaen can work the crystal lock with the gift in place of the tools (chapter IV, B8) |
 | The service passages without a guide (first time only) | 15 Wisdom (Survival) |
 | Deceive Corval about the household · bribe him | 20 Charisma (Deception) · impossible |
-| Deceive Raunu · move Vell | 25 Charisma (Deception) · 25 Charisma (Deception, Intimidation, or Persuasion) |
+| Deceive Raunu · move Vell | 25 Charisma (Deception) · 25 Charisma (Persuasion) for bribery, flattery or charm, (Intimidation) for a threat, (Deception) for a lie |
 
 **Table VIII–4: Costs to Hand** *(a near miss: name the cost first, and the thing still
 arrives)*
@@ -343,7 +347,7 @@ Several cannot all be true, which bothers nobody telling them.*
 
 ## Player Handouts
 
-*Everything from here to the end of the chapter goes across the table, except the
+*Everything from here to the Midnight Tracker goes across the table, except the
 italic line at the head of each handout, which tells you when to hand it over.*
 
 ### Player Handout 1: The Invitation
@@ -450,6 +454,42 @@ not, trained or not. Releasing one does not make its bearer a caster.
 | *A Chime at a Threshold* | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
 | *Warmth* | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
 | *A Held Image* | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
+
+---
+
+### Player Handout 4: The Public Rooms
+
+*Put it on the table when the characters reach the Gatehouse Court (chapter IV, area B1).
+It shows only the rooms a guest may walk into: the Gatehouse Court, the Crystal Court and
+its galleries, the Audience Hall, the chapel and the gardens down to the river gate.*
+
+![Player Handout 4: The Public Rooms, as a guest sees them](maps/handout_4_public_rooms.svg)
+
+---
+
+### Player Handout 5: Tonight's Customs
+
+*Give it to the table in the first five minutes (chapter I). It is what every guest at
+the ball already knows.*
+
+**Masks.** On the last night of Oraga, Rekuzan wears masks. By old custom they are
+spirit-faces: the dead of the year, the spirits of the harvest, the luck and grief of the
+season made wearable. Nothing said or done behind a spirit's face is entirely yours.
+Masks are on before the gate.
+
+**Steel.** Everyone wears a knife. Nobody is disarmed at the door, because nobody is
+ever disarmed anywhere: bring whatever you own, armor too, if you can dance in it.
+Drawing is the crime. Bare steel pointed at a person brings the guards at a run and ends
+invitations, and a spell with a visible effect cast at a guest counts as steel.
+
+**The Dead Dance.** Before midnight the lamps are lowered, the music turns slow and
+strange, and every guest dances, masked, with whoever the dark provides, living and dead
+alike, until the midnight bells. It is the most beautiful hour of the year.
+
+**The Unmasking.** At midnight the bells ring the Unmasking: the masks come off, the
+spirits are thanked and sent home, and the living toast the year to come with their own
+faces. Every Oraga somebody uses the custom for business that cannot stand daylight,
+which is why the great houses post extra guards.
 
 ---
 
