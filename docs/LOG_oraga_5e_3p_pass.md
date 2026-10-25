@@ -1049,3 +1049,20 @@ Full draft, with citations, examples and questions: `docs/DRAFT_oraga_speech_hab
 - Done: T11.1–T11.10. ⛔ OWNER: T11.11 (apply the habits; the draft and questions are in `docs/DRAFT_oraga_speech_habits.md` and the T11.10 block above). Open: T11.12 (final checks and commit; not done, per brief).
 - Tic metric, whole book: prose colons 11.3 → 8.3 per 1,000 words, semicolons 7.3 → 5.4, em dashes 2.7 → 2.6, "the way" similes 34 → 31, ", not" 71 → 67; `lint --report` tics 57 → 56.
 - Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **668 passed, 1 skipped**. Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**. `copyright_scan.py` not run (needs `--refs`; no refs directory here). No commit or staging; `M/art/` untouched; nothing from the private canon folder read or cited.
+
+## 2026-10-25 — T6.5, commit rows, T11.12 (close-out; Worker)
+
+### T6.5 A drop costs something before midnight
+- TP57 cut the dial, so the per-dial line became one rule: "Pick the cost that fits the fight, or roll a d4." 09 *Death before midnight* rewritten; new **Table IX–4: What a Drop Costs Before Midnight** (1 Robbed: a crystal charge or a carried agenda object, Agenda 4's ring or Agenda 5's soul-crystal; 2 Held: misses the rest of the Movement; 3 Marked for the inquest; 4 The gatehouse cell, pointing to chapter IV's cell scene). Nobody dies before the bells; the palace still only detains and ejects. A character held or in the cell after a Movement V drop wakes as the lights die (the cell's printed rule). The "Stable at once … 1 Hit Point" free reset is gone.
+- `facts.yaml` `risk_dial`: forbid "Stable at once"; require the Table IX–4 caption. INVENTIONS #137; DECISIONS TPN-56. No F/ edit (mechanics are 5e-only).
+
+### Commit rows
+- T4.17 `b106f6d` · T5.12 `b89e14e` · T6.16 `9d57ac9` · T7.22 `0db680e` · T8.6 `f3a6306` · T9.13 `c53552e` (+ missed files `a6ce127`) · T10.7 `9a35c33`. Rows and headings marked ☑. The WP6 OWNER follow-ups (W1, W2) heading marked answered (TP62, TP61); TASKS ⛔ count 1 → 0.
+
+### T11.12 (done except the commit: commit by coordinator)
+- From `M/`: `lint_5e --check` 0; `fact_check --check` 0; `bestiary_check` 28 blocks + 1 variant, 0 mismatches; `pregen_check` 5, 0 issues; `pytest tools` **668 passed, 1 skipped** (re-ran test_wp6/test_wp7/test_fact_check after a one-sentence wording fix: 190 passed, 1 skipped).
+- SA+F: `software/` `pytest tests/test_docs_consistency.py tests/test_no_private_canon.py` **42 passed**.
+- Repo root `pytest research/oraga_5e_sim` **34 passed**.
+- `copyright_scan.py`: not run. It requires `--refs`, and there is no refs directory on this machine.
+- Ledger reconciled: each row ID now carries ☑ (closed by done tasks) or ∅ (no-task list). **105 ☑ · 6 ∅ · 0 ⛔ = 111.** §5 gains a close-out status table; the legend explains the markers and notes `DIAL` is void under TP57.
+- History scan of `main..HEAD` (96 commits) against the guard's hash list, added lines and commit messages: one commit adds matches, `057998f` in `docs/REFERENCE_oraga_palace_visual_brief.md` (two hashed words); `c439d52` removed them, and the tree at HEAD is clean (guard test passes). Nothing rewritten. No commit or staging.

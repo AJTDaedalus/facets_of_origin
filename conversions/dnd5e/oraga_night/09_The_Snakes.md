@@ -593,10 +593,22 @@ steps around it. The fight is not their business, and anyone who makes it their
 business is in chapter V — and may have S14 to deal with. Within 30 feet of any of the
 three, crystal charges gutter (see chapter X, "Items of the Night").
 
-**Death before midnight.** The snakes' people fight to pressure, detain, or leave.
-None of them attacks a creature at 0 Hit Points, and a character who drops in
-a snake fight before the bells is **Stable at once**, and wakes with 1 Hit Point when
-the scene ends. No Death Saving Throws.
+**Death before midnight.** The snakes' people fight to pressure, detain, or leave,
+and the palace still only detains and ejects. Nobody dies in a snake fight before the
+bells. None of them attacks a creature at 0 Hit Points, and a character who drops is
+Stable, with no Death Saving Throws. The drop still costs something. Pick the cost
+that fits the fight, or roll a d4.
+
+**Table IX–4: What a Drop Costs Before Midnight**
+
+| d4 | Cost |
+|---|---|
+| 1 | **Robbed.** The character wakes with 1 Hit Point when the scene ends, and one thing is gone with the snake's people: a crystal charge, or what an agenda needs that the character was carrying (Agenda 4's ring, Agenda 5's soul-crystal once it is taken) |
+| 2 | **Held.** The snake's people keep the character out of sight until the Movement ends. They wake with 1 Hit Point at the start of the next Movement, having missed the rest of this one |
+| 3 | **Marked for the inquest.** The character wakes with 1 Hit Point when the scene ends. The snake's people saw a face they can name, and at dawn the inquest (chapter VI) hears that name from them first |
+| 4 | **The gatehouse cell.** The character wakes there at the start of the next Movement, without mask or invitation, and somebody comes for them at the price of a favor (chapter IV, "The gatehouse cell is a scene") |
+
+Held or in the cell, a character who drops in Movement V wakes as the lights die.
 
 **After midnight** the ordinary rules for dying apply in every snake fight, and the
 crowd rule does not reach them. Nobody finishes a downed character on purpose. The

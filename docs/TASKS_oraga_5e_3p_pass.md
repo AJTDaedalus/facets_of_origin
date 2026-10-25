@@ -141,7 +141,7 @@ after X.
 | T4.14 | WP4 | done | Saving Raunu (TP16) |
 | T4.15 | WP4 | withdrawn (TP45) | ⟨If History Breaks⟩ at the boat |
 | T4.16 | WP4 | done (no Last Rite pointer; TP43) | Chapter X Uninvited blocks aligned |
-| T4.17 | WP4 | open | Commit WP4 |
+| T4.17 | WP4 | done (`b106f6d`) | Commit WP4 |
 | T5.1 | WP5 | done | `facts.yaml`: threat rule guard |
 | T5.2 | WP5 | done | The threat rule |
 | T5.3 | WP5 | done | Damage to a set-aside creature, per dial |
@@ -153,23 +153,23 @@ after X.
 | T5.9 | WP5 | done | S14 re-simulation |
 | T5.10 | WP5 | done | S14 text from the re-sim |
 | T5.11 | WP5 | done | Vell's immunities |
-| T5.12 | WP5 | open | Commit WP5 |
+| T5.12 | WP5 | done (`b89e14e`) | Commit WP5 |
 | T6.1 | WP6 | ✕ superseded by TP57 (dial cut) | "How Hard to Go" dial box |
 | T6.2 | WP6 | done | Rule 2 rewritten; one snake everywhere |
 | T6.3 | WP6 | done | Heat-4 rows, part 1 (incl. TP24 Circle beat) |
 | T6.4 | WP6 | done | Heat-4 rows, part 2 |
-| T6.5 | WP6 | held (coordinator: waits on the TP57 lethality wording) | A drop costs something before midnight |
+| T6.5 | WP6 | done (TP57: one level; Table IX–4) | A drop costs something before midnight |
 | T6.6 | WP6 | done (polish B) | Lethal after midnight |
 | T6.7 | WP6 | done | Two cards live by default |
 | T6.8 | WP6 | done | Resources: chapel rest, Hit Die, potions |
 | T6.9 | WP6 | done | Update `skirm.py` / `chain.py` |
 | T6.10 | WP6 | done | Before-midnight re-budget sims |
-| T6.11 | WP6 | done (⛔ OWNER follow-ups W1, W2 below) | Before-midnight card text, labels, CR |
+| T6.11 | WP6 | done (follow-ups W1, W2 answered: TP62, TP61) | Before-midnight card text, labels, CR |
 | T6.12 | WP6 | done | S4 roster and label |
 | T6.13 | WP6 | done | After-midnight re-budget sims; chain run |
-| T6.14 | WP6 | done (⛔ OWNER follow-ups W1, W2 below) | After-midnight card text and labels |
+| T6.14 | WP6 | done (follow-ups W1, W2 answered: TP62, TP61) | After-midnight card text and labels |
 | T6.15 | WP6 | done | S11 door XP, balustrade, non-lethal, *Sleep* |
-| T6.16 | WP6 | open | Commit WP6 |
+| T6.16 | WP6 | done (`9d57ac9`) | Commit WP6 |
 | T6.17 | WP6 | done | TP57: strip the dial |
 | T7.1 | WP7 | done | Propagate TP11 |
 | T7.2 | WP7 | done | The Root (TP8, TP17, TP18) |
@@ -192,7 +192,7 @@ after X.
 | T7.19 | WP7 | done | Patron's Errand; Corval's doubling; "publicly" |
 | T7.20 | WP7 | done | Slingers at midnight |
 | T7.21 | WP7 | done | The Radiant's chase line (L-091) |
-| T7.22 | WP7 | open | Commit WP7 |
+| T7.22 | WP7 | done (`0db680e`) | Commit WP7 |
 | T7.23 | WP7 | done | TP61: cut the heat-4 finish |
 | T7.24 | WP7 | done | TP65/TP66/TP68: the Tithe in two heads; S12 on Corval in B10 |
 | T7.25 | WP7 | done | TP67: house half-masks; the Root's glow after midnight |
@@ -201,14 +201,14 @@ after X.
 | T8.3 | WP8 | done | Map residue; ward-points; the sealed doors |
 | T8.4 | WP8 | done (TP60) | Garden-stair top door; S10 terrain |
 | T8.5 | WP8 | done | S4 on a gate draw |
-| T8.6 | WP8 | open | Commit WP8 |
+| T8.6 | WP8 | done (`f3a6306`) | Commit WP8 |
 | T10.1 | WP10 | done | NPC saves; casting as steel |
 | T10.2 | WP10 | done | Success at a cost: scope |
 | T10.3 | WP10 | done | Dassa's armour; even charges |
 | T10.4 | WP10 | done | Free-hand grapples |
 | T10.5 | WP10 | done | Serane's SRD wording |
 | T10.6 | WP10 | done | Charge text, moving charges, alignment, Gift Knack |
-| T10.7 | WP10 | open | Commit WP10 |
+| T10.7 | WP10 | done (`9a35c33`) | Commit WP10 |
 | T9.1 | WP9 | done | Prep box re-costed; 60-minute path |
 | T9.2 | WP9 | done | Three-player runtime; cut list; S14 cap |
 | T9.3 | WP9 | done | "The maps"; vague cross-refs; V–5 row 2; notation |
@@ -221,7 +221,7 @@ after X.
 | T9.10 | WP9 | done | Pregen sheets |
 | T9.11 | WP9 | done | The flow page |
 | T9.12 | WP9 | done | Two player handouts |
-| T9.13 | WP9 | open | Commit WP9 |
+| T9.13 | WP9 | done (`c53552e`; missed files `a6ce127`) | Commit WP9 |
 | T11.1 | WP11 | done | "Words of the Night" glossary |
 | T11.2 | WP11 | done | Overloaded terms |
 | T11.3 | WP11 | done | Meta and kickers |
@@ -233,10 +233,10 @@ after X.
 | T11.9 | WP11 | done | Read-aloud slips; blank cheque; Captain; DC names |
 | T11.10 | WP11 | done | Draft mid-tier speech habits (TP22) |
 | T11.11 | WP11 | done (TP77) | Apply approved habits (TP22) |
-| T11.12 | WP11 | open | Final checks and commit |
+| T11.12 | WP11 | done except the commit (commit by coordinator) | Final checks and commit |
 
 **Counts:** WP1 4 · WP2 6 · WP3 14 · WP4 17 · WP5 12 · WP6 16 · WP7 24 · WP8 6 · WP9 13 · WP10 7 ·
-WP11 12 = **131 tasks**. **⛔ 1:** OWNER 1 (T11.11; T7.13 answered by TP65; T8.4 answered by TP60; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
+WP11 12 = **131 tasks**. **⛔ 0** (T11.11 answered by TP77; T7.13 answered by TP65; T8.4 answered by TP60; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
 (confirm: T4.11, T6.12, T7.4, T7.21; escalation: T7.6).
 
 **Run order** (the ledger's §7): WP1 → WP3 → WP2 (T2.1–T2.5) → WP4 + WP5 (T5.1–T5.2 before T4.5) →
@@ -667,7 +667,7 @@ T4.14).
 - **Accept:** `bestiary_check` passes. No block restates a chapter V rule in full (`rule_copy`).
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T4.17 Commit WP4
+### ☑ T4.17 Commit WP4 — committed as `b106f6d`
 - `Oraga 5e 3p pass: WP4 Slow / Stop / End, the Last Rite, TP13 Crossing`.
 
 ---
@@ -797,7 +797,7 @@ T4.14).
   taken⟩.
 - **Checks:** SA. **Time:** 10 min.
 
-### ☐ T5.12 Commit WP5
+### ☑ T5.12 Commit WP5 — committed as `b89e14e`
 - `Oraga 5e 3p pass: WP5 threat rule and lethal Attendant`.
 
 ---
@@ -839,7 +839,8 @@ T4.14).
 - **Accept:** every faction line has a heat-4 row. Table VIII–5 matches.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T6.5 A drop costs something before midnight *(L-011, `DIAL`)*
+### ☑ T6.5 A drop costs something before midnight *(L-011; `DIAL` void under TP57)*
+- **Done 2026-10-25:** TP57 cut the dial, so there is one rule: the DM picks the cost that fits the fight, or rolls a d4 on new Table IX–4 (Robbed / Held / Marked for the inquest / The gatehouse cell). No drop kills before the bells. `facts.yaml` `risk_dial` gains a forbid on "Stable at once" and a require on the table. INVENTIONS #137.
 - **Do:** add the cost table to "Death before midnight" (09:544): robbed of an agenda item or a
   crystal charge; held, missing the next beat; marked for the inquest; wakes in the gatehouse cell
   (S3's existing cell). It never kills at any setting. Say how it is rolled or chosen per dial.
@@ -949,7 +950,7 @@ T4.14).
   times in M/; the guard fires on the old text.
 - **Checks:** SA; `pytest research/oraga_5e_sim`.
 
-### ⛔ OWNER follow-ups from WP6 (2026-10-25; the tasks above are done within the printed canon)
+### ☑ OWNER follow-ups from WP6 (2026-10-25; both answered: W1 by TP62, W2 by TP61)
 - **W1 (rosters capped by headcount).** *Answered: TP62, printed headcounts stand.* Six cards cannot reach DESIGN §2.2's targets (before
   midnight Low 750 / Moderate 1,125; after midnight Moderate 1,125 / High 1,500) without people the
   book does not put there: S1 (six Feuding Kinsmen, 175 XP), S2 and S5 (Tavva's crew of four: 650
@@ -966,7 +967,7 @@ T4.14).
   is to cut the heat-4 finish (snakes leave the fallen where they lie; ordinary death saves only),
   which brings S13 back to 1–2%.
 
-### ☐ T6.16 Commit WP6
+### ☑ T6.16 Commit WP6 — committed as `9d57ac9`
 - `Oraga 5e 3p pass: WP6 risk dial, lethal after midnight, three-player budgets`.
 
 ---
@@ -1229,7 +1230,7 @@ T4.14).
   only in the Facets edition; record in INVENTIONS; add a facts guard if a stale line exists.
 - **Checks:** SA + F. **Time:** 20 min.
 
-### ☐ T7.22 Commit WP7
+### ☑ T7.22 Commit WP7 — committed as `0db680e`
 - `Oraga 5e 3p pass: WP7 logic fixes and TP13–TP24 canon (both editions)`.
 
 ---
@@ -1280,7 +1281,7 @@ T4.14).
   apply" (08:18; 09:899–902).
 - **Files:** `M/09_The_Snakes.md`. **Checks:** SA. **Time:** 5 min.
 
-### ☐ T8.6 Commit WP8
+### ☑ T8.6 Commit WP8 — committed as `f3a6306`
 - `Oraga 5e 3p pass: WP8 gallery geometry and maps`.
 
 ---
@@ -1336,7 +1337,7 @@ T4.14).
   `M/09_The_Snakes.md`.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T10.7 Commit WP10
+### ☑ T10.7 Commit WP10 — committed as `9a35c33`
 - `Oraga 5e 3p pass: WP10 rules accuracy sweep`.
 
 ---
@@ -1435,7 +1436,7 @@ T4.14).
 - **Accept:** every custom traces to a printed line, and no private room appears.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T9.13 Commit WP9
+### ☑ T9.13 Commit WP9 — committed as `c53552e`, with the files it missed in `a6ce127`
 - `Oraga 5e 3p pass: WP9 prep, runtime and print build`.
 
 ---
@@ -1516,7 +1517,8 @@ of each task.*
   canon facts, so 5e only unless the owner says otherwise. Log them in INVENTIONS.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T11.12 Final checks and commit
+### ☑ T11.12 Final checks and commit — done 2026-10-25 except the commit (**commit by coordinator**)
+- **Result:** every check green (see LOG, "T6.5, commit rows, T11.12"); `copyright_scan` not run (needs `--refs`; no refs directory here). Ledger reconciled: 105 ☑, 6 ∅ (no task), 0 ⛔ of 111. `main..HEAD` private-canon scan reported to the coordinator; nothing rewritten.
 - **Do:**
   - run SA in full, plus SA+F, `python tools/copyright_scan.py`, `pytest research/oraga_5e_sim`
     and `software/tests/test_no_private_canon.py`;

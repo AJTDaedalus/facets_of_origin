@@ -815,6 +815,14 @@ facts:
         pattern: '\*\*Every ambush is foreshadowed\.\*\* No snake moves on a character whose tell'
         anchor: 'The Snakes at the Ball'
         why: T6.2 — the new rule 2
+      - type: forbid
+        pattern: '(?i)\bStable at once\b'
+        why: T6.5 / L-011 — a drop before midnight costs something (Table IX–4); the free reset is gone
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: '\*\*Table IX–4: What a Drop Costs Before Midnight\*\*'
+        anchor: 'Death before midnight'
+        why: T6.5 — four costs, chosen or rolled on a d4; none kills
 
   - id: one_level
     truth: >-
