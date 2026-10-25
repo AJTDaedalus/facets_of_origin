@@ -194,11 +194,11 @@ after X.
 | T7.21 | WP7 | done | The Radiant's chase line (L-091) |
 | T7.22 | WP7 | open | Commit WP7 |
 | T7.23 | WP7 | done | TP61: cut the heat-4 finish |
-| T8.1 | WP8 | open | `facts.yaml`: gallery geometry and residue values |
-| T8.2 | WP8 | open | Redraw VIII–3; sightlines |
-| T8.3 | WP8 | open (after T7.4) | Map residue; ward-points; the sealed doors |
+| T8.1 | WP8 | done | `facts.yaml`: gallery geometry and residue values |
+| T8.2 | WP8 | done | Redraw VIII–3; sightlines |
+| T8.3 | WP8 | done | Map residue; ward-points; the sealed doors |
 | T8.4 | WP8 | done (TP60) | Garden-stair top door; S10 terrain |
-| T8.5 | WP8 | open | S4 on a gate draw |
+| T8.5 | WP8 | done | S4 on a gate draw |
 | T8.6 | WP8 | open | Commit WP8 |
 | T10.1 | WP10 | open | NPC saves; casting as steel |
 | T10.2 | WP10 | open | Success at a cost: scope |
@@ -1211,7 +1211,7 @@ T4.14).
 
 ## WP8: N4 geometry and maps
 
-### ☐ T8.1 `facts.yaml`: gallery geometry and residue values *(L-032, L-062, `FACTS`)*
+### ☑ T8.1 `facts.yaml`: gallery geometry and residue values *(L-032, L-062, `FACTS`)*
 - **Do:** in the `maps` block and facts, settle:
   - two gallery stairs;
   - the S11 and B4 doors at floor level under a mezzanine;
@@ -1223,7 +1223,7 @@ T4.14).
 - **Accept:** `fact_check --report` lists the text worklist.
 - **Checks:** `pytest tools` (`test_maps`). **Time:** 25 min.
 
-### ☐ T8.2 Redraw VIII–3; sightlines *(L-032)*
+### ☑ T8.2 Redraw VIII–3; sightlines *(L-032)*
 - **Do:** update `maps/build_maps.py` for VIII–3 and fix its caption. Fix 05:177 and 384, 09:1510,
   and 04:1170–1172. Move or cut the slingers' view of the wing corridor (04:1160–1161) and the
   toast sightline (05:925–926).
@@ -1232,7 +1232,7 @@ T4.14).
   the owner.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T8.3 Map residue; ward-points; the sealed doors *(L-062; open after T7.4)*
+### ☑ T8.3 Map residue; ward-points; the sealed doors *(L-062; open after T7.4)*
 - **Do:** remove "other positions approximate" from the four maps. Replace VIII–1's schematic boxes
   (N11). Give the walk rail its own symbol. Draw the four dais and two door ward-points. Mark the
   doors that seal at midnight (C1) on VIII–5. Fix the "second floor" vs gallery-level wording
@@ -1250,7 +1250,7 @@ T4.14).
   (09:1430–1463; 05:457–459).
 - **Checks:** SA. **Time:** 10 min.
 
-### ☐ T8.5 S4 on a gate draw *(L-099)*
+### ☑ T8.5 S4 on a gate draw *(L-099)*
 - **Do:** add to S4's *Where and when*: "run in B1 on a gate draw; the corridor terrain doesn't
   apply" (08:18; 09:899–902).
 - **Files:** `M/09_The_Snakes.md`. **Checks:** SA. **Time:** 5 min.

@@ -443,7 +443,7 @@ her is the better bet.
 |---|---|---|---|
 | I | The delegation waits in the line with thinning patience. Two carry slings | They count the guards on the east side of the court, not the gate | — |
 | II | Maiven presses Corval. The slingers walk to the cleared east wing corridor, look a long moment, walk back | The second time, they time it | — |
-| III | Maiven petitions for a summons and does not get one. The slingers watch the guard change from the gallery rail | The count restarts every time the guards do | — |
+| III | Maiven petitions for a summons and does not get one. The slingers time the guard change on the east-wing doors | The count restarts every time the guards do | — |
 | IV | The toast. The audience refused. Maiven goes to sit with her people | They have stopped drinking | — |
 | V | Maiven at the east wing doors; the slingers in the gardens below the east wing, one uncoiling a rope. At the half-bell they try the wall, and the honor guard answers | The rope | **S10** (and S4) |
 | VI | She goes toward the east wing the instant the lights die | — | Chapter V |
@@ -952,7 +952,8 @@ see ⟨If History Breaks⟩ in chapter V.**
 ***Where and when:*** B9's cleared corridor, any time the party crosses the house —
 forcing the east wing, robbing the gallery loudly, refusing the gatehouse cell. Most
 often Movement V. Also the Gatehouse Court in Movement I, if steel is drawn at the gate
-(see chapter IV), and S10, with the Thenya as the offenders.
+(see chapter IV), and S10, with the Thenya as the offenders. On a gate draw, run it in B1
+(map VIII–2); the corridor's terrain doesn't apply.
 
 **Enemies.** Two **Boranis Honor Guards**, detaining and expelling. *Call the House* brings four more at the start of the second round after the first guard is Bloodied.
 *Budget:* 2 × 450 = **900 XP**, between Low and Moderate; with the four who are coming,
@@ -1552,7 +1553,8 @@ stands between them and that window, lays hands on them, or calls the guard.
 - *At heat 4:* the half-bell clock starts with one segment filled.
 
 **Terrain as rules.** *(see map VIII–5, chapter VIII)*
-- *The wall* is 20 feet of grown crystal to the window. Climbing it takes a DC 13
+- *The wall* is 20 feet of grown crystal to the window, an east-wing window at gallery
+  level; the garden lies a little below the Court. Climbing it takes a DC 13
   Strength (Athletics) check with the rope, or a DC 18 Strength (Athletics) check without.
 - *The garden stair's top door* is shut and locked from inside, as it is all night until
   the household unlocks it at midnight. Picking it from the stair is possible but slow,
@@ -1612,8 +1614,9 @@ A party that stood with her here is standing with her then.
 
 ## S11. The Phern Door
 
-***Where and when:*** B2, the Crystal Court, the first seconds of Movement VI; a service
-door on the gallery side, into the service passages (B10). Phern.
+***Where and when:*** B2, the Crystal Court, the first seconds of Movement VI; a 5-foot
+service door at floor level on the gallery side, in the aisle under the west gallery,
+into the service passages (B10). Phern.
 
 **Read this when the lights die, straight away, to any character near Corro or
 near that door:**

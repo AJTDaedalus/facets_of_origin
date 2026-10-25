@@ -219,6 +219,9 @@ approved in TP56 or TP64, with the overlaps the architecture review found correc
 | Banquet galleries (B3) | −20 → 0 and 80 → 100 | 0 → 140 | +12 | rail height PRINTED; depth MAP |
 | Dais | 25 → 55 | 120 → 135 | +3 | PRINTED (30 ft across, 3 ft high, ~120 ft from doors); depth MAP |
 | Main doors (10 ft, double) | 35 → 45 | wall at y 0 | 0 | PRINTED width; MAP position |
+| Gallery stairs (two, rising 12 ft northward, in the aisles) | −19.5 → −11.5 and 91.5 → 99.5 | 3 → 27 | 0 → +12 | PRINTED existence (WP8, T8.2); MAP position |
+| Musicians' gallery, over the main doors | 0 → 80 | 0 → 15 | +12 | MAP (WP8, T8.2) |
+| Ward-points by the main doors (Table V–3) | 32 and 48 | ~2 | 0 | MAP (WP8, T8.3) |
 | Garden doors (two pairs, 10 ft) | 8 → 18 and 62 → 72 | wall at y 140 | 0 | MAP |
 | East doors and the passage under the east gallery | 80 → 100 | 30 → 40 | 0 | MAP |
 | East stair (rises 12 ft, northward) | 100 → 110 | 30 → 54 | 0 → +12 | PRINTED rise; MAP run |
@@ -290,9 +293,11 @@ retaining wall, with flights down at either end.
 
 **Stairs and passages:**
 
-- **Public stairs [APPROVED TP64 positions]:** two grand stairs from the Court's south corners
+- **Public stairs [PRINTED since WP8, T8.2]:** two grand stairs from the Court's south corners
   (beside the main doors, in the aisles) up to the banquet galleries and the musicians'
-  gallery. The module never says how guests reach the galleries; these are proposals.
+  gallery. Chapter V's General Features now prints them ("a stair in each aisle at the
+  main-doors end"), with the galleries as a mezzanine over floor-level aisles; map VIII–3
+  draws them.
 - **The east stair [PRINTED]:** from the Court's east doors, a stair rises 12 feet to the
   cleared corridor and the east wing.
 - **The service stair [PRINTED]:** "beside" the east wing's double doors; it carries the
@@ -608,7 +613,8 @@ not cut: facets and growth lines, no mortar joints, no carved figures).
   in the side aisles, mid-hall, hooded in dark crystal.
 
 **The dais and high table [PRINTED]:** "a high table on a dais at the far end, laid and
-canopied and empty." Four ward-points on the dais, shown as sconces [PRINTED: "turn a
+canopied and empty." [MAP, T8.3] Map VIII–3 draws the two ward-points of Table V–3 inside
+the main doors, one each side. Four ward-points on the dais, shown as sconces [PRINTED: "turn a
 sconce"]. The high table carries table linen, candles, plates; the canopy can be pulled down
 (Table V–2). [VX] The canopy: a tall baldachin of rose-violet silk on four slender crystal
 posts, fringed; the high table a long board of dark wood with crystal inlay, laid in white

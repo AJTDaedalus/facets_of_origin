@@ -135,6 +135,36 @@
 <line x1="108.4" y1="784.8" x2="396.4" y2="784.8" stroke="#2a2723" stroke-width="3.2"/>
 <line x1="108.4" y1="784.8" x2="396.4" y2="784.8" stroke="#ffffff" stroke-width="1.4"/>
 <line x1="108.4" y1="784.8" x2="396.4" y2="784.8" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<line x1="113.2" y1="784.8" x2="113.2" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="122.8" y1="784.8" x2="122.8" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="132.4" y1="784.8" x2="132.4" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="142" y1="784.8" x2="142" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="151.6" y1="784.8" x2="151.6" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="161.2" y1="784.8" x2="161.2" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="170.8" y1="784.8" x2="170.8" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="180.4" y1="784.8" x2="180.4" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="190" y1="784.8" x2="190" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="199.6" y1="784.8" x2="199.6" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="209.2" y1="784.8" x2="209.2" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="218.8" y1="784.8" x2="218.8" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="228.4" y1="784.8" x2="228.4" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="238" y1="784.8" x2="238" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="247.6" y1="784.8" x2="247.6" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="257.2" y1="784.8" x2="257.2" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="266.8" y1="784.8" x2="266.8" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="276.4" y1="784.8" x2="276.4" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="286" y1="784.8" x2="286" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="295.6" y1="784.8" x2="295.6" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="305.2" y1="784.8" x2="305.2" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="314.8" y1="784.8" x2="314.8" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="324.4" y1="784.8" x2="324.4" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="334" y1="784.8" x2="334" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="343.6" y1="784.8" x2="343.6" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="353.2" y1="784.8" x2="353.2" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="362.8" y1="784.8" x2="362.8" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="372.4" y1="784.8" x2="372.4" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="382" y1="784.8" x2="382" y2="780.96" stroke="#2a2723" stroke-width="1"/>
+<line x1="391.6" y1="784.8" x2="391.6" y2="780.96" stroke="#2a2723" stroke-width="1"/>
 <line x1="108.4" y1="688.8" x2="396.4" y2="688.8" stroke="#2a2723" stroke-width="3.2"/>
 <line x1="108.4" y1="688.8" x2="396.4" y2="688.8" stroke="#ffffff" stroke-width="1.4"/>
 <line x1="108.4" y1="688.8" x2="396.4" y2="688.8" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
@@ -250,8 +280,8 @@
 <text x="161.2" y="800.88" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">garden walk (ground level), railed</text>
 <text x="238" y="732" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the upper terrace</text>
 <text x="238" y="732" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="middle" font-weight="bold" fill="#22201c">the upper terrace</text>
-<text x="238" y="746.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">below the walk's rail</text>
-<text x="238" y="746.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">below the walk's rail</text>
+<text x="238" y="746.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">about 8 ft below the walk's rail</text>
+<text x="238" y="746.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c" data-fact="rails.walk">about 8 ft below the walk's rail</text>
 <text x="238" y="636" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the second terrace</text>
 <text x="238" y="636" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="middle" font-weight="bold" fill="#22201c">the second terrace</text>
 <text x="238" y="650.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">10 ft below the one above</text>
@@ -303,17 +333,18 @@
 <g id="profile" data-px-per-ft="2.4">
 <text x="38" y="861" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">Profile, Court to river gate (drops to scale; lengths are not)</text>
 <text x="42" y="879" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">walk</text>
-<text x="110" y="893.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">upper terrace</text>
-<line x1="174" y1="897.4" x2="174" y2="921.4" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
-<text x="180" y="917.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">second</text>
-<line x1="244" y1="921.4" x2="244" y2="945.4" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
-<text x="250" y="941.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">third</text>
-<line x1="314" y1="945.4" x2="314" y2="969.4" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
-<text x="320" y="965.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">lower garden</text>
-<polyline points="38,883 98,883 98,897.4 168,897.4 168,921.4 238,921.4 238,945.4 308,945.4 308,969.4 438,969.4" fill="none" stroke="#2a2723" stroke-width="1.6"/>
-<line x1="438" y1="969.4" x2="438" y2="951.4" stroke="#8c2f1f" stroke-width="2.4"/>
-<text x="444" y="963.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">river gate</text>
-<text x="178" y="881" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">each terrace 10 ft below the last</text>
+<line x1="104" y1="883" x2="104" y2="902.2" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="rails.walk" data-px-per-ft="2.4"/>
+<text x="110" y="898.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">upper terrace</text>
+<line x1="174" y1="902.2" x2="174" y2="926.2" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
+<text x="180" y="922.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">second</text>
+<line x1="244" y1="926.2" x2="244" y2="950.2" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
+<text x="250" y="946.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">third</text>
+<line x1="314" y1="950.2" x2="314" y2="974.2" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
+<text x="320" y="970.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">lower garden</text>
+<polyline points="38,883 98,883 98,902.2 168,902.2 168,926.2 238,926.2 238,950.2 308,950.2 308,974.2 438,974.2" fill="none" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="438" y1="974.2" x2="438" y2="956.2" stroke="#8c2f1f" stroke-width="2.4"/>
+<text x="444" y="968.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">river gate</text>
+<text x="178" y="881" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">the upper terrace about 8 ft below the walk; each terrace 10 ft below the last</text>
 </g>
 <rect x="6" y="6" width="752" height="1075" fill="none" stroke="#22201c" stroke-width="1.2"/>
 <rect x="10" y="10" width="744" height="1067" fill="none" stroke="#22201c" stroke-width="0.5"/>
@@ -344,46 +375,54 @@
 <text x="564" y="108" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Stairs (arrow points up)</text>
 <line x1="528" y1="124" x2="554" y2="124" stroke="#2a2723" stroke-width="3.2"/>
 <line x1="528" y1="124" x2="554" y2="124" stroke="#ffffff" stroke-width="1.4"/>
-<line x1="528" y1="124" x2="554" y2="124" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
-<text x="564" y="128" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Rail or waist-high</text>
-<text x="564" y="141" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">balustrade (a 10-ft drop</text>
-<text x="564" y="154" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">beyond)</text>
-<rect x="528" y="163" width="26" height="13" fill="#e4ecd9" stroke="#2a2723" stroke-width="0.6"/>
-<text x="564" y="174" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Garden walk (ground level)</text>
-<rect x="528" y="183" width="26" height="13" fill="#d9e5cb" stroke="#2a2723" stroke-width="0.6"/>
-<text x="564" y="194" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Terraces, each 10 ft lower</text>
-<rect x="528" y="203" width="26" height="13" fill="#e9f0e1" stroke="#2a2723" stroke-width="0.6"/>
-<text x="564" y="214" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Lower garden</text>
-<rect x="528" y="223" width="26" height="13" fill="#efede8" stroke="#2a2723" stroke-width="0.6"/>
-<text x="564" y="234" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Context, other maps</text>
-<rect x="528" y="243" width="26" height="13" fill="#f6f1e6" stroke="#2a2723" stroke-width="0.6"/>
-<line x1="533.2" y1="243" x2="533.2" y2="256" stroke="#b8b0a0" stroke-width="0.5"/>
-<line x1="538.4" y1="243" x2="538.4" y2="256" stroke="#b8b0a0" stroke-width="0.5"/>
-<line x1="543.6" y1="243" x2="543.6" y2="256" stroke="#b8b0a0" stroke-width="0.5"/>
-<line x1="548.8" y1="243" x2="548.8" y2="256" stroke="#b8b0a0" stroke-width="0.5"/>
-<line x1="528" y1="249.5" x2="554" y2="249.5" stroke="#b8b0a0" stroke-width="0.5"/>
-<text x="564" y="254" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">5-foot grid</text>
-<rect x="528" y="262" width="26" height="15" rx="3" fill="#8c2f1f"/>
-<text x="541" y="273" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S#</text>
-<text x="564" y="274" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Fight card (chapter IX)</text>
-<line x1="528" y1="290" x2="554" y2="290" stroke="#6b655c" stroke-width="0.8"/>
-<line x1="528" y1="286" x2="528" y2="294" stroke="#6b655c" stroke-width="0.8"/>
-<line x1="554" y1="286" x2="554" y2="294" stroke="#6b655c" stroke-width="0.8"/>
-<text x="564" y="294" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Measured distance</text>
-<text x="528" y="324" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
-<text x="528" y="345" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B5</text>
-<text x="564" y="345" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The garden terraces and the</text>
-<text x="564" y="358" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">river gate</text>
-<text x="528" y="375" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S6</text>
-<text x="564" y="375" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The quiet word, on the upper</text>
-<text x="564" y="388" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">terrace</text>
-<text x="528" y="405" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S9</text>
-<text x="564" y="405" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The appointment, on the</text>
-<text x="564" y="418" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">upper terrace, watched from</text>
-<text x="564" y="431" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">the walk's rail</text>
+<line x1="531" y1="124" x2="531" y2="129.5" stroke="#2a2723" stroke-width="1"/>
+<line x1="537.5" y1="124" x2="537.5" y2="129.5" stroke="#2a2723" stroke-width="1"/>
+<line x1="544" y1="124" x2="544" y2="129.5" stroke="#2a2723" stroke-width="1"/>
+<line x1="550.5" y1="124" x2="550.5" y2="129.5" stroke="#2a2723" stroke-width="1"/>
+<text x="564" y="128" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The garden walk's rail</text>
+<text x="564" y="141" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">(about 8 ft down to the</text>
+<text x="564" y="154" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">upper terrace)</text>
+<line x1="528" y1="170" x2="554" y2="170" stroke="#2a2723" stroke-width="3.2"/>
+<line x1="528" y1="170" x2="554" y2="170" stroke="#ffffff" stroke-width="1.4"/>
+<line x1="528" y1="170" x2="554" y2="170" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<text x="564" y="174" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Waist-high balustrade (a</text>
+<text x="564" y="187" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">10-ft drop beyond)</text>
+<rect x="528" y="196" width="26" height="13" fill="#e4ecd9" stroke="#2a2723" stroke-width="0.6"/>
+<text x="564" y="207" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Garden walk (ground level)</text>
+<rect x="528" y="216" width="26" height="13" fill="#d9e5cb" stroke="#2a2723" stroke-width="0.6"/>
+<text x="564" y="227" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Terraces, each 10 ft lower</text>
+<rect x="528" y="236" width="26" height="13" fill="#e9f0e1" stroke="#2a2723" stroke-width="0.6"/>
+<text x="564" y="247" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Lower garden</text>
+<rect x="528" y="256" width="26" height="13" fill="#efede8" stroke="#2a2723" stroke-width="0.6"/>
+<text x="564" y="267" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Context, other maps</text>
+<rect x="528" y="276" width="26" height="13" fill="#f6f1e6" stroke="#2a2723" stroke-width="0.6"/>
+<line x1="533.2" y1="276" x2="533.2" y2="289" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="538.4" y1="276" x2="538.4" y2="289" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="543.6" y1="276" x2="543.6" y2="289" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="548.8" y1="276" x2="548.8" y2="289" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="528" y1="282.5" x2="554" y2="282.5" stroke="#b8b0a0" stroke-width="0.5"/>
+<text x="564" y="287" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">5-foot grid</text>
+<rect x="528" y="295" width="26" height="15" rx="3" fill="#8c2f1f"/>
+<text x="541" y="306" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S#</text>
+<text x="564" y="307" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Fight card (chapter IX)</text>
+<line x1="528" y1="323" x2="554" y2="323" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="528" y1="319" x2="528" y2="327" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="554" y1="319" x2="554" y2="327" stroke="#6b655c" stroke-width="0.8"/>
+<text x="564" y="327" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Measured distance</text>
+<text x="528" y="357" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
+<text x="528" y="378" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B5</text>
+<text x="564" y="378" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The garden terraces and the</text>
+<text x="564" y="391" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">river gate</text>
+<text x="528" y="408" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S6</text>
+<text x="564" y="408" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The quiet word, on the upper</text>
+<text x="564" y="421" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">terrace</text>
+<text x="528" y="438" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S9</text>
+<text x="564" y="438" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The appointment, on the</text>
+<text x="564" y="451" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">upper terrace, watched from</text>
+<text x="564" y="464" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">the walk's rail</text>
 </g>
 <g id="caption">
-<text x="28" y="1065" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Distances from chapter V; other positions approximate.</text>
+<text x="28" y="1065" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Distances and drops from chapter V; the walk's rail is about 8 ft up.</text>
 </g>
 <g id="scalebar">
 <rect x="32" y="1033" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>

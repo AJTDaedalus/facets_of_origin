@@ -535,6 +535,12 @@ a card says otherwise. Chapter VIII draws the palace (see maps VIIIâ€“1 to VIIIâ
     (3 feet high, 30 feet across) is at the other, about 120 feet from them. The banquet
     galleries (B3) run the length of both long sides, their rails 12 feet above the
     floor (card S1).
+  - *The banquet galleries (B3)* are a mezzanine over a floor-level aisle: under each
+    one, behind the row of piers that carries it, an aisle 20 feet deep runs at ground
+    level, and the two doors in the west wall (to the Audience Hall, B4, and the 5-foot
+    service door of card S11) open from it at floor level. A stair in each aisle at the
+    main-doors end climbs to the galleries, which run the Court's full length and look
+    down on the dais.
   - *The garden terraces (B5)* are three, each about 40 feet deep and 120 feet wide,
     stepping down from the Court's garden doors. Each ends at a waist-high balustrade
     over a 10-foot drop to the next (cards S6 and S9), with a stair at either end. Below
@@ -546,8 +552,9 @@ a card says otherwise. Chapter VIII draws the palace (see maps VIIIâ€“1 to VIIIâ
     feet across), with the private stair (the garden stair) at its far end.
 - **Elevations.** The Crystal Court is at ground level, and so are its garden doors,
   which open on the Court's railed garden walk; the upper terrace lies below that rail.
-  The banquet galleries and the east wing are at gallery level, 12 feet up. Raunu's
-  study (B8) is on the second floor, in the dark wing. The garden stair is the east
+  The banquet galleries and the east wing are at gallery level, 12 feet up: the second
+  floor. Raunu's study (B8) is on the second floor too, in the dark wing, which has no
+  door to the galleries. The garden stair is the east
   wing's private stair: it runs down the wing's outer wall to the upper terrace, and
   the service passages reach it too. Each terrace drops 10 feet to the next.
 - **The ways into the east wing.** Raunu's first crystal seals only the wing's double

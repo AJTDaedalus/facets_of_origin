@@ -818,7 +818,8 @@ nobody can stop thinking about.)*
 
 ### Movement IV — The Toast *(later — dinner)*
 
-The banquet is called, and the galleries fill. And then, between the first course
+The banquet is called, and the galleries fill. They run the Court's full length, so
+every table in them can look down on the dais. And then, between the first course
 and the second, with no trumpet and no announcement, Raunu Boranis is simply
 *standing at the high table* — unmasked, plainly dressed for a chief, holding a cup
 as if someone had handed it to him and left. The room takes a full three seconds to

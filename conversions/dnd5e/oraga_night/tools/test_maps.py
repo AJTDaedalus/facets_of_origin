@@ -79,8 +79,12 @@ def test_scaled_maps_have_a_scale_bar_and_a_grid_layer(built):
         assert "scalebar" in ids and "grid" in ids, name
 
 
-def test_overview_says_it_is_not_to_scale(built):
-    assert any("not to scale" in t.lower() for t in texts(root(built["map_viii_1_palace"])))
+def test_overview_states_its_scale(built):
+    # T8.3 (N11): the overview is a small-scale plan now, not a schematic of boxes
+    r = root(built["map_viii_1_palace"])
+    assert any("small-scale plan" in t.lower() for t in texts(caption_of(built["map_viii_1_palace"])))
+    ids = {e.get("id") for e in r.iter()}
+    assert "overview-scale" in ids and "grid" not in ids
 
 
 def test_grid_can_be_left_out(tmp_path):
@@ -134,14 +138,11 @@ def test_no_map_label_prints_development_scaffolding(built, pattern):
             assert not re.search(pattern, t), (name, t)
 
 
-def test_only_the_caption_may_say_approximate(built):
+def test_no_map_says_approximate(built):
+    # T8.3 (L-062): the "other positions approximate" hedge is gone from every caption too
     for name, p in built.items():
-        r = root(p)
-        cap = [e for e in r.iter() if e.get("id") == "caption"][0]
-        in_cap = {id(e) for e in cap.iter()}
-        for e in r.iter(SVG_NS + "text"):
-            if id(e) not in in_cap:
-                assert "pproximate" not in "".join(e.itertext()), (name, "".join(e.itertext()))
+        for t in texts(root(p)):
+            assert "pproximate" not in t, (name, t)
 
 
 # --------------------------------------------------------------------------- the overview
@@ -304,7 +305,8 @@ def test_chapter_viii_has_no_ascii_palace_figure_left():
     text = (MODULE / "08_Handouts.md").read_text(encoding="utf-8")
     section = text.split("## The Palace, Keyed")[1].split("\n## ")[0]
     assert "```" not in section
-    assert "**Rooms shown by connection:**" in section
+    assert "**Rooms beyond maps VIII–2 to VIII–5:**" in section
+    assert "by connection" not in section
 
 
 def test_chapter_viii_numbers_its_maps_in_order():
@@ -338,3 +340,85 @@ def test_chapter_iv_areas_point_to_their_map(area, mapno):
     text = (MODULE / "04_The_Ball.md").read_text(encoding="utf-8")
     body = text.split(f"\n**{area}. ")[1].split("\n**B")[0]
     assert re.search(rf"(?i)(?:see|, and) map VIII–{mapno}\b", body)
+
+
+# --------------------------------------------------------------------------- WP8 geometry
+
+def test_rail_drops_agree_with_the_room_sizes():
+    # T8.1 (L-062): one drop per rail; the gallery and terrace values are the printed ones
+    r = FACTS["rails"]
+    assert r["gallery"] == FACTS["court"]["gallery_rail"] == 12
+    assert r["terrace"] == FACTS["terraces"]["drop"] == 10
+    assert 0 < r["walk"] < r["terrace"]
+
+
+def test_s10_wall_adds_up():
+    # T8.1 (TP64, brief §1.5): wing floor 12 + sill 3 + the garden 5 below the Court = 20
+    w = FACTS["east_wing"]
+    assert w["floor"] + w["window_sill"] + w["garden_below_court"] == w["window_wall"] == 20
+
+
+def test_gallery_geometry_values():
+    c = FACTS["court"]
+    assert c["aisle_deep"] == (FACTS["terraces"]["wide"] - c["width"]) / 2   # aisle under the gallery
+    assert c["gallery_stairs"] == 2 and c["gallery_stair_rise"] == c["gallery_rail"]
+    assert c["ward_points_dais"] == 4 and c["ward_points_doors"] == 2
+    wd = c["west_doors"]
+    assert 0 < wd["b4_at"] < wd["b4_at"] + wd["b4_wide"] < wd["service_at"] < c["length"]
+
+
+def test_missing_rails_block_is_a_clear_error(tmp_path):
+    data = yaml.safe_load((MODULE / "facts.yaml").read_text(encoding="utf-8"))
+    del data["maps"]["rails"]
+    bad = tmp_path / "facts.yaml"
+    bad.write_text(yaml.safe_dump(data), encoding="utf-8")
+    with pytest.raises(ValueError, match="rails.gallery"):
+        B.load_dims(bad)
+
+
+def test_overview_places_every_room_without_by_connection_boxes(built):
+    # T8.3 (N11): no room is boxed "by connection"; B13 and B11 carry their own levels
+    r = root(built["map_viii_1_palace"])
+    floors = {e.get("data-room"): e.get("data-floor") for e in r.iter() if e.get("data-room")}
+    assert "unknown" not in floors.values()
+    assert floors["B4"] == "ground" and floors["B6"] == "ground" and floors["B7"] == "gallery"
+    assert floors["B13"] == "terrace"
+    assert not any("by connection" in t.lower() for t in texts(r))
+
+
+def test_court_map_draws_the_gallery_stairs_and_floor_level_aisles(built):
+    # T8.2 (L-032): two stairs up to the galleries; the aisles are ground level
+    r = root(built["map_viii_3_court"])
+    ids = {e.get("id") for e in r.iter()}
+    assert {"west-aisle", "east-aisle", "musicians-gallery", "high-gallery"} <= ids
+    labels = " ".join(texts(r))
+    assert labels.count("stair up") >= 3          # two gallery stairs and the east stair
+    assert "at floor level" in labels
+    piers = [e for e in r.iter() if e.get("data-pier")]
+    assert len(piers) == 14
+
+
+def test_court_map_draws_the_six_ward_points(built):
+    # T8.3 (L-062): Tables V–2 and V–3 count four on the dais and two by the doors
+    r = root(built["map_viii_3_court"])
+    wards = [e.get("data-ward") for e in r.iter() if e.get("data-ward")]
+    assert wards.count("dais") == FACTS["court"]["ward_points_dais"]
+    assert wards.count("doors") == FACTS["court"]["ward_points_doors"]
+
+
+def test_only_the_double_doors_are_marked_to_seal(built):
+    # T8.3 (TP28): one seal mark on VIII–5, across the double doors (10 ft)
+    r = root(built["map_viii_5_east_wing"])
+    scale = float(r.get("data-px-per-ft"))
+    seals = [e for e in r.iter() if e.get("data-seal")]
+    assert len(seals) == 1
+    e = seals[0]
+    length = abs(float(e.get("x2")) - float(e.get("x1"))) / scale
+    assert length == pytest.approx(FACTS["east_wing"]["cleared_corridor"]["wide"])
+
+
+@pytest.mark.parametrize("name", ["map_viii_3_court", "map_viii_4_terraces", "map_viii_5_east_wing"])
+def test_the_walk_rail_has_its_own_symbol(built, name):
+    # T8.3 (L-062): the garden walk's rail is not drawn as a terrace balustrade
+    legend = [e for e in root(built[name]).iter() if e.get("id") == "legend"][0]
+    assert any("garden walk's rail" in t.lower() for t in texts(legend))

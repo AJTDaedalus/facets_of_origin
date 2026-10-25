@@ -183,18 +183,21 @@ arrives)*
 ## The Palace, Keyed
 
 *Five maps of the palace. Map VIII–1 shows every room, the ways between them and the
-floor each is on, without a scale; maps VIII–2 to VIII–5 are drawn to scale, and one square
-is 5 feet. Dashed lines are the service passages.*
+floor each is on, at a small scale; maps VIII–2 to VIII–5 are drawn on a grid, and one
+square is 5 feet. Dashed lines are the service passages.*
 
-**Map VIII–1: The Palace** *(schematic, keyed B0–B13, floor by floor)*
+**Map VIII–1: The Palace** *(a small-scale plan, keyed B0–B13, floor by floor)*
 
 ![Map VIII–1: The Palace, keyed B0 to B13 by floor](maps/map_viii_1_palace.svg)
 
 *The street (B0) up through the Gatehouse Court (B1, held
 after midnight as B12) to the Crystal Court (B2), with the banquet galleries (B3) along both
 sides and the Audience Hall (B4) off it; the gardens (B5) beyond the garden doors; the east
-wing (B9) up the east-door stair. The rooms shown by connection (B6, B7, B8, B10, B11,
-B13) are boxed at the right.*
+wing (B9) up the east-door stair. The rest of the palace is placed too: the West Range
+behind the Court's west wall, with the Audience Hall's antechamber, the chapel (B6), the shut
+state rooms and Raunu's study (B8) in the dark wing's corner tower; the garden wing, with the
+trophy gallery (B7) above and B13 below; the kitchens (B10) behind the gatehouse; and the Root
+(B11), far beneath the Court.*
 
 **Map VIII–2: The Gatehouse Court** *(B0, B1, B12; card S3)*
 
@@ -211,7 +214,9 @@ stand at midnight. The section below the plan gives the heights.*
 
 *The floor, the dais at the far end, the main doors, the
 garden doors to the railed garden walk, the galleries and their 12-foot rails, the east doors
-and the stair up, the service door on the gallery side (S11).*
+and the stair up. The galleries are a mezzanine: a stair in each aisle at the main-doors end
+climbs to them, and the doors beneath them, to the Audience Hall (B4) and the service door on
+the gallery side (S11), open at floor level.*
 
 **Map VIII–4: The Terraces and the River Gate** *(B5; cards S6, S9)*
 
@@ -230,7 +235,7 @@ the double doors, the wing's corridor and its rooms, the garden stair, the servi
 beside the doors with the wing's service door, the service run, and the garden
 below the wing.*
 
-**Rooms shown by connection:**
+**Rooms beyond maps VIII–2 to VIII–5:**
 
 - **B6. The Chapel.** A public room; Mother Sella's, all night.
 - **B7. The Trophy Gallery.** The private palace, off the gallery corridor.

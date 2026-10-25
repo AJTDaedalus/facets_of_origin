@@ -184,6 +184,70 @@ facts:
         anchor: 'private stair to the garden'
         why: O33 — name the private stair as the garden stair where the wing is described
 
+  - id: gallery_geometry
+    truth: >-
+      L-032, T8.1 (TPN-52), following the palace brief §1.4–§1.5 and §7 item 4 (TP64). The
+      banquet galleries (B3) are a mezzanine over a floor-level aisle: under each gallery,
+      behind the row of piers that carries it, an aisle 20 feet deep runs at ground level.
+      The two doors in the Court's west wall open from that aisle at floor level: the double
+      door to the Audience Hall (B4) and the 5-foot gallery-side service door (card S11).
+      Two stairs, one in each aisle at the main-doors end, climb 12 feet to the galleries
+      and to the musicians' gallery over the main doors. The galleries run the Court's full
+      length, so they look down on the dais (the toast; Table V–2's "Over the rail"). The
+      east wing's corridor cannot be seen from a gallery: the stair and the cleared corridor
+      run behind the east gallery's outer wall, which has no door to them.
+    source: L-032; T8.1; palace brief §1.4–§1.5 and §7 item 4 (TP64)
+    maps: {aisle_deep: 20, gallery_stairs: 2, stair_rise: 12, musicians_gallery_deep: 15}
+    phrases: ["a mezzanine over a floor-level aisle", "look down on the dais", "at floor level"]
+    checks:
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'mezzanine over a floor-level aisle'
+        anchor: '\*The Crystal Court \(B2\)\*'
+        why: L-032 — General Features says the galleries are a mezzanine with floor-level doors
+      - type: require
+        file: 04_The_Ball.md
+        pattern: 'look down on the dais'
+        anchor: 'The banquet is called, and the galleries fill'
+        why: L-032 — the toast's sightline works because the galleries overlook the dais
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: 'service door at floor level'
+        anchor: 'S11. The Phern Door'
+        why: L-032 — the crowd on the floor can reach S11's door
+      - type: forbid
+        pattern: '(?i)\bguard change\b[^.|\n]{0,40}\bgallery rail\b'
+        why: L-032 — the east wing's corridor is behind the east gallery's wall, out of its sight
+      - type: forbid
+        pattern: '(?i)\bwalk the gallery toward the east wing\b'
+        why: L-032 — no door joins a banquet gallery to the cleared corridor
+
+  - id: second_floor
+    truth: >-
+      T8.1 / T8.3 (L-062), following the palace brief §1.5 and §7 item 9 (TP64): "second
+      floor" is the storey above the ground floor, in the American sense. The banquet
+      galleries and the east wing are on it, at gallery level (12 feet up), and so is the dark
+      wing with Raunu's study (B8), which has no door to the galleries. S10's lit window is
+      an east-wing window at gallery level; the garden below the wing lies a little below the
+      Court, so the wall from that garden to the window is the card's 20 feet.
+    source: L-062; T8.1; T8.3; palace brief §1.5 and §7 item 9 (TP64)
+    maps: {window_sill: 3, garden_below_court: 5, wall: 20}
+    phrases: ["gallery level, 12 feet up: the second floor", "an east-wing window at gallery level"]
+    checks:
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'at gallery level, 12 feet up: the second floor'
+        anchor: '\*\*Elevations\.\*\*'
+        why: L-062 — General Features says gallery level is the second floor
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: 'east-wing window at gallery level'
+        anchor: 'S10. Over the Wall'
+        why: L-062 — S10's terrain places the window, and the garden below it
+      - type: sentence
+        all: ['(?i)\bsecond floor\b', '(?i)\b(?:above|over) the (?:banquet )?galler(?:y|ies)\b']
+        why: L-062 — the second floor is gallery level, not a storey above the galleries
+
   - id: terraces
     truth: >-
       Three garden terraces (B5), each about 40 feet deep and 120 feet wide, step down from
@@ -990,6 +1054,20 @@ maps:
     dais_from_doors: 120
     gallery_rail: 12
     east_stair_rise: 12
+    # T8.1 (L-032, L-062; TPN-52), from the palace brief §1.4–§1.5 (TP64): the galleries are
+    # a mezzanine over a floor-level aisle; the B4 and S11 doors open from the west aisle
+    aisle_deep: 20
+    gallery_stairs: 2        # one in each aisle at the main-doors end
+    gallery_stair_rise: 12
+    musicians_gallery_deep: 15
+    high_gallery: 30         # about; the walkway where Raunu is glimpsed in Movement III
+    ward_points_dais: 4      # Table V–2
+    ward_points_doors: 2     # Table V–3, beside the main doors
+    west_doors: {b4_at: 56, b4_wide: 10, service_at: 96}   # feet from the main-doors wall
+  rails:          # one drop per rail (L-062; TPN-52)
+    gallery: 12              # card S1; chapter V
+    terrace: 10              # cards S6, S9; chapter V
+    walk: 8                  # about; the garden walk's rail over the upper terrace (brief §1.5)
   terraces:       # B5
     count: 3
     deep: 40
@@ -1001,6 +1079,10 @@ maps:
     cleared_corridor: {wide: 10, long: 60}
     inner_corridor: {wide: 10, long: 100}
     room_across: {min: 20, max: 30}
+    window_sill: 3           # S10's lit window, above the wing's floor (brief §1.5)
+    garden_below_court: 5    # the garden below the wing, about 5 ft under the Court floor
+    window_wall: 20          # card S10: floor 12 + sill 3 + garden 5
+    seals_at_midnight: double_doors   # TP28: only the double doors at the head of the east stair
   service_run:    # B10 (S7, S11)
     wide: 5
     door: 5

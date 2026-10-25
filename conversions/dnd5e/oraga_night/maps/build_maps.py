@@ -8,8 +8,9 @@
 Every map is original drawing code: plain SVG strings, no external assets, no network. The
 dimensions come from the `maps` block of ../facts.yaml (the O28 sizes, O33's elevations,
 O34's terraces, card S3's gatehouse heights). Whatever the text does not fix is a drawing
-choice, recorded in DECISIONS O53–O56 and O62; the maps themselves print no decision IDs and
-no hedges, only one caption line each (R6.2, tools/test_maps.py).
+choice, recorded in DECISIONS O53–O56, O62 and TPN-52 (WP8: the gallery geometry, rails, S10
+and the overview's placings follow the palace brief, TP64); the maps themselves print no
+decision IDs and no hedges, only one caption line each (R6.2, tools/test_maps.py).
 
 Each measured shape declares the dimension it draws (`data-fact-w`, `data-fact-h`,
 `data-fact-len`, in feet, keyed to facts.yaml), and tools/test_maps.py measures it back.
@@ -58,11 +59,15 @@ CONTEXT = "#efede8"
 
 REQUIRED = {
     "court": ["length", "width", "vault", "main_doors", "dais_high", "dais_across",
-              "dais_from_doors", "gallery_rail", "east_stair_rise"],
+              "dais_from_doors", "gallery_rail", "east_stair_rise", "aisle_deep",
+              "gallery_stairs", "gallery_stair_rise", "musicians_gallery_deep", "high_gallery",
+              "ward_points_dais", "ward_points_doors", "west_doors.b4_at", "west_doors.b4_wide",
+              "west_doors.service_at"],
+    "rails": ["gallery", "terrace", "walk"],
     "terraces": ["count", "deep", "wide", "drop", "lower_garden"],
     "east_wing": ["floor", "cleared_corridor.wide", "cleared_corridor.long",
                   "inner_corridor.wide", "inner_corridor.long", "room_across.min",
-                  "room_across.max"],
+                  "room_across.max", "window_sill", "garden_below_court", "window_wall"],
     "service_run": ["wide", "door"],
     "gatehouse": ["gate_walk_height", "walk_to_street_drop", "stair_fall", "wicket_wide",
                   "blades_out"],
@@ -275,6 +280,32 @@ class Plan:
         s.line(X1, Y1, X2, Y2, stroke="#ffffff", stroke_width=1.4)
         s.line(X1, Y1, X2, Y2, stroke=WALL, stroke_width=0.5, stroke_dasharray="1 5")
 
+    def walkrail(self, x1, y, x2, down=1, step=4):
+        """The garden walk's rail: a balustrade with ticks on the low side (the drop)."""
+        self.rail(x1, y, x2, y)
+        s = self.svg
+        k = x1 + step / 2
+        while k < x2:
+            s.line(self.X(k), self.Y(y), self.X(k), self.Y(y + 1.6 * down), stroke=WALL,
+                   stroke_width=1)
+            k += step
+
+    def ward(self, x, y, label=None):
+        """A ward-point: a small red diamond."""
+        X, Y, r = self.X(x), self.Y(y), 4.5
+        self.svg.poly([(X, Y - r), (X + r, Y), (X, Y + r), (X - r, Y)], fill=ACCENT,
+                      stroke="#ffffff", stroke_width=1, data_ward=label or "ward")
+
+    def pier(self, x, y, size=2):
+        self.rect(x - size / 2, y - size / 2, size, size, fill=WALL, data_pier="1")
+
+    def seal(self, x, y, length, horizontal=True):
+        """A door that seals at midnight: a heavy red bar across the doorway."""
+        if horizontal:
+            self.line(x, y, x + length, y, stroke=ACCENT, stroke_width=4.5, data_seal="midnight")
+        else:
+            self.line(x, y, x, y + length, stroke=ACCENT, stroke_width=4.5, data_seal="midnight")
+
     def tag(self, x, y, code, dx=0, dy=0):
         """A card marker (S1, S3 …): a small dark-red label."""
         s = self.svg
@@ -354,6 +385,22 @@ def frame(svg: Svg, title: str, subtitle: str, legend: list[tuple], caption: lis
             s.line(sx, y - 4, sx + 26, y - 4, stroke=WALL, stroke_width=3.2)
             s.line(sx, y - 4, sx + 26, y - 4, stroke="#ffffff", stroke_width=1.4)
             s.line(sx, y - 4, sx + 26, y - 4, stroke=WALL, stroke_width=0.5, stroke_dasharray="1 5")
+        elif kind == "walkrail":
+            s.line(sx, y - 4, sx + 26, y - 4, stroke=WALL, stroke_width=3.2)
+            s.line(sx, y - 4, sx + 26, y - 4, stroke="#ffffff", stroke_width=1.4)
+            for i in range(4):
+                s.line(sx + 3 + i * 6.5, y - 4, sx + 3 + i * 6.5, y + 1.5, stroke=WALL, stroke_width=1)
+        elif kind == "ward":
+            cx_, cy_ = sx + 13, y - 4.5
+            s.poly([(cx_, cy_ - 4.5), (cx_ + 4.5, cy_), (cx_, cy_ + 4.5), (cx_ - 4.5, cy_)], fill=ACCENT,
+                   stroke="#ffffff", stroke_width=1)
+        elif kind == "pier":
+            s.rect(sx + 10, y - 7.5, 6, 6, fill=WALL)
+        elif kind == "seal":
+            s.line(sx, y - 4, sx + 26, y - 4, stroke=WALL, stroke_width=2.2)
+            s.line(sx + 6, y - 4, sx + 20, y - 4, stroke=ACCENT, stroke_width=4.5)
+        elif kind == "overhead":
+            s.rect(sx, y - 11, 26, 13, fill="none", stroke=SOFT, stroke_width=1, stroke_dasharray="2 2")
         elif kind == "service":
             s.line(sx, y - 4, sx + 26, y - 4, stroke=SERVICE, stroke_width=2, stroke_dasharray="5 3")
         elif kind == "above":
@@ -601,7 +648,7 @@ def map_gatehouse(d: dict, grid=True) -> str:
     key = [("B0", "Gate Street, the street and the line"),
            ("B1", "The Gatehouse Court (chapter IV)"),
            ("B12", "The same court after midnight, held (chapter V; card S3)")]
-    caption = ["Heights, the wicket and the Bought's posts from card S3; other positions approximate."]
+    caption = ["Heights, the wicket and the Bought's posts from card S3."]
     frame(svg, "Map VIII–2: The Gatehouse Court", "B0 · B1 · B12 — the outer gate, the wicket and the gate-walk",
           legend, caption, mw, scale_ft=20, scale=scale, key=key)
     return svg.render("Map VIII–2: The Gatehouse Court")
@@ -610,9 +657,10 @@ def map_gatehouse(d: dict, grid=True) -> str:
 # --------------------------------------------------------------------------- map VIII–3
 
 def map_court(d: dict, grid=True) -> str:
-    c = d["court"]
+    c, r = d["court"], d["rails"]
     G = geometry(d)
     W_, L, gw, gx = G["W"], G["L"], G["gw"], G["gx"]
+    wd = c["west_doors"]
     scale = 4
     x0, x1, y0, y1 = -gw - 26, gx + 36, -12, L + G["walk"] + 14
     mw, mh = int((x1 - x0) * scale), int((y1 - y0) * scale)
@@ -622,15 +670,14 @@ def map_court(d: dict, grid=True) -> str:
     P = Plan(svg, PAD, TOP + 10, x0, y1, scale)
     P.grid_on = grid
 
-    # floors
+    # floors: the dance floor and both aisles are ground level; the galleries are overhead
     P.rect(-gw, L, gw * 2 + W_, G["walk"], fill=GARDEN)              # garden walk
     P.rect(-gw, L + G["walk"], gw * 2 + W_, y1 - L - G["walk"], fill=GARDEN2, opacity=0.6)
-    P.rect(-gw, 0, gw, L, fill=GALLERY)
-    P.rect(W_, 0, gw, L, fill=GALLERY)
+    P.rect(-gw, 0, gw, L, fill=FLOOR, id="west-aisle", data_fact_w="court.aisle_deep")
+    P.rect(W_, 0, gw, L, fill=FLOOR, id="east-aisle", data_fact_w="court.aisle_deep")
     P.rect(0, 0, W_, L, fill=FLOOR, id="court-floor", data_fact_w="court.width",
            data_fact_h="court.length")
     sx, sy, sw, sh = G["stair"]
-    P.rect(W_, G["east_door_y"], gw, G["east_door_w"], fill=FLOOR)    # passage under the gallery
     if grid:
         svg.open(id="grid", stroke=GRID, stroke_width=0.5, opacity=0.8)
         P.grid(0, 0, W_, L)
@@ -638,7 +685,21 @@ def map_court(d: dict, grid=True) -> str:
         P.grid(W_, 0, gw, L)
         P.grid(-gw, L, gw * 2 + W_, G["walk"])
         svg.close()
-    # the dais
+    # the galleries overhead (dashed), the musicians' gallery over the main doors, and the
+    # high gallery's walkway in the outer walls
+    svg.open(id="galleries-overhead")
+    P.rect(-gw, 0, gw, L, fill=GALLERY, opacity=0.45, stroke=SOFT, stroke_width=1.1,
+           stroke_dasharray="6 3")
+    P.rect(W_, 0, gw, L, fill=GALLERY, opacity=0.45, stroke=SOFT, stroke_width=1.1,
+           stroke_dasharray="6 3")
+    md = c["musicians_gallery_deep"]
+    P.rect(0, 0, W_, md, fill=GALLERY, opacity=0.45, stroke=SOFT, stroke_width=1.1,
+           stroke_dasharray="6 3", id="musicians-gallery", data_fact_h="court.musicians_gallery_deep")
+    svg.close()
+    P.svg.polyline([(P.X(-gw + 1.2), P.Y(2)), (P.X(-gw + 1.2), P.Y(L - 1.2)), (P.X(gx - 1.2), P.Y(L - 1.2)),
+                    (P.X(gx - 1.2), P.Y(2))], stroke=SOFT, stroke_width=1, stroke_dasharray="1 3",
+                   id="high-gallery")
+    # the dais, and its four ward-points (Table V–2): two each side of the high table
     dx, dy, dw, dh = G["dais"]
     P.rect(dx, dy, dw, dh, fill="#e2d3b4", stroke=WALL, stroke_width=1.2, id="dais",
            data_fact_w="court.dais_across")
@@ -646,15 +707,22 @@ def map_court(d: dict, grid=True) -> str:
     P.text(W_ / 2, dy + 4.2, "the dais, 3 ft high", size=10, anchor="middle", style="italic",
            data_fact="court.dais_high")
     P.text(W_ / 2, dy + 12.6, "high table", size=8.5, anchor="middle", style="italic", fill=SOFT)
+    for wx in (dx + 1.8, dx + 4.2, dx + dw - 4.2, dx + dw - 1.8):
+        P.ward(wx, dy + 9.75, "dais")
+    # the piers that carry the galleries, seven a side on the floor's edge lines
+    for py in (8, 26, 47, 66, 85, 104, 123):
+        P.pier(0, py)
+        P.pier(W_, py)
 
-    # walls: outer shell of Court + galleries
+    # walls: outer shell of Court + aisles
     P.walls([(-gw, 0), (-gw, L), (gx, L), (gx, 0), (-gw, 0)], closed=False)
     P.walls([(gx, G["east_door_y"] + G["east_door_w"]), (gx, 0)], closed=False)
-    # the rails along the Court's long sides, 12 ft up
+    # the gallery rails along the floor's long sides, 12 ft up over the piers
     P.rail(0, 0.5, 0, L - 0.5)
     P.rail(W_, 0.5, W_, G["east_door_y"])
     P.rail(W_, G["east_door_y"] + G["east_door_w"], W_, L - 0.5)
     # the passage under the east gallery, to the stair
+    P.rect(W_, G["east_door_y"], gw, G["east_door_w"], fill=FLOOR)
     P.line(W_, G["east_door_y"], gx, G["east_door_y"], stroke=WALL, stroke_width=1.4)
     P.line(W_, G["east_door_y"] + G["east_door_w"], gx, G["east_door_y"] + G["east_door_w"],
            stroke=WALL, stroke_width=1.4)
@@ -665,14 +733,23 @@ def map_court(d: dict, grid=True) -> str:
     P.rect(sx, sy + sh, sw, 18, fill=UPPER)
     P.stairs(sx, sy, sw, sh, up="n")
     P.door(sx, sy, G["east_door_w"], horizontal=False, fill=FLOOR)
-    # main doors, garden doors, west doors
+    # the two gallery stairs, one in each aisle at the main-doors end (12 ft up)
+    rise = c["gallery_stair_rise"]
+    run = 2 * rise
+    for gsx in (-gw + 0.5, gx - 8.5):
+        P.stairs(gsx, 3, 8, run, up="n", treads=14)
+    svg.line(P.X(-gw + 9.5), P.Y(3), P.X(-gw + 9.5), P.Y(3 + run), stroke="none",
+             data_fact_len="24")
+    # main doors and their two ward-points (Table V–3), garden doors, the west-wall doors
     P.door(W_ / 2 - c["main_doors"] / 2, 0, c["main_doors"], double=True, fact="court.main_doors")
+    for wx in (W_ / 2 - c["main_doors"] / 2 - 3, W_ / 2 + c["main_doors"] / 2 + 3):
+        P.ward(wx, 2.4, "doors")
     P.door(8, L, 10, double=True, fill=GARDEN)
     P.door(W_ - 18, L, 10, double=True, fill=GARDEN)
-    P.door(-gw, 96, 5, horizontal=False, fill=GALLERY, fact="service_run.door")
-    P.door(-gw, 56, 10, horizontal=False, double=True, fill=GALLERY)
-    # the garden walk's rail
-    P.rail(-gw, L + G["walk"], gx, L + G["walk"])
+    P.door(-gw, wd["service_at"], 5, horizontal=False, fill=FLOOR, fact="service_run.door")
+    P.door(-gw, wd["b4_at"], wd["b4_wide"], horizontal=False, double=True, fill=FLOOR)
+    # the garden walk's rail (its own symbol: an 8-ft drop to the upper terrace)
+    P.walkrail(-gw, L + G["walk"], gx, down=1)
 
     # labels
     P.text(W_ / 2, 72, "B2", size=22, anchor="middle", weight="bold", halo=True)
@@ -682,16 +759,24 @@ def map_court(d: dict, grid=True) -> str:
     P.text(W_ / 2, 57.5, "vault some 50 ft high", size=10, anchor="middle", style="italic",
            halo=True, data_fact="court.vault")
     P.text(W_ / 2, 45, "the Dance", size=10, anchor="middle", style="italic", fill=SOFT, halo=True)
+    P.text(W_ / 2, 10.5, "musicians' gallery overhead", size=9, anchor="middle", style="italic",
+           fill=SOFT, halo=True)
     for gxm, side in ((-gw / 2, "west"), (W_ + gw / 2, "east")):
         P.text(gxm, 80, "B3", size=18, anchor="middle", weight="bold", halo=True)
-        for i, ln in enumerate(["banquet", "gallery", f"({side})", "", "gallery", "level,", "12 ft up"]):
+        for i, ln in enumerate(["banquet", "gallery", f"({side})", "", "12 ft up,", "over a", "floor-level", "aisle"]):
             P.text(gxm, 75 - 3.6 * i, ln, size=10, anchor="middle",
                    style="italic" if i > 3 else None, weight="bold" if i < 3 else None, halo=True)
-    P.text(1.2, 108, "rail 12 ft", size=9, style="italic", halo=True, data_fact="court.gallery_rail")
-    P.text(1.2, 105.5, "above the floor", size=9, style="italic", halo=True)
+    P.text(1.2, 112, "gallery rail", size=9, style="italic", halo=True)
+    P.text(1.2, 109.5, "12 ft above", size=9, style="italic", halo=True, data_fact="court.gallery_rail")
+    P.text(1.2, 107, "the floor", size=9, style="italic", halo=True)
     P.text(W_ / 2, -4.5, "main doors (10 ft)", size=10, anchor="middle", style="italic")
     P.text(W_ / 2, -8.2, "to B1, the Gatehouse Court (map VIII–2)", size=9.5, anchor="middle",
            style="italic", fill=SOFT)
+    P.text(-gw / 2, 1.2 + run + 3.5, "stair up", size=9, anchor="middle", style="italic", halo=True)
+    P.text(-gw / 2, 1.2 + run + 1, "12 ft", size=9, anchor="middle", style="italic", halo=True,
+           data_fact="court.gallery_stair_rise")
+    P.text(W_ + gw / 2 - 4, 1.2 + run + 1, "stair up 12 ft", size=9, anchor="middle", style="italic",
+           halo=True)
     P.text(W_ - 2, G["east_door_y"] + G["east_door_w"] / 2 + 6.5, "east doors", size=9.5,
            anchor="end", style="italic", halo=True)
     P.text(sx + sw + 1.5, sy + 8, "stair up", size=9.5, style="italic", halo=True)
@@ -701,32 +786,47 @@ def map_court(d: dict, grid=True) -> str:
     P.text(sx + sw + 1.5, sy + sh + 12, "cleared", size=9.5, style="italic", halo=True)
     P.text(sx + sw + 1.5, sy + sh + 9.5, "corridor to", size=9.5, style="italic", halo=True)
     P.text(sx + sw + 1.5, sy + sh + 7, "B9 (map VIII–5)", size=9.5, style="italic", halo=True)
+    P.text(sx + sw + 1.5, 100, "high gallery,", size=9, style="italic", fill=SOFT, halo=True)
+    P.text(sx + sw + 1.5, 97.5, "about 30 ft up,", size=9, style="italic", fill=SOFT, halo=True,
+           data_fact="court.high_gallery")
+    P.text(sx + sw + 1.5, 95, "in the outer walls", size=9, style="italic", fill=SOFT, halo=True)
+    P.text(sx + sw + 1.5, 92.5, "(dotted)", size=9, style="italic", fill=SOFT, halo=True)
     P.text(W_ / 2, L + 4, "garden walk (railed)", size=10, anchor="middle", style="italic", halo=True)
-    P.text(W_ / 2, L + G["walk"] + 6, "the upper terrace, below the rail (map VIII–4)", size=9.5,
-           anchor="middle", style="italic", fill=SOFT, halo=True)
+    P.text(W_ / 2, L + G["walk"] + 6, "the upper terrace, about 8 ft below the rail (map VIII–4)",
+           size=9.5, anchor="middle", style="italic", fill=SOFT, halo=True, data_fact="rails.walk")
     P.text(4, L - 2.6, "garden doors", size=9, style="italic", halo=True)
-    P.text(-gw - 1.5, 101.5, "service door,", size=9, anchor="end", style="italic", halo=True)
-    P.text(-gw - 1.5, 99, "5 ft, to B10", size=9, anchor="end", style="italic", halo=True)
-    P.text(-gw - 1.5, 62.5, "to B4, the", size=9, anchor="end", style="italic", halo=True)
-    P.text(-gw - 1.5, 60, "Audience Hall", size=9, anchor="end", style="italic", halo=True)
+    P.text(-gw - 1.5, wd["service_at"] + 8, "service door,", size=9, anchor="end", style="italic", halo=True)
+    P.text(-gw - 1.5, wd["service_at"] + 5.5, "5 ft, at floor", size=9, anchor="end", style="italic", halo=True)
+    P.text(-gw - 1.5, wd["service_at"] + 3, "level, to B10", size=9, anchor="end", style="italic", halo=True)
+    P.text(-gw - 1.5, wd["b4_at"] + 6.5, "to B4, the", size=9, anchor="end", style="italic", halo=True)
+    P.text(-gw - 1.5, wd["b4_at"] + 4, "Audience Hall,", size=9, anchor="end", style="italic", halo=True)
+    P.text(-gw - 1.5, wd["b4_at"] + 1.5, "at floor level", size=9, anchor="end", style="italic", halo=True)
+    P.text(W_ / 2, dy - 2.5, "four ward-points on the dais", size=8.5, anchor="middle", style="italic",
+           fill=ACCENT, halo=True)
+    P.text(W_ / 2 + 9.5, 4, "two ward-points", size=8.5, style="italic", fill=ACCENT, halo=True)
     P.dim(W_ - 5, 0, W_ - 5, c["dais_from_doors"], "about 120 ft,\ndoors to dais",
           fact="court.dais_from_doors", side=-1, at=0.8)
-    P.tag(W_ + gw / 2, 18, "S1")
-    P.tag(-gw / 2, 26, "S1")
+    P.tag(W_ + gw / 2, 100, "S1")
+    P.tag(-gw / 2, 100, "S1")
     P.tag(-gw - 6, 92, "S11")
     P.tag(-gw / 2, 120, "S13")
     P.tag(W_ + gw / 2, 120, "S12")
 
     legend = [("wall", "Wall"), ("door", "Door or doorway"), ("stairs", "Stairs (arrow points up)"),
-              ("rail", "Rail, 12 ft above the Court floor"), ("fill", "Ground level", FLOOR),
-              ("fill", "Gallery level, 12 ft up", GALLERY), ("fill", "Corridor at gallery level", UPPER),
-              ("fill", "Garden walk (ground level)", GARDEN), ("grid", "5-foot grid"),
+              ("rail", f"Gallery rail, {r['gallery']} ft above the floor"),
+              ("walkrail", f"Garden walk's rail (about {r['walk']} ft down to the terrace)"),
+              ("pier", "Pier carrying a gallery"),
+              ("fill", "Ground level: the floor and the aisles", FLOOR),
+              ("fill", "Gallery overhead, 12 ft up (the aisle below is at floor level)", GALLERY, "6 3"),
+              ("fill", "Corridor at gallery level", UPPER),
+              ("fill", "Garden walk (ground level)", GARDEN),
+              ("ward", "Ward-point (Tables V–2 and V–3)"), ("grid", "5-foot grid"),
               ("tag", "Fight card (chapter IX)"), ("dim", "Measured distance")]
     key = [("B2", "The Crystal Court"), ("B3", "The banquet galleries, along both long sides"),
            ("S1", "The seating feud, in either gallery"),
            ("S11", "The one open door at midnight"),
            ("S12", "The minister in the smoke"), ("S13", "The arrest in the fire")]
-    caption = ["Distances from chapter V; other positions approximate."]
+    caption = ["Distances from chapter V. The galleries are a mezzanine; the doors under them open at floor level."]
     frame(svg, "Map VIII–3: The Crystal Court", "B2 · B3 — the Court, the banquet galleries and the east doors",
           legend, caption, mw, scale_ft=50, scale=scale, key=key)
     return svg.render("Map VIII–3: The Crystal Court")
@@ -780,7 +880,7 @@ def map_terraces(d: dict, grid=True) -> str:
         svg.close()
     # walls and balustrades
     P.walls([(-gw, L), (gx, L)], closed=False)
-    P.rail(-gw, L + G["walk"], gx, L + G["walk"])
+    P.walkrail(-gw, L + G["walk"], gx, down=1)
     for k in range(t["count"]):
         P.rail(-gw, G["terr0"] + (k + 1) * t["deep"], gx, G["terr0"] + (k + 1) * t["deep"])
     P.walls([(-gw, L), (-gw, gate_y), (gx, gate_y), (gx, wing_top)], closed=False, width=1.6)
@@ -802,9 +902,10 @@ def map_terraces(d: dict, grid=True) -> str:
     for k in range(t["count"]):
         ty = G["terr0"] + k * t["deep"]
         P.text(W_ / 2 - 6, ty + t["deep"] / 2 + 2, names[k], size=11, anchor="middle", weight="bold", halo=True)
-        sub = ("below the walk's rail" if k == 0 else "10 ft below the one above")
+        sub = (f"about {d['rails']['walk']} ft below the walk's rail" if k == 0
+               else "10 ft below the one above")
         P.text(W_ / 2 - 6, ty + t["deep"] / 2 - 4, sub, size=9.5, anchor="middle", style="italic", halo=True,
-               data_fact="terraces.drop" if k == 1 else None)
+               data_fact="terraces.drop" if k == 1 else ("rails.walk" if k == 0 else None))
     P.text(W_ / 2, lo + 84, "B5", size=20, anchor="middle", weight="bold", halo=True)
     P.text(W_ / 2, lo + 76, "THE LOWER GARDEN", size=12, anchor="middle", weight="bold", halo=True)
     P.text(W_ / 2, lo + 69, "about 150 ft to the river gate", size=9.5, anchor="middle",
@@ -837,10 +938,10 @@ def map_terraces(d: dict, grid=True) -> str:
     pts = [(px0, yy)]
     for i in range(5):
         if i > 0:
-            drop = 6 if i == 1 else t["drop"]               # walk → upper terrace: not given
-            if i > 1:
-                svg.line(px0 + xs[i] + 6, yy, px0 + xs[i] + 6, yy + drop * ps, stroke=ACCENT,
-                         stroke_width=0.9, data_fact_len="terraces.drop", data_px_per_ft=n(ps))
+            drop = d["rails"]["walk"] if i == 1 else t["drop"]   # walk → upper terrace: about 8
+            svg.line(px0 + xs[i] + 6, yy, px0 + xs[i] + 6, yy + drop * ps, stroke=ACCENT,
+                     stroke_width=0.9, data_fact_len="rails.walk" if i == 1 else "terraces.drop",
+                     data_px_per_ft=n(ps))
             pts.append((px0 + xs[i], yy))
             yy += drop * ps
             pts.append((px0 + xs[i], yy))
@@ -849,12 +950,13 @@ def map_terraces(d: dict, grid=True) -> str:
     svg.polyline(pts, stroke=WALL, stroke_width=1.6)
     svg.line(px0 + xs[5], yy, px0 + xs[5], yy - 18, stroke=ACCENT, stroke_width=2.4)
     svg.text(px0 + xs[5] + 6, yy - 6, "river gate", size=9, style="italic", fill=SOFT)
-    svg.text(px0 + 140, yb - 2, "each terrace 10 ft below the last",
+    svg.text(px0 + 140, yb - 2, "the upper terrace about 8 ft below the walk; each terrace 10 ft below the last",
              size=9, style="italic", fill=SOFT)
     svg.close()
 
     legend = [("wall", "Wall"), ("door", "Door"), ("stairs", "Stairs (arrow points up)"),
-              ("rail", "Rail or waist-high balustrade (a 10-ft drop beyond)"),
+              ("walkrail", "The garden walk's rail (about 8 ft down to the upper terrace)"),
+              ("rail", "Waist-high balustrade (a 10-ft drop beyond)"),
               ("fill", "Garden walk (ground level)", GARDEN),
               ("fill", "Terraces, each 10 ft lower", GARDEN2), ("fill", "Lower garden", LAWN),
               ("fill", "Context, other maps", CONTEXT), ("grid", "5-foot grid"),
@@ -862,7 +964,7 @@ def map_terraces(d: dict, grid=True) -> str:
     key = [("B5", "The garden terraces and the river gate"),
            ("S6", "The quiet word, on the upper terrace"),
            ("S9", "The appointment, on the upper terrace, watched from the walk's rail")]
-    caption = ["Distances from chapter V; other positions approximate."]
+    caption = ["Distances and drops from chapter V; the walk's rail is about 8 ft up."]
     frame(svg, "Map VIII–4: The Terraces and the River Gate", "B5 — Court to river, down three terraces",
           legend, caption, mw, scale_ft=50, scale=scale, key=key)
     return svg.render("Map VIII–4: The Terraces and the River Gate")
@@ -898,7 +1000,7 @@ def map_east_wing(d: dict, grid=True) -> str:
     P.rect(x0, L, gx - x0, G["walk"], fill=GARDEN)
     P.rect(x0, G["terr0"], gx - x0, 40, fill=GARDEN2)
     P.rect(x0, G["terr0"] + 40, gx - x0, y1 - G["terr0"] - 40, fill=GARDEN3)
-    P.rail(x0, L + G["walk"], gx, L + G["walk"])
+    P.walkrail(x0, L + G["walk"], gx, down=1)
     P.rail(x0, G["terr0"] + 40, gx, G["terr0"] + 40)
     P.walls([(W_, y0), (W_, sy)], closed=False, width=1.2)
     P.walls([(W_, sy + G["east_door_w"]), (W_, L), (x0, L)], closed=False, width=1.2)
@@ -954,6 +1056,7 @@ def map_east_wing(d: dict, grid=True) -> str:
     P.line(ix, iy, ex, iy, stroke=WALL, stroke_width=1.0)
     P.door(W_, sy, G["east_door_w"], horizontal=False, double=True, fill=FLOOR)
     P.door(ix, iy, iw, double=True, fill=UPPER)                              # the double doors
+    P.seal(ix, iy, iw)                                   # TP28: only these seal at midnight
     P.door(ex, cy + ch - 7, 4, horizontal=False, fill=UPPER)                 # cleared corridor → service stair
     P.door(ex, iy + 0.2, land - 0.4, horizontal=False, fill=UPPER)            # the wing's service door
     for name, ry in room_boxes:
@@ -968,12 +1071,16 @@ def map_east_wing(d: dict, grid=True) -> str:
     P.text(W_ + gw - 1, cy + 36, "cleared corridor,", size=9.5, anchor="end", style="italic", halo=True)
     P.text(W_ + gw - 1, cy + 32.5, "10 × 60 ft", size=9.5, anchor="end", style="italic", halo=True)
     P.text(W_ + gw - 1, iy + 1, "double doors →", size=9.5, anchor="end", style="italic", halo=True)
+    P.text(W_ + gw - 1, iy - 2.5, "(seal at midnight)", size=9, anchor="end", style="italic",
+           fill=ACCENT, halo=True)
     P.text(W_ + gw - 1, iy + 22, "corridor,", size=9.5, anchor="end", style="italic", halo=True)
     P.text(W_ + gw - 1, iy + 18.5, "10 × 100 ft →", size=9.5, anchor="end", style="italic", halo=True)
     P.text(gx - 8, G["terr0"] + 34, "the garden stair", size=9, anchor="end", style="italic", halo=True)
     P.text(gx - 8, G["terr0"] + 31, "(the private stair),", size=9, anchor="end", style="italic", halo=True)
     P.text(gx - 8, G["terr0"] + 28, "down the outer wall", size=9, anchor="end", style="italic", halo=True)
-    P.text(gx - 8, G["terr0"] + 25, "to the upper terrace", size=9, anchor="end", style="italic", halo=True)
+    P.text(gx - 8, G["terr0"] + 25, "to the upper terrace;", size=9, anchor="end", style="italic", halo=True)
+    P.text(gx - 8, G["terr0"] + 22, "its top door locked", size=9, anchor="end", style="italic", halo=True)
+    P.text(gx - 8, G["terr0"] + 19, "until midnight", size=9, anchor="end", style="italic", halo=True)
     # the rooms
     for name, ry in room_boxes:
         P.text(ex + rw / 2, ry + room_len / 2 + 1, name, size=10, anchor="middle", weight="bold", halo=True)
@@ -995,17 +1102,22 @@ def map_east_wing(d: dict, grid=True) -> str:
     P.text(gxe + 3, top - 14, "rooms 20–30 ft across", size=9.5, style="italic", halo=True)
     P.text(gxe + 3, r0 + 52, "the garden below", size=10, weight="bold", halo=True)
     P.text(gxe + 3, r0 + 48.5, "the east wing", size=10, weight="bold", halo=True)
-    P.text(gxe + 3, r0 + 45, "dark past the last lantern;", size=9, style="italic", halo=True)
-    P.text(gxe + 3, r0 + 42, "flower beds; 20 ft of", size=9, style="italic", halo=True)
-    P.text(gxe + 3, r0 + 39, "crystal wall up to one", size=9, style="italic", halo=True)
-    P.text(gxe + 3, r0 + 36, "lit window", size=9, style="italic", halo=True)
-    P.tag(gxe + 10, r0 + 30, "S10")
+    P.text(gxe + 3, r0 + 45, "about 5 ft below the Court;", size=9, style="italic", halo=True,
+           data_fact="east_wing.garden_below_court")
+    P.text(gxe + 3, r0 + 42, "dark past the last lantern;", size=9, style="italic", halo=True)
+    P.text(gxe + 3, r0 + 39, "flower beds; 20 ft of", size=9, style="italic", halo=True,
+           data_fact="east_wing.window_wall")
+    P.text(gxe + 3, r0 + 36, "crystal wall up to one lit", size=9, style="italic", halo=True)
+    P.text(gxe + 3, r0 + 33, "window at gallery level", size=9, style="italic", halo=True)
+    P.tag(gxe + 10, r0 + 26, "S10")
     P.tag(cx + cw / 2, cy + 14, "S4")
     P.tag(run_x + 2.5, 40, "S7")
     P.tag(run_x + 2.5, 50, "S2")
 
     legend = [("wall", "Wall"), ("door", "Door or double doors"), ("stairs", "Stairs (arrow points up)"),
-              ("rail", "Balustrade"), ("fill", "Gallery level, 12 ft up", UPPER),
+              ("walkrail", "The garden walk's rail"), ("rail", "Terrace balustrade (10-ft drop)"),
+              ("seal", "Seals at midnight (the double doors only)"),
+              ("fill", "Second floor: gallery level, 12 ft up", UPPER),
               ("service", "Service run, 5 ft"), ("fill", "The garden below the wing", LAWN),
               ("fill", "Context, other maps", CONTEXT), ("grid", "5-foot grid"),
               ("tag", "Fight card (chapter IX)")]
@@ -1014,7 +1126,7 @@ def map_east_wing(d: dict, grid=True) -> str:
            ("S2", "The service corridor behind the Dance"), ("S4", "The east wing doors"),
            ("S7", "The dark run to the wing's service door"),
            ("S10", "Over the wall, from the garden below")]
-    caption = ["Distances from chapter V; other positions approximate."]
+    caption = ["Distances from chapter V. Only the double doors seal at midnight; the other ways in stay open."]
     frame(svg, "Map VIII–5: The East Wing and the Service Run", "B9 · B10 — upstairs, at gallery level",
           legend, caption, mw, scale_ft=20, scale=scale, key=key)
     return svg.render("Map VIII–5: The East Wing and the Service Run")
@@ -1026,129 +1138,190 @@ FLOOR_STYLE = {
     "street": (STREET, None, "Outside: the street"),
     "ground": (FLOOR, None, "Ground level"),
     "garden": (GARDEN, None, "Gardens, below the garden walk"),
-    "gallery": (UPPER, None, "Gallery level, 12 ft up"),
-    "second": ("#cdbfe0", None, "Second floor"),
-    "cellar": ("#d8d2c8", None, "Beneath the cellars"),
-    "unknown": ("#ffffff", "4 3", "Shown by connection"),
-    "throughout": ("#eef2f6", "6 3", "Throughout the palace"),
+    "gallery": (UPPER, None, "Second floor: gallery level, 12 ft up"),
+    "second": ("#cdbfe0", None, "Second floor: the dark wing (no door to the galleries)"),
+    "terrace": ("#ffffff", "3 2", "Terrace level, under the garden wing"),
+    "cellar": ("#d8d2c8", "4 3", "Beneath the cellars"),
+    "throughout": ("#eef2f6", "6 3", "Kitchens; the passages run throughout"),
+    "context": (CONTEXT, None, "Rooms the night does not use"),
 }
 
 
 def map_palace(d: dict, grid=True) -> str:
-    mw, mh = 760, 760
-    W, H = mw + PAD * 2 + LEGEND_W, TOP + mh + 96
-    svg = Svg(W, H, 1)
+    # a small-scale plan in the scaled maps' frame (feet: x east, y north, origin at the
+    # south-west corner of the Court floor); placings off maps VIII-2 to VIII-5 follow the
+    # palace brief's block table (TP56, TP64)
+    scale = 1.55
+    x0, x1, y0, y1 = -182, 228, -160, 448
+    mw, mh = int((x1 - x0) * scale), int((y1 - y0) * scale)
+    W, H = mw + PAD * 2 + LEGEND_W, TOP + mh + 110
+    svg = Svg(W, H, scale)
     svg.rect(0, 0, W, H, fill="#ffffff")
-    ox, oy = PAD + 10, TOP + 20
+    P = Plan(svg, PAD, TOP + 10, x0, y1, scale)
 
-    def box(code, x, y, w, h, title, floor, notes=(), extra=None, big=14):
+    def room(code, x, y, w, h, floor, title=None, size=12, tx=None, ty=None, anchor="start",
+             notes=(), dash_override=None):
         fill, dash, _ = FLOOR_STYLE[floor]
-        svg.rect(ox + x, oy + y, w, h, fill=fill, stroke=WALL, stroke_width=1.6,
-                 stroke_dasharray=dash, data_room=code, data_floor=floor)
-        svg.text(ox + x + 8, oy + y + 19, code, size=big, weight="bold")
-        tx = ox + x + 8 + bold_w(code, big) + 4
-        line = 0
+        P.rect(x, y, w, h, fill=fill, stroke=WALL, stroke_width=1.3,
+               stroke_dasharray=dash_override or dash, data_room=code, data_floor=floor)
+        lx = x + 2.5 if tx is None else tx
+        ly = y + h - 8.5 if ty is None else ty
+        if code:
+            P.text(lx, ly, code, size=size, weight="bold", anchor=anchor, halo=True)
         if title:
-            if tx + bold_w(title, 11) > ox + x + w - 4:
-                line = 1
-                svg.text(ox + x + 8, oy + y + 34, title, size=11, weight="bold")
-            else:
-                svg.text(tx, oy + y + 19, title, size=11, weight="bold")
+            P.text(lx, ly - 8.5, title, size=9, weight="bold", anchor=anchor, halo=True)
         for i, ln in enumerate(notes):
-            svg.text(ox + x + 8, oy + y + 35 + 15 * line + 13 * i, ln, size=9.5, style="italic", fill=SOFT)
-        if extra:
-            code2, floor2, text = extra
-            svg.text(ox + x + 8, oy + y + h - 9, f"{code2}  {text}", size=10.5, weight="bold",
-                     fill=ACCENT, data_room=code2, data_floor=floor2)
+            P.text(lx, ly - 8.5 * (2 if title else 1) - 7 * i, ln, size=8.5, style="italic",
+                   fill=SOFT, anchor=anchor, halo=True)
 
-    def link(pts, dashed=False):
-        p = [(ox + x, oy + y) for x, y in pts]
-        svg.polyline(p, stroke=SERVICE if dashed else INK, stroke_width=1.4 if dashed else 1.8,
-                     stroke_dasharray="5 3" if dashed else None)
+    def plain(x, y, w, h, fill=CONTEXT, label=None, lines=(), anchor="middle", dash=None):
+        P.rect(x, y, w, h, fill=fill, stroke=WALL, stroke_width=1, stroke_dasharray=dash)
+        for i, ln in enumerate(lines):
+            P.text(x + w / 2 if anchor == "middle" else x + 2.5, y + h / 2 + 2 - 7 * i, ln,
+                   size=8.5, style="italic", fill=SOFT, anchor=anchor, halo=True)
 
-    def note(x, y, s, anchor="start", color=SOFT):
-        svg.text(ox + x, oy + y, s, size=9, style="italic", fill=color, anchor=anchor, halo=True)
+    def note(x, y, s, anchor="start", color=SOFT, size=8.5):
+        P.text(x, y, s, size=size, style="italic", fill=color, anchor=anchor, halo=True)
 
-    # the river and the gardens
-    svg.rect(ox + 120, oy, 300, 22, fill=WATER)
-    svg.text(ox + 270, oy + 15, "THE RIVER", size=10.5, anchor="middle", weight="bold", fill=SOFT)
-    box("B5", 120, 30, 300, 150, "The Garden Terraces & the River Gate", "garden",
-        ["the river gate (locked; Agenda 6), on the river walk",
-         "the lower garden, about 150 ft",
-         "three terraces, each 10 ft below the last (S6, S9)",
-         "the garden walk, railed, at ground level"])
-    # the Court and its galleries
-    box("B2", 160, 236, 220, 190, "The Crystal Court", "ground",
-        ["ground level; about 140 × 80 ft", "the dais and high table at the", "far end; the Dance",
-         "garden doors to the walk", "east doors: a stair up 12 ft"])
-    for gx_ in (120, 380):
-        box("B3", gx_, 236, 40, 190, "", "gallery", big=13)
-        for i, ln in enumerate(["ban-", "quet", "gal-", "lery,", "", "12 ft", "up"]):
-            svg.text(ox + gx_ + 20, oy + 300 + 13 * i, ln, size=9.5, anchor="middle", style="italic", fill=SOFT)
-    box("B4", 0, 284, 106, 70, "Audience Hall", "unknown", ["off the Court"])
-    box("B1", 160, 482, 220, 92, "The Gatehouse Court", "ground",
-        ["the gatehouse: the cell, the stair", "to the gate-walk (15 ft up)"],
-        extra=("B12", "ground", "after midnight, held (S3)"))
-    box("B0", 160, 630, 220, 80, "The Street", "street", ["Gate Street: the hill, the line.", "Play starts here."])
-    box("B9", 500, 110, 150, 180, "The East Wing", "gallery",
-        ["gallery level, 12 ft up", "a 10 × 100-ft corridor:", "Veier's rooms, Raunu's",
-         "rooms, the nursery; the", "private stair (the garden", "stair) at its far end;",
-         "double doors (S4) at the", "head of the cleared corridor"])
-    # connections the text gives
-    link([(270, 482), (270, 426)])
-    note(278, 458, "main doors (10 ft)")
-    link([(270, 630), (270, 574)])
-    note(278, 606, "the outer gate and its wicket (S3)")
-    link([(270, 236), (270, 180)])
-    note(278, 212, "garden doors, to the walk")
-    link([(106, 318), (120, 318)])
-    link([(420, 270), (500, 270)])
-    for i, ln in enumerate(["east doors,", "a stair up", "12 ft; the", "cleared", "corridor", "(10 × 60 ft)"]):
-        note(426, 262 + (0 if i == 0 else 22 + 12 * (i - 1)), ln)
-    link([(575, 110), (575, 100), (420, 100)])
-    note(585, 88, "the garden stair, down")
-    note(585, 100, "to the upper terrace")
+    # the river, and Gate Street
+    P.rect(x0, 432, x1 - x0, y1 - 432, fill=WATER)
+    P.rect(x0, 420, x1 - x0, 12, fill=STREET)
+    P.text(40, 437, "THE RIVER", size=10.5, anchor="middle", weight="bold", fill=SOFT)
+    note(-150, 424, "the river walk")
+    room("B0", x0, y0, x1 - x0, -60 - y0, "street", "Gate Street, the approach", tx=-176, ty=-80,
+         notes=["the line climbs the hill; play starts here"])
+    P.stairs(30, -150, 20, 60, up="n", treads=16)
+    note(54, -120, "the grand stair")
+    P.rect(0, -90, 80, 30, fill="#ebe7df", stroke=WALL, stroke_width=0.8)
+    note(40, -82, "gate landing", anchor="middle")
 
-    # rooms placed only by connection
-    px = 490
-    svg.text(ox + px, oy + 372, "Rooms shown by connection", size=11.5, weight="bold")
-    box("B6", px, 384, 270, 44, "The Chapel", "unknown", ["a public room; Mother Sella's, all night"])
-    box("B7", px, 436, 270, 44, "The Trophy Gallery", "unknown", ["the private palace, off the gallery corridor"])
-    box("B8", px, 488, 270, 44, "Raunu's Study", "second", ["the second floor, in the dark wing (S8)"])
-    box("B13", px, 540, 270, 44, "The Room You Put Here", "unknown",
-        ["off the lower gallery; from B7 and the service run"])
-    box("B10", px, 592, 270, 56, "Kitchens & Service Passages", "throughout",
-        ["the passages thread the whole palace: the east", "wing, the garden stair, the S11 door off B2"])
-    box("B11", px, 656, 270, 56, "The Root of the House", "cellar",
-        ["kitchens → wine cellar → the lower cellar", "stair → a sealed seam (Undercurrent A)"])
-    link([(px, 620), (465, 620), (465, 340), (575, 340), (575, 290)], dashed=True)
-    link([(465, 410), (420, 410)], dashed=True)
-    note(457, 520, "service", anchor="end", color=SERVICE)
-    note(457, 532, "passages", anchor="end", color=SERVICE)
+    # the street front: gatehouse, towers, the Gatehouse Court
+    for tx_ in (6, 60):
+        plain(tx_, -64, 14, 18)
+    for tx_ in (-34, 94):
+        plain(tx_, -14, 20, 20)
+    plain(20, -60, 40, 15, fill="#ece6d8")
+    P.line(32.5, -60, 47.5, -60, stroke=ACCENT, stroke_width=2.6)
+    room("B1", 10, -45, 60, 45, "ground", "Gatehouse Court", tx=13, ty=-17,
+         notes=[])
+    P.text(13, -40, "B12  held (S3)", size=8.5, weight="bold", fill=ACCENT,
+           data_room="B12", data_floor="ground")
 
-    # the floors panel
-    fy = 420
-    svg.text(ox, oy + fy - 8, "Floors", size=11, weight="bold")
-    rows = [("second", "2nd floor: B8"), ("gallery", "12 ft up: B3, B9"),
-            ("ground", "Ground: B1, B2"), ("garden", "Below walk: B5"),
-            ("cellar", "Cellars: B11"), ("unknown", "By connection: B4,"),
-            (None, "B6, B7, B13")]
-    for i, (fl, label) in enumerate(rows):
-        if fl:
-            fill, dash, _ = FLOOR_STYLE[fl]
-            svg.rect(ox, oy + fy + i * 21, 16, 13, fill=fill, stroke=WALL, stroke_width=0.8,
-                     stroke_dasharray=dash)
-        svg.text(ox + 22, oy + fy + i * 21 + 10.5, label, size=9.5)
+    # the Crystal Court, its aisles and galleries
+    P.rect(-20, 0, 120, 140, fill=FLOOR, stroke=WALL, stroke_width=1.6)
+    room("B2", 0, 0, 80, 140, "ground", "The Crystal Court", size=15, tx=40, ty=78, anchor="middle",
+         notes=["ground level", "about 140 × 80 ft"])
+    P.rect(25, 120, 30, 15, fill="#e2d3b4", stroke=WALL, stroke_width=0.8)
+    note(40, 114, "the dais", anchor="middle")
+    for gx_ in (-20, 80):
+        P.rect(gx_, 0, 20, 140, fill=UPPER, opacity=0.6, stroke=SOFT, stroke_width=1.1,
+               stroke_dasharray="5 3", data_room="B3", data_floor="gallery")
+        P.text(gx_ + 10, 74, "B3", size=11, weight="bold", anchor="middle", halo=True)
+    note(-10, 66, "gallery", anchor="middle", size=7.5)
+    note(90, 66, "gallery", anchor="middle", size=7.5)
+    P.stairs(-19.5, 3, 7, 22, up="n", treads=8)
+    P.stairs(92.5, 3, 7, 22, up="n", treads=8)
+    P.line(35, 0, 45, 0, stroke=FLOOR, stroke_width=4)                       # main doors
+    for gd in (8, 62):
+        P.line(gd, 140, gd + 10, 140, stroke=GARDEN, stroke_width=4)          # garden doors
+    P.line(-20, 56, -20, 66, stroke=FLOOR, stroke_width=4)                    # door to B4
+    P.line(-20, 96, -20, 101, stroke=FLOOR, stroke_width=4)                   # S11's door
+    P.tag(-20, 106, "S11")
+
+    # the gardens
+    room("B5", -20, 140, 120, 280, "garden", "Terraces and river gate", tx=40, ty=330,
+         anchor="middle", notes=["the lower garden, about 150 ft", "to the river gate"])
+    for k, tint in enumerate((GARDEN, GARDEN2, GARDEN3)):
+        P.rect(-20, 150 + 40 * k, 120, 40, fill=tint, stroke=WALL, stroke_width=0.6)
+    P.walkrail(-20, 150, 100, down=1, step=6)
+    for k in (1, 2, 3):
+        P.rail(-20, 150 + 40 * k, 100, 150 + 40 * k)
+    note(40, 168, "upper terrace", anchor="middle")
+    note(40, 208, "second terrace", anchor="middle")
+    note(40, 248, "third terrace", anchor="middle")
+    note(40, 143, "garden walk", anchor="middle", size=7.5)
+    P.line(35, 420, 45, 420, stroke=ACCENT, stroke_width=3)
+    note(48, 412, "river gate (locked)")
+    plain(135, 92, 85, 178, fill=LAWN, lines=["the garden", "below the", "east wing", "(S10)"])
+
+    # the east wing, up the east stair (gallery level)
+    P.rect(80, 30, 20, 10, fill=FLOOR, stroke=WALL, stroke_width=0.8)
+    P.stairs(100, 30, 10, 24, up="n", treads=8)
+    P.rect(100, 54, 10, 60, fill=UPPER, stroke=WALL, stroke_width=1)
+    note(112, 70, "cleared corridor")
+    plain(110, 86, 10, 28, fill=STAIR)
+    room("B9", 100, 114, 35, 100, "gallery", "The East Wing", tx=104, ty=196,
+         notes=["Veier's rooms, Raunu's", "rooms, the nursery"])
+    P.line(100, 114, 110, 114, stroke=ACCENT, stroke_width=3.5)
+    P.stairs(93, 164, 6, 48, up="n", treads=12)
+    note(91, 186, "garden", anchor="end", size=7.5)
+    note(91, 180, "stair", anchor="end", size=7.5)
+    note(122, 46, "east stair, up 12 ft")
+
+    # the West Range
+    room("B4", -160, 36, 110, 50, "ground", "Audience Hall", tx=-156, ty=72)
+    plain(-50, 46, 30, 30, fill=FLOOR, lines=["ante-", "chamber"])
+    P.svg.poly([(P.X(x_), P.Y(y_)) for x_, y_ in ((-64, -6), (-46, -6), (-34, 6), (-34, 24), (-46, 36),
+                                                   (-64, 36), (-76, 24), (-76, 6))],
+               fill=FLOOR, stroke=WALL, stroke_width=1.3, data_room="B6", data_floor="ground")
+    P.text(-55, 18, "B6", size=12, weight="bold", anchor="middle", halo=True)
+    note(-55, 10, "chapel", anchor="middle")
+    P.svg.poly([(P.X(x_), P.Y(y_)) for x_, y_ in ((-170, -60), (-34, -60), (-34, -6), (-76, -6),
+                                                   (-76, 36), (-170, 36))],
+               fill=CONTEXT, stroke=WALL, stroke_width=1)
+    note(-120, 20, "shut state rooms", anchor="middle")
+    note(-120, 13, "and the dark-wing stair;", anchor="middle")
+    note(-120, 6, "the dark wing above", anchor="middle")
+    room("B8", -176, -66, 30, 30, "second", "", tx=-173, ty=-48)
+    note(-173, -56, "study", size=7.5)
+    note(-142, -52, "Raunu's study, in the dark")
+    note(-142, -59, "wing's corner tower")
+    plain(-170, 96, 110, 54, fill=STREET, lines=["stable yard"])
+    # the garden wing: B7 above, B13 below
+    room("B7", -55, 150, 35, 40, "gallery", "", tx=-52, ty=180)
+    note(-52, 172, "trophy", size=7.5)
+    note(-52, 166, "gallery", size=7.5)
+    plain(-55, 190, 35, 24, fill=UPPER, lines=["drawing", "rooms"])
+    room("B13", -53, 152, 14, 9, "terrace", "", size=8.5, tx=-52, ty=154.5)
+    plain(-120, 150, 65, 80, fill=CONTEXT, lines=["falcon mews"])
+    note(-58, 141, "lower gallery and B13 below B7", anchor="end", size=7.5)
+
+    # the East Range
+    room("B10", 114, -60, 86, 50, "throughout", "Kitchens", tx=118, ty=-24,
+         notes=["and the service passages"])
+    plain(119, -10, 51, 40, fill=CONTEXT, lines=["servants' hall"])
+
+    # the Root beneath the Court's south half
+    P.svg.circle(P.X(40), P.Y(28), 25 * scale, fill="#d8d2c8", fill_opacity=0.55, stroke=WALL,
+                 stroke_width=1.2, stroke_dasharray="4 3", data_room="B11", data_floor="cellar")
+    P.text(40, 30, "B11", size=11, weight="bold", anchor="middle", halo=True)
+    note(40, 23, "the Root, far below", anchor="middle", size=7.5)
+
+    # the service passages (schematic)
+    svc = dict(stroke=SERVICE, stroke_width=1.6, stroke_dasharray="5 3")
+    for pts in ([(116.5, -10), (116.5, 8.5), (102.5, 8.5), (102.5, 23.5), (112.5, 23.5), (112.5, 86)],
+                [(-20, 98.5), (-25, 98.5), (-25, 140)], [(-20, 91), (-165, 91), (-165, 36)]):
+        P.svg.polyline([(P.X(x_), P.Y(y_)) for x_, y_ in pts], **svc)
 
     legend = [("fill", FLOOR_STYLE[k][2], FLOOR_STYLE[k][0], FLOOR_STYLE[k][1])
-              for k in ("street", "ground", "gallery", "second", "garden", "cellar", "throughout", "unknown")]
-    legend += [("wall", "A way through"), ("service", "Service passages")]
+              for k in ("street", "ground", "gallery", "second", "garden", "terrace", "cellar",
+                        "throughout", "context")]
+    legend += [("stairs", "Stairs (arrow points up)"), ("service", "Service passages (schematic)"),
+               ("walkrail", "The garden walk's rail"), ("rail", "Terrace balustrade"),
+               ("seal", "Seals at midnight"), ("tag", "Fight card (chapter IX)")]
     key = [("B0", "Street, approach, line"), ("B1", "Gatehouse Court"), ("B2", "Crystal Court"),
            ("B3", "Banquet Galleries"), ("B4", "Audience Hall"), ("B5", "Terraces, river gate"),
            ("B6", "Chapel"), ("B7", "Trophy Gallery"), ("B8", "Raunu's Study"), ("B9", "East Wing"),
            ("B10", "Kitchens, service passages"), ("B11", "Root of the House"),
            ("B12", "Gatehouse Court, held"), ("B13", "The Room You Put Here")]
-    caption = ["Not to scale. Maps VIII–2 to VIII–5 draw the rooms to scale."]
+    # a small scale bar of its own (the overview has no grid)
+    svg.open(id="overview-scale")
+    bx, by = PAD + 10, H - 56
+    svg.rect(bx, by, 100 * scale, 5, fill=INK, data_fact_w="100")
+    svg.text(bx, by - 4, "0", size=9, anchor="middle")
+    svg.text(bx + 100 * scale, by - 4, "100 feet", size=9, anchor="middle")
+    svg.close()
+    caption = ["A small-scale plan; maps VIII–2 to VIII–5 draw the rooms at 5 feet a square."]
     frame(svg, "Map VIII–1: The Palace", "B0–B13, keyed, floor by floor", legend, caption, mw,
           scale_ft=None, east=True, key=key)
     return svg.render("Map VIII–1: The Palace")

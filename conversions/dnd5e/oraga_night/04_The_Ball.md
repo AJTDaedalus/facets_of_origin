@@ -1114,8 +1114,8 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
   They are no longer laughing, and one of them has moved his hilt to where he can
   reach it sitting down. **Tell:** the bodyguards' eyes going to the same doors
   Corro's do.
-- **The Thenya.** Maiven presses Corval in B3. Behind her, the slingers walk the
-  gallery toward the east wing as far as the cleared corridor, look at the doors and
+- **The Thenya.** Maiven presses Corval in B3. Behind her, the slingers go out by
+  the east doors and up the stair as far as the cleared corridor, look at the doors and
   the guards on them for a long moment, and walk back. **Tell:** the second time, they
   time it. → the Thenya's line, chapter IX (only if provoked).
 
@@ -1274,8 +1274,8 @@ good thing I have left to give anyone."
   all) and asks, low, if they have felt anything tonight. He is not joking. *No
   card: this is a conversation, and an ally if it goes well.*
 - **The Thenya.** Maiven petitions for a summons, and does not get one. The
-  slingers are no longer walking to the east wing corridor; they are watching the
-  guard change on it from the gallery rail, and one of them is counting under her
+  slingers are no longer walking to the east wing corridor; they are timing the
+  guard change on its doors instead, and one of them is counting under her
   breath. **Tell:** the count restarts every time the guards do. → the Thenya's line, chapter IX (only if provoked).
 
 ### Movement IV — The Toast *(later — dinner)*
@@ -1287,7 +1287,8 @@ good thing I have left to give anyone."
 > the Wept watching the young pages a beat too long; her offering in Elanna's niche,
 > for anyone who passes the shrine (B6).
 
-The banquet is called, and the galleries fill. And then, between the first course
+The banquet is called, and the galleries fill. They run the Court's full length, so
+every table in them can look down on the dais. And then, between the first course
 and the second, with no trumpet and no announcement, Raunu Boranis is simply
 standing at the high table: unmasked, plainly dressed for a chief, holding a cup
 as if someone had handed it to him and left. The room takes a full three seconds to
