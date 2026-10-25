@@ -90,7 +90,7 @@ happy, genuinely and unfashionably, and rumor has no shelf for it.
 
 **Where she is:** the east wing (B9), all night, near her time, the midwife in
 attendance. She is reachable only by characters who earn the east wing (Agenda 4's
-errand with the grandmother's ring at the doors, Anha's passages, Undercurrent C), so
+errand with the grandmother's ring at the doors, Undercurrent C), so
 a scene with her is a prize, not a schedule item. Characters who reach her after the toast find her at dinner with
 Raunu, the two plates explained at last. It is the only place all night anyone sees
 Raunu Boranis at ease (see chapter IV, "Dinner for Two (B9)").
@@ -123,7 +123,8 @@ doors, or anyone who reaches her there) learns the following (see chapter IV,
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her: her husband's two crystals working. Wounded once, cleanly,
 by the Radiant, she stays upright anyway and goes down the private stair and out through the gardens
-on Vell's arm (the Crossing, chapter V). If her gift matters at your table (a
+on Vell's arm (the Crossing, chapter V). The cut will not close: healing eases her and
+keeps her on her feet, but the wound does not knit, and nothing says why. If her gift matters at your table (a
 bonded loved one in mortal peril), it flares once, without training or
 explanation; spend it on a character who bled
 for her.
@@ -201,7 +202,18 @@ the shape of everything (the staff cuts, the sealed wing, the midwife, the maste
 locked study, the testament he stood witness to in the chapel three days ago) and
 the meaning of none of it.
 Loyalty has kept him from assembling the pieces: he is the faithful servant's
-tragedy, one honest conversation away from understanding.
+tragedy, one honest conversation away from understanding. The usual staff carry the
+meals for two up to the east wing; the third tray he takes up himself, alone, and a
+guest who sees the majordomo carrying a tray himself has a clue (see chapter IV, "Undercurrent
+C").
+
+**At the Unmasking:** Raunu's last words send him to the stairs that reach the east
+wing, and he goes without needing to understand. He gathers the characters nearest
+him, those who helped him first, and guides them by the service stair and the garden
+stair to get in front of the Radiant. He is a guide, never a fighter; he never reaches
+Veier and never meets Vell. If the characters convinced him before midnight, he has
+already given them the wing's service door. Keeping him alive is Agenda 1's midnight
+payoff (chapter V, "Corval. The stairs.").
 
 **Roleplaying Corval:** thin, upright, old, magnificent under pressure, doing the work of six
 chamberlains. Bribing Corval is impossible, with no check for it at
@@ -256,7 +268,7 @@ is too tired to check.
 **Wants:** to keep her head down and her triple wages flowing home. **Fears:**
 giving the wrongness a name, in case naming is what makes it real. **Secret:** two
 years of eerie domestic detail (east wing lights burning all night, meals for two
-sent up and meals for three coming back down these last months, the master's voice
+sent up and, these last months, three plates coming back down together for washing, the master's voice
 in empty rooms, corridors she is forbidden to sweep) and no frame to put around any
 of it.
 
@@ -271,7 +283,8 @@ befriend her.
 gets nothing) learns the following:
 
 - The east wing's lights burn all night.
-- Meals for two go up. These last months, plates for three come back down.
+- Meals for two go up. These last months, three plates come back down for washing,
+  all together.
 - She has heard the master's voice in empty rooms.
 - There are corridors she is forbidden to sweep. One is the lower cellar stair,
   which makes no sense, because nothing is down there but wine.
@@ -296,7 +309,9 @@ lights die she goes for the service passages, because she knows them.
 which is to say, the one report from the east that reached her desk and was above her
 seal to read. **Secret:** the Church's interest tonight is not doctrinal; her
 superiors want to know whether the man who returned is the man who left, and
-she has not been told why the question is phrased that way.
+she has not been told why the question is phrased that way. The Church cannot read
+Raunu, so her wardens mean to search his private room for anything that answers the
+question, or for any breach of the writing law to hold over him (card S8).
 
 **Roleplaying Kovaun:** urbane, watchful, a career diplomat in vestments; works the room like
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
@@ -354,8 +369,11 @@ all of this:
 *Mistress of the Merchant's Circle; Agenda 1's patron.*
 
 **Wants:** Raunu's next decree, before it lands on her margins. **Fears:** an heir,
-a dynasty of Raunus, which is why Movement IV turns her polite loathing into
-something with a horizon. **Secret:** the Circle has already gamed a Vorlain
+a dynasty of Raunus: Raunu's politics outliving him, and the chieftaincy she has
+priced (below) never coming. That is why Movement IV turns her polite loathing into
+something with a horizon. Her knife who trailed Corval in Movement II saw him carry a
+third tray up himself, and the toast's two plates and "two years in the keeping"
+finish the sum; so she sends a knife to lean on Anha (card S7). **Secret:** the Circle has already gamed a Vorlain
 chieftaincy and priced it attractive; she is here tonight to check the arithmetic,
 not to act on it. (She would be horrified to be called a conspirator; she is merely
 prepared, like her host.)
@@ -450,8 +468,9 @@ who goes to him on the terrace in Movement V, the one time he asks anyone for he
 can learn the following:
 
 - He served the year of Vorlain's rule as fixer.
-- The Draunel duelist's appointment on the terraces was accepted, and Essin did not
-  accept it. At the first quarter-bell he must choose between his cousin's reputation
+- The Draunel duelist's appointment on the terraces was accepted by one of his
+  blades, in public, behind his back. Essin cannot call it off without the house
+  being seen to run, which is why he asks an outsider for help. At the first quarter-bell he must choose between his cousin's reputation
   and his blade's life (see chapter IV, Movements IV and V).
 - He knows where the missing year's two bodies are buried: the two cousins Vorlain
   killed in his year of rule. He does not say where. Carried to House Draunel, it can
@@ -583,6 +602,12 @@ edges: masks from no maker's hand, names on no one's memory, speech from another
 age. Near them, quietly, Orthaen crystals go faint. What makes them
 monstrous is how much of them is left.
 
+One of them leaves the ball once. After his blessing over the food in Movement IV,
+the Radiant slips out to walk the garden route he will hunt Veier down at midnight,
+and the falcons in the mews scream and fall silent as he passes (the Movement IV
+omen). The guests never learn it. A table watching him may notice a gray mask gone
+from the galleries at the moment the mews erupt. Walking a route is not acting.
+
 Their human moments — the Wept watching the young pages too long, her mourning
 rite in the chapel, the cradle-song at the east wing doors; the Radiant's
 antique blessing over the food, his warmth on the subject of service; the
@@ -598,8 +623,9 @@ does; see chapter V, "Buying Time"), and ward-fire, the leash and the Fractures 
 outcomes. That is the complete list; their Attendant, below, is another matter.
 
 ### The Attendant — the Quiet Guest
-*A great house's attendant, by its clothes: a cloak folded over one arm and a cup held
-ready for a master nobody at the ball can find. It came in with the early guests.*
+*A great house's attendant, by its clothes: a cloak folded over one arm, standing apart
+and staring oddly, as if it expects a master nobody at the ball can find to arrive. It
+came in with the early guests.*
 
 *DM only: the Attendant is a Namak-Zai. The module never uses the word at the table
 and never says more about what that is.* It is a made thing, not a born one, serving
@@ -617,8 +643,8 @@ Asked whom it serves, it names no one, and looks around, briefly, for the master
 supposed to have.
 
 It has **three habits**, and they are how the party beats it at
-midnight: it stares at worked crystal and light; it keeps a cup and cloak ready for
-a master who is not there; it follows music that changes. Chapter IV shows one habit
+midnight: it stares at worked crystal and light; it waits for a master who is not
+there; it follows music that changes. Chapter IV shows one habit
 in each of Movements I, II, IV and V, visible and deniable, and a player who says one out loud before anything
 explains it has read an omen (Table I–3).
 
@@ -629,7 +655,7 @@ one as printed (see chapter IV). Drawing steel on it is still
 drawing steel at the ball (see chapter IV, "The Palace on Alert"), and the guards arrive
 to find a character with a blade out and nobody in front of them.
 
-**At the Unmasking** it drops the pretense, sets the cloak and the cup down on the
+**At the Unmasking** it drops the pretense, sets the cloak down on the
 nearest table, and takes its place by the Uninvited (chapter V has the read-aloud).
 
 **Roleplaying the Attendant:** it speaks only when spoken to, and it

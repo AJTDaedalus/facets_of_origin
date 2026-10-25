@@ -164,8 +164,10 @@ how a party walks into it, turns it, or sets one snake on another.*
 
 **What they came for.** Raunu's next decree, which his ministers call the Tithe of Hands.
 It lives whole in exactly three heads, Minister Corval's and two ministers' (see chapter II,
-"The Eight Agendas", Agenda 1), and her knives' line runs through those heads. Her want,
-fear and secret are in her dossier (see chapter VII, "Mistress Rhaza Callun").
+"The Eight Agendas", Agenda 1), and her knives' line runs through those heads. What she
+fears is an heir, for her margins: Raunu's politics outliving him, and the Vorlain
+chieftaincy the Circle had priced attractive never coming. Her want, fear and secret
+are in her dossier (see chapter VII, "Mistress Rhaza Callun").
 
 **Who they brought.** **Rhaza Callun** and four **Circle Hired Knives** (see chapter X), from
 the season's hired swords, paid half up front and half on delivery. A prepared patron
@@ -177,9 +179,9 @@ Agenda 1, if anyone took it, and the other is these.
 | Movement | The scheme | What the party can see | Card |
 |---|---|---|---|
 | I | The knives memorize who came, the only way the law allows | Lips moving at every name Corval calls | — |
-| II | One knife shadows Corval, the man the Tithe lives in — or watches the Agenda 1 character work him | The same plain good coat wherever Corval goes | — |
+| II | One knife shadows Corval, the man the Tithe lives in — or watches the Agenda 1 character work him — and sees him carry a third tray up toward the east wing himself, alone | The same plain good coat wherever Corval goes | — |
 | III | A knife waits in the Audience Hall line to see who is summoned; Callun buys what they heard | Compliments, a quiet question, coin, and a knife standing close | — |
-| IV | After the two plates, Callun's question: a knife leans on Anha in the service doorway — *who eats off the second plate?* | Anha's hands going still on the tray | **S7** |
+| IV | The third tray, then the two plates and "two years in the keeping": Callun's question. A knife leans on Anha in the service doorway — *who eats off the second plate?* | Anha's hands going still on the tray | **S7** |
 | V | A knife works the dark service run toward the east wing's service door with whatever Anha told him, which is less than he wants | A plain good coat where no guest has any reason to be | **S7** |
 | VI–VII | *Lights out.* Heat 0–2: the knives get Callun out through the service passages. Heat 3–4: paid on delivery, they deliver — they take one of the two ministers who carry the Tithe and walk him out through the smoke to her | Two coats half-carrying an old man the wrong way through the smoke | **S12** |
 
@@ -212,7 +214,9 @@ knives all night has testimony that cuts the other way.
 **What they came for.** To file Raunu Boranis under something, and to answer her superiors'
 question about him (see chapter II, "The Eight Agendas", Agenda 2). The Church finds Raunu illegible, and a chief it cannot predict is a
 chief it cannot steer (see chapter II). And the written word belongs to the Church and to
-nobody else. Her want, fear and secret are in her dossier (see chapter VII, "Prelate
+nobody else. The Church cannot read Raunu, so her wardens mean to search his private
+room for anything that answers the Prelate's question, or for any breach of the
+writing law to hold over him. Her want, fear and secret are in her dossier (see chapter VII, "Prelate
 Damaris Kovaun").
 
 **Who they brought.** **Damaris Kovaun** and four **Church Wardens** (see chapter X), her escort.
@@ -226,13 +230,15 @@ Damaris Kovaun").
 | III | Kovaun waits in the Audience Hall antechamber; a warden meets any summoned character with an invitation to attend her in the chapel | The warden knows their name without being told it | — |
 | IV | The Radiant blesses the food in a form Kovaun recognizes (a Fracture tell; see chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
 | V | The two wardens are at the door of Raunu's study (B8), working its crystal lock with the patience of men who have done this in other houses. They want the room filed | Lamplight under a study door that is supposed to be dark | **S8** |
-| VI–VII | *Lights out.* Heat 0–2: the wardens come down for the Prelate and get her out. Heat 3–4: they are inside the study when the lights die, and they finish the job: the drawer of invitation cards goes into a warden's arms, and the work-slate is wiped | Wardens coming down the dark-wing stair with their arms full | **S8** (dark) |
+| VI–VII | *Lights out.* Heat 0–2: the wardens come down for the Prelate and get her out. Heat 3–4: they are inside the study when the lights die, and they finish the job: the great table's map goes down in a warden's hand, and the work-slate is wiped | Wardens coming down the dark-wing stair, one with fresh-written pages held to his chest | **S8** (dark) |
 
 **What is in the study that the Church wants** (area B8): no papers (there are
-none anywhere), but a **drawer of duplicate invitation cards**, one for every guest,
-a certain few with a corner deliberately scorched. An invitation is one of the two
-writings the Church suffers outside its walls; a drawer of duplicates, marked, is
-something a warden can carry out and call a violation. And the **work-slate** with
+none anywhere), but the **great table**, a grown relief of the eastern coast with its
+mist-lines reworked many times. The wardens cannot carry it out, because it is grown,
+but they can do what only the Church may and write it down: a record of that map is
+proof the chief is looking east, which is the fear Kovaun carries (see chapter VII).
+
+The **work-slate** with
 the half-erased lattice diagram: slate scratch-work is the law's other grudging
 exception, and wiping it is what the law expects. That diagram is the key to the Root
 of the House (Undercurrent A). A table chasing the Root has a very good reason to be
@@ -246,10 +252,10 @@ Church's heat to 0, and she pays her debts. Telling her what her wardens are doi
 somewhere she would have to be seen ignoring it, also works: she calls them off.
 
 **Snake on snake.** The wardens are the only
-people at the ball who can take the drawer of scorched invitations out of the
-palace, and the scorch marks are a list somebody might want read: Draunel, who wants
+people at the ball who may write down what is on the great table, and what the
+Prelate learns about the mists is something others would pay for: Draunel, who wants
 Vorlain blamed, and Essin, who wants nothing read at all, would each pay to know what
-is in a warden's arms. Kovaun also recognizes the Radiant's blessing: a party that
+the Church now knows. Kovaun also recognizes the Radiant's blessing: a party that
 asks her about it has a priest who can plant the doubt (see chapter V), if they can
 get her near it.
 
@@ -336,7 +342,7 @@ draw.
 | I | Essin and the cousins stand in a loose ring a few paces off Vorlain. Anyone who approaches Vorlain is looked at by one of them first | The ring closes a step whenever a Draunel laughs | — |
 | II | Whoever spends more than one drink on Vorlain (Agenda 3 above all), or asks anyone about the missing year, finds a cousin at their elbow, pleasant, admiring their mask, on the side nearest Vorlain | Every time the character turns toward Vorlain, somebody is already there | **S6** |
 | III | Anyone who pressed Vorlain and has not yet been warned off is invited, very warmly, to take the air on the terraces — just the two of you, and a friend already out there | The same cousin who admired their mask | **S6** |
-| IV | Vorlain goes quiet and drinks. The cousins steer anyone still baiting him toward the garden doors. The duelist's appointment has been accepted, and Essin did not accept it | Essin, for the first time tonight, not smiling | **S9** |
+| IV | Vorlain goes quiet and drinks. The cousins steer anyone still baiting him toward the garden doors. The duelist's appointment has been accepted by one of Essin's blades, in public, behind his back; Essin cannot call it off without the house being seen to run | Essin, for the first time tonight, not smiling | **S9** |
 | V | Essin has a problem on the terrace he did not make, and chooses between his cousin's reputation and his blade's life. A character who goes to him now finds the one moment all night Essin asks anyone for help | Essin, alone, which he never is | **S9** |
 | VI–VII | *Lights out.* Vorlain hauls guests out of the burning banquet gallery, and nobody, Vorlain included, can say why. Essin and the cousins go with him. Heat 3–4: if Draunel's Iron 4 comes for Vorlain, the cousins fight for him, and the man they are fighting over is carrying a stranger out of a fire | Cousins with blades out in the smoke, standing between Vorlain and three Draunel men | **S13** |
 
@@ -431,9 +437,9 @@ her is the better bet.
 | V | Maiven at the east wing doors; the slingers in the gardens below the east wing, one uncoiling a rope. At the half-bell they try the wall, and the honor guard answers | The rope | **S10** (and S4) |
 | VI | She goes toward the east wing the instant the lights die | — | Chapter V |
 
-**Walk into it.** The characters can go with them. Agenda 4 is a way through the east
-wing doors, and Anha's passages are another. Either one turns a wall-climb into an
-escort (S10). Or they can stand in their way, and it is a fight nobody wants.
+**Walk into it.** The characters can go with them, onto the wall or the window ledge,
+never into Veier's room: the inner guards turn them back (S10). Or they can stand in
+their way, and it is a fight nobody wants.
 
 **Turn it.** Proof of Veier ends the line:
 the ring delivered and an answer brought back (Agenda 4), or any character who
@@ -897,7 +903,7 @@ if anyone can climb it away from the gatehouse (a DC 13 Strength (Athletics) che
 they do, they meet four more Blades, because the other twelve are holding the
 perimeter. The captain's price, if anyone asks what it is.
 
-**Treasure.** The contract case, and the company's purse (3d6 × 10 GP in old coin)
+**Treasure.** The contract case, and the company's purse (3d6 × 10 GP in ordinary coin)
 (see chapter X, "The Night's Loot").
 
 **Rewards.** 850 XP, or 1,950 once the captain is on the field, divided equally among
@@ -1134,6 +1140,11 @@ second plate?* — and he is polite about it, and the polite is the threat. A
 character who steps into the doorway ends the first half: he smiles, says something
 kind about the soup, and goes. What happens to the question is the second half.
 
+*Why Anha, and why now:* the knife who trailed Corval in Movement II saw him carry a
+third tray up himself, and the toast's two plates and "two years in the keeping"
+finished the sum. Callun fears an heir for her margins (see the Circle's line), and
+Anha is the person who would know.
+
 **Read this when a character follows the Circle's man into
 the service run in Movement V, or meets one there:**
 
@@ -1181,7 +1192,9 @@ The clock and the narrow run are the card.
   neither does anyone else in the run tonight.
 - *The east wing's service door.* The honor guard is doubled on the east wing tonight.
   Any fight that reaches the door is heard by the guard behind it, and becomes S4 for
-  everyone in the passage.
+  everyone in the passage. (At midnight this door does not seal; only the double doors
+  do. It is still a guarded door until those guards go to the dais or the double doors,
+  Table VIII–7; see chapter V, "The Palace After Midnight".)
 
 **Tactics.** The knives do not want a fight; they want the door. One steps in to hold a
 character in the narrow run while the others slip past or wait for a gap.
@@ -1255,21 +1268,20 @@ Perception of 13, with Advantage, because the corridor is dark. On a success, sk
 box's last sentence: the wardens are surprised.
 
 **What is behind the door** (see chapter IV, area B8): no papers, because there are none
-anywhere. Instruments nobody can name. A grown relief of the eastern coast on the great
-table, its mist-lines reworked many times. A **work-slate** with a half-erased lattice
-diagram, the key to the Root of the House (Undercurrent A). And a **drawer of
-duplicate invitation cards**, one for every guest, a certain few with a corner
-deliberately scorched. A drawer of writing, kept outside the Church, is what the
-wardens came to carry away; a slate, by law, is something to wipe.
+anywhere. Instruments nobody can name. A grown relief of the eastern coast on the **great
+table**, its mist-lines reworked many times. And a **work-slate** with a half-erased
+lattice diagram, the key to the Root of the House (Undercurrent A). The table is grown
+and cannot be carried, but the wardens came to do what only the Church may and write
+it down, as proof the chief is looking east; a slate, by law, is something to wipe.
 
-**Objective:** decide what leaves the study. Keep the slate readable. Keep the drawer
-in the house, or hand it over knowing what it is.
+**Objective:** decide what leaves the study. Keep the slate readable. Keep the map out
+of the Church's hand, or let them write it down knowing what it is.
 
 **The lock clock — four segments.** Advances at the end of each round the wardens work
 the lock undisturbed, and whenever anyone in the corridor rolls a 1 on a d20, once a
 round at most (the dark
 wing is quiet, and nobody here wants the honor guard). **Full:** the wardens are inside.
-One round later the slate is wiped, and the drawer is in a warden's arms.
+One round later the slate is wiped, and a warden is at the great table, writing.
 
 **Enemies.** Two **Church Wardens** at the door; the third arrives up the stair on the
 clock's second segment; the fourth never comes. Kovaun brought four. The Prelate is in the chapel.
@@ -1293,36 +1305,38 @@ and the fight plays well under Low. The clock is what the party is racing.
 
 **Tactics.** The wardens detain: they seize for questioning, name the Church's
 authority, and never kill. They would much rather talk. If it goes badly, one of them
-gets to the drawer and runs.
+writes down what he can of the great table and runs.
 
 **Morale.** The wardens break when two are down, or at the Prelate's word. A warden who
 breaks keeps whatever he is carrying if he can.
 
 **Outs.**
-- Turn the law on them. A great house's invitation is one of the two writings the
-  Church suffers outside its walls, and these are invitations: a DC 15 Intelligence
+- Turn the law on them. There is no writing in this room to file: the table is grown,
+  and the slate is the one grudging medium the law leaves alone. A DC 15 Intelligence
   (Religion) or DC 15 Charisma (Persuasion) check.
 - The Prelate's Question. A character carrying Agenda 2 can promise Kovaun an
   honest judgment in exchange for the room: a DC 13 Charisma (Persuasion) check, or no check if
   they have already given it.
 - Fetch Kovaun from the chapel. She calls them off rather than be seen standing at a
   chief's study door on the night of his ball.
-- Trade. Let them have the drawer; keep the slate. Or copy the diagram before they wipe
+- Trade. Let them write down the map; keep the slate. Or copy the diagram before they wipe
   it: a DC 13 Intelligence check to memorize it, and the Root opens to that character
   as chapter IV says it opens to anyone who copied the slate.
 
 **In the dark** *(the Church's heat 3–4 at midnight, and the clock filled or never
 touched)*. The wardens are inside when the lights die. They come down the dark-wing
-stair a minute later with their arms full, and the stair is where the party meets them.
+stair a minute later, one with fresh-written pages held to his chest, and the stair is
+where the party meets them.
 The clock is gone; the objective is what they are carrying. Same outs, except that
 Kovaun is no longer in the chapel: she is in the Court, in the dark, with everyone
 else.
 
 *At heat 4:* the wardens are already on the stair when the party arrives, and the
-drawer is halfway down it.
+record of the map is halfway down it.
 
-**Treasure.** The drawer, if it stays with the party: evidence of something. What
-the scorch marks mean is left open (see chapter X, "The Night's Loot").
+**Treasure.** The wardens' record of the map, if the party takes it: evidence that
+Raunu was looking east. What the mist-lines mean is left open (see chapter X, "The
+Night's Loot").
 
 **Rewards.** 600 XP, divided equally among the characters. Heroic Inspiration
 (Table I–3, "a fight ended by an out"): to whoever keeps the slate readable by an out.
@@ -1342,8 +1356,9 @@ the scorch marks mean is left open (see chapter X, "The Night's Loot").
 - *Four at 5th level:* as for five, and the third warden is already at the door.
 
 **Development.** If the slate is wiped, the Root of the House can still be opened, but
-only by the improvised route in chapter IV. If the drawer leaves with the Church, the
-inquest never sees it, and the Church's file on Raunu Boranis is one drawer thicker. If
+only by the improvised route in chapter IV. If the record of the map leaves with the Church, the
+inquest never sees it, the Prelate learns what her chief was studying in the east, and
+the Church's file on Raunu Boranis is one map thicker. If
 the wardens were turned back, the Church's heat falls by one. **Return to Movement V**,
 or to the dark (see chapter V).
 
@@ -1353,8 +1368,10 @@ or to the dark (see chapter V).
 
 ***Where and when:*** B5, the upper garden terrace, Movement V. House Draunel and House
 Boranis. The appointment was made in front of witnesses in Movement IV: *at the first
-quarter-bell, on the terraces, and bring your cousin's excuses.* *(Chapter IV, "The Snakes
-This Movement — V", points here.)*
+quarter-bell, on the terraces, and bring your cousin's excuses.* One of Essin's blades
+accepted it there, in public, behind Essin's back, and Essin cannot call it off without
+the house being seen to run; that is why he asks an outsider for help. *(Chapter IV, "The
+Snakes This Movement — V", points here.)*
 
 **Read this when a character reaches the terrace, or looks down at it from
 the rail:**
@@ -1519,8 +1536,10 @@ they will if they have to.
 goes. The fight ends the instant the party stops standing between them and the window.
 
 **Outs.**
-- Go with them. Agenda 4's errand is a way through the east wing doors; Anha's
-  passages are another. Either turns a wall-climb into an escort.
+- Go with them. A party that joins the slingers gets onto the wall or the window
+  ledge, never into Veier's room: the inner guards turn them back. The fight is over
+  the moment the party stops standing in the way, and the half-bell clock keeps
+  running.
 - Proof of Veier. Anyone who has been inside B9 tells Maiven what the unpacked
   traveling pack means, or what the two slings say. No check. The rope comes down.
 - Promise to go with her at midnight, and mean it: a DC 13 Charisma (Persuasion) check, or no
@@ -1880,8 +1899,9 @@ Adjusting the Encounter.
 **Distracting the Attendant — the full rule.** It takes **an action**. The player
 describes what their character does, then makes **an ability check with the skill that
 fits the trick** — Charisma (Performance) for music, Charisma (Deception) for a false order,
-Intelligence (Arcana) to show it a working crystal, Dexterity (Sleight of Hand) to take
-its cup, and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**
+Intelligence (Arcana) to show it a working crystal, Charisma (Deception) or Charisma
+(Performance) to pose as, or announce, the master it awaits ("your master is here",
+pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**
 
 *One trick a round.* It watches one thing at a time. Once anyone has tried a trick on
 it in a round, win or lose, it is watching for the next: nobody else can try until the
@@ -1893,8 +1913,8 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   across its mask, and say, 'Your master asked me to show you this'"): **+2.**
 - **A habit the party has seen:** **+2.** This is the payoff for noticing it before
   midnight. Only habits the table actually saw count. Its three habits, shown before
-  midnight: *it stares at worked crystal and light; it keeps a cup and a cloak ready
-  for a master who is not there; it follows music that changes.*
+  midnight: *it stares at worked crystal and light; it waits for a master who is not
+  there; it follows music that changes.*
 - **Repeats.** A trick already tried on it tonight gets no bonus and has
   **Disadvantage** — it learns. The same trick never works a third time.
 
@@ -1916,8 +1936,8 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
 > **DM Note — how to hint that it can be distracted**
 >
 > 1. **Show every habit before midnight, plainly** (chapter IV's sightings, in
->    Movements I, II, IV and V): in Movement I it holds a cup for someone who never takes
->    it; in II it stops dead in front of a crystal wall and watches the light for a full
+>    Movements I, II, IV and V): in Movement I it stands apart with a cloak over its arm,
+>    staring oddly, as if it expects someone to arrive; in II it stops dead in front of a crystal wall and watches the light for a full
 >    minute; in IV the band changes tune and it turns
 >    to follow the sound; in V it is trying to watch the party and keeps losing them
 >    because something shiny goes past. A player who says any of these out loud earns

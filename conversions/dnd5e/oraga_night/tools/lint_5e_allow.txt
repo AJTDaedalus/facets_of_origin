@@ -23,9 +23,10 @@
 05_The_Longest_Night.md|bare_dc|the skill that fits, DC 13 while it is Idle and DC 19 while it is Focused|Attendant distraction: skill fits the trick (card S14)
 08_Handouts.md|bare_dc|fits, DC 13 → 1 Delay (DC 15 the second time; never a third)|DM-sheet compression of the room-trick rule (05)
 08_Handouts.md|bare_dc|ability check using the skill that fits, DC 13 Idle / 19 Focused|DM-sheet compression of the Attendant distraction (S14)
-08_Handouts.md|bare_dc|the skill the words fit, DC 18 with one tell, 15 with two or more|DM-sheet compression of the Fracture rule: skill fits the words (05, 10)
-09_The_Snakes.md|bare_dc|its cup, and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**|Attendant distraction: the sentence opens "an ability check with the skill that fits the trick"
+09_The_Snakes.md|bare_dc|pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**|Attendant distraction: the sentence opens "an ability check with the skill that fits the trick"
 10_Bestiary.md|bare_dc|fits it: **DC 13 while it is Idle, DC 19 while it is Focused**|Can Be Distracted: "an ability check with whatever skill fits it" (BESTIARY-8 wording)
+05_The_Longest_Night.md|bare_dc|the caster's spellcasting ability, DC 13.|spells roll (three-player pass T4.2, L-002): the ability is the caster's spellcasting ability, which varies by class
+10_Bestiary.md|bare_dc|the caster's spellcasting ability, DC 13.|spells roll (three-player pass T4.3, L-002): the same sentence as chapter V, word for word
 
 # T4.3: SRD 5.2.1 grapple form. "has the Grappled condition (escape DC 12)" is the SRD's own
 # wording (28 uses in the SRD 5.2.1 extract); an escape DC names no ability by design.

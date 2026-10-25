@@ -162,7 +162,7 @@
    "label": "B8. Raunu's Study",
    "phase": "m2",
    "kind": "room",
-   "summary": "No papers anywhere: a crystal relief of the eastern coast, the lattice-key slate, scorched invitation duplicates.",
+   "summary": "No papers anywhere: a crystal relief of the eastern coast (the Church means to write it down), the lattice-key slate.",
    "ref": "04_The_Ball.md#the-private-palace (B8)",
    "optional": true,
    "faction": null
@@ -312,7 +312,7 @@
    "label": "Undercurrent C: The Third Plate",
    "phase": "m2",
    "kind": "scene",
-   "summary": "The midwife, small linens, protective guards. Find: the pregnancy, and the nursery, before the announcement that never comes.",
+   "summary": "Corval carrying the third tray himself, the midwife, small linens, protective guards. Find: the pregnancy, and the nursery, before the announcement that never comes.",
    "ref": "04_The_Ball.md#undercurrent-c--the-third-plate-run-it-if-anyone-carries-agenda-4",
    "optional": true,
    "faction": null
@@ -472,7 +472,7 @@
    "label": "Omen: the mews scream",
    "phase": "m4",
    "kind": "omen",
-   "summary": "Every falcon screams, then all fall silent. The gardens go quiet. Corro does not laugh.",
+   "summary": "Every falcon screams, then all fall silent: the Radiant walking his midnight route through the gardens (the guests never learn it). Corro does not laugh.",
    "ref": "04_The_Ball.md#movement-iv--the-toast-later--dinner",
    "optional": false,
    "faction": null
@@ -692,7 +692,7 @@
    "label": "Snakes in the dark: the Church's filing",
    "phase": "m6",
    "kind": "snake",
-   "summary": "Heat 3–4: Wardens come down the dark-wing stair with the drawer of scorched invitations, the slate wiped behind them. Heat 0–2: they get the Prelate out.",
+   "summary": "Heat 3–4: Wardens come down the dark-wing stair with a written record of the mist map, the slate wiped behind them. Heat 0–2: they get the Prelate out.",
    "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S8)",
    "optional": true,
    "faction": "church"
@@ -952,7 +952,7 @@
    "label": "⟨A snake gets what it came for⟩",
    "phase": "end",
    "kind": "ending",
-   "summary": "The Church files the scorched invitations, a Tithe minister leaves in Circle hands. History, unrecorded: why the story is wrong by noon.",
+   "summary": "The Church files its record of the mist map, a Tithe minister leaves in Circle hands. History, unrecorded: why the story is wrong by noon.",
    "ref": "05_The_Longest_Night.md#if-history-breaks",
    "optional": true,
    "faction": null
@@ -992,7 +992,7 @@
    "label": "S8. The Study Door",
    "phase": "m5",
    "kind": "fight",
-   "summary": "Church Wardens pick the study's crystal lock for the scorched invitations and the slate — the Root's key. Lock clock.",
+   "summary": "Church Wardens pick the study's crystal lock to write down the mist map and wipe the slate — the Root's key. Lock clock.",
    "ref": "09_The_Snakes.md (S8)",
    "optional": true,
    "faction": "church"
@@ -1012,7 +1012,7 @@
    "label": "S10. Over the Wall",
    "phase": "m5",
    "kind": "fight",
-   "summary": "Thenya slingers with a rope below the east wing. Only if provoked; going with them is the better bet.",
+   "summary": "Thenya slingers with a rope below the east wing. Only if provoked; going with them reaches the wall or the ledge, never Veier's room.",
    "ref": "09_The_Snakes.md (S10)",
    "optional": true,
    "faction": "thenya"
@@ -1079,10 +1079,10 @@
   },
   {
    "id": "qg-1",
-   "label": "The quiet guest: the cup",
+   "label": "The quiet guest: waiting",
    "phase": "m1",
    "kind": "omen",
-   "summary": "An attendant in the line holds a cup out for a master who is not there. Its first habit. Say it aloud: an omen. Followed or confronted, it walks into a shadow and is gone for the rest of that Movement; it never fights before the bells.",
+   "summary": "An attendant stands apart from the line, cloak over one arm, staring as if it expects a master who is not there. Its first habit. Say it aloud: an omen. Followed or confronted, it walks into a shadow and is gone for the rest of that Movement; it never fights before the bells.",
    "ref": "04_The_Ball.md#the-program-of-the-night; 07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest",
    "optional": true,
    "faction": "uninvited"
@@ -1122,7 +1122,7 @@
    "label": "The Attendant drops the pretense",
    "phase": "m6",
    "kind": "event",
-   "summary": "Cloak and cup set down on the nearest table; it stands beside the three gray masks, facing the room. Idle until one of them turns it on the party.",
+   "summary": "Cloak set down on the nearest table; it stands beside the three gray masks, facing the room. Idle until one of them turns it on the party.",
    "ref": "07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest; 10_Bestiary.md",
    "optional": false,
    "faction": "uninvited"
@@ -1820,7 +1820,7 @@
   {
    "from": "b8",
    "to": "kd-church",
-   "label": "the drawer and the slate",
+   "label": "the mist map and the slate",
    "kind": "optional"
   },
   {
@@ -2048,7 +2048,7 @@
   {
    "from": "kd-church",
    "to": "ihb-expose",
-   "label": "if the drawer is kept",
+   "label": "if the map's record is kept",
    "kind": "history-breaks"
   },
   {
@@ -2410,7 +2410,7 @@
    "label": "Lock clock (S8)",
    "segments": 4,
    "advances": "Each round the Wardens work the study lock undisturbed, and on any natural 1 in the corridor",
-   "fills": "The Wardens are inside; a round later the slate is wiped and the drawer taken"
+   "fills": "The Wardens are inside; a round later the slate is wiped and the map written down"
   },
   {
    "id": "clk-circle",

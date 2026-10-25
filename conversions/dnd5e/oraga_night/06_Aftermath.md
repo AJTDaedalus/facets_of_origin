@@ -29,7 +29,10 @@ record, and it is what history keeps.
   and the skeleton staff hold the silence they were paid for. The record says a vanished
   bride, never a vanished heir. Characters who reached the east wing hold a truth that
   exists nowhere else in the world: priceless, unprovable, and dangerous in exact
-  proportion to who they tell.
+  proportion to who they tell. The one exception: if a character sold the nursery to
+  Callun, the Circle knows there is an heir, and it begins its own search, keeping it quiet.
+  Circle agents start looking west for the child. It is a threat for a campaign to
+  carry, never a public fact.
 - **The trail goes tidy.** The river gate is unlocked, oiled, recently used. A boat is
   missing from a fisher's mooring, paid for in old coin at three times its worth, and
   fishers on the tributary saw it go north in the dark. Where the foothills begin it

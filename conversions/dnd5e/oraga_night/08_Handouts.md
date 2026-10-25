@@ -16,13 +16,13 @@ own. Print the first three pages and the tracker, and run the night from them.*
 | Start | Movement | Scheduled | The omen | The quiet guest | Fights to show (chapter IX) |
 |---|---|---|---|---|---|
 | 0:00 | **The street** (10) | Pick character, agenda, hook (chapter I); read B0; "what does your mask look like?" | — | — | — |
-| 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Holds a cup out for nobody | S4 if anyone draws |
+| 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Stands apart, waiting for a master who never comes | S4 if anyone draws |
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
 | 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
 | 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
 | 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group,** sized to who walks in (alone: the card's *One character* line): S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
-| 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak and cup; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
+| 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
 | 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, when S3's sect-guard clock fills); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
 | 4:40 | **Epilogue** (10) | Chapter V read-aloud; "what do you carry out?"; **5th level** | | | |
 
@@ -38,8 +38,8 @@ The last bell of Oraga rings when the gate is decided, or when S3's sect-guard c
 fills (at the end of Movement VII if no character gets there). It is the leash's hard
 limit: by then the three are gone, finished or not.
 
-**Tells to show** *(Table V–6 in chapter V has them all. A Fracture needs one tell
-witnessed or heard secondhand; two make it easier. Show each of the three at least
+**Tells to show** *(Table V–6 in chapter V has them all. Each tell witnessed or
+heard secondhand eases a Stop; an End needs two. Show each of the three at least
 once before midnight.)*
 
 - **III:** the Radiant's *"Whom do you serve?"* · the Hollow beside an exit; his flat
@@ -57,11 +57,12 @@ once before midnight.)*
 |---|---|---|
 | **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **4th turn** (3rd with four characters). Delay buys him rounds |
 | **The Radiant** | B9, for Veier | Private stair, which he reaches at the **fall + 3 beats** → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
-| **The Hollow** | The main doors (B2) | Herds the crowd back in. His Fracture opens the doors |
+| **The Hollow** | The main doors (B2) | Herds the crowd back in. His End opens the doors |
 | **The Attendant** | Beside the three | Idle until the party gets in the way; then Focused whenever one of the three has no Delay → **S14** |
 | **Raunu** | The dais | Spends his last charge sealing doors behind Veier; dies there, by his own choice |
 | **Veier** | B9 | Wounded once; down the private stair on Vell's arm; out the river gate (**by default, even if no player character is there**) |
 | **Vell** | — | Service passages → garden stair → the river gate (B5) |
+| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair or garden stair, in front of the Radiant. A guide, never a fighter; never reaches Veier. Alive, he is Agenda 1's payoff |
 | **The nine honor guards** | Seven to the dais, and stay; two hold the east-wing doors (Table VIII–7) | — |
 | **The Bought** | The outer gate shut from outside (B12) | Hold it until the gate is decided (S3) |
 | **Corro** | Moving three seconds before the dark | Follow him and live. S11 if Phern heat is 3–4 |
@@ -87,7 +88,7 @@ secret**: no faction learns of the child unless a player character tells them.
   returns.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: the skill that
-  fits, DC 13 → 1 Delay (DC 15 the second time; never a third). A Fracture → 2 Delay.
+  fits, DC 13 → 1 Delay (DC 15 the second time; never a third). A Stop → 2 Delay.
   20+ damage to one in a round → 1 Delay (30+ with four characters, 40+ with five or at 5th level). The Attendant's *Clears the Way*: −1 Delay a
   round.
 - **The Attendant (S14).** *Idle:* rusty, one attack with Disadvantage. *Focused* (at
@@ -102,10 +103,15 @@ secret**: no faction learns of the child unless a player character tells them.
   more trick. **Fourth broken focus:** it
   wanders off. 0 HP: gone into the shadow. Say its state aloud: "It's locked on you" /
   "It's drifting."
-- **Fractures.** Needs one witnessed tell. Action within 30 ft.: an ability check using
-  the skill the words fit, DC 18 with one tell, 15 with two or more (the Wept: 15 once
-  she has 2+ Delay). A miss by 4 or less still lands and gives 2 Delay, after one blow
-  or word. Never Intimidation or Deception. Once each.
+- **Stop** (see chapter V, "The Fractures"). No tell needed. Action within 30 ft.: an
+  ability check using the skill the words fit, the DC is 15, +2 per tell seen (+4 at
+  most); or three tricks on one's nature in a scene; or a child crying, for the Wept.
+  → 2 Delay, and the one who landed it is a threat. A miss by 4 or less still lands,
+  after one blow or word. Never Intimidation on the Hollow. Once per scene each.
+- **End.** Two or more tells, the same check, and the method: Mercy (the Wept),
+  Permission (the Hollow). Out for the night; Heroic Inspiration. A miss counts as a
+  Stop. The Radiant has no End but a trap in the deep crystal (any of the three can be
+  trapped). End once; Stop once per scene.
 - **Wards.** Steer: action, a DC 13 Intelligence (Arcana) check for anyone who studied
   them, a DC 18 Intelligence (Arcana) check otherwise; each ward-point once tonight;
   against an Uninvited, 1 round = 1 Delay. From the Root (B11): palace-wide with a DC 13
@@ -443,11 +449,11 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 | | The Wept | The Radiant | The Hollow |
 |---|---|---|---|
 | **Errand** | Raunu, on the dais (B2) | Veier, from the east wing (B9) | The main doors (B2) |
-| **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his Fracture lands: ☐ turned east |
+| **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his End lands: ☐ turned east |
 | **Delay earned** (fill a circle; cross it out when spent) | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ |
 | **Tricks that worked** (DC 15 the second time; never a third) | | | |
 | **Tells seen** (write each witness's initial in the box) | ☐ the pages · ☐ the offering · ☐ the cradle-song · ☐ the omen · during: ☐ a child crying · ☐ the woman's face | ☐ the blessing · ☐ "Whom do you serve?" · ☐ the dance · during: ☐ staged kills · ☐ posing when watched | ☐ beside an exit · ☐ flat small talk · ☐ watching Anha's people · during: ☐ holds, never advances · ☐ flinching from ward-fire |
-| **Fracture** (once each) | ☐ landed (DC 15 while she has 2+ Delay) | ☐ landed | ☐ landed |
+| **Stop** (once a scene) · **End** | Stop ☐ ☐ ☐ · Mercy ☐ | Stop ☐ ☐ ☐ · trapped ☐ | Stop ☐ ☐ ☐ · Permission ☐ |
 | **Last blow** (thrown when it returns) | | | |
 
 **Table VIII–11: The Midnight Tracker — Everything Else**
@@ -456,7 +462,7 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 |---|---|---|
 | **The Attendant (S14)** | ☐ fired · broken focus ○ ○ ○ ○ | Say its state every round. The fourth break: it wanders off |
 | Its Hit Points | 178 (229 with four): | 0 Hit Points: gone, no body |
-| Habits the table saw | ☐ the cup · ☐ crystal and light · ☐ music that changes | +2 to a distraction |
+| Habits the table saw | ☐ the waiting · ☐ crystal and light · ☐ music that changes | +2 to a distraction |
 | Tricks tried on it | | A repeat has Disadvantage and no bonus; never a third time |
 | Furniture to it | | Until they next attack it or interfere with the three |
 | **Ward-points** | Dais ○ ○ ○ ○ · doors ○ ○ · sealed doors held: | Each steers once tonight (Table V–4 for the doors) |

@@ -277,7 +277,8 @@ class TestFacts:
         ids = {f["id"] for f in F.load_facts(F.FACTS)}
         assert {"household", "honor_guards", "retinues", "bought_company", "arrivals",
                 "east_wing_floor", "stairs", "terraces", "room_sizes", "maiven_fate",
-                "down_not_out"} <= ids
+                "threat_rule", "fracture_rule"} <= ids
+        assert "down_not_out" not in ids  # T5.1: replaced by threat_rule
 
     def test_shipped_truths_follow_the_rulings(self):
         by = {f["id"]: f for f in F.load_facts(F.FACTS)}
@@ -286,6 +287,115 @@ class TestFacts:
         assert by["bought_company"]["size"]["total"] == 21
         assert by["retinues"]["sizes"]["circle"] == 4 and by["retinues"]["sizes"]["church"] == 4
         assert "dies" in by["maiven_fate"]["truth"]
+
+
+class TestThreePlayerGuards:
+    """T4.1 and T5.1 (three-player pass): the guards fire on the retired wording."""
+
+    @pytest.fixture(scope="class")
+    @staticmethod
+    def facts():
+        return F.load_facts(F.FACTS)
+
+    @staticmethod
+    def _hits(facts, text, fname, fid):
+        return [h for h in F.check_text(text, fname, facts) if h.fact == fid]
+
+    def test_nothing_bought_is_forbidden(self, facts):
+        row = "| *Sleep* | Condition immunities; nothing bought | *Held by Something Else* |\n"
+        assert self._hits(facts, row, "10_Bestiary.md", "fracture_rule")
+
+    def test_free_spell_success_is_forbidden(self, facts):
+        text = "A spell is a trick like any other: if it lands, that is the success.\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "fracture_rule")
+
+    def test_spells_roll_sentence_is_not_a_hit(self, facts):
+        text = ("A spell with an attack roll or a saving throw uses that roll, and *Centuries of "
+                "Practice* can refuse the save; a spell with neither is a trick check with the "
+                "caster's spellcasting ability, DC 13.\n")
+        assert not self._hits(facts, text, "10_Bestiary.md", "fracture_rule")
+
+    def test_buying_time_restated_outside_05_is_a_copy(self, facts):
+        text = ("A trick earns 1 Delay, DC 15 the second time, never a third time, and an "
+                "Uninvited loses at most three turns per scene.\n")
+        assert self._hits(facts, text, "09_The_Snakes.md", "fracture_rule")
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "fracture_rule")
+
+    def test_mortal_danger_by_choice_is_forbidden(self, facts):
+        text = "A character is only ever in mortal danger by choice.\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "threat_rule")
+
+    def test_deadly_but_not_lethal_is_forbidden(self, facts):
+        text = "The Attendant is deadly, but not lethal.\n"
+        assert self._hits(facts, text, "10_Bestiary.md", "threat_rule")
+
+    def test_threat_rule_restated_outside_05_is_a_copy(self, facts):
+        text = ("Marked when it earns Delay three times in one scene; the DM says she looks at "
+                "you, properly, for the first time, and the mark lasts the scene.\n")
+        assert self._hits(facts, text, "10_Bestiary.md", "threat_rule")
+
+    # T4.5: Stop and End replace "Fracture" as rule terms in 05, 08 and 10
+    def test_fracture_as_rule_term_is_forbidden(self, facts):
+        text = "A character who lands his Fracture makes the Fracture check.\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "fracture_rule")
+        assert self._hits(facts, text, "08_Handouts.md", "fracture_rule")
+
+    def test_fractures_heading_pointer_is_not_a_hit(self, facts):
+        text = 'Two tells land an End (see chapter V, "The Fractures").\n'
+        assert not self._hits(facts, text, "10_Bestiary.md", "fracture_rule")
+
+    def test_fracture_term_outside_owned_files_is_not_scanned(self, facts):
+        # 01-04, 06, 07, 09 keep the word until the later sweep (LOG T4.5)
+        text = "Her Fracture check is easier once she has seen a tell.\n"
+        assert not self._hits(facts, text, "07_Cast_of_the_Ball.md", "fracture_rule")
+
+    def test_stop_rule_restated_outside_05_is_a_copy(self, facts):
+        text = ("A Stop is DC 15, +2 per tell, once per scene; an End needs two or more tells, "
+                "and a failure by 4 or less still lands.\n")
+        assert self._hits(facts, text, "09_The_Snakes.md", "fracture_rule")
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "fracture_rule")
+
+    # T7.4: what seals at midnight (TP28)
+    def test_corridor_booms_shut_is_forbidden(self, facts):
+        text = "The east wing corridor booms shut somewhere above, sealed from afar.\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "midnight_wing_routes")
+
+    def test_sealed_stair_is_forbidden(self, facts):
+        text = "At the lights the garden stair is sealed behind her.\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "midnight_wing_routes")
+
+    def test_open_stair_beside_sealed_doors_is_not_a_hit(self, facts):
+        text = "He takes them by the service stair beside the sealed double doors.\n"
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "midnight_wing_routes")
+
+    def test_anha_passages_as_a_way_in_is_forbidden(self, facts):
+        text = "She is reachable only through Agenda 4's errand, Anha's passages, Undercurrent C.\n"
+        assert self._hits(facts, text, "07_Cast_of_the_Ball.md", "midnight_wing_routes")
+
+    # T4.10: Veier unmet before the Crossing (TP13, TP41)
+    def test_take_veier_in_the_wing_is_forbidden(self, facts):
+        row = ("| 5 | **The service door.** Take Veier out through the east wing's service door "
+               "into the run | Wisdom (Survival); no check with Anha or any of the household |\n")
+        assert self._hits(facts, row, "05_The_Longest_Night.md", "veier_unmet")
+
+    def test_beside_veier_is_forbidden(self, facts):
+        text = "It is the one agenda that puts a character beside Veier.\n"
+        assert self._hits(facts, text, "11_Pregenerated_Characters.md", "veier_unmet")
+
+    def test_crossing_carry_note_is_exempt(self, facts):
+        text = ("A character can carry her (Strength 13 or better) or support her (the Help "
+                "action).\n")
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "veier_unmet")
+
+    def test_household_moving_her_is_exempt(self, facts):
+        text = "The household moves her through the wing, and nobody stands with Veier but them.\n"
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "veier_unmet")
+
+    # T7.14: the Circle exception beside "never gets out" (TP46)
+    def test_pregnancy_secret_requires_both_editions(self, facts):
+        by = {f["id"]: f for f in facts}
+        files = {c["file"] for c in by["pregnancy_secret"]["checks"] if c["type"] == "require"}
+        assert files == {"06_Aftermath.md", "../../../adventures/oraga_night/06_Aftermath.md"}
 
 
 # --------------------------------------------------------------------------- the real module (the R2 worklist)
@@ -315,8 +425,13 @@ class TestRealModule:
     def test_no_false_positive_on_ceremony_forty(self, real):
         assert not any(h.fact == "bought_company" and h.file.startswith("04") for h in real)
 
-    def test_down_not_out_has_one_home(self, real):
-        assert [h for h in real if h.fact == "down_not_out"] == []
+    def test_threat_rule_has_one_home(self, real):
+        assert [h for h in real if h.fact == "threat_rule"] == []
+
+    def test_slow_rule_agrees(self, real):
+        # T4.1-T4.5: spells roll, the cap, no "nothing bought", Stop and End (no "works once",
+        # no DC 18 row)
+        assert [h for h in real if h.fact == "fracture_rule"] == []
 
     def test_excluded_files_not_scanned(self, real):
         assert not any(h.file in ("INVENTIONS_5e.md", "STYLE_5e.md") for h in real)

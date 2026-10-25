@@ -291,3 +291,167 @@ T3.10 and T3.11 are marked ⛔. T3.12 and T3.13 are independent and went ahead.
 - **T2.5 (commit WP2) not run:** this session's brief says not to commit. T2.6 stays open until WP4–WP6.
 - **Spotted in passing, not changed (outside WP2):** Table VIII–1's caption still reads "*(four players; minutes from Table I–1)*" after WP3; check whether Table I–1's minutes are now three-player and fix the caption (WP9 runtime or a WP3 follow-up).
 - Integrator (2026-10-22): Table VIII–1 caption → three players; 05 'east wing doors' → 'east-wing doors' (3). INVENTIONS #89's 'derived' reading is composed from printed facts (05:959 contract task 1, fires at the quarter-bells; Table VIII–1 puts the quarter-bells in Movement V); left flagged for owner review. TPN-3 (tracker at chapter end) accepted.
+
+## 2026-10-24 — Story-beat review with the owner
+- The WP4 phase-A worker (T4.1–T4.4, T5.1–T5.2) stopped when the previous session ended; its partial edits to 05, 10, facts.yaml, tools/lint_5e_allow.txt and tools/test_fact_check.py are uncommitted and unreviewed. Hold until reviewed against TP41–TP43.
+- Owner walked every beat (premise, Movements I–VII, the Crossing, the snakes in the dark, epilogue, ⟨If History Breaks⟩, aftermath). Rulings TP30–TP46 recorded in DECISIONS; TASKS status updated (T4.8, T4.15 withdrawn; T4.10 narrowed; T7.8, T7.14 unblocked) and the new work listed at the end of TASKS.
+- Noticed in passing, not yet ledgered: 01 "What This Adventure Is" still says "built for four characters… Every fight in it is balanced for four", and Table I–1's minutes are "for four players" (contradicts TP10/WP3).
+
+## 2026-10-24 — WP4 phase A: T4.1, T5.1, T4.2, T4.3, T4.4, T5.2
+
+- **Run order:** T5.1–T5.2 (threat rule, WP5) were pulled forward into WP4 because the run order puts them before T4.5. Order worked: T4.1 → T5.1 (guards) → T5.2 → T4.2 + T4.4 → T4.3 + T4.4. Resumed after the session break; checked against TP41–TP43 (story-beat review): nothing written touches the Crossing, and nothing names or points to a Last Rite.
+
+### T4.1 `facts.yaml`: Slow / Stop / End guards
+- `fracture_rule` extended: forbids "nothing bought", "if it lands, that is the success", "Each Fracture works once", "DC 18 with one tell"; `require` the spells-roll sentence word for word in 05 and in 10; `require` "at most three turns per scene" in 05; a second `rule_copy` (home 05) for Buying Time (DC 15 the second time, never a third, the cap, once per Uninvited, half a turn's progress, named people out, nature → 2 Delay).
+- `python tools/fact_check.py --report` on the old text: **10 hits**: 05:237 ×2 (both requires missing), 05:254 ("if it lands, that is the success"), 05:763 ("Each Fracture works once"), 08:106 ("DC 18 with one tell"), 10:138 (require missing), 10:148, 149, 150, 152 ("nothing bought").
+- `tools/test_fact_check.py`: new class `TestThreePlayerGuards` (7 tests: each new forbid fires on the retired wording, the spells-roll sentence is not a hit, Buying Time and the threat rule restated outside 05 are copies) and `TestRealModule::test_slow_rule_agrees`.
+- **Left for T4.5 (not this task's files):** 05:808 "Each Fracture works once" and 08:106 "DC 18 with one tell". `test_slow_rule_agrees` excludes those two matches; `test_module_agrees_after_r2` stays red until T4.5 clears them (TPN-5a; note added to T4.5's body).
+
+### T5.1 `facts.yaml`: threat rule guard
+- `down_not_out` replaced by `threat_rule`: the old `rule_copy` elements kept (the crowd rule is still printed once) plus four threat elements (the mark line, three times in one scene, still in the way, the mark lasts the scene); `round after next` forbid kept; new forbids "only ever in mortal danger by choice" and "deadly(,) but not lethal"; `require` the mark line in 05. The coverage test now expects `threat_rule` and asserts `down_not_out` is gone; `test_down_not_out_has_one_home` → `test_threat_rule_has_one_home`.
+- `--report` on the old text: **2 hits**: 05:27 (mortal danger by choice), 05:29 (mark line missing). "deadly but not lethal" has no hit in today's text (it never reached the module); kept as a guard.
+
+### T5.2 The threat rule (05)
+- Principle 1 (05:24–32): the "mortal danger by choice" sentence is retired; the in-rules note now says a dropped character is set aside, not killed, unless it has become a threat.
+- *Down, Not Out* (05:206–260): **Threats.** paragraph (three triggers; the line said aloud, with "He" for the Radiant and the Hollow; the mark lasts until the scene ends); bullets *Not a threat* (the old Stable text), *A threat* (ordinary dying rules; finished only if still between them and their errand on their next turn), *Their quarry* (unchanged); a dial paragraph (Sharp printed; Gentle and Merciless lines, TPN-4). The help-up, crowd, hauling and last-blow bullets are unchanged. The Attendant line now reads "sets people aside the same way" (no rule change; T5.5 makes it lethal).
+- Judgment calls: the heading "Down, Not Out" is kept because 01, 08, 09, 10 and STYLE point to it (T5.4 renames); the trigger says "Fracture" until T4.5 renames it to Stop (TPN-4).
+
+### T4.2 Buying Time rewrite (05)
+- 05:276–307: **Earn it by being clever** (any creative action that lands: a trick, an attack aimed at the moment, a spell; DC 13 / DC 15 the second time / never a third, wording kept so the existing lint allowlist entry still matches); **Spells roll** (the sentence word for word, then: a landed spell buys Delay through condition immunities, the effect ends at once; each spell once per Uninvited; pointer to chapter X, "What spells buy"); **Their nature pays double** (2 Delay; sorrow / devotion / despair from each printed Truth, pointer to "The Fractures"); the lump paragraph unchanged; **Three turns a scene, at most** (later points still buy Table V–1's "each point", the Uninvited makes its progress anyway).
+- 05:322–325: "Delay changes how many, not whether" now ends "Delay alone never changes an outcome; ⟨If History Breaks⟩ … says what does" (was "stack enough of it to change an outcome"). Crystals gutter sidebar: "a spell that lands buys Delay" (was "most spells used well").
+- `tools/lint_5e_allow.txt`: two `bare_dc` entries for the spells-roll sentence's "spellcasting ability, DC 13." (05 and 10), with reasons.
+- For T4.13: Table V–1 says Delay the Radiant still has at the Crossing is spent at the river gate; whether that counts against the scene cap is not settled here (TPN-5c).
+- Not changed (not my files): 08's DM-sheet Buying Time and Down, Not Out lines still compress the old rules (T5.4 / T2.6).
+
+### T4.3 Chapter X "What spells buy" (10)
+- 10:128: "Then every door a clever table tries opens a little, and no further." The next paragraph now opens "The reason is in the fiction".
+- 10:144–189: the 18-row table is replaced by **What spells buy.** (lands → 1 Delay, nature → 2, once per spell on each; the spells-roll sentence word for word; immunities stay, the effect ends at once) and a 13-item list. Dropped: *Invisibility* and *Sanctuary* on Veier (TP13/TP41), "Just save the saving throw" (in the sentence) (TPN-5d). The following paragraph now points tricks to chapter V.
+- *Held by Something Else* (Hollow 10:1171, Radiant 10:1445, Wept 10:1976): adds "or left helpless by laughter or anything else", a spell or effect of that kind that would give the Prone condition ends at once, and if it landed it still buys Delay. The *Hideous Laughter* Prone contradiction is gone. Immunities lines unchanged.
+- Lint: `not_but` soft count rose (Sanctuary's "A ward, not a compulsion" moved out of a table); reworded to "It is a ward rather than a compulsion".
+
+### T4.4 Speed-to-turn rule; the Radiant's 20-ft floor
+- 05:300–303 **Slowing them**: halved Speed or 20 feet or less for a whole turn is half a turn's progress; two such turns are 1 Delay, within the cap; *Slow*, *Ray of Frost*, *Witnessed* and the Radiant's Fracture all run through it.
+- 10:1478–1481 *Witnessed*: "Nothing slows the Radiant below 20 feet" made global (Witnessed, his guilt, *Slow*, *Ray of Frost*, anything else; a whole slowed turn is half a turn's progress). The chapter X list's *Slow* item says the same (10:173–175).
+
+### Checks (end of phase A, from `M/`)
+- `python tools/lint_5e.py --check`: OK, 0 problems.
+- `python tools/fact_check.py --check`: 2 problems, both T4.5's (05:808, 08:106), as agreed with the coordinator.
+- `python tools/bestiary_check.py`: 28 blocks + 1 variant, 0 mismatches. `python tools/pregen_check.py`: 5 pregens, 0 issues.
+- `python -m pytest tools -q`: 429 passed, 1 failed (`test_module_agrees_after_r2`, red only for the two T4.5 hits). It was 422 before; 8 tests added.
+- INVENTIONS #90; DECISIONS TPN-4 (dial readings, heading kept), TPN-5 (T4.5 worklist, the sentence, the cap, list drops, Held scope).
+- No commit or staging, per the brief.
+
+## 2026-10-24 — Story-beat rulings TP30–TP38, TP44, TP46 and the WP3 leftover (all chapters except 05, 10, facts.yaml)
+- **TP30 (the cup goes):** 04 Mv I run line, read-aloud heading and read-aloud (cloak over one arm, apart, staring as if someone is expected; nobody comes), the habits sentence, Mv II sighting ("the cloak over its arm"); 07 Attendant (italic head, habits, Unmasking sets down the cloak only); 08 Table VIII–1 (Mv I and VI quiet-guest cells), Table VIII–11 habit box ("the waiting"); 09 S14 skill list (take its cup → Deception or Performance to pose as, or announce, the master it awaits, "your master is here"), habit list, hint 1; 01 Attendant bullet; flow.json (`quiet guest` nodes). F/ has no Attendant (F/05's cup is Raunu's). `tools/lint_5e_allow.txt` line for the 09 S14 DC sentence re-anchored to its new text (one line).
+- **TP31 (Corval's third tray):** 04 Undercurrent C italic lead and a new spark (a guest sees Corval carry a tray up himself, alone, in Mv II); 07 Corval (Secret paragraph), Anha (Secret, and the bullet: three plates come back down for washing, together); F/04 Undercurrent C, F/07 Corval and Anha; flow `uc-c` summary.
+- **TP32 (the Church's motive):** one sentence in 04 Mv II Church line and the B8 note; 07 Kovaun (after Secret); 09 the Church's *What they came for*.
+- **TP34 (mews omen):** 04 Mv IV omen, a DM aside; 07 the Uninvited (new short paragraph); F/04 omen aside (MM), F/07 the Uninvited; flow `omen-4`.
+- **TP35 (Thenya wall):** 04 Mv V Thenya ("competent company" sentence replaced); 09 the Thenya's *Walk into it* (the "escort" sentence) and S10's *Go with them* out; flow S10 summary.
+- **TP36 (Circle motive and trigger):** 04 Mv II Circle (the knife sees Corval carry a third tray), Mv IV guessing paragraph (Circle fears an heir for its margins; Draunel for the seat), Mv IV Circle line (the chain); 07 Callun (Fears); 09 the Circle's *What they came for*, line rows II and IV, S7 (new *Why Anha, and why now* paragraph).
+- **TP37 (the duel):** 04 Mv IV and Mv V Boranis lines; 07 Essin (What Essin Knows bullet); 09 Boranis line row IV, S9 *Where and when*.
+- **TP38 (drawer cut):** 04 B8 (drawer bullet cut; "follow the characters home" moved to the great table; note rewritten: the wardens write the map down, wipe the slate); 09 the Church's line row VI–VII, *What is in the study*, *Snake on snake* (what the Prelate learns about the mists), S8 (contents, objective, clock Full, tactics, *Turn the law on them*, *Trade*, *In the dark*, heat 4, treasure, development); F/04 B8; flow (b8, kd-church, S8, ihb-expose summary, two edge labels, S8 clock). B0's half-burned card stays. 06 and 08 never listed the drawer.
+- **TP44 (old coin is Vell's):** 09 S3 treasure (the purse is "in ordinary coin"); F/05 B12 (paid half up front, in ordinary coin; the "And the coin" MM paragraph cut). 07 Bought entries and M/06 carried no coin-age test; 02/08/11 old coin is Agenda 6 (Vell) and stays. INVENTIONS #28 retired in part.
+- **TP46 (T7.14):** 06 and F/06, the same sentence in both, as the exception beside "the pregnancy never gets out". T7.14 ☑ in TASKS; its `facts.yaml` fact `pregnancy_secret` is still to write.
+- **WP3 leftover:** 01 *What This Adventure Is* (built for three, balanced for three, lines for four or five and a party of four at 3rd or 5th), *Fight cards* paragraph (same), Table I–1 lead-in ("for three players"). The minutes were not re-measured: they were budgeted for four, and a three-player table probably runs Mv II a little short (one agenda beat per player). Numbers kept; flag for WP9 runtime.
+- **INVENTIONS:** #7, #28, #55, #71 amended; new **#91** (derived wording for this pass). #90 was already taken by the WP4 worker's row.
+- **For the Planner:** S9's out "Essin's word ends the Boranis side at once" now sits beside TP37's "Essin cannot call it off without the house being seen to run". It still reads as "he can, at a price" (Draunel's Iron 2 wins), but confirm. Flow nodes `kd-church` and `ihb-expose` now describe the map record although 05 still says "scorched invitations".
+- **Checks** (final run): lint OK 0 (first run: a soft not_but, a `tic_quietly`, three long paragraphs I made and the S14 allow line, all fixed); fact_check OK 0; bestiary_check 0; pregen_check 0; `pytest tools` 430 passed; software docs-consistency + private-canon 42 passed; flow rebuilt. A mid-run fact_check hit in 08 ("DC 18 with one tell", 08 Page One) and the 05 hits came from the other worker's in-progress facts.yaml/05 edits and cleared by the final run; 08's line was not touched here.
+- **Left for the next worker (05, 10, facts.yaml), locate by quote:**
+  - TP30 — 05 Mv VI Attendant read-aloud "a folded cloak and a full cup, set down neatly"; 05 "attendant, holding a cloak and a cup for a master nobody saw"; 05 "the cup and cloak for a missing master" (habits list); 05's distraction rule if it lists a cup trick. 10 Attendant: "carrying a cloak and a cup for a master nobody ever sees" (intro), "it keeps a cup and a cloak ready" (habits), "carrying a cloak and a cup for a" (block lead), Tells "holds a cup for someone who never takes it" and "the cup down on the nearest table". (05's trick "Hand him something… Give him a cup" is the Hollow's, not the Attendant's: leave.) Raunu's "sets down the cup" stays.
+  - TP34 — no garden-silence echo found in 05's Crossing.
+  - TP35 — 05 Table of the snakes in the dark, Thenya row "She dies there, unless somebody competent went with her", and 05 "she dies there unless somebody competent goes with" (midnight, probably fine; check against TP13/TP35); 10 Maiven *Breaks* "someone competent is going the same way she is" (same).
+  - TP38 — 05 snakes-in-the-dark Church row "wardens coming down the dark-wing stair with their arms full" / "The scorched invitations are gone"; 05 Epilogue evidence "the drawer of scorched invitations (if the Church's…" → the wardens' record of the map (or the map seen first-hand); 05 ⟨They expose the truth⟩/history "The Church filing the scorched invitations"; 10 *The Night's Loot* "Whatever the wardens were carrying… It is evidence, and it is heavy" (a written record is not heavy).
+  - TP44 — 05 B12 "paid half in old coin" → half up front in ordinary coin; 05 B12 DM note "**And the coin.** … Never confirm it." cut; 10 *The Night's Loot* "The half-fee, paid in old coin — 3d6 × 10 GP by weight. Chapter V says what the coin means" → ordinary coin, drop the pointer.
+  - TP46 — `facts.yaml` fact `pregnancy_secret` (T7.14): require the exception beside "never gets out" in 06 and F/06.
+
+## 2026-10-24 — WP4 phase B: T4.5, T4.6, T4.7, T4.9, T4.16
+
+Read against TP41–TP43 first: no Last Rite anywhere (T4.8 withdrawn), the Radiant's only End is the trap, and the party carries Veier at the Crossing. Only 05, 08 (rule lines only), 10 and F/05's Crossing were edited; 01–04, 06, 07, 09 and the rest of F/ belong to the concurrent worker.
+
+### T4.5 Stop; Table V–6
+- 05 *The Fractures* (05:774–931) rewritten to DESIGN §3.3: **Stop** (05:793) has three roads: words (an action within 30 ft where they can hear, any fitting skill, the DC is 15, +2 per tell, +4 at most; Intimidation and Deception allowed except Intimidation on the Hollow; a voice carried by *Message* from farther doesn't count, L-075), the third nature trick in a scene, and a printed freeze (the child crying for the Wept). Every Stop: 2 Delay, marks whoever landed it, once per scene per Uninvited. The bands kept: by 4 or less lands after a blow or word (the speaker is already a threat), by 5 or more misses and the scene's Stop is not spent. "**End once; Stop once per scene.**" replaces "Each Fracture works once". Table V–6 is now *Tells*, with its rows unchanged; the 18/15 DC paragraph became +2 per tell. Sidebar renamed *Stops, Ends and magic*: control spells buy Delay and are never the words; *Thaumaturgy* may amplify a speaker within 30 ft.
+- Threat trigger renamed: 05:214 "lands a Stop on that Uninvited"; Gentle line "only a landed Stop".
+- Other 05 sites: Midnight Clock step 4 (the Hollow "if his End has not already sent him home"), Buying Time (a Stop earns 2 Delay; *Witnessed* and his Stop), Table V–1 (the Wept's "DC 15 at 2+ Delay" cut, DESIGN §3.7), Table V–4 note (lights out as a Stop), default beats ("His weakness (below)"; the looters "no tells, leash, or ward-lore"), the Crossing (a Stop "comes easiest", "a Stop finally landed", "If any character stopped her tonight"), *You Cannot Beat Them* ("Stops and Ends"), ⟨They save Raunu⟩ (terms only: "the Wept's End, Mercy"; T4.14 rewrites the sidebar), ⟨They expose the truth⟩ ("a confession won by a Stop or an End").
+- 08 (rule lines only): tells line (08:41), Table VIII–2's Hollow cell ("His End opens the doors"), Page Two Buying Time ("A Stop → 2 Delay") and the old *Fractures* bullet split into **Stop** and **End** (08:105–113), Table VIII–10's Hollow arrival cell and the *Fracture* row → **Stop** (once a scene) · **End** boxes. The rest of the tracker refresh stays with T2.6.
+- `facts.yaml` `fracture_rule`: truth rewritten for Stop/End; the `rule_copy` drops "or Deception" and "works once", adds +2 per tell, once per scene, two or more tells, "read the check as a Stop"; a new forbid (05/08/10 only) for "Fracture check/attempt" and "lands/earns/invokes … Fracture" (4 hits in HEAD's 05 and 1 in 10, 0 now). `tools/test_fact_check.py`: the `t45` exclusion in `test_slow_rule_agrees` is removed, and 4 tests are added (the forbid fires in 05/08, the heading pointer is not a hit, files outside the scope are not scanned, a Stop restatement outside 05 is a copy). `tools/lint_5e_allow.txt`: the stale 08 "DC 18 with one tell" entry is removed.
+- Lint's first run flagged a bare "DC 15" in the words bullet; it now reads "the DC is 15".
+
+### T4.6 Themes and Stop effects per Uninvited
+- 05:852–921: each entry keeps its printed Truth, then *nature* (DESIGN §3.5's list, drawn from the Truth and Table V–6), *Stop* and *End*. The Wept freezes one full round, as printed, and three nature tricks in a scene are her "easier road". The Radiant keeps both printed roads to guilt; the effect is scoped to the scene, including "does not break past Vell" when it lands at the Crossing (TPN-6d). The Hollow steps off the doors for one round. "Cannot be turned" is unchanged.
+
+### T4.7 End: Mercy, Permission, the trap
+- 05:825–842: **End** needs two or more tells plus the method and uses the words check. **On success:** out for the night or the errand forfeit, Heroic Inspiration, and the matching ⟨If History Breaks⟩ entry if there is one. **On failure:** it is read as a Stop attempt, and the End can be retried after a new tell. *Mercy* (the Wept; it points to ⟨They save Raunu⟩) and *Permission* (the Hollow; Intimidation never works) are in the per-Uninvited entries. **The trap is an End for all three** (it points to ⟨They trap one of the Uninvited⟩, which T7.2 rewrites) and is the Radiant's only End: "none that words can reach… held there, still hunting, until the last bell", so "cannot be turned" stays literally true. No Last Rite text was written.
+
+### T4.9 TP15: the Radiant at the Crossing
+- 05:664: "What the Radiant means to do when he reaches her, the module does not say. Never narrate an attack on Veier herself: his violence goes to whoever is a threat to him ("Down, Not Out") and stands in his way."
+- 10:1469 (the Radiant's *Down, Not Out*): a pointer to the same line.
+- F/05:199 (Crossing, lore only): "…its violence goes to whoever has made themselves its enemy and stands in its way" (no threat-rule wording; TPN-6g). Printed steps untouched (TP41).
+
+### T4.16 Chapter X Uninvited blocks aligned
+- 10:179 (*Darkness* item: "a try at his Stop"). 10:193 *What changes the night* ("Stop and End"; deep crystal "the Radiant's only End"). 10:201 **Stop and End.** pointer paragraph (no DCs; it replaces the 18/15 paragraph). Hollow 10:1207 ***Stop and End — Despair.***, *Breaks* "Only his End". Radiant: *Cannot Be Turned* and *Witnessed* point to "his Stop"; 10:1491 ***Stop — Devotion.*** (for the scene; no End but the trap). Wept: *Delay*'s DC-15 clause cut; 10:2019 ***Stop and End — Sorrow.*** (the child crying needs no check; Mercy); *Breaks* "Mercy does". 10:2241 *Dark-Burst* note "(his Stop)". *Centuries of Practice* 3/Day, the Speed floor and *Held by Something Else* were already aligned (T4.3–T4.4). There is no Last Rite pointer (TP43). *The Post* / *Only the Doors* are left for T7.3; the Root's "will not cross" wording (10:195–196, 08:112) is left for T7.2.
+
+### Checks (from `M/`, end of phase B)
+- `python tools/lint_5e.py --check`: OK, 0. `python tools/fact_check.py --check`: OK, 0. `python tools/bestiary_check.py`: 0 mismatches. `python tools/pregen_check.py`: 0 issues. `python -m pytest tools -q`: **434 passed** (up from 429 + 1 failed). From `software/`: `pytest tests/test_docs_consistency.py -q` 37 passed.
+- INVENTIONS **#92** (#91 was taken by the concurrent worker). DECISIONS **TPN-6** (a–h).
+- No commit or staging.
+
+### Not changed, for later tasks
+- 05 *You Cannot Beat Them* still says "A character one of them drops to 0 Hit Points does not die… This mercy covers only the Uninvited and the Attendant" (05:732), and 08's Page Two *Down, Not Out* line says "Nobody an Uninvited… drops dies tonight". Both contradict the threat rule (T5.4 / T6.6).
+- TP34's mews omen as a possible Table V–6 tell: not added.
+
+### Remaining "Fracture" sites outside my files (for the sweep; the section name *The Fractures* is kept, so pointers to it may stay)
+- 5e: 01:19 (pointer, OK), 01:419; 04:426, 04:829, 04:854, 04:1275; 07:320, 07:355 (pointers, OK), 07:582, 07:606, 07:613; 09:231; README:66 (chapter summary, can stay).
+- Facets edition: F/01:136; F/04:279, 570, 571, 588; F/05:122, 144, 185, 192, 206, 234, 237, 249, 252, 254, 257, 260, 278, 415, 450 (F/05's own Fracture rule is Facets mechanics and may stay as it is); F/07:355, 378; F/08:114, 115, 155, 181, 189; F/README:38.
+
+## 2026-10-24 — WP4/WP7 phase C: T7.4, T7.21, T7.8, T4.11, T4.10, T4.12, T4.13, T4.14, and the 05/10 leftovers
+
+Read first: TASKS (header, SA, the task bodies, the story-beat section), DESIGN §3.1 and §6, DECISIONS TPN-4–TPN-6 and TP30–TP46, the previous LOG entries. Rulings applied over older task text: TP41 (the Crossing is printed as is; only pre-midnight and east-wing sites changed), TP42, TP43 (no Last Rite anywhere), TP45 (T4.15 withdrawn), TP39/TP40 (Corval). Locate by quote; line numbers below are today's.
+
+### T7.4 `facts.yaml`: midnight wing routes
+- New fact `midnight_wing_routes`: forbids "east wing corridor booms shut", "spent sealing the corridor", a sealed service/garden stair, and Anha's passages as a way in (04, 07); requires the named double doors in Movement VI and a General Features bullet. `--report` on HEAD's text: 6 hits (04:358, 07:93, 05:145, 05:492, two requires); 0 now.
+- 05 Movement VI step 2: "The double doors at the head of the east stair boom shut". 05 the dais beat: the first crystal "spent sealing the double doors". 05 General Features: new bullet **The ways into the east wing** (only the double doors seal; the service stair with the wing's service door and the garden stair stay open; the inner doors lock behind Veier on Raunu's last charge).
+- 09 S7 terrain, the service door: a parenthesis that it does not seal at midnight and its Movement V guard has gone to the dais or the double doors (Table VIII–7).
+- Anha's passages struck as a way to Veier: 04 B9 note (now: they reach the service door, guard doubled, card S7) and 07 Veier; F/07 Veier mirrored. F/04's Undercurrent C trail ("through them needs … Anha's passages") left for T7.6 (dinner complex).
+- F/05: the same seal wording (double doors; "spent sealing the double doors").
+
+### T7.21 The Radiant's chase line
+- 05 Midnight Clock step 5: the doors locking behind Veier are worth **two** of the three beats and *Witnessed* the third; if Raunu is saved the doors never lock and he reaches the stair one beat after the beat Raunu would have fallen. The east-wing beat's rules note repeats the split. TPN-7a.
+
+### T7.8 Acting early: which door Corval opens (TP39)
+- 04 Undercurrent D, *Warning Corval*: a Corval the warning convinces gives them the wing's service door (the key, or he opens it himself); they start the chase there, never with Veier. Same in F/04. The 05 Corval paragraph and 07 Corval carry the payoff. T7.7's other sites (01 promise, Table I–1, 02:383) are T7.7's.
+
+### T4.11 Table V–4 tricks 1 and 5; the east-wing bullet (with TP40)
+- 05 Movement VI: new paragraph **"Corval. The stairs."** (05:180–194): sent to the stairs, gathers the characters nearest him (those who helped him first), the service stair and the garden stair, a guide and never a fighter, never to Veier, never meets Vell; the household moves her and Vell takes her at the garden stair out of everyone's sight; a convinced Corval has already given them the service door; his survival is Agenda 1's payoff.
+- 05 the east-wing beat: "Nobody reaches her here. The household moves her a door ahead of him…", and a rules note on the routes in.
+- Table V–4 trick 1: held from the Radiant's side. Trick 5: the household takes her into the run; a character holds the door (Athletics) or leads him into the run (Survival; Corval added to the no-check list).
+- TP40 mirrors: 07 Corval *At the Unmasking*; 02 Agenda 1 DM parenthesis; 08 Table VIII–2 new Corval row; F/05 (Corval paragraph, east-wing line), F/07 Corval, F/08 crisis panel.
+- Lint split two over-long paragraphs I made.
+
+### T4.10 (narrowed) the healing line and `veier_unmet`
+- 05 the Crossing step 2 (05:668): "The Radiant's cut will not close. Healing magic eases her and keeps her on her feet… the wound does not knit, and nothing in this book says why." 07 Veier *At the Unmasking*; F/05 Crossing step 2 and F/07 Veier (narrative). No text says she is dying.
+- New fact `veier_unmet` (04, 05, 07, 08, 09, 11): forbids "carry her", "support her", "take Veier", "with/beside Veier"; `unless` for the household moving her, the Crossing's carry note (Strength 13 / the Help action), Table V–5 trick 3 ("off the gravel"), the boat, Vell in the read-aloud ("pale man") and Raunu's row; a `require` for the healing line. `--report` on HEAD's text: 3 hits (the require, 05 Table V–4 trick 5 "Take Veier", 11:437 "beside Veier"); 0 now. No temporary T7.6 `unless` was needed. Printed Crossing steps, the Speed 15 / carry / Help note, Table V–5 trick 3 and the #66 read-aloud are unchanged.
+
+### T4.12 Sweep for Veier in reach
+- Swept 04, 05, 07, 08, 09, 11 and F/04, F/05, F/07, F/08. Changed: 05 Table V–4 trick 5 and the east-wing beat (T4.11), 11 Ilesse's hook ("reach the east wing's door, and the one whose voice Veier listens for through that door at midnight"). Left as printed: every Crossing site (TP41); Maiven's midnight lines (she goes toward the wing, never to Veier); 08 Table VIII–2's Veier row ("on Vell's arm"). Left for T7.6: 04 B9 note, Undercurrent C (04:588 "a way to Veier"), the dinner, 07 Veier's reach list and dinner bullets, 08 Table VIII–6 "dinner for two", F/04:532 and F/04:809, F/07:56. Left for T7.5: 02 Agenda 4's "beside Veier at the Unmasking" and F/03:135.
+
+### T4.13 Crossing rules paragraph; Vell into the boat
+- 05 step 3: "the margin should be the characters, not luck" deleted; Vell "already at the oars", his *Elsewhere* action, the boat pulls out with him in it (L-053; north per TP12 is untouched). Rules: carried Delay spent at the gate is one lost turn inside the cap (TPN-5c closed); with none, his one turn goes under the threat rule: unmarked set aside, a marked creature he drops is dying and can die there, no next turn to finish it; the escape fails only by a player character's choice (⟨The child is taken⟩, list unchanged, TP45). DIAL paragraph (Gentle / Sharp / Merciless). TP9 reward (a crowd in the gardens makes him *Witnessed* at the gate) and TP16 pointer (two beats sooner if Raunu lived). No Last Rite.
+- VOICE R13 ("decides what the night costs them") and R16 ("at the Crossing it keeps him off the gate altogether") fitted. F/05: Vell at the oars, one sentence (canon).
+
+### T4.14 Saving Raunu (TP16)
+- 05 ⟨They save Raunu⟩ (05:1239–1258): four numbered steps: 1 Mercy lands (conditions as printed); 2 Raunu spends the twin crystal on himself and lives, by his own choice, nobody makes it for him; 3 the doors never lock, the Radiant gains the two beats (TPN-7a), the household still moves her and the party is all that stands between; 4 the Midnight Clock counts from the beat he would have fallen (the Hollow turns east, the doors open, the bells), and the Crossing runs as written two beats sooner. The trap route now enters at step 2.
+- Dais ward-steering at his side: DC 10 for a character who studied the wards, DC 13 otherwise (05 dais beat, Table V–2 trick 1). The shielding note ("takes them out of the fight… Stable… up within two rounds") now points to the threat rule.
+- F/05 ⟨They save Raunu⟩: the narrative (twin crystal on himself, by his own choice; the doors behind her never seal; the players are all that stand between them). No mechanics.
+
+### Leftover sites (lore worker's list)
+- TP30: 05 Movement VI box (the folded cloak only), *The Attendant* lead and habit line; 10 Attendant intro, habits, block lead, Tells. The Hollow's "Give him a cup" and Raunu's "sets down the cup" stay.
+- TP38: 05 Table V–7 Church row (a written record of the mist map, the slate wiped), ⟨They expose the truth⟩ (the wardens' record of the map, or the map seen first-hand), ⟨A snake gets what it came for⟩ ("The Church writing down the mist map"); 10 *The Night's Loot* ("The wardens' record of the map"). Matches the flow page's `kd-church`; flow.json not changed.
+- TP44: 05 B12 "paid half up front, in ordinary coin"; the "And the coin" DM paragraph cut; 10 purse in ordinary coin, pointer gone. INVENTIONS #28 note updated.
+- TP46: new fact `pregnancy_secret`: two `require`s, the Circle exception beside "never gets out" in 06 and (by relative path) F/06. Removing the F/06 sentence fires it (checked, then restored).
+
+### Tests, records, checks
+- `tools/test_fact_check.py`: 9 new tests in `TestThreePlayerGuards` (the seal forbids, the open-stair non-hit, Anha's passages, Take Veier, beside Veier, the two exemptions, the pregnancy requires).
+- INVENTIONS **#93** (wing routes, beats, Corval), **#94** (Crossing, healing, save-Raunu steps, dais DC), **#95** (TP30/TP38/TP44 wording); #28 note updated. DECISIONS **TPN-7** (a–h).
+- From `M/`: `lint_5e.py --check` OK 0 (first runs: two long paragraphs and a bare DC 13, fixed); `fact_check.py --check` OK 0; `bestiary_check.py` 0 mismatches; `pregen_check.py` 0 issues; `pytest tools -q` **443 passed** (434 before). From `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` 42 passed. flow.json unchanged, so no rebuild.
+- Not touched, for WP5: 05 *You Cannot Beat Them* "does not die" line, 08 Down, Not Out copy, 10 the Radiant's *Down, Not Out* trait, and 05 ⟨A player character dies⟩ ("Neither the Uninvited nor the Attendant ever kills a player character"), which now contradicts the gate rule and the threat rule (T5.4/T5.5).
+- No commit or staging.

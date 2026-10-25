@@ -125,25 +125,25 @@ after X.
 | T2.4 | WP2 | done | Beats that vanish at three |
 | T2.5 | WP2 | done | Commit WP2 |
 | T2.6 | WP2 | open (after WP4–WP6) | Tracker refresh |
-| T4.1 | WP4 | open | `facts.yaml`: Slow / Stop / End guards |
-| T4.2 | WP4 | open | Buying Time (Slow) rewrite |
-| T4.3 | WP4 | open | Chapter X "what spells buy" |
-| T4.4 | WP4 | open | Speed-to-turn rule; Radiant's 20-ft floor |
-| T4.5 | WP4 | open (after T5.2) | Stop; Table V–6 |
-| T4.6 | WP4 | open | Themes and Stop effects per Uninvited |
-| T4.7 | WP4 | open | End: Mercy, Permission, the Root route |
-| T4.8 | WP4 | open | The Last Rite |
-| T4.9 | WP4 | open | TP15: the Radiant at the Crossing |
-| T4.10 | WP4 | open | TP13: Crossing steps, Speed 15 note, Table V–5 |
-| T4.11 | WP4 | open | TP13: Table V–4 tricks 1 and 5; the east-wing bullet |
-| T4.12 | WP4 | open | TP13: sweep for Veier in reach |
-| T4.13 | WP4 | open (after T4.8, T5.2) | Crossing rules paragraph (L-004); Vell into the boat |
-| T4.14 | WP4 | open (after T7.21) | Saving Raunu (TP16) |
-| T4.15 | WP4 | open | ⟨If History Breaks⟩ at the boat (TP25) |
-| T4.16 | WP4 | open | Chapter X Uninvited blocks aligned |
+| T4.1 | WP4 | done | `facts.yaml`: Slow / Stop / End guards |
+| T4.2 | WP4 | done | Buying Time (Slow) rewrite |
+| T4.3 | WP4 | done | Chapter X "what spells buy" |
+| T4.4 | WP4 | done | Speed-to-turn rule; Radiant's 20-ft floor |
+| T4.5 | WP4 | done | Stop; Table V–6 |
+| T4.6 | WP4 | done | Themes and Stop effects per Uninvited |
+| T4.7 | WP4 | done (no Last Rite; TP43) | End: Mercy, Permission, the Root route |
+| T4.8 | WP4 | withdrawn (TP43) | The Last Rite |
+| T4.9 | WP4 | done | TP15: the Radiant at the Crossing |
+| T4.10 | WP4 | done (narrowed: TP41, TP42) | Crossing: keep printed steps; healing line; `veier_unmet` exempts the Crossing |
+| T4.11 | WP4 | done (with TP40) | TP13: Table V–4 tricks 1 and 5; the east-wing bullet |
+| T4.12 | WP4 | done | TP13: sweep for Veier in reach |
+| T4.13 | WP4 | done (no Last Rite, TP43) | Crossing rules paragraph (L-004); Vell into the boat |
+| T4.14 | WP4 | done | Saving Raunu (TP16) |
+| T4.15 | WP4 | withdrawn (TP45) | ⟨If History Breaks⟩ at the boat |
+| T4.16 | WP4 | done (no Last Rite pointer; TP43) | Chapter X Uninvited blocks aligned |
 | T4.17 | WP4 | open | Commit WP4 |
-| T5.1 | WP5 | open | `facts.yaml`: threat rule guard |
-| T5.2 | WP5 | open | The threat rule |
+| T5.1 | WP5 | done | `facts.yaml`: threat rule guard |
+| T5.2 | WP5 | done | The threat rule |
 | T5.3 | WP5 | open | Damage to a set-aside creature, per dial |
 | T5.4 | WP5 | open | Rule copies become pointers |
 | T5.5 | WP5 | open | Attendant: lethal, *Clears the Way* |
@@ -173,24 +173,24 @@ after X.
 | T7.1 | WP7 | open | Propagate TP11 |
 | T7.2 | WP7 | open | The Root (TP8, TP17, TP18) |
 | T7.3 | WP7 | open | The garden doors (TP9) |
-| T7.4 | WP7 | open | `facts.yaml`: midnight wing routes |
+| T7.4 | WP7 | done | `facts.yaml`: midnight wing routes |
 | T7.5 | WP7 | open | Agenda 4's midnight note (TP13) |
 | T7.6 | WP7 | open (option C) | Dinner for Two, Undercurrent C, 07 Veier, S10 escort |
 | T7.7 | WP7 | open | Acting early: refusals and two payoffs (TP14) |
-| T7.8 | WP7 | ⛔ OWNER | Acting early: which door Corval opens |
+| T7.8 | WP7 | done (TP39) | Acting early: which door Corval opens |
 | T7.9 | WP7 | open | Vell's sword (TP19) |
 | T7.10 | WP7 | open | "Both rivers, one spring" note (TP20) |
 | T7.11 | WP7 | open | Second Clause cut (TP21); the contract void |
 | T7.12 | WP7 | open | Draft midwife and minister positions (TP23) |
 | T7.13 | WP7 | ⛔ OWNER | Apply approved positions (TP23) |
-| T7.14 | WP7 | ⛔ OWNER | Aftermath: the Circle knows (TP24) |
+| T7.14 | WP7 | ☑ 2026-10-24 (TP46; `pregnancy_secret` guard added) | Aftermath: the Circle knows (TP24) |
 | T7.15 | WP7 | open | Vell's midnight route |
 | T7.16 | WP7 | open | Agenda 6's reveal |
 | T7.17 | WP7 | open (after WP4) | Endings box; the dream line |
 | T7.18 | WP7 | open | Agenda 3 completion; Agenda 2 mechanism |
 | T7.19 | WP7 | open | Patron's Errand; Corval's doubling; "publicly" |
 | T7.20 | WP7 | open | Slingers at midnight |
-| T7.21 | WP7 | open | The Radiant's chase line (L-091) |
+| T7.21 | WP7 | done | The Radiant's chase line (L-091) |
 | T7.22 | WP7 | open | Commit WP7 |
 | T8.1 | WP8 | open | `facts.yaml`: gallery geometry and residue values |
 | T8.2 | WP8 | open | Redraw VIII–3; sightlines |
@@ -232,7 +232,7 @@ after X.
 | T11.12 | WP11 | open | Final checks and commit |
 
 **Counts:** WP1 4 · WP2 6 · WP3 14 · WP4 17 · WP5 12 · WP6 16 · WP7 22 · WP8 6 · WP9 13 · WP10 7 ·
-WP11 12 = **129 tasks**. **⛔ 5:** OWNER 5 (T7.8, T7.13, T7.14, T8.4, T11.11); the 4 confirm items and E1 were answered 2026-10-22
+WP11 12 = **129 tasks**. **⛔ 3:** OWNER 3 (T7.13, T8.4, T11.11; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
 (confirm: T4.11, T6.12, T7.4, T7.21; escalation: T7.6).
 
 **Run order** (the ledger's §7): WP1 → WP3 → WP2 (T2.1–T2.5) → WP4 + WP5 (T5.1–T5.2 before T4.5) →
@@ -452,7 +452,7 @@ T4.14).
 
 ## WP4: Slow / Stop / End (DESIGN §3.2–§3.7; TP7, TP13, TP15, TP16, TP25)
 
-### ☐ T4.1 `facts.yaml`: Slow / Stop / End guards *(L-002, L-003, `FACTS`)*
+### ☑ T4.1 `facts.yaml`: Slow / Stop / End guards *(L-002, L-003, `FACTS`)*
 - **Do:** replace or extend fact `fracture_rule`:
   - forbid "nothing bought", "Each Fracture works once", "DC 18 with one tell" and
     "if it lands, that is the success";
@@ -463,7 +463,7 @@ T4.14).
 - **Files:** `M/facts.yaml`. **Accept:** the guard fires on today's text, and the hits are logged.
 - **Checks:** `pytest tools`. **Time:** 20 min.
 
-### ☐ T4.2 Buying Time (Slow) rewrite *(L-002, L-003 cap, L-042 confirm)*
+### ☑ T4.2 Buying Time (Slow) rewrite *(L-002, L-003 cap, L-042 confirm)*
 - **Do:** rewrite "Earn it by being clever" (05:242–262, 250) to DESIGN §3.2:
   - any creative action that lands earns 1 Delay; DC 13, then DC 15 the second time, never a
     third;
@@ -478,7 +478,7 @@ T4.14).
 - **Accept:** T4.1's guard is clean for 05. Nothing implies Delay changes history (End's job).
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T4.3 Chapter X "what spells buy" *(L-007, L-002)*
+### ☑ T4.3 Chapter X "what spells buy" *(L-007, L-002)*
 - **Do:** replace the spell table (10:143–166) with a short list under one rule: lands → 1 Delay;
   on theme → 2. Condition immunities stay, and the effect ends at once. Add Prone and "laughter,
   or anything that would leave them helpless" to *Held by Something Else* (10:1127, 1399, 1924,
@@ -489,7 +489,7 @@ T4.14).
   T4.1's guard is clean.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T4.4 Speed-to-turn rule; the Radiant's 20-ft floor *(L-039)*
+### ☑ T4.4 Speed-to-turn rule; the Radiant's 20-ft floor *(L-039)*
 - **Do:** add to Buying Time: "an Uninvited whose Speed is halved, or cut to 20 ft or less, for a
   whole turn makes half a turn's progress; two such turns are 1 Delay (within the cap)". Make
   "nothing slows him below 20 ft" a global clause on the Radiant (10:1444–1449; 10:158).
@@ -498,7 +498,7 @@ T4.14).
   one sentence.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T4.5 Stop; Table V–6 *(L-008, L-075; open after T5.2)*
+### ☑ T4.5 Stop; Table V–6 *(L-008, L-075; open after T5.2)*
 - **Do:** rewrite "The Fractures" (05:742–761) as Stop, DESIGN §3.3:
   - routes: (a) words, DC 15 with any fitting skill, +2 per tell (+4 at most); (b) three thematic
     successes in a scene; (c) a printed room freeze;
@@ -511,9 +511,12 @@ T4.14).
   Stop once per scene".
 - **Files:** `M/05_The_Longest_Night.md`.
 - **Accept:** T4.1's guard is clean. The cross-reference to the threat rule resolves (lint).
+  *(From T4.1: the forbids "Each Fracture works once" (05) and "DC 18 with one tell" (08 DM sheet)
+  are this task's worklist; remove the `t45` exclusion in `test_slow_rule_agrees` when they clear.
+  The threat rule's first trigger says "lands that Uninvited's Fracture"; rename it with the rest.)*
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T4.6 Themes and Stop effects per Uninvited *(L-009)*
+### ☑ T4.6 Themes and Stop effects per Uninvited *(L-009)*
 - **Do:** write the per-Uninvited block from DESIGN §3.5's table:
   - themes drawn only from each printed "Truth" (05:773–818);
   - Stop effects: the Wept freezes one full round; the Radiant falters for the scene (Speed 20,
@@ -523,7 +526,7 @@ T4.14).
 - **Accept:** each theme list cites a printed trait. No new fact about any Uninvited.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T4.7 End: Mercy, Permission, the Root route *(L-009)*
+### ☑ T4.7 End: Mercy, Permission, the Root route *(L-009)*
 - **Do:** write End, DESIGN §3.4. It needs 2+ witnessed tells plus the method.
   - **On success:** out of the attack or errand forfeit, Heroic Inspiration, the matching ⟨If
     History Breaks⟩.
@@ -536,7 +539,7 @@ T4.14).
 - **Accept:** every End names its tells requirement, method, success and failure.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T4.8 The Last Rite *(TP7; L-009, L-004 part)*
+### ✕ T4.8 The Last Rite *(TP7; L-009, L-004 part)* — **WITHDRAWN (TP43):** the Radiant has no Last Rite; his only End is the trap. Nothing below is to be done.
 - **Do:** write the Radiant's End from DESIGN §3.6:
   - **Trigger:** two tells, plus a congregation and a liturgy (a lit room, watchers, and
     Charisma (Performance) or Intelligence (Religion)).
@@ -551,7 +554,7 @@ T4.14).
   places a character within reach of Veier.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T4.9 TP15: the Radiant at the Crossing *(L-048)*
+### ☑ T4.9 TP15: the Radiant at the Crossing *(L-048)*
 - **Do:** add the DM line: "What he means to do when he reaches her, the module does not say. Never
   narrate an attack on Veier herself; his violence goes to whoever is marked under the threat rule
   and stands in his way." Put it in 05 (the Crossing) and as a pointer in 10. In the Facets
@@ -561,7 +564,7 @@ T4.14).
 - **Accept:** the line is present in both editions. No text states his intent.
 - **Checks:** SA+F. **Time:** 15 min.
 
-### ☐ T4.10 TP13: Crossing steps, Speed 15 note, Table V–5 *(TP13, C3)*
+### ☑ T4.10 TP13: Crossing steps, Speed 15 note, Table V–5 *(TP13, C3)* — **narrowed by TP41/TP42 and done 2026-10-24:** printed steps kept; healing line added; `veier_unmet` with Crossing and household exemptions (LOG)
 - **Do:**
   - **Opener (05:553–556):** "Any character with her (Agenda 4 above all) is welcome company"
     becomes: the characters hold the terrace and stair behind her, and Vell and the household move
@@ -586,7 +589,7 @@ T4.14).
   for the household.
 - **Checks:** SA+F. **Time:** 30 min.
 
-### ☐ T4.11 TP13: Table V–4 tricks 1 and 5; the east-wing bullet *(TP13; C1, C3)*
+### ☑ T4.11 TP13: Table V–4 tricks 1 and 5; the east-wing bullet *(TP13; C1, C3)*
 - **Do (once C1 and C3 are confirmed):**
   - **Trick 1** (*Hold a sealed door*): retarget it to the doors that lock behind Veier, per C1b.
     The character holds the seal from the Radiant's side, never at her side.
@@ -599,7 +602,7 @@ T4.14).
   the service and garden stairs, and the text uses them.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T4.12 TP13: sweep for Veier in reach *(TP13)*
+### ☑ T4.12 TP13: sweep for Veier in reach *(TP13)*
 - **Do:** search 04, 05, 07, 08, 09 and 11 for every read-aloud or instruction placing a character
   with Veier from midnight onward: Movement VI–VII bullets, Table VIII–2 notes, S10/S12 midnight
   lines, the 11:438 Agenda 4 summary. Rewrite each to the TP13 model. **Exclude** the Dinner for
@@ -610,7 +613,7 @@ T4.14).
   `unless` noting E1.
 - **Checks:** SA+F. **Time:** 30 min.
 
-### ☐ T4.13 Crossing rules paragraph; Vell into the boat *(L-004, L-053 folded in from WP7; after T4.8, T5.2)*
+### ☑ T4.13 Crossing rules paragraph; Vell into the boat *(L-004, L-053 folded in from WP7; after T4.8, T5.2)*
 - **Do:** rewrite 05:597–611:
   - **No Delay and no Last Rite:** the Radiant's turn at the gate runs under the threat rule and
     can kill a marked creature in his way.
@@ -628,7 +631,7 @@ T4.14).
   the Radiant does to a marked creature at each setting.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T4.14 Saving Raunu (TP16) *(L-005, L-006; open after T7.21)*
+### ☑ T4.14 Saving Raunu (TP16) *(L-005, L-006; open after T7.21)*
 - **Do:** rewrite ⟨They save Raunu⟩ (05:1090–1103) as numbered steps:
   1. Mercy lands (T4.7); the Wept leaves the dais.
   2. Raunu spends the twin crystal on himself and lives, "by his own choice".
@@ -643,7 +646,7 @@ T4.14).
   stays literally true.
 - **Checks:** SA (+F if F/05 is touched). **Time:** 25 min.
 
-### ☐ T4.15 ⟨If History Breaks⟩ at the boat (TP25)
+### ✕ T4.15 ⟨If History Breaks⟩ at the boat (TP25) — **WITHDRAWN (TP45):** history breaks at the boat by any deliberate choice, as printed; ⟨The child is taken⟩ keeps its list. Nothing below is to be done.
 - **Do:** in ⟨The child is taken⟩ (05:1109–1112), cut "holds Veier back from it, drags her to the
   front gate instead, or otherwise stands between her and the water". History breaks only if a
   character stops the boat or bars the river gate, from a distance. Apply the same to F/05's
@@ -652,7 +655,7 @@ T4.14).
 - **Accept:** a `forbid` for "holds Veier back" is added to `veier_unmet`. Both editions agree.
 - **Checks:** SA+F. **Time:** 15 min.
 
-### ☐ T4.16 Chapter X Uninvited blocks aligned *(L-002, L-007, L-009)*
+### ☑ T4.16 Chapter X Uninvited blocks aligned *(L-002, L-007, L-009)*
 - **Do:** align the three Uninvited blocks with WP4: *Centuries of Practice* 3/day, Stop effects,
   the Radiant's Speed floor, the Last Rite pointer, *Held by Something Else*. Leave *The Post* /
   *Only the Doors* for T7.3.
@@ -667,7 +670,7 @@ T4.14).
 
 ## WP5: Threat rule and lethal Attendant (DESIGN §3.1, §4; TP17)
 
-### ☐ T5.1 `facts.yaml`: threat rule guard *(L-010, `FACTS`)*
+### ☑ T5.1 `facts.yaml`: threat rule guard *(L-010, `FACTS`)*
 - **Do:** replace fact `down_not_out` with `threat_rule`:
   - forbid "only ever in mortal danger by choice" and "deadly but not lethal";
   - `require` the mark line (*"She looks at you — properly, for the first time."* or the final
@@ -677,7 +680,7 @@ T4.14).
 - **Files:** `M/facts.yaml`. **Accept:** fires on today's text. **Checks:** `pytest tools`.
   **Time:** 20 min.
 
-### ☐ T5.2 The threat rule *(L-010, `DIAL`)*
+### ☑ T5.2 The threat rule *(L-010, `DIAL`)*
 - **Do:** replace "Down, Not Out" for the Uninvited (05:204–235) with DESIGN §3.1:
   - **the three triggers:** a Stop; Delay earned three times in a scene; the last blow;
   - **the line said aloud;**
@@ -984,7 +987,7 @@ T4.14).
   terraces" hold.
 - **Checks:** SA (+F). **Time:** 30 min.
 
-### ☐ T7.4 `facts.yaml`: midnight wing routes *(L-027; TP13; C1)*
+### ☑ T7.4 `facts.yaml`: midnight wing routes *(L-027; TP13; C1)*
 - **Do (after C1):** add fact `midnight_wing_routes`:
   - the first crystal seals only the double doors at the head of the east stair;
   - the service and garden stairs stay open;
@@ -1038,7 +1041,7 @@ T4.14).
 - **Accept:** each early act a table will try has a printed answer.
 - **Checks:** SA (+F). **Time:** 25 min.
 
-### ⛔ T7.8 Acting early: which door Corval opens *(TP14; OWNER)*
+### ☑ T7.8 Acting early: which door Corval opens *(TP14; answered by TP39)*
 - **Question for the owner:** TP14 says "a convinced Corval opens a door". Which door, and to
   what? For example, the wing's service door for the party, a door the honor guard holds for the
   crowd, or the east-wing double doors before they seal. Under C1 the sealed doors are magical, so
@@ -1090,7 +1093,8 @@ T4.14).
   (fact `midnight_positions`). Mirror them in F/08's position table (F/08:131), as canon.
 - **Checks:** SA+F. **Time:** 15 min.
 
-### ⛔ T7.14 Aftermath: the Circle knows (TP24) *(L-049; OWNER, wording)*
+### ☑ T7.14 Aftermath: the Circle knows (TP24) *(L-049; OWNER, wording)*
+- **Done 2026-10-24** with TP46's wording, in 06 and F/06 word for word. The `facts.yaml` fact `pregnancy_secret` is still to write (facts.yaml was held by another worker).
 - **Question for the owner:** TP24 says chapter VI gains a line that the Circle knows, as the
   exception to "the pregnancy never gets out", and that the owner words the consequence. Please
   supply the line.
@@ -1150,7 +1154,7 @@ T4.14).
   `M/04_The_Ball.md`.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T7.21 The Radiant's chase line *(L-091; C1)*
+### ☑ T7.21 The Radiant's chase line *(L-091; C1)*
 - **Do (after C1 and T7.4):** add one sentence to 05:84–86 and 501–506: the inner doors that lock
   behind Veier, plus *Witnessed*, account for the three beats. State how many beats the locking
   doors are worth, because T4.14 (TP16) removes exactly those beats. Record the number as a TPN
@@ -1453,3 +1457,23 @@ of each task.*
   - commit `Oraga 5e 3p pass: WP11 voice pass; close tasks`;
   - scan `main..HEAD` for private canon before any push.
 - **Time:** 20 min.
+
+---
+
+## Story-beat review (2026-10-24): rulings TP30–TP46 to fold in
+
+The owner walked the whole story beat by beat (`docs/DECISIONS.md`, "Story-beat review"). Status-table
+changes above: T4.8 and T4.15 withdrawn; T4.10 narrowed; T7.8 and T7.14 unblocked. New work, to be
+decomposed into tasks before WP7 (or folded into WP4/WP7 as noted):
+
+- **TP30** cup → "waits for someone who isn't there"; midnight trick = posing as the awaited master (04, 05, 07, 08, 09 S14, 10, F/).
+- **TP31** Corval carries the third tray; **TP36** the Circle's motive stated plainly and its trigger chain (04, 07, 09 S7).
+- **TP32** the Church's two reasons in one sentence; **TP38** the scorched drawer cut; the mist map and slate are the targets (04, 05, 07, 09 S8, 10 loot, F/).
+- **TP33** the ring taken by Veier's hand through the door (WP7 T7.6 site).
+- **TP34** the mews omen is the Radiant scouting the garden route (04, 07).
+- **TP35** the Thenya wall never reaches Veier (04, 09 S10).
+- **TP37** the duel accepted behind Essin's back, stated plainly (04, 07, 09 S9).
+- **TP39/TP40** Corval opens the service door; at midnight he guides the party to the stairs (05, 07, 02 Agenda 1, F/). Folds into WP4 T4.11.
+- **TP41** the party takes Veier at the Crossing (WP4 T4.10 narrowed); **TP42** her wound won't close.
+- **TP43** no Last Rite: the Radiant's only End is the Root trap (WP4 T4.7, T4.13, T4.16; DESIGN §3.6 void).
+- **TP44** old coin is Vell's alone; **TP45** history breaks by any deliberate choice; **TP46** the Circle starts its own search.

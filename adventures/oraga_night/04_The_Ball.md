@@ -205,12 +205,10 @@ behave — light, seals, alarms — which pays off desperately at midnight.)*
 solitude, and — players will look for papers and find none, because there are none
 anywhere — the room thinks in crystal: instruments nobody can name, a grown relief
 of the eastern coast on the great table with its mist-lines remembered in colored
-lattice, the recent lines reworked many times; a work-slate bearing a half-erased
-lattice diagram (temporary scratch-work, the one grudging medium even the law
-cannot police); and, the detail that should follow players home, a drawer of
-duplicate invitation cards, one for every guest, a certain few with a corner
-deliberately scorched, as if he had been deciding something about each one. *(The
-module does not explain the instruments or the scorch-marks. Operational hint only:
+lattice, the recent lines reworked many times, the detail that should follow
+players home; and a work-slate bearing a half-erased lattice diagram (temporary
+scratch-work, the one grudging medium even the law cannot police). *(The
+module does not explain the instruments or the mist-lines. Operational hint only:
 Raunu has been studying something far away to the east, and preparing. Nothing of
 Agenda 1's decree is here — the Tithe of Hands exists only in Corval's memory and
 two ministers'.)*
@@ -518,10 +516,13 @@ could not make leave. Corval, Anha, the nine inward-facing guards: the volunteer
 Every one of them saved is a coda this thread earns.
 
 ### Undercurrent C — The Third Plate
-*Two people live in the east wing. The kitchen sends up meals for two. Lately the
-trays come back down — three plates used.*
+*Two people live in the east wing. The kitchen sends up meals for two, and the usual
+staff carry them. Lately Corval carries a third tray up himself, alone, and later all
+three plates come back down together for washing.*
 
-**The spark:** Anha mentions it as one of her unframed facts; or laundry — a guest
+**The spark:** Anha mentions it as one of her unframed facts (the three plates in the
+washing); or a guest sees Corval carry a tray up toward the east wing himself, alone,
+in Movement II; or laundry — a guest
 near the service passages sees linens going up that no ball needs: small, soft,
 new-hemmed; or rumor 11's "guards on the inside of the doors" invites a test that
 finds the guards courteous, immovable, and *protective* rather than jailerly.
@@ -574,7 +575,10 @@ of them can be met before midnight.)*
 no one's list, in no maker's masks, speaking a century that isn't this one — the
 only Undercurrent whose bottom is a warning instead of an answer. What then?
 Warning Corval gets the east wing guard doubled (it already will be; now the
-players know *why*). Warning Raunu is the thread's crown: he listens — completely,
+players know *why*). A Corval the warning actually convinces — he is one honest
+conversation away from it, and hears it best from someone who has helped him tonight
+— also gives them the wing's service door (the key, or he opens it himself), and
+they start the midnight chase there. It never brings them to Veier. Warning Raunu is the thread's crown: he listens — completely,
 the way he listens to everything — thanks them with terrible gentleness, and does
 not act. *"I know," he says. "You noticed. That matters more than you yet
 understand. Enjoy the ball — and stay near the walls after the bells."* (He has
@@ -810,6 +814,11 @@ with all the warmth the ballroom's rumors deny them.)*
 at once, then, worse, all at once silent. The gardens go quiet the way a forest does
 when something walks through it. Guests laugh it off. Master Corro, and any Phern
 player character, does not.
+
+*(For the MM alone: after his blessing over the food, the Radiant slips out to walk
+the garden route he will hunt Veier down at midnight, and the birds feel him pass. The
+guests never learn it. A table watching him may notice one gray mask gone from the
+galleries at the moment the mews erupt.)*
 
 ### Movement V — The Hour of Spirits *(approaching midnight)*
 

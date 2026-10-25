@@ -52,7 +52,7 @@ happy, genuinely and unfashionably, and rumor has no shelf for it.
 
 **Where she is:** the east wing (B9), all night, near her time, the midwife in
 attendance. She is reachable only by players who earn the east wing — Agenda 4's
-errand, Anha's passages, Undercurrent C — so a scene with her is a prize, not a
+errand, Undercurrent C — so a scene with her is a prize, not a
 schedule item. Players who reach her after the toast find her at dinner with
 Raunu, the two plates explained at last — the only place all night anyone sees
 Raunu Boranis at ease.
@@ -67,7 +67,8 @@ reach her expecting a prisoner or a madwoman get a brisk education.
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her — her husband's two crystals working. Wounded once, cleanly,
 by the Radiant; upright anyway; down the private stair and out through the gardens
-on Vell's arm (the Crossing, Chapter V). If her gift matters at your table — a
+on Vell's arm (the Crossing, Chapter V). The cut will not close: healing eases her
+and keeps her on her feet, but the wound does not knit, and nothing says why. If her gift matters at your table — a
 bonded loved one in mortal peril — it flares exactly once, without training or
 explanation, and the module suggests spending it on a player character who bled
 for her.
@@ -132,7 +133,16 @@ the shape of everything — the staff cuts, the sealed wing, the midwife, the ma
 locked study, the testament he stood witness to in the chapel three days ago — and
 the meaning of none of it.
 Loyalty has kept him from assembling the pieces. He is the faithful servant's
-tragedy, one honest conversation away from understanding.
+tragedy, one honest conversation away from understanding. The usual staff carry the
+meals for two up to the east wing; the third tray he takes up himself, alone.
+
+**At the Unmasking:** Raunu's last words — *"Corval. The stairs."* — send him to the
+stairs that reach the east wing, and he goes without needing to understand. He
+gathers the players nearest him, those who helped him first, and guides them by the
+service stair and the garden stair to get in front of the Radiant. A guide, never a
+fighter; he never reaches Veier and never meets Vell. If the players convinced him
+before midnight, he has already given them the wing's service door. His survival is
+Agenda 1's midnight payoff — the Tithe lives in his head.
 
 **Play him:** thin, upright, old, magnificent under pressure, doing the work of six
 chamberlains. Bribing Corval is impossible — not Hard, *impossible*, tell the
@@ -184,7 +194,7 @@ household matters is **Hard**; about anything else he is too tired to check.
 **Wants:** to keep her head down and her triple wages flowing home. **Fears:**
 naming the wrongness out loud, in case naming is what makes it real. **Secret:** two
 years of eerie domestic detail — east wing lights burning all night, meals for two
-sent up and meals for *three* coming back down these last months, the master's voice
+sent up and, these last months, *three* plates coming back down together for washing, the master's voice
 in empty rooms, corridors she is forbidden to sweep — and no frame to put around any
 of it.
 
@@ -363,6 +373,12 @@ feeling obscurely that they were the one being kind. The wrongness is all at the
 edges: masks from no maker's hand, names on no one's memory, speech from another
 age — and near them, quietly, Orthaen crystals go faint. What makes them
 monstrous is not what was taken from them. It is how much is left.
+
+One of them leaves the ball once. After his blessing over the food in Movement IV,
+the Radiant slips out to walk the garden route he will hunt Veier down at midnight,
+and the falcons in the mews scream and fall silent as he passes. The guests never
+learn it. A table watching him may notice a gray mask gone from the galleries at the
+moment the mews erupt.
 
 Their human moments — the Wept watching the young pages too long, her mourning
 rite in the chapel, the cradle-song at the east wing doors; the Radiant's

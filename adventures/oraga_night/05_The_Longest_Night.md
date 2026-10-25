@@ -73,8 +73,8 @@ fixed order, fast:
 2. **Raunu understands first.** In the dark, before the first scream — players
    watching the dais (Agenda 2) catch it against the last candle-light — he does
    not startle, does not finish the sentence, does not waste one second on
-   disbelief. His hand is already at his wrist. The east wing corridor booms shut
-   somewhere above, sealed from afar, and his voice — flat, carrying, instantly
+   disbelief. His hand is already at his wrist. The double doors at the head of the east
+   stair boom shut somewhere above, sealed from afar, and his voice — flat, carrying, instantly
    obeyed — says the only farewell the ballroom gets: *"Corval. The stairs."*
 3. **The Wept moves.** The tallest of the three crosses the dark hall toward the
    dais — not running, *arriving* — and the screaming starts.
@@ -89,6 +89,18 @@ where everything is and what everything wants. The night-tracker's crisis panel
 the doors, herding, keeping the herd from mattering.** Master Vell is already moving
 along the service passages toward the east wing, and the fastest route to the river
 gate runs through the garden stair.
+
+**"Corval. The stairs."** Raunu's last order sends his majordomo to the stairs that
+reach the east wing, and Corval goes without needing to understand why. On the way he
+gathers the player characters nearest him, looking first for any who helped him
+tonight, and takes them by the routes he knows: the service stair beside the sealed
+double doors, and the garden stair from the upper terrace. Only the double doors are
+sealed. He gets them in front of the Radiant. He is a guide and never a fighter, and he
+never brings them to Veier: the household moves her through the wing, and Vell meets
+her at the foot of the garden stair. Corval never meets Vell. If the
+players convinced him before midnight, he has already given them the wing's service
+door, and they start the chase there. Keep him alive if you can: the Tithe of Hands
+lives in his head (Agenda 1).
 
 > **Sidebar — Crystals gutter:** Within a stone's throw of an Uninvited, a
 > released crystal charge works only on a Soul roll (Standard) — on a 6− the light
@@ -108,7 +120,7 @@ What history records, told in scenes. Bend everything except what the players be
   side becomes his hands — *"the third sconce — turn it — NOW"* — and buys the room
   minutes. Then the Wept is through the last barrier, and Raunu Boranis, who has
   visibly been holding one crystal back — a second small thing, worn at his wrist,
-  twin to the one already spent sealing the corridor — looks at it, looks once
+  twin to the one already spent sealing the double doors — looks at it, looks once
   more toward the east wing, and *crushes it in his fist* instead of shielding
   himself with it. What that charge does: every door between Veier's rooms and the
   river seals itself behind her, one by one, all the way down. What the Wept does
@@ -122,7 +134,9 @@ What history records, told in scenes. Bend everything except what the players be
   not faster than: witnesses. Its Fracture (below) is that it *performs*; alone with
   prey it is lethal, but under watching eyes it slows, poses, savors. Every player
   character who chases it, harries it, or simply stands where it must be *seen* is
-  buying Veier hallway after hallway. This is where the whole design points: the
+  buying Veier hallway after hallway. Nobody reaches her here: the household moves her
+  a door ahead of it, and the players' place is behind her, between it and those
+  doors, wherever Corval or their own route brings them in. This is where the whole design points: the
   escape in the history books happens because people got in the way. Let it be
   the players.
 - **The gardens — the Crossing.** Veier's flight meets its hunter in the open, and
@@ -180,7 +194,9 @@ three beats down the garden's three levels:
    faces it (see sidebar). Vell is holding the Radiant, barely; he cannot both
    fight it and move Veier, and he says so, once, without turning: *"Take her.
    The gate. Don't stop."* The players carry history in their arms down a garden
-   being demolished behind them. The Radiant, meanwhile, is losing the thing it
+   being demolished behind them. The Radiant's cut will not close: healing eases her
+   and keeps her on her feet, but the wound does not knit, and nothing in the module
+   says why. The Radiant, meanwhile, is losing the thing it
    cannot bear to lose: its audience, gone running into the dark with the prize.
    This is where its Fracture (below) is at its most invocable — dark, empty
    terraces, nobody watching but the enemy it fears.
@@ -190,11 +206,16 @@ three beats down the garden's three levels:
    out: one clean line of attack, one last chance, and **whatever stands at the
    gate is what it has to go through.** A held gate, a doused lantern, a body in
    the way, a Fracture finally invoked — any of it is enough; the module asks only
-   that the margin be *the players*, not luck. Then the bell. The Radiant stops as
+   that the margin be *the players*, not luck. Vell is already at the oars: the
+   moment the Radiant is past him, he is simply in the boat as it pulls out. Then the bell. The Radiant stops as
    if hooked through the spine, stands one heartbeat in the shallows watching the
    boat — and is gone east with the mist coming off the water. The last any of
    them see: a pale man rowing hard into the dark, a woman bent over her own
    heartbeat, and the palace burning rose-colored behind them.
+
+What the Radiant means to do when it reaches her, the module does not say. Never
+narrate an attack on Veier herself; its violence goes to whoever has made themselves
+its enemy and stands in its way.
 
 If the Wept finished on the dais, it arrives at the water's edge for the end of
 beat 3 — and does not pursue. It stands where the river laps the gate, carved
@@ -323,8 +344,8 @@ and they are standing at the front gate right now.
 ### B12. The Gatehouse Court, Held
 
 **The contract.** Two nights ago a factor nobody can describe hired a company of
-the Bought — sixteen blades, four sergeants, a captain — and paid half in old coin,
-for three tasks written in a case chained to the captain's belt:
+the Bought — sixteen blades, four sergeants, a captain — and paid half up front, in
+ordinary coin, for three tasks written in a case chained to the captain's belt:
 
 1. At the quarter-bells, fire in two named sect districts and the Blackwatch
    courier post.
@@ -341,13 +362,6 @@ at the gate.
 > answer as everything else tonight, and the module never gives it. Vell knows the
 > company is there and planned around it, which is why the escape is the river gate
 > and the front was never anything but a decoy.
->
-> **And the coin.** "Old coin" is also Vell's signature — Agenda 6, the boat, the
-> horses — and that collision is **deliberate**. A table that notices will suspect
-> the pale factor of hiring the company. Let them. The aftermath is where it comes
-> apart: a bought-out captain, asked, describes a payer who was not tall, not pale,
-> and not soft-spoken, and the coin in the Bought's case is older than Vell's by a
-> dynasty. Write the herring so it *can* be untangled. Never confirm it.
 
 **Trigger:** the first fleeing guests reach the Gatehouse Court and find the outer
 gate barred from the far side, and a sergeant of the Bought standing on the wrong
@@ -416,7 +430,11 @@ generous.** A table that beats history has done something remarkable; never claw
 it back.
 
 **⟨They save Raunu.⟩** Possible — it takes the Wept's Fracture found early, plus
-real sacrifice at the dais. If they do it: Raunu survives his own assassination,
+real sacrifice at the dais. The Wept's Fracture buys Raunu one round, and he uses it
+to choose differently: he spends the twin crystal on himself instead of on the doors,
+and lives, by his own choice. The price is Veier's. The doors behind her never seal,
+the Radiant gains on her through the east wing, and the players are all that stand
+between them. If they do it: Raunu survives his own assassination,
 which makes him the most dangerous man alive and the players his only trusted
 witnesses. Veier and the child still must vanish — Raunu himself, once he
 understands what came for his son, will insist; grieving the living is the price of

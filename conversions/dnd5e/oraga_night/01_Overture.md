@@ -41,9 +41,10 @@
 ## What This Adventure Is
 
 Oraga Night is a masquerade designed for three to five characters of 3rd to 5th level,
-and built for **four characters of 4th level**, freshly made or taken from the
-pregenerated guests in chapter XI. Every fight in it is balanced for four, and every
-fight card carries lines for three or five characters and for 3rd or 5th level. Use
+and built for **three characters of 4th level**, freshly made or taken from the
+pregenerated guests in chapter XI. Every fight in it is balanced for three, and every
+fight card carries lines for four or five characters and for a party of four at 3rd
+or 5th level. Use
 the one line nearest your table; the lines are not cumulative.
 
 Every problem in the night can be solved by people with a good idea and the nerve to
@@ -111,8 +112,8 @@ palace diagram, the fight cards and every cross-reference.
 
 **Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
-budget for four 4th-level characters, terrain, objective, clock, outs, morale, and
-scaling lines for three or five characters and for 3rd or 5th level.
+budget for three 4th-level characters, terrain, objective, clock, outs, morale, and
+scaling lines for four or five characters and for a party of four at 3rd or 5th level.
 
 **Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
 and IX, a creature name in **bold** has a stat block there. Full blocks live nowhere else; a card or scene repeats a Passive Perception, an AC or a Hit Point total only where you need it at hand.
@@ -178,7 +179,7 @@ terror, and choices about who to save.
 - **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
   until it is decided, and then the last bell rings.
 
-The minutes below are for four players, and they are a budget, not a stopwatch: move on
+The minutes below are for three players, and they are a budget, not a stopwatch: move on
 when the table's energy says so. The budget tells you when you have spent too long.
 
 **Table I–1: The Runtime**
@@ -358,8 +359,8 @@ Chapter IX runs them by three rules (see chapter IX, "The Snakes at the Ball"), 
 more thing holds tonight:
 
 - **Something came with the Uninvited, and it can be beaten.** All evening a quiet
-  guest has been at the ball dressed as a great house's attendant, carrying a cloak and
-  a cup for a master nobody can find. It is **the Attendant**: a made thing, not a born
+  guest has been at the ball dressed as a great house's attendant, a cloak over one
+  arm, waiting for a master nobody can find. It is **the Attendant**: a made thing, not a born
   one, serving the same master as the three, sent to watch ahead of midnight and bad at
   it.
 

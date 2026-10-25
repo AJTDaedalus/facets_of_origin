@@ -241,14 +241,22 @@ facts:
         unless: '\b(?:[Ii]f (?:Maiven|she) (?:lived|survived|lives))\b'
         why: P2-5 — she dies by default; make the aftermath line conditional
 
-  - id: down_not_out
+  - id: threat_rule
     truth: >-
-      "Down, Not Out" is printed in full once, in chapter V ("Midnight Rules"). Every other
+      The threat rule (TP6; DESIGN §3.1) replaces the Uninvited's blanket "Down, Not Out". It is
+      printed in full once, in chapter V ("Midnight Rules", under "Down, Not Out"); every other
       chapter (the DM sheet, the fight cards, the stat blocks) points to it and adds only its
-      local rule. The crowd rouses a dropped creature at the start of "the round after" the
-      round it was still down, never "the round after next".
-    source: O36; review P2-18
-    phrases: ['(see chapter V, "Down, Not Out")', "the crowd rule"]
+      local rule. A creature becomes a threat to one of the Uninvited when it lands a Stop on
+      it, earns Delay against it three times in one scene, or deals its last blow; the DM says
+      the mark aloud ("She looks at you — properly, for the first time."). Unmarked, a creature
+      dropped to 0 HP is set aside, Unconscious and Stable, and the crowd rule applies. Marked,
+      normal dying rules apply; at Sharp the Uninvited finishes a marked creature only if it is
+      still in the way on its next turn. The quarry is unchanged; the mark lasts the scene. The
+      crowd rouses a dropped creature at the start of "the round after" the round it was still
+      down, never "the round after next". Nothing prints "only ever in mortal danger by choice"
+      or "deadly but not lethal".
+    source: owner TP6 (2026-10-20); DESIGN_oraga_5e_3p_pass §3.1; ledger L-010 (replaces O36's down_not_out; review P2-18)
+    phrases: ['(see chapter V, "Down, Not Out")', "the crowd rule", "properly, for the first time"]
     checks:
       - type: rule_copy
         home: "05"
@@ -262,18 +270,35 @@ facts:
           - '\bhaul\w*[^.]{0,80}Heroic Inspiration\b'
           - '\blast blow\b'
           - '\b(?:within|longer than) two rounds\b'
-        why: O36 — the full rule lives in chapter V; elsewhere print a pointer plus the local rule
+          - '\bproperly, for the first time\b'
+          - '\bthree times in (?:one|a) scene\b'
+          - '\bstill (?:in the way|between (?:them|her|him) and)\b'
+          - '\b(?:the )?mark lasts the scene\b'
+        why: O36 / L-010 — the full rule lives in chapter V; elsewhere print a pointer plus the local rule
       - type: forbid
         pattern: '\bround after next\b'
         why: O36 / P2-18 — chapter V says "the round after"
+      - type: forbid
+        pattern: '(?i)\bonly ever in mortal danger by choice\b'
+        why: TP6 / DESIGN §1 — retired; the threat rule replaces it
+      - type: forbid
+        pattern: '(?i)\bdeadly,? but not lethal\b'
+        why: TP5 / DESIGN §1 — retired for the Attendant
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\*"She looks at you — properly, for the first time\."\*'
+        anchor: 'Down, Not Out'
+        why: TP6 / DESIGN §3.1 — the DM says the mark aloud
 
   - id: fracture_rule
     truth: >-
-      The Fracture rule (invoking one, the skills, Intimidation and Deception never working,
-      the three result bands, "works once") is printed in full once, in chapter V ("The
-      Fractures"). Chapter X keeps a pointer plus its local DCs; each block's Fracture trait
-      says only what lands. The DM sheet (08) is a quick reference and may compress it.
-    source: O36 extended (review 2 N8, R6.2, O64)
+      The Stop and End rule (three ways to a Stop, DC 15 with +2 per tell, once per scene,
+      the result bands, 2 Delay and the mark; an End's two tells, method, success and
+      failure; "End once; Stop once per scene"; the trap as an End for all three) is printed
+      in full once, in chapter V ("The Fractures"). Chapter X keeps a pointer; each block's
+      Stop and End traits say only what lands. The DM sheet (08) is a quick reference and
+      may compress it.
+    source: O36 extended (review 2 N8, R6.2, O64); T4.5–T4.7 (DESIGN §3.3–§3.5, TP43)
     phrases: ['(see chapter V, "The Fractures")']
     checks:
       - type: rule_copy
@@ -282,14 +307,61 @@ facts:
         files: ["01", "02", "03", "04", "06", "07", "09", "10", "11", "README"]
         elements:
           - '\bIntimidation never works\b|\bNever Intimidation\b'
-          - '\bneither does Deception\b|\bor Deception\b'
           - '\b(?:Failure|miss(?:es)?|fails?) by 4 or less\b'
           - '\b(?:Failure|miss(?:es)?|fails?) by 5 or more\b'
-          - '\bworks once\b|\bOnce each\b'
           - '\bwithin 30 (?:feet|ft\.)[^.]{0,60}\bhear'
           - '\bHeroic Inspiration may be spent\b'
           - "\\b(?:isn't|is not|not) spent\\b"
-        why: O36 / review 2 N8 — the full Fracture rule lives in chapter V; chapter X points to it
+          - '\+2 (?:for each|per) tell\b'
+          - '\bonce per scene\b'
+          - '\btwo or more (?:witnessed )?tells\b'
+          - '\bread the check as a Stop\b|\bcounts as a Stop\b'
+        why: O36 / review 2 N8 / DESIGN §3.3–§3.4 — the full Stop and End rule lives in chapter V; chapter X points to it
+      - type: forbid
+        pattern: '\bFracture (?:check|attempt)\b|\b(?:lands?|landed|earns?|earned|invoked?) (?:his |her |its |a |the |that Uninvited''s )?Fracture\b'
+        why: DESIGN §3.3–§3.7 (T4.5) — the rule terms are Stop and End; "The Fractures" names only the seams and the section
+        files: ["05", "08", "10"]
+      # T4.1 (three-player pass; DESIGN §3.2, §3.7; ledger L-002, L-003, L-007): Slow (Delay).
+      - type: forbid
+        pattern: '(?i)\bnothing bought\b'
+        why: L-007 / DESIGN §3.2 — a spell that lands always buys Delay; no "nothing bought" row
+      - type: forbid
+        pattern: '(?i)\bif it lands, that is the success\b'
+        why: L-002 / DESIGN §3.2 — spells roll (the attack, the save, or a trick check)
+      - type: forbid
+        pattern: '\bEach Fracture works once\b'
+        why: DESIGN §3.7 — "End once; Stop once per scene"
+      - type: forbid
+        pattern: '\bDC 18 with one tell\b'
+        why: DESIGN §3.7 — the DC rows become +2 per tell
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: "A spell with an attack roll or a saving throw uses that roll, and \\*Centuries of Practice\\* can refuse the save; a spell with neither is a trick check with the caster's spellcasting ability, DC 13\\."
+        anchor: 'Buying Time'
+        why: L-002 / DESIGN §3.2 — spells roll; chapters V and X print the same sentence
+      - type: require
+        file: 10_Bestiary.md
+        pattern: "A spell with an attack roll or a saving throw uses that roll, and \\*Centuries of Practice\\* can refuse the save; a spell with neither is a trick check with the caster's spellcasting ability, DC 13\\."
+        anchor: 'One rule covers most of the list'
+        why: L-002 / DESIGN §3.2 — spells roll; chapters V and X print the same sentence
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\bat most three turns per scene\b'
+        anchor: 'Buying Time'
+        why: L-003 / DESIGN §3.2 — the Delay cap
+      - type: rule_copy
+        home: "05"
+        max: 2
+        files: ["01", "02", "03", "04", "06", "07", "09", "10", "11", "README"]
+        elements:
+          - '\bDC 15 (?:the second time|if the same trick)\b'
+          - '\bnever (?:works )?a third time\b'
+          - '\bat most three turns per scene\b'
+          - '\bonce per (?:spell per )?Uninvited\b'
+          - '\bhalf a turn''s progress\b'
+          - '\bnamed people out\b|\bgets? named people\b'
+          - '\b(?:theme|nature)\b[^.]{0,80}\b2 Delay\b'
+        why: DESIGN §3.2 — Buying Time is printed in full once, in chapter V; chapter X keeps the spells sentence and a pointer
 
   - id: party_baseline
     truth: >-
@@ -352,6 +424,85 @@ facts:
       - type: forbid
         pattern: 'Raunu[^.]{0,80}(sends?|sent) (her|Veier) (away|off)'
         why: TP11 — Raunu planned to keep her until the birth
+
+  - id: midnight_wing_routes
+    truth: >-
+      At the lights, Raunu's first crystal seals only the double doors at the head of the east
+      stair. The service stair beside them (with the wing's service door) and the garden stair
+      from the upper terrace stay open, as drawn on Map VIII–5: they are the party's routes to
+      intercept the Radiant, and an open route can still be guarded. The inner doors lock behind
+      Veier on Raunu's last charge (his twin crystal), as printed. Anha's passages reach the
+      wing's service door; they are never a way to Veier.
+    source: owner TP13, TP28 (C1, C1b); ledger L-027, R-01
+    phrases: ["the double doors at the head of the east stair", "The ways into the east wing"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\beast wing corridor booms? shut\b'
+        why: TP28 — the first crystal seals the double doors at the head of the east stair; name them
+      - type: forbid
+        pattern: '\bspent sealing the corridor\b'
+        why: TP28 — the first crystal sealed the double doors, not the corridor
+      - type: forbid
+        pattern: '(?i)\b(?:service|garden) stairs? (?:(?:is|are|was|were) )?(?:sealed|seals?|booms? shut)\b|\bseals? (?:the|its) (?:service|garden) stair'
+        why: TP28 — the service and garden stairs stay open at midnight
+      - type: sentence
+        files: ["04", "07"]
+        all: ["Anha's passages", '\bways? in\b|\breachable\b']
+        why: R-01 / TP13 — Anha's passages reach the service door (guard doubled); never a way to Veier
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\bdouble doors at the head of the east stair boom shut\b'
+        anchor: 'Raunu understands first'
+        why: TP28 — Movement VI names what seals at the lights
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\*\*The ways into the east wing\.\*\*[^\n]*'
+        anchor: 'The Palace After Midnight'
+        why: TP28 — General Features names the open routes
+
+  - id: veier_unmet
+    truth: >-
+      Veier is never met before midnight or in the east wing: the door, her hand and her voice
+      only (TP13, TP27, TP33). In the east-wing chase the household moves her, and the party
+      holds the Radiant off from doors, corridors and stairs; Corval guides them, never to her
+      (TP40). The Crossing is the one exception: Vell says "Take her. The gate. Don't stop."
+      to the characters, and they carry or support her to the boat, as printed (TP41).
+    source: owner TP13, TP27, TP33, TP40, TP41; T4.10
+    phrases: ["the household moves her", "Nobody reaches her here", "Take her. The gate. Don't stop."]
+    checks:
+      - type: forbid
+        files: ["04", "05", "07", "08", "09", "11"]
+        pattern: '(?i)\bcarry her\b|\bsupport her\b|\btake Veier\b|\b(?:with|beside) Veier\b'
+        unless: '(?i)\bhousehold (?:moves|takes)\b|\bStrength 13\b|\bthe Help action\b|\boff the gravel\b|\bpale man\b|\bboat\b|\|\s*Raunu\s*\|'
+        why: >-
+          TP13 / TP41 — no character carries, supports, takes or stands with Veier before the
+          Crossing; the exemptions are the household moving her, the Crossing's printed carry
+          note and Table V–5 trick 3, Vell in the read-aloud, and Raunu's own row
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\bThe Radiant''s cut will not close\b'
+        anchor: 'The Crossing'
+        why: TP42 — healing eases her, but the wound does not knit
+
+  - id: pregnancy_secret
+    truth: >-
+      The pregnancy never gets out: it stays secret in the record forever. The one exception
+      (TP46): if a character sold the nursery to Callun, the Circle knows there is an heir and
+      quietly starts its own search, Circle agents looking west for the child. A campaign
+      threat, never a public fact. Both editions print the exception beside "never gets out".
+    source: owner TP24, TP46 (2026-10-24); T7.14
+    phrases: ["The pregnancy never gets out", "the Circle knows there is an heir"]
+    checks:
+      - type: require
+        file: 06_Aftermath.md
+        pattern: '\bnever gets out\b.{0,1500}?\bthe Circle knows there is an heir\b'
+        anchor: 'never gets out'
+        why: TP46 — the Circle exception sits beside "the pregnancy never gets out"
+      - type: require
+        file: ../../../adventures/oraga_night/06_Aftermath.md
+        pattern: '\bnever gets out\b.{0,1500}?\bthe Circle knows there is an heir\b'
+        anchor: 'never gets out'
+        why: TP46 — the Facets edition prints the same exception (fact_check reads it by path)
 
 maps:
   court:          # B2 (05 General Features, Sizes)

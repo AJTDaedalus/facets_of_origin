@@ -296,7 +296,9 @@ by money. He is not incorruptible by kindness.
 **At midnight:** The decree lives only in the memories of men now trapped in a
 burning palace with three killers. Keep Corval alive and the Tithe survives the
 night; the Circle, to its own surprise, may end up owing you for saving the policy
-it hired you to undermine. *(The Tithe of Hands is a levy on each sect palace to pay
+it hired you to undermine. *(For the DM: at midnight Raunu's last order sends Corval to
+the east-wing stairs, with the characters nearest him; chapter V, "Corval. The stairs.")*
+*(The Tithe of Hands is a levy on each sect palace to pay
 festival laborers year-round, one more Raunu policy the great houses will hate. It
 dies with its rememberers unless your table saves them.)*
 

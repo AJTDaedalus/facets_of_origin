@@ -434,7 +434,8 @@ safe, and she knows the Nolonaire name better than anyone else at this ball.
 
 **Agenda hook.** *The Cousin's Errand* is Ilesse's: a message learned by heart and a
 grandmother's ring, for Veier Nolonaire's hands alone. It is the one agenda that has to
-reach the east wing, and the one that puts a character beside Veier.
+reach the east wing's door, and the one whose voice Veier listens for through that door at
+midnight.
 
 **Mask.** *Ilesse is carrying a Thenya message under an Orthaen mask. What would the
 delegation think of the one she chose?*

@@ -174,6 +174,8 @@ Everything in the last column is a thing a table can actually reach.*
 B5: **the Crossing**, where Vell meets it — the crossfire hazard, Ch. V: avoid
 roll, 10+ clear / 7–9 d4 or lose an action / 6− d8 or the ground gets worse). Hollow →
 main doors (B2), herding. Vell → service passages → garden stair → river gate (B5).
+Corval → the stairs, on Raunu's last word, guiding the players nearest him by the
+service stair or the garden stair to get in front of the Radiant (never to Veier).
 
 **You cannot beat them:** 0 HP ≠ kill — it stops indulging, puts the attacker
 through a wall (0 HP, out of scene, Hold On no worse than 7–9), steps into

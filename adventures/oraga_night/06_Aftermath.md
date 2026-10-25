@@ -47,7 +47,10 @@ Agenda 4) now hold a truth that exists nowhere else in the world — priceless,
 unprovable, and dangerous in exact proportion to who they tell. Vorlain would pay
 a fortune for it and might even believe it. The Church would make it, and them,
 disappear into a closed file. The Thenya would go to war over it. Choose carefully
-is not advice the module needs to write down; the players will feel it.
+is not advice the module needs to write down; the players will feel it. The one
+exception: if a character sold the nursery to Callun, the Circle knows there is an
+heir, and it begins its own search, keeping it quiet. Circle agents start looking west for the
+child. It is a threat for a campaign to carry, never a public fact.
 
 **Vorlain's morning.** He is chief now in everything but ceremony, and he is
 *afraid* — visibly, to anyone who knows what fear looks like on a clever face. He
