@@ -43,9 +43,9 @@ her answer, word for word. Bring back the truth of how she fares. — M.N.*
 **5. THE UNPAID DEBT** — *Grandmother's soul-crystal hangs in their trophy gallery
 like a hunting prize. It took her sixty years to grow. Take it home.*
 
-**6. THE GATE AT MIDNIGHT** — *Triple rates, in old coin, for one small thing: the
-river gate at the bottom of the garden, unlocked at midnight. Not before. No
-questions.*
+**6. THE GATE AT MIDNIGHT** — *Triple rates, in old coin, for one small thing, and the
+key to do it with: the river gate at the bottom of the garden, unlocked before the
+midnight bell, and not before the Dead Dance. No questions.*
 
 **7. THE STORY OF A LIFETIME** — *The mists fall, the silent house opens, the
 vanished chief throws a ball. Every thread knots in that palace tonight. Witness

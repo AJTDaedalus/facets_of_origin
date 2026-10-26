@@ -286,8 +286,8 @@ Lantern-strung gardens stepping down to
 the water, ending at a modest iron gate to the river walk, which is always locked. Couples,
 conspirators, and anyone needing air. *(Agenda 6 lives here, and so does the escape route.
 Know this geography cold: Court → terraces → lower garden → river gate. The
-gate's lock takes a DC 15 Dexterity check using Thieves' Tools. The character with Agenda 6 needs no check, having
-been given what they need. Three terraces, each about 40 feet deep with a 10-foot drop
+gate's lock takes a DC 15 Dexterity check using Thieves' Tools. The character with Agenda 6 needs no check, with
+the key they were given. Three terraces, each about 40 feet deep with a 10-foot drop
 between, then about 150 feet of lower garden to the gate. See chapter V, "The Palace
 After Midnight: General Features", and map VIII–4.)*
 

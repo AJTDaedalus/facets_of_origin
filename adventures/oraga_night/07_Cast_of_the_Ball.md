@@ -376,6 +376,10 @@ with an exceptional will who studies him directly may feel it — a Soul roll at
 Very Hard to notice the nudge — and earns, on a success, the most dangerous
 piece of information at the ball: someone is editing you.)*
 
+*(The player character with Agenda 6 gets it personally. He hired them, and each time
+they see the tall factor something nags: they have met this man before, and they can't
+hold why (Chapter III, Agenda 6).)*
+
 **One line he does not cross, and one he does:** he will take the path that
 spills the least blood if one exists — and if none exists, he will be ruthless,
 because the one thing he will not do is fail. Players standing between him and
@@ -393,7 +397,9 @@ him. The Radiant's one word of hate (*"...You."*) is all the explanation the nig
 asked, or shields Veier at real cost): at the river gate, Vell looks back — the
 only time all night — and gives them one sentence. Suggested: *"Twenty years from
 now, when you hear this night has finally mattered — that was you."* Then the
-water takes him.
+water takes him. If the one who earned it carries Agenda 6, the pressure lifts while he
+speaks: for that moment they see him plainly and know him for the stranger with the coin,
+and his is the one face from this night they remember all their life.
 
 ### The Uninvited — the Three Gray Masks
 *Cards: `enemies/the_wept.fof`, `the_radiant.fof`, `the_hollow.fof`. Their

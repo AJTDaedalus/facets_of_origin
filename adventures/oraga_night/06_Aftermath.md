@@ -69,6 +69,11 @@ with centuries of practice. The players should end certain of exactly two things
 the lady left the palace alive, and whoever took her wanted her safe. (Only players
 who learned the east wing's secret know to count a third passenger.)
 
+**Nobody connects the key.** No one searches a guest. The player character with Agenda 6
+goes home with a newly cut key to the river gate and a purse of the same old coin that
+paid for the boat, and nobody ever asks. It is their private proof, a keepsake, and a
+hook if the story goes on.
+
 **The counting of the house.** Threads to pay off from the ball: Corval, ruined and
 dignified, executing the testament Raunu swore aloud in the chapel — three days
 before the ball, Corval and Mother Sella standing witness — providing for every

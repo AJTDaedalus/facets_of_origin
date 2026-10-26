@@ -406,9 +406,9 @@ like a hunting prize. It took her sixty years to grow. Take it home.*
 *The gallery is warded, and the house's few guards watch it closely.* **Pays:** the
 crystal, home.
 
-**6. THE GATE AT MIDNIGHT** — *Triple rates, in old coin, for one small thing: the
-river gate at the bottom of the garden, unlocked at midnight. Not before. No
-questions.*
+**6. THE GATE AT MIDNIGHT** — *Triple rates, in old coin, for one small thing, and the
+key to do it with: the river gate at the bottom of the garden, unlocked before the
+midnight bell, and not before the Dead Dance. No questions.*
 *You do not know who paid you.* **Pays:** 30 GP in old coin, already in your purse.
 
 **7. THE STORY OF A LIFETIME** — *The mists fall, the silent house opens, the

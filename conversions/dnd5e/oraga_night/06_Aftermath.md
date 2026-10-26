@@ -41,6 +41,10 @@ record, and it is what history keeps.
   whatever the dice do. Anyone who follows it ends certain of two things: the lady left the palace
   alive, and whoever took her wanted her safe. Only characters who learned the east
   wing's secret know to count a third passenger.
+- **Nobody connects the key.** No one searches a guest. The character with Agenda 6 goes
+  home with a newly cut key to the river gate and a purse of the same old coin that paid
+  for the boat, and nobody ever asks. It is their private proof, a keepsake, and a hook if
+  the story goes on.
 - **The house counts itself.** Corval, ruined and dignified, executes the testament
   Raunu swore aloud in the chapel, providing for every servant by name. Anha and the
   staff are free to talk at last, and have two years of eerie domestic detail and no

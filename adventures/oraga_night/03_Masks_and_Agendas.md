@@ -151,15 +151,37 @@ where they are weakest. People will live or die by whether you share that.
 
 ### 6. The Gate at Midnight
 *Patron: unknown.*
-**The ask:** A stranger paid you triple rates in old coin for one small thing: the
-river gate at the bottom of the garden is to be unlocked at midnight. Not before. No
-questions.
+**The ask:** A stranger paid you triple rates in old coin for one small thing, and gave
+you the key for it: the river gate at the bottom of the garden is to be unlocked before
+the midnight bell, and not before the Dead Dance. No questions.
 **The catch:** You have no idea who paid you, why, or what comes through a gate — in
 which direction — at midnight on Oraga.
 **At midnight:** You find out. *(MM: the stranger was Master Vell, securing Veier's
 escape route. The player character who felt like a hired traitor all night was one
 of the reasons mother and child got out, and the one that let Vell spend his second
 way on something else. Give it its moment.)*
+
+*(MM: play the hiring with the Agenda 6 player alone, before the session or aside at its
+start. The stranger is Vell, and nothing in the scene names him. Nothing is written
+down either: the Church writes, and he is not the Church. Put the purse of old coin and
+the key, plain iron and newly cut, in the character's hands, give the instruction once,
+and answer any question with a smaller one. Afterwards the character remembers the
+voice, the weight of the coin and the size of the hand, never the face. At the ball,
+each time they see the tall factor, something nags at them; see Chapter VII, "Master
+Vell". The lamps go down for the Dead Dance in Movement V, and the character can slip
+out to the gate under them and be back in the Court for the Unmasking.)*
+
+**When you meet the Agenda 6 player alone before the session, read:**
+
+> *A stranger meets you somewhere quiet in the city: very tall, broad as a doorway,
+> well dressed. He speaks softly, and warmly. He puts a purse in your hand, heavy, the
+> coins in it old and worn smooth. Then a key, plain iron, newly cut, still bright where
+> the file bit. "The river gate at the bottom of the palace garden. Unlocked before the
+> midnight bell, and not before the Dead Dance. No questions." His hand closes yours
+> over the key. It is a very large hand.*
+>
+> *Afterwards you have his voice, the weight of the coin and the size of that hand. His
+> face is gone.*
 
 ### 7. The Story of a Lifetime
 *Personal.*

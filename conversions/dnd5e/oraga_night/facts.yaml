@@ -1130,6 +1130,46 @@ facts:
         anchor: 'Where Everyone Stands'
         why: TP65 — the Facets edition's position table agrees
 
+  - id: agenda6_key
+    truth: >-
+      PB1–PB4 (personal beats, Agenda 6): the stranger hands over a purse of old coin and a
+      plain, newly cut iron key to the river gate, and the instruction is "unlocked before
+      the midnight bell, and not before the Dead Dance". It replaces the card's old "at
+      midnight. Not before." and B5's "given what they need". A prelude scene beside
+      Agenda 6 plays the hiring; the character remembers the voice, the coin and the hand,
+      never the face, until the boat. Both editions.
+    source: owner PB1–PB4 (2026-10-25); PB-A6
+    phrases: ["unlocked before the midnight bell, and not before the Dead Dance", "the key"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bat midnight\. Not before\b|\bgiven what they need\b'
+        why: PB2a, PB1b — the gate is unlocked before the midnight bell, with the key
+      - type: require
+        file: 02_The_World_and_the_Night.md
+        pattern: 'gave\s+you the key for it: the river gate at the bottom of the garden is to be unlocked before\s+the midnight bell, and not before the Dead Dance'
+        anchor: 'The Gate at Midnight'
+        why: PB1b, PB2a — Agenda 6 carries the key and the new instruction
+      - type: require
+        file: 08_Handouts.md
+        pattern: 'and the\s+key to do it with: the river gate at the bottom of the garden, unlocked before the\s+midnight bell, and not before the Dead Dance'
+        anchor: 'THE GATE AT MIDNIGHT'
+        why: PB1b, PB2a — handout card 6 agrees
+      - type: require
+        file: 04_The_Ball.md
+        pattern: 'with\s+the key they were given'
+        anchor: 'B5\. The Garden Terraces'
+        why: PB1b — B5's lock note names the key
+      - type: require
+        file: ../../../adventures/oraga_night/03_Masks_and_Agendas.md
+        pattern: '(?s)\A(?!.*at midnight\. Not before).*gave\s+you the key for it'
+        anchor: 'The Gate at Midnight'
+        why: PB1b, PB2a — the Facets edition's Agenda 6 has the key and not the old wording (fact_check scans only this edition for forbids)
+      - type: require
+        file: ../../../adventures/oraga_night/08_Handouts.md
+        pattern: '(?s)\A(?!.*at midnight\. Not before).*and the\s+key to do it with'
+        anchor: 'THE GATE AT MIDNIGHT'
+        why: PB1b, PB2a — the Facets edition's card 6 agrees
+
 maps:
   court:          # B2 (05 General Features, Sizes)
     length: 140

@@ -643,6 +643,10 @@ who studies him directly can make a DC 25 Wisdom (Insight) check to notice the n
 On a success, they learn the most dangerous piece of information at the ball: someone
 is editing you.)*
 
+*(The character with Agenda 6 gets it personally. He hired them, and whenever they see
+the tall factor, a DC 25 Wisdom (Insight) check tells them they have met him before, and
+they can't hold why (chapter II, Agenda 6).)*
+
 **Quote:** "You are observant. Enjoy the ball."
 
 **One line he does not cross, and one he does:** he will take the path that
@@ -662,7 +666,9 @@ him. The Radiant's one word of hate ("...You.") is all the explanation the night
 asked, or shields Veier at real cost): at the river gate, Vell looks back, the
 only time all night, and gives them one sentence. Suggested: "Twenty years from
 now, when you hear this night has finally mattered — that was you." Then the
-water takes him.
+water takes him. If the one who earned it carries Agenda 6, the pressure lifts while he
+speaks: for that moment they see him plainly and know him for the stranger with the coin,
+and his is the one face from this night they remember all their life.
 
 **If it comes to steel:** he will not fight if he can avoid it, and he can almost always
 avoid it. His block in chapter X ("Master Vell") has real numbers, set so high that no

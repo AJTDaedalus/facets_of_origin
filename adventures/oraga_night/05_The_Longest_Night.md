@@ -222,6 +222,10 @@ in three beats down the garden's three levels:
    them see: a pale man rowing hard into the dark, a woman bent over her own
    heartbeat, and the palace burning rose-colored behind them.
 
+   *(If a player character earned Vell's one sentence (Chapter VII, "Master Vell", "One
+   crack in the ice") and carries Agenda 6, they see his face plainly while he speaks,
+   know him for the stranger with the coin, and keep that face all their life.)*
+
 What the Radiant means to do when it reaches her, the module does not say. Never
 narrate an attack on Veier herself; its violence goes to whoever has made themselves
 its enemy and stands in its way.

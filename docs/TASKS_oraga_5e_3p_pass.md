@@ -1547,3 +1547,22 @@ decomposed into tasks before WP7 (or folded into WP4/WP7 as noted):
 - **TP41** the party takes Veier at the Crossing (WP4 T4.10 narrowed); **TP42** her wound won't close.
 - **TP43** no Last Rite: the Radiant's only End is the Root trap (WP4 T4.7, T4.13, T4.16; DESIGN §3.6 void).
 - **TP44** old coin is Vell's alone; **TP45** history breaks by any deliberate choice; **TP46** the Circle starts its own search.
+
+---
+
+## Personal beats (2026-10-25): rulings PB1–PB4
+
+The owner ruled Agenda 6's personal beats (`docs/DECISIONS.md`, "Personal beats: Agenda 6, the
+Gate at Midnight").
+
+### ☑ PB-A6 Agenda 6: the hiring, the key, the face *(PB1–PB4)*
+- **Do:** the card's instruction becomes "unlocked before the midnight bell, and not before the
+  Dead Dance" (PB2a) and "given what they need" becomes a plain, newly cut iron key (PB1b), in
+  M/02 Agenda 6, M/08 card 6, M/04 B5, F/03 and F/08; add the prelude scene beside Agenda 6 (DM
+  note plus an 80–110-word read-aloud, PB1a); the DC 25 Insight nag in M/07 Vell, lore only in
+  F/07 (PB1c); "the face stays, once" in 07 *One crack in the ice* and at the boat in 05, both
+  editions (PB4a); nobody connects the key at dawn in 06, both editions (PB4b). Table V–4 trick 4,
+  Movement V's Vell line and Undercurrent D's refusal stay as printed (PB2a, PB3a).
+- **Files:** M/02, M/04, M/05, M/06, M/07, M/08, `M/facts.yaml` (`agenda6_key`),
+  `M/INVENTIONS_5e.md` (#138); F/03, F/05, F/06, F/07, F/08.
+- **Result:** done 2026-10-25; every check green (see LOG, "PB-A6"). No commit or staging.

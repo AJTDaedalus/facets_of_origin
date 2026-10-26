@@ -760,7 +760,9 @@ they choose to fight. Run it in three beats down the garden's three levels:
    *(If the character with Agenda 6 unlocked this gate for him, or a character helped
    the escape unasked or shielded Veier at real cost, Vell looks back from the oars, the
    only time all night, and gives that character one sentence: chapter VII, "Master
-   Vell", "One crack in the ice".)*
+   Vell", "One crack in the ice". If that character carries Agenda 6, they see his face
+   plainly while he speaks, know him for the stranger with the coin, and keep that face
+   all their life.)*
 
 What the Radiant means to do when he reaches her, the module does not say. Never
 narrate an attack on Veier herself: his violence goes to whoever is a threat to him
