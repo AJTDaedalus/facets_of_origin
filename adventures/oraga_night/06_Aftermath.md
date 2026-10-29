@@ -74,6 +74,11 @@ goes home with a newly cut key to the river gate and a purse of the same old coi
 paid for the boat, and nobody ever asks. It is their private proof, a keepsake, and a
 hook if the story goes on.
 
+**The Prelate files an answer.** A player character with Agenda 2 who has not yet given
+Kovaun their judgment can give it now, among the survivors. She repeats it back once,
+word for word, and names the debt. Nothing is written; the favor lives in her memory.
+Whether the man who came back was the man who left, the record never says.
+
 **The counting of the house.** Threads to pay off from the ball: Corval, ruined and
 dignified, executing the testament Raunu swore aloud in the chapel — three days
 before the ball, Corval and Mother Sella standing witness — providing for every

@@ -45,6 +45,10 @@ record, and it is what history keeps.
   home with a newly cut key to the river gate and a purse of the same old coin that paid
   for the boat, and nobody ever asks. It is their private proof, a keepsake, and a hook if
   the story goes on.
+- **The Prelate files an answer.** A character with Agenda 2 who has not yet given Kovaun
+  their judgment can give it now, among the survivors. She repeats it back once, word for
+  word, and names the debt. Nothing is written; the favor lives in her memory. Whether
+  the man who came back was the man who left, the record never says.
 - **The house counts itself.** Corval, ruined and dignified, executes the testament
   Raunu swore aloud in the chapel, providing for every servant by name. Anha and the
   staff are free to talk at last, and have two years of eerie domestic detail and no

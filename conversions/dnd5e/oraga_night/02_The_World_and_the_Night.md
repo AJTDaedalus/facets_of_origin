@@ -312,7 +312,7 @@ frightening size for the answer: *is the man who came back the man who left?* Wa
 Raunu. Speak with him if you can. Bring the Prelate your honest judgment.
 
 **The catch:** The recluse will be seen perhaps four times tonight: a glimpse, a
-summons you must earn, a toast, and midnight. Miss a window and there may not be
+summons, a toast, and midnight. Miss a window and there may not be
 another. And then: your honest judgment. The Prelate will know if you shade it.
 
 **At midnight:** You are probably the only person in the palace who has studied
@@ -325,6 +325,30 @@ completes the agenda, whatever it says; the module never answers the question. A
 character who shades it makes a Charisma (Deception) check against the Prelate's
 Wisdom (Insight) (+8, chapter X). If she wins, she knows, and the agenda is not done.
 This patron is a snake. See chapter IX, the Church line.)*
+
+> **DM Note — the hiring, before the session**
+>
+> Play this with the Agenda 2 player alone, before the session or aside at its start.
+> Kovaun hands over nothing: the pay is a favor, and it lives in her memory. At the ball,
+> Raunu summons this character without the angling check (chapter IV, Movement III); of
+> all the night's errands, the Church's question is the one about him. The judgment can
+> be delivered at any time before the session ends: in the chapel when the warden fetches
+> the character after the summons, or at dawn among the survivors, when it can carry what
+> they saw at midnight. A judgment delivered after the lights go out still completes the
+> agenda and pays the favor, but it comes too late to cool the Church's line. When it is
+> delivered, Kovaun repeats it back to the character once, word for word, and then names
+> the debt. That is her receipt. The module still never answers the question.
+
+**Read this when you meet the Agenda 2 player alone, before the session:**
+
+> *The Prelate finds you; you do not find her. A woman in vestments, urbane and
+> unhurried, who greets you by your name and your station before you have offered
+> either. She has one question, and she would like you to carry it into the Boranis
+> palace tonight: "Is the man who came back the man who left?" Watch him. Speak with
+> him if you can. Bring her your honest judgment, and the Church will owe you.*
+>
+> *When you agree, she repeats your answer back to you once, word for word, as if
+> filing it. Nothing changes hands, and nothing is written. You are in her memory now.*
 
 ### 3. A House's Long Game
 *Patron: House Draunel, through Lord Essar Draunel.*

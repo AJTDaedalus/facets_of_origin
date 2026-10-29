@@ -1130,6 +1130,29 @@ facts:
         anchor: 'Where Everyone Stands'
         why: TP65 — the Facets edition's position table agrees
 
+  - id: agenda2_summons
+    truth: >-
+      PA2-1–PA2-4 (personal beats, Agenda 2): Raunu always summons the Agenda 2 character,
+      with no angling check; the card's catch no longer says the summons must be earned.
+      A prelude plays the hiring and nothing changes hands; the judgment can be given
+      before midnight or at dawn, and Kovaun repeats it back once. Both editions.
+    source: owner PA2-1–PA2-4 (2026-10-28)
+    phrases: ["Raunu always sends for the Agenda 2 character"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bsummons you must earn\b'
+        why: PA2-2 — the Agenda 2 summons is guaranteed
+      - type: require
+        file: 04_The_Ball.md
+        pattern: 'Raunu always sends for the Agenda 2 character'
+        anchor: 'Movement III'
+        why: PA2-2 — the summons beat says so
+      - type: require
+        file: 02_The_World_and_the_Night.md
+        pattern: 'Read this when you meet the Agenda 2 player alone'
+        anchor: "The Prelate's Question"
+        why: PA2-1 — the prelude is printed beside Agenda 2
+
   - id: agenda6_key
     truth: >-
       PB1–PB4 (personal beats, Agenda 6): the stranger hands over a purse of old coin and a

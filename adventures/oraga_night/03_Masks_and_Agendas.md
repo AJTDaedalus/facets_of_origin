@@ -104,11 +104,31 @@ module invents it here; it dies with its rememberers unless your table saves the
 frightening size for the answer: *is the man who came back the man who left?* Watch
 Raunu. Speak with him if you can. Bring the Prelate your honest judgment.
 **The catch:** The recluse will be seen perhaps four times tonight — a glimpse, a
-summons you must earn, a toast, and midnight. Miss a window and there may not be
+summons, a toast, and midnight. Miss a window and there may not be
 another. And then: your honest judgment. The Prelate will know if you shade it.
 **At midnight:** You are probably the only person in the palace who has studied
 Raunu's face all night. You saw the exact moment he understood — before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
+
+*(MM: play the hiring with the Agenda 2 player alone, before the session or aside at its
+start. Kovaun hands over nothing: the pay is a favor, and it lives in her memory. At the
+ball, Raunu always sends for this character; of all the night's errands, the Church's
+question is the one about him. The judgment can be delivered at any time before the
+session ends: in the chapel when the warden fetches the character after the summons, or
+at dawn among the survivors, when it can carry what they saw at midnight. When it is
+delivered, Kovaun repeats it back once, word for word, and then names the debt. That is
+her receipt. The module never answers the question.)*
+
+**When you meet the Agenda 2 player alone before the session, read:**
+
+> *The Prelate finds you; you do not find her. A woman in vestments, urbane and
+> unhurried, who greets you by your name and your station before you have offered
+> either. She has one question, and she would like you to carry it into the Boranis
+> palace tonight: "Is the man who came back the man who left?" Watch him. Speak with
+> him if you can. Bring her your honest judgment, and the Church will owe you.*
+>
+> *When you agree, she repeats your answer back to you once, word for word, as if
+> filing it. Nothing changes hands, and nothing is written. You are in her memory now.*
 
 ### 3. A House's Long Game
 *Patron: House Draunel, through Lord Essar Draunel.*

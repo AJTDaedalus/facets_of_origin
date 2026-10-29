@@ -230,7 +230,7 @@ being ready to go home.
 ### Prelate Damaris Kovaun — the Church's Eye
 **Wants:** to file Raunu Boranis under something. Anything. **Fears:** the mists —
 which is to say, the one memo from the east that reached her desk and was above her
-seal to read. **Secret:** the Church's interest tonight is not doctrinal. Her superiors want to know whether the man who returned is *the man who returned*, and
+seal to read. **Secret:** the Church's interest tonight is not doctrinal. Her superiors want to know whether the man who returned is the man who left, and
 she has not been told why the question is phrased that way.
 
 **Play her:** urbane, watchful, a career diplomat in vestments, who works the room like

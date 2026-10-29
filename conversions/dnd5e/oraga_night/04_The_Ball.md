@@ -1225,7 +1225,8 @@ would read him finds a man thinking about a staircase, and nothing else. He has
 prepared for that, too.
 
 **Agenda beats:** a summons is the only route to the host. It is Agenda 2's one close
-study and Agenda 1's one chance to simply ask (which gets a long look, and then,
+study, and Raunu always sends for the Agenda 2 character, with no angling check: the
+Church's question is the one errand tonight that is about him. It is also Agenda 1's one chance to simply ask (which gets a long look, and then,
 flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is the
 whole secret. You may tell the Circle I said so."*).
 

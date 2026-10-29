@@ -800,7 +800,8 @@ something that is nearly a kindness, and the long walk back.
 > it is the last good thing I have left to give anyone."
 
 **Agenda beats:** a summons is the only route to the host — Agenda 2's one close
-study, Agenda 1's one chance to simply *ask* (which gets a long look, and then,
+study (Raunu always sends for the Agenda 2 character: the Church's question is the one
+errand tonight that is about him), Agenda 1's one chance to simply *ask* (which gets a long look, and then,
 flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is the
 whole secret. You may tell the Circle I said so."*). Characters not summoned work the room — angling
 to *get* summoned is a fine scene in itself.
