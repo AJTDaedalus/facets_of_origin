@@ -39,6 +39,8 @@ understanding. — E.D.*
 **4. THE COUSIN'S ERRAND** — *These words, learned by heart, and her grandmother's
 ring, into Veier's own hands — no minister, no husband, no exceptions. Bring back
 her answer, word for word. Bring back the truth of how she fares. — M.N.*
+*The words:* "Veier. Your cousin speaks, and you know the ring. Two years, and not
+one word. Are you well? Are you free? Answer in your own words. I will wait for them."
 
 **5. THE UNPAID DEBT** — *Grandmother's soul-crystal hangs in their trophy gallery
 like a hunting prize. It took her sixty years to grow. Take it home.*

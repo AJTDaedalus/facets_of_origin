@@ -1493,3 +1493,11 @@ Reviews: docs/REVIEW_oraga_polish_A.md, docs/REVIEW_oraga_polish_B.md.
   - **PA2-4 (the payoff):** **she repeats it back** once, word for word, and names the debt. Nothing is written. The module still never answers the question.
   - **PA2-5 (prelude text):** approved with the second "Honest" sentence cut (INVENTIONS #139).
   - **PA2-6 (Facets typo):** F/07 Kovaun's secret "whether the man who returned is *the man who returned*" was a typo; it now reads "the man who left", matching the 5e edition and both cards.
+
+### Personal beats: Agenda 4, the Cousin's Errand (2026-10-30)
+  - **Context:** the owner's table uses player-built characters; the chapter XI pregens are examples only. A player carries Agenda 4 as Taven Olmarin (an Orthaen Lore bard on Raunu's own card, then hired by the Thenya). His sheet is `conversions/dnd5e/oraga_night/player_characters/taven_olmarin.md` and is **not written into the module**. The fit review found that Agenda 4 needs no change for a talker: the door scene has no check, and Performance is already a summons angle and a Radiant trick.
+  - **PA4-1 (the hiring):** a one-on-one prelude with Maiven beside Agenda 4 (02; F/03), built from her printed manner. The ring is the object the character carries.
+  - **PA4-2 (the message):** the words are printed for the first time, beside the prelude and on card 4 (both editions), approved as written (PA4-5).
+  - **PA4-3 (midnight):** Veier comes to the Agenda 4 character's voice. In Table V–4, trick 5 (the service door) needs no check either way, and trick 8 (the wrong stair) needs no check: at their word she goes silent. The Facets edition says it in lore.
+  - **PA4-4 (dawn):** Maiven's trust is believing them. If she lives and the Agenda 4 character tells her what Veier said and what they saw at the river, she takes Veier's words home to the Thenyan chief instead of searching the city (06, 05's Thenya paragraph and Table V–8 row; F/06). Otherwise the printed line stands.
+  - **PA4-5 (text):** the prelude read-aloud (with "holding her temper down with both hands") and the message are approved as written (INVENTIONS #140). Taven's sheet is committed beside the module, unlinked.

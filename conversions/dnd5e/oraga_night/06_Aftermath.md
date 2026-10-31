@@ -54,6 +54,11 @@ record, and it is what history keeps.
   staff are free to talk at last, and have two years of eerie domestic detail and no
   answers. If Maiven lives, she will not leave the city without her cousin or a body. If
   not, the Thenya delegation takes her home.
+- **Maiven's trust.** If Maiven lives and the character with Agenda 4 tells her what
+  Veier said through the door, and what they saw at the river, she believes them. That
+  is what her trust is worth. She takes the delegation home to the Thenyan chief with
+  Veier's own words instead of searching the city. If nobody tells her, the line above
+  stands.
 
 ## Ending the Session
 

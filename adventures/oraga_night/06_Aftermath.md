@@ -86,7 +86,10 @@ servant by name. Anha and the skeleton staff, finally free to talk, with two
 years of eerie domestic detail and no answers. The nursery, untouched by fire, that
 inquest officers keep finding reasons not to stand in. Maiven Nolonaire, refusing
 to leave the city without her cousin or a body, becoming the players' fiercest
-ally if they earned her trust — the Thenya do not abandon their own.
+ally if they earned her trust — the Thenya do not abandon their own. (Unless the
+player character with Agenda 4 told her what Veier said through the door and what
+they saw at the river: then she believes them, because that is what her trust is
+worth, and takes Veier's own words home to the Thenyan chief instead.)
 
 **Where it ends.** Give the wing two sessions at most, then close the file the way
 history does: the inquest names "agents unknown, likely Mazaaian," which everyone

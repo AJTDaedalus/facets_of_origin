@@ -399,6 +399,8 @@ understanding.*
 ring, into Veier's own hands — no minister, no husband, no exceptions. Bring back
 her answer, word for word. Bring back the truth of how she fares.*
 *Nobody has seen Veier in public for two years. The east wing is closed and guarded.*
+*The words:* "Veier. Your cousin speaks, and you know the ring. Two years, and not
+one word. Are you well? Are you free? Answer in your own words. I will wait for them."
 **Pays:** Maiven Nolonaire's trust.
 
 **5. THE UNPAID DEBT** — *Grandmother's soul-crystal hangs in their trophy gallery

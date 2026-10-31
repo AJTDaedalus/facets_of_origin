@@ -391,6 +391,32 @@ after midnight is worth more than any coin at this ball. *Your patron is not a s
 The Thenya line in chapter IX is the one that turns into a fight only if somebody
 provokes it.*
 
+> **DM Note — the hiring, before the session**
+>
+> Play this with the Agenda 4 player alone, before the session or aside at its start.
+> Maiven puts the ring in the character's hands and teaches the message below until they
+> have it by heart (it is also on their card). The ring is what they carry all night; the
+> door scene is in chapter IV, "The Ring at the Door (B9)". At midnight Veier comes to
+> this character's voice: in the east wing, two of the Radiant's room tricks need no
+> check from them (chapter V, Table V–4, tricks 5 and 8). At dawn, Maiven's trust means
+> she believes them (chapter VI).
+
+**Read this when you meet the Agenda 4 player alone, before the session:**
+
+> *Maiven Nolonaire finds you somewhere quiet before the ball and does not waste a
+> word: border-raised, direct, and holding her temper down with both hands. She puts a
+> ring in your hand, her grandmother's. Then she gives you the message, and has you say
+> it back until it is right. "Veier alone. No minister. No husband. No exceptions." You
+> agree. She asks again, in the same words: "Veier alone?"*
+>
+> *"Bring back her answer, word for word. And the truth. Is she well. Is she free. Is
+> she herself."*
+
+**Read this when Maiven teaches the message:**
+
+> *"Veier. Your cousin speaks, and you know the ring. Two years, and not one word.
+> Are you well? Are you free? Answer in your own words. I will wait for them."*
+
 ### 5. The Unpaid Debt
 *Personal.*
 **The ask:** Your grandmother spent her working life growing a soul-crystal: a

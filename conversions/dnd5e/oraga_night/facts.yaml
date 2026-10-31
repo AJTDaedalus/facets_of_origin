@@ -1130,6 +1130,26 @@ facts:
         anchor: 'Where Everyone Stands'
         why: TP65 — the Facets edition's position table agrees
 
+  - id: agenda4_voice
+    truth: >-
+      PA4-1–PA4-4 (personal beats, Agenda 4): a prelude with Maiven; the message printed
+      beside it and on card 4; at midnight, tricks 5 and 8 of Table V–4 need no check for
+      the character with Agenda 4; at dawn, a living Maiven told what Veier said believes
+      them and goes home. Both editions.
+    source: owner PA4-1–PA4-4 (2026-10-30)
+    phrases: ["Your cousin speaks, and you know the ring"]
+    checks:
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'no check for the character with Agenda 4: at their word she goes silent'
+        anchor: 'Table V–4'
+        why: PA4-3 — the wrong stair needs no check for Agenda 4
+      - type: require
+        file: 08_Handouts.md
+        pattern: 'Your cousin speaks, and you know the ring'
+        anchor: "THE COUSIN'S ERRAND"
+        why: PA4-2 — the card carries the words
+
   - id: agenda2_summons
     truth: >-
       PA2-1–PA2-4 (personal beats, Agenda 2): Raunu always summons the Agenda 2 character,

@@ -429,10 +429,10 @@ door Raunu sealed is a ward-point)*
 | 2 | **Answer him.** He asks, warmly, whom you serve, and waits for the answer. Give him one worth waiting for | Charisma (Performance), Charisma (Persuasion) or Intelligence (Religion) |
 | 3 | **A kill that isn't there.** Lie still in a corridor he has already passed, like somebody he missed. He stops to stage it | Charisma (Deception) |
 | 4 | **Put the furniture back.** The corridor outside the east-wing doors was cleared for tonight. Drag something into it. It only works while he is Witnessed; otherwise he steps round it through the shadow | Strength (Athletics) |
-| 5 | **The service door.** The household takes her out by the wing's service door into the run. Hold that door against him, or lead him into the run instead: 5 feet wide, one lamp in three, and he has to find his way in it like anybody else | Strength (Athletics) to hold the door; Wisdom (Survival) to lead him, DC 15 even the first time, and no check with Corval, Anha or any of the household |
+| 5 | **The service door.** The household takes her out by the wing's service door into the run. Hold that door against him, or lead him into the run instead: 5 feet wide, one lamp in three, and he has to find his way in it like anybody else | Strength (Athletics) to hold the door; Wisdom (Survival) to lead him, DC 15 even the first time, and no check with Corval, Anha or any of the household; no check either way for the character with Agenda 4, whose voice she comes to |
 | 6 | **Through the plank.** In the service run the wall to the Court is one plank thick. Kick it through, and he is standing in front of everyone on the other side | Strength (Athletics); he is Witnessed while they can see him |
 | 7 | **An audience.** Bring the guards off the east-wing doors, Maiven's slingers, anyone, to where he can see them watching. He turns to them and poses | Charisma (Persuasion) |
-| 8 | **The wrong stair.** Tell him she went down the other way | Charisma (Deception) |
+| 8 | **The wrong stair.** Tell him she went down the other way | Charisma (Deception); no check for the character with Agenda 4: at their word she goes silent, and nothing gives the lie away |
 
 Darkness speeds him up. In an unlit corridor nobody is watching, so he isn't
 Witnessed, and he hurries. A pursuer needs a light for him to be Witnessed. The
@@ -1098,8 +1098,11 @@ her:** she is the best ally in the palace for the next ten minutes — a border 
 who knows what she came for. The Radiant is ahead of both of them. Her
 slingers standing in his sight are witnesses, and he performs for witnesses. *(There is no
 card for this. At this hour, fighting Maiven means fighting a woman trying to save her
-family.)* **What it changes:** a living Maiven is the aftermath's fiercest ally,
-refusing to leave the city without her cousin or a body.
+family.)*
+
+**What it changes:** a living Maiven is the aftermath's fiercest ally, refusing to
+leave the city without her cousin or a body, unless the character with Agenda 4 tells
+her what Veier said and what they saw at the river (chapter VI).
 
 > **DM Note — which knives to show**
 >
@@ -1293,7 +1296,7 @@ out the last line if nobody danced with the Wept in Movement V.
 | If… | Then say, or change… |
 |---|---|
 | **Raunu lives** (⟨They save Raunu⟩) | In place of "dead in his shining hall, mid-sentence": *"alive in his shining hall, and already hunting"* |
-| **Maiven lives** | Add: *"The Thenya envoy will not leave the city without her cousin, or a body."* |
+| **Maiven lives** | Add: *"The Thenya envoy will not leave the city without her cousin, or a body."* If the character with Agenda 4 told her what Veier said and what they saw at the river, add instead: *"The Thenya envoy rides home with her cousin's own words, and believes them."* |
 | **Corval and Raunu** | The Tithe of Hands survives if either of the two who carry it lives (chapter II, Agenda 1): Corval, or a saved Raunu. If Corval left the palace in Circle hands (card S12), add: *"By dawn the Circle owns the Tithe of Hands."* |
 | **Vorlain was taken** (card S13) | After "No one is ever charged", add: *"Not even the brother they handed to the sect guard as the culprit."* |
 | **The slate and the map** | If the wardens got their record of the mist map out (card S8), add: *"In a Church archive, a careful copy of a chief's great table says he was looking east."* |
