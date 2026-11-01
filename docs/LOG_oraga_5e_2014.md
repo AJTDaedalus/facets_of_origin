@@ -158,3 +158,11 @@
 - **T6.1** SRD 5.1 attribution, verbatim, in chapters IX, X and XI and the README. The README subtitle, the chapter X subtitle and the commoner line no longer name SRD 5.2.1. Chapter I's casing note no longer cites SRD 5.2.1 (R1 keeps the capitals). The near-duplicate allowlist now has the SRD 5.1 notice.
 - **Copyright scan:** (a) 83, (b) 14, (c) **0**.
 - **Checks:** fact_check 0, pregen_check 0, bestiary_check 0, lint OK, pytest tools 680 passed, 1 skipped (before the last attribution edits; re-run below).
+
+## 2026-11-01: P7 ledger and close
+
+- **DECISIONS** "The 2014 conversion and the four-player baseline": scope, baseline, yardstick, R1–R4, defaults, and two notes for a later pass (re-simulate S14 with 2014 pregens; four-player runtimes).
+- **INVENTIONS** #141 (four-player rosters and party-size numbers), #142 (the Attendant at CR 6), #143 (the SRD 5.1 pregens; supersedes #31's 4th-level choices and #124's numbers).
+- **STYLE_5e** now states the 2014/SRD 5.1 declaration, the kept Title Case (R1), the 2014 stat-block layout and the 2014 difficulty vocabulary. The charge example is updated.
+- **Memory:** project_oraga_5e_2014_conversion.md.
+- **Final checks:** lint OK (0/0), fact_check 0, pregen_check 0, bestiary_check 0, copyright scan (c) 0, pytest tools 680 passed / 1 skipped.

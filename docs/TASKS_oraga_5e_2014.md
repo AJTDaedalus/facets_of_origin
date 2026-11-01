@@ -39,5 +39,5 @@ Status keys: [ ] open · [~] in progress · [x] done · [!] blocked. Blocked on 
 - [x] T6.1 SRD 5.1 attribution at every former SRD 5.2.1 site and in `build_print.SRD_NOTE`; README "Rules" line. Accept: grep finds no "5.2.1" outside DECISIONS and history notes.
 
 ## P7. Ledger and close
-- [ ] T7.1 DECISIONS entry (2014 conversion, rulings R1–R4), INVENTIONS rows for any new numbers, facts.yaml guards, `docs/LOG_oraga_5e_2014.md`.
-- [ ] T7.2 Full checks green; rebuild print packets if `build_print` output is tracked; update memory.
+- [x] T7.1 DECISIONS entry (2014 conversion, rulings R1–R4), INVENTIONS rows for any new numbers, facts.yaml guards, `docs/LOG_oraga_5e_2014.md`.
+- [x] T7.2 Full checks green; rebuild print packets if `build_print` output is tracked; update memory.

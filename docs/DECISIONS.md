@@ -1501,3 +1501,17 @@ Reviews: docs/REVIEW_oraga_polish_A.md, docs/REVIEW_oraga_polish_B.md.
   - **PA4-3 (midnight):** Veier comes to the Agenda 4 character's voice. In Table V–4, trick 5 (the service door) needs no check either way, and trick 8 (the wrong stair) needs no check: at their word she goes silent. The Facets edition says it in lore.
   - **PA4-4 (dawn):** Maiven's trust is believing them. If she lives and the Agenda 4 character tells her what Veier said and what they saw at the river, she takes Veier's words home to the Thenyan chief instead of searching the city (06, 05's Thenya paragraph and Table V–8 row; F/06). Otherwise the printed line stands.
   - **PA4-5 (text):** the prelude read-aloud (with "holding her temper down with both hands") and the message are approved as written (INVENTIONS #140). Taven's sheet is committed beside the module, unlinked.
+
+### The 2014 conversion and the four-player baseline (2026-11-01)
+  - **Context:** the owner's table plays 2014 rules with four players. The 5e edition was written against SRD 5.2.1 for three players. BRIEF, DESIGN, TASKS and LOG are in `docs/*_oraga_5e_2014.md`.
+  - **Scope (owner):** a full 2014 conversion of the 5e edition: stat blocks, pregens, rules terms, licence (SRD 5.2.1 becomes SRD 5.1) and encounter math. The Facets edition is untouched.
+  - **Baseline (owner):** four 4th-level characters. Every card carries One, Three, Five, 4@3rd, 4@5th and Nastier lines, each with a total.
+  - **Yardstick (owner):** the 2014 DMG adjusted-XP method, checked in design against Xanathar's multiple-monster ratios. The book prints only results: each card's "*N XP; adjusted M for four: Band*", and the party thresholds in Table IX–1. It never reprints the DMG multiplier table or Xanathar's tables.
+  - **R1 styling:** keep the Title Case rules terms (Advantage, Hit Points, Short Rest, the Prone condition). Only the rules change.
+  - **R2 targets:** SRD 5.2.1 "under Low"/"Low" fights become 2014 Easy–Medium; "Low–Moderate"/"Moderate" become Medium–Hard; the Attendant becomes about 1–1.25 × Deadly. Where a single foe had no other lever, its block moves: **the Attendant is CR 6, 144 HP** (2,300 XP, 1.15 × Deadly for four).
+  - **R3 2024 support:** short "At a 2024 table" notes. There is one box in chapter X, with lines in chapters I, III and XI.
+  - **R4 the gift:** a bonus feat at 1st level. A table using the PHB variant human gives the gift on top of the variant's feat. Ungifted characters take no feat.
+  - **Defaults taken:** branch `feat/oraga-5e-2014`; local tag `oraga-5e-2024` pins the 2024 edition (never pushed); tools converted in place.
+  - **Notes for a later pass:**
+    - (a) The S14 play-note odds come from the research simulator run with the 2024 pregens at the new HP. Re-run once the harness models the 2014 pregens.
+    - (b) Table I–1's minutes are still the three-player budget, and chapter I says so. Replace them with a real four-player table's times.
