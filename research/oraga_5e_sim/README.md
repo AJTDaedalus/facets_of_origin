@@ -306,3 +306,32 @@ Use the harness for **comparisons between rule variants** (old against new, a fi
 against as written, one party against another); that is what T5.8–T5.9, T3.10 and
 the other SIM rows need. Quote absolute snake-card rates only alongside the
 assumptions above.
+
+## 2014 mode (the 2014 conversion, 2026-11-01)
+
+`skirm.set_edition("2014")` swaps in the SRD 5.1 pregens of chapter XI (stats, saves, one Second Wind, one Channel Divinity). It also turns off the 2024-only features: Savage Attacker, Sap, Steady Aim and Potent Cantrip. Vicious Mockery becomes 1d4, Healing Word 1d4 and Cure Wounds 1d8. `s14.py` reuses the same pregens and offense, so the switch covers it too. The cards `S2_14`, `S3_14`, `S7_14`, `S8_14`, `S9_14`, `S10_14` and `S13_14` are the four-player printed rosters (DESIGN_oraga_5e_2014 §7).
+
+Results, party `4P` (Dassa, Ilesse, Serane, Andra), N=2000, seed 1. A card's run ends at its morale trigger.
+
+| Card | Any drop | Mean rounds |
+|---|---|---|
+| S2_14 | 26% | 2.6 |
+| S3_14 | 20% | 4.7 |
+| S7_14 | 0% | 1.1 |
+| S8_14 | 23% | 4.7 |
+| S9_14 | 2% | 3.0 |
+| S10_14 | 30% | 6.0 |
+| S13_14 | 14% | 2.0 |
+
+S14 at 144 HP, NEW rules:
+- engaged: win 90.8%, drop 50.5%;
+- slug: win 24.9% (45.0% with the 2024 pregens), drop 90.7%.
+
+These set the S8 and S13 play lines to Medium and confirm the S14 note.
+
+```python
+import skirm, s14
+skirm.set_edition("2014")
+skirm.simulate("S8_14", party="4P", n=2000, seed=1)
+s14.simulate(party="4P", policy="slug", rules=s14.NEW, hp=144, n=2000, seed=1)
+```

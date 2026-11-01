@@ -477,7 +477,7 @@ def _boxes(n: int) -> str:
 
 def trackers(sheet: str) -> str:
     """Markdown tracker lines for one sheet: Hit Points, Hit Dice, slots, limited uses,
-    Heroic Inspiration, the crystal charge and Death Saving Throws."""
+    Inspiration, the crystal charge and Death Saving Throws."""
     lines = []
     hp = re.search(r"\*\*Hit Points\*\* (\d+)", sheet)
     if hp:
@@ -494,63 +494,67 @@ def trackers(sheet: str) -> str:
         lines.append(f"**{m.group(1)}** {_boxes(int(m.group(2)))}")
     for m in re.finditer(r"\*\*([A-Z][\w' ]+?)\*\* \((\d+) use per", sheet):
         lines.append(f"**{m.group(1)}** {_boxes(int(m.group(2)))}")
-    if re.search(r"crystal charge", sheet):
+    for m in re.finditer(r"\*\*([A-Z][\w' ]+?)\*\* \(once per", sheet):
+        lines.append(f"**{m.group(1)}** {_boxes(1)}")
+    if re.search(r"crystal\s+charge", sheet):
         lines.append("**Crystal charge** ☐ released")
-    lines.append("**Heroic Inspiration** ☐")
+    lines.append("**Inspiration** ☐")
     lines.append("**Death Saving Throws** successes ☐☐☐ · failures ☐☐☐")
     return "\n".join(f"- {l}" for l in lines)
 
 
-# One line per spell, from the SRD 5.2.1 (CC BY 4.0) text, cut to what a player needs
-# at the table. A pregen naming a spell that is not here fails the build (spell_lines).
+# One line per spell, from the SRD 5.1 (CC BY 4.0) text (2014 conversion), cut to what a
+# player needs at the table. A pregen naming a spell that is not here fails the build
+# (spell_lines).
 SPELLS = {
     "Aid": "Up to three creatures within 30 ft. each gain 5 to their Hit Point maximum and current Hit Points for 8 hours.",
-    "Alarm": "Ritual: ward a door, window or area up to a 20-ft. Cube within 30 ft. for 8 hours; a creature touching or entering it sets off an audible or mental alarm.",
     "Bless": "Up to three creatures within 30 ft. add 1d4 to attack rolls and saving throws for up to 1 minute (Concentration).",
-    "Calm Emotions": "Each Humanoid in a 20-ft.-radius Sphere within 60 ft. makes a Charisma save or, for up to 1 minute (Concentration), is immune to being Charmed and Frightened, or turns Indifferent toward creatures you choose.",
-    "Charm Person": "One Humanoid within 30 ft. makes a Wisdom save (with Advantage if you or your allies are fighting it) or is Charmed by you for 1 hour; it knows afterward.",
+    "Calm Emotions": "Each humanoid in a 20-ft.-radius sphere within 60 ft. makes a Charisma save (it can choose to fail); for up to 1 minute (Concentration) you suppress anything charming or frightening it, or make it indifferent toward creatures you choose.",
+    "Charm Person": "One humanoid within 30 ft. makes a Wisdom save (with Advantage if you or your companions are fighting it) or is Charmed by you for 1 hour, or until you or your companions harm it; it knows afterward.",
     "Command": "One creature within 60 ft. that understands you makes a Wisdom save or obeys a one-word command (Approach, Drop, Flee, Grovel, Halt) on its next turn.",
-    "Comprehend Languages": "Ritual: for 1 hour you understand the literal meaning of any language you hear or see signed, and written language you touch.",
-    "Cure Wounds": "A creature you touch regains 2d8 + your spellcasting modifier Hit Points.",
-    "Darkness": "Magical Darkness fills a 15-ft.-radius Sphere within 60 ft. for up to 10 minutes (Concentration); Darkvision can't see through it and ordinary light can't light it.",
-    "Detect Magic": "Ritual: for up to 10 minutes (Concentration) you sense magic within 30 ft. and can see a faint aura round a visible creature or object that bears it.",
-    "Disguise Self": "You look different, clothes and gear included, for 1 hour; a creature that studies you sees through it on an Intelligence (Investigation) check against your save DC.",
+    "Comprehend Languages": "Ritual: for 1 hour you understand the literal meaning of any spoken language you hear, and written language you touch.",
+    "Cure Wounds": "A creature you touch regains 1d8 + your spellcasting modifier Hit Points.",
+    "Darkness": "Magical darkness fills a 15-ft.-radius sphere within 60 ft. for up to 10 minutes (Concentration); darkvision can't see through it and ordinary light can't light it.",
+    "Detect Magic": "Ritual: for up to 10 minutes (Concentration) you sense magic within 30 ft., and can use your action to see a faint aura round a visible creature or object that bears it.",
+    "Disguise Self": "You look different, clothes and gear included, for 1 hour; a creature that uses its action to inspect you sees through it on an Intelligence (Investigation) check against your save DC.",
     "Fire Bolt": "Ranged spell attack, 120 ft.: 1d10 Fire damage; a flammable object it hits catches fire.",
-    "Guidance": "Touch a willing creature and name a skill: for up to 1 minute (Concentration) it adds 1d4 to ability checks using that skill.",
+    "Guidance": "Touch a willing creature: once within the next minute (Concentration) it adds 1d4 to one ability check of its choice.",
     "Guiding Bolt": "Ranged spell attack, 120 ft.: 4d6 Radiant damage, and the next attack roll against the target before the end of your next turn has Advantage.",
-    "Healing Word": "Bonus Action: a creature you can see within 60 ft. regains 2d4 + your spellcasting modifier Hit Points.",
-    "Hideous Laughter": "One creature within 30 ft. makes a Wisdom save or falls Prone and is Incapacitated, laughing, for up to 1 minute (Concentration); it repeats the save at the end of each of its turns and when it takes damage.",
+    "Healing Word": "Bonus Action: a creature you can see within 60 ft. regains 1d4 + your spellcasting modifier Hit Points.",
+    "Hideous Laughter": "One creature within 30 ft. makes a Wisdom save or falls Prone and is Incapacitated, laughing, for up to 1 minute (Concentration); it repeats the save at the end of each of its turns and when it takes damage. A creature of Intelligence 4 or less is unaffected.",
+    "Hold Person": "One humanoid within 60 ft. makes a Wisdom save or is Paralyzed for up to 1 minute (Concentration); it repeats the save at the end of each of its turns.",
     "Identify": "Ritual: touch an object for 1 minute and learn its magical properties and how to use them.",
-    "Lesser Restoration": "Touch a creature and end one condition on it: Blinded, Deafened, Paralyzed or Poisoned.",
-    "Light": "An object you touch sheds Bright Light in a 20-ft. radius and Dim Light for 20 ft. more, for 1 hour.",
+    "Lesser Restoration": "Touch a creature and end one disease, or one condition on it: Blinded, Deafened, Paralyzed or Poisoned.",
+    "Light": "An object you touch sheds bright light in a 20-ft. radius and dim light for 20 ft. more, for 1 hour.",
     "Mage Armor": "A creature you touch that wears no armor has a base AC of 13 + its Dexterity modifier for 8 hours.",
-    "Mage Hand": "A spectral hand appears within 30 ft. for 1 minute; as a Magic action you move it 30 ft. and use it to handle an object, open a door or carry up to 10 lb.",
+    "Mage Hand": "A spectral hand appears within 30 ft. for 1 minute; as your action you move it 30 ft. and use it to handle an object, open a door or carry up to 10 lb.",
     "Magic Missile": "Three darts, each striking a creature you can see within 120 ft. for 1d4 + 1 Force damage; they never miss.",
     "Mending": "Repair one break or tear in an object you touch, no larger than 1 ft. in any dimension.",
     "Message": "Whisper to a creature within 120 ft.; only it hears, and it can whisper back.",
-    "Minor Illusion": "A sound, or the image of an object no larger than a 5-ft. Cube, within 30 ft. for 1 minute; a creature that studies it sees through it on an Intelligence (Investigation) check against your save DC.",
+    "Minor Illusion": "A sound, or the image of an object no larger than a 5-ft. cube, within 30 ft. for 1 minute; a creature that uses its action to examine it sees through it on an Intelligence (Investigation) check against your save DC.",
     "Misty Step": "Bonus Action: teleport up to 30 ft. to an unoccupied space you can see.",
+    "Prayer of Healing": "Over 10 minutes, up to six creatures you can see within 30 ft. each regain 2d8 + your spellcasting modifier Hit Points.",
     "Prestidigitation": "A small trick within 10 ft.: a harmless sensory effect, light or snuff a candle, clean or soil a small object, chill, warm or flavor food, or a brief mark or trinket-sized illusion.",
-    "Ray of Frost": "Ranged spell attack, 60 ft.: 1d8 Cold damage, and the target's Speed drops by 10 ft. until the start of your next turn.",
-    "Resistance": "Touch a willing creature and name a damage type: for up to 1 minute (Concentration), when it takes damage of that type it reduces the damage by 1d4, once a turn.",
+    "Ray of Frost": "Ranged spell attack, 60 ft.: 1d8 Cold damage, and the target's speed drops by 10 ft. until the start of your next turn.",
+    "Resistance": "Touch a willing creature: once within the next minute (Concentration) it adds 1d4 to one saving throw of its choice.",
     "Sacred Flame": "One creature within 60 ft. makes a Dexterity save or takes 1d8 Radiant damage; cover doesn't help it.",
-    "Sanctuary": "Bonus Action: ward a creature within 30 ft. for 1 minute; anyone who targets it with an attack or a harmful spell makes a Wisdom save or must pick a new target. It ends if the warded creature attacks, casts a spell or deals damage.",
+    "Sanctuary": "Bonus Action: ward a creature within 30 ft. for 1 minute; anyone who targets it with an attack or a harmful spell makes a Wisdom save or must pick a new target. It ends if the warded creature attacks or casts a spell that affects an enemy.",
     "Shield": "Reaction, when you are hit by an attack or targeted by *Magic Missile*: +5 AC until the start of your next turn, including against that attack.",
     "Shield of Faith": "Bonus Action: a creature within 60 ft. gains +2 AC for up to 10 minutes (Concentration).",
-    "Silent Image": "The image of an object, creature or other visible thing, no larger than a 15-ft. Cube, within 60 ft. for up to 10 minutes (Concentration); a Magic action moves it; a creature that studies it sees through it on an Intelligence (Investigation) check.",
-    "Sleep": "Each creature you choose in a 5-ft.-radius Sphere within 60 ft. makes a Wisdom save or is Incapacitated until the end of its next turn, then saves again or falls Unconscious for up to 1 minute (Concentration); damage or a shake wakes it.",
-    "Spare the Dying": "A creature within 15 ft. that has 0 Hit Points and isn't dead becomes Stable.",
-    "Spiritual Weapon": "Bonus Action: a floating spectral weapon within 60 ft. for up to 1 minute (Concentration) makes a melee spell attack for 1d8 + your spellcasting modifier Force damage; a Bonus Action on later turns moves it 20 ft. and repeats the attack.",
-    "Suggestion": "One creature within 30 ft. that can hear and understand you makes a Wisdom save or follows a reasonable course of action you describe in 25 words or fewer, for up to 8 hours (Concentration).",
-    "Vicious Mockery": "One creature within 60 ft. that can see or hear you makes a Wisdom save or takes 1d6 Psychic damage and has Disadvantage on its next attack roll.",
+    "Silent Image": "The image of an object, creature or other visible thing, no larger than a 15-ft. cube, within 60 ft. for up to 10 minutes (Concentration); your action moves it; a creature that uses its action to examine it sees through it on an Intelligence (Investigation) check.",
+    "Sleep": "Roll 5d8: creatures within 20 ft. of a point within 90 ft. fall Unconscious for 1 minute, lowest current Hit Points first, until the total is spent; damage or a shake wakes them.",
+    "Spare the Dying": "Touch a living creature that has 0 Hit Points: it becomes stable.",
+    "Spiritual Weapon": "Bonus Action: a floating spectral weapon within 60 ft. for 1 minute makes a melee spell attack for 1d8 + your spellcasting modifier Force damage; a Bonus Action on later turns moves it 20 ft. and repeats the attack.",
+    "Suggestion": "One creature within 30 ft. that can hear and understand you makes a Wisdom save or follows a reasonable course of action you describe in a sentence or two, for up to 8 hours (Concentration).",
+    "Vicious Mockery": "One creature within 60 ft. that can hear you makes a Wisdom save or takes 1d4 Psychic damage and has Disadvantage on its next attack roll.",
 }
 
 # What a new player does on their turn, drawn from each sheet's own features.
 ON_YOUR_TURN = {
     "Serane Vaskarin": "Move, then one action: talk, *Vicious Mockery*, or a spell (*Hideous Laughter* and *Suggestion* end trouble without a blade). A Bonus Action gives a friend Bardic Inspiration or casts *Healing Word*. Your Reaction is Cutting Words.",
-    "Pello": "Move, then attack with a dagger, and the second dagger's Nick attack comes free; add Sneak Attack once a turn when you have Advantage or an ally beside the target. A Bonus Action is Cunning Action (Dash, Disengage, Hide), Steady Aim, or Fast Hands.",
+    "Pello": "Move, then attack with a dagger; add Sneak Attack once a turn when you have Advantage or an ally beside the target. A Bonus Action is the second dagger, Cunning Action (Dash, Disengage, Hide), or Fast Hands.",
     "Andra Tessarin": "Move, then one action: *Fire Bolt* or *Ray of Frost*, or a spell (*Sleep*, *Magic Missile*, *Darkness*). *Misty Step* is a Bonus Action; *Shield* is your Reaction when you are hit.",
-    "Dassa": "Move, then attack once with the longsword (Sap gives the target Disadvantage on its next attack). Once a Short Rest, Action Surge gives you a second action. Second Wind is a Bonus Action that heals you.",
+    "Dassa": "Move, then attack once with the longsword; you score a critical hit on a 19 or 20. Once a Short Rest, Action Surge gives you a second action. Second Wind is a Bonus Action that heals you.",
     "Ilesse Kethaun": "Move, then one action: *Sacred Flame*, *Guiding Bolt* or a healing spell. A Bonus Action casts *Healing Word*, *Shield of Faith* or *Spiritual Weapon*. Channel Divinity heals in a hurry (Preserve Life).",
 }
 
@@ -564,7 +568,7 @@ def spell_lines(sheet: str) -> list[str]:
         block = m.group(0)
         head = re.match(r"^- \*(?:\*)?([^:*]+)", block)
         kind = head.group(1).strip().lower() if head else ""
-        if not kind.startswith(("cantrips", "prepared", "always prepared", "the lattice")):
+        if not kind.startswith(("cantrips", "prepared", "spells known", "always prepared", "the lattice")):
             continue
         body = block.split(":", 1)[1] if ":" in block else block
         for sm in re.finditer(r"\*([A-Z][A-Za-z' ]+?)\*(?: \(ritual\))?", body):
@@ -684,8 +688,8 @@ def build_pregen_sheets(module: Path = MODULE) -> str:
     return page("Oraga Night — Pregenerated Characters", "\n".join(parts), cls="sheets")
 
 
-SRD_NOTE = ('<p class="srd"><em>This sheet includes material from the System '
-            "Reference Document 5.2.1 by Wizards of the Coast LLC, licensed under the Creative "
+SRD_NOTE = ('<p class="srd"><em>This sheet includes material taken from the System '
+            "Reference Document 5.1 by Wizards of the Coast LLC, licensed under the Creative "
             "Commons Attribution 4.0 International License.</em></p>")
 
 

@@ -392,3 +392,40 @@ def test_tp61_chain_runs_and_is_deterministic():
     r = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.tp61())
     r2 = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.tp61())
     assert r == r2 and r["wp6"] == "111101"
+
+
+# --------------------------------------------------------------------------- 2014 mode
+# The 2014 conversion (DESIGN_oraga_5e_2014): SRD 5.1 pregens and the four-player rosters.
+
+import pytest  # noqa: E402
+
+
+@pytest.fixture
+def ed2014():
+    skirm.set_edition("2014")
+    yield
+    skirm.set_edition("2024")
+
+
+def test_2014_mode_swaps_the_pregens(ed2014):
+    assert skirm.PREGENS["Dassa"]["hp"] == 36 and skirm.PREGENS["Dassa"]["ac"] == 17
+    assert skirm.PREGENS["Ilesse"]["channel"] == 1 and skirm.PREGENS["Dassa"]["second_wind"] == 1
+
+
+def test_2024_mode_is_restored_after_2014():
+    skirm.set_edition("2014")
+    skirm.set_edition("2024")
+    assert skirm.PREGENS["Dassa"]["hp"] == 40
+
+
+def test_2014_cards_run(ed2014):
+    for card in ("S2_14", "S3_14", "S7_14", "S8_14", "S9_14", "S10_14", "S13_14"):
+        r = skirm.simulate(card, party="4P", n=N, seed=SEED)
+        assert _is_rate(r["any_drop"]), card
+
+
+def test_2014_party_is_weaker_at_s14(ed2014):
+    r14 = s14.simulate(party="4P", policy="slug", rules=s14.NEW, hp=144, n=N, seed=SEED)
+    skirm.set_edition("2024")
+    r24 = s14.simulate(party="4P", policy="slug", rules=s14.NEW, hp=144, n=N, seed=SEED)
+    assert r14["win"] <= r24["win"]

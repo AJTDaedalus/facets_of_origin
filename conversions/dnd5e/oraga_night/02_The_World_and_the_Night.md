@@ -275,7 +275,7 @@ ways). Each agenda below has:
 Agendas are written to be completable before midnight by fast, clever play, and the
 adventure rewards that. A character who finishes their agenda early has stopped being an
 errand-runner and started being a person who notices things, and that is when the omens
-find them. **Completing an agenda earns Heroic Inspiration** on the spot (Table I–3),
+find them. **Completing an agenda earns Inspiration** on the spot (Table I–3),
 and XP by Table I–4 if you track it.
 
 Three of the eight agendas have a patron who is also one of the night's snakes, and a
@@ -301,7 +301,7 @@ the east-wing stairs, with the characters nearest him. See chapter V, "Corval. T
 festival laborers year-round, one more Raunu policy the great houses will hate. It
 dies with its rememberers unless your table saves them.)*
 
-**Pays:** Heroic Inspiration on the spot, and XP by Table I–4. Mistress Callun pays on
+**Pays:** Inspiration on the spot, and XP by Table I–4. Mistress Callun pays on
 delivery, **100 GP** in Circle silver, and she pays whether or not she likes the
 answer. *(For the DM: this patron is a snake. See chapter IX, the Merchant's Circle line.)*
 
@@ -319,7 +319,7 @@ another. And then: your honest judgment. The Prelate will know if you shade it.
 Raunu's face all night. You saw the exact moment he understood: before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
-**Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one favor Prelate
+**Pays:** Inspiration, and XP by Table I–4. The Church's favor: one favor Prelate
 Kovaun can grant without scandal, spendable after tonight, or two if the character also gave her something true about the three gray masks to file (chapter VI; the card's "frightening size" is the patron's pitch). *(For the DM: any sincere judgment
 completes the agenda, whatever it says; the module never answers the question. A
 character who shades it makes a Charisma (Deception) check against the Prelate's
@@ -363,7 +363,7 @@ in a way your patron cannot imagine. He says nothing incriminating sober.
 this, and you watched his face when it happened. Whatever you saw there, you are the
 only witness to it.
 
-**Pays:** Heroic Inspiration, and XP by Table I–4. Lord Draunel's gratitude, for
+**Pays:** Inspiration, and XP by Table I–4. Lord Draunel's gratitude, for
 whatever a Draunel's gratitude is worth. *(For the DM: any line Vorlain says drunk
 counts (chapter VII, "What Vorlain Says"), once the character carries it to Draunel
 and frames it as an understanding: a DC 13 Charisma (Deception) check. What it does to
@@ -386,7 +386,7 @@ trust. When she listens for help in the dark, she will listen for you. *(The err
 done at the east wing door: her hand takes the ring, her face stays unseen. At midnight
 she listens for that character's voice through the door. Chapter V leans on it.)*
 
-**Pays:** Heroic Inspiration, and XP by Table I–4. Maiven Nolonaire's trust, which
+**Pays:** Inspiration, and XP by Table I–4. Maiven Nolonaire's trust, which
 after midnight is worth more than any coin at this ball. *Your patron is not a snake.
 The Thenya line in chapter IX is the one that turns into a fight only if somebody
 provokes it.*
@@ -433,7 +433,7 @@ you are not the only thief who noticed the first open Boranis door in two years.
 and you are the only guest who understands what the palace's defenses are doing, and
 where they are weakest. People will live or die by whether you share that.
 
-**Pays:** Heroic Inspiration, and XP by Table I–4. The crystal itself, home. It is an
+**Pays:** Inspiration, and XP by Table I–4. The crystal itself, home. It is an
 heirloom, not treasure, and nobody at your table should be selling it. *Tavva's crew
 wants the same gallery (see chapter VII).*
 
@@ -452,7 +452,7 @@ reasons mother and child got out, and the one that let Vell spend his second way
 something else. Give it its moment. A table that wants Veier out through this gate
 before midnight is refused, in character; see chapter IV, Undercurrent D.)*
 
-**Pays:** Heroic Inspiration when the gate stands unlocked at midnight, and XP by
+**Pays:** Inspiration when the gate stands unlocked at midnight, and XP by
 Table I–4. The fee is already in your purse: **30 GP** in coin of an old striking,
 triple a hireling's rate, and nobody at the ball can say whose. The key is in your pocket.
 
@@ -495,7 +495,7 @@ person in the city, to everyone.
 next hour, and what you choose to hold in memory or grow into crystal, is what
 Val'loh will ever know of this night.
 
-**Pays:** Heroic Inspiration when you carry the testimony out through the gate, and XP
+**Pays:** Inspiration when you carry the testimony out through the gate, and XP
 by Table I–4. Nothing else, which is the point.
 
 ### 8. The Vanished Servant
@@ -514,5 +514,5 @@ half-knows, is the night's work.
 locked doors, you and Anha are the only people in the palace who know the other way
 through, and two hundred guests are about to need it.
 
-**Pays:** Heroic Inspiration when Anha is found and talking, and XP by Table I–4.
+**Pays:** Inspiration when Anha is found and talking, and XP by Table I–4.
 Your sister, and the only other person in the palace who knows the way through.

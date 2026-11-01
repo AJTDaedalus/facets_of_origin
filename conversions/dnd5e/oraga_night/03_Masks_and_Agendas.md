@@ -3,25 +3,26 @@
 ## Making Characters for Oraga Night
 
 Build **4th-level** characters by the ordinary fifth-edition steps. Nothing about this
-module changes how a character is made. It only narrows the species step and adds one
+module changes how a character is made. It only narrows the race step and adds one
 set of options.
 
 - **Every character is Human.** The tribes of Val'loh are not different kinds of
   people; they are the same kind of people, and some of them are born carrying
-  something. Take the SRD's Human species and write your tribe beside it on the sheet.
+  something. Take the SRD's human (every ability score +1) and write your tribe beside
+  it on the sheet.
 - **Your tribe is Orthaen.** Rarely, and with the DM's agreement, it is **Phern** (a couple of
   high-ranking Phern sit on the Merchant's Circle, and their factors and kin have
   legitimate business at the ball). This is an Orthaen affair. The guest list is almost
   exclusively Orthaen, and anyone else would be watched all night.
-- **Take any class, any SRD subclass, and a background in the SRD's shape**: three
-  ability scores to raise (+2 and +1, or +1 to all three), an origin feat, two skill
-  proficiencies, one tool proficiency, and starting equipment. The four SRD backgrounds
-  work as written, and the pregens' custom backgrounds (see chapter XI) show how a Val'loh one
-  is built. Calligrapher's Supplies are a strange thing to own in a country where the
+- **Take any class, any SRD subclass, and a background in the SRD's shape**: two skill
+  proficiencies, two tool proficiencies or languages in any mix, starting equipment, and
+  a feature. The SRD's Acolyte works as written, and the pregens' custom backgrounds
+  (see chapter XI) show how a Val'loh one is built, by the SRD's rule for customizing a
+  background. Calligrapher's Supplies are a strange thing to own in a country where the
   Church owns the written word, so swap them for any other tool.
-- **A gifted character takes their tribe's gift** as the origin feat the Human's
-  *Versatile* trait grants. The gifts are below. Four Orthaen in five are gifted, and
-  nearly every Phern.
+- **A gifted character takes their tribe's gift** as a bonus feat at 1st level. The
+  gifts are below. Four Orthaen in five are gifted, and nearly every Phern. *(At a 2024
+  table, the gift is the origin feat the Human's Versatile trait grants.)*
 - **Everyone picks a hook and an agenda** in the first five minutes (see chapter I). The
   six hooks are there, and every one of them starts you in the street outside the
   palace. The agenda cards are in chapter VIII.
@@ -46,18 +47,17 @@ knows, and the DM does not call for a check to know it.
 
 ### The Gifts
 
-A gift is carried in the blood. Mechanically, it is an **origin feat**, and it is taken one
-way only: as the feat a Human's *Versatile* trait grants, by a character born with it.
-Nobody learns a gift, and nobody has two. *(At a 2014 table, a gifted human takes the gift as a
-bonus feat at 1st level.)*
+A gift is carried in the blood. Mechanically, it is a **feat**, and it is taken one way
+only: as a bonus feat at 1st level, by a character born with it. Nobody learns a gift,
+and nobody has two. A table that uses the optional variant human from the *Player's
+Handbook* gives the gift on top of the variant's own feat.
 
 Every gift feat is built the same way, and three things are the same for all of them:
 
 **It is Minor, for life.** Small, local, brief; never damage, never deciding anything;
 in a fight it is a stunt. The feat does not grow as you level. A gifted character who
-wants real spellcasting takes a spellcasting class, or *Magic Initiate* as their
-4th-level feat, like anyone else, and the gift is the natural place for that magic to
-show itself.
+wants real spellcasting takes a spellcasting class, like anyone else, and the gift is
+the natural place for that magic to show itself.
 
 **You choose what it does.** Your people's gift says how it shows itself, not what it
 is. One Orthaen's crystal holds a light, another's mends a crack by growing across it,
@@ -82,7 +82,7 @@ how it looks, never what it can do.
 ---
 
 #### Orthaen Gift
-*Origin feat. Prerequisite: Orthaen, gifted.*
+*Feat, taken as a bonus feat at 1st level. Prerequisite: Orthaen, gifted.*
 
 The gift shows itself through grown soul-crystal: coaxed out of stone, shaped as it
 sets, and able to hold a working. Four in five carry it.
@@ -99,7 +99,7 @@ sets, and able to hold a working. Four in five carry it.
   a spellcaster's training. There is no downtime during the ball.
 
 #### Phern Gift
-*Origin feat. Prerequisite: Phern, gifted.*
+*Feat, taken as a bonus feat at 1st level. Prerequisite: Phern, gifted.*
 
 The gift shows itself as warning: a prickle before danger, and a sense of where it is
 coming from. Nearly all carry it.
@@ -112,7 +112,7 @@ coming from. Nearly all carry it.
   Knowing the direction doesn't take away that creature's Advantage on the attack.
 
 #### Thenya Gift
-*Origin feat. Prerequisite: Thenya, gifted, and the DM's agreement.*
+*Feat, taken as a bonus feat at 1st level. Prerequisite: Thenya, gifted, and the DM's agreement.*
 
 The gift shows itself only on behalf of someone loved, and only when they are in
 danger, and it does nothing for the one who carries it. Fewer than one in a hundred carry
@@ -131,7 +131,8 @@ but all of it points at another character, and that only works if the table has 
 ### The Ungifted
 
 One Orthaen in five is born without the gift. An ungifted character keeps their
-people's Heritage and takes any origin feat through *Versatile*. Among the Orthaen,
+people's Heritage and takes no feat in its place (a variant human still takes the
+variant's own). Among the Orthaen,
 where four in five have it, the fifth is a private disappointment nobody mentions
 twice. Dassa (see chapter XI) is ungifted, because the table should see what that looks
 like on a sheet.
@@ -195,8 +196,8 @@ chapter VIII). Your card is all your character knows about it.
 ## The Ready-Made Guests
 
 Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
-are in **chapter XI**, and this is the table to deal from. The module is built for three
-players, and which three to deal is in chapter I, "Three at the Table".
+are in **chapter XI**, and this is the table to deal from. The module is built for four
+players, and which four to deal is in chapter I, "Four at the Table".
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|

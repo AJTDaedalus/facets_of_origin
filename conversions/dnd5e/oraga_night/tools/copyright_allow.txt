@@ -14,3 +14,11 @@ b7f9dcd1a51f65deed62ef63d9e16640aa6fff9c | 10_Bestiary.md | (b) SRD Legendary Re
 fa72be8a2f47c27b3a2e73cae37521d0750e2d11 | 10_Bestiary.md | (b) SRD Regeneration timing with "her" for "its"
 f94faf391764e2dd19aeec6b6b9ac08df212b559 | 10_Bestiary.md | (b) save call plus a push; the SRD has "pushed 10 feet away"
 1f72168e91890fd91dc4134b435ab050d143b7d1 | 10_Bestiary.md | (b) SRD teleport grammar with "he" for "it"
+# 2014 conversion (P1/P2): stock 2014 stat-block grammar surfaced once the 2014 books joined --refs
+1e24a60448f8287fd40ec58a772c4694150fa952 | 10_Bestiary.md | (b) 2014 area-save call: within N feet of it must make a DC N (2014 conversion)
+e98d2c2952c7aeb51f0c5bb0fec679766f29038a | 10_Bestiary.md | (b) grapple targeting grammar: Medium or smaller creature within 5 feet of (2014 conversion)
+75f860ecc26ff9e246ece8cbe3b807a06372c34a | 10_Bestiary.md | (b) generic reaction-move rule wording (move up to its speed without provoking opportunity attacks) (2014 conversion)
+ee43e46e45be58d3745a787c17a363ff58d59437 | 10_Bestiary.md | (b) 2014 save call: must succeed on a DC N Wisdom saving throw or (2014 conversion)
+899434b573f55cfe182c154a012bb4cca758f9b9 | 10_Bestiary.md | (b) Condition Immunities line: conditions in alphabetical order (2014 conversion)
+# REVIEW2 N6: with SRD 5.1 alone as --srd (the book declares only SRD 5.1)
+332c13012ef1ce6da05ab4ee2df66703662b8826 | 10_Bestiary.md | (b) teleport grammar: up to N feet to an unoccupied space (2014 conversion)

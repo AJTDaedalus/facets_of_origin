@@ -778,3 +778,23 @@ class TestTP56QuietRooms:
                   F.MODULE / "../../../adventures/oraga_night/04_The_Ball.md"):
             text = p.read_text(encoding="utf-8")
             assert text.index("#### The Rest of the Palace") < text.index("## Running the Room")
+
+
+class TestPotionsAndLicenceGuard:
+    """REVIEW2 S1/S6: the 2014 conversion's potion count and SRD 5.1 notice are guarded."""
+
+    @pytest.fixture
+    def guard(self):
+        return [f for f in F.load_facts() if f["id"] == "potions_and_licence"]
+
+    def test_three_potions_without_the_three_character_aside_is_caught(self, guard):
+        text = "- **The kitchen's remedy box.** Three **Potions of Healing** (four if four characters are playing)."
+        assert [h.fact for h in F.check_text(text, "10_Bestiary.md", guard)] == ["potions_and_licence"]
+
+    def test_four_potions_with_the_three_character_aside_passes(self, guard):
+        text = "Four **Potions of Healing** (three if three characters are playing)."
+        assert F.check_text(text, "10_Bestiary.md", guard) == []
+
+    def test_srd_521_is_forbidden(self, guard):
+        text = 'This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1").'
+        assert F.check_text(text, "09_The_Snakes.md", guard)

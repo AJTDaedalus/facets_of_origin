@@ -87,9 +87,9 @@
 ## What This Adventure Is
 
 Oraga Night is a masquerade designed for three to five characters of 3rd to 5th level,
-and built for **three characters of 4th level**, freshly made or taken from the
-pregenerated guests in chapter XI. Every fight in it is balanced for three, and every
-fight card carries lines for four or five characters and for a party of four at 3rd
+and built for **four characters of 4th level**, freshly made or taken from the
+pregenerated guests in chapter XI. Every fight in it is balanced for four, and every
+fight card carries lines for three or five characters and for a party of four at 3rd
 or 5th level. Use
 the one line nearest your table. The lines are not cumulative.
 
@@ -130,14 +130,14 @@ Vell's boat, and no one is ever charged (see chapter II, "The Truth of the Night
 
 ## What You Need
 
-Any fifth-edition core rules. The module is written against the **System Reference
-Document 5.2.1** (the 2024 rules) and runs at a 2014 table with the notes marked
-*At a 2014 table* and the glossary box of that name in chapter X. Only the
-pregenerated characters need rebuilding.
+The 2014 fifth-edition core rules. The module is written against the **System
+Reference Document 5.1** and runs at a 2024 table with the notes marked *At a 2024
+table* and the box of that name in chapter X. Only the pregenerated characters need
+rebuilding.
 
 You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III and
 Player Handout 3 (chapter VIII) carry everything a player needs about the tribes,
-including their gifts as origin feats and the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
+including their gifts as feats and the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
 fight, and chapter X every stat block and every crystal charge ("Items of the Night").
 
 Print from chapter VIII before you sit down: the **two-page DM sheet**, the **maps
@@ -158,8 +158,8 @@ maps (VIII–1 to VIII–5), the fight cards and every cross-reference.
 
 **Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
-budget for three 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone, and
-scaling lines for four or five characters and for a party of four at 3rd or 5th level.
+budget for four 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone wherever one can walk in, and
+scaling lines for three or five characters and for a party of four at 3rd or 5th level.
 
 **Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
 and IX, a creature name in **bold** has a stat block there. Full blocks live nowhere else. A card or scene repeats a Passive Perception, an AC or a Hit Point total only where you need it at hand.
@@ -168,8 +168,8 @@ and IX, a creature name in **bold** has a stat block there. Full blocks live now
 advances its clock, and what happens when it fills.
 
 **Italics** mark spells and magic items, in Title Case: *Detect Thoughts*, *Steady
-Light*. Rules terms take the SRD 5.2.1 capitals (Advantage, Hit Points, Short Rest, the
-Prone condition), and a check is written in full: "a DC 15 Wisdom (Insight) check".
+Light*. Rules terms take capitals (Advantage, Hit Points, Short Rest, the Prone
+condition), and a check is written in full: "a DC 15 Wisdom (Insight) check".
 
 **Cross-references** name the chapter, and the section in quotation marks where it
 helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
@@ -270,7 +270,8 @@ terror, and choices about who to save.
 - **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
   until it is decided, and then the last bell rings.
 
-The minutes below are for three players, and they are a budget, not a stopwatch. Move on
+The minutes below were set for three players, and they are a budget, not a stopwatch.
+With four, a Movement runs a little long; trim the beats nobody is chasing. Move on
 when the table's energy says so. The budget tells you when you have spent too long.
 
 **Table I–1: The Runtime**
@@ -322,21 +323,23 @@ and put out the pregen sheets, the agenda cards and the invitation.
    tonight. Pick one from the table below.
 4. **What the party tells each other.** They do not have to tell each other anything.
 
-> **Sidebar — Three at the Table**
+> **Sidebar — Four at the Table**
 >
-> The module is built for three players. Deal **Dassa**, **Ilesse** and **Serane**, and
-> deal their agendas face up: *The Vanished Servant* (Agenda 8) to Dassa, *The Cousin's
-> Errand* (Agenda 4) to Ilesse, *The Prelate's Question* (Agenda 2) to Serane. That is a
-> frontliner, a healer and a talker, and one of them is on the route to the east-wing
-> door.
+> The module is built for four players. Deal **Dassa**, **Ilesse**, **Serane** and
+> **Pello**, and deal their agendas face up: *The Vanished Servant* (Agenda 8) to Dassa,
+> *The Cousin's Errand* (Agenda 4) to Ilesse, *The Prelate's Question* (Agenda 2) to
+> Serane, and *The Gate at Midnight* (Agenda 6) or *The Circle's Reckoning* (Agenda 1) to
+> Pello. That is a frontliner, a healer, a talker and a sneak, and one of them is on the
+> route to the east-wing door.
 >
-> - *For more steel,* swap Serane for Pello. The three agendas stay on the table.
+> - *For a party that wants to know things,* swap Pello for Andra, who takes *The Story
+>   of a Lifetime* (Agenda 7).
 > - *Never leave out Ilesse* unless somebody else at the table heals.
 > - *Agenda 4 is always dealt,* whoever the characters are, and never face down. It is
 >   the route to the east-wing door, and chapter V leans on somebody having walked it.
 >
-> With four players, add Andra or Pello. With characters the table built
-> themselves, check that one of them heals, and deal Agenda 4 face up.
+> With three players, leave out Pello. With five, add Andra. With characters the table
+> built themselves, check that one of them heals, and deal Agenda 4 face up.
 
 **Table I–2: How You Got In**
 
@@ -392,12 +395,12 @@ imposes instead. Inside a fight, they roll like anybody else. Saving throws are 
 checks. When a spell or effect calls for one, the NPC rolls it, using the save line in
 chapter X.
 
-**Heroic Inspiration** works as the SRD says. A character either has it or does not, and spends it to reroll one die
-immediately after rolling it, keeping the new roll. A character who already has it
-when they earn it again **may give it to another player character who lacks it**.
-Human characters (and every character here is human) begin with it and regain it on a
-Long Rest, which tonight they will not get. *At a 2014 table, this is plain
-Inspiration, and it grants Advantage instead of a reroll.*
+**Inspiration** works as the SRD says. A character either has it or does not, and spends
+it for Advantage on one attack roll, saving throw or ability check. A character who
+already has it when they earn it again **may give it to another player character who
+lacks it**. Every character begins the night with it; there is no Long Rest tonight to
+bring it back. *At a 2024 table, this is Heroic Inspiration, and it grants a reroll
+instead of Advantage.*
 
 **Rests.** There is no Long Rest tonight. A character who spends half a Movement in the
 chapel (B6) may take a Short Rest, the only one the ball offers, and every snake line the
@@ -409,10 +412,10 @@ chapter IV).
 
 Clever and peaceful play is paid on the page here, rather than left to your
 generosity in the moment. You will be tired by Movement VI, and a reward
-you have to remember to invent is a reward that does not happen. Because Heroic
-Inspiration is have-it-or-not, the list is short, and each award goes to one character.
+you have to remember to invent is a reward that does not happen. Because Inspiration is
+have-it-or-not, the list is short, and each award goes to one character.
 
-**Table I–3: Heroic Inspiration, Printed**
+**Table I–3: Inspiration, Printed**
 
 | When | To whom |
 |---|---|
@@ -424,7 +427,7 @@ Inspiration is have-it-or-not, the list is short, and each award goes to one cha
 | **The Attendant distracted** — the first attempt of the night, whether or not it works, and any natural 20 (card S14) | The one who tried |
 | **Somebody carried out** in Movement VII | The one who carried them, for the first person they bring out |
 
-The best moment of the evening still earns Heroic Inspiration whether or not it is on
+The best moment of the evening still earns Inspiration whether or not it is on
 this list. A fight card in chapter IX that prints Inspiration is a reminder of one of
 these rows, not an extra award.
 
@@ -440,9 +443,9 @@ these rows, not an extra award.
 | Standing outside at dawn | 1,000 to each character |
 
 **Milestone is how this module is built.** The party starts at 2,700 XP (4th level). If
-you track XP, a party of three that plays the night fully lands close to **6,700 XP**
-each (5th level) at the epilogue; a party of four, close to 6,500. If they arrive a little short, round up, because the night is the
-milestone.
+you track XP, a party of four that plays the night fully lands close to **6,000 XP** each
+at the epilogue, a little short of 5th level (6,500); a party of three, close to 6,200.
+Either way, round up, because the night is the milestone.
 
 ## The Snakes in the Chicken Pen
 

@@ -1,9 +1,14 @@
-"""SRD 5.2.1 (2024 rules) legality check for the five 4th-level pregens in
-11_Pregenerated_Characters.md.
+"""SRD 5.1 (2014 rules) legality check for the five 4th-level pregens in
+11_Pregenerated_Characters.md (2014 conversion, DESIGN_oraga_5e_2014; was SRD 5.2.1).
 
-Data hand-entered from the chapter (read 2026-09-30). The printed AC, Hit Points,
-Initiative and Passive Perception are also cross-checked against the text of chapter XI,
-so an edit there that is not mirrored here fails loudly.
+Data hand-entered from the chapter. The printed AC, Hit Points, Initiative and Passive
+Perception are also cross-checked against the text of chapter XI, so an edit there that
+is not mirrored here fails loudly.
+
+2014 build: SRD human (+1 to every score), the standard array, the 4th-level Ability
+Score Improvement, a background of two skills; the gifted take their gift as a bonus
+feat at 1st level (chapter III), which grants no skill. Jack of All Trades adds half the
+proficiency bonus to every ability check without proficiency, Initiative included.
 
 Usage: python pregen_check.py [--quiet] [--file PATH]
 Exit 0 = every pregen is legal and matches the text; 1 = mismatch.
@@ -16,39 +21,44 @@ PREGENS = MODULE / "11_Pregenerated_Characters.md"
 
 PB=2; LV=4
 ARRAY=sorted([15,14,13,12,10,8])
+HUMAN=1   # SRD 5.1 human: every ability score +1
 m=lambda s:(s-10)//2
 HD={'bard':8,'rogue':8,'wizard':6,'fighter':10,'cleric':8}
-# per-level prepared/cantrip tables at 4th (2024 PHB/SRD 5.2.1)
+# 2014 tables at 4th level (SRD 5.1): cantrips known; bard spells known; prepared =
+# ability modifier + class level for clerics and wizards
 CANTRIPS={'bard':3,'wizard':4,'cleric':4}
-PREP={'bard':7,'wizard':7,'cleric':7}
+KNOWN={'bard':7}
+PREP_ABIL={'wizard':'INT','cleric':'WIS'}
 PCs={
- 'Serane':dict(cls='bard',final=dict(STR=8,DEX=14,CON=14,INT=10,WIS=13,CHA=18),bg={'CHA':2,'WIS':1},asi={'CHA':1,'CON':1},bg_opts={'INT','WIS','CHA'},
-   armor=('studded',12,None),alert=True,printed=dict(AC=14,HP=31,init=4,pp=13,dc=14,atk=6),
-   prof={'Persuasion','Deception','Intimidation','Performance','Insight','Perception','History','Investigation','Religion'},exp={'Persuasion','Insight'},
-   skillsrc=dict(bg=2,cls=3,skillful=1,sub=3,feat=0),cantrips=['message','minor illusion','vicious mockery'],prep=['charm person','disguise self','healing word','hideous laughter','silent image','calm emotions','suggestion'],
-   printed_sk=dict(Persuasion=8,Deception=6,Intimidation=6,Performance=6,Insight=5,Perception=3,History=2,Investigation=2,Religion=2,Acrobatics=3,SleightofHand=3,Stealth=3,AnimalHandling=2,Medicine=2,Survival=2,Arcana=1,Nature=1,Athletics=0),joat=True),
- 'Pello':dict(cls='rogue',final=dict(STR=8,DEX=19,CON=14,INT=12,WIS=14,CHA=10),bg={'DEX':2,'WIS':1},asi={'DEX':2},bg_opts={'DEX','INT','WIS'},
-   armor=('studded',12,None),alert=False,printed=dict(AC=16,HP=31,init=4,pp=14),
-   prof={'Stealth','Sleight of Hand','Acrobatics','Insight','Perception','Investigation','Deception','Persuasion','Athletics'},exp={'Stealth','Sleight of Hand'},
-   skillsrc=dict(bg=2,cls=4,skillful=1,sub=0,feat=2),
-   printed_sk={'Stealth':8,'Sleight of Hand':8,'Acrobatics':6,'Insight':4,'Perception':4,'Investigation':3,'Deception':2,'Persuasion':2,'Athletics':1}),
- 'Andra':dict(cls='wizard',final=dict(STR=8,DEX=14,CON=14,INT=19,WIS=12,CHA=10),bg={'INT':2,'CON':1},asi={'INT':2},bg_opts={'CON','INT','WIS'},
-   armor=('mage armor',13,None),alert=False,printed=dict(AC=15,HP=26,init=2,pp=13,dc=14,atk=6),
-   prof={'History','Arcana','Investigation','Nature','Religion','Insight','Medicine','Perception'},exp={'History'},
-   skillsrc=dict(bg=2,cls=2,skillful=1,sub=0,feat=3),cantrips=['fire bolt','mage hand','minor illusion','ray of frost'],prep=['mage armor','magic missile','shield','silent image','sleep','darkness','misty step'],
-   book1=['alarm','comprehend languages','detect magic','feather fall','identify','mage armor','magic missile','shield','silent image','sleep'],book2=['darkness','hold person','misty step','web'],
-   printed_sk={'History':8,'Arcana':6,'Investigation':6,'Nature':6,'Religion':6,'Insight':3,'Medicine':3,'Perception':3}),
- 'Dassa':dict(cls='fighter',final=dict(STR=18,DEX=13,CON=16,INT=8,WIS=12,CHA=10),bg={'STR':2,'CON':1},asi={'STR':1,'CON':1},bg_opts={'STR','CON','WIS'},
-   armor=('scale mail',14,2),defense=True,alert=True,printed=dict(AC=16,HP=40,init=3,pp=13),
-   prof={'Athletics','Insight','Medicine','Perception','Intimidation'},exp=set(),
-   skillsrc=dict(bg=2,cls=2,skillful=1,sub=0,feat=0),
-   printed_sk={'Athletics':6,'Insight':3,'Medicine':3,'Perception':3,'Intimidation':2}),
- 'Ilesse':dict(cls='cleric',final=dict(STR=8,DEX=12,CON=14,INT=10,WIS=18,CHA=15),bg={'WIS':2,'CHA':1},asi={'WIS':1,'CON':1},bg_opts={'CON','WIS','CHA'},
-   armor=('chain shirt',13,2),alert=True,printed=dict(AC=14,HP=31,init=3,pp=14,dc=14,atk=6),
-   prof={'Insight','Medicine','Persuasion','History','Stealth'},exp=set(),
-   skillsrc=dict(bg=2,cls=2,skillful=1,sub=0,feat=0),cantrips=['guidance','light','mending','sacred flame','spare the dying'],thaumaturge=True,
-   prep=['command','guiding bolt','healing word','sanctuary','shield of faith','calm emotions','spiritual weapon'],
-   printed_sk={'Insight':6,'Medicine':6,'Persuasion':4,'Arcana':4,'Religion':4,'Stealth':3,'History':2}),
+ 'Serane':dict(cls='bard',final=dict(STR=9,DEX=14,CON=15,INT=11,WIS=13,CHA=18),asi={'CHA':2},
+   armor=('studded',12,None),printed=dict(AC=14,HP=31,init=3,pp=13,dc=14,atk=6),
+   prof={'Persuasion','History','Deception','Performance','Insight','Investigation','Perception','Religion'},exp={'Persuasion','Insight'},
+   skillsrc=dict(bg=2,cls=3,sub=3),cantrips=['message','minor illusion','vicious mockery'],
+   known=['charm person','disguise self','healing word','hideous laughter','silent image','calm emotions','suggestion'],
+   printed_sk=dict(Persuasion=8,Insight=5,Deception=6,Performance=6,Perception=3,History=2,Investigation=2,Religion=2,Intimidation=5,Acrobatics=3,SleightofHand=3,Stealth=3,AnimalHandling=2,Medicine=2,Survival=2,Arcana=1,Nature=1,Athletics=0),joat=True),
+ 'Pello':dict(cls='rogue',final=dict(STR=9,DEX=18,CON=14,INT=13,WIS=15,CHA=11),asi={'DEX':2},
+   armor=('studded',12,None),printed=dict(AC=16,HP=31,init=4,pp=14),
+   prof={'Stealth','Sleight of Hand','Acrobatics','Perception','Insight','Persuasion'},exp={'Stealth','Sleight of Hand'},
+   skillsrc=dict(bg=2,cls=4,sub=0),
+   printed_sk={'Stealth':8,'Sleight of Hand':8,'Acrobatics':6,'Perception':4,'Insight':4,'Persuasion':2}),
+ 'Andra':dict(cls='wizard',final=dict(STR=9,DEX=15,CON=14,INT=18,WIS=13,CHA=11),asi={'INT':2},
+   armor=('mage armor',13,None),printed=dict(AC=15,HP=26,init=2,pp=11,dc=14,atk=6),
+   prof={'History','Investigation','Arcana','Insight'},exp=set(),
+   skillsrc=dict(bg=2,cls=2,sub=0),cantrips=['fire bolt','mage hand','minor illusion','ray of frost'],
+   prep=['mage armor','magic missile','shield','silent image','sleep','darkness','hold person','misty step'],
+   book1=['comprehend languages','detect magic','identify','mage armor','magic missile','shield','silent image','sleep'],book2=['darkness','hold person','misty step','web'],
+   printed_sk={'History':6,'Arcana':6,'Investigation':6,'Insight':3}),
+ 'Dassa':dict(cls='fighter',final=dict(STR=18,DEX=14,CON=15,INT=9,WIS=13,CHA=11),asi={'STR':2},
+   armor=('scale mail',14,2),defense=True,printed=dict(AC=17,HP=36,init=2,pp=13),
+   prof={'Athletics','Insight','Perception','Intimidation'},exp=set(),
+   skillsrc=dict(bg=2,cls=2,sub=0),
+   printed_sk={'Athletics':6,'Insight':3,'Perception':3,'Intimidation':2}),
+ 'Ilesse':dict(cls='cleric',final=dict(STR=9,DEX=13,CON=15,INT=11,WIS=18,CHA=14),asi={'WIS':2},
+   armor=('chain shirt',13,2),printed=dict(AC=14,HP=31,init=1,pp=14,dc=14,atk=6),
+   prof={'Insight','Persuasion','Medicine','History'},exp=set(),
+   skillsrc=dict(bg=2,cls=2,sub=0),cantrips=['guidance','light','sacred flame','spare the dying'],
+   prep=['command','guiding bolt','healing word','sanctuary','shield of faith','aid','calm emotions','prayer of healing'],
+   printed_sk={'Insight':6,'Medicine':6,'Persuasion':4,'History':2}),
 }
 SK={'Athletics':'STR','Acrobatics':'DEX','Sleight of Hand':'DEX','Stealth':'DEX','Arcana':'INT','History':'INT','Investigation':'INT','Nature':'INT','Religion':'INT',
  'Animal Handling':'WIS','Insight':'WIS','Medicine':'WIS','Perception':'WIS','Survival':'WIS','Deception':'CHA','Intimidation':'CHA','Performance':'CHA','Persuasion':'CHA'}
@@ -64,48 +74,58 @@ FOCUS={'Andra':dict(spell='a crystal as Arcane Focus', carry='crystal (Arcane Fo
 def legality_issues(out=print):
     issues=[]
     for n,p in PCs.items():
-        f=p['final']; base=dict(f)
-        for d in (p['bg'],p['asi']):
-            for k,v in d.items(): base[k]-=v
+        f=p['final']; base={k:v-HUMAN for k,v in f.items()}
+        for k,v in p['asi'].items(): base[k]-=v
         ok_arr=sorted(base.values())==ARRAY
-        ok_bg=set(p['bg'])<=p['bg_opts'] and sorted(p['bg'].values())==[1,2]
+        ok_asi=sum(p['asi'].values())==2 and len(p['asi']) in (1,2)
         ok_cap=max(f.values())<=20
         hd=HD[p['cls']]; con=m(f['CON'])
         hp=hd+con+(LV-1)*(hd//2+1+con)
         name,base_ac,cap=p['armor']
         dex=m(f['DEX']); ac=base_ac+(dex if cap is None else min(dex,cap))+(1 if p.get('defense') else 0)
-        init=dex+(PB if p['alert'] else 0)
+        init=dex+(PB//2 if p.get('joat') else 0)
         pp=10+m(f['WIS'])+(PB if 'Perception' in p['prof'] else 0)
-        src=p['skillsrc']; nprof=sum(src.values())
-        out(f"{n}: base {base} array={ok_arr} bg={ok_bg} cap={ok_cap} | HP {hp}/{p['printed']['HP']} AC {ac}/{p['printed']['AC']} init {init}/{p['printed']['init']} PP {pp}/{p['printed']['pp']} | skills {len(p['prof'])} vs sources {nprof}")
+        nprof=sum(p['skillsrc'].values())
+        out(f"{n}: base {base} array={ok_arr} asi={ok_asi} cap={ok_cap} | HP {hp}/{p['printed']['HP']} AC {ac}/{p['printed']['AC']} init {init}/{p['printed']['init']} PP {pp}/{p['printed']['pp']} | skills {len(p['prof'])} vs sources {nprof}")
         for chk,a,b in [('HP',hp,p['printed']['HP']),('AC',ac,p['printed']['AC']),('init',init,p['printed']['init']),('PP',pp,p['printed']['pp']),('skillcount',len(p['prof']),nprof)]:
             if a!=b: issues.append((n,chk,a,b))
-        if not(ok_arr and ok_bg and ok_cap): issues.append((n,'abilities',base,None))
-        # skills
+        if not(ok_arr and ok_asi and ok_cap): issues.append((n,'abilities',base,None))
         for sk,val in p['printed_sk'].items():
             key={'SleightofHand':'Sleight of Hand','AnimalHandling':'Animal Handling'}.get(sk,sk)
             mod=m(f[SK[key]])
             if key in p['prof']: mod+=PB*(2 if key in p['exp'] else 1)
             elif p.get('joat'): mod+=PB//2
-            if p.get('thaumaturge') and key in ('Arcana','Religion') and key not in p['prof']: mod+=max(1,m(f['WIS']))
             if mod!=val: issues.append((n,'skill '+key,mod,val))
         if 'dc' in p['printed']:
             abil={'bard':'CHA','wizard':'INT','cleric':'WIS'}[p['cls']]
             dc=8+PB+m(f[abil]); atk=PB+m(f[abil])
             if (dc,atk)!=(p['printed']['dc'],p['printed']['atk']): issues.append((n,'spell dc/atk',(dc,atk),(p['printed']['dc'],p['printed']['atk'])))
-            nc=len(p['cantrips']); expc=CANTRIPS[p['cls']]+(1 if p.get('thaumaturge') else 0)
-            np_=len(p['prep'])
-            out(f"   cantrips {nc}/{expc} prepared {np_}/{PREP[p['cls']]} (+ gift cantrip; Life domain spells always prepared)")
+            nc=len(p['cantrips']); expc=CANTRIPS[p['cls']]
             if nc!=expc: issues.append((n,'cantrips',nc,expc))
-            if np_!=PREP[p['cls']]: issues.append((n,'prepared',np_,PREP[p['cls']]))
+            if p['cls'] in KNOWN:
+                if len(p['known'])!=KNOWN[p['cls']]: issues.append((n,'spells known',len(p['known']),KNOWN[p['cls']]))
+                out(f"   cantrips {nc}/{expc} known {len(p['known'])}/{KNOWN[p['cls']]} (+ gift cantrip)")
+            else:
+                want=m(f[PREP_ABIL[p['cls']]])+LV
+                if len(p['prep'])!=want: issues.append((n,'prepared',len(p['prep']),want))
+                note = "; Life domain spells always prepared" if p['cls'] == 'cleric' else ""
+                out(f"   cantrips {nc}/{expc} prepared {len(p['prep'])}/{want} (+ gift cantrip{note})")
         if n=='Andra':
-            book=len(p['book1'])+len(p['book2']); exp=6+2*(LV-1)+2
-            out(f"   spellbook {book}/{exp} (6 + 2/level + Evocation Savant 2); prepared all in book: {set(p['prep'])<=set(p['book1']+p['book2'])}")
+            book=len(p['book1'])+len(p['book2']); exp=6+2*(LV-1)
+            out(f"   spellbook {book}/{exp} (6 + 2 per level after 1st); prepared all in book: {set(p['prep'])<=set(p['book1']+p['book2'])}")
             if book!=exp: issues.append((n,'spellbook',book,exp))
+            if not set(p['prep'])<=set(p['book1']+p['book2']): issues.append((n,'prepared not in book',None,None))
     return issues
 
 
+SAVES={'bard':('DEX','CHA'),'rogue':('DEX','INT'),'wizard':('INT','WIS'),'fighter':('STR','CON'),'cleric':('WIS','CHA')}
+ABBR={'STR':'Str','DEX':'Dex','CON':'Con','INT':'Int','WIS':'Wis','CHA':'Cha'}
+
+
 def text_issues(text):
+    """The chapter's printed numbers against the data: AC, HP, Initiative, Passive
+    Perception, every printed skill, the Saving Throws line and the spell DC and attack
+    (REVIEW2 S5: the text cannot drift from the checked data)."""
     found = []
     secs = re.split(r"^## ", text, flags=re.M)[1:]
     for n, p in PCs.items():
@@ -119,6 +139,29 @@ def text_issues(text):
             m_ = re.search(pat, sec)
             if not m_ or int(m_.group(1)) != p['printed'][k]:
                 found.append((n, 'text ' + k, m_.group(1) if m_ else None, p['printed'][k]))
+        sk = re.search(r"\*\*Skills\*\* (.*?)(?= \*\*)", sec)
+        printed = dict((nm.replace(" ", ""), v) for nm, v in
+                       re.findall(r"([A-Z][a-z]+(?: (?:of )?[A-Z][a-z]+)?) \+(\d+)", sk.group(1) if sk else ""))
+        want = {k.replace(" ", ""): v for k, v in p['printed_sk'].items()}
+        for k, v in printed.items():
+            if k not in want:
+                found.append((n, 'text skill ' + k, v, None))
+            elif int(v) != want[k]:
+                found.append((n, 'text skill ' + k, v, want[k]))
+        for k in want:
+            if k not in printed:
+                found.append((n, 'text skill ' + k, None, want[k]))
+        f = p['final']
+        exp = ", ".join(f"{ABBR[a]} {m(f[a]) + PB:+d}" for a in SAVES[p['cls']])
+        sv = re.search(r"\*\*Saving Throws\*\* (.*?)(?= \*\*|$)", sec)
+        got = sv.group(1).strip() if sv else None
+        if got != exp:
+            found.append((n, 'text saves', got, exp))
+        if 'dc' in p['printed']:
+            d = re.search(r"save DC (\d+), attack \+(\d+)", sec)
+            if not d or (int(d.group(1)), int(d.group(2))) != (p['printed']['dc'], p['printed']['atk']):
+                found.append((n, 'text spell dc/atk', d.groups() if d else None,
+                              (p['printed']['dc'], p['printed']['atk'])))
     return found
 
 

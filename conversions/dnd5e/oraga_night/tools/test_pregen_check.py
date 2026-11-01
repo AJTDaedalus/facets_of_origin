@@ -16,7 +16,7 @@ ANDRA = """## Andra Tessarin
 
 **Spellcasting** (Intelligence; save DC 14, attack +6; {spell})
 
-**Carrying.** Dagger · the lattice · {carry} · 40 GP · Heroic Inspiration
+**Carrying.** Dagger · the lattice · {carry} · 40 GP · Inspiration
 
 ---
 
@@ -110,3 +110,80 @@ def test_main_exits_one_when_the_focus_is_dropped(tmp_path):
     with pytest.raises(SystemExit) as e:
         PC.main(["--quiet", "--file", str(bad)])
     assert e.value.code == 1
+
+
+# --------------------------------------------------------------------------- 2014 rules
+# REVIEW2 S5: the 2014 rewrite of pregen_check gets its own red/green tests.
+
+import copy
+
+TEXT = PC.PREGENS.read_text(encoding="utf-8")
+
+
+@pytest.fixture
+def pcs(monkeypatch):
+    data = copy.deepcopy(PC.PCs)
+    monkeypatch.setattr(PC, "PCs", data)
+    return data
+
+
+def _issues(kind):
+    return [i for i in PC.legality_issues(lambda *a, **k: None) if i[1] == kind]
+
+
+def test_legality_clean_on_the_module():
+    assert PC.legality_issues(lambda *a, **k: None) == []
+
+
+def test_bard_cantrip_count_is_three_in_2014(pcs):
+    pcs["Serane"]["cantrips"].append("light")
+    assert _issues("cantrips") == [("Serane", "cantrips", 4, 3)]
+
+
+def test_bard_knows_seven_spells_in_2014(pcs):
+    pcs["Serane"]["known"].pop()
+    assert _issues("spells known") == [("Serane", "spells known", 6, 7)]
+
+
+def test_cleric_prepared_is_wisdom_plus_level(pcs):
+    pcs["Ilesse"]["prep"].pop()
+    assert _issues("prepared") == [("Ilesse", "prepared", 7, 8)]
+
+
+def test_wizard_spellbook_is_six_plus_two_per_level(pcs):
+    pcs["Andra"]["book2"].pop()
+    assert _issues("spellbook") == [("Andra", "spellbook", 11, 12)]
+
+
+def test_scores_must_come_from_array_human_and_asi(pcs):
+    pcs["Serane"]["final"]["CHA"] = 19
+    assert [i[0] for i in _issues("abilities")] == ["Serane"]
+
+
+def test_jack_of_all_trades_adds_to_initiative(pcs):
+    pcs["Serane"]["printed"]["init"] = 2
+    assert ("Serane", "init", 3, 2) in PC.legality_issues(lambda *a, **k: None)
+
+
+def test_text_clean_on_the_module():
+    assert PC.text_issues(TEXT) == []
+
+
+def test_text_skill_drift_is_caught():
+    bad = TEXT.replace("**Skills** Persuasion +8, Deception +6", "**Skills** Persuasion +9, Deception +6", 1)
+    assert ("Serane", "text skill Persuasion", "9", 8) in PC.text_issues(bad)
+
+
+def test_text_skill_not_in_data_is_caught():
+    bad = TEXT.replace("Insight +4, Perception +4,", "Insight +4, Perception +4, Arcana +1,", 1)
+    assert any(i[0] == "Pello" and i[1] == "text skill Arcana" for i in PC.text_issues(bad))
+
+
+def test_text_saving_throws_drift_is_caught():
+    bad = TEXT.replace("**Saving Throws** Str +6, Con +4", "**Saving Throws** Str +6, Con +5", 1)
+    assert ("Dassa", "text saves", "Str +6, Con +5", "Str +6, Con +4") in PC.text_issues(bad)
+
+
+def test_text_spell_dc_drift_is_caught():
+    bad = TEXT.replace("(Wisdom; save DC 14, attack +6;", "(Wisdom; save DC 13, attack +6;", 1)
+    assert any(i[0] == "Ilesse" and i[1] == "text spell dc/atk" for i in PC.text_issues(bad))

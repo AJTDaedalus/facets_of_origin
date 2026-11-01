@@ -78,8 +78,8 @@ is stated, and everything else in this chapter points here.
 
 1. **The lights die.** Nobody rolls Initiative yet (Movement VI, below).
 2. **The beats begin.** Master Pellin Corro moves first ("Who moves first", below).
-3. **The Wept reaches Raunu** on her fourth turn of moving toward him (her third with
-   four characters; see "Adjusting the Attack"), plus one turn for each point of
+3. **The Wept reaches Raunu** on her third turn of moving toward him (her fourth with
+   three characters; see "Adjusting the Attack"), plus one turn for each point of
    Delay spent on her (Table V–1), three at most in a scene ("Buying Time").
 4. **Raunu falls.** The Hollow turns east (if his End has not already sent him home),
    the main doors and the garden doors open, and the crowd pours out toward the
@@ -219,8 +219,8 @@ may act in the first beat before anyone else. Following him saves lives (card S1
 > **DC 13 Charisma check** by whoever releases it (their *Unraveling Presence*,
 > chapter X). On a success it works; on a failure
 > the light simply goes out of it, and the charge is spent. A charge already running
-> (a light carried in, a door already sealed) keeps running. Heroic Inspiration can
-> reroll this, and it is a fine thing to spend it on.
+> (a light carried in, a door already sealed) keeps running. Inspiration gives
+> Advantage on this check, and it is a fine thing to spend it on.
 >
 > The palace's great wards are
 > older and deeper and hold longer, but even they gutter when one of the three stands
@@ -278,7 +278,7 @@ and a character's own area spell all reach a body on the floor.
   something. (Between fights, when the night runs in beats, they are up by the next
   beat.) This is **the crowd rule**, and it covers only the set-aside.
 - **Hauling each other up.** The first time tonight a character hauls an ally to their
-  feet after midnight, that character gains Heroic Inspiration, or gives it to a
+  feet after midnight, that character gains Inspiration, or gives it to a
   companion who has none.
 - **The last blow.** When an Uninvited drops to 0 Hit Points they step into the
   world's shadow and return at the start of their next turn, at full Hit Points, in
@@ -337,7 +337,7 @@ Delay** as well as its own effect.
 The room-trick tables below give eight ideas for each place the attack reaches. They
 are prompts, not a menu, and a trick the characters invent is worth the same.
 
-**Damage counts only in lumps.** If the characters deal **20 or more damage to one
+**Damage counts only in lumps.** If the characters deal **30 or more damage to one
 Uninvited in a single round**, that Uninvited gains 1 Delay, never more than 1 a
 round. Damage never takes Delay away, and it never threatens their lives (*Leashed*).
 
@@ -359,7 +359,7 @@ gets that room's people out instead.
 
 | Uninvited | Each point spent | Keep in mind |
 |---|---|---|
-| **The Wept** | A round of Raunu's work: a dozen guests out of the Crystal Court under his wards, or Veier one sealed door further down | She reaches Raunu on her fourth turn of moving toward him, through the wards he throws up himself; every point spent pushes that back a turn, three at most in a scene |
+| **The Wept** | A round of Raunu's work: a dozen guests out of the Crystal Court under his wards, or Veier one sealed door further down | She reaches Raunu on her third turn of moving toward him (her fourth with three characters), through the wards he throws up himself; every point spent pushes that back a turn, three at most in a scene |
 | **The Radiant** | In the east wing: one more person in his way gets clear — Maiven, one of her slingers, a guard at the doors — and he reaches the garden stair a beat later | Three at most in the east wing ("The Midnight Clock", step 5). Delay he still has when he breaks past Vell at the Crossing is spent at the river gate, and one point is enough: the boat is out of reach before he gets his turn |
 | **The Hollow** | A beat off his post: *The Post* doesn't apply, and a dozen guests get through the doors behind him | When the Wept's work is done he turns east, and the doors open anyway |
 
@@ -375,17 +375,17 @@ That is why the characters cannot ignore it. See "The Attendant", below.
 
 > **Sidebar — Adjusting the Attack**
 >
-> The numbers above are for three 4th-level characters. Any other table uses one
+> The numbers above are for four 4th-level characters. Any other table uses one
 > line below, by the party-size rule in chapter IX (see chapter IX, "Running the
 > Snakes", and Table IX–1).
 >
-> - *Four characters:* the Wept reaches Raunu on her third turn of moving toward
->   him, and 30 damage in a round makes a lump.
-> - *Five characters:* as for four, but 40 damage in a round makes a lump.
-> - *Four at 3rd level:* as for four characters, and the crossfire deals 3 (1d6)
->   Bludgeoning damage, or 7 (2d6) on a failure by 5 or more.
-> - *Four at 5th level:* as for four, but 40 damage in a round makes a lump, and the
->   crossfire deals 10 (3d6) Bludgeoning damage, or 21 (6d6) on a failure by 5 or more.
+> - *Three characters:* the Wept reaches Raunu on her fourth turn of moving toward
+>   him, and 20 damage in a round makes a lump.
+> - *Five characters:* 40 damage in a round makes a lump.
+> - *Four at 3rd level:* the crossfire deals 3 (1d6) Bludgeoning damage, or 7 (2d6) on
+>   a failure by 5 or more.
+> - *Four at 5th level:* 40 damage in a round makes a lump, and the crossfire deals
+>   10 (3d6) Bludgeoning damage, or 21 (6d6) on a failure by 5 or more.
 
 #### Room Tricks
 
@@ -833,7 +833,7 @@ In practice it means this:
   of their next turn at full Hit Points in the space where they dropped, and walk on
   toward the task. Whoever struck the last
   blow makes a saving throw or is thrown ("Down, Not Out"). Fighting the Uninvited
-  never ends in victory, but it does buy time. Every round the characters land 20 damage on
+  never ends in victory, but it does buy time. Every round the characters land 30 damage on
   one of them is a point of Delay.
 - **A character one of them drops to 0 Hit Points is set aside, not killed,** unless
   that character has become a threat to them. Set aside, they are Stable, and back on
@@ -860,7 +860,7 @@ complete list.
 
 > **DM Note — the table that will not stop trying to kill them**
 >
-> Let them try, run it honestly, and pay every 20-damage round in Delay.
+> Let them try, run it honestly, and pay every 30-damage round in Delay.
 > When the Wept reaches 0 Hit Points, say plainly what just happened: she stopped,
 > looked at the character almost patiently, without anger, and the character went
 > through the wall. She is walking back toward the dais, whole. Then say what the
@@ -922,7 +922,7 @@ Characters who arrive at midnight with nothing can still land a Stop in the fire
 to that Uninvited ("Down, Not Out"). Each Uninvited can be stopped **once per scene**.
 What a Stop does depends on who it reaches (below).
 
-Heroic Inspiration may be spent on the words, and should be.
+Inspiration may be spent on the words, and should be.
 
 - **Success:** the Stop lands.
 - **Failure by 4 or less:** it lands, but the Uninvited answers first, with one
@@ -937,7 +937,7 @@ that particular person (below). Otherwise it is made like a Stop with words: the
 30 feet, the same check, the same +2 for each Fracture tell.
 
 - **Success:** the End lands. That Uninvited is out of the attack for the night, or its
-  errand is forfeit, as its entry below says. The speaker gains Heroic Inspiration. If
+  errand is forfeit, as its entry below says. The speaker gains Inspiration. If
   ⟨If History Breaks⟩ has an entry for what just happened, run it.
 - **Failure:** read the check as a Stop attempt instead (if that Uninvited has already
   been stopped this scene, nothing lands). The End can be tried again once the
@@ -1151,7 +1151,7 @@ is still running (the Circle's coats in the smoke, the Church on the dark-wing s
 finishes it now or loses it (see "The Snakes in the Dark"). Everyone else is doing what
 the rest of the palace is doing, which is trying to get out.
 
-**Carrying somebody out** pays as Tables I–3 and I–4 print it: Heroic Inspiration to
+**Carrying somebody out** pays as Tables I–3 and I–4 print it: Inspiration to
 the carrier for the first person they bring out (a carrier who already has it gives it
 to a companion who has none), and 100 XP to the carrier for each person they bring out
 (Table I–4). Not per attempt; per person.
@@ -1212,8 +1212,8 @@ court (card S3 counts them).
 read-aloud at the grille and the treasure are on the card.
 
 ***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
-the sect guard's arrival, the **Bought Sergeant** (the **Veteran Bought Sergeant** for four or
-more characters at 4th level or higher), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
+the sect guard's arrival, the **Bought Sergeant** (the **Veteran Bought Sergeant** for four
+characters at 5th level, or a table that wants it nastier), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
 the scene means. The card is what you run it from.
 
 **Why this fight, here.** The Bought are the one foe at the gate who can be beaten

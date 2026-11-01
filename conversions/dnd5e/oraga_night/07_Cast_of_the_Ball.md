@@ -840,7 +840,7 @@ They are the one foe at the gate who can be beaten or bought. More usefully,
 they can be talked to, by anyone who understands that the contract settles more
 arguments than the sword does. Full fight on **card S3**, chapter IX;
 stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, chapter X
-(the **Veteran Bought Sergeant** for four or more characters at 4th level or higher).*
+(the **Veteran Bought Sergeant** for four characters at 5th level, or on the card's Nastier line).*
 
 ### Sergeant of the Bought — the One Reading the Room
 *Gray wool, cut plainly, with the company's mark at the shoulder and a case chained at
@@ -873,7 +873,7 @@ says, calmly, and says aloud any deal he is about to take.
 - **Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3.
 
 **If it comes to steel:** stat block **Bought Sergeant** (see chapter X; the
-**Veteran Bought Sergeant** for four or more characters at 4th level or higher); card S3.
+**Veteran Bought Sergeant** for four characters at 5th level, or on the card's Nastier line); card S3.
 
 ### Captain-under-Contract — the One Who Read It All
 *Older than the sergeants and quieter than the Blades. The coat is very good, and the

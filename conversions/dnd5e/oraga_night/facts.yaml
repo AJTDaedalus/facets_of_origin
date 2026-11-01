@@ -437,45 +437,87 @@ facts:
 
   - id: party_baseline
     truth: >-
-      Three 4th-level characters are the printed baseline (TP10); four, and five at 5th, are
-      adjustment lines. At three: 20 damage to one Uninvited in a round is a lump of Delay
-      (30 at four); the Wept reaches Raunu on her 4th turn of moving toward him (her 3rd at
-      four); the Radiant reaches the garden stair at the fall + 3 beats; the Attendant has
-      178 HP (229 at four). A four-player value may appear only on its adjustment line.
-    source: owner TP10 (2026-10-20); DESIGN_oraga_5e_3p_pass §2.2, §3.2, §4; ledger L-022
-    values: {lump: {three: 20, four: 30}, wept_turn: {three: 4, four: 3}, radiant_stair: "fall + 3 beats", attendant_hp: {three: 178, four: 229}}
-    phrases: ["20 damage in a round", "on her fourth turn", "178 Hit Points", "With four characters"]
+      Four 4th-level characters are the printed baseline (2014 conversion, owner R2,
+      2026-11-01; was three, TP10); three, five, and four at 3rd or 5th are adjustment lines.
+      At four: 30 damage to one Uninvited in a round is a lump of Delay (20 at three); the
+      Wept reaches Raunu on her 3rd turn of moving toward him (her 4th at three); the
+      Radiant reaches the garden stair at the fall + 3 beats; the Attendant is CR 6 with
+      144 HP (120 at three). A three-player value may appear only on its adjustment line.
+    source: owner R2 (2026-11-01); DESIGN_oraga_5e_2014 §2, §7; was TP10 (2026-10-20)
+    values: {lump: {four: 30, three: 20}, wept_turn: {four: 3, three: 4}, radiant_stair: "fall + 3 beats", attendant_hp: {four: 144, three: 120}}
+    phrases: ["30 damage in a round", "on her third turn", "144 Hit Points", "Three characters"]
     checks:
       - type: sentence
-        all: ['\b30(?:\+| or more)? damage\b|\b30-damage\b']
-        unless: '(?i)\bfour\b'
-        why: TP10 — the lump is 20 at three; 30 belongs on the four-player line
+        all: ['\b20(?:\+| or more)? damage\b|\b20-damage\b']
+        unless: '(?i)\bthree\b'
+        why: R2 — the lump is 30 at four; 20 belongs on the three-player line
       - type: sentence
-        all: ['\bWept\b|\bShe\b|\bshe\b', '\bthird turn\b']
-        unless: '(?i)\bfour\b'
-        why: TP10 — the Wept reaches Raunu on her 4th turn at three; the 3rd is the four-player line
+        all: ['\bWept\b|\bShe\b|\bshe\b', '\bfourth turn\b|\b4th turn\b']
+        unless: '(?i)\bthree\b'
+        why: R2 — the Wept reaches Raunu on her 3rd turn at four; the 4th is the three-player line
       - type: sentence
-        all: ['\b229\b']
-        unless: '(?i)\bfour\b'
-        why: TP10 — the Attendant has 178 HP at three; 229 belongs on the four-player line
+        all: ['\b120 Hit Points\b']
+        unless: '(?i)\bthree\b'
+        why: R2 — the Attendant has 144 HP at four; 120 belongs on the three-player line
       - type: forbid
-        pattern: '(?i)\b(?:built|written|tuned) for four\b'
-        why: TP10 — the module is built for three 4th-level characters
+        pattern: '\b(?:178|229) Hit Points\b|\*\*Hit Points\*\* (?:178|229)\b'
+        why: R2 — the Attendant's old 178/229 HP are gone (CR 6, 144 HP)
+      - type: forbid
+        pattern: '(?i)\b(?:built|written|tuned|balanced) for three\b'
+        why: R2 — the module is built for four 4th-level characters
       - type: require
         file: 10_Bestiary.md
-        pattern: '\*\*HP\*\* 178 \('
+        pattern: '\*\*Hit Points\*\* 144 \('
         anchor: 'A quiet guest with no master'
-        why: TP10 / DESIGN §4 — the Attendant's block prints 178 HP
+        why: R2 / DESIGN §7 — the Attendant's block prints 144 HP
       - type: require
         file: 08_Handouts.md
-        pattern: '\bWept\b[^\n]{0,200}\b4th turn\b'
+        pattern: '\bWept\b[^\n]{0,200}\b3rd turn\b'
         anchor: 'Table VIII–2'
-        why: L-022 — Table VIII–2 gives the Wept's turn (4th at three)
+        why: L-022, R2 — Table VIII–2 gives the Wept's turn (3rd at four)
       - type: require
         file: 08_Handouts.md
         pattern: '\bRadiant\b[^\n]{0,300}\bfall \+ 3 beats\b'
         anchor: 'Table VIII–2'
         why: L-022 — Table VIII–2 gives the Radiant's beat (the stair at the fall + 3 beats)
+
+  - id: potions_and_licence
+    truth: >-
+      The kitchen's remedy box holds four Potions of Healing (three if three characters are
+      playing), at four characters (2014 conversion, R2). The module declares the SRD 5.1:
+      every file that carries SRD material prints the SRD 5.1 CC BY 4.0 notice, and no module
+      file names the SRD 5.2.1 (the 2024 edition is pinned by tag oraga-5e-2024).
+    source: owner R2 and the 2014 conversion (2026-11-01); DESIGN_oraga_5e_2014 §4; REVIEW2 S1, S6
+    values: {potions: {four: 4, three: 3}, srd: "5.1"}
+    phrases: ["four **Potions of Healing**", "System Reference Document 5.1"]
+    checks:
+      - type: sentence
+        all: ['\bPotions? of Healing\b', '\b(?:Three|three)\b']
+        unless: '(?i)\bthree characters\b'
+        why: R2 — the remedy box holds four potions at four; three belongs on the three-character aside
+      - type: forbid
+        pattern: 'System Reference Document 5\.2\.1|\bSRD 5\.2\.1\b'
+        why: the 2014 conversion — the module declares SRD 5.1, never SRD 5.2.1
+      - type: require
+        file: README.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'License and Attribution'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'This work includes material taken from'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+      - type: require
+        file: 10_Bestiary.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'This work includes material taken from'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+      - type: require
+        file: 11_Pregenerated_Characters.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'This work includes material taken from'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
 
 # --------------------------------------------------------------------------- maps (R4)
 # The dimensions maps/build_maps.py draws, all in feet (O28, O33, O34; S3 for the gate;

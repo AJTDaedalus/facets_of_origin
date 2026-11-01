@@ -236,7 +236,8 @@ class TestPregens:
     def test_preamble_is_merged_into_each(self):
         sheets = P.pregen_sheets_md((MODULE / "11_Pregenerated_Characters.md").read_text(encoding="utf-8"))
         for name, md in sheets.items():
-            assert "Resourceful" in md and "Heroic Inspiration" in md, name
+            assert "every ability score +1" in md and "Inspiration" in md, name
+            assert "Heroic Inspiration" not in md and "Resourceful" not in md, name
             assert "Masks." in md or "mask" in md.lower(), name
 
     def test_no_sheets_is_empty(self):
@@ -255,15 +256,28 @@ class TestTrackers:
         t = P.trackers(self.SHEET)
         assert "1st-level slots" in t and "2nd-level slots" in t and "Bardic Inspiration" in t
 
-    def test_always_has_heroic_inspiration_and_death_saves(self):
+    def test_always_has_inspiration_and_death_saves(self):
         t = P.trackers("**Hit Points** 10")
-        assert "Heroic Inspiration" in t and "Death Saving Throws" in t
+        assert "**Inspiration** ☐" in t and "Death Saving Throws" in t
+        assert "Heroic" not in t
+
+    def test_once_per_rest_feature_gets_one_box(self):
+        t = P.trackers("**Hit Points** 36\n- **Second Wind** (once per Short Rest). Bonus action.\n"
+                       "- **Action Surge** (once per Short Rest). One more action.\n")
+        assert "**Second Wind** ☐" in t and "**Action Surge** ☐" in t
 
 
 class TestSpellLines:
     def test_lists_each_prepared_spell(self):
         lines = P.spell_lines("- *Cantrips:* *Light*, *Mending*\n- *Prepared:* *Bless*\n")
         assert [l.split(".")[0] for l in lines] == ["*Light*", "*Mending*", "*Bless*"]
+
+    def test_spells_known_are_listed(self):
+        lines = P.spell_lines("- *Cantrips:* *Message*\n- *Spells known:* *Charm Person*; *2nd:* *Suggestion*\n")
+        assert [l.split(".")[0] for l in lines] == ["*Message*", "*Charm Person*", "*Suggestion*"]
+
+    def test_srd_note_names_srd_5_1(self):
+        assert "System Reference Document 5.1" in P.SRD_NOTE and "5.2.1" not in P.SRD_NOTE
 
     def test_unknown_spell_is_an_error(self):
         with pytest.raises(KeyError):
@@ -364,7 +378,7 @@ class TestPregenSheets:
         for page_html in pages:
             assert "On your turn" in page_html
             assert "Hit Points" in page_html and "☐" in page_html
-            assert "Resourceful" in page_html
+            assert "every ability score +1" in page_html
         casters = [p for p in pages if "Spellcasting" in p]
         assert len(casters) == 3
         for p in casters:
