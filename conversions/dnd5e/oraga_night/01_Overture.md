@@ -168,8 +168,8 @@ and IX, a creature name in **bold** has a stat block there. Full blocks live now
 advances its clock, and what happens when it fills.
 
 **Italics** mark spells and magic items, in Title Case: *Detect Thoughts*, *Steady
-Light*. Rules terms take the SRD 5.2.1 capitals (Advantage, Hit Points, Short Rest, the
-Prone condition), and a check is written in full: "a DC 15 Wisdom (Insight) check".
+Light*. Rules terms take capitals (Advantage, Hit Points, Short Rest, the Prone
+condition), and a check is written in full: "a DC 15 Wisdom (Insight) check".
 
 **Cross-references** name the chapter, and the section in quotation marks where it
 helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).

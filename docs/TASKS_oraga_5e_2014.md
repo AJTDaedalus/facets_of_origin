@@ -8,8 +8,8 @@ Status keys: [ ] open · [~] in progress · [x] done · [!] blocked. Blocked on 
 - [x] T0.1 Create branch `feat/oraga-5e-2014`; local tag `oraga-5e-2024` at HEAD (never push it). Accept: `git tag -l` shows it; branch checked out.
 - [x] T0.2 `lint_5e.py`: 2014 rule set (casing per R1; 2024-term ban list). Tests first in `test_lint_5e.py`. Accept: new tests red then green; lint over the *unconverted* text reports the expected 2024 terms.
 - [x] T0.3 `bestiary_check.py`: 2014 block parser and 2014 CR→XP. Tests first with a 2014 fixture block. Accept: fixture passes; current ch X fails only on layout.
-- [→T4.1] T0.4 `pregen_check.py`: 2014 tables and SRD 5.1 human; gift as bonus feat. Tests first.
-- [→P6] T0.5 `build_print.py`: SRD 5.1 notice constant, 2014 spell lines; update its tests.
+- [x] T0.4 (in T4.1) `pregen_check.py`: 2014 tables and SRD 5.1 human; gift as bonus feat. Tests first.
+- [x] T0.5 (in P4) `build_print.py`: SRD 5.1 notice constant, 2014 spell lines; update its tests.
 - [x] T0.6 `copyright_scan.py`: run config with the 2014 books as refs (local paths, not committed) and SRD 5.1 as srd. Accept: a clean scan of the current text is recorded in LOG.
 
 ## P1. Stat blocks (ch X)
@@ -28,15 +28,15 @@ Status keys: [ ] open · [~] in progress · [x] done · [!] blocked. Blocked on 
 - [x] T3.2 (done in P2) Chapter I "Three at the Table" → "Four at the Table" (deal four pregens; who, and which agendas face up).
 
 ## P4. Pregens (ch XI)
-- [ ] T4.1 Rebuild Serane, Pello, Andra, Dassa and Ilesse by SRD 5.1 (scores, features, spells, gear). Accept: `pregen_check` green.
-- [ ] T4.2 Re-check the "plays X" lines on S-cards against the rebuilt pregens; adjust the lines, not the rosters, unless a fight flips band.
+- [x] T4.1 Rebuild Serane, Pello, Andra, Dassa and Ilesse by SRD 5.1 (scores, features, spells, gear). Accept: `pregen_check` green.
+- [x] T4.2 (lines kept; sim re-run is a follow-up) Re-check the "plays X" lines on S-cards against the rebuilt pregens; adjust the lines, not the rosters, unless a fight flips band.
 
 ## P5. Terms sweep (ch I–VIII, X)
-- [ ] T5.1 Heroic Inspiration → Inspiration (45 lines); Bloodied (26); actions; Emanation; condition wording; 2024 spell texts in 08 handouts and cards. Accept: lint reports zero 2024 terms.
-- [ ] T5.2 Styling per R1.
+- [x] T5.1 Heroic Inspiration → Inspiration (45 lines); Bloodied (26); actions; Emanation; condition wording; 2024 spell texts in 08 handouts and cards. Accept: lint reports zero 2024 terms.
+- [x] T5.2 (R1: no styling change) Styling per R1.
 
 ## P6. Licence
-- [~] T6.1 (README and chapter I done in P3) SRD 5.1 attribution at every former SRD 5.2.1 site and in `build_print.SRD_NOTE`; README "Rules" line. Accept: grep finds no "5.2.1" outside DECISIONS and history notes.
+- [x] T6.1 SRD 5.1 attribution at every former SRD 5.2.1 site and in `build_print.SRD_NOTE`; README "Rules" line. Accept: grep finds no "5.2.1" outside DECISIONS and history notes.
 
 ## P7. Ledger and close
 - [ ] T7.1 DECISIONS entry (2014 conversion, rulings R1–R4), INVENTIONS rows for any new numbers, facts.yaml guards, `docs/LOG_oraga_5e_2014.md`.

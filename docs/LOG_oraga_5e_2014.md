@@ -126,3 +126,35 @@
   - Inspiration rules: Advantage; everyone starts with it as a module rule; *At a 2024 table* Heroic Inspiration.
   - Table I–3 renamed "Inspiration, Printed".
 - Checks: fact_check 0; pytest tools 677 passed, 1 skipped. Chapters I and III and the README have no lint hits.
+
+## 2026-11-01: P4 pregens, P5 terms sweep, P6 licence
+
+- **T4.1 / T0.4** `pregen_check.py` rewritten for SRD 5.1, test-first: the five new builds entered, legality passing, text red. Its rules:
+  - human +1 to every score, the standard array, a 2-point ASI;
+  - background two skills, no origin feat or Skillful;
+  - 2014 cantrip and known/prepared tables (bard 3/7; cleric and wizard cantrips 4, prepared = modifier + level);
+  - wizard spellbook 6 + 2 per level;
+  - Jack of All Trades counts on Initiative.
+  
+  Then chapter XI rebuilt, keeping each concept, gear, specialty and story text:
+  - **Serane** (Bard, Lore): 9/14/15/11/13/18, AC 14, HP 31, Init +3. Intimidation becomes Jack of All Trades. 7 spells known; Vicious Mockery 1d4; Cutting Words and Bardic Inspiration in SRD 5.1 wording; Song of Rest.
+  - **Pello** (Rogue, Thief): 9/18/14/13/15/11, AC 16, HP 31. Six skills (Investigation and Deception dropped). The off-hand dagger is a bonus action. Fast Hands covers Use an Object (charges). Second-Story Work is 2014. Steady Aim and Weapon Mastery dropped.
+  - **Andra** (Wizard, Evocation): 9/15/14/18/13/11, AC 15 (Mage Armor), HP 26, PP 11. 4 skills. No Scholar and no Potent Cantrip. Ritual Casting, Arcane Recovery, Evocation Savant and Sculpt Spells. Lattice of 12 spells (Alarm and Feather Fall dropped); 8 prepared (Hold Person added).
+  - **Dassa** (Fighter, Champion, ungifted): 18/14/15/9/13/11, AC 17 (scale mail + Defense), HP 36, Init +2. Medicine dropped. Savage Attacker, Alert, Tactical Mind, Remarkable Athlete and Weapon Mastery dropped. Second Wind and Action Surge once per Short Rest; crits on 19–20.
+  - **Ilesse** (Cleric, Life): 9/13/15/11/18/14, AC 14, HP 31, Init +1. 4 skills. 4 cantrips (Mending dropped). Domain spells are SRD 5.1 (Lesser Restoration and Spiritual Weapon at 3rd). 8 prepared (Aid and Prayer of Healing added). Channel Divinity once per rest; Spiritual Weapon without Concentration; heavy armor proficiency.
+  - The chapter's shared sections are updated: header, SRD 5.1 notice, "Common to all five", the "can stand in a fight" numbers (Dassa AC 17 / 36 HP), and the 2024 note.
+- **T0.5** `build_print.py`, test-first:
+  - Spell lines rewritten from SRD 5.1 (Healing Word 1d4, Cure Wounds 1d8, Sleep 5d8, Spiritual Weapon without Concentration, and so on); Prayer of Healing and Hold Person added.
+  - "Spells known" is parsed; "(once per …)" features get a tracker box; the tracker reads **Inspiration**.
+  - Turn lines for Pello and Dassa drop Nick, Sap and Steady Aim.
+  - SRD_NOTE names SRD 5.1.
+  - Tests: preamble, Inspiration tracker, once-per box, spells known, SRD note.
+- **T4.2** The "plays" lines were left as they are. The rebuilt pregens differ little in HP and AC, and the per-card play lines are qualitative. A simulator re-run with 2014 pregens is a follow-up: the research harness hard-codes the 2024 pregens.
+- **T5.1** Sweep:
+  - 16 × Heroic Inspiration becomes Inspiration (chapters II, IV, V, VIII).
+  - Chapter IV's Bloodied becomes half its Hit Points.
+  - Chapter VIII's charge release becomes "an action (Use an Object)"; the matching allowlist entry is updated.
+  - Lint: rules_2024 at 0; `--check` OK.
+- **T6.1** SRD 5.1 attribution, verbatim, in chapters IX, X and XI and the README. The README subtitle, the chapter X subtitle and the commoner line no longer name SRD 5.2.1. Chapter I's casing note no longer cites SRD 5.2.1 (R1 keeps the capitals). The near-duplicate allowlist now has the SRD 5.1 notice.
+- **Copyright scan:** (a) 83, (b) 14, (c) **0**.
+- **Checks:** fact_check 0, pregen_check 0, bestiary_check 0, lint OK, pytest tools 680 passed, 1 skipped (before the last attribution edits; re-run below).

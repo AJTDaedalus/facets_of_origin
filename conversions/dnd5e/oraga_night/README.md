@@ -1,6 +1,6 @@
 # Oraga Night — Fifth Edition
 
-*A masquerade adventure compatible with fifth-edition rules (SRD 5.2.1). One night, one
+*A masquerade adventure compatible with fifth-edition rules (SRD 5.1). One night, one
 palace, two hundred masks, every enemy the host has — and three guests nobody invited.*
 
 **Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, the year 3164.

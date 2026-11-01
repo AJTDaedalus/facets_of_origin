@@ -123,7 +123,7 @@ secret**: no faction learns of the child unless a player character tells them.
   → 2 Delay, and the one who landed it is a threat. A miss by 4 or less still lands,
   after one blow or word. Never Intimidation on the Hollow. Once per scene each.
 - **End.** Two or more tells, the same check, and the method: Mercy (the Wept),
-  Permission (the Hollow). Out for the night; Heroic Inspiration. A miss counts as a
+  Permission (the Hollow). Out for the night; Inspiration. A miss counts as a
   Stop. The Radiant has no End but a trap in the deep crystal (any of the three can be
   trapped). End once; Stop once per scene.
 - **Wards.** Steer: action, a DC 13 Intelligence (Arcana) check for anyone who studied
@@ -435,7 +435,7 @@ Orthaen crystal holds finished workings, and a **charge** is one of them: a
 consumable magic item, one stored working, released at a touch by anyone, gifted or
 not, trained or not. Releasing one does not make its bearer a caster.
 
-- **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
+- **Releasing a charge** takes an action (Use an Object), and no
   check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are common: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,

@@ -42,12 +42,13 @@
 
 # R5.2 (review-fix pass, O38): near_duplicate. Only repeats that are meant to be repeats.
 *|near_duplicate|This work includes material from the System Reference Document 5.2.1|the CC BY 4.0 attribution notice is required wherever SRD material is used; it is legal text, repeated on purpose
+*|near_duplicate|This work includes material taken from the System Reference Document 5.1|the SRD 5.1 CC BY 4.0 attribution notice (2014 conversion); legal text, repeated on purpose
 11_Pregenerated_Characters.md|near_duplicate|**Heritage.** Reads grown crystalwork the way a mason reads a wall|a pregen sheet reprints its Orthaen lineage trait (chapter III) so the sheet stands alone at the table
 10_Bestiary.md|near_duplicate|Orthaen crystal holds finished workings, and a **charge**|Player Handout 3 (chapter VIII) reprints the charge rules for players; the DM's copy in chapter X is the rules home
-10_Bestiary.md|near_duplicate|**Releasing a charge** takes the Magic action|Player Handout 3 reprints the charge rules for players (see above)
+10_Bestiary.md|near_duplicate|**Releasing a charge** takes an action (Use an Object)|Player Handout 3 reprints the charge rules for players (see above)
 10_Bestiary.md|near_duplicate|**The six every Orthaen knows** are common|Player Handout 3 reprints the charge rules for players (see above)
 10_Bestiary.md|near_duplicate|**Chancy releases.** When the fiction makes a|Player Handout 3 reprints the charge rules for players (see above)
 
-# T10.5 (L-104): Serane's Vicious Mockery copies the SRD 5.2.1 spell text (CC BY 4.0), whose
-# dice have no average because a cantrip's damage is rolled, not a stat-block hit.
-11_Pregenerated_Characters.md|save_damage|take 1d6 Psychic damage|SRD 5.2.1 Vicious Mockery wording, copied (T10.5)
+# T10.5 (L-104), 2014 conversion: Serane's Vicious Mockery follows the SRD 5.1 spell text
+# (CC BY 4.0), whose dice have no average because a cantrip's damage is rolled.
+11_Pregenerated_Characters.md|save_damage|takes 1d4 Psychic damage|SRD 5.1 Vicious Mockery dice (T10.5)

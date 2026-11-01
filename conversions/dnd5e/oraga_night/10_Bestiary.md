@@ -1,13 +1,14 @@
 # X. The Bestiary
 
-*Every stat block the night needs, alphabetically, in the SRD 5.2.1 format. The
+*Every stat block the night needs, alphabetically, in the SRD 5.1 format. The
 fights that use them are in chapter IX, The Snakes. The people behind them are in
 chapter VII.*
 
-> This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1")
-> by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD
-> 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License,
-> available at https://creativecommons.org/licenses/by/4.0/legalcode.
+> This work includes material taken from the System Reference Document 5.1 ("SRD 5.1")
+> by Wizards of the Coast LLC and available at
+> https://dnd.wizards.com/resources/systems-reference-document. The SRD 5.1 is licensed
+> under the Creative Commons Attribution 4.0 International License available at
+> https://creativecommons.org/licenses/by/4.0/legalcode.
 
 ---
 
@@ -2061,7 +2062,7 @@ reaches her workshop, the table has gone badly wrong somewhere.
 
 **A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. ·
 Saves Wis +0, Cha +0. No attacks; use
-the SRD 5.2.1 **commoner** stat block without its attack. Any
+the SRD **commoner** stat block without its attack. Any
 one of the two hundred: a merchant, a minister's cousin, a festival hire in borrowed
 livery. After midnight, count one in every 5-foot square where the crowd is (see chapter
 V, "Two Hundred People"). A guest a character kills was seen doing it by

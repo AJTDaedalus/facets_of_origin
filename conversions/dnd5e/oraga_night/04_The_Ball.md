@@ -14,7 +14,7 @@ I–V are this chapter; the Unmasking and everything after it are chapter V.*
 > first, then let them take it or leave it. This chapter says "at a cost" wherever
 > that habit matters most.
 >
-> **Heroic Inspiration.** Table I–3 in chapter I lists every printed award.
+> **Inspiration.** Table I–3 in chapter I lists every printed award.
 >
 > **Time.** Every Movement below opens with its minutes from Table I–1 and what to run
 > if you are behind. *If you have time* marks depth a four-hour table can leave out.
@@ -58,7 +58,7 @@ alerted" and stops.*
 
 **When steel is bared** anywhere a guest can see, or a spell with a visible effect is
 cast at a guest, or a spell is seen being cast (chapter IX, *Casting in view*), two
-**Boranis Honor Guards** arrive at once, and four more come at the start of the second round after the first guard is Bloodied (*Call the House*;
+**Boranis Honor Guards** arrive at once, and four more come at the start of the second round after the first guard drops to half its Hit Points (*Call the House*;
 card S4, chapter IX). They fight to detain and expel,
 never to hurt. A creature they
 reduce to 0 Hit Points is Unconscious and Stable, never dying. The offender's
@@ -701,7 +701,7 @@ Agendas are what the characters were sent to do; Undercurrents are what they
 choose to chase. The best nights are the ones where a character abandons
 their patron halfway down a wine-cellar stair.
 
-**Reaching the bottom of an Undercurrent earns Heroic Inspiration** for the character
+**Reaching the bottom of an Undercurrent earns Inspiration** for the character
 who says the find out loud at the table (Table I–3; once per Movement).
 
 ### Undercurrent A — The Root of the House *(if you have time)*

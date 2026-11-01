@@ -219,7 +219,7 @@ may act in the first beat before anyone else. Following him saves lives (card S1
 > **DC 13 Charisma check** by whoever releases it (their *Unraveling Presence*,
 > chapter X). On a success it works; on a failure
 > the light simply goes out of it, and the charge is spent. A charge already running
-> (a light carried in, a door already sealed) keeps running. Heroic Inspiration can
+> (a light carried in, a door already sealed) keeps running. Inspiration can
 > reroll this, and it is a fine thing to spend it on.
 >
 > The palace's great wards are
@@ -278,7 +278,7 @@ and a character's own area spell all reach a body on the floor.
   something. (Between fights, when the night runs in beats, they are up by the next
   beat.) This is **the crowd rule**, and it covers only the set-aside.
 - **Hauling each other up.** The first time tonight a character hauls an ally to their
-  feet after midnight, that character gains Heroic Inspiration, or gives it to a
+  feet after midnight, that character gains Inspiration, or gives it to a
   companion who has none.
 - **The last blow.** When an Uninvited drops to 0 Hit Points they step into the
   world's shadow and return at the start of their next turn, at full Hit Points, in
@@ -922,7 +922,7 @@ Characters who arrive at midnight with nothing can still land a Stop in the fire
 to that Uninvited ("Down, Not Out"). Each Uninvited can be stopped **once per scene**.
 What a Stop does depends on who it reaches (below).
 
-Heroic Inspiration may be spent on the words, and should be.
+Inspiration may be spent on the words, and should be.
 
 - **Success:** the Stop lands.
 - **Failure by 4 or less:** it lands, but the Uninvited answers first, with one
@@ -937,7 +937,7 @@ that particular person (below). Otherwise it is made like a Stop with words: the
 30 feet, the same check, the same +2 for each Fracture tell.
 
 - **Success:** the End lands. That Uninvited is out of the attack for the night, or its
-  errand is forfeit, as its entry below says. The speaker gains Heroic Inspiration. If
+  errand is forfeit, as its entry below says. The speaker gains Inspiration. If
   ⟨If History Breaks⟩ has an entry for what just happened, run it.
 - **Failure:** read the check as a Stop attempt instead (if that Uninvited has already
   been stopped this scene, nothing lands). The End can be tried again once the
@@ -1151,7 +1151,7 @@ is still running (the Circle's coats in the smoke, the Church on the dark-wing s
 finishes it now or loses it (see "The Snakes in the Dark"). Everyone else is doing what
 the rest of the palace is doing, which is trying to get out.
 
-**Carrying somebody out** pays as Tables I–3 and I–4 print it: Heroic Inspiration to
+**Carrying somebody out** pays as Tables I–3 and I–4 print it: Inspiration to
 the carrier for the first person they bring out (a carrier who already has it gives it
 to a companion who has none), and 100 XP to the carrier for each person they bring out
 (Table I–4). Not per attempt; per person.
