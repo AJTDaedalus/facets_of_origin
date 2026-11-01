@@ -16,7 +16,7 @@ BESTIARY = MODULE / "10_Bestiary.md"
 
 SIZE_DIE = {"M": 8}
 XP = {"1/8": 25, "1/4": 50, "1/2": 100, "1": 200, "2": 450, "3": 700, "4": 1100,
-      "8": 3900, "9": 5000, "10": 5900, "11": 7200}
+      "5": 1800, "6": 2300, "7": 2900, "8": 3900, "9": 5000, "10": 5900, "11": 7200}
 CRS = ["0", "1/8", "1/4", "1/2"] + [str(i) for i in range(1, 31)]
 def pb(cr):
     v = eval(cr)
@@ -52,7 +52,7 @@ def crname(x):
 # name: cr, hd(n), hp, ac, abilities, save_prof list, skills {name:(abil,val)}, pp, perc_prof,
 # attacks [(bonus, abil, dmg_str, stated_avg)], dcs [(dc, abil)], dpr, eff mods
 B = {
- "Attendant": dict(cr="8", hd=21, hp=178, ac=17, ab=[18,16,18,22,12,6], sv=[2,3],
+ "Attendant": dict(cr="6", hd=17, hp=144, ac=17, ab=[18,16,18,22,12,6], sv=[2,3],
    sk={"Arcana":(3,9),"Perception":(4,4)}, pp=14,
    atk=[(7,0,(1,10,4),9)], dc=[(15,0)], dpr=40, atkb=7),
  "Cousin's Blade": dict(cr="1/2", hd=4, hp=22, ac=14, ab=[14,13,12,10,10,12], sv=[],
@@ -195,10 +195,17 @@ def split_blocks(text):
 
 # Values set by the official-module fix pass (T3.4). The data above and the text must
 # both carry them, so a later edit cannot quietly undo the fix.
-EXPECT_CR = {"Damaris Kovaun": ("1/2", 100, 2)}   # BESTIARY-4: CR 1/2 (XP 100; PB +2)
+EXPECT_CR = {"Damaris Kovaun": ("1/2", 100)}      # BESTIARY-4: Challenge 1/2 (100 XP)
 MAX_ATTACKS_PER_TURN = {"The Wept": 2}            # BESTIARY-2: base block, Nastier aside
 WORDNUM = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
-_CR_LINE = re.compile(r"\*\*CR\*\* ([\d/]+) \(XP ([\d,]+); PB \+(\d+)\)")
+# 2014 layout: "**Challenge** 3 (700 XP)"; the 2014 block prints no PB
+_CR_LINE = re.compile(r"\*\*Challenge\*\* ([\d/]+) \(([\d,]+) XP\)")
+
+
+def parse_challenge(blk):
+    """(CR, XP) from a 2014 Challenge line, or None."""
+    m = _CR_LINE.search(blk)
+    return (m.group(1), int(m.group(2).replace(",", ""))) if m else None
 
 
 def attacks_per_turn(blk):
@@ -225,16 +232,15 @@ def fixed_value_problems(blocks):
         m = blk and _CR_LINE.search(blk)
         if not m:
             continue  # reported by text_problems, or a CR line with no XP (Vell)
-        cr, xp, p = m.group(1), int(m.group(2).replace(",", "")), int(m.group(3))
-        if cr in XP and (xp, p) != (XP[cr], pb(cr)):
-            probs.append(f"{n}: CR {cr} prints XP {xp}, PB +{p}; SRD says XP {XP[cr]}, PB +{pb(cr)}")
-    for n, (cr, xp, p) in EXPECT_CR.items():
+        cr, xp = m.group(1), int(m.group(2).replace(",", ""))
+        if cr in XP and xp != XP[cr]:
+            probs.append(f"{n}: CR {cr} prints XP {xp}; SRD says XP {XP[cr]}")
+    for n, (cr, xp) in EXPECT_CR.items():
         if B[n]["cr"] != cr:
             probs.append(f"{n}: data CR {B[n]['cr']}, expected {cr} (T3.4)")
-        m = _CR_LINE.search(blocks.get(n, ""))
-        got = (m.group(1), int(m.group(2).replace(",", "")), int(m.group(3))) if m else None
-        if got != (cr, xp, p):
-            probs.append(f"{n}: text CR line {got}, expected {(cr, xp, p)} (T3.4)")
+        got = parse_challenge(blocks.get(n, ""))
+        if got != (cr, xp):
+            probs.append(f"{n}: text CR line {got}, expected {(cr, xp)} (T3.4)")
     for n, cap in MAX_ATTACKS_PER_TURN.items():
         blk = blocks.get(n)
         if blk is None:
@@ -264,30 +270,22 @@ def trait_dc_problems(blocks):
     return probs
 
 
-# T4.4: SRD 5.2.1 layout. Armor sits on a Gear line, and the AC line is bare.
+# 2014 layout (DESIGN_oraga_5e_2014 §1): armor in parentheses on the Armor Class line,
+# a Saving Throws line, "+n to hit" attack lines, and no Initiative or Gear line.
 # Armor: name -> (base AC, Dex cap or None for no cap).
 ARMOR = {"Padded Armor": (11, None), "Leather Armor": (11, None),
          "Studded Leather Armor": (12, None), "Hide Armor": (12, 2), "Chain Shirt": (13, 2),
          "Scale Mail": (14, 2), "Breastplate": (14, 2), "Half Plate Armor": (15, 2),
          "Ring Mail": (14, 0), "Chain Mail": (16, 0), "Splint Armor": (17, 0),
          "Plate Armor": (18, 0)}
-# Creatures with Advantage on Initiative: the score folds it in (+5).
-INIT_ADVANTAGE = {"Pellin Corro", "Phern Bodyguard"}
-_INIT = re.compile(r"\*\*Initiative\*\* ([+−-]\d+) \((\d+)\)(,? with Advantage)?")
+ABBR = ["Str", "Dex", "Con", "Int", "Wis", "Cha"]
+_AC = re.compile(r"\*\*Armor Class\*\* (\d+)(?: \(([^)]*)\))?")
 
 
-def parse_gear(blk):
-    """The items on a block's **Gear** line, or [] if it has none."""
-    m = re.search(r"^\*\*Gear\*\* (.+)$", blk, re.M)
-    return [g.strip() for g in m.group(1).split(",")] if m else []
-
-
-def parse_initiative(blk):
-    """(bonus, score, has the 2014 'with Advantage' suffix) or None."""
-    m = _INIT.search(blk)
-    if not m:
-        return None
-    return int(m.group(1).replace("−", "-")), int(m.group(2)), bool(m.group(3))
+def parse_armor(blk):
+    """The items in the Armor Class parenthetical, or [] if it has none."""
+    m = _AC.search(blk)
+    return [g.strip() for g in m.group(2).split(",")] if m and m.group(2) else []
 
 
 def layout_problems(blocks):
@@ -298,28 +296,25 @@ def layout_problems(blocks):
         if n is None:
             continue
         b = B[n]
-        dex, p = mod(b["ab"][1]), pb(b["cr"])
-        acm = re.search(r"\*\*AC\*\* (\d+)( \([^)]*\))?", blk)
-        if acm and acm.group(2):
-            probs.append(f"{n}: AC line carries a parenthetical{acm.group(2)}; armor goes on a Gear line")
-        gear = parse_gear(blk)
-        armor = [g for g in gear if g in ARMOR]
+        m, p = [mod(x) for x in b["ab"]], pb(b["cr"])
+        for old in ("Initiative", "Gear"):
+            if re.search(r"\*\*" + old + r"\*\*", blk):
+                probs.append(f"{n}: 2024 layout leftover: the {old} line")
+        acm = _AC.search(blk)
+        armor = [g for g in parse_armor(blk) if g in ARMOR]
         if acm and armor:
             base, cap = ARMOR[armor[0]]
-            got = base + (dex if cap is None else min(dex, cap)) + (2 if "Shield" in gear else 0)
+            got = base + (m[1] if cap is None else min(m[1], cap)) + (2 if "Shield" in parse_armor(blk) else 0)
             if got != int(acm.group(1)):
-                probs.append(f"{n}: Gear gives AC {got}, block prints AC {acm.group(1)}")
-        ini = parse_initiative(blk)
-        if ini is None:
-            probs.append(f"{n}: no Initiative bonus and score found"); continue
-        bonus, score, suffix = ini
-        if suffix:
-            probs.append(f"{n}: Initiative written 'with Advantage'; fold it into the score (+5)")
-        if bonus not in (dex, dex + p, dex + 2 * p):
-            probs.append(f"{n}: Initiative bonus {bonus:+d} is not Dex {dex:+d} (+ PB {p})")
-        want = 10 + bonus + (5 if n in INIT_ADVANTAGE else 0)
-        if score != want:
-            probs.append(f"{n}: Initiative score {score}, expected {want}")
+                probs.append(f"{n}: armor gives AC {got}, block prints AC {acm.group(1)}")
+        want = ", ".join(f"{ABBR[i]} {m[i] + p:+d}" for i in sorted(b["sv"]))
+        svm = re.search(r"^\*\*Saving Throws\*\* (.+)$", blk, re.M)
+        if want and (not svm or svm.group(1).strip() != want):
+            probs.append(f"{n}: Saving Throws line {svm.group(1).strip() if svm else None!r}, expected {want!r}")
+        if not want and svm:
+            probs.append(f"{n}: Saving Throws line printed, but the data has no save proficiency")
+        if re.search(r"\*(?:Melee|Ranged) Attack Roll:\*", blk):
+            probs.append(f"{n}: 2024 attack form ('Attack Roll:'); use '*Melee Weapon Attack:* +n to hit'")
     return probs
 
 
@@ -346,9 +341,9 @@ def text_problems(text):
         blk = blocks.get(name)
         if blk is None:
             probs.append(f"{n}: no '### {name}' block in 10_Bestiary.md"); continue
-        ac = re.search(r"\*\*AC\*\* (\d+)", blk)
-        hp = re.search(r"\*\*HP\*\* (\d+) \((\d+)d8", blk)
-        cr = re.search(r"\*\*CR\*\* ([\d/]+)", blk)
+        ac = re.search(r"\*\*Armor Class\*\* (\d+)", blk)
+        hp = re.search(r"\*\*Hit Points\*\* (\d+) \((\d+)d8", blk)
+        cr = re.search(r"\*\*Challenge\*\* ([\d/]+)", blk)
         if not ac or int(ac.group(1)) != b["ac"]:
             probs.append(f"{n}: text AC {ac.group(1) if ac else None} vs data {b['ac']}")
         if not hp or (int(hp.group(1)), int(hp.group(2))) != (b["hp"], b["hd"]):

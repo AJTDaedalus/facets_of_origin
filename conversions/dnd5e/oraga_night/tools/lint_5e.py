@@ -9,7 +9,7 @@ Usage (from the repo root):
 
 Rule families
     hard       counts that must reach 0 (role name, rules-term capitals, check/save/damage
-               grammar, conversion talk, narrator voice, designer "we", "Deadly" budgets,
+               grammar, conversion talk, narrator voice, designer "we", SRD 5.2.1 budget labels and 2024 rules terms,
                PCs, spelled distances, gp, British spelling, grey, Designer's note, the
                removed Attendant habit; and from the review-fix pass, R0.2: emphasis
                italics, "(X or Y)" skills, HTML comments, repo file names, simulation
@@ -75,7 +75,7 @@ DTYPE = (r"(?:acid|bludgeoning|cold|fire|force|lightning|necrotic|piercing|poiso
          r"radiant|slashing|thunder)")
 CONDITIONS = (r"(?:blinded|charmed|deafened|frightened|grappled|incapacitated|invisible|"
               r"paralyzed|petrified|poisoned|prone|restrained|stunned|unconscious)")
-ACTIONS = r"(?:attack|dash|disengage|dodge|help|hide|influence|magic|ready|search|study|utilize)"
+ACTIONS = r"(?:attack|dash|disengage|dodge|help|hide|ready|search)"  # 2014 action names; 2024-only ones are rules_2024
 NUMWORDS = (r"(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen|twenty|"
             r"twenty-five|thirty|forty|fifty|sixty|ninety|hundred)")
 
@@ -88,7 +88,8 @@ def classify(text: str, fname: str = "") -> list[str]:
 
     readaloud: a blockquote block whose first content line starts with a single `*`
     (the indented italic box), or an italic paragraph inside any other blockquote.
-    statblock: from an H2/H3 whose next few lines carry `**AC**` to the next `---` or H2.
+    statblock: from an H2/H3 whose next few lines carry `**AC**` (or the 2014 `**Armor Class**`)
+    to the next `---` or H2.
     """
     lines = text.split("\n")
     if lines and lines[-1] == "":
@@ -114,7 +115,7 @@ def classify(text: str, fname: str = "") -> list[str]:
                 in_stat = False
             if re.match(r"^#{2,3} ", ln):
                 ahead = "\n".join(lines[i + 1:i + 8])
-                if "**AC**" in ahead:
+                if "**AC**" in ahead or "**Armor Class**" in ahead:
                     in_stat = True
             i += 1
             continue
@@ -302,7 +303,7 @@ RULES = [
     ("lowercase_terms", "terms",
      r"\b(?:advantage|disadvantage|temporary hit points|hit points?|short rests?|long rests?|"
      r"difficult terrain|dim light|bright light|heavily obscured|lightly obscured|"
-     r"half cover|three-quarters cover|bloodied|heroic inspiration|opportunity attacks?)\b",
+     r"half cover|three-quarters cover|opportunity attacks?)\b",
      "SPEECH", 0),
     ("lowercase_terms", "condition", CONDITIONS + r" condition\b", "SPEECH", 0),
     ("lowercase_terms", "prone/unconscious",
@@ -333,7 +334,13 @@ RULES = [
     ("narrator_voice", "module", r"\bthe module (?:would|notes|suggests|prefers|intends|has spent)\b", "NOBOX", I),
     ("narrator_voice", "honest", r"\bHonest (?:note|warning)\b", "NOBOX", I),
     ("designer_we", "S28", r"\b(?:we|We|our|Our|us|Us|ours)\b", "SPEECH", 0),
-    ("deadly_budget", "S34", r"\bDeadly\b", "NOBOX", 0),  # line filter in code
+    # 2014 conversion (DESIGN_oraga_5e_2014): budgets use the 2014 DMG bands, so "Deadly" is
+    # legal and the SRD 5.2.1 labels are not (line filter in code: XP lines only)
+    ("budget_2024", "2014 bands", r"\bunder Low\b|\bbeyond High\b|\bLow\b|\bModerate\b|\bHigh\b", "NOBOX", 0),
+    ("rules_2024", "2024 term",
+     r"\bHeroic Inspiration\b|\bBloodied\b|\bEmanations?\b|\bD20 Tests?\b|"
+     r"\b(?:Magic|Utilize|Study|Influence) action\b|\bWeapon Mastery\b|\borigin feats?\b",
+     "ALL", I),  # a paragraph that names 2024 (an "At a 2024 table" note) is exempt
     ("pcs", "S1", r"\bPCs?\b", "NOBOX", 0),
     ("spelled_distance", "S37", r"\b" + NUMWORDS + r"(?: |-)(?:feet|foot)\b", "SPEECH", I),
     ("gp", "gp", r"\bgp\b", "ALL", 0),
@@ -377,7 +384,6 @@ _DC_OK_AFTER = re.compile(
     r"(?:,? or (?:a )?(?:DC \d+ )?" + ABIL + r"(?: \([^)]*\))?)*"
     r" (?:checks?|saving throws?|save)\b")
 _DC_SAVE_FORM = re.compile(r"(?:Saving Throw:\*?|save) $", re.I)
-_BUDGET_LINE = re.compile(r"\bXP\b|budget|\bLow\b|\bModerate\b|\bHigh\b|multiplier|difficulty", re.I)
 _IDIOM_BEFORE = re.compile(r"(?:\btakes? |\btaking |\bto (?:his|her|their|its|your|our|my) |\bat a )$")
 _FALL = re.compile(r"\b(?:fall|falls|falling|fell|drop|drops|plunge|pushed over)\b", re.I)
 _ITALIC = re.compile(r"(?<![*\w])\*(?![\s*])([^*\n]{1,60}?)(?<![\s*])\*(?![*\w])")
@@ -468,7 +474,9 @@ def lint_hard(text: str, fname: str, allow=()) -> list[Hit]:
                     continue
                 found = [(col, rid, mt) for col, mt in _emphasis_hits(s)]
             else:
-                if family == "deadly_budget" and not _BUDGET_LINE.search(s):
+                if family == "budget_2024" and (not re.search(r"\bXP\b", s) or "2024" in s):
+                    continue
+                if family == "rules_2024" and "2024" in s:
                     continue
                 if family == "repo_filename":    # a Markdown link target is not prose (R4 maps)
                     s = _LINK_TARGET.sub(lambda m: " " * len(m.group()), s)

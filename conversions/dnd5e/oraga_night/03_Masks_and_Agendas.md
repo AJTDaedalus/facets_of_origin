@@ -195,8 +195,8 @@ chapter VIII). Your card is all your character knows about it.
 ## The Ready-Made Guests
 
 Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
-are in **chapter XI**, and this is the table to deal from. The module is built for three
-players, and which three to deal is in chapter I, "Three at the Table".
+are in **chapter XI**, and this is the table to deal from. The module is built for four
+players, and which four to deal is in chapter I, "Four at the Table".
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|

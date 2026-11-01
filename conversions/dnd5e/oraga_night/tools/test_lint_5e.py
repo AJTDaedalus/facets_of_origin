@@ -66,6 +66,14 @@ class TestClassify:
         kinds = L.classify(text, "10_Bestiary.md")
         assert kinds[1] == "statblock" and kinds[6] == "statblock"
 
+    def test_statblock_2014_armor_class_line(self):
+        # 2014 conversion: the block opens with **Armor Class**, not **AC**
+        text = ("### Bought Blade\n*Medium Humanoid*\n\n**Armor Class** 16 (Chain Shirt, Shield)\n"
+                "**Hit Points** 22 (4d8 + 4)\n\nSome trait text.\n\n---\n\nAfter the block.\n")
+        kinds = L.classify(text, "10_Bestiary.md")
+        assert all(k in ("statblock", "blank") for k in kinds[1:7])
+        assert kinds[-1] == "prose"
+
     def test_h3_without_ac_is_not_statblock(self):
         kinds = L.classify("### The Palace on Alert\n\nPlain prose here.\n", "10_Bestiary.md")
         assert kinds[2] == "prose"
@@ -243,15 +251,50 @@ class TestDesignerWe:
         assert fam(text, "designer_we") == []
 
 
-class TestDeadlyBudget:
-    def test_hit(self):
-        assert fam("*Budget:* 2,400 XP — Deadly.", "deadly_budget") == ["Deadly"]
+class TestBudget2024:
+    """2014 conversion: budgets use the DMG bands; the SRD 5.2.1 labels are gone."""
+    def test_hit_low(self):
+        assert fam("*Budget:* 600 XP — Low.", "budget_2024") == ["Low"]
 
-    def test_miss_lowercase(self):
-        assert fam("A deadly blade; 1,000 XP, Low.", "deadly_budget") == []
+    def test_hit_under_low_and_beyond_high(self):
+        assert fam("*Budget:* 175 XP, under Low; 2,700 XP, beyond High.",
+                   "budget_2024") == ["under Low", "beyond High"]
+
+    def test_miss_2014_bands(self):
+        assert fam("*Budget:* 1,200 XP; adjusted 2,400 for four: Deadly.", "budget_2024") == []
 
     def test_edge_not_a_budget_line(self):
-        assert fam("The Deadly Nightshade is a tavern.", "deadly_budget") == []
+        assert fam("The High Prelate keeps a Low table.", "budget_2024") == []
+
+    def test_edge_2024_note_is_exempt(self):
+        assert fam("At a 2024 table, 1,200 XP is Moderate for four.", "budget_2024") == []
+
+    def test_deadly_is_legal_now(self):
+        assert not any(h.family == "deadly_budget"
+                       for h in L.lint_hard("*Budget:* 2,400 XP — Deadly.", "04_The_Ball.md", ()))
+
+
+class TestRules2024:
+    """2014 conversion: 2024-only rules terms are banned outside 2024 notes."""
+    def test_hit_terms(self):
+        text = "She has Heroic Inspiration. While Bloodied, it uses the Magic action."
+        assert fam(text, "rules_2024") == ["Heroic Inspiration", "Bloodied", "Magic action"]
+
+    def test_hit_more_terms(self):
+        text = "A 10-foot Emanation; a D20 Test; Weapon Mastery; an origin feat; the Utilize action."
+        assert fam(text, "rules_2024") == ["Emanation", "D20 Test", "Weapon Mastery",
+                                           "origin feat", "Utilize action"]
+
+    def test_miss_2014_words(self):
+        text = "She has Inspiration. At half its Hit Points it uses the Use an Object action."
+        assert fam(text, "rules_2024") == []
+
+    def test_edge_2024_note_line_is_exempt(self):
+        assert fam("*At a 2024 table:* read Inspiration as Heroic Inspiration.", "rules_2024") == []
+
+    def test_edge_lowercase_magic_action_not_a_casing_hit(self):
+        assert fam("It takes the magic action.", "lowercase_terms") == []
+        assert fam("It takes the magic action.", "rules_2024") == ["magic action"]
 
 
 class TestPCs:

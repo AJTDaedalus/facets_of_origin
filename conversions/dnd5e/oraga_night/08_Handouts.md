@@ -59,7 +59,7 @@ once before midnight.)*
 
 | Who | At the lights | Then |
 |---|---|---|
-| **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **4th turn** (3rd with four characters). Delay buys him rounds, three at most a scene |
+| **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **3rd turn** (4th with three characters). Delay buys him rounds, three at most a scene |
 | **The Radiant** | B9, for Veier | Private stair, which he reaches at the **fall + 3 beats**, plus a beat per Delay spent (three at most) → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
 | **The Hollow** | The main doors and the garden doors (B2) | Herds the crowd back in. His End opens the doors; so does Raunu's fall (he turns east) |
 | **The Attendant** | Beside the three | Idle until the party gets in the way; then Focused whenever one of the three has no Delay → **S14** |
@@ -98,8 +98,8 @@ secret**: no faction learns of the child unless a player character tells them.
   movement lost. A clever trick with the room, the crowd, a door, a lie: the skill that
   fits, DC 13 → 1 Delay (DC 15 the second time; never a third); on its nature, 2 Delay.
   Spells: the spell's own attack or save, else the caster's spellcasting ability vs DC 13;
-  each spell once per Uninvited. A Stop → 2 Delay. 20+ damage to one in a round → 1 Delay
-  (30+ with four characters, 40+ with five or at 5th level). Two turns at half Speed (or
+  each spell once per Uninvited. A Stop → 2 Delay. 30+ damage to one in a round → 1 Delay
+  (20+ with three characters, 40+ with five or at 5th level). Two turns at half Speed (or
   20 ft. or less) → 1 Delay. At most 3 turns lost per scene; past that, points still free
   people. The Attendant's *Clears the Way*: −1 Delay for
   a turn's action (Idle, when nobody attacked it since its last turn; Focused, its second turn).
@@ -146,7 +146,7 @@ secret**: no faction learns of the child unless a player character tells them.
   the captain needs no check), buy them out, or outlast them. **The last bell rings after the front gate is
   decided**, or at the end of Movement VII if no character reached it (ending 3, offstage).
 
-**Beats that need an agenda.** With three players, five agendas stay in the deck, and
+**Beats that need an agenda.** With four players, four agendas stay in the deck, and
 their beats go with them; play on without them. Anha and her sibling clear the
 galleries in Movement VII only with Agenda 8, and S11's other door is Anha's or Agenda
 8's. S8's Prelate's Question needs Agenda 2. Steering a ward with a DC 13 Intelligence
@@ -500,14 +500,14 @@ which is why the great houses post extra guards.
 *Print this page and write on it from the moment the lights die. Every line is a piece
 of the midnight hour that drifts if you carry it in your head. The boxes only count.
 The rules behind them are in chapter V ("Midnight Rules", "The Fractures"), on card S14
-and on card S3. Numbers are for three characters, with four in parentheses.*
+and on card S3. Numbers are for four characters, with three in parentheses.*
 
 **Table VIII–10: The Midnight Tracker — the Three**
 
 | | The Wept | The Radiant | The Hollow |
 |---|---|---|---|
 | **Errand** | Raunu, on the dais (B2) | Veier, from the east wing (B9) | The main doors and the garden doors (B2) |
-| **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐, plus a beat per Delay spent in the east wing. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his End lands: ☐ turned east |
+| **Arrives** | At Raunu on her 3rd turn of moving (4th with three): ☐ ☐ ☐ (☐), plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐, plus a beat per Delay spent in the east wing. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his End lands: ☐ turned east |
 | **Delay earned** (fill a circle; cross it out when spent) | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ |
 | **Turns lost to Delay this scene** (three at most; clear at a new scene) | ☐ ☐ ☐ | ☐ ☐ ☐ | ☐ ☐ ☐ |
 | **Delay earned this scene, by whom** (initials; a third time marks a threat) | | | |
@@ -522,7 +522,7 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 | Track | Mark it | Remember |
 |---|---|---|
 | **The Attendant (S14)** | ☐ fired · broken focus ○ ○ ○ ○ | Say its state every round. The fourth break: it wanders off |
-| Its Hit Points | 178 (229 with four): | 0 Hit Points: gone, no body |
+| Its Hit Points | 144 (120 with three): | 0 Hit Points: gone, no body |
 | Habits the table saw | ☐ the waiting · ☐ crystal and light · ☐ music that changes | +2 to a distraction |
 | Tricks tried on it | | A repeat has Disadvantage and no bonus; never a third time |
 | Furniture to it | | Until they next attack it or interfere with the three |

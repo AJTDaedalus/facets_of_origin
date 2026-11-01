@@ -26,8 +26,8 @@ One of them, **Dassa, is ungifted**, because one Orthaen in five is and the tabl
 see what that looks like on a sheet. Each wears the armor they can dance in, under
 their festival clothes, as chapter IV allows.
 
-**Which to deal.** The module is built for three players. Which three, and what to
-change for four, is in chapter I, "Three at the Table".
+**Which to deal.** The module is built for four players. Which four, and what to
+change for three, is in chapter I, "Four at the Table".
 
 **Common to all five.** *Human* (see chapter III): **Resourceful**: each begins the night
 with Heroic Inspiration and regains it on a Long Rest; **Skillful**: one extra skill,

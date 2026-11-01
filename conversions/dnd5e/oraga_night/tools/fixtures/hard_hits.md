@@ -8,7 +8,9 @@ It takes 2d6 damage from the fire.
 Heroic Inspiration replaces the original's Sparks.
 The module would rather you improvise.
 We suggest you open on the street.
-*Budget:* 2,400 XP — Deadly.
+*Budget:* 2,400 XP — beyond High.
+
+While Bloodied, she keeps her Heroic Inspiration.
 The PCs arrive late.
 The rail is over a twelve-foot drop.
 The fee is 30 gp.

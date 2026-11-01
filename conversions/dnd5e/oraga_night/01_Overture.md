@@ -87,9 +87,9 @@
 ## What This Adventure Is
 
 Oraga Night is a masquerade designed for three to five characters of 3rd to 5th level,
-and built for **three characters of 4th level**, freshly made or taken from the
-pregenerated guests in chapter XI. Every fight in it is balanced for three, and every
-fight card carries lines for four or five characters and for a party of four at 3rd
+and built for **four characters of 4th level**, freshly made or taken from the
+pregenerated guests in chapter XI. Every fight in it is balanced for four, and every
+fight card carries lines for three or five characters and for a party of four at 3rd
 or 5th level. Use
 the one line nearest your table. The lines are not cumulative.
 
@@ -158,8 +158,8 @@ maps (VIII–1 to VIII–5), the fight cards and every cross-reference.
 
 **Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
-budget for three 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone, and
-scaling lines for four or five characters and for a party of four at 3rd or 5th level.
+budget for four 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone, and
+scaling lines for three or five characters and for a party of four at 3rd or 5th level.
 
 **Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
 and IX, a creature name in **bold** has a stat block there. Full blocks live nowhere else. A card or scene repeats a Passive Perception, an AC or a Hit Point total only where you need it at hand.
@@ -270,7 +270,8 @@ terror, and choices about who to save.
 - **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
   until it is decided, and then the last bell rings.
 
-The minutes below are for three players, and they are a budget, not a stopwatch. Move on
+The minutes below were set for three players, and they are a budget, not a stopwatch.
+With four, a Movement runs a little long; trim the beats nobody is chasing. Move on
 when the table's energy says so. The budget tells you when you have spent too long.
 
 **Table I–1: The Runtime**
@@ -322,21 +323,23 @@ and put out the pregen sheets, the agenda cards and the invitation.
    tonight. Pick one from the table below.
 4. **What the party tells each other.** They do not have to tell each other anything.
 
-> **Sidebar — Three at the Table**
+> **Sidebar — Four at the Table**
 >
-> The module is built for three players. Deal **Dassa**, **Ilesse** and **Serane**, and
-> deal their agendas face up: *The Vanished Servant* (Agenda 8) to Dassa, *The Cousin's
-> Errand* (Agenda 4) to Ilesse, *The Prelate's Question* (Agenda 2) to Serane. That is a
-> frontliner, a healer and a talker, and one of them is on the route to the east-wing
-> door.
+> The module is built for four players. Deal **Dassa**, **Ilesse**, **Serane** and
+> **Pello**, and deal their agendas face up: *The Vanished Servant* (Agenda 8) to Dassa,
+> *The Cousin's Errand* (Agenda 4) to Ilesse, *The Prelate's Question* (Agenda 2) to
+> Serane, and *The Gate at Midnight* (Agenda 6) or *The Circle's Reckoning* (Agenda 1) to
+> Pello. That is a frontliner, a healer, a talker and a sneak, and one of them is on the
+> route to the east-wing door.
 >
-> - *For more steel,* swap Serane for Pello. The three agendas stay on the table.
+> - *For a party that wants to know things,* swap Pello for Andra, who takes *The Story
+>   of a Lifetime* (Agenda 7).
 > - *Never leave out Ilesse* unless somebody else at the table heals.
 > - *Agenda 4 is always dealt,* whoever the characters are, and never face down. It is
 >   the route to the east-wing door, and chapter V leans on somebody having walked it.
 >
-> With four players, add Andra or Pello. With characters the table built
-> themselves, check that one of them heals, and deal Agenda 4 face up.
+> With three players, leave out Pello. With five, add Andra. With characters the table
+> built themselves, check that one of them heals, and deal Agenda 4 face up.
 
 **Table I–2: How You Got In**
 
@@ -440,9 +443,9 @@ these rows, not an extra award.
 | Standing outside at dawn | 1,000 to each character |
 
 **Milestone is how this module is built.** The party starts at 2,700 XP (4th level). If
-you track XP, a party of three that plays the night fully lands close to **6,700 XP**
-each (5th level) at the epilogue; a party of four, close to 6,500. If they arrive a little short, round up, because the night is the
-milestone.
+you track XP, a party of four that plays the night fully lands close to **6,000 XP** each
+at the epilogue, a little short of 5th level (6,500); a party of three, close to 6,200.
+Either way, round up, because the night is the milestone.
 
 ## The Snakes in the Chicken Pen
 

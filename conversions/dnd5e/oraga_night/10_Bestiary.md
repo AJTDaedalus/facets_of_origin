@@ -13,10 +13,11 @@ chapter VII.*
 
 ## How to Read This Chapter
 
-**The blocks are built for three 4th-level characters.** Challenge ratings and XP
-are the SRD's; the encounter math on every fight card in chapter IX uses the SRD
-5.2.1 budget per character (4th level: **Low 250 · Moderate 375 · High 500**; for three,
-**750 · 1,125 · 1,500**; other tables, Table IX–1). The
+**The blocks are built for four 4th-level characters.** Challenge ratings and XP
+are the SRD's. Every fight card in chapter IX sums its foes' XP, multiplies the sum for
+their number, and sets the result against the party's thresholds: for four 4th-level
+characters, **Easy 500 · Medium 1,000 · Hard 1,500 · Deadly 2,000** (chapter IX,
+"Running the Snakes", has the method and the other party sizes). The
 three Uninvited are the deliberate exception. They are CR 9 to 11, and they carry a
 trait called **Leashed** that means none of that matters, because tonight they
 cannot be killed. The **Attendant** who came with them is the other exception, in the
@@ -50,40 +51,28 @@ else, and most of them break long before the end.
   its own.
 
 **Standard numbers in the text.** DCs follow the ladder in chapter I: **Easy 10 ·
-Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below half
-Hit Points. A creature with Advantage on Initiative has it folded into its Initiative
-score already. The **Gear** line names a creature's armor; its weapons are named in
-its Actions. "Until the scene ends" means until the fight ends or the Movement
-changes, whichever comes first. At a 2014 table, read the box below first, because the blocks
-use a few words the 2014 books don't.
+Standard 13–15 · Hard 18–20 · Very Hard 25.** "Half its Hit Points" means at or below
+half its Hit Point maximum. A creature's armor is named on its Armor Class line; its
+weapons are named in its Actions. "Until the scene ends" means until the fight ends or
+the Movement changes, whichever comes first. At a 2024 table, read the box below first.
 
-> **DM Note — at a 2014 table**
+> **DM Note — at a 2024 table**
 >
-> The blocks and cards use the SRD 5.2.1 words. Read them this way:
+> The blocks and cards use the 2014 rules and layout. Read them this way:
 >
-> - **Emanation.** An area that spreads from a creature in every direction and moves
->   with it: a sphere of that radius centered on the creature. The creature itself is
->   outside it unless it chooses otherwise.
-> - **Utilize action.** The Use an Object action.
-> - **Magic action.** The Cast a Spell action, or Use an Object for a magic item such
->   as a crystal charge. Either way, it takes an action.
-> - **Bloodied.** At or below half its Hit Point maximum. The 2014 books have no word
->   for it, but nothing else changes.
-> - **Study and Influence.** The SRD's actions for recalling lore and for winning a
->   creature over. Run each as an action spent on the matching ability check.
-> - **Condition lines.** One **Immunities** line lists damage types, then a semicolon,
->   then conditions: read it as the 2014 Damage Immunities and Condition Immunities
->   lines. "Has the Prone condition" means "is knocked prone". A save reads *Strength
->   Saving Throw:* DC 15, who it affects, then *Failure:* and *Success:*, which is the
->   2014 "must make a DC 15 Strength saving throw" written as a list.
-> - **Initiative.** The number in parentheses is the 2024 Initiative score. Roll
->   Initiative as usual and ignore it.
-> - **Heroic Inspiration.** Plain Inspiration.
-> - **The encounter multiplier.** The 2014 guide multiplies a group's XP by its head
->   count, so it rates most of chapter IX's cards one or two bands harder than printed:
->   S3's 850 XP becomes 1,700, past Deadly, and S14 is more than twice Deadly. These
->   heads break early, fight to detain and quit on a clock. Keep the rosters as
->   printed, and trust each card's line on how it plays.
+> - **The block lines.** Armor Class, Hit Points and Challenge are AC, HP and CR. The
+>   blocks print no Initiative score: roll it with the Dexterity modifier, and a
+>   creature with Advantage on Initiative says so in its traits.
+> - **Saving throws** are written as 2014 prose ("must succeed on a DC 15 Strength
+>   saving throw"). They work unchanged.
+> - **Half its Hit Points** is what the 2024 rules call Bloodied. An **aura** is an
+>   Emanation.
+> - **Use an Object** is the 2024 Utilize action. Casting a spell, or releasing a
+>   crystal charge, is the 2024 Magic action.
+> - **Inspiration** is the 2024 Heroic Inspiration: a reroll instead of Advantage.
+> - **Budgets.** Each card prints its foes' XP and the 2014 adjusted total for four. At
+>   a 2024 table, set the plain XP sum against the 2024 budget for four 4th-level
+>   characters (2024 Low 1,000 · Moderate 1,500 · High 2,000). The rosters work as printed.
 
 **Languages.** Every block lists Common. Read it as the speech of Rekuzan. The
 Uninvited speak it too, in turns of phrase two centuries out of fashion.
@@ -101,21 +90,21 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 | The palace | — | Boranis Honor Guard (CR 2) | S4, S10 |
 | The feud | — | Feuding Kinsman (CR 1/8) | S1 |
 | Tavva's crew | Tavva (CR 2) | Gallery Knife (CR 1/4) | S2, S5 |
-| The Bought | Bought Captain (CR 4), Bought Sergeant (CR 2) at the gate, Veteran Bought Sergeant (CR 4) at the gate for four or more | Bought Blade (CR 1/2) | S3 |
+| The Bought | Bought Captain (CR 4), Bought Sergeant (CR 2) at the gate, Veteran Bought Sergeant (CR 4) at the gate for four at 5th level | Bought Blade (CR 1/2) | S3 |
 | The city | — | Sect Guard (CR 1/8) | S3 (its last ending) |
-| The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | The Attendant (CR 8 Focused) | Chapter V, S14 |
+| The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | The Attendant (CR 6 Focused) | Chapter V, S14 |
 
 The noncombatants (Raunu Boranis, Veier Nolonaire, Minister Corval, Anha, Mother
 Sella, Master Vell, Otta Vesh, and any one of the two hundred guests) are at the
 end of the chapter under "If It Comes to It". Crystal charges and the night's loot are under "Items of the
 Night".
 
-**Table X–2: Challenge Rating, XP and Proficiency Bonus** *(SRD 5.2.1)*
+**Table X–2: Challenge Rating, XP and Proficiency Bonus** *(SRD 5.1)*
 
 | CR | XP | PB | | CR | XP | PB |
 |---|---|---|---|---|---|---|
 | 1/8 | 25 | +2 | | 4 | 1,100 | +2 |
-| 1/4 | 50 | +2 | | 8 | 3,900 | +3 |
+| 1/4 | 50 | +2 | | 6 | 2,300 | +3 |
 | 1/2 | 100 | +2 | | 9 | 5,000 | +4 |
 | 1 | 200 | +2 | | 10 | 5,900 | +4 |
 | 2 | 450 | +2 | | 11 | 7,200 | +4 |
@@ -150,7 +139,7 @@ to that one's nature, once per spell on each of them. A spell with an attack rol
 immunities stay. Whatever the spell would do to them ends at once (*Held by Something
 Else*), and the Delay is all it buys. The obvious ones:
 
-- **Damage, a lot of it.** Every round the party deals 20 or more damage to one of
+- **Damage, a lot of it.** Every round the party deals 30 or more damage to one of
   them (with more characters, see chapter V, "Adjusting the Attack"), that one gains
   1 Delay, never more than 1 a round. At 0 HP they step into the world's shadow and
   are back at full HP on their next turn, and whoever dealt the last blow makes a save
@@ -224,21 +213,21 @@ list below.
 
 *Medium Construct, Unaligned*
 
-**AC** 17 · **Initiative** +3 (13)
-**HP** 178 (21d8 + 84)
+**Armor Class** 17
+**Hit Points** 144 (17d8 + 68)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 18 | 16 | 18 | 22 | 12 | 6 |
-| Mod | +4 | +3 | +4 | +6 | +1 | −2 |
-| Save | +4 | +3 | +7 | +9 | +1 | −2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 18 (+4) | 16 (+3) | 18 (+4) | 22 (+6) | 12 (+1) | 6 (−2) |
 
+**Saving Throws** Con +7, Int +9
 **Skills** Arcana +9, Perception +4
-**Immunities** Poison, Psychic; Charmed, Exhaustion, Frightened, Poisoned
+**Damage Immunities** Poison, Psychic
+**Condition Immunities** Charmed, Exhaustion, Frightened, Poisoned
 **Senses** Darkvision 120 ft.; Passive Perception 14
 **Languages** Common; speaks only when spoken to
-**CR** 8 (XP 3,900; PB +3)
+**Challenge** 6 (2,300 XP)
 
 **Traits**
 
@@ -258,7 +247,7 @@ else is furniture. A creature that stops interfering stops being its business.
 
 ***Rusty (Idle Only).*** It has spent centuries doing nothing. While Idle, its action
 is one Joined Hands attack, with Disadvantage, instead of its Multiattack. It can use
-Put Aside instead only if it is Bloodied or its focus has been broken twice tonight.
+Put Aside instead only if it is at or below half its Hit Points or its focus has been broken twice tonight.
 
 ***Can Be Distracted.*** A creature the Attendant can see or hear can take an action
 to distract it: describe the trick, then make an ability check with whatever skill
@@ -306,9 +295,8 @@ here, steps into the world's shadow, and is gone for the night. There is no body
 ***Two Turns (Focused Only).*** While Focused, the Attendant takes two turns each
 round: one on its Initiative and one at Initiative count 10 lower (last in the round,
 if that count is below 1). On the second turn its action is to clear the way (*Clears
-the Way*) or one Joined Hands attack instead of its Multiattack (with four or more
-characters it is the full Multiattack, against a lone character no attack at all;
-card S14). Focus is checked at the start of each of the two turns, so a focus broken
+the Way*) or its full Multiattack (with three characters, one Joined Hands attack
+instead; against a lone character, no attack at all; card S14). Focus is checked at the start of each of the two turns, so a focus broken
 on its first turn lasts only until its second; if it is Idle when the second turn comes,
 it takes that turn Idle (*Rusty*, or *Clears the Way*). It still has only one Reaction a
 round, and it rolls Put Aside's recharge only at the start of its first turn each round.
@@ -318,13 +306,14 @@ round, and it rolls Put Aside's recharge only at the start of its first turn eac
 ***Multiattack.*** The Attendant makes two Joined Hands attacks. It can replace one
 of them with Put Aside, if Put Aside is available.
 
-***Joined Hands.*** *Melee Attack Roll:* +7, reach 5 ft. *Hit:* 9 (1d10 + 4)
+***Joined Hands.*** *Melee Weapon Attack:* +7 to hit, reach 5 ft., one target. *Hit:* 9 (1d10 + 4)
 Bludgeoning damage, and a Medium or smaller target is pushed 5 feet away.
 
-***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).***
-*Strength Saving Throw:* DC 15, each creature of its choice in a 20-foot Emanation originating from it.
-*Failure:* 9 (2d8) Force damage, and the target is pushed 15 feet straight away and has the Prone
-condition. *Success:* Half damage.
+***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).*** Each creature of
+its choice within 20 feet of it must make a DC 15 Strength saving throw. On a failed
+save, a creature takes 9 (2d8) Force damage, is pushed 15 feet straight away from it and
+is knocked Prone. On a successful save, it takes half as much damage and is neither
+pushed nor knocked Prone.
 
 **Before Midnight**
 
@@ -351,31 +340,27 @@ looks round, briefly, for the master it is supposed to have.
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
 > them tonight. What it is, for the DM alone: chapter VII. Card: S14. Chapter V.*
-> *Its CR 8 is for the Focused Attendant: 2.6 times High for three 4th-level
-> characters, on purpose (card S14). Award
-> the full XP however the party gets it out of the way. With four characters it has
-> 229 Hit Points (card S14).*
+> *Its CR 6 is for the Focused Attendant: 2,300 XP, a little past Deadly for four
+> 4th-level characters, on purpose (card S14). Award the full XP however the party gets
+> it out of the way. With three characters it has 120 Hit Points (card S14).*
 
 ---
 
 ### Boranis Cousin's Blade
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 · **Initiative** +1 (11)
-**HP** 22 (4d8 + 4)
+**Armor Class** 14 (Chain Shirt)
+**Hit Points** 22 (4d8 + 4)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 14 | 13 | 12 | 10 | 10 | 12 |
-| Mod | +2 | +1 | +1 | +0 | +0 | +1 |
-| Save | +2 | +1 | +1 | +0 | +0 | +1 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 14 (+2) | 13 (+1) | 12 (+1) | 10 (+0) | 10 (+0) | 12 (+1) |
 
 **Skills** Athletics +4, Intimidation +3
-**Gear** Chain Shirt
 **Senses** Passive Perception 10
 **Languages** Common
-**CR** 1/2 (XP 100; PB +2)
+**Challenge** 1/2 (100 XP)
 
 **Traits**
 
@@ -384,11 +369,11 @@ blade doesn't break, and it stops fighting the moment Essin tells it to.
 
 **Actions**
 
-***Longsword.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2) Slashing
+***Longsword.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 6 (1d8 + 2) Slashing
 damage.
 
-***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 Bludgeoning
-damage, and the target has the Grappled condition (escape DC 12). The
+***A Quiet Word.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 3 Bludgeoning
+damage, and the target is Grappled (escape DC 12). The
 blade uses this before it uses steel, and only somewhere a guard can't see.
 
 > **Wants.** Vorlain safe, sober and unrecorded; the missing year left buried; the
@@ -411,21 +396,18 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 ### Boranis Cousin of 3160
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 · **Initiative** +1 (11)
-**HP** 33 (6d8 + 6)
+**Armor Class** 14 (Chain Shirt)
+**Hit Points** 33 (6d8 + 6)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 14 | 13 | 12 | 10 | 10 | 12 |
-| Mod | +2 | +1 | +1 | +0 | +0 | +1 |
-| Save | +2 | +1 | +1 | +0 | +0 | +1 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 14 (+2) | 13 (+1) | 12 (+1) | 10 (+0) | 10 (+0) | 12 (+1) |
 
 **Skills** Athletics +4, Intimidation +3
-**Gear** Chain Shirt
 **Senses** Passive Perception 10
 **Languages** Common
-**CR** 1 (XP 200; PB +2)
+**Challenge** 1 (200 XP)
 
 **Traits**
 
@@ -436,11 +418,11 @@ cousin doesn't break, and it stops fighting the moment Essin tells it to.
 
 ***Multiattack.*** The cousin makes two Longsword attacks.
 
-***Longsword.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2) Slashing
+***Longsword.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 6 (1d8 + 2) Slashing
 damage.
 
-***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 Bludgeoning
-damage, and the target has the Grappled condition (escape DC 12). The
+***A Quiet Word.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 3 Bludgeoning
+damage, and the target is Grappled (escape DC 12). The
 cousin uses this before it uses steel, and only somewhere a guard can't see.
 
 > **Wants.** Vorlain safe, sober and unrecorded; the missing year left buried; the
@@ -462,21 +444,19 @@ cousin uses this before it uses steel, and only somewhere a guard can't see.
 ### Boranis Honor Guard
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 18 · **Initiative** +1 (11)
-**HP** 52 (8d8 + 16)
+**Armor Class** 18 (Chain Mail, Shield)
+**Hit Points** 52 (8d8 + 16)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 16 | 12 | 14 | 10 | 13 | 11 |
-| Mod | +3 | +1 | +2 | +0 | +1 | +0 |
-| Save | +5 | +1 | +4 | +0 | +1 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 16 (+3) | 12 (+1) | 14 (+2) | 10 (+0) | 13 (+1) | 11 (+0) |
 
+**Saving Throws** Str +5, Con +4
 **Skills** Athletics +5, Perception +3
-**Gear** Chain Mail, Shield
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 2 (XP 450; PB +2)
+**Challenge** 2 (450 XP)
 
 **Traits**
 
@@ -493,25 +473,25 @@ checks.
 ***Multiattack.*** The guard makes two House Blade attacks, or one House Blade
 attack and uses Seize.
 
-***House Blade.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3) Slashing
+***House Blade.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 7 (1d8 + 3) Slashing
 damage.
 
-***Seize.*** *Strength Saving Throw:* DC 13, one Medium or smaller creature within
-5 feet. *Failure:* The target has the Grappled condition (escape DC 13). The guard
-grapples with its shield arm, keeping its blade in hand.
+***Seize.*** One Medium or smaller creature within 5 feet of the guard must succeed on a
+DC 13 Strength saving throw or be Grappled (escape DC 13). The guard grapples with its
+shield arm, keeping its blade in hand.
 
 ***Warder (1/Day Each).*** The guard carries two charged house crystals, and
 releases one in place of one House Blade attack:
 - *Seal.* One door within 30 feet swings shut and grows closed. Until the scene
   ends it is locked; forcing it takes a DC 20 Strength (Athletics) check or a key
   from Corval.
-- *Flare.* Bright Light fills a 30-foot Emanation from the crystal until the end of
+- *Flare.* Bright Light fills a 30-foot radius around the crystal until the end of
   the guard's next turn. Nothing in it can benefit from the Invisible condition or
   take the Hide action, and every face in it is seen and remembered.
 
 **Reactions**
 
-***Call the House.*** *Trigger:* The guard is Bloodied, and no guard has called the
+***Call the House.*** *Trigger:* The guard drops to half its Hit Points or fewer, and no guard has called the
 house this scene. *Response:* It moves
 up to half its Speed toward the nearest ward-point without provoking Opportunity
 Attacks and calls out. Four more Boranis Honor Guards arrive at the start of the
@@ -537,35 +517,32 @@ second round after this one, and this guard holds its ground until they come.
 
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 · **Initiative** +1 (11)
-**HP** 22 (4d8 + 4)
+**Armor Class** 16 (Chain Shirt, Shield)
+**Hit Points** 22 (4d8 + 4)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 14 | 13 | 12 | 10 | 11 | 10 |
-| Mod | +2 | +1 | +1 | +0 | +0 | +0 |
-| Save | +2 | +1 | +1 | +0 | +0 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 14 (+2) | 13 (+1) | 12 (+1) | 10 (+0) | 11 (+0) | 10 (+0) |
 
 **Skills** Athletics +4
-**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 10
 **Languages** Common
-**CR** 1/2 (XP 100; PB +2)
+**Challenge** 1/2 (100 XP)
 
 **Traits**
 
 ***To the Terms.*** The Blade fights only as the contract allows and never crosses
 its boundary. On a contract to detain, a creature the Blade would reduce to 0 Hit
-Points drops to 1 Hit Point instead and has the Grappled condition (escape DC 12):
+Points drops to 1 Hit Point instead and is Grappled (escape DC 12):
 held, not hurt worse. The Blade grapples with its shield arm, keeping its blade in hand.
 
 **Actions**
 
-***Company Blade.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2)
+***Company Blade.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 6 (1d8 + 2)
 Slashing damage.
 
-***Cudgel (Contract to Detain).*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 5
+***Cudgel (Contract to Detain).*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5
 (1d6 + 2) Bludgeoning damage. The Blades at the gate carry these tonight.
 
 > **Wants.** The contract's terms met and the fee paid.
@@ -584,21 +561,19 @@ Slashing damage.
 
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 17 · **Initiative** +2 (12)
-**HP** 97 (13d8 + 39)
+**Armor Class** 17 (Half Plate Armor)
+**Hit Points** 97 (13d8 + 39)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 17 | 14 | 16 | 14 | 15 | 14 |
-| Mod | +3 | +2 | +3 | +2 | +2 | +2 |
-| Save | +5 | +2 | +5 | +2 | +4 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 17 (+3) | 14 (+2) | 16 (+3) | 14 (+2) | 15 (+2) | 14 (+2) |
 
+**Saving Throws** Str +5, Con +5, Wis +4
 **Skills** Insight +6, Perception +4, Persuasion +4
-**Gear** Half Plate Armor
 **Senses** Passive Perception 14
 **Languages** Common
-**CR** 4 (XP 1,100; PB +2)
+**Challenge** 4 (1,100 XP)
 
 **Traits**
 
@@ -614,7 +589,7 @@ only it has read, aloud, and the company's objective changes mid-scene. The Blad
 stop holding the gate and start looking for a woman in Thenya wool. *(What that
 tells the party, and what it must never achieve, is in chapter V.)*
 
-***Talks While It Fights.*** Once Bloodied, or from its second round on the field if
+***Talks While It Fights.*** Once at or below half its Hit Points, or from its second round on the field if
 the fight is running long, the captain negotiates out loud every turn while it keeps
 attacking. Anyone who answers is talking to someone genuinely listening.
 
@@ -623,7 +598,7 @@ attacking. Anyone who answers is talking to someone genuinely listening.
 ***Multiattack.*** The captain makes two Very Good Sword attacks and uses Command
 the Line.
 
-***Very Good Sword.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 8 (1d10 + 3)
+***Very Good Sword.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 8 (1d10 + 3)
 Slashing damage. It would rather not draw it.
 
 ***Command the Line.*** One Blade the captain can see within 60 feet can, as a
@@ -656,27 +631,25 @@ miss.
 
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 17 · **Initiative** +2 (12)
-**HP** 52 (8d8 + 16)
+**Armor Class** 17 (Chain Shirt, Shield)
+**Hit Points** 52 (8d8 + 16)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 15 | 14 | 14 | 12 | 13 | 13 |
-| Mod | +2 | +2 | +2 | +1 | +1 | +1 |
-| Save | +4 | +2 | +4 | +1 | +1 | +1 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 15 (+2) | 14 (+2) | 14 (+2) | 12 (+1) | 13 (+1) | 13 (+1) |
 
+**Saving Throws** Str +4, Con +4
 **Skills** Insight +3, Perception +3, Persuasion +3
-**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 2 (XP 450; PB +2)
+**Challenge** 2 (450 XP)
 
 **Actions**
 
 ***Multiattack.*** The sergeant makes two Company Blade attacks.
 
-***Company Blade.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2)
+***Company Blade.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 6 (1d8 + 2)
 Slashing damage. Drawn second; the contract case is drawn first.
 
 **Bonus Actions**
@@ -697,7 +670,7 @@ miss.
 > **Wants.** The contract satisfied or voided. Either one ends the fight.
 > **Tells.** It opens by reading the contract's terms aloud. This is not a bluff; it
 > is how the company works.
-> **Breaks.** When Bloodied it calls the Blades back to the boundary and starts
+> **Breaks.** At half its Hit Points it calls the Blades back to the boundary and starts
 > calling out terms, still fighting. It surrenders the field the moment the
 > contract is void (payment withdrawn, terms broken by the employer, or the named
 > target gone), says so, and expects to be believed.
@@ -709,21 +682,19 @@ miss.
 ### Church Warden
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 · **Initiative** +1 (11)
-**HP** 33 (6d8 + 6)
+**Armor Class** 16 (Chain Shirt, Shield)
+**Hit Points** 33 (6d8 + 6)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 14 | 12 | 13 | 10 | 13 | 11 |
-| Mod | +2 | +1 | +1 | +0 | +1 | +0 |
-| Save | +2 | +1 | +1 | +0 | +3 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 14 (+2) | 12 (+1) | 13 (+1) | 10 (+0) | 13 (+1) | 11 (+0) |
 
+**Saving Throws** Wis +3
 **Skills** Insight +3, Perception +3, Religion +2
-**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 1 (XP 200; PB +2)
+**Challenge** 1 (200 XP)
 
 **Traits**
 
@@ -739,13 +710,12 @@ should not be keeping, and it takes what it finds.
 ***Multiattack.*** The warden makes two Mace attacks, or one Mace attack and uses
 Seize for Questioning.
 
-***Mace.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 5 (1d6 + 2) Bludgeoning
+***Mace.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2) Bludgeoning
 damage.
 
-***Seize for Questioning.*** *Strength Saving Throw:* DC 12, one Medium or smaller
-creature within 5 feet. *Failure:* The target has the
-Grappled condition (escape DC 12). The warden grapples with its shield arm, keeping its
-mace in hand.
+***Seize for Questioning.*** One Medium or smaller creature within 5 feet of the warden
+must succeed on a DC 12 Strength saving throw or be Grappled (escape DC 12). The warden
+grapples with its shield arm, keeping its mace in hand.
 
 **Reactions**
 
@@ -768,21 +738,19 @@ another warden within 5 feet of it. *Response:* The attack roll has Disadvantage
 ### Circle Hired Knife
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 · **Initiative** +3 (13)
-**HP** 32 (5d8 + 10)
+**Armor Class** 15 (Studded Leather Armor)
+**Hit Points** 32 (5d8 + 10)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 12 | 16 | 14 | 11 | 12 | 10 |
-| Mod | +1 | +3 | +2 | +0 | +1 | +0 |
-| Save | +1 | +5 | +2 | +0 | +1 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 12 (+1) | 16 (+3) | 14 (+2) | 11 (+0) | 12 (+1) | 10 (+0) |
 
+**Saving Throws** Dex +5
 **Skills** Intimidation +2, Perception +3, Stealth +5
-**Gear** Studded Leather Armor
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 1 (XP 200; PB +2)
+**Challenge** 1 (200 XP)
 
 **Traits**
 
@@ -797,7 +765,7 @@ Advantage against.
 
 ***Multiattack.*** The knife makes two Knife attacks.
 
-***Knife.*** *Melee or Ranged Attack Roll:* +5, reach 5 ft. or range 20/60 ft.
+***Knife.*** *Melee or Ranged Weapon Attack:* +5 to hit, reach 5 ft. or range 20/60 ft., one target.
 *Hit:* 5 (1d4 + 3) Piercing damage.
 
 **Bonus Actions**
@@ -809,10 +777,10 @@ Advantage against.
 > **Tells.** Lips moving at every name Corval calls. The same good coat
 > wherever Corval goes. The one man in the Audience Hall line not rehearsing a
 > question. The Circle's man, where no guest has any reason to be.
-> **Breaks.** On Callun's word. Without it, when the first knife is Bloodied; they
+> **Breaks.** On Callun's word. Without it, when the first knife drops to half its Hit Points; they
 > were hired for pressure, not for this. A knife that breaks drops whatever it has
 > taken and walks back into the crowd like a guest.
-> **Nastier.** They don't break when the first knife is Bloodied; they break when
+> **Nastier.** They don't break when the first knife drops to half its Hit Points; they break when
 > half of them are down.
 > *The armor is worn under a plain good coat. Every great house hired extra swords this season; these are the Circle's share.
 > The Circle brought four. Cards: S7, S12.*
@@ -823,20 +791,19 @@ Advantage against.
 
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 11 · **Initiative** +1 (11)
-**HP** 33 (6d8 + 6)
+**Armor Class** 11
+**Hit Points** 33 (6d8 + 6)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 10 | 12 | 12 | 16 | 18 | 16 |
-| Mod | +0 | +1 | +1 | +3 | +4 | +3 |
-| Save | +0 | +1 | +1 | +3 | +6 | +5 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 10 (+0) | 12 (+1) | 12 (+1) | 16 (+3) | 18 (+4) | 16 (+3) |
 
+**Saving Throws** Wis +6, Cha +5
 **Skills** History +5, Insight +8, Persuasion +5, Religion +5
 **Senses** Passive Perception 14
 **Languages** Common
-**CR** 1/2 (XP 100; PB +2)
+**Challenge** 1/2 (100 XP)
 
 **Traits**
 
@@ -847,13 +814,13 @@ nobody living uses.
 
 **Actions**
 
-***Staff of Office.*** *Melee Attack Roll:* +2, reach 5 ft. *Hit:* 3 (1d6)
+***Staff of Office.*** *Melee Weapon Attack:* +2 to hit, reach 5 ft., one target. *Hit:* 3 (1d6)
 Bludgeoning damage. She would much rather not.
 
-***In the Church's Name (Recharge 5–6).*** *Wisdom Saving Throw:* DC 14, each
-creature of the Prelate's choice within 30 feet that can hear and understand her.
-*Failure:* Until the end of its next turn, the target can't take a hostile action
-against her or against anyone she names.
+***In the Church's Name (Recharge 5–6).*** Each creature of the Prelate's choice within
+30 feet that can hear and understand her must succeed on a DC 14 Wisdom saving throw or
+be unable to take a hostile action against her, or against anyone she names, until the
+end of its next turn.
 
 **Bonus Actions**
 
@@ -876,21 +843,19 @@ move up to half its Speed and make one Mace attack or use Seize for Questioning.
 ### Draunel Duelist
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 · **Initiative** +3 (13)
-**HP** 27 (5d8 + 5)
+**Armor Class** 15 (Studded Leather Armor)
+**Hit Points** 27 (5d8 + 5)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 11 | 16 | 12 | 10 | 11 | 14 |
-| Mod | +0 | +3 | +1 | +0 | +0 | +2 |
-| Save | +0 | +5 | +1 | +0 | +0 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 11 (+0) | 16 (+3) | 12 (+1) | 10 (+0) | 11 (+0) | 14 (+2) |
 
+**Saving Throws** Dex +5
 **Skills** Acrobatics +5, Intimidation +4, Performance +4
-**Gear** Studded Leather Armor
 **Senses** Passive Perception 10
 **Languages** Common
-**CR** 1 (XP 200; PB +2)
+**Challenge** 1 (200 XP)
 
 **Traits**
 
@@ -902,14 +867,13 @@ cheerfully.
 
 ***Multiattack.*** The duelist makes one Rapier attack and uses Provocation.
 
-***Rapier.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3) Piercing
+***Rapier.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 7 (1d8 + 3) Piercing
 damage.
 
-***Provocation.*** *Wisdom Saving Throw:* DC 12, one creature within 30 feet that can
-hear the duelist. *Failure:* The target has Disadvantage on attack rolls against
-anyone but the duelist until the end of its next turn. A Boranis cousin (either block,
-the Cousin's Blade or the Cousin of 3160) that fails this save draws steel, wherever it
-is standing.
+***Provocation.*** One creature within 30 feet that can hear the duelist must succeed on
+a DC 12 Wisdom saving throw or have Disadvantage on attack rolls against anyone but the
+duelist until the end of its next turn. A Boranis cousin (either block, the Cousin's
+Blade or the Cousin of 3160) that fails this save draws steel, wherever it is standing.
 
 **Reactions**
 
@@ -935,21 +899,19 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 
 *Medium Humanoid (Human), Neutral*
 
-**AC** 16 · **Initiative** +3 (13)
-**HP** 58 (9d8 + 18)
+**Armor Class** 16 (Breastplate)
+**Hit Points** 58 (9d8 + 18)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 12 | 16 | 14 | 14 | 12 | 17 |
-| Mod | +1 | +3 | +2 | +2 | +1 | +3 |
-| Save | +1 | +5 | +2 | +2 | +3 | +5 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 12 (+1) | 16 (+3) | 14 (+2) | 14 (+2) | 12 (+1) | 17 (+3) |
 
+**Saving Throws** Dex +5, Wis +3, Cha +5
 **Skills** Deception +5, Insight +3, Intimidation +5, Persuasion +7
-**Gear** Breastplate
 **Senses** Passive Perception 11
 **Languages** Common
-**CR** 3 (XP 700; PB +2)
+**Challenge** 3 (700 XP)
 
 **Traits**
 
@@ -966,7 +928,7 @@ Opportunity Attacks, and the plan changes.
 
 ***Multiattack.*** Draunel makes three Rapier attacks.
 
-***Rapier.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3) Piercing
+***Rapier.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 7 (1d8 + 3) Piercing
 damage.
 
 **Reactions**
@@ -991,21 +953,19 @@ miss.
 
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 · **Initiative** +3 (13)
-**HP** 45 (10d8)
+**Armor Class** 14 (Leather Armor)
+**Hit Points** 45 (10d8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 10 | 16 | 11 | 15 | 14 | 14 |
-| Mod | +0 | +3 | +0 | +2 | +2 | +2 |
-| Save | +0 | +5 | +0 | +4 | +2 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 10 (+0) | 16 (+3) | 11 (+0) | 15 (+2) | 14 (+2) | 14 (+2) |
 
+**Saving Throws** Dex +5, Int +4
 **Skills** Deception +6, Insight +6, Perception +4, Sleight of Hand +5, Stealth +5
-**Gear** Leather Armor
 **Senses** Passive Perception 14
 **Languages** Common
-**CR** 2 (XP 450; PB +2)
+**Challenge** 2 (450 XP)
 
 **Traits**
 
@@ -1021,7 +981,7 @@ target.
 
 ***Multiattack.*** Essin makes two Knife attacks.
 
-***Knife.*** *Melee or Ranged Attack Roll:* +5, reach 5 ft. or range 20/60 ft.
+***Knife.*** *Melee or Ranged Weapon Attack:* +5 to hit, reach 5 ft. or range 20/60 ft., one target.
 *Hit:* 5 (1d4 + 3) Piercing damage.
 
 **Bonus Actions**
@@ -1052,20 +1012,18 @@ attack's target instead.
 
 *Medium Humanoid (Human), Neutral*
 
-**AC** 11 · **Initiative** +1 (11)
-**HP** 9 (2d8)
+**Armor Class** 11
+**Hit Points** 9 (2d8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 13 | 12 | 11 | 9 | 8 | 12 |
-| Mod | +1 | +1 | +0 | −1 | −1 | +1 |
-| Save | +1 | +1 | +0 | −1 | −1 | +1 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 13 (+1) | 12 (+1) | 11 (+0) | 9 (−1) | 8 (−1) | 12 (+1) |
 
 **Skills** Athletics +3, Intimidation +3
 **Senses** Passive Perception 9
 **Languages** Common
-**CR** 1/8 (XP 25; PB +2)
+**Challenge** 1/8 (25 XP)
 
 **Traits**
 
@@ -1080,11 +1038,11 @@ Unconscious and Stable, and no one makes Death Saving Throws.
 
 **Actions**
 
-***Fists and Elbows.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 3 (1d4 + 1)
-Bludgeoning damage, or the target is pushed 5 feet or has the Prone condition (the
+***Fists and Elbows.*** *Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 3 (1d4 + 1)
+Bludgeoning damage, or the target is pushed 5 feet or knocked Prone (the
 kinsman's choice).
 
-***Harvest Fruit.*** *Ranged Attack Roll:* +3, range 20/60 ft. *Hit:* 1 Bludgeoning
+***Harvest Fruit.*** *Ranged Weapon Attack:* +3 to hit, range 20/60 ft., one target. *Hit:* 1 Bludgeoning
 damage, and the next attack roll against the target before the start of the
 kinsman's next turn has Advantage.
 
@@ -1107,21 +1065,18 @@ stands, the other kinsmen don't step back when hit. Card S1 fields one.
 ### Gallery Knife
 *Medium Humanoid (Human), Neutral*
 
-**AC** 13 · **Initiative** +2 (12)
-**HP** 13 (3d8)
+**Armor Class** 13 (Leather Armor)
+**Hit Points** 13 (3d8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 10 | 15 | 10 | 11 | 10 | 10 |
-| Mod | +0 | +2 | +0 | +0 | +0 | +0 |
-| Save | +0 | +2 | +0 | +0 | +0 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 10 (+0) | 15 (+2) | 10 (+0) | 11 (+0) | 10 (+0) | 10 (+0) |
 
 **Skills** Sleight of Hand +4, Stealth +4
-**Gear** Leather Armor
 **Senses** Passive Perception 10
 **Languages** Common
-**CR** 1/4 (XP 50; PB +2)
+**Challenge** 1/4 (50 XP)
 
 **Traits**
 
@@ -1133,7 +1088,7 @@ passages, if they are in reach.
 
 **Actions**
 
-***Knife.*** *Melee or Ranged Attack Roll:* +4, reach 5 ft. or range 20/60 ft.
+***Knife.*** *Melee or Ranged Weapon Attack:* +4 to hit, reach 5 ft. or range 20/60 ft., one target.
 *Hit:* 4 (1d4 + 2) Piercing damage.
 
 **Bonus Actions**
@@ -1157,23 +1112,21 @@ passages, if they are in reach.
 
 *Medium Humanoid (Human), Unaligned*
 
-**AC** 16 · **Initiative** +3 (13)
-**HP** 157 (21d8 + 63)
+**Armor Class** 16
+**Hit Points** 157 (21d8 + 63)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 20 | 16 | 17 | 12 | 14 | 10 |
-| Mod | +5 | +3 | +3 | +1 | +2 | +0 |
-| Save | +9 | +3 | +7 | +1 | +6 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 20 (+5) | 16 (+3) | 17 (+3) | 12 (+1) | 14 (+2) | 10 (+0) |
 
+**Saving Throws** Str +9, Con +7, Wis +6
 **Skills** Athletics +9, Perception +6
-**Resistances** Bludgeoning, Piercing, Slashing
-**Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
-Petrified, Stunned, Unconscious
+**Damage Resistances** Bludgeoning, Piercing, Slashing
+**Condition Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed, Petrified, Stunned, Unconscious
 **Senses** Darkvision 120 ft.; Passive Perception 16
 **Languages** Common
-**CR** 9 (XP 5,000; PB +4)
+**Challenge** 9 (5,000 XP)
 
 **Traits**
 
@@ -1221,7 +1174,7 @@ People").
 set) or attack him. He never advances if holding will do, and he never follows anyone who
 backs away.
 
-***Bloodied.*** While Bloodied, the Hollow gives ground to the doors and holds there.
+***Wounded.*** While at or below half its Hit Points, the Hollow gives ground to the doors and holds there.
 He follows no one.
 
 ***Stop and End — Despair.*** Ferocity is useless; nobody can frighten a man who
@@ -1238,12 +1191,12 @@ called. *(The rule: Stop and End, above.)*
 
 ***Multiattack.*** The Hollow makes two Bare Hands attacks and uses Turn Them Back.
 
-***Bare Hands.*** *Melee Attack Roll:* +9, reach 5 ft. *Hit:* 16 (2d10 + 5)
+***Bare Hands.*** *Melee Weapon Attack:* +9 to hit, reach 5 ft., one target. *Hit:* 16 (2d10 + 5)
 Bludgeoning damage.
 
-***Turn Them Back.*** *Strength Saving Throw:* DC 17, each creature in a 15-foot Cone.
-*Failure:* The target is pushed 15 feet away and has the Prone condition. *Success:*
-The target is pushed 5 feet away.
+***Turn Them Back.*** Each creature in a 15-foot Cone must make a DC 17 Strength saving
+throw. On a failed save, a creature is pushed 15 feet away and knocked Prone. On a
+successful save, it is pushed 5 feet away.
 
 **Bonus Actions**
 
@@ -1270,21 +1223,19 @@ doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal 
 
 *Medium Humanoid (Human), Neutral Good*
 
-**AC** 15 · **Initiative** +3 (13)
-**HP** 58 (9d8 + 18)
+**Armor Class** 15 (Studded Leather Armor)
+**Hit Points** 58 (9d8 + 18)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 14 | 17 | 14 | 11 | 14 | 13 |
-| Mod | +2 | +3 | +2 | +0 | +2 | +1 |
-| Save | +2 | +5 | +2 | +0 | +4 | +1 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 14 (+2) | 17 (+3) | 14 (+2) | 11 (+0) | 14 (+2) | 13 (+1) |
 
+**Saving Throws** Dex +5, Wis +4
 **Skills** Athletics +4, Insight +6, Perception +4, Survival +4
-**Gear** Studded Leather Armor
 **Senses** Passive Perception 14
 **Languages** Common
-**CR** 3 (XP 700; PB +2)
+**Challenge** 3 (700 XP)
 
 **Traits**
 
@@ -1305,10 +1256,10 @@ be talked down, but only by someone she already trusts, with a DC 13 Charisma
 ***Multiattack.*** Maiven makes three attacks, using Long Knife or Border Sling in
 any combination.
 
-***Long Knife.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 6 (1d6 + 3) Piercing
+***Long Knife.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 6 (1d6 + 3) Piercing
 damage.
 
-***Border Sling.*** *Ranged Attack Roll:* +5, range 30/120 ft. *Hit:* 5 (1d4 + 3)
+***Border Sling.*** *Ranged Weapon Attack:* +5 to hit, range 30/120 ft., one target. *Hit:* 5 (1d4 + 3)
 Bludgeoning damage. Once per turn, when she hits a creature holding a weapon, it
 must succeed on a DC 13 Dexterity saving throw or drop it.
 
@@ -1331,20 +1282,18 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 
 *Medium Humanoid (Human), Neutral Good*
 
-**AC** 11 · **Initiative** +1 (16)
-**HP** 13 (3d8)
+**Armor Class** 11
+**Hit Points** 13 (3d8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 8 | 12 | 10 | 14 | 16 | 15 |
-| Mod | −1 | +1 | +0 | +2 | +3 | +2 |
-| Save | −1 | +1 | +0 | +2 | +3 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 8 (−1) | 12 (+1) | 10 (+0) | 14 (+2) | 16 (+3) | 15 (+2) |
 
 **Skills** Insight +5, Perception +5, Persuasion +4
 **Senses** Passive Perception 15
 **Languages** Common
-**CR** 1/8 (XP 25; PB +2)
+**Challenge** 1/8 (25 XP)
 
 **Traits**
 
@@ -1357,7 +1306,7 @@ follows him in that moment follows him to a way out.
 
 **Actions**
 
-***Knife.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 3 (1d4 + 1) Piercing damage.
+***Knife.*** *Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 3 (1d4 + 1) Piercing damage.
 
 **Bonus Actions**
 
@@ -1377,21 +1326,19 @@ up to its Speed toward him, or toward the way out he is pointing at.
 ### Phern Bodyguard
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 · **Initiative** +4 (19)
-**HP** 33 (6d8 + 6)
+**Armor Class** 15 (Chain Shirt)
+**Hit Points** 33 (6d8 + 6)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 15 | 14 | 13 | 10 | 14 | 10 |
-| Mod | +2 | +2 | +1 | +0 | +2 | +0 |
-| Save | +4 | +2 | +1 | +0 | +4 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 15 (+2) | 14 (+2) | 13 (+1) | 10 (+0) | 14 (+2) | 10 (+0) |
 
+**Saving Throws** Str +4, Wis +4
 **Skills** Athletics +4, Insight +4, Perception +4
-**Gear** Chain Shirt
 **Senses** Passive Perception 14
 **Languages** Common
-**CR** 1 (XP 200; PB +2)
+**Challenge** 1 (200 XP)
 
 **Traits**
 
@@ -1406,11 +1353,11 @@ through a Medium creature's space by shoving it aside.
 ***Multiattack.*** The bodyguard makes two attacks, using Caravan Blade or Shove in
 any combination.
 
-***Caravan Blade.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 5 (1d6 + 2)
+***Caravan Blade.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. *Hit:* 5 (1d6 + 2)
 Slashing damage.
 
-***Shove.*** *Strength Saving Throw:* DC 12, one creature within 5 feet. *Failure:*
-The target is pushed 10 feet away or has the Prone condition (the bodyguard's
+***Shove.*** One creature within 5 feet of the bodyguard must succeed on a DC 12
+Strength saving throw or be pushed 10 feet away or knocked Prone (the bodyguard's
 choice).
 
 **Reactions**
@@ -1438,23 +1385,21 @@ instead.
 
 *Medium Humanoid (Human), Unaligned*
 
-**AC** 17 · **Initiative** +9 (19)
-**HP** 162 (25d8 + 50)
+**Armor Class** 17
+**Hit Points** 162 (25d8 + 50)
 **Speed** 40 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 16 | 20 | 14 | 14 | 16 | 20 |
-| Mod | +3 | +5 | +2 | +2 | +3 | +5 |
-| Save | +3 | +9 | +2 | +2 | +7 | +9 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 16 (+3) | 20 (+5) | 14 (+2) | 14 (+2) | 16 (+3) | 20 (+5) |
 
+**Saving Throws** Dex +9, Wis +7, Cha +9
 **Skills** Acrobatics +9, Performance +13, Perception +7, Religion +6
-**Resistances** Bludgeoning, Piercing, Slashing
-**Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
-Petrified, Stunned, Unconscious
+**Damage Resistances** Bludgeoning, Piercing, Slashing
+**Condition Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed, Petrified, Stunned, Unconscious
 **Senses** Darkvision 120 ft.; Passive Perception 17
 **Languages** Common
-**CR** 10 (XP 5,900; PB +4)
+**Challenge** 10 (5,900 XP)
 
 **Traits**
 
@@ -1509,7 +1454,7 @@ slowing effect don't stack, and at their worst he moves at 20 feet. A whole turn
 slowed is half a turn's progress (see chapter V, "Buying Time"), except in the east
 wing, where being watched is already counted in his three beats.
 
-***Bloodied.*** When the Radiant is first Bloodied, he re-stages. On his next turn he
+***Wounded.*** When the Radiant first drops to half his Hit Points or fewer, he re-stages. On his next turn he
 makes no attacks: he steps back to wherever the most eyes are, and poses. Then he
 resumes.
 
@@ -1539,13 +1484,13 @@ End, above.)*
 ***Multiattack.*** The Radiant makes three Offered Hands attacks. He can replace the
 last of them with The Rite, if The Rite is available.
 
-***Offered Hands.*** *Melee Attack Roll:* +9, reach 5 ft. *Hit:* 16 (2d10 + 5)
+***Offered Hands.*** *Melee Weapon Attack:* +9 to hit, reach 5 ft., one target. *Hit:* 16 (2d10 + 5)
 Bludgeoning damage.
 
-***The Rite (Recharge 5–6).*** *Constitution Saving Throw:* DC 17, one creature
-within 5 feet that the Radiant hit this turn. *Failure:* 22 (4d10) Bludgeoning
-damage. *Success:* Half damage. He turns toward the room before he does this, and
-offers the blow upward.
+***The Rite (Recharge 5–6).*** One creature within 5 feet that the Radiant hit this turn
+must make a DC 17 Constitution saving throw, taking 22 (4d10) Bludgeoning damage on a
+failed save, or half as much damage on a successful one. He turns toward the room before
+he does this, and offers the blow upward.
 
 **Bonus Actions**
 
@@ -1576,20 +1521,19 @@ He can't do this while Witnessed.
 
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 11 · **Initiative** +1 (11)
-**HP** 22 (5d8)
+**Armor Class** 11
+**Hit Points** 22 (5d8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 9 | 12 | 11 | 18 | 15 | 14 |
-| Mod | −1 | +1 | +0 | +4 | +2 | +2 |
-| Save | −1 | +1 | +0 | +6 | +4 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 9 (−1) | 12 (+1) | 11 (+0) | 18 (+4) | 15 (+2) | 14 (+2) |
 
+**Saving Throws** Int +6, Wis +4
 **Skills** Deception +4, Insight +4, Investigation +6, Persuasion +4
 **Senses** Passive Perception 12
 **Languages** Common
-**CR** 1/4 (XP 50; PB +2)
+**Challenge** 1/4 (50 XP)
 
 **Traits**
 
@@ -1602,7 +1546,7 @@ action.
 
 **Actions**
 
-***Knife.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 3 (1d4 + 1) Piercing damage.
+***Knife.*** *Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 3 (1d4 + 1) Piercing damage.
 
 ***Name the Price.*** Callun names what it would cost to end this. It is
 a real price and she will pay it or accept it. No creature that heard her needs a
@@ -1627,21 +1571,18 @@ instead.
 ### Sect Guard
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 · **Initiative** +1 (11)
-**HP** 11 (2d8 + 2)
+**Armor Class** 16 (Chain Shirt, Shield)
+**Hit Points** 11 (2d8 + 2)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 13 | 12 | 12 | 10 | 11 | 10 |
-| Mod | +1 | +1 | +1 | +0 | +0 | +0 |
-| Save | +1 | +1 | +1 | +0 | +0 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 13 (+1) | 12 (+1) | 12 (+1) | 10 (+0) | 11 (+0) | 10 (+0) |
 
 **Skills** Perception +2
-**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 12
 **Languages** Common
-**CR** 1/8 (XP 25; PB +2)
+**Challenge** 1/8 (25 XP)
 
 **Traits**
 
@@ -1653,7 +1594,7 @@ arrive within two rounds. They shout and whistle long before they draw.
 
 **Actions**
 
-***Cudgel.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 4 (1d6 + 1) Bludgeoning
+***Cudgel.*** *Melee Weapon Attack:* +3 to hit, reach 5 ft., one target. *Hit:* 4 (1d6 + 1) Bludgeoning
 damage.
 
 > **Wants.** The trouble ended.
@@ -1672,21 +1613,19 @@ damage.
 
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 · **Initiative** +5 (15)
-**HP** 44 (8d8 + 8)
+**Armor Class** 15 (Studded Leather Armor)
+**Hit Points** 44 (8d8 + 8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 10 | 17 | 12 | 14 | 14 | 15 |
-| Mod | +0 | +3 | +1 | +2 | +2 | +2 |
-| Save | +0 | +5 | +1 | +4 | +2 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 10 (+0) | 17 (+3) | 12 (+1) | 14 (+2) | 14 (+2) | 15 (+2) |
 
+**Saving Throws** Dex +5, Int +4
 **Skills** Deception +6, Insight +4, Perception +6, Sleight of Hand +7, Stealth +7
-**Gear** Studded Leather Armor
 **Senses** Passive Perception 16
 **Languages** Common
-**CR** 2 (XP 450; PB +2)
+**Challenge** 2 (450 XP)
 
 **Traits**
 
@@ -1704,7 +1643,7 @@ their Speed without provoking Opportunity Attacks, and are simply elsewhere. A
 creature that can see Tavva when the charge fires can use its Reaction to move with
 her, up to its own Speed, and keep her in sight. If nobody does, she is gone.
 
-***Bloodied.*** When Tavva is first Bloodied, she uses Release a Charge on her next
+***Wounded.*** When Tavva first drops to half her Hit Points or fewer, she uses Release a Charge on her next
 turn (a Bonus Action). If she has none left, she starts bargaining between
 blows.
 
@@ -1713,12 +1652,12 @@ blows.
 ***Multiattack.*** Tavva makes two Knife attacks, or one Knife attack and uses
 Furniture.
 
-***Knife.*** *Melee or Ranged Attack Roll:* +5, reach 5 ft. or range 20/60 ft.
+***Knife.*** *Melee or Ranged Weapon Attack:* +5 to hit, reach 5 ft. or range 20/60 ft., one target.
 *Hit:* 5 (1d4 + 3) Piercing damage.
 
-***Furniture.*** *Dexterity Saving Throw:* DC 13, one creature within 5 feet.
-*Failure:* The target has the Prone condition, and its space becomes Difficult
-Terrain until someone spends an action clearing it.
+***Furniture.*** One creature within 5 feet of Tavva must succeed on a DC 13 Dexterity
+saving throw or be knocked Prone, and its space becomes Difficult Terrain until someone
+spends an action clearing it.
 
 **Bonus Actions**
 
@@ -1749,21 +1688,18 @@ roll. *Response:* She halves the attack's damage against her.
 ### Thenya Border Slinger
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 · **Initiative** +3 (13)
-**HP** 19 (3d8 + 6)
+**Armor Class** 14 (Leather Armor)
+**Hit Points** 19 (3d8 + 6)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 11 | 16 | 14 | 10 | 13 | 10 |
-| Mod | +0 | +3 | +2 | +0 | +1 | +0 |
-| Save | +0 | +3 | +2 | +0 | +1 | +0 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 11 (+0) | 16 (+3) | 14 (+2) | 10 (+0) | 13 (+1) | 10 (+0) |
 
 **Skills** Perception +3, Stealth +5, Survival +3
-**Gear** Leather Armor
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 1/2 (XP 100; PB +2)
+**Challenge** 1/2 (100 XP)
 
 **Traits**
 
@@ -1772,10 +1708,10 @@ or given the Prone condition.
 
 **Actions**
 
-***Border Sling.*** *Ranged Attack Roll:* +5, range 30/120 ft. *Hit:* 5 (1d4 + 3)
+***Border Sling.*** *Ranged Weapon Attack:* +5 to hit, range 30/120 ft., one target. *Hit:* 5 (1d4 + 3)
 Bludgeoning damage.
 
-***Long Knife.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 6 (1d6 + 3) Piercing
+***Long Knife.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 6 (1d6 + 3) Piercing
 damage.
 
 > **Wants.** Their chief's kinswoman seen with their own eyes and, since the toast,
@@ -1797,27 +1733,25 @@ damage.
 
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 17 · **Initiative** +2 (12)
-**HP** 78 (12d8 + 24)
+**Armor Class** 17 (Chain Shirt, Shield)
+**Hit Points** 78 (12d8 + 24)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 17 | 14 | 14 | 12 | 13 | 13 |
-| Mod | +3 | +2 | +2 | +1 | +1 | +1 |
-| Save | +5 | +2 | +4 | +1 | +1 | +1 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 17 (+3) | 14 (+2) | 14 (+2) | 12 (+1) | 13 (+1) | 13 (+1) |
 
+**Saving Throws** Str +5, Con +4
 **Skills** Insight +3, Perception +3, Persuasion +3
-**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 4 (XP 1,100; PB +2)
+**Challenge** 4 (1,100 XP)
 
 **Actions**
 
 ***Multiattack.*** The sergeant makes three Company Blade attacks.
 
-***Company Blade.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3)
+***Company Blade.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 7 (1d8 + 3)
 Slashing damage. Drawn second; the contract case is drawn first.
 
 **Bonus Actions**
@@ -1839,7 +1773,7 @@ miss.
 > **Wants.** The contract satisfied or voided. Either one ends the fight.
 > **Tells.** It opens by reading the contract's terms aloud from the case chained to
 > its hip. This is not a bluff; it is how the company works.
-> **Breaks.** When Bloodied it calls the Blades back to the boundary and starts
+> **Breaks.** At half its Hit Points it calls the Blades back to the boundary and starts
 > calling out terms, still fighting. It surrenders the field the moment the
 > contract is void (payment withdrawn, terms broken by the employer, or the named
 > target gone), says so, and expects to be believed.
@@ -1854,21 +1788,19 @@ miss.
 ### Veteran Draunel Duelist
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 · **Initiative** +3 (13)
-**HP** 44 (8d8 + 8)
+**Armor Class** 15 (Studded Leather Armor)
+**Hit Points** 44 (8d8 + 8)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 11 | 16 | 12 | 10 | 11 | 14 |
-| Mod | +0 | +3 | +1 | +0 | +0 | +2 |
-| Save | +0 | +5 | +1 | +0 | +0 | +2 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 11 (+0) | 16 (+3) | 12 (+1) | 10 (+0) | 11 (+0) | 14 (+2) |
 
+**Saving Throws** Dex +5
 **Skills** Acrobatics +5, Intimidation +4, Performance +4
-**Gear** Studded Leather Armor
 **Senses** Passive Perception 10
 **Languages** Common
-**CR** 2 (XP 450; PB +2)
+**Challenge** 2 (450 XP)
 
 **Traits**
 
@@ -1880,14 +1812,13 @@ cheerfully.
 
 ***Multiattack.*** The duelist makes two Rapier attacks and uses Provocation.
 
-***Rapier.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3) Piercing
+***Rapier.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 7 (1d8 + 3) Piercing
 damage.
 
-***Provocation.*** *Wisdom Saving Throw:* DC 12, one creature within 30 feet that can
-hear the duelist. *Failure:* The target has Disadvantage on attack rolls against
-anyone but the duelist until the end of its next turn. A Boranis cousin (either block,
-the Cousin's Blade or the Cousin of 3160) that fails this save draws steel, wherever it
-is standing.
+***Provocation.*** One creature within 30 feet that can hear the duelist must succeed on
+a DC 12 Wisdom saving throw or have Disadvantage on attack rolls against anyone but the
+duelist until the end of its next turn. A Boranis cousin (either block, the Cousin's
+Blade or the Cousin of 3160) that fails this save draws steel, wherever it is standing.
 
 **Reactions**
 
@@ -1902,8 +1833,8 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 > **Breaks.** When the challenge is refused in front of witnesses (which is a loss
 > it can't fight past), when Lord Draunel withdraws it, or the first time it takes
 > damage.
-> **Nastier.** It doesn't break the first time it takes damage, only when it is
-> Bloodied.
+> **Nastier.** It doesn't break the first time it takes damage, only when it drops to
+> half its Hit Points.
 > *It has fought three of these this season and won them all. Cards: S9, S13.*
 
 ---
@@ -1913,21 +1844,19 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 · **Initiative** +3 (13)
-**HP** 60 (11d8 + 11)
+**Armor Class** 15 (Studded Leather Armor)
+**Hit Points** 60 (11d8 + 11)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 14 | 16 | 12 | 15 | 13 | 17 |
-| Mod | +2 | +3 | +1 | +2 | +1 | +3 |
-| Save | +2 | +5 | +1 | +2 | +3 | +5 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 14 (+2) | 16 (+3) | 12 (+1) | 15 (+2) | 13 (+1) | 17 (+3) |
 
+**Saving Throws** Dex +5, Wis +3, Cha +5
 **Skills** Deception +7, Insight +5, Perception +3, Persuasion +5
-**Gear** Studded Leather Armor
 **Senses** Passive Perception 13
 **Languages** Common
-**CR** 3 (XP 700; PB +2)
+**Challenge** 3 (700 XP)
 
 **Traits**
 
@@ -1947,7 +1876,7 @@ says one true thing (see chapter VII).
 
 ***Multiattack.*** Vorlain makes two Blade attacks.
 
-***Blade.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3) Piercing damage.
+***Blade.*** *Melee Weapon Attack:* +5 to hit, reach 5 ft., one target. *Hit:* 7 (1d8 + 3) Piercing damage.
 
 **Reactions**
 
@@ -1974,23 +1903,21 @@ miss.
 
 *Medium Humanoid (Human), Unaligned*
 
-**AC** 18 · **Initiative** +7 (17)
-**HP** 187 (22d8 + 88)
+**Armor Class** 18
+**Hit Points** 187 (22d8 + 88)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 22 | 16 | 18 | 13 | 16 | 18 |
-| Mod | +6 | +3 | +4 | +1 | +3 | +4 |
-| Save | +10 | +3 | +8 | +1 | +7 | +4 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 22 (+6) | 16 (+3) | 18 (+4) | 13 (+1) | 16 (+3) | 18 (+4) |
 
+**Saving Throws** Str +10, Con +8, Wis +7
 **Skills** Athletics +10, Insight +7, Perception +7
-**Resistances** Bludgeoning, Piercing, Slashing
-**Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
-Petrified, Stunned, Unconscious
+**Damage Resistances** Bludgeoning, Piercing, Slashing
+**Condition Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed, Petrified, Stunned, Unconscious
 **Senses** Darkvision 120 ft.; Passive Perception 17
 **Languages** Common
-**CR** 11 (XP 7,200; PB +4)
+**Challenge** 11 (7,200 XP)
 
 **Traits**
 
@@ -2017,11 +1944,11 @@ choose to succeed instead.
 ***Delay.*** The Wept has a Delay count (see chapter V, "Buying Time"). At the start of
 her turn, if she has any, spend 1: she doesn't move toward Raunu that turn, and he
 gets a round of work out of it (a dozen guests out of the Court, or Veier one sealed
-door further down), three turns at most in a scene. She reaches Raunu on her fourth
-turn of moving toward him (with more characters, see chapter V, "Adjusting the
-Attack"), through the wards he throws up himself.
+door further down), three turns at most in a scene. She reaches Raunu on her third
+turn of moving toward him (with three characters, her fourth; see chapter V,
+"Adjusting the Attack"), through the wards he throws up himself.
 
-***Bloodied: The Sorrow Slips.*** While the Wept is Bloodied, the mask's carved tears
+***Wounded: The Sorrow Slips.*** While the Wept is at or below half her Hit Points, the mask's carved tears
 begin to run — actually run. Her attacks can't score Critical Hits, and she hums a
 cradle-song mid-attack without knowing it. She is losing the argument with what she
 used to be.
@@ -2057,7 +1984,7 @@ table that lands Mercy before Raunu falls has earned ⟨They save Raunu⟩, chap
 
 ***Multiattack.*** The Wept makes two Strength Like a Fact attacks.
 
-***Strength Like a Fact.*** *Melee Attack Roll:* +10, reach 5 ft. *Hit:* 28 (4d10 +
+***Strength Like a Fact.*** *Melee Weapon Attack:* +10 to hit, reach 5 ft., one target. *Hit:* 28 (4d10 +
 6) Bludgeoning damage. If the target is a Large or smaller creature, it is pushed up
 to 10 feet away.
 
@@ -2105,7 +2032,7 @@ wrist are his, and chapter V says what they are for.*
 
 **Veier Nolonaire** — *Medium Humanoid (Human).* AC 12 · HP 27 · Speed 30 ft.
 (15 ft. once she is wounded, at the Crossing) · Saves Wis +1, Cha +1. Near her time, and not fighting anyone. If cornered: *Border
-Sling.* *Ranged Attack Roll:* +4, range 30/120 ft. *Hit:* 4 (1d4 + 2) Bludgeoning
+Sling.* *Ranged Weapon Attack:* +4 to hit, range 30/120 ft., one target. *Hit:* 4 (1d4 + 2) Bludgeoning
 damage. Her gift flares once, on behalf
 of someone she loves who is in mortal danger (see chapter VII, Veier). The camera never lingers
 on harm to her; cut away.
@@ -2145,24 +2072,21 @@ somebody, and the inquest hears of it.
 
 *Medium Humanoid (Human), Unaligned*
 
-**AC** 20 · **Initiative** +4 (14)
-**HP** 285 (30d8 + 150)
+**Armor Class** 20
+**Hit Points** 285 (30d8 + 150)
 **Speed** 30 ft.
 
-| | STR | DEX | CON | INT | WIS | CHA |
-|---|---|---|---|---|---|---|
-| Score | 16 | 18 | 20 | 18 | 20 | 18 |
-| Mod | +3 | +4 | +5 | +4 | +5 | +4 |
-| Save | +3 | +8 | +9 | +4 | +9 | +8 |
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 16 (+3) | 18 (+4) | 20 (+5) | 18 (+4) | 20 (+5) | 18 (+4) |
 
+**Saving Throws** Dex +8, Con +9, Wis +9, Cha +8
 **Skills** Insight +13, Perception +9
-**Resistances** Acid, Bludgeoning, Cold, Fire, Force, Lightning, Necrotic, Piercing,
-Poison, Psychic, Radiant, Slashing, Thunder
-**Immunities** Charmed, Frightened, Grappled, Incapacitated, Paralyzed, Restrained,
-Stunned, Unconscious
+**Damage Resistances** Acid, Bludgeoning, Cold, Fire, Force, Lightning, Necrotic, Piercing, Poison, Psychic, Radiant, Slashing, Thunder
+**Condition Immunities** Charmed, Frightened, Grappled, Incapacitated, Paralyzed, Restrained, Stunned, Unconscious
 **Senses** Passive Perception 19
 **Languages** Common
-**CR** — (XP 0; PB +4)
+**Challenge** — (0 XP)
 
 
 **Traits**
@@ -2238,7 +2162,7 @@ Orthaen crystal holds finished workings, and a **charge** is one of them: a
 consumable magic item, one stored working, released at a touch by anyone, gifted or
 not, trained or not. Releasing one does not make its bearer a caster.
 
-- **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
+- **Releasing a charge** takes an action (Use an Object), and no
   check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are common: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
@@ -2268,7 +2192,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
 | *A Chime at a Threshold* | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
 | *Warmth* | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
 | *A Held Image* | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
-| *House Flare* | Uncommon | Bright Light fills a 30-foot Emanation from the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
+| *House Flare* | Uncommon | Bright Light fills a 30-foot radius around the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
 | *House Seal* | Uncommon | One door within 30 feet swings shut and grows closed until the scene ends. Forcing it is a DC 20 Strength (Athletics) check. *(The honor guard's.)* |
 | *Dark-Burst* | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centered on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. The effect stays where it was released. *(Tavva's.)* |
 | *Door-Seal* | Uncommon | One door within 30 feet slams and grows shut for 1 minute. Forcing it is a DC 18 Strength (Athletics) check. *(Tavva's.)* |

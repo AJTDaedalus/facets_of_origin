@@ -3,6 +3,7 @@ attacks per turn, and the XP/PB printed on every CR line).
 
 Run: python -m pytest conversions/dnd5e/oraga_night/tools -q
 """
+import re
 import sys
 from pathlib import Path
 
@@ -13,7 +14,7 @@ sys.path.insert(0, str(TOOLS))
 import bestiary_check as BC  # noqa: E402
 
 WEPT_BASE = """
-**CR** 11 (XP 7,200; PB +4)
+**Challenge** 11 (7,200 XP)
 
 **Traits**
 
@@ -63,14 +64,14 @@ def test_fixed_values_clean_on_the_module():
 def test_fixed_values_catch_kovaun_reverted():
     blocks = _blocks()
     blocks["Damaris Kovaun"] = blocks["Damaris Kovaun"].replace(
-        "**CR** 1/2 (XP 100; PB +2)", "**CR** 1 (XP 200; PB +2)")
+        "**Challenge** 1/2 (100 XP)", "**Challenge** 1 (200 XP)")
     probs = BC.fixed_value_problems(blocks)
     assert any("Damaris Kovaun: text CR line" in p for p in probs)
 
 
 def test_fixed_values_catch_wrong_xp_for_cr():
     blocks = _blocks()
-    blocks["Tavva"] = blocks["Tavva"].replace("(XP 450; PB +2)", "(XP 400; PB +2)")
+    blocks["Tavva"] = blocks["Tavva"].replace("(450 XP)", "(400 XP)")
     probs = BC.fixed_value_problems(blocks)
     assert any(p.startswith("Tavva: CR 2 prints XP 400") for p in probs)
 
@@ -99,83 +100,92 @@ def test_main_exits_zero_on_the_module():
 def test_main_exits_one_on_a_reverted_text(tmp_path):
     bad = tmp_path / "10.md"
     bad.write_text(BC.BESTIARY.read_text(encoding="utf-8").replace(
-        "**CR** 1/2 (XP 100; PB +2)", "**CR** 1 (XP 200; PB +2)"), encoding="utf-8")
+        "**Challenge** 1/2 (100 XP)", "**Challenge** 1 (200 XP)"), encoding="utf-8")
     with pytest.raises(SystemExit) as e:
         BC.main(["--quiet", "--file", str(bad)])
     assert e.value.code == 1
 
 
-# T4.4: SRD 5.2.1 layout (Gear line, folded Initiative) ----------------------------
+# 2014 conversion (DESIGN_oraga_5e_2014 §1): 2014 block layout --------------------
 
-def _blk(ac_line, gear=None):
-    g = f"**Gear** {gear}\n" if gear else ""
-    return f"{ac_line}\n**HP** 22 (4d8 + 4)\n\n**Skills** Athletics +4\n{g}**Senses** Passive Perception 10\n"
-
-
-def test_parse_gear_reads_the_items():
-    assert BC.parse_gear(_blk("**AC** 16 · **Initiative** +1 (11)", "Chain Shirt, Shield, Longsword")) == \
-        ["Chain Shirt", "Shield", "Longsword"]
+def _blk(ac_line, saves=None, attack=None):
+    sv = f"**Saving Throws** {saves}\n" if saves else ""
+    atk = attack or ""
+    return (f"{ac_line}\n**Hit Points** 22 (4d8 + 4)\n**Speed** 30 ft.\n\n"
+            f"{sv}**Skills** Athletics +4\n**Senses** Passive Perception 10\n"
+            f"**Challenge** 1/2 (100 XP)\n\n**Actions**\n\n{atk}\n")
 
 
-def test_parse_gear_none_when_absent():
-    assert BC.parse_gear(_blk("**AC** 11 · **Initiative** +1 (11)")) == []
+BLADE_ATK = ("***Longsword.*** *Melee Weapon Attack:* +4 to hit, reach 5 ft., one target. "
+             "*Hit:* 6 (1d8 + 2) Slashing damage.")
 
 
-def test_gear_armor_gives_the_printed_ac():
+def test_parse_armor_reads_the_parenthetical():
+    assert BC.parse_armor(_blk("**Armor Class** 16 (Chain Shirt, Shield)")) == ["Chain Shirt", "Shield"]
+
+
+def test_parse_armor_none_when_absent():
+    assert BC.parse_armor(_blk("**Armor Class** 11")) == []
+
+
+def test_armor_gives_the_printed_ac():
     # Bought Blade: Dex 13 (+1); Chain Shirt 13 + 1 + Shield 2 = 16
-    blk = _blk("**AC** 16 · **Initiative** +1 (11)", "Chain Shirt, Shield, Longsword")
+    blk = _blk("**Armor Class** 16 (Chain Shirt, Shield)", attack=BLADE_ATK)
     assert BC.layout_problems({"Bought Blade": blk}) == []
 
 
-def test_gear_armor_ac_mismatch_is_reported():
-    blk = _blk("**AC** 16 · **Initiative** +1 (11)", "Chain Shirt, Longsword")
+def test_armor_ac_mismatch_is_reported():
+    blk = _blk("**Armor Class** 16 (Chain Shirt)", attack=BLADE_ATK)
     probs = BC.layout_problems({"Bought Blade": blk})
-    assert any("Bought Blade: Gear gives AC 14" in p for p in probs)
+    assert any("Bought Blade: armor gives AC 14" in p for p in probs)
 
 
-def test_ac_with_armor_in_parentheses_is_reported():
-    blk = _blk("**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)")
+def test_leftover_2024_gear_and_initiative_are_reported():
+    blk = _blk("**AC** 16 · **Initiative** +1 (11)", attack=BLADE_ATK) + "**Gear** Chain Shirt\n"
     probs = BC.layout_problems({"Bought Blade": blk})
-    assert any("Bought Blade: AC line carries a parenthetical" in p for p in probs)
+    assert any("2024 layout" in p and "Initiative" in p for p in probs)
+    assert any("2024 layout" in p and "Gear" in p for p in probs)
 
 
-def test_parse_initiative_reads_bonus_and_score():
-    assert BC.parse_initiative("**AC** 11 · **Initiative** +1 (16)") == (1, 16, False)
+def test_saving_throws_line_matches_the_data():
+    # Honor Guard: Str 16 (+3), Con 14 (+2), PB +2, proficient in Str and Con
+    blk = _blk("**Armor Class** 18 (Chain Mail, Shield)", saves="Str +5, Con +4")
+    assert not any("Saving Throws" in p for p in BC.layout_problems({"Boranis Honor Guard": blk}))
 
 
-def test_parse_initiative_flags_the_2014_suffix():
-    assert BC.parse_initiative("**AC** 11 · **Initiative** +1 (11), with Advantage") == (1, 11, True)
+def test_saving_throws_line_wrong_is_reported():
+    blk = _blk("**Armor Class** 18 (Chain Mail, Shield)", saves="Str +5, Con +3")
+    probs = BC.layout_problems({"Boranis Honor Guard": blk})
+    assert any("Saving Throws" in p and "Str +5, Con +4" in p for p in probs)
 
 
-def test_initiative_advantage_folded_is_clean():
-    # Pellin Corro has Advantage on Initiative: score = 10 + 1 + 5
-    blk = _blk("**AC** 11 · **Initiative** +1 (16)")
-    assert BC.layout_problems({"Pellin Corro": blk}) == []
+def test_saving_throws_line_missing_is_reported():
+    blk = _blk("**Armor Class** 18 (Chain Mail, Shield)")
+    probs = BC.layout_problems({"Boranis Honor Guard": blk})
+    assert any("Saving Throws" in p for p in probs)
 
 
-def test_initiative_advantage_suffix_is_reported():
-    blk = _blk("**AC** 11 · **Initiative** +1 (11), with Advantage")
-    probs = BC.layout_problems({"Pellin Corro": blk})
-    assert any("Pellin Corro: Initiative" in p and "fold" in p for p in probs)
+def test_no_save_proficiency_needs_no_line():
+    blk = _blk("**Armor Class** 16 (Chain Shirt, Shield)", attack=BLADE_ATK)
+    assert not any("Saving Throws" in p for p in BC.layout_problems({"Bought Blade": blk}))
 
 
-def test_initiative_advantage_not_folded_is_reported():
-    blk = _blk("**AC** 11 · **Initiative** +1 (11)")
-    probs = BC.layout_problems({"Pellin Corro": blk})
-    assert any("Pellin Corro: Initiative score 11, expected 16" in p for p in probs)
+def test_attack_line_in_2014_form_is_clean():
+    blk = _blk("**Armor Class** 16 (Chain Shirt, Shield)", attack=BLADE_ATK)
+    assert not any("attack" in p.lower() for p in BC.layout_problems({"Bought Blade": blk}))
 
 
-def test_initiative_score_without_advantage_is_ten_plus_bonus():
-    blk = _blk("**AC** 16 · **Initiative** +1 (12)", "Chain Shirt, Shield")
+def test_attack_line_in_2024_form_is_reported():
+    atk = "***Longsword.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2) Slashing damage."
+    blk = _blk("**Armor Class** 16 (Chain Shirt, Shield)", attack=atk)
     probs = BC.layout_problems({"Bought Blade": blk})
-    assert any("Bought Blade: Initiative score 12, expected 11" in p for p in probs)
+    assert any("2024 attack form" in p for p in probs)
 
 
-def test_initiative_bonus_must_come_from_dex_and_pb():
-    # Dex +1, PB +2: +1, +3 or +5 are possible; +2 is not
-    blk = _blk("**AC** 16 · **Initiative** +2 (12)", "Chain Shirt, Shield")
-    probs = BC.layout_problems({"Bought Blade": blk})
-    assert any("Bought Blade: Initiative bonus +2" in p for p in probs)
+def test_parse_challenge_reads_cr_and_xp():
+    assert BC.parse_challenge("**Challenge** 1/2 (100 XP)") == ("1/2", 100)
+    assert BC.parse_challenge("**Challenge** 11 (7,200 XP)") == ("11", 7200)
+    assert BC.parse_challenge("**CR** 2 (XP 450; PB +2)") is None
 
 
 def test_layout_clean_on_the_module():
@@ -191,15 +201,17 @@ def test_trait_dc_clean_on_the_module():
 def test_trait_dc_catches_put_aside_at_14():
     blocks = _blocks()
     blocks["The Attendant"] = blocks["The Attendant"].replace(
-        "*Strength Saving Throw:* DC 15", "*Strength Saving Throw:* DC 14")
+        "must make a DC 15 Strength saving throw", "must make a DC 14 Strength saving throw")
     probs = BC.trait_dc_problems(blocks)
     assert any("Attendant: Put Aside DC 14 vs 8+3+4 = 15" in p for p in probs)
 
 
 def test_trait_dc_reads_a_wrapped_trait():
     blocks = _blocks()
-    blocks["The Attendant"] = blocks["The Attendant"].replace(
-        "*Strength Saving Throw:* DC 15", "*Strength Saving Throw:*\nDC 15")
+    blk = " ".join(blocks["The Attendant"].split(" "))  # normalize, then force a wrap
+    assert "DC 15 Strength saving throw" in " ".join(blk.split())
+    blocks["The Attendant"] = re.sub(r"DC\s+15\s+Strength", "DC\n15 Strength", blk)
+    assert "DC\n15 Strength" in blocks["The Attendant"]
     assert BC.trait_dc_problems(blocks) == []
 
 
@@ -264,7 +276,7 @@ def test_base_nastier_must_not_reprint_the_variant_numbers():
 def test_variant_text_numbers_checked_like_any_block(tmp_path):
     bad = tmp_path / "10.md"
     bad.write_text(BC.BESTIARY.read_text(encoding="utf-8").replace(
-        "**HP** 78 (12d8 + 24)", "**HP** 80 (12d8 + 24)"), encoding="utf-8")
+        "**Hit Points** 78 (12d8 + 24)", "**Hit Points** 80 (12d8 + 24)"), encoding="utf-8")
     probs = BC.text_problems(bad.read_text(encoding="utf-8"))
     assert any(p.startswith("Veteran Bought Sergeant: text HP") for p in probs)
 

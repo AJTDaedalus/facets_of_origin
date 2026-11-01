@@ -29,9 +29,9 @@
 10_Bestiary.md|bare_dc|the caster's spellcasting ability, DC 13.|spells roll (three-player pass T4.3, L-002): the same sentence as chapter V, word for word
 08_Handouts.md|bare_dc|else the caster's spellcasting ability vs DC 13|DM-sheet compression of the spells-roll sentence (05); the ability varies by class (polish pass B, S3)
 
-# T4.3: SRD 5.2.1 grapple form. "has the Grappled condition (escape DC 12)" is the SRD's own
-# wording (28 uses in the SRD 5.2.1 extract); an escape DC names no ability by design.
-10_Bestiary.md|bare_dc|Grappled condition (escape DC|SRD 5.2.1 "(escape DC N)" grapple form
+# T4.3, 2014 conversion: the SRD's grapple form. "(escape DC 12)" is the SRD's own wording
+# in both SRD 5.1 and 5.2.1; an escape DC names no ability by design.
+10_Bestiary.md|bare_dc|Grappled (escape DC|SRD "(escape DC N)" grapple form
 
 # T7.7: Handout 2 agenda card 3 is canon card text in Lord Draunel's voice; "we" is House Draunel, not a designer.
 08_Handouts.md|designer_we|out if he misses the taste. Get him to say anything we could later call an|Handout 2 canon agenda card, in-character "we"

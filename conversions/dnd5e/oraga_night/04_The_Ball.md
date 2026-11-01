@@ -445,8 +445,8 @@ the first time and is automatic after that. With Anha or any of the skeleton sta
 there is no check. See map VIII–5 for the run to the east wing.)*
 
 *(A kitchen this short of hands keeps its own remedies. In a plain box on the shelf
-above the hearth, beside the burn salve, are three **Potions of
-Healing** (four if four characters are playing). A character who searches the kitchens
+above the hearth, beside the burn salve, are four **Potions of
+Healing** (three if three characters are playing). A character who searches the kitchens
 finds the box with no check, and nobody on the staff will stop a guest who looks like they
 need it. They are the night's only healing that isn't a spell (chapter X, "The Night's
 Loot").)*
@@ -556,7 +556,7 @@ otherwise be 13. The custom protects the conversation, and everyone at this ball
 
 ### Running a Scattered Party
 
-Three players will be in three rooms by Movement II. That is the design, and it
+Four players will be in three or four rooms by Movement II. That is the design, and it
 works only if nobody sits idle.
 
 - **Cut every five to ten minutes,** on a question: "What do you do?" End a scene on a
