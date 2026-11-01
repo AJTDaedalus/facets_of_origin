@@ -104,6 +104,39 @@ PREGENS = {
     ),
 }
 
+# 2014 conversion (DESIGN_oraga_5e_2014; chapter XI rebuilt by SRD 5.1): the same five
+# guests as SRD 5.1 4th-level humans. set_edition("2014") swaps these in, and turns off
+# the 2024-only features in pc_offence and healing (Savage Attacker, Sap, Steady Aim,
+# Potent Cantrip; Vicious Mockery 1d4, Healing Word 1d4, Cure Wounds 1d8).
+PREGENS_2014 = {
+    "Dassa": dict(hp=36, ac=17, init=2, init_adv=False,
+                  saves=dict(str=6, dex=2, con=4, wis=1), medicine=1, athletics=6,
+                  second_wind=1, action_surge=1, hd=(10, 2)),
+    "Pello": dict(hp=31, ac=16, init=4, saves=dict(str=-1, dex=6, con=2, wis=2), medicine=2,
+                  athletics=-1),
+    "Serane": dict(hp=31, ac=14, init=3, saves=dict(str=-1, dex=2, con=2, wis=1), medicine=2),
+    "Andra": dict(hp=26, ac=15, init=2, saves=dict(str=-1, dex=2, con=2, wis=3), medicine=1),
+    "Ilesse": dict(hp=31, ac=14, init=1, saves=dict(str=-1, dex=1, con=2, wis=6), medicine=6,
+                   channel=1),
+}
+_PREGENS_2024 = {k: dict(v) for k, v in PREGENS.items()}
+EDITION = {"name": "2024"}
+
+
+def set_edition(name):
+    """'2024' (the T3.1 model, default) or '2014' (the SRD 5.1 pregens)."""
+    PREGENS.clear()
+    for k, v in _PREGENS_2024.items():
+        PREGENS[k] = dict(v)
+        if name == "2014":
+            PREGENS[k].update(PREGENS_2014[k])
+    EDITION["name"] = name
+
+
+def is_2014():
+    return EDITION["name"] == "2014"
+
+
 PARTIES = {
     "C1": ["Dassa", "Ilesse", "Serane"],
     "C2": ["Dassa", "Ilesse", "Andra"],
@@ -377,6 +410,39 @@ def _r_s5(k):
 # The Veteran Draunel Duelist block is approximated (58 HP, AC 16, two +6 1d8+4);
 # it appears only in the four-player S9/S13 lines.
 
+# 2014 conversion: the four-player printed rosters (DESIGN_oraga_5e_2014 §7).
+def _r14_s2(k):
+    return [E("Tavva")] + [E("Gallery Knife") for _ in range(3)]
+
+
+def _r14_s3(k, captain=False):
+    r = [E("Bought Sergeant")] + [E("Bought Blade") for _ in range(4)]
+    if captain:
+        r.append(E("Bought Captain"))
+    return r
+
+
+def _r14_s7(k):
+    return [E("Circle Hired Knife") for _ in range(3)]
+
+
+def _r14_s8(k):
+    return [E("Church Warden") for _ in range(3)]
+
+
+def _r14_s9(k):
+    return [E("Draunel Duelist") for _ in range(3)] + [E("Boranis Cousin's Blade") for _ in range(3)]
+
+
+def _r14_s10(k):
+    return [E("Maiven Nolonaire", arrive=3)] + [E("Thenya Border Slinger") for _ in range(2)]
+
+
+def _r14_s13(k):
+    # the Veteran Draunel Duelist as chapter X prints it: 44 HP, AC 15, two +5 1d8+3
+    return [E("Essar Draunel"), E("Draunel Duelist", hp=44, attacks=[(5, 1, 8, 3)] * 2)]
+
+
 CARDS = {
     # name: (roster fn, lethal, end rule, focus rule, extras)
     "S2": dict(roster=_r_s2, lethal=False, end="tavva", focus="leader"),
@@ -427,6 +493,11 @@ CARDS = {
     "S13_solo": dict(roster=_solo_s13, lethal=True, end="draunel_bloodied", focus="leader",
                      smoke=True),
 }
+
+# 2014 conversion: each card's 2014 four-player roster, same rules as the card it copies.
+for _name, _fn in {"S2": _r14_s2, "S3": _r14_s3, "S7": _r14_s7, "S8": _r14_s8, "S9": _r14_s9,
+                   "S10": _r14_s10, "S13": _r14_s13}.items():
+    CARDS[_name + "_14"] = dict(CARDS[_name], roster=_fn)
 
 
 # ------------------------------------------------------------------------ WP6 (T6.9)
@@ -683,7 +754,7 @@ def pc_offence(pc, target, ctx, first_turn=False, allow_slots=True):
         if pc.action_surge and (first_turn or target.max_hp > 60):
             pc.action_surge -= 1
             attacks = 2
-        savage = True
+        savage = not is_2014()                    # Savage Attacker is a 2024 origin feat
         for _ in range(attacks):
             if not target.active:
                 break
@@ -695,7 +766,8 @@ def pc_offence(pc, target, ctx, first_turn=False, allow_slots=True):
                     dmg = max(dmg, roll(rng, dice, 10))
                     savage = False
                 total += deal(target, dmg + 4, ctx, True)
-                target.disadv_next = True         # Sap
+                if not is_2014():
+                    target.disadv_next = True     # Sap (2024 Weapon Mastery)
         pc.adjacent = True
     elif n == "Pello":
         sneak_used = False
@@ -703,7 +775,7 @@ def pc_offence(pc, target, ctx, first_turn=False, allow_slots=True):
         for i, (dn, mod) in enumerate(((1, 4), (1, 0))):     # dagger, Nick dagger
             if not target.active:
                 break
-            adv = 1 if i == 0 else 0                           # Steady Aim
+            adv = 1 if i == 0 and not is_2014() else 0         # Steady Aim (2024 only)
             hit, crit, _ = pc_attack_roll(pc, target, ctx, 6, adv=adv)
             if hit:
                 dice = 2 if crit else 1
@@ -720,7 +792,7 @@ def pc_offence(pc, target, ctx, first_turn=False, allow_slots=True):
         else:
             hit, crit, _ = pc_attack_roll(pc, target, ctx, 6, melee=False)
             dmg = roll(rng, 2 if crit else 1, 10)
-            total += deal(target, dmg if hit else dmg // 2, ctx)
+            total += deal(target, dmg if hit else (0 if is_2014() else dmg // 2), ctx)  # Potent Cantrip: 2024
     elif n == "Ilesse":
         bonus_free = not getattr(pc, "_bonus_used", False)
         if bonus_free and not pc.conc_sw and allow_slots and getattr(ctx, "ilesse_attack", OPTIONS["ilesse_attack_slots"]) \
@@ -743,7 +815,7 @@ def pc_offence(pc, target, ctx, first_turn=False, allow_slots=True):
                     total += deal(target, roll(rng, 1, 8), ctx)
     elif n == "Serane":
         if d20(rng) + target.wis_save < 14:                   # Vicious Mockery
-            total += deal(target, roll(rng, 1, 6), ctx)
+            total += deal(target, roll(rng, 1, 4 if is_2014() else 6), ctx)
             target.disadv_next = True
     pc._bonus_used = False
     return total
@@ -760,7 +832,7 @@ def try_bonus_heal(pc, pcs, ctx):
         return False
     tgt = downs[0]
     pc.slots[1] -= 1
-    amt = roll(ctx.rng, 2, 4) + 4 + (3 if pc.name == "Ilesse" else 0)   # Disciple of Life
+    amt = roll(ctx.rng, 1 if is_2014() else 2, 4) + 4 + (3 if pc.name == "Ilesse" else 0)   # Disciple of Life
     heal_pc(tgt, amt)
     if not ctx.haul_hi_given:                 # "Hauling each other up"
         ctx.haul_hi_given = True
@@ -794,7 +866,7 @@ def try_action_heal(pc, pcs, ctx):
     low = [p for p in pcs if p.up and p.hp <= p.max_hp // 4 and p.in_fight]
     if low and pc.slots.get(1, 0) > 1:
         pc.slots[1] -= 1
-        heal_pc(low[0], roll(rng, 2, 8) + 4 + 3)
+        heal_pc(low[0], roll(rng, 1 if is_2014() else 2, 8) + 4 + 3)
         return True
     return False
 

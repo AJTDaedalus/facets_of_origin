@@ -1172,7 +1172,7 @@ People").
 set) or attack him. He never advances if holding will do, and he never follows anyone who
 backs away.
 
-***Wounded.*** While at or below half its Hit Points, the Hollow gives ground to the doors and holds there.
+***Wounded.*** While at or below half his Hit Points, the Hollow gives ground to the doors and holds there.
 He follows no one.
 
 ***Stop and End — Despair.*** Ferocity is useless; nobody can frighten a man who

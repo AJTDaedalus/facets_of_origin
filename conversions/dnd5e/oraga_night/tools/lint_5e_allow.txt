@@ -38,7 +38,6 @@
 
 # R3.3 (review-fix pass, P2-19): the one DM Note that explains the 2014 multiplier (STYLE,
 # Difficulty vocabulary) has to name the 2014 band. It is not a budget line.
-10_Bestiary.md|deadly_budget|S3's 850 XP becomes 1,700, past Deadly, and S14 is more than twice Deadly|the 2014 glossary box names the 2014 band it is translating; not a budget line
 
 # R5.2 (review-fix pass, O38): near_duplicate. Only repeats that are meant to be repeats.
 *|near_duplicate|This work includes material taken from the System Reference Document 5.1|the SRD 5.1 CC BY 4.0 attribution notice (2014 conversion); legal text, repeated on purpose

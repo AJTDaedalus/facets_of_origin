@@ -197,3 +197,9 @@
 
 - The owner allowed the push. `feat/lean-facets` was fast-forwarded (27 commits) and `feat/oraga-5e-2014` pushed; tags stayed local. PR #34 targets feat/lean-facets.
 - The owner asked for a critical review agent, with a push once its findings are resolved. Report: `docs/REVIEW2_oraga_5e_2014.md`. It found 1 blocker, 8 should-fixes, 11 nits and 3 uncertain items, and confirmed every card total, pregen and block. All are resolved; see the report's "Resolution" section. Tests: 703 passed (+23).
+
+## 2026-11-01: Pre-merge review (REVIEW3) and fixes
+
+- Third review, as the owner asked ("spin up a critical review agent to do the review and merge if all findings can be resolved"). Report: `docs/REVIEW3_oraga_5e_2014.md`. It found no blockers: F1 is a should-fix, F2–F9 are nits, and D1–D2 needed data.
+- All resolved; see the report's Resolution section.
+- The simulator's 2014 mode gave data for D1. S8 and S13 play lines moved to Medium.

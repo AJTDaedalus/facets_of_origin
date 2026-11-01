@@ -92,7 +92,8 @@ development.*
 
 - **The objective is never a body count.** The clock is what actually ends the scene.
 - **Party size.** Every number in this module, on the cards and off them, is printed
-  for **four 4th-level characters**. That is the table the module expects. Any other
+  for **four 4th-level characters**, except the runtime minutes (Tables I–1 and VIII–1),
+  which were set for three players. That is the table the module expects. Any other
   table uses one adjustment line, and Table IX–1 gives its thresholds. On a card,
   *Adjusting the Encounter* gives the lines in this order: one character, three
   characters, five characters, and a party of four at 3rd level or at 5th. Chapter V's
@@ -101,8 +102,8 @@ development.*
 - **Size each card to who walks in.** Four characters face the printed roster, five or
   more use the card's *Five characters* line, and two or three use its *Three characters*
   line. One character alone uses the card's *One character* line, which comes first under
-  *Adjusting the Encounter* on every card a lone character can walk into (S2, S4, S7,
-  S8, S9, S10, S13 and S14). A lone talker or healer (Ilesse, Serane, or any character
+  *Adjusting the Encounter* on every card a lone character can walk into (S2, S4, S6,
+  S7, S8, S9, S10, S13 and S14). A lone talker or healer (Ilesse, Serane, or any character
   without real weapon damage) is offered the card's outs first, and the fight is the
   last resort: alone, that character wins by being clever.
 - **Use one line only; the lines are not cumulative.** For five characters at 5th
@@ -120,8 +121,8 @@ development.*
   differently from their sum say how. As a rough guide, a fight that plays Easy rarely
   drops anyone, one that plays Medium drops a character now and then, one that plays
   Hard drops one fairly often, and one that plays Deadly usually drops at least one.
-- **Five CRs read a step generous** for what their blocks do (the Veteran Bought Sergeant, the Boranis Cousin's Blade, the Boranis Cousin of
-  3160, Maiven and Vorlain), so a card built on them reads a little harder on paper than
+- **Seven CRs read a step generous** for what their blocks do (the Veteran Bought Sergeant, the Boranis Cousin's Blade, the Boranis Cousin of
+  3160, Essin Boranis, Maiven, the Phern Bodyguard and Vorlain), so a card built on them reads a little harder on paper than
   it plays. The play line is the correction; the CR stays as printed.
 - **Clocks** have four segments. Each card says what advances its clock and what
   happens when it fills. Announce the clock at the top of the scene. "A 1 on a
@@ -580,14 +581,14 @@ Make sure the table sees those openings.
 | **S2** | The Service Corridor Job | Mv V | B10, service run | Tavva's crew | 600 XP; 1,200 — Medium, and the clock is the fight |
 | S4 *(half)* | The East Wing Doors | Mv I–V | B9 | Boranis Honor Guard | 900 XP; 1,350 — Medium fought out, and four more are coming |
 | **S7** | The Second Plate | Mv IV–V | B10 → the east wing's service door | The Circle | 600 XP; 1,200 — Medium; ends fast on its morale, plays Hard to the last knife |
-| **S8** | The Study Door | Mv V, into VI | B8 | The Church | 600 XP; 1,200 — Medium; plays Easy (Medium for a party light on damage), and nobody dies |
+| **S8** | The Study Door | Mv V, into VI | B8 | The Church | 600 XP; 1,200 — Medium; plays Medium (Hard for a party light on damage), and nobody dies |
 | **S9** | The Appointment | Mv V | B5, upper terrace | House Draunel and House Boranis | 900 XP; 1,800 — Hard; ends fast on its morale, plays Deadly if both sides fight to the last |
 | **S10** | Over the Wall | Mv V | The garden under the east wing | The Thenya *(only if provoked)* | 900 XP; 1,800 — Hard; plays Medium (Hard for a party light on damage) |
 | **S11** | The Phern Door | Mv VI | B2 → the service passages | Phern | 625 XP; 1,200 — Medium; the crush is the fight |
 | **S14** | The Attendant | Mv VI–VII | Wherever the party gets in an Uninvited's way | The Uninvited's servant | 2,300 XP; 2,300 — Deadly while Focused; plays Hard while Idle |
 | S5 *(half)* | The Looters | Mv VI–VII | B7 / B3 | Tavva's crew | 600 XP; 1,200 — Medium |
 | S12 *(half)* | Corval in the Kitchens | Mv VI–VII | B10 | The Circle | 400–600 XP; 600–1,200 — Easy to Medium |
-| **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,150 XP; 1,725 — Hard |
+| **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,150 XP; 1,725 — Hard; plays Medium, because Draunel lets go the moment it is seen as his fight |
 | **S3** | The Gate at Midnight | Mv VII | B12 | The Bought | 850 XP; 1,700 — Hard; 3,900 if the captain fights, and he would rather talk |
 
 **Before midnight:** S1 and S6 (Movements II–III), S4, S2, S7, S8, S9, S10. **In the
@@ -795,8 +796,9 @@ was not violence.
   working the other job (850 XP; adjusted 1,700 for five: Medium). Three sides, one
   plank wall, one clock.
 - *Four at 3rd level:* Tavva and one knife (500 XP; adjusted 750: Medium).
-- *Four at 5th level:* as for five, and the noise clock has three segments (850 XP;
-  adjusted 1,700: Easy).
+- *Four at 5th level:* Tavva's **Nastier** line (a third charge and a fourth knife) and all
+  four of the Circle's knives working S7's job in the same run, and the noise clock has
+  three segments (1,450 XP; adjusted 3,625: Hard).
 
 **Development.** Whatever the party did here, Tavva is alive and in the palace unless
 they went well out of their way. She leads S5's crew if they meet again in Movement
@@ -916,7 +918,7 @@ boundary. Then someone lifts the bar. The captain, arriving, invokes the **Secon
 the party looks like winning. The company pulls back from the gate to watch the crowd
 for a woman in Thenya wool, and the gate is open. The party has just been told
 something enormous. The captain fights on only if the party blocks the search. Then,
-At half his Hit Points or on his second round on the field, he **starts negotiating**, out loud,
+at half his Hit Points or on his second round on the field, he **starts negotiating**, out loud,
 while his attacks continue.
 
 Fought to the last Blade with the
@@ -1155,6 +1157,9 @@ struck. If it ended without a shout, House Boranis's heat falls by one, and Essi
 next Movement that the party kept its head. He will remember it.
 
 **Adjusting the Encounter.**
+- *One character:* the invitation is for one, and the terrace holds two cousins; the third
+  stays inside (400 XP; adjusted 800 for one: Deadly on paper, and they break long before
+  anyone is on the ground). Alone, a character is offered the outs first.
 - *Three characters:* two cousins, both on the terrace; the third stays inside (400 XP;
   adjusted 600 for three: Easy).
 - *Five characters:* all three. A quiet word does not get louder for a bigger
@@ -1295,8 +1300,9 @@ doorway without a blow.
   of them are past the party at once (800 XP; adjusted 1,600 for five: Medium). The
   Circle brought no more.
 - *Four at 3rd level:* two knives, as for three (400 XP; adjusted 600: Medium).
-- *Four at 5th level:* all four knives, and Tavva's crew in the same run (S2) — two jobs
-  in the dark, and neither side wants the noise (1,400 XP; adjusted 3,500: Hard).
+- *Four at 5th level:* all four knives, and Tavva's crew on its **Nastier** line in the
+  same run (S2) — two jobs in the dark, and neither side wants the noise (1,450 XP;
+  adjusted 3,625: Hard).
 - *Nastier:* the fourth knife joins, the knives' **Nastier** line holds (they keep going
   past the first hurt knife and break when half of them are down), and the service-door
   clock has three segments (800 XP; adjusted 1,600 for four: Hard).
@@ -1348,7 +1354,7 @@ One round later the slate is wiped, and a warden is at the great table, writing.
 clock's second segment; the fourth never comes. Kovaun brought four. The Prelate is in the chapel.
 *Budget:* 3 × 200 = **600 XP; adjusted 1,200 for four: Medium.** The Prelate is not in
 the fight, so her rating adds nothing. The wardens detain, and they break when two are
-down. Nobody in this corridor is going to die. The fight plays Easy, and Medium for a
+down. Nobody in this corridor is going to die. The fight plays Medium, and Hard for a
 party light on damage (a healer and a talker with one fighter drops someone more often
 than not). The clock is what the party is racing.
 
@@ -1866,7 +1872,8 @@ comes down, and whoever is still inside is still inside.
 **Enemies.** It depends on the party.
 - *The Draunel side:* **Essar Draunel** and a **Veteran Draunel Duelist**, the two men in
   good coats. 700 + 450 = **1,150 XP; adjusted 1,725 for four: Hard.** Draunel's three
-  Rapier attacks run hotter than his XP, and it plays Hard. Expect a character to drop. Nobody here stabilizes the fallen but the
+  Rapier attacks run hotter than his XP, but he lets go the moment it is seen as his fight,
+  and it plays Medium. A character drops now and then. Nobody here stabilizes the fallen but the
   party (see chapter V, "Down, Not Out", *Everyone else's steel*): keep someone free to
   reach them.
 - *The Boranis side:* **Essin Boranis** and two **Boranis Cousin's Blades**. 450 +
@@ -2149,10 +2156,10 @@ player who tries to distract it (hint 4); a natural 20 on a distraction pays its
 - *Four at 3rd level:* 125 Hit Points, and a distraction DC of 17 while it is Focused
   (2,300 XP; about 1.4 times Deadly).
 - *Four at 5th level:* use the five-character line, or the block's **Nastier** line
-  for a table that wants it harder.
+  for a table that wants it harder (2,300 XP; adjusted 2,300 for four at 5th: Medium).
 - *A table built to hit hard* (characters built for damage first): 30 more Hit Points,
   on top of whichever line above fits the table (174 for four characters, 150 for
-  three).
+  three; still 2,300 XP).
 
 **Development.** Gone, the Attendant is not seen again tonight, and chapter VI has no
 body and no witness who can say what it was. A party that sent it to the window has a

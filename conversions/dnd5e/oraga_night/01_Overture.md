@@ -158,7 +158,7 @@ maps (VIII–1 to VIII–5), the fight cards and every cross-reference.
 
 **Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
-budget for four 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone, and
+budget for four 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone wherever one can walk in, and
 scaling lines for three or five characters and for a party of four at 3rd or 5th level.
 
 **Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
