@@ -14,7 +14,7 @@ stat blocks, and each pregenerated character prints as a sheet of its own.*
 
 ### Page One: The Night and Midnight
 
-**Table VIII–1: The Night** *(three players; minutes from Table I–1)*
+**Table VIII–1: The Night** *(minutes from Table I–1, set for three players)*
 
 | Start | Movement | Scheduled | The omen | The quiet guest | Fights to show (chapter IX) |
 |---|---|---|---|---|---|

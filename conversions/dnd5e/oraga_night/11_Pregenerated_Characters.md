@@ -36,7 +36,7 @@ Proficiency Bonus +2. Each begins the night with Inspiration (chapter I). Langua
 Common, one more the player and the DM agree on, and any the background adds. Every guest carries a knife, because everyone at this
 ball does. Drawing it is the crime. Crystal charges are consumable magic items, and
 Player Handout 3, "Crystal Charges" (chapter VIII), says what each does. Each sheet
-carries one common charge, the night's gift to every guest.
+carries one common charge.
 
 **Masks.** No guest's mask is written down, because a mask is the player's to describe.
 Each sheet ends with one question about it, for the player to answer in the street on
@@ -172,8 +172,7 @@ anything.
   the target and no Disadvantage.
 
 **Class Features**
-- **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant**, and one more
-  language of his choice. In a country without writing, the cant is all signs, knots and chalk marks that get wiped.
+- **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant.** In a country without writing, the cant is all signs, knots and chalk marks that get wiped.
 - **Cunning Action.** Bonus action: Dash, Disengage, or Hide.
 - **Fast Hands** (Thief). Bonus action: a Dexterity (Sleight of Hand) check, Thieves'
   Tools to disarm a trap or open a lock, or the Use an Object action — a crystal charge

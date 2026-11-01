@@ -219,8 +219,8 @@ may act in the first beat before anyone else. Following him saves lives (card S1
 > **DC 13 Charisma check** by whoever releases it (their *Unraveling Presence*,
 > chapter X). On a success it works; on a failure
 > the light simply goes out of it, and the charge is spent. A charge already running
-> (a light carried in, a door already sealed) keeps running. Inspiration can
-> reroll this, and it is a fine thing to spend it on.
+> (a light carried in, a door already sealed) keeps running. Inspiration gives
+> Advantage on this check, and it is a fine thing to spend it on.
 >
 > The palace's great wards are
 > older and deeper and hold longer, but even they gutter when one of the three stands

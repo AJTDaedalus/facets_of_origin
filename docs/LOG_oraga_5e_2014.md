@@ -166,3 +166,29 @@
 - **STYLE_5e** now states the 2014/SRD 5.1 declaration, the kept Title Case (R1), the 2014 stat-block layout and the 2014 difficulty vocabulary. The charge example is updated.
 - **Memory:** project_oraga_5e_2014_conversion.md.
 - **Final checks:** lint OK (0/0), fact_check 0, pregen_check 0, bestiary_check 0, copyright scan (c) 0, pytest tools 680 passed / 1 skipped.
+
+## 2026-11-01: Independent review and fixes
+
+- An independent reviewer agent read the diff `oraga-5e-2024..feat/oraga-5e-2014` cold. Report: `docs/REVIEW_oraga_5e_2014.md`.
+  - No blockers.
+  - Confirmed: all five pregens, all 29 blocks, all 41 spell lines against SRD 5.1, 82/83 card totals, and Table IX–3.
+- **Fixed:**
+  - S9 five-character line with Essin: 7 foes ×2.5 = 4,000, not 3,200.
+  - Chapter V: Inspiration gives Advantage on the chancy release (was a reroll).
+  - Pello: dropped the 2024 rogue's extra language.
+  - Veteran Bought Sergeant footer: "four characters at 5th level".
+  - 14 reactions rewritten from the 2024 *Trigger:/Response:* form to 2014 prose.
+  - Chapter XI: the common charge line is a plain rules note again (dropped "the night's gift to every guest", which was new fiction).
+  - Chapter X damage line: 20 with three, 40 with five.
+  - S13 "his duelist"; the chapter IX Draunel line now has one duelist and "Two men in good coats".
+  - S14 "Fewer than half of tables get through 144 Hit Points" (matches the 45% slugging figure).
+  - Table VIII–1 caption.
+  - S9 4@5th line now prints the Essin-fighting total (2,150 / 5,375, Deadly).
+  - The Attendant's AC shows "(Natural Armor)".
+- **Kept:**
+  - The **Traits** and **Bonus Actions** headings. They change no rule and help a DM scan; **Reactions** is a 2014 heading anyway.
+  - Natural Armor *not* added to Vell or the three Uninvited. They are written up as humans, and the label would hint at their nature (canon).
+  - Table IX–1's derived party thresholds: a deliberate DESIGN §2.5 choice; numbers only, no table text.
+  - S11's Corro exclusion as stated.
+  - The Attendant at CR 6: `bestiary_check`'s DMG estimate is defense 6, offense 7, average 6. The reviewer's defense-7 reading would still round to CR 6–7.
+- **Checks:** lint OK, fact_check 0, pregen_check 0, bestiary_check 0, copyright (c) 0, pytest tools 680 passed / 1 skipped.

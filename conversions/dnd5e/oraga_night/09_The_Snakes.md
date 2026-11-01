@@ -313,7 +313,7 @@ of his house with good blades and a great deal to prove.
 | III | Draunel courts in the Audience Hall line. A duelist tries to buy a better place in it from a minor guest, and moves from money to the other thing | The minor guest's mask turned toward the nearest honor guard, hoping | — |
 | IV | Draunel fears a succession decree. A duelist makes the appointment in front of everyone at the table: *at the first quarter-bell, on the terraces, and bring your cousin's excuses* | Every guest at the table gone quiet except the duelist | **S9** |
 | V | The appointment, on the upper garden terrace at the first quarter-bell, away from the Dance and the guards | A knot of masks at the rail of the Court's garden walk, looking down, not dancing | **S9** |
-| VI–VII | *Lights out.* Heat 0–2: Draunel gets out, and remembers what he saw for the inquest. Heat 3–4: Iron 4 — Draunel and two of his duelists find Vorlain hauling guests out of the burning banquet gallery, and take him | Three men in good coats pulling a man out of a burning room by the arms while he shouts for the people still inside | **S13** |
+| VI–VII | *Lights out.* Heat 0–2: Draunel gets out, and remembers what he saw for the inquest. Heat 3–4: Iron 4 — Draunel and one of his duelists find Vorlain hauling guests out of the burning banquet gallery, and take him | Two men in good coats pulling a man out of a burning room by the arms while he shouts for the people still inside | **S13** |
 | **Heat 4** | *They come for you.* A character who embarrassed Draunel in front of guests, or spent his second iron, gets an appointment of their own: Draunel's duelists, the upper garden terrace, the next quarter-bell (or the dark, if the bells have gone). It is S9 with only the Draunel side, and the challenge is to that character | The same duelist, near that character now instead of Vorlain | **S9** (the Draunel side) |
 
 **Walk into it.** The characters can stand second to either side of the appointment,
@@ -1534,12 +1534,12 @@ blade drawn.
 - *Five characters:* the principal is a **Veteran Draunel Duelist** and his seconds two
   Draunel Duelists (850 XP), against three Boranis Cousin's Blades (300 XP); against both,
   1,150 XP, adjusted 2,300 for five: Hard. If Essin comes in hostile, 1,600 XP, adjusted
-  3,200: Deadly.
+  4,000: Deadly.
 - *Four at 3rd level:* two duelists and two cousins (600 XP; adjusted 1,200: Hard).
 - *Four at 5th level:* the principal and one second are Veteran Draunel Duelists
   (450 + 450 + 200 = 1,100 XP), the cousins are Cousins of 3160 (600 XP), Essin is
   there from the start, and Draunel watches from the rail (1,700 XP; adjusted 3,400:
-  Hard).
+  Hard; if Essin fights too, 2,150 XP, adjusted 5,375: Deadly).
 - *Nastier:* the principal is a **Veteran Draunel Duelist** (the duelist's **Nastier**
   line: he breaks only at half his Hit Points), and the Boranis side is three **Boranis
   Cousins of 3160**. Against both: 450 + (2 × 200) + (3 × 200) = **1,450 XP; adjusted
@@ -1850,7 +1850,7 @@ The man reaching for his knife is Essin Boranis.
 
 **What is happening.** Vorlain Boranis has been hauling guests out of this gallery since
 the lights died, and nobody, Vorlain included, can account for it. Draunel's
-fourth iron has found him. Draunel and his duelists are taking the man who profits
+fourth iron has found him. Draunel and his duelist are taking the man who profits
 most from tonight and delivering him to the first sect guard through the gate as the
 culprit. Essin and his cousins are about to stop them.
 
@@ -2000,7 +2000,7 @@ Idle.** The block is CR 6, and that CR is its Focused self: a little past Deadly
 4th-level characters (2,000).
 
 Idle, it strikes once, at Disadvantage, but its 144 Hit Points and AC 17 do not move,
-and the clock is what keeps it dangerous. Few tables get through 144 Hit Points in the
+and the clock is what keeps it dangerous. Fewer than half of tables get through 144 Hit Points in the
 rounds an errand takes, and every one of those rounds it is clearing the way. Award the
 full 2,300 XP however it is got out of the way.
 

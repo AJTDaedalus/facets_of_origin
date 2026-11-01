@@ -141,7 +141,7 @@ immunities stay. Whatever the spell would do to them ends at once (*Held by Some
 Else*), and the Delay is all it buys. The obvious ones:
 
 - **Damage, a lot of it.** Every round the party deals 30 or more damage to one of
-  them (with more characters, see chapter V, "Adjusting the Attack"), that one gains
+  them (20 with three characters, 40 with five; see chapter V, "Adjusting the Attack"), that one gains
   1 Delay, never more than 1 a round. At 0 HP they step into the world's shadow and
   are back at full HP on their next turn, and whoever dealt the last blow makes a save
   or is thrown (*Leashed*).
@@ -214,7 +214,7 @@ list below.
 
 *Medium Construct, Unaligned*
 
-**Armor Class** 17
+**Armor Class** 17 (Natural Armor)
 **Hit Points** 144 (17d8 + 68)
 **Speed** 30 ft.
 
@@ -492,11 +492,11 @@ releases one in place of one House Blade attack:
 
 **Reactions**
 
-***Call the House.*** *Trigger:* The guard drops to half its Hit Points or fewer, and no guard has called the
-house this scene. *Response:* It moves
-up to half its Speed toward the nearest ward-point without provoking Opportunity
-Attacks and calls out. Four more Boranis Honor Guards arrive at the start of the
-second round after this one, and this guard holds its ground until they come.
+***Call the House.*** When the guard drops to half its Hit Points or fewer, and no guard
+has called the house this scene, it moves up to half its Speed toward the nearest
+ward-point without provoking Opportunity Attacks and calls out. Four more Boranis Honor
+Guards arrive at the start of the second round after this one, and this guard holds its
+ground until they come.
 
 > **Wants.** The room held and the offender out of it: detained and expelled, never
 > killed.
@@ -607,9 +607,8 @@ Reaction, move up to half its Speed and make one attack.
 
 **Reactions**
 
-***Parry.*** *Trigger:* The captain is hit by a melee attack roll while holding its
-sword. *Response:* It adds 2 to its AC against that attack, possibly causing it to
-miss.
+***Parry.*** When the captain is hit by a melee attack roll while holding its sword, it
+adds 2 to its AC against that attack, possibly causing it to miss.
 
 > **Wants.** The fee, the company intact, and the reputation that gets the next
 > contract.
@@ -664,9 +663,8 @@ them will cross it.
 
 **Reactions**
 
-***Parry.*** *Trigger:* The sergeant is hit by a melee attack roll while holding its
-blade. *Response:* It adds 2 to its AC against that attack, possibly causing it to
-miss.
+***Parry.*** When the sergeant is hit by a melee attack roll while holding its blade, it
+adds 2 to its AC against that attack, possibly causing it to miss.
 
 > **Wants.** The contract satisfied or voided. Either one ends the fight.
 > **Tells.** It opens by reading the contract's terms aloud. This is not a bluff; it
@@ -720,8 +718,8 @@ grapples with its shield arm, keeping its mace in hand.
 
 **Reactions**
 
-***Interpose.*** *Trigger:* A creature the warden can see attacks the Prelate or
-another warden within 5 feet of it. *Response:* The attack roll has Disadvantage.
+***Interpose.*** When a creature the warden can see attacks the Prelate or another
+warden within 5 feet of it, the attack roll has Disadvantage.
 
 > **Wants.** The room filed. Whatever is in it, the Church's, and the Prelate's
 > question answered by what they carry out.
@@ -878,8 +876,8 @@ Blade or the Cousin of 3160) that fails this save draws steel, wherever it is st
 
 **Reactions**
 
-***Riposte.*** *Trigger:* A creature within 5 feet misses the duelist with a melee
-attack roll. *Response:* The duelist makes one Rapier attack against it.
+***Riposte.*** When a creature within 5 feet misses the duelist with a melee attack
+roll, the duelist makes one Rapier attack against it.
 
 > **Wants.** A Boranis seen drawing first. Lord Draunel one seat closer, without
 > anyone seeing him want it.
@@ -934,9 +932,8 @@ damage.
 
 **Reactions**
 
-***Parry.*** *Trigger:* Draunel is hit by a melee attack roll while holding his
-Rapier. *Response:* He adds 2 to his AC against that attack, possibly causing it to
-miss.
+***Parry.*** When Draunel is hit by a melee attack roll while holding his Rapier, he
+adds 2 to his AC against that attack, possibly causing it to miss.
 
 > **Wants.** By dawn, Vorlain blamed, and never to be seen wanting the seat.
 > **Tells.** Courting in the Audience Hall line. His young men hearing a succession decree in his silence after
@@ -991,10 +988,9 @@ target.
 
 **Reactions**
 
-***Always Between.*** *Trigger:* A creature Essin can see within 30 feet targets
-Vorlain Boranis with an attack. *Response:* Essin moves up to half his Speed to a
-space within 5 feet of Vorlain without provoking Opportunity Attacks, and becomes the
-attack's target instead.
+***Always Between.*** When a creature Essin can see within 30 feet targets Vorlain
+Boranis with an attack, Essin moves up to half his Speed to a space within 5 feet of
+Vorlain without provoking Opportunity Attacks, and becomes the attack's target instead.
 
 > **Wants.** Vorlain out of this, and the missing year left buried.
 > **Tells.** Always between Vorlain and whoever is working him. For the first time
@@ -1363,9 +1359,8 @@ choice).
 
 **Reactions**
 
-***Interpose.*** *Trigger:* A creature the bodyguard can see attacks Pellin Corro
-within 5 feet of it. *Response:* The bodyguard becomes the target of the attack
-instead.
+***Interpose.*** When a creature the bodyguard can see attacks Pellin Corro within 5
+feet of it, the bodyguard becomes the target of the attack instead.
 
 > **Wants.** Corro alive and out. By Movement IV, out now.
 > **Tells.** Big, relaxed, laughing at their master's jokes — remember them like
@@ -1555,9 +1550,8 @@ check to believe it.
 
 **Reactions**
 
-***Someone Else's Problem.*** *Trigger:* A creature attacks Callun while a Circle
-Hired Knife is within 5 feet of her. *Response:* The knife becomes the target
-instead.
+***Someone Else's Problem.*** When a creature attacks Callun while a Circle Hired Knife
+is within 5 feet of her, the knife becomes the target instead.
 
 > **Wants.** Raunu's next decree; after the two plates, whether there is an heir.
 > **Tells.** Comparing margins with Corro in the B3 alcove. Compliments, a quiet
@@ -1668,8 +1662,8 @@ spends an action clearing it.
 
 **Reactions**
 
-***Uncanny Dodge.*** *Trigger:* An attacker Tavva can see hits her with an attack
-roll. *Response:* She halves the attack's damage against her.
+***Uncanny Dodge.*** When an attacker Tavva can see hits her with an attack roll, she
+halves the attack's damage against her.
 
 > **Wants.** Out with something. Shifts for a clear exit or a better payer, and
 > honors any deal that ends with her walking and somebody else holding the bag.
@@ -1767,9 +1761,8 @@ it can see drops to 0 Hit Points.
 
 **Reactions**
 
-***Parry.*** *Trigger:* The sergeant is hit by a melee attack roll while holding its
-blade. *Response:* It adds 2 to its AC against that attack, possibly causing it to
-miss.
+***Parry.*** When the sergeant is hit by a melee attack roll while holding its blade, it
+adds 2 to its AC against that attack, possibly causing it to miss.
 
 > **Wants.** The contract satisfied or voided. Either one ends the fight.
 > **Tells.** It opens by reading the contract's terms aloud from the case chained to
@@ -1781,8 +1774,8 @@ miss.
 > **Nastier.** It has spoken Hold the Terms before the party reaches the wicket: the
 > line is the gate, and the Blades start the fight with its Advantage against anyone
 > on the court side.
-> *One of the company's four sergeants, the veteran among them. Card: S3, with four
-> or more characters or on the Bought Sergeant's Nastier line.*
+> *One of the company's four sergeants, the veteran among them. Card: S3, for four
+> characters at 5th level or on the Bought Sergeant's Nastier line.*
 
 ---
 
@@ -1823,8 +1816,8 @@ Blade or the Cousin of 3160) that fails this save draws steel, wherever it is st
 
 **Reactions**
 
-***Riposte.*** *Trigger:* A creature within 5 feet misses the duelist with a melee
-attack roll. *Response:* The duelist makes one Rapier attack against it.
+***Riposte.*** When a creature within 5 feet misses the duelist with a melee attack
+roll, the duelist makes one Rapier attack against it.
 
 > **Wants.** A Boranis seen drawing first. Lord Draunel one seat closer, without
 > anyone seeing him want it.
@@ -1881,9 +1874,8 @@ says one true thing (see chapter VII).
 
 **Reactions**
 
-***Parry.*** *Trigger:* Vorlain is hit by a melee attack roll while holding his
-blade. *Response:* He adds 2 to his AC against that attack, possibly causing it to
-miss.
+***Parry.*** When Vorlain is hit by a melee attack roll while holding his blade, he adds
+2 to his AC against that attack, possibly causing it to miss.
 
 > **Wants.** Nothing from this fight. He has no plot tonight.
 > **Tells.** Silk over springs. Charming, funny at others' expense. Goes quiet after
@@ -2132,9 +2124,8 @@ not do is fail.
 
 **Reactions**
 
-***Not Where It Landed.*** *Trigger:* Vell is hit by an attack roll. *Response:* The
-attack deals no damage to him. He was a half-step to one side all along, and nobody
-saw him hurry.
+***Not Where It Landed.*** When Vell is hit by an attack roll, the attack deals no
+damage to him. He was a half-step to one side all along, and nobody saw him hurry.
 
 > **Wants.** The river gate open at midnight, and no one ever remembering his face.
 > **Tells.** Arrived early and entirely unremarkably. Walks the gardens once. Stands
