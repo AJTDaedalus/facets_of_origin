@@ -339,7 +339,8 @@ RULES = [
     ("budget_2024", "2014 bands", r"\bunder Low\b|\bbeyond High\b|\bLow\b|\bModerate\b|\bHigh\b", "NOBOX", 0),
     ("rules_2024", "2024 term",
      r"\bHeroic Inspiration\b|\bBloodied\b|\bEmanations?\b|\bD20 Tests?\b|"
-     r"\b(?:Magic|Utilize|Study|Influence) action\b|\bWeapon Mastery\b|\borigin feats?\b",
+     r"\b(?:Magic|Utilize|Study|Influence) action\b|\bWeapon Mastery\b|\borigin feats?\b|"
+     r"\bspecies\b|\bResourceful\b|\bSkillful\b|\bVersatile trait\b",
      "ALL", I),  # a paragraph that names 2024 (an "At a 2024 table" note) is exempt
     ("pcs", "S1", r"\bPCs?\b", "NOBOX", 0),
     ("spelled_distance", "S37", r"\b" + NUMWORDS + r"(?: |-)(?:feet|foot)\b", "SPEECH", I),

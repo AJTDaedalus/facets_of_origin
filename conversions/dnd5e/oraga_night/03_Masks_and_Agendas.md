@@ -3,7 +3,7 @@
 ## Making Characters for Oraga Night
 
 Build **4th-level** characters by the ordinary fifth-edition steps. Nothing about this
-module changes how a character is made. It only narrows the species step and adds one
+module changes how a character is made. It only narrows the race step and adds one
 set of options.
 
 - **Every character is Human.** The tribes of Val'loh are not different kinds of

@@ -481,6 +481,44 @@ facts:
         anchor: 'Table VIII–2'
         why: L-022 — Table VIII–2 gives the Radiant's beat (the stair at the fall + 3 beats)
 
+  - id: potions_and_licence
+    truth: >-
+      The kitchen's remedy box holds four Potions of Healing (three if three characters are
+      playing), at four characters (2014 conversion, R2). The module declares the SRD 5.1:
+      every file that carries SRD material prints the SRD 5.1 CC BY 4.0 notice, and no module
+      file names the SRD 5.2.1 (the 2024 edition is pinned by tag oraga-5e-2024).
+    source: owner R2 and the 2014 conversion (2026-11-01); DESIGN_oraga_5e_2014 §4; REVIEW2 S1, S6
+    values: {potions: {four: 4, three: 3}, srd: "5.1"}
+    phrases: ["four **Potions of Healing**", "System Reference Document 5.1"]
+    checks:
+      - type: sentence
+        all: ['\bPotions? of Healing\b', '\b(?:Three|three)\b']
+        unless: '(?i)\bthree characters\b'
+        why: R2 — the remedy box holds four potions at four; three belongs on the three-character aside
+      - type: forbid
+        pattern: 'System Reference Document 5\.2\.1|\bSRD 5\.2\.1\b'
+        why: the 2014 conversion — the module declares SRD 5.1, never SRD 5.2.1
+      - type: require
+        file: README.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'License and Attribution'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'This work includes material taken from'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+      - type: require
+        file: 10_Bestiary.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'This work includes material taken from'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+      - type: require
+        file: 11_Pregenerated_Characters.md
+        pattern: 'System Reference Document 5\.1 \("SRD 5\.1"\)'
+        anchor: 'This work includes material taken from'
+        why: the SRD 5.1 CC BY 4.0 notice is required where SRD material is used
+
 # --------------------------------------------------------------------------- maps (R4)
 # The dimensions maps/build_maps.py draws, all in feet (O28, O33, O34; S3 for the gate;
 # DECISIONS O53–O56 for what the maps had to choose). tools/test_maps.py checks every

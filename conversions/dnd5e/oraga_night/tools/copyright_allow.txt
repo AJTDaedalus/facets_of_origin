@@ -20,3 +20,5 @@ e98d2c2952c7aeb51f0c5bb0fec679766f29038a | 10_Bestiary.md | (b) grapple targetin
 75f860ecc26ff9e246ece8cbe3b807a06372c34a | 10_Bestiary.md | (b) generic reaction-move rule wording (move up to its speed without provoking opportunity attacks) (2014 conversion)
 ee43e46e45be58d3745a787c17a363ff58d59437 | 10_Bestiary.md | (b) 2014 save call: must succeed on a DC N Wisdom saving throw or (2014 conversion)
 899434b573f55cfe182c154a012bb4cca758f9b9 | 10_Bestiary.md | (b) Condition Immunities line: conditions in alphabetical order (2014 conversion)
+# REVIEW2 N6: with SRD 5.1 alone as --srd (the book declares only SRD 5.1)
+332c13012ef1ce6da05ab4ee2df66703662b8826 | 10_Bestiary.md | (b) teleport grammar: up to N feet to an unoccupied space (2014 conversion)

@@ -289,6 +289,13 @@ class TestRules2024:
         text = "She has Inspiration. At half its Hit Points it uses the Use an Object action."
         assert fam(text, "rules_2024") == []
 
+    def test_hit_2024_species_and_human_traits(self):
+        text = "It only narrows the species step. Resourceful, Skillful and the Versatile trait."
+        assert fam(text, "rules_2024") == ["species", "Resourceful", "Skillful", "Versatile trait"]
+
+    def test_miss_versatile_weapon_property(self):
+        assert fam("A longsword is versatile (1d10).", "rules_2024") == []
+
     def test_edge_2024_note_line_is_exempt(self):
         assert fam("*At a 2024 table:* read Inspiration as Heroic Inspiration.", "rules_2024") == []
 

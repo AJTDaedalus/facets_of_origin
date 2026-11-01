@@ -318,10 +318,48 @@ def layout_problems(blocks):
     return probs
 
 
+# REVIEW2 S7: the block's printed numbers against the data B, so a text edit can't drift.
+_ABIL_ROW = re.compile(r"^\| (\d+) \([+−-]\d+\) \| (\d+) \([+−-]\d+\) \| (\d+) \([+−-]\d+\) \| "
+                       r"(\d+) \([+−-]\d+\) \| (\d+) \([+−-]\d+\) \| (\d+) \([+−-]\d+\) \|", re.M)
+
+
+def stat_text_problems(blocks):
+    probs = []
+    by_text = {TEXT_NAME.get(n, n): n for n in B if n not in VARIANT_OF}
+    for name, blk in blocks.items():
+        n = by_text.get(name)
+        if n is None:
+            continue
+        b = B[n]
+        flat = " ".join(blk.split())
+        row = _ABIL_ROW.search(blk)
+        got = [int(x) for x in row.groups()] if row else None
+        if got != b["ab"]:
+            probs.append(f"{n}: ability scores {got} vs data {b['ab']}")
+        skl = re.search(r"\*\*Skills\*\* ([^\n]+)", blk)
+        printed = dict(re.findall(r"([A-Z][a-z]+(?: of [A-Z][a-z]+| [A-Z][a-z]+)?) \+(\d+)", skl.group(1) if skl else ""))
+        for sk, (_, v) in b["sk"].items():
+            if sk not in printed or int(printed[sk]) != v:
+                probs.append(f"{n}: skill {sk} printed {printed.get(sk)}, data +{v}")
+        for sk in printed:
+            if sk not in b["sk"]:
+                probs.append(f"{n}: skill {sk} printed but not in data")
+        pp = re.search(r"Passive Perception (\d+)", flat)
+        if not pp or int(pp.group(1)) != b["pp"]:
+            probs.append(f"{n}: Passive Perception {pp.group(1) if pp else None}, data {b['pp']}")
+        for bonus, _, (dn, dd, db), st in b["atk"]:
+            if not re.search(r"\+" + str(bonus) + r" to hit\b", flat):
+                probs.append(f"{n}: attack +{bonus} to hit not printed")
+            dmg = rf"\b{st} \({dn}d{dd}" + (rf" \+ {db}\)" if db else r"\)")
+            if not re.search(dmg, flat):
+                probs.append(f"{n}: damage {st} ({dn}d{dd}{' + ' + str(db) if db else ''}) not printed")
+    return probs
+
+
 def text_problems(text):
     blocks = split_blocks(text)
     probs = (fixed_value_problems(blocks) + layout_problems(blocks) + trait_dc_problems(blocks)
-             + variant_problems(blocks))
+             + variant_problems(blocks) + stat_text_problems(blocks))
     for n, b in B.items():
         if n in VARIANT_OF:
             base, label = VARIANT_OF[n]

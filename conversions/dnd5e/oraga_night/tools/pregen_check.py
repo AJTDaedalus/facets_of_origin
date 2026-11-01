@@ -47,7 +47,7 @@ PCs={
    skillsrc=dict(bg=2,cls=2,sub=0),cantrips=['fire bolt','mage hand','minor illusion','ray of frost'],
    prep=['mage armor','magic missile','shield','silent image','sleep','darkness','hold person','misty step'],
    book1=['comprehend languages','detect magic','identify','mage armor','magic missile','shield','silent image','sleep'],book2=['darkness','hold person','misty step','web'],
-   printed_sk={'History':6,'Arcana':6,'Investigation':6,'Insight':3,'Nature':4,'Religion':4,'Perception':1}),
+   printed_sk={'History':6,'Arcana':6,'Investigation':6,'Insight':3}),
  'Dassa':dict(cls='fighter',final=dict(STR=18,DEX=14,CON=15,INT=9,WIS=13,CHA=11),asi={'STR':2},
    armor=('scale mail',14,2),defense=True,printed=dict(AC=17,HP=36,init=2,pp=13),
    prof={'Athletics','Insight','Perception','Intimidation'},exp=set(),
@@ -108,7 +108,8 @@ def legality_issues(out=print):
             else:
                 want=m(f[PREP_ABIL[p['cls']]])+LV
                 if len(p['prep'])!=want: issues.append((n,'prepared',len(p['prep']),want))
-                out(f"   cantrips {nc}/{expc} prepared {len(p['prep'])}/{want} (+ gift cantrip; Life domain spells always prepared)")
+                note = "; Life domain spells always prepared" if p['cls'] == 'cleric' else ""
+                out(f"   cantrips {nc}/{expc} prepared {len(p['prep'])}/{want} (+ gift cantrip{note})")
         if n=='Andra':
             book=len(p['book1'])+len(p['book2']); exp=6+2*(LV-1)
             out(f"   spellbook {book}/{exp} (6 + 2 per level after 1st); prepared all in book: {set(p['prep'])<=set(p['book1']+p['book2'])}")
@@ -117,7 +118,14 @@ def legality_issues(out=print):
     return issues
 
 
+SAVES={'bard':('DEX','CHA'),'rogue':('DEX','INT'),'wizard':('INT','WIS'),'fighter':('STR','CON'),'cleric':('WIS','CHA')}
+ABBR={'STR':'Str','DEX':'Dex','CON':'Con','INT':'Int','WIS':'Wis','CHA':'Cha'}
+
+
 def text_issues(text):
+    """The chapter's printed numbers against the data: AC, HP, Initiative, Passive
+    Perception, every printed skill, the Saving Throws line and the spell DC and attack
+    (REVIEW2 S5: the text cannot drift from the checked data)."""
     found = []
     secs = re.split(r"^## ", text, flags=re.M)[1:]
     for n, p in PCs.items():
@@ -131,6 +139,29 @@ def text_issues(text):
             m_ = re.search(pat, sec)
             if not m_ or int(m_.group(1)) != p['printed'][k]:
                 found.append((n, 'text ' + k, m_.group(1) if m_ else None, p['printed'][k]))
+        sk = re.search(r"\*\*Skills\*\* (.*?)(?= \*\*)", sec)
+        printed = dict((nm.replace(" ", ""), v) for nm, v in
+                       re.findall(r"([A-Z][a-z]+(?: (?:of )?[A-Z][a-z]+)?) \+(\d+)", sk.group(1) if sk else ""))
+        want = {k.replace(" ", ""): v for k, v in p['printed_sk'].items()}
+        for k, v in printed.items():
+            if k not in want:
+                found.append((n, 'text skill ' + k, v, None))
+            elif int(v) != want[k]:
+                found.append((n, 'text skill ' + k, v, want[k]))
+        for k in want:
+            if k not in printed:
+                found.append((n, 'text skill ' + k, None, want[k]))
+        f = p['final']
+        exp = ", ".join(f"{ABBR[a]} {m(f[a]) + PB:+d}" for a in SAVES[p['cls']])
+        sv = re.search(r"\*\*Saving Throws\*\* (.*?)(?= \*\*|$)", sec)
+        got = sv.group(1).strip() if sv else None
+        if got != exp:
+            found.append((n, 'text saves', got, exp))
+        if 'dc' in p['printed']:
+            d = re.search(r"save DC (\d+), attack \+(\d+)", sec)
+            if not d or (int(d.group(1)), int(d.group(2))) != (p['printed']['dc'], p['printed']['atk']):
+                found.append((n, 'text spell dc/atk', d.groups() if d else None,
+                              (p['printed']['dc'], p['printed']['atk'])))
     return found
 
 

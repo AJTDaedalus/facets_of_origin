@@ -318,3 +318,39 @@ def test_variant_line_wrong_cr_is_reported():
     j = text.index("CR 1/8", i)
     text = text[:j] + "CR 1/4" + text[j + 6:]
     assert any(f"{PRINCIPAL}: text CR 1/4" in p for p in BC.text_problems(text))
+
+
+# REVIEW2 S7: every printed number in a block is compared with the data ---------------
+
+def test_stat_text_clean_on_the_module():
+    assert BC.stat_text_problems(_blocks()) == []
+
+
+def test_stat_text_catches_an_attack_bonus_edit():
+    blocks = _blocks()
+    blocks["Tavva"] = blocks["Tavva"].replace("+5 to hit", "+6 to hit", 1)
+    assert any(p.startswith("Tavva: attack") for p in BC.stat_text_problems(blocks))
+
+
+def test_stat_text_catches_a_damage_edit():
+    blocks = _blocks()
+    blocks["Maiven Nolonaire"] = blocks["Maiven Nolonaire"].replace("6 (1d6 + 3)", "7 (1d6 + 3)", 1)
+    assert any(p.startswith("Maiven Nolonaire: damage") for p in BC.stat_text_problems(blocks))
+
+
+def test_stat_text_catches_an_ability_score_edit():
+    blocks = _blocks()
+    blocks["Tavva"] = blocks["Tavva"].replace("| 10 (+0) | 17 (+3) |", "| 10 (+0) | 18 (+4) |", 1)
+    assert any(p.startswith("Tavva: ability scores") for p in BC.stat_text_problems(blocks))
+
+
+def test_stat_text_catches_a_skill_edit():
+    blocks = _blocks()
+    blocks["Tavva"] = blocks["Tavva"].replace("Stealth +7", "Stealth +8", 1)
+    assert any(p.startswith("Tavva: skill Stealth") for p in BC.stat_text_problems(blocks))
+
+
+def test_stat_text_catches_a_passive_perception_edit():
+    blocks = _blocks()
+    blocks["Tavva"] = blocks["Tavva"].replace("Passive Perception 16", "Passive Perception 17", 1)
+    assert any(p.startswith("Tavva: Passive Perception") for p in BC.stat_text_problems(blocks))

@@ -435,7 +435,7 @@ Orthaen crystal holds finished workings, and a **charge** is one of them: a
 consumable magic item, one stored working, released at a touch by anyone, gifted or
 not, trained or not. Releasing one does not make its bearer a caster.
 
-- **Releasing a charge** takes an action (Use an Object), and no
+- **Releasing a charge** takes an action, and no
   check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are common: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,

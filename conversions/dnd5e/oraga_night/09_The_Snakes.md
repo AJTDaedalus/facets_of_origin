@@ -98,11 +98,11 @@ development.*
   characters, five characters, and a party of four at 3rd level or at 5th. Chapter V's
   sidebar "Adjusting the Attack" gives the same lines for the attack. Some cards add a
   *Nastier* line: one step harder, for a table that wants it harder.
-- **Size each card to who walks in.** Three or more characters face the printed roster,
-  and two use the card's *Three characters* line.
-  One character alone uses the card's *One character* line, which comes first under
+- **Size each card to who walks in.** Four characters face the printed roster, five or
+  more use the card's *Five characters* line, and two or three use its *Three characters*
+  line. One character alone uses the card's *One character* line, which comes first under
   *Adjusting the Encounter* on every card a lone character can walk into (S2, S4, S7,
-  S8, S9, S10 and S13). A lone talker or healer (Ilesse, Serane, or any character
+  S8, S9, S10, S13 and S14). A lone talker or healer (Ilesse, Serane, or any character
   without real weapon damage) is offered the card's outs first, and the fight is the
   last resort: alone, that character wins by being clever.
 - **Use one line only; the lines are not cumulative.** For five characters at 5th
@@ -139,7 +139,7 @@ development.*
   the fight and pays nothing.
 - **Steel at the ball.** Before midnight, a spell with a visible effect cast at a guest
   counts as bare steel (see chapter IV, "The Palace on Alert"). And at this ball any
-  attacker may knock out rather than kill, as the SRD's Knocking Out a Creature, with
+  attacker may knock out rather than kill, as the SRD's Knocking a Creature Out, with
   any attack roll, a spell or a sling as much as a fist; never with an area effect. The
   SRD allows it only for melee attacks. Here it is a house rule, because nobody wants a
   guest killed by a *Fire Bolt* over a seating plan.
@@ -361,8 +361,8 @@ draw.
 | III | Anyone who pressed Vorlain and has not yet been warned off is invited, very warmly, to take the air on the terraces — just the two of you, and a friend already out there | The same cousin who admired their mask | **S6** |
 | IV | Vorlain goes quiet and drinks. The cousins steer anyone still baiting him toward the garden doors. The duelist's appointment has been accepted by one of Essin's blades, in public, behind his back; Essin cannot call it off without the house being seen to run | Essin, for the first time tonight, not smiling | **S9** |
 | V | Essin has a problem on the terrace he did not make, and chooses between his cousin's reputation and his blade's life. A character who goes to him now finds the one moment all night Essin asks anyone for help | Essin, alone, which he never is | **S9** |
-| VI–VII | *Lights out.* Vorlain hauls guests out of the burning banquet gallery, and nobody, Vorlain included, can say why. Essin and the cousins go with him. Heat 3–4: if Draunel's Iron 4 comes for Vorlain, the cousins fight for him, and the man they are fighting over is carrying a stranger out of a fire | Cousins with blades out in the smoke, standing between Vorlain and three Draunel men | **S13** |
-| **Heat 4** | *They come for you.* A character who baited Vorlain, or beat a cousin in public, is invited to take the air a second time, by a cousin who does not smile. Two cousins on the same terrace (B5), and nobody has told Essin | The cousin who admired that character's mask, not admiring it | **S6** (without Essin) |
+| VI–VII | *Lights out.* Vorlain hauls guests out of the burning banquet gallery, and nobody, Vorlain included, can say why. Essin and the cousins go with him. Heat 3–4: if Draunel's Iron 4 comes for Vorlain, the cousins fight for him, and the man they are fighting over is carrying a stranger out of a fire | Cousins with blades out in the smoke, standing between Vorlain and two Draunel men | **S13** |
+| **Heat 4** | *They come for you.* A character who baited Vorlain, or beat a cousin in public, is invited to take the air a second time, by a cousin who does not smile. Three cousins on the same terrace (B5), and nobody has told Essin | The cousin who admired that character's mask, not admiring it | **S6** (without Essin) |
 
 **Walk into it.** The characters can accept the invitation to the terraces in
 Movement II or III, or follow a friend who did (S6). They can stand with Essin on the
@@ -520,8 +520,8 @@ No more than two factions are hot at midnight unless the table has made it so, a
 one.
 
 **When nobody carries the agenda.** Three of the "to 0" exits are agendas: Agenda 1 for
-the Circle, Agenda 2 for the Church, Agenda 3 for Draunel. With four players, at least
-one of them stays in the deck. A faction whose agenda nobody carries cools on its −1 boxes
+the Circle, Agenda 2 for the Church, Agenda 3 for Draunel. With four players, usually
+at least one of them stays in the deck. A faction whose agenda nobody carries cools on its −1 boxes
 instead: the Circle for each of its knives turned or caught (its two other ways to 0
 still stand), the Church when Kovaun is given something true to file or the wardens are
 turned back at the study door, and Draunel when he is embarrassed in front of guests.
@@ -555,9 +555,9 @@ Make sure the table sees those openings.
 >
 > S2, S7, S8, S9 and S10 can all be live during the Dead Dance. Run **one card per
 > group of characters**, sized to the group that walks in: a character alone gets the
-> card's *One character* line, two or more the printed roster. If the party is
-> together, that is one card; if it has split three ways, it is three, one each, each
-> on its solo line. Every card the table did not walk into
+> card's *One character* line, two or three its *Three characters* line, and four the
+> printed roster. If the party is together, that is one card; if it has split three
+> ways, it is three cards, each sized to its group. Every card the table did not walk into
 > resolves by its default (its clock fills offstage, or the snake simply does what it
 > came to do), and a faction's heat never rises for a line the table was never shown.
 > S9 fills offstage only if the table saw the appointment made (see its card).
@@ -1445,7 +1445,7 @@ the rail:**
 
 > *A knot of masks has gathered at the rail of the Court's garden walk, looking down
 > instead of dancing. On the upper terrace below them two young men have taken off
-> their coats. One is laughing. The other is not. Another man stands a little behind each of them, the way
+> their coats. One is laughing. The other is not. Two more men stand a little behind each of them, the way
 > seconds stand. Nobody has drawn yet.*
 
 **Objective:** nobody draws — or if they do, nobody dies, and no Boranis is seen to
@@ -1921,8 +1921,9 @@ him, or when half of the Draunel side is down. Essin's side breaks the moment Vo
 
 **Treasure.** None.
 
-**Rewards.** 1,150 XP, divided equally among the characters; an out pays the same.
-Inspiration (Table I–3, "a fight ended by an out"): to whoever got Vorlain back
+**Rewards.** 1,150 XP against the Draunel side (650 against the Boranis side), divided
+equally among the characters; an out pays the same. Inspiration (Table I–3, "a fight
+ended by an out"): to whoever got Vorlain back
 into the gallery without a fight.
 
 **Adjusting the Encounter.**
@@ -2019,8 +2020,9 @@ Adjusting the Encounter.
 > without leaning in, the table wins about two fights in three; the rest end with the
 > errand done.
 >
-> Played as a slugging match, it is a coin flip at best: a party clears it by blows
-> before the errand is done in fewer than half of those fights, nearly every such fight
+> Played as a slugging match, it is worse than a coin flip: a party clears it by blows
+> before the errand is done in fewer than half of those fights, and a party of pregens in
+> fewer still. Nearly every such fight
 > drops someone, and a slugging party loses a character often enough to fear it, the
 > hardest hitters most of all, because they stay in reach longest. A party built for
 > damage first wins by blows more often than not, which is what its Adjusting line is
@@ -2136,7 +2138,8 @@ four times or it is driven to 0 Hit Points. Inspiration (Table I–3, "the Atten
 player who tries to distract it (hint 4); a natural 20 on a distraction pays its own.
 
 **Adjusting the Encounter.** *(How each line plays is in the DM Note — how it plays, above.)*
-- *One character:* while Focused its second turn makes no attack. Alone, a character is
+- *One character:* while Focused its second turn makes no attack (2,300 XP; adjusted
+  3,450 for one: far beyond Deadly). Alone, a character is
   offered the outs first (stepping back is one); the fight is the last resort.
 - *Three characters:* 120 Hit Points, and while Focused its second turn is one Joined
   Hands attack instead of the full Multiattack (2,300 XP; adjusted 2,300 for three: about 1.5

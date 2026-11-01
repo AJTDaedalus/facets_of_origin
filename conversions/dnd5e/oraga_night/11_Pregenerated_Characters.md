@@ -91,7 +91,7 @@ shaped it, and whether it is holding a working right now.
   Disadvantage on the next attack roll it makes before the end of its next turn.
 
 **Class Features**
-- **Bardic Inspiration** (4 uses, d6; regain on a Long Rest). As a bonus action, she
+- **Bardic Inspiration** (4 uses, d6; regain on a Long Rest). As a Bonus Action, she
   chooses one creature other than herself within 60 feet who can hear her. Once within
   the next 10 minutes, it can roll the d6 and add it to one ability check, attack roll
   or saving throw, deciding after it rolls but before the DM says whether the roll
@@ -166,17 +166,16 @@ anything.
 
 **Attacks**
 - *Dagger ×2.* +6 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 4 Piercing. When he
-  attacks with one dagger, he can use a bonus action to attack with the other, whose
+  attacks with one dagger, he can use a Bonus Action to attack with the other, whose
   damage is 1d4 Piercing (no ability modifier).
 - **Sneak Attack** 2d6, once per turn, with Advantage, or with an ally within 5 ft. of
   the target and no Disadvantage.
 
 **Class Features**
 - **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant.** In a country without writing, the cant is all signs, knots and chalk marks that get wiped.
-- **Cunning Action.** Bonus action: Dash, Disengage, or Hide.
-- **Fast Hands** (Thief). Bonus action: a Dexterity (Sleight of Hand) check, Thieves'
-  Tools to disarm a trap or open a lock, or the Use an Object action — a crystal charge
-  included.
+- **Cunning Action.** Bonus Action: Dash, Disengage, or Hide.
+- **Fast Hands** (Thief). Bonus Action: a Dexterity (Sleight of Hand) check, Thieves'
+  Tools to disarm a trap or open a lock, or the Use an Object action.
 - **Second-Story Work** (Thief). Climbing costs him no extra movement, and his running
   jumps carry 4 feet farther.
 
@@ -318,7 +317,7 @@ knowing is.
 
 **Class Features**
 - **Fighting Style: Defense** (+1 AC in armor, included).
-- **Second Wind** (once per Short Rest). Bonus action: regain 1d10 + 4 Hit Points.
+- **Second Wind** (once per Short Rest). Bonus Action: regain 1d10 + 4 Hit Points.
 - **Action Surge** (once per Short Rest). One additional action on her turn.
 - **Improved Critical** (Champion). Critical Hits on 19–20.
 
@@ -378,8 +377,8 @@ shaped it, and whether it is holding a working right now.
 - *Guiding Bolt* (1st-level slot). +6 to hit, range 120 ft., 4d6 Radiant, and the next
   attack against the target before the end of her next turn has Advantage.
 - *Sacred Flame.* DC 14 Dexterity saving throw, 1d8 Radiant.
-- *Spiritual Weapon* (2nd-level slot). Bonus action, +6 to hit, 1d8 + 4 Force; it lasts
-  1 minute, and she can move it and strike again as a bonus action each turn.
+- *Spiritual Weapon* (2nd-level slot). Bonus Action, +6 to hit, 1d8 + 4 Force; it lasts
+  1 minute, and she can move it and strike again as a Bonus Action each turn.
 - *Dagger (her knife).* +3 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 1 Piercing.
 
 **Class Features**

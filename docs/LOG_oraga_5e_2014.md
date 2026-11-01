@@ -192,3 +192,8 @@
   - S11's Corro exclusion as stated.
   - The Attendant at CR 6: `bestiary_check`'s DMG estimate is defense 6, offense 7, average 6. The reviewer's defense-7 reading would still round to CR 6–7.
 - **Checks:** lint OK, fact_check 0, pregen_check 0, bestiary_check 0, copyright (c) 0, pytest tools 680 passed / 1 skipped.
+
+## 2026-11-01: PR #34 opened; second critical review and fixes
+
+- The owner allowed the push. `feat/lean-facets` was fast-forwarded (27 commits) and `feat/oraga-5e-2014` pushed; tags stayed local. PR #34 targets feat/lean-facets.
+- The owner asked for a critical review agent, with a push once its findings are resolved. Report: `docs/REVIEW2_oraga_5e_2014.md`. It found 1 blocker, 8 should-fixes, 11 nits and 3 uncertain items, and confirmed every card total, pregen and block. All are resolved; see the report's "Resolution" section. Tests: 703 passed (+23).

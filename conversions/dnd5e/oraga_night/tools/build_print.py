@@ -496,7 +496,7 @@ def trackers(sheet: str) -> str:
         lines.append(f"**{m.group(1)}** {_boxes(int(m.group(2)))}")
     for m in re.finditer(r"\*\*([A-Z][\w' ]+?)\*\* \(once per", sheet):
         lines.append(f"**{m.group(1)}** {_boxes(1)}")
-    if re.search(r"crystal charge", sheet):
+    if re.search(r"crystal\s+charge", sheet):
         lines.append("**Crystal charge** ☐ released")
     lines.append("**Inspiration** ☐")
     lines.append("**Death Saving Throws** successes ☐☐☐ · failures ☐☐☐")
@@ -520,7 +520,7 @@ SPELLS = {
     "Fire Bolt": "Ranged spell attack, 120 ft.: 1d10 Fire damage; a flammable object it hits catches fire.",
     "Guidance": "Touch a willing creature: once within the next minute (Concentration) it adds 1d4 to one ability check of its choice.",
     "Guiding Bolt": "Ranged spell attack, 120 ft.: 4d6 Radiant damage, and the next attack roll against the target before the end of your next turn has Advantage.",
-    "Healing Word": "Bonus action: a creature you can see within 60 ft. regains 1d4 + your spellcasting modifier Hit Points.",
+    "Healing Word": "Bonus Action: a creature you can see within 60 ft. regains 1d4 + your spellcasting modifier Hit Points.",
     "Hideous Laughter": "One creature within 30 ft. makes a Wisdom save or falls Prone and is Incapacitated, laughing, for up to 1 minute (Concentration); it repeats the save at the end of each of its turns and when it takes damage. A creature of Intelligence 4 or less is unaffected.",
     "Hold Person": "One humanoid within 60 ft. makes a Wisdom save or is Paralyzed for up to 1 minute (Concentration); it repeats the save at the end of each of its turns.",
     "Identify": "Ritual: touch an object for 1 minute and learn its magical properties and how to use them.",
@@ -532,19 +532,19 @@ SPELLS = {
     "Mending": "Repair one break or tear in an object you touch, no larger than 1 ft. in any dimension.",
     "Message": "Whisper to a creature within 120 ft.; only it hears, and it can whisper back.",
     "Minor Illusion": "A sound, or the image of an object no larger than a 5-ft. cube, within 30 ft. for 1 minute; a creature that uses its action to examine it sees through it on an Intelligence (Investigation) check against your save DC.",
-    "Misty Step": "Bonus action: teleport up to 30 ft. to an unoccupied space you can see.",
+    "Misty Step": "Bonus Action: teleport up to 30 ft. to an unoccupied space you can see.",
     "Prayer of Healing": "Over 10 minutes, up to six creatures you can see within 30 ft. each regain 2d8 + your spellcasting modifier Hit Points.",
     "Prestidigitation": "A small trick within 10 ft.: a harmless sensory effect, light or snuff a candle, clean or soil a small object, chill, warm or flavor food, or a brief mark or trinket-sized illusion.",
     "Ray of Frost": "Ranged spell attack, 60 ft.: 1d8 Cold damage, and the target's speed drops by 10 ft. until the start of your next turn.",
     "Resistance": "Touch a willing creature: once within the next minute (Concentration) it adds 1d4 to one saving throw of its choice.",
     "Sacred Flame": "One creature within 60 ft. makes a Dexterity save or takes 1d8 Radiant damage; cover doesn't help it.",
-    "Sanctuary": "Bonus action: ward a creature within 30 ft. for 1 minute; anyone who targets it with an attack or a harmful spell makes a Wisdom save or must pick a new target. It ends if the warded creature attacks or casts a spell that affects an enemy.",
+    "Sanctuary": "Bonus Action: ward a creature within 30 ft. for 1 minute; anyone who targets it with an attack or a harmful spell makes a Wisdom save or must pick a new target. It ends if the warded creature attacks or casts a spell that affects an enemy.",
     "Shield": "Reaction, when you are hit by an attack or targeted by *Magic Missile*: +5 AC until the start of your next turn, including against that attack.",
-    "Shield of Faith": "Bonus action: a creature within 60 ft. gains +2 AC for up to 10 minutes (Concentration).",
+    "Shield of Faith": "Bonus Action: a creature within 60 ft. gains +2 AC for up to 10 minutes (Concentration).",
     "Silent Image": "The image of an object, creature or other visible thing, no larger than a 15-ft. cube, within 60 ft. for up to 10 minutes (Concentration); your action moves it; a creature that uses its action to examine it sees through it on an Intelligence (Investigation) check.",
     "Sleep": "Roll 5d8: creatures within 20 ft. of a point within 90 ft. fall Unconscious for 1 minute, lowest current Hit Points first, until the total is spent; damage or a shake wakes them.",
     "Spare the Dying": "Touch a living creature that has 0 Hit Points: it becomes stable.",
-    "Spiritual Weapon": "Bonus action: a floating spectral weapon within 60 ft. for 1 minute makes a melee spell attack for 1d8 + your spellcasting modifier Force damage; a bonus action on later turns moves it 20 ft. and repeats the attack.",
+    "Spiritual Weapon": "Bonus Action: a floating spectral weapon within 60 ft. for 1 minute makes a melee spell attack for 1d8 + your spellcasting modifier Force damage; a Bonus Action on later turns moves it 20 ft. and repeats the attack.",
     "Suggestion": "One creature within 30 ft. that can hear and understand you makes a Wisdom save or follows a reasonable course of action you describe in a sentence or two, for up to 8 hours (Concentration).",
     "Vicious Mockery": "One creature within 60 ft. that can hear you makes a Wisdom save or takes 1d4 Psychic damage and has Disadvantage on its next attack roll.",
 }
@@ -552,9 +552,9 @@ SPELLS = {
 # What a new player does on their turn, drawn from each sheet's own features.
 ON_YOUR_TURN = {
     "Serane Vaskarin": "Move, then one action: talk, *Vicious Mockery*, or a spell (*Hideous Laughter* and *Suggestion* end trouble without a blade). A Bonus Action gives a friend Bardic Inspiration or casts *Healing Word*. Your Reaction is Cutting Words.",
-    "Pello": "Move, then attack with a dagger; add Sneak Attack once a turn when you have Advantage or an ally beside the target. A bonus action is the second dagger, Cunning Action (Dash, Disengage, Hide), or Fast Hands.",
+    "Pello": "Move, then attack with a dagger; add Sneak Attack once a turn when you have Advantage or an ally beside the target. A Bonus Action is the second dagger, Cunning Action (Dash, Disengage, Hide), or Fast Hands.",
     "Andra Tessarin": "Move, then one action: *Fire Bolt* or *Ray of Frost*, or a spell (*Sleep*, *Magic Missile*, *Darkness*). *Misty Step* is a Bonus Action; *Shield* is your Reaction when you are hit.",
-    "Dassa": "Move, then attack once with the longsword; you score a critical hit on a 19 or 20. Once a Short Rest, Action Surge gives you a second action. Second Wind is a bonus action that heals you.",
+    "Dassa": "Move, then attack once with the longsword; you score a critical hit on a 19 or 20. Once a Short Rest, Action Surge gives you a second action. Second Wind is a Bonus Action that heals you.",
     "Ilesse Kethaun": "Move, then one action: *Sacred Flame*, *Guiding Bolt* or a healing spell. A Bonus Action casts *Healing Word*, *Shield of Faith* or *Spiritual Weapon*. Channel Divinity heals in a hurry (Preserve Life).",
 }
 

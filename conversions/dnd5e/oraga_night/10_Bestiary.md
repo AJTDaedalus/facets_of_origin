@@ -42,7 +42,7 @@ else, and most of them break long before the end.
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
   somebody comes for it (see chapter IV, "The Palace on Alert"). After midnight, see
   chapter V, "Down, Not Out". Any attacker at this ball may also knock out rather than
-  kill, as the SRD's Knocking Out a Creature, with any attack roll; never with an area
+  kill, as the SRD's Knocking a Creature Out, with any attack roll; never with an area
   effect (see chapter IX, "Running the Snakes").
 - **Down, Not Out.** The Uninvited set most people aside instead of killing them. A
   creature one of them drops is thrown clear, and a companion or the crowd gets it up,
@@ -141,7 +141,8 @@ immunities stay. Whatever the spell would do to them ends at once (*Held by Some
 Else*), and the Delay is all it buys. The obvious ones:
 
 - **Damage, a lot of it.** Every round the party deals 30 or more damage to one of
-  them (20 with three characters, 40 with five; see chapter V, "Adjusting the Attack"), that one gains
+  them (20 with three characters, 40 with five or at 5th level; see chapter V, "Adjusting
+  the Attack"), that one gains
   1 Delay, never more than 1 a round. At 0 HP they step into the world's shadow and
   are back at full HP on their next turn, and whoever dealt the last blow makes a save
   or is thrown (*Leashed*).
@@ -2154,7 +2155,7 @@ Orthaen crystal holds finished workings, and a **charge** is one of them: a
 consumable magic item, one stored working, released at a touch by anyone, gifted or
 not, trained or not. Releasing one does not make its bearer a caster.
 
-- **Releasing a charge** takes an action (Use an Object), and no
+- **Releasing a charge** takes an action, and no
   check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are common: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
@@ -2207,7 +2208,7 @@ before it is a reward.*
   have a standing interest in. Worth 2d6 × 25 GP in Rekuzan to a fence, and nothing
   to the table that gives the rings back. In S5, where they came off the fallen,
   giving them back is the reward.
-- **The kitchen's remedy box** *(B10).* Three **Potions of Healing** (four if four
+- **The kitchen's remedy box** *(B10).* Four **Potions of Healing** (three if three
   characters are playing), on the shelf above the hearth, for a party that goes looking
   (see chapter IV, B10). Each restores 2d4 + 2 Hit Points (the SRD's Potion of Healing).
   Nobody claims them, and nobody stops a guest who takes one.
