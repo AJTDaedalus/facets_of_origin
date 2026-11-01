@@ -13,9 +13,9 @@ and for 3rd or 5th level. The night ends at 5th level.
 **Length:** one session, **about five hours** with a break. Play starts in the street outside the palace
 and ends at dawn (the runtime table is in chapter I).
 
-**Rules:** any fifth-edition core rules; written against the **SRD 5.2.1**. A 2014
-table can play it with the short glossary in chapter X ("At a 2014 table") and
-rebuilt pregens.
+**Rules:** the 2014 fifth-edition core rules; written against the **SRD 5.1**. A 2024
+table can play it with the short notes marked *At a 2024 table* and the box of that
+name in chapter X; only the pregens need rebuilding.
 
 **Tone:** glamour over a blade: festival splendor and social fencing, with something
 wrong accumulating underneath, and knives under every table.
@@ -54,9 +54,9 @@ appendices you open at the table.
 
 | File | What it is |
 |---|---|
-| `01_Overture.md` | How to run it: the background, the runtime table, the first five minutes, the DC ladder, Heroic Inspiration, the snakes, tone, canon, safety |
+| `01_Overture.md` | How to run it: the background, the runtime table, the first five minutes, the DC ladder, Inspiration, the snakes, tone, canon, safety |
 | `02_The_World_and_the_Night.md` | Val'loh, Rekuzan, House Boranis, what is really happening, and the eight agendas (DM only) |
-| `03_Masks_and_Agendas.md` | Characters, the Val'loh gifts as origin feats, crystal charges, and masks |
+| `03_Masks_and_Agendas.md` | Characters, the Val'loh gifts as feats, crystal charges, and masks |
 
 ### The Night
 
@@ -114,16 +114,17 @@ module keeps shut.
 
 ## License and Attribution
 
-This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by
-Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is
-licensed under the Creative Commons Attribution 4.0 International License, available
-at https://creativecommons.org/licenses/by/4.0/legalcode.
+This work includes material taken from the System Reference Document 5.1 ("SRD 5.1") by
+Wizards of the Coast LLC and available at
+https://dnd.wizards.com/resources/systems-reference-document. The SRD 5.1 is licensed
+under the Creative Commons Attribution 4.0 International License available at
+https://creativecommons.org/licenses/by/4.0/legalcode.
 
 **Changes from the SRD.** SRD rules, classes, subclasses, feats, spells, conditions and
 equipment are referenced by name and used as the SRD writes them, except where this
-module says otherwise. These are the module's own: the origin feats (the Val'loh
+module says otherwise. These are the module's own: the gift feats (the Val'loh
 gifts), the crystal charges, the encounter rules (clocks, "Down, Not Out", "Buying
-Time" and Delay), how Heroic Inspiration is awarded, and four table rules: one DC
+Time" and Delay), how Inspiration is awarded, and four table rules: one DC
 ladder for every check in the night (chapter I), success at a cost on a near miss (chapter I),
 NPCs who make no checks outside a fight (chapter I), and nonlethal blows from any attack,
 ranged and spell attacks included (chapter IX).
@@ -131,10 +132,11 @@ ranged and spell attacks included (chapter IX).
 Most stat blocks are original creatures written in the SRD's format; the Sect Guard
 adapts the SRD Guard, and a guest uses the SRD commoner. The
 pregenerated characters are built from SRD options; their class-feature text is
-adapted from the SRD. At a 2014 table, a gifted human takes the gift as a bonus feat
-at 1st level.
+adapted from the SRD. A gifted human takes the gift as a bonus feat at 1st level.
 
-No other Wizards of the Coast material is used. This module is not affiliated with,
+No other Wizards of the Coast material is reproduced. The encounter budgets follow the
+method of the 2014 *Dungeon Master's Guide*, which the module names but does not
+reprint. This module is not affiliated with,
 endorsed, sponsored or approved by Wizards of the Coast.
 
 The module's own text is part of the Facets of Origin project, released under GPLv3

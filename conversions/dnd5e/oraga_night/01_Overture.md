@@ -130,14 +130,14 @@ Vell's boat, and no one is ever charged (see chapter II, "The Truth of the Night
 
 ## What You Need
 
-Any fifth-edition core rules. The module is written against the **System Reference
-Document 5.2.1** (the 2024 rules) and runs at a 2014 table with the notes marked
-*At a 2014 table* and the glossary box of that name in chapter X. Only the
-pregenerated characters need rebuilding.
+The 2014 fifth-edition core rules. The module is written against the **System
+Reference Document 5.1** and runs at a 2024 table with the notes marked *At a 2024
+table* and the box of that name in chapter X. Only the pregenerated characters need
+rebuilding.
 
 You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III and
 Player Handout 3 (chapter VIII) carry everything a player needs about the tribes,
-including their gifts as origin feats and the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
+including their gifts as feats and the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
 fight, and chapter X every stat block and every crystal charge ("Items of the Night").
 
 Print from chapter VIII before you sit down: the **two-page DM sheet**, the **maps
@@ -395,12 +395,12 @@ imposes instead. Inside a fight, they roll like anybody else. Saving throws are 
 checks. When a spell or effect calls for one, the NPC rolls it, using the save line in
 chapter X.
 
-**Heroic Inspiration** works as the SRD says. A character either has it or does not, and spends it to reroll one die
-immediately after rolling it, keeping the new roll. A character who already has it
-when they earn it again **may give it to another player character who lacks it**.
-Human characters (and every character here is human) begin with it and regain it on a
-Long Rest, which tonight they will not get. *At a 2014 table, this is plain
-Inspiration, and it grants Advantage instead of a reroll.*
+**Inspiration** works as the SRD says. A character either has it or does not, and spends
+it for Advantage on one attack roll, saving throw or ability check. A character who
+already has it when they earn it again **may give it to another player character who
+lacks it**. Every character begins the night with it; there is no Long Rest tonight to
+bring it back. *At a 2024 table, this is Heroic Inspiration, and it grants a reroll
+instead of Advantage.*
 
 **Rests.** There is no Long Rest tonight. A character who spends half a Movement in the
 chapel (B6) may take a Short Rest, the only one the ball offers, and every snake line the
@@ -412,10 +412,10 @@ chapter IV).
 
 Clever and peaceful play is paid on the page here, rather than left to your
 generosity in the moment. You will be tired by Movement VI, and a reward
-you have to remember to invent is a reward that does not happen. Because Heroic
-Inspiration is have-it-or-not, the list is short, and each award goes to one character.
+you have to remember to invent is a reward that does not happen. Because Inspiration is
+have-it-or-not, the list is short, and each award goes to one character.
 
-**Table I–3: Heroic Inspiration, Printed**
+**Table I–3: Inspiration, Printed**
 
 | When | To whom |
 |---|---|
@@ -427,7 +427,7 @@ Inspiration is have-it-or-not, the list is short, and each award goes to one cha
 | **The Attendant distracted** — the first attempt of the night, whether or not it works, and any natural 20 (card S14) | The one who tried |
 | **Somebody carried out** in Movement VII | The one who carried them, for the first person they bring out |
 
-The best moment of the evening still earns Heroic Inspiration whether or not it is on
+The best moment of the evening still earns Inspiration whether or not it is on
 this list. A fight card in chapter IX that prints Inspiration is a reminder of one of
 these rows, not an extra award.
 

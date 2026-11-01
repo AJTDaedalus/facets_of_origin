@@ -105,3 +105,24 @@
   - `pytest tools`: 677 passed, 1 skipped.
   - software docs and canon tests: 42 passed; simulator smoke tests: 34 passed.
   - `lint --check` still FAILS on 53 rules_2024 hits outside chapters IX and X. P5 sweeps them. budget_2024 is at 0.
+
+## 2026-11-01: P3 character rules (and early P5/P6 pieces)
+
+- **T3.1** Chapter III:
+  - The SRD human (+1 to every score).
+  - Backgrounds in the SRD 5.1 shape: two skills, two tools or languages, equipment and a feature, with the Acolyte and the customizing rule.
+  - The gift is a **bonus feat at 1st level** (R4). A table using the variant human gives the gift on top of the variant's feat.
+  - The gift headings now read "Feat, taken as a bonus feat at 1st level".
+  - Ungifted characters take no feat.
+  - The Magic Initiate pointer is removed. A short "At a 2024 table" note keeps the origin-feat reading.
+- **README:**
+  - Rules line (2014, SRD 5.1, *At a 2024 table* notes).
+  - Contents rows.
+  - The SRD 5.1 attribution, verbatim from the SRD 5.1 legal page.
+  - The "Changes from the SRD" paragraph: gift feats and Inspiration.
+  - The WotC paragraph now says the 2014 DMG method is named, not reprinted.
+- **Chapter I:**
+  - The rules line.
+  - Inspiration rules: Advantage; everyone starts with it as a module rule; *At a 2024 table* Heroic Inspiration.
+  - Table I–3 renamed "Inspiration, Printed".
+- Checks: fact_check 0; pytest tools 677 passed, 1 skipped. Chapters I and III and the README have no lint hits.

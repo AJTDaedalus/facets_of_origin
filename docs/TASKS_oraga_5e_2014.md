@@ -24,7 +24,7 @@ Status keys: [ ] open · [~] in progress · [x] done · [!] blocked. Blocked on 
 - [x] T2.4 The 38 party-size numbers outside the cards (encounter research §4) move to four-character values. Accept: fact_check guards updated and green.
 
 ## P3. Character rules (ch I, III, README)
-- [ ] T3.1 Chapter III build rules: SRD 5.1 human, Customizing a Background, gift as bonus feat, ungifted take no feat; drop the Magic Initiate and variant human pointers.
+- [x] T3.1 Chapter III build rules: SRD 5.1 human, Customizing a Background, gift as bonus feat, ungifted take no feat; drop the Magic Initiate and variant human pointers.
 - [x] T3.2 (done in P2) Chapter I "Three at the Table" → "Four at the Table" (deal four pregens; who, and which agendas face up).
 
 ## P4. Pregens (ch XI)
@@ -36,7 +36,7 @@ Status keys: [ ] open · [~] in progress · [x] done · [!] blocked. Blocked on 
 - [ ] T5.2 Styling per R1.
 
 ## P6. Licence
-- [ ] T6.1 SRD 5.1 attribution at every former SRD 5.2.1 site and in `build_print.SRD_NOTE`; README "Rules" line. Accept: grep finds no "5.2.1" outside DECISIONS and history notes.
+- [~] T6.1 (README and chapter I done in P3) SRD 5.1 attribution at every former SRD 5.2.1 site and in `build_print.SRD_NOTE`; README "Rules" line. Accept: grep finds no "5.2.1" outside DECISIONS and history notes.
 
 ## P7. Ledger and close
 - [ ] T7.1 DECISIONS entry (2014 conversion, rulings R1–R4), INVENTIONS rows for any new numbers, facts.yaml guards, `docs/LOG_oraga_5e_2014.md`.
