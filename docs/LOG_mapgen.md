@@ -313,3 +313,21 @@ Built as a minimal, rules-free v1 on reversible defaults (see the status note in
 - **Limitation (documented):** fog is visual only; the full image reaches every
   client.
 - Tests: board 24; e2e 13; **full suite 2184 passed**.
+
+## 2026-11-13 — Foundry import, checked against the importer's source
+
+There's no Foundry here, so the owner's live import (open item 3) still stands.
+To de-risk it, I read the public source of the Foundry "Universal Battlemap
+Importer" (github.com/moo-man/FVTT-DD-Import, `ddimport.js`) and compared it with
+our export:
+- Units are grid squares with `map_origin`, `map_size` and `pixels_per_grid` ✓.
+  `line_of_sight` is polylines of {x, y} (an empty polyline throws there; we drop
+  any under two points) ✓. `portals[].bounds` is two points, plus `closed` ✓.
+  `lights[].color` is 8-hex ARGB (the importer strips the first two digits) ✓.
+  `image` is bare base64 PNG ✓. Arrays it requires (`line_of_sight`, `portals`,
+  `lights`) are always present, even empty ✓. Canvas cap 11000 px per side ✓.
+- Pinned as `TestFoundryImporterConformance` (5 tests) in `test_m5_export_cli.py`.
+  Every rendered proof (court, cave, cellar, region, ruins, town) passes the same checks.
+- Note: the importer sets a light's alpha to 0.05 × intensity, so our default
+  intensity 0.7 imports as a faint light. Recipes wanting a strong Foundry light
+  can set intensity up to 1; the cap stays at 1, as in the source format.

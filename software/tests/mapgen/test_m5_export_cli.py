@@ -166,3 +166,37 @@ def test_param_change_breaks_golden(tmp_path, tmp_out):
     p.write_text(src.replace("strength: 0.4", "strength: 0.6"))
     known = json.loads(HASHES.read_text())
     assert image_hash(render_recipe(p, out_dir=tmp_out, only_png=True)["png"]) != known["stone_room"]
+
+
+class TestFoundryImporterConformance:
+    """What the public Foundry 'Universal Battlemap Importer' (moo-man/FVTT-DD-Import, ddimport.js)
+    actually reads, checked 2026-11-13: missing arrays or empty polylines throw there."""
+
+    def _d(self, rendered):
+        return json.loads(Path(rendered["dd2vtt"]).read_text())
+
+    def test_required_arrays_always_present(self, rendered):
+        d = self._d(rendered)
+        for k in ("line_of_sight", "portals", "lights"):
+            assert isinstance(d[k], list)
+        assert {"x", "y"} <= set(d["resolution"]["map_origin"]) and {"x", "y"} <= set(d["resolution"]["map_size"])
+
+    def test_no_empty_or_single_point_polylines(self, rendered):
+        assert all(len(line) >= 2 for line in self._d(rendered)["line_of_sight"])
+
+    def test_portal_bounds_are_two_points(self, rendered):
+        for p in self._d(rendered)["portals"]:
+            assert len(p["bounds"]) == 2 and isinstance(p["closed"], bool)
+
+    def test_light_colour_is_argb_hex(self, rendered):
+        import re
+        for l in self._d(rendered)["lights"]:
+            assert re.fullmatch(r"[0-9a-f]{8}", l["color"]) and l["color"].startswith("ff")
+
+    def test_image_is_bare_base64_png_matching_the_grid(self, rendered):
+        d = self._d(rendered)
+        raw = base64.b64decode(d["image"])
+        assert not d["image"].startswith("data:") and raw[:4] == b"\x89PNG"
+        w, h = PImage.open(io.BytesIO(raw)).size
+        ppg = d["resolution"]["pixels_per_grid"]
+        assert (w, h) == (round(d["resolution"]["map_size"]["x"] * ppg), round(d["resolution"]["map_size"]["y"] * ppg))
