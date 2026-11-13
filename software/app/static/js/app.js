@@ -289,7 +289,7 @@ const HANDLE = {
       ruleset: d.ruleset, chars: d.all_characters || {}, enemies: d.active_enemies || {},
       library: d.enemy_library || {}, clocks: d.threat_clocks || {}, combat: d.combat,
       danger: d.danger || null, sessionNumber: d.session_number || state.sessionNumber,
-      sessionName: d.session_name || state.sessionName,
+      sessionName: d.session_name || state.sessionName, map: d.map || null,
     });
     state.me = isMM() ? null : (d.your_character || null);
     $('#hdr-session').textContent = state.sessionName || '';
@@ -352,6 +352,11 @@ const HANDLE = {
   enemy_spawned(m) { state.enemies[m.enemy.key] = m.enemy; feedPush('foe', `<b>${esc(m.enemy.name)}</b> enters the fight.`); refresh(['play']); },
   enemy_updated(m) { state.enemies[m.enemy.key] = m.enemy; refresh(['play']); },
   enemy_removed(m) { delete state.enemies[m.key]; refresh(['play']); },
+
+  map_list(m) { state.mapList = m.maps; if (!m.maps.length) notify('No rendered maps found. Run python -m mapgen render <recipe>.', 'warn'); refresh(['play']); },
+  map_state(m) { state.map = m.map; if (m.map) feedSys(`The map is up: ${esc(m.map.title)}.`); refresh(['play']); },
+  token_moved(m) { if (state.map) { state.map.tokens[m.token] = { x: m.x, y: m.y }; refresh(['play']); } },
+  token_removed(m) { if (state.map) { delete state.map.tokens[m.token]; refresh(['play']); } },
   enemy_library(m) { state.library = m.library; notify(m.loaded.length ? `Loaded ${m.loaded.length} Bestiary cards.` : 'The library already holds the Bestiary.', 'success'); refresh(); },
   enemy_damage(m) { if (m.result.bloodied_now) notify(`${m.name} is Bloodied.`, 'warn'); },
   danger(m) { state.danger = m.danger; refresh(['play']); },

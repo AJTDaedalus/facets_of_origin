@@ -97,6 +97,9 @@ class GameSession:
     #: MM-only `spark_flow_nudge` prompt in the WS layer — a tool prompt,
     #: not a rule (see `SPARK_FLOW_NUDGE_SECONDS` in `app/api/websocket.py`).
     spark_flow: dict[str, dict] = field(default_factory=dict)
+    #: The map board (mapgen Phase 3 v1): {id, title, squares, pixels_per_grid, image, tokens} or None.
+    #: Tokens are "pc:<player>" / "foe:<enemy key>" -> {x, y} in grid squares.
+    active_map: dict | None = None
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
@@ -252,6 +255,7 @@ class GameSession:
             "combat": self.combat.to_dict() if self.combat else None,
             "session_number": self.session_number,
             "level_up_ready": sorted(self.level_up_ready),
+            "map": self.active_map,
             # MM dial only: deliberately absent from the player state.
             "danger": self.active_danger(),
         }
@@ -276,6 +280,7 @@ class GameSession:
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
             "combat": self.combat.to_dict() if self.combat else None,
             "level_up_ready": player_name in self.level_up_ready,
+            "map": self.active_map,
         }
 
 

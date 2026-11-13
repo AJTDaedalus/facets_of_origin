@@ -1293,6 +1293,7 @@ async def _enemy_remove(ctx: Ctx) -> None:
     enemy = _enemy(ctx, "key")
     del ctx.session.active_enemies[enemy.key or enemy.id]
     await manager.broadcast(ctx.session_id, {"type": "enemy_removed", "key": enemy.key or enemy.id})
+    await _drop_token(ctx, f"foe:{enemy.key or enemy.id}")
     await _push_danger(ctx)
 
 
@@ -1433,3 +1434,122 @@ async def _clock_delete(ctx: Ctx) -> None:
     clock = _clock(ctx)
     del ctx.session.threat_clocks[clock.id]
     await manager.broadcast(ctx.session_id, {"type": "clock_deleted", "clock_id": clock.id})
+
+
+# ---------------------------------------------------------------------------
+# Map board (mapgen Phase 3 v1, docs/BRIEF_mapgen_phase3.md). Plumbing only:
+# no movement rules, no line of sight, no fog. Positions are in grid squares.
+# ---------------------------------------------------------------------------
+
+_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv"}
+
+
+def _scan_maps() -> dict[str, Path]:
+    """Rendered maps under settings.maps_dir: relative posix id -> .dd2vtt path."""
+    from app.config import settings
+    root = Path(settings.maps_dir).resolve()
+    found: dict[str, Path] = {}
+    for p in sorted(root.glob("**/mapgen/*.dd2vtt")):
+        rel = p.relative_to(root)
+        if any(part in _SKIP_DIRS for part in rel.parts):
+            continue
+        found[rel.as_posix()] = p
+        if len(found) >= 200:
+            break
+    return found
+
+
+def _map_title(path: Path) -> str:
+    meta = path.with_name(path.name[: -len(".dd2vtt")] + ".meta.json")
+    try:
+        return str(json.loads(meta.read_text()).get("title") or path.stem)
+    except (OSError, ValueError):
+        return path.stem
+
+
+def _float(msg: dict, key: str, lo: float, hi: float) -> float:
+    try:
+        v = float(msg.get(key))
+    except (TypeError, ValueError):
+        raise WSError(f"'{key}' must be a number.")
+    if v != v:  # NaN
+        raise WSError(f"'{key}' must be a number.")
+    return round(max(lo, min(hi, v)), 3)
+
+
+async def _drop_token(ctx: Ctx, token: str) -> None:
+    board = ctx.session.active_map
+    if board and token in board["tokens"]:
+        del board["tokens"][token]
+        await manager.broadcast(ctx.session_id, {"type": "token_removed", "token": token})
+
+
+@on("map_list", mm_only=True)
+async def _map_list(ctx: Ctx) -> None:
+    """The rendered maps the MM can put on the board."""
+    maps = []
+    for mid, path in _scan_maps().items():
+        try:
+            size = json.loads(path.read_text()).get("resolution", {}).get("map_size", {})
+        except (OSError, ValueError):
+            continue
+        maps.append({"id": mid, "title": _map_title(path), "squares": size})
+    await manager.send_to(ctx.websocket, {"type": "map_list", "maps": maps})
+
+
+@on("map_set", mm_only=True)
+async def _map_set(ctx: Ctx) -> None:
+    """Put a rendered map on the board for everyone (tokens start off the board)."""
+    mid = _str(ctx.msg, "id", 400)
+    path = _scan_maps().get(mid)
+    if path is None:
+        raise WSError(f"No map {mid!r}: render one with `python -m mapgen render`.")
+    try:
+        data = json.loads(path.read_text())
+        res = data["resolution"]
+        image = data["image"]
+    except (OSError, ValueError, KeyError):
+        raise WSError(f"Map {mid!r} is not a readable .dd2vtt file.")
+    ctx.session.active_map = {
+        "id": mid, "title": _map_title(path),
+        "squares": {"x": res["map_size"]["x"], "y": res["map_size"]["y"]},
+        "pixels_per_grid": res.get("pixels_per_grid", 70),
+        "image": "data:image/png;base64," + image, "tokens": {}}
+    await manager.broadcast(ctx.session_id, {"type": "map_state", "map": ctx.session.active_map})
+
+
+@on("map_clear", mm_only=True)
+async def _map_clear(ctx: Ctx) -> None:
+    ctx.session.active_map = None
+    await manager.broadcast(ctx.session_id, {"type": "map_state", "map": None})
+
+
+def _check_token(ctx: Ctx, token: str) -> None:
+    kind, _, name = token.partition(":")
+    ok = (kind == "pc" and name in ctx.session.characters) or \
+         (kind == "foe" and name in ctx.session.active_enemies)
+    if not ok:
+        raise WSError(f"No token {token!r} (use pc:<player> or foe:<enemy key>).")
+    if not ctx.is_mm and token != f"pc:{ctx.identity}":
+        raise WSError("You can only move your own token.")
+
+
+@on("token_move")
+async def _token_move(ctx: Ctx) -> None:
+    """Place or move a token (squares from the north-west corner, clamped to the map)."""
+    board = ctx.session.active_map
+    if board is None:
+        raise WSError("No map on the board.")
+    token = _str(ctx.msg, "token", 200)
+    _check_token(ctx, token)
+    x = _float(ctx.msg, "x", 0.0, float(board["squares"]["x"]))
+    y = _float(ctx.msg, "y", 0.0, float(board["squares"]["y"]))
+    board["tokens"][token] = {"x": x, "y": y}
+    await manager.broadcast(ctx.session_id, {"type": "token_moved", "token": token, "x": x, "y": y})
+
+
+@on("token_remove", mm_only=True)
+async def _token_remove(ctx: Ctx) -> None:
+    if ctx.session.active_map is None:
+        raise WSError("No map on the board.")
+    await _drop_token(ctx, _str(ctx.msg, "token", 200))

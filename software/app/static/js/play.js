@@ -14,7 +14,7 @@ function inputVal(key) { return esc(uiv(key, '')); }
 
 function renderPlay() {
   const root = $('#play-main');
-  if (isMM()) { root.innerHTML = mmPlayHtml(); wireMMPlay(root); return; }
+  if (isMM()) { root.innerHTML = mapBoardHtml() + mmPlayHtml(); wireMMPlay(root); wireMapBoard(root); return; }
   const me = state.me;
   if (!me) {
     root.innerHTML = `<div class="panel center"><h2>No character yet</h2><p class="muted">Build one to take your seat.</p>
@@ -22,9 +22,10 @@ function renderPlay() {
     $('[data-go-build]', root).onclick = () => switchTab('build');
     return;
   }
-  root.innerHTML = `${bannersHtml(me)}<div class="sheet-grid"><div>${sheetHtml(me)}</div>
+  root.innerHTML = `${bannersHtml(me)}${mapBoardHtml()}<div class="sheet-grid"><div>${sheetHtml(me)}</div>
     <div>${actionsHtml(me)}${partyHtml(me)}${foesPublicHtml()}${clocksPublicHtml()}</div></div>`;
   wirePlayer(root, me);
+  wireMapBoard(root);
 }
 
 // =====================================================================

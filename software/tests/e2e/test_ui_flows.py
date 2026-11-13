@@ -44,7 +44,13 @@ def live_server(tmp_path_factory):
     """A real uvicorn process on its own port and throwaway data directory."""
     port = _free_port()
     data_dir = tmp_path_factory.mktemp("e2e-data")
-    env = {**os.environ, "DATA_DIR": str(data_dir), "PORT": str(port), "HOST": "127.0.0.1"}
+    maps_dir = data_dir / "maps"
+    sys.path.insert(0, str(SOFTWARE_DIR))
+    from mapgen.export import render_recipe
+    render_recipe(SOFTWARE_DIR / "tests" / "mapgen" / "goldens" / "stone_room.map.yaml",
+                  out_dir=maps_dir / "demo" / "mapgen")
+    env = {**os.environ, "DATA_DIR": str(data_dir), "PORT": str(port), "HOST": "127.0.0.1",
+           "MAPS_DIR": str(maps_dir)}
     log_path = data_dir / "server.log"
     log_file = log_path.open("wb")   # never an undrained pipe: a full pipe wedges uvicorn
     proc = subprocess.Popen([sys.executable, "run.py"], cwd=SOFTWARE_DIR, env=env,
@@ -321,6 +327,36 @@ def test_tools_reference_and_inventory(table):
     z.click("[data-invsave]")
     z.click(".tab[data-tab=play]")
     expect(z.locator(".slot.item", has_text="Rope")).to_be_visible(timeout=T)
+
+
+def test_map_board_shared_and_tokens_drag(table):
+    """mapgen Phase 3 v1: the MM puts a map up; a player places and drags their token; the MM sees it move."""
+    mm, z = table["mm"], table["Zahna"]
+    mm.click("[data-tab=play]") if mm.locator("[data-tab=play]").count() else None
+    mm.click("[data-map=list]")
+    expect(mm.locator("[data-ui=map_pick]")).to_be_visible(timeout=T)
+    expect(mm.locator("[data-ui=map_pick] option")).to_contain_text("Golden Stone Room")
+    mm.click("[data-map=set]")
+    expect(z.locator(".map-board img")).to_be_visible(timeout=T)
+    z.wait_for_function("() => { const i = document.querySelector('.map-board img'); return i && i.complete && i.naturalWidth > 0; }",
+                        timeout=T)   # the image really decoded (CSP allows data: images)
+    z.click("[data-place='pc:Zahna']")
+    tok = z.locator(".map-token.pc.can")
+    expect(tok).to_be_visible(timeout=T)
+    expect(mm.locator(".map-token[data-token='pc:Zahna']")).to_be_visible(timeout=T)
+    before = mm.locator(".map-token[data-token='pc:Zahna']").get_attribute("style")
+    box = tok.bounding_box()
+    board = z.locator(".map-board").bounding_box()
+    z.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    z.mouse.down()
+    z.mouse.move(board["x"] + board["width"] * 0.25, board["y"] + board["height"] * 0.3, steps=6)
+    z.mouse.up()
+    mm.wait_for_function(
+        "b => { const t = document.querySelector(\".map-token[data-token='pc:Zahna']\"); return t && t.getAttribute('style') !== b; }",
+        arg=before, timeout=T)
+    # players cannot drag someone else's token: Mordai's (if placed) is not .can on Zahna's page
+    expect(z.locator(".map-token.can")).to_have_count(1)
+    _shot(mm, "map_board_mm")
 
 
 def test_no_front_end_errors(table, errors):

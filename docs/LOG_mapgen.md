@@ -279,3 +279,23 @@ initiative).
   passes **307**, so the suite stands at 2154 passing.
 
 - **Phase 3 brief drafted:** `docs/BRIEF_mapgen_phase3.md` (an in-app map board is recommended; four owner questions). No code until the owner answers.
+
+## 2026-11-13 — Phase 3 v1: the map board in the web app
+
+Built as a minimal, rules-free v1 on reversible defaults (see the status note in
+`BRIEF_mapgen_phase3.md`):
+- **Server:** `settings.maps_dir` (default repo root, env `MAPS_DIR`) scanned for
+  `**/mapgen/*.dd2vtt` (skipping .git, venvs and node_modules; at most 200);
+  ids are relative paths checked against the scan, so there's no path traversal.
+  WS: `map_list`, `map_set`, `map_clear` (MM), `token_move` (MM any token;
+  players only `pc:<self>`; positions clamped to the map, in squares),
+  `token_remove` (MM). `active_map` rides in both join states, so late joiners
+  see the board. `enemy_remove` also takes the foe's token off.
+- **Client:** `map.js` (board, picker, tray, drag that snaps to square centres,
+  shift-click to remove), hooked into both play views, plus four message handlers in `app.js`.
+- **Bug caught by the browser test:** the CSP (`default-src 'self'`) blocked the
+  map's `data:` image. A test that only checked the `<img>` was visible would
+  have missed it. Fixed with `img-src 'self' data:` (scripts untouched, pinned by
+  a test), and the e2e test now requires the image to actually decode.
+- **Tests:** test_map_board.py 18; e2e 13 passed (including the new board flow);
+  **full suite 2176 passed** (excluding e2e).

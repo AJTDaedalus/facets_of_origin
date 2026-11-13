@@ -56,4 +56,18 @@ for characters and active enemies, and the MM can reveal it room by room.
 4. Does this belong to a wider "5e in the Facets app" brief (character sheets,
    2014 rules), which hasn't been written yet?
 
-*Draft. Planner work starts only after the owner answers these.*
+*Draft.*
+
+## Status (2026-11-13): v1 built on defaults, all reversible
+
+Option A was built as a minimal, rules-free v1 while these questions wait. Each
+default below changes with a one-line edit if the owner answers differently:
+
+- Q1 (wanted at all?): built. Deleting `app/static/js/map.js` plus the `map_*`/`token_*`
+  handlers removes it cleanly.
+- Q2 (whose tokens?): both PCs and active enemies; players move only their own
+  token, and an enemy's token leaves when it leaves the tracker.
+- Q3 (fog?): **none**. Not built, pending the answer.
+- Q4 (wider 5e brief?): unanswered. The board is system-neutral plumbing.
+
+Details: `docs/LOG_mapgen.md` (Phase 3 v1).

@@ -247,4 +247,15 @@ the engine (DESIGN §8). City maps follow region maps.
   `l_shape` (cross-gabled wings); the town proof uses curved streets and branching
   lanes. *(3 tests)* Walls and hedges are left for later.
 
-**The web-app map view (Phase 3)** needs its own BRIEF under the 5e-in-the-app initiative.
+## Phase 3 v1 — map board in the web app (built on reversible defaults; see BRIEF_mapgen_phase3)
+
+- [x] **W1 Server.** `settings.maps_dir` (default: repo root; env `MAPS_DIR`);
+  WS `map_list`/`map_set`/`map_clear` (MM), `token_move` (players: own token
+  only), `token_remove` (MM); `session.active_map` in both join states; removed
+  enemies leave the board. *(tests/test_map_board.py, 18 tests)*
+- [x] **W2 Client.** `app/static/js/map.js`: board panel for the MM and players,
+  map picker, token tray, pointer drag snapped to square centres, shift-click to
+  remove. CSP allows `img-src 'self' data:` for the embedded map image (pinned by a test).
+- [x] **W3 Browser test.** `tests/e2e/test_ui_flows.py::test_map_board_shared_and_tokens_drag`:
+  real Chromium, the MM shows a map, a player places and drags their token, the MM sees it move.
+- [ ] **W4 Fog of war / room reveal.** Waits for owner Q3.
