@@ -10,7 +10,8 @@ from mapgen.export import render_recipe
 REPO = Path(__file__).resolve().parents[3]
 COURT = REPO / "conversions/dnd5e/oraga_night/maps/recipes/crystal_court.map.yaml"
 FACTS = REPO / "conversions/dnd5e/oraga_night/facts.yaml"
-PROOFS = [COURT, REPO / "maps/recipes/proof_cave.map.yaml", REPO / "maps/recipes/proof_ruins.map.yaml"]
+PROOFS = [COURT, REPO / "maps/recipes/proof_cave.map.yaml", REPO / "maps/recipes/proof_ruins.map.yaml",
+          REPO / "maps/recipes/proof_cellar.map.yaml"]
 
 
 @pytest.fixture(scope="module")

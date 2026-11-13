@@ -92,6 +92,8 @@ class GrassM(_M):
     speckle: float = PField(0.08, ge=0, le=1)
     tufts: float = PField(0.25, ge=0, le=3)
     tuft_color: Any = None
+    tuft_length: float = PField(0.45, gt=0)
+    tuft_width: float = PField(0.05, gt=0)
     light_tufts: float = PField(0.0, ge=0, le=3)
     light_color: Any = None
 
@@ -335,13 +337,13 @@ def _render(ctx, name, m, mask, seed):
             rgb = rgb * (1 - 0.35 * np.clip(sp, 0, 1))[..., None]
         if m.tufts > 0:
             region = np.ones(shape, np.float32)
-            ta = hatch_alpha(shape, region, fr.px(1.6 / m.tufts), fr.px(0.45), max(fr.px(0.05), 1),
+            ta = hatch_alpha(shape, region, fr.px(1.6 / m.tufts), fr.px(m.tuft_length), max(fr.px(m.tuft_width), 1),
                              3, seed + 4, angle=-75, angle_jitter=40)
             tc = resolve_color(st, m.tuft_color)[:3] if m.tuft_color else cols[0][:3] * 0.75
             rgb = rgb * (1 - 0.7 * ta[..., None]) + tc * 0.7 * ta[..., None]
         if m.light_tufts > 0:
             region = np.ones(shape, np.float32)
-            la = hatch_alpha(shape, region, fr.px(1.6 / m.light_tufts), fr.px(0.4), max(fr.px(0.05), 1),
+            la = hatch_alpha(shape, region, fr.px(1.6 / m.light_tufts), fr.px(m.tuft_length * 0.9), max(fr.px(m.tuft_width), 1),
                              3, seed + 6, angle=-70, angle_jitter=50)
             lc = resolve_color(st, m.light_color)[:3] if m.light_color else np.minimum(cols[-1][:3] * 1.18, 1)
             rgb = rgb * (1 - 0.6 * la[..., None]) + lc * 0.6 * la[..., None]

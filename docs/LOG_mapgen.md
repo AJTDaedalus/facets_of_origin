@@ -174,3 +174,28 @@ Review images (scratchpad, never committed, since the sheets contain comparator 
 `/tmp/claude-0/-root-facets-of-origin/eb46f7a0-189d-4dd6-848a-6d5e583a84cc/scratchpad/final/`
 (`proof_cave.png`, `proof_ruins.png`, `crystal_court.png`, and `sheet_*.png` beside the
 comparators). Rebuild any time with `cd software && python -m mapgen render <recipe>`.
+
+## 2026-11-13 — T33 round 2 (independent work while the court escalation waits)
+
+- **Proof D added:** `maps/recipes/proof_cellar.map.yaml`, a furnished generic
+  dungeon (guard room, storeroom, barracks, corridor, partitions with doors, a
+  secret door, stairs, keyed rooms), so the built-interior category has a fair
+  proof alongside the empty canon court. It renders in `test_m7_proofs.py`.
+- **Engine/style:** grass `tuft_length`/`tuft_width` (the old sub-pixel tufts
+  vanished on downscale); trees with more interior ink; rounder stalagmites with
+  cracks; a darker tan `dirt_path` that stands out from bare earth; a slightly
+  brighter `earth` highlight; textured `thicket` for the cave's forest edge;
+  quieter grids so Q6 < 0.5 everywhere.
+
+| Proof | Q1 | Q2 | Q3 | Q4 | Q5s | Q6 | Rubric (self) |
+|---|---|---|---|---|---|---|---|
+| B cave (C2) | 0.757 ✓ | 0.079 ✓ | 0.117 ✓ | 0.167 ✓ | 0.165 ✓ | 0.49 ✓ | ≈3.9 |
+| C ruins (C3) | 0.794 ✓ | 0.076 ✓ | 0.166 ✓ | 0.148 ✓ | 0.197 ✓ | 0.47 ✓ | ≈4.0 |
+| D cellar (C1) | 0.778 ✓ | 0.086 ✓ | 0.137 ✓ | 0.192 ✓ | 0.164 ✓ | 0.48 ✓ | ≈4.0 |
+| A court (C1) | 0.663 ✓ | 0.043 ✗ | 0.123 ✓ | 0.051 ✗ | 0.250 ✓ | 0.47 ✓ | ≈3.2 (escalated) |
+
+The three generic proofs now pass every automated band and sit at about the 4.0
+rubric bar on my reading; the owner's eye is the final gate. The ESCALATION above
+(court yardstick, TP74 palette) still stands; its question (c) about the grid is
+answered provisionally by the quiet grid now passing all bands on B, C and D.
+Tests: mapgen **263 passed**.

@@ -42,10 +42,10 @@ materials:
                    seam_color: "#4a3420", grain: 0.4}
   cobble:         {type: cobble, colors: ["#8b877e", "#a7a297", "#b5b0a5"], size: 1.1, mortar_color: "#5f5a51", dome: 0.3}
   grass:          {type: grass, colors: ["#5a6845", "#707f5a", "#87936e"], scale: 9, speckle: 0.1, tufts: 0.35}
-  meadow:         {type: grass, colors: ["#737a5f", "#989e85", "#bcc0aa"], scale: 4, speckle: 0.4, tufts: 2.2, light_tufts: 1.6, grain: 0.09, tuft_color: "#3f4630"}
-  thicket:        {type: grass, colors: ["#4f5a46", "#6a7660", "#8a947c"], scale: 3, speckle: 0.5, tufts: 2.6, light_tufts: 1.4, grain: 0.1, tuft_color: "#2f3826"}
-  earth:          {type: dirt, colors: ["#d2c7ab", "#e6dfca", "#f6f1e3"], scale: 18, octaves: 5, grain: 0.05, speckle: 0.05}
-  dirt_path:      {type: dirt, colors: ["#cbb995", "#ddcfae", "#ebe2c9"], scale: 6, grain: 0.06, speckle: 0.08}
+  meadow:         {type: grass, colors: ["#737a5f", "#989e85", "#bcc0aa"], scale: 4, speckle: 0.4, tufts: 2.2, light_tufts: 1.6, grain: 0.09, tuft_color: "#3f4630", tuft_length: 0.65, tuft_width: 0.09}
+  thicket:        {type: grass, colors: ["#4f5a46", "#6a7660", "#8a947c"], scale: 3, speckle: 0.5, tufts: 2.6, light_tufts: 1.4, grain: 0.1, tuft_color: "#2f3826", tuft_length: 0.6, tuft_width: 0.09}
+  earth:          {type: dirt, colors: ["#d2c7ab", "#e6dfca", "#f9f5ea"], scale: 18, octaves: 5, grain: 0.05, speckle: 0.05}
+  dirt_path:      {type: dirt, colors: ["#b7a27a", "#c9b68f", "#d8c9a6"], scale: 6, grain: 0.06, speckle: 0.08}
   water:          {type: water, shallow: water_shallow, deep: water_deep, depth: 4.0, ripples: 1.1, grain: 0.03}
   crystal_floor:  {type: ramp_noise, colors: ["#3b2c39", "#594556", "#7a6274", "#9b8394"], scale: 9, octaves: 5, kind: ridged,
                    contrast: 1.3, grain: 0.09, veins: 0.95, vein_color: "#f4dcea", vein_dark: "#140c12",

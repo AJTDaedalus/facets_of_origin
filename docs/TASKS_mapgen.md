@@ -187,7 +187,7 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
   stone cottages, one roofless with a fallen wall; tree clumps and brush on the
   edges." Built **through the skill workflow** (T34 draft first if ready, else by
   hand). *Accept:* both render; dd2vtt valid; checked by the T33 gate.
-- [!] **T33 Quality gate.** For A (category: built interior → C1/C4 bands),
+- [!] **T33 Quality gate.** *(2026-11-13: B, C and the added D pass all bands at ≈4.0 self-scored; A escalated to the owner, see LOG; awaiting owner review)* For A (category: built interior → C1/C4 bands),
   B (cave → C2/C5) and C (outdoor → C3): run `quality`, build contact sheets,
   score the rubric for ours and the comparator, tune the style/material params,
   repeat. Log every iteration's metrics + scores. *Accept:* all Q1–Q5 in band, Q6

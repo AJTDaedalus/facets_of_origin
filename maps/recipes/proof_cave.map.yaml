@@ -25,7 +25,7 @@ steps:
   - {op: roughen_geom, out: forest, src: forest_shape, amount: 0.9, scale: 5, id: forest_rough}
   - {op: cave_floor, src: cave}
   - {op: rasterize, out: forest_m, src: forest}
-  - {op: fill, mask: forest_m, material: grass, id: grass}
+  - {op: fill, mask: forest_m, material: thicket, id: grass}
   - {op: stroke, src: forest, weight: fine, opacity: 0.6, roughness: 0.2}
   - {op: combine, out: walk, of: [floor, forest_m], mode: max}
   # the stream: out of the north rock, down through the mouth and away south (drawn under the walls)

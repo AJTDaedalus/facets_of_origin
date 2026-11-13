@@ -149,11 +149,12 @@ def p_tree(s, rng):
     top = affinity.translate(_canopy(s * 0.2, int(rng.integers(6, 9)), rng), -s * 0.1, -s * 0.11)
     cx, cy = -s * 0.04, -s * 0.05
     branches = []
-    for i in range(int(rng.integers(5, 8))):
-        a = 2 * np.pi * i / 6 + rng.uniform(-0.3, 0.3)
-        L = s * rng.uniform(0.12, 0.2)
+    n = int(rng.integers(7, 11))
+    for i in range(n):
+        a = 2 * np.pi * i / n + rng.uniform(-0.3, 0.3)
+        L = s * rng.uniform(0.12, 0.24)
         branches.append((LineString([(cx, cy), (cx + L * np.cos(a), cy + L * np.sin(a))]), None, INK_FINE * 0.55))
-    return [(c, "foliage", INK_MED * 2.0), (mid, "foliage_light", INK_FINE * 0.9), (top, "foliage_top", 0)] + branches
+    return [(c, "foliage", INK_MED * 2.0), (mid, "foliage_light", INK_FINE * 0.9), (top, "foliage_top", INK_FINE * 0.6)] + branches
 
 
 def p_bush(s, rng):
