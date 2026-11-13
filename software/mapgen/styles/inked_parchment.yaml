@@ -1,0 +1,6 @@
+# inked_parchment: the default mapgen style (docs/DESIGN_mapgen.md §2.5).
+# Palette, ink weights, materials, op defaults and macros. Filled out in T14/T30.
+palette:
+  ink: "#2b2620"
+  parchment: "#e9dfc6"
+  floor: "#d9d2c3"

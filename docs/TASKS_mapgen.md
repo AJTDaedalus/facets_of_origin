@@ -18,32 +18,32 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## M0 — Skeleton
 
-- [ ] **T1 Package skeleton.** Create `software/mapgen/` (`__init__`, `__main__` with
+- [x] **T1 Package skeleton.** Create `software/mapgen/` (`__init__`, `__main__` with
   argparse subcommands `render|ops|quality|sheet` stubbed), `software/tests/mapgen/`
   (`__init__`, `conftest.py` with a `tmp_out` fixture). Add `opensimplex` to
   `software/requirements.txt`. Add `software/mapgen/.refcache/` to `.gitignore`.
   *Accept:* `python -m mapgen --help` lists 4 subcommands; 3 tests (import,
   help exit 0, unknown subcommand exits non-zero).
-- [ ] **T2 Recipe models.** `recipe.py`: `MapHeader` (title, width_ft, height_ft,
+- [x] **T2 Recipe models.** `recipe.py`: `MapHeader` (title, width_ft, height_ft,
   feet_per_square ∈ {5,10}, px_per_square 10–300, supersample 1–4, seed, include),
   `Step` (op, out?, id?, seed_offset?, extra params kept), `Recipe`; `load_recipe(path)`.
   *Accept:* ≥6 tests: valid load, missing header, negative size, bad
   feet_per_square, unknown top-level key, and error messages that name the field.
-- [ ] **T3 Units.** `units.py`: `Frame(header, draft=False)` with `ft_to_px`,
+- [x] **T3 Units.** `units.py`: `Frame(header, draft=False)` with `ft_to_px`,
   `px_shape`, the supersample factor and a draft override (35 px/sq, ss 1).
   *Accept:* ≥4 tests: a 60×40 ft map at 70 px/sq is 840×560 output and 1680×1120
   working at ss 2; draft shape; rounding.
-- [ ] **T4 Layer store and registry.** `layers.py` (the 4 typed layer classes,
+- [x] **T4 Layer store and registry.** `layers.py` (the 4 typed layer classes,
   store with get/put/free), `registry.py` (`@op(name, params=Model, inputs={...},
   output=Type)`, lookup, list). *Accept:* ≥6 tests: register/lookup, duplicate name
   error, type mismatch error, free, list order stable.
-- [ ] **T5 Engine.** `engine.py`: run steps in order, resolve `~mask` inversion
+- [x] **T5 Engine.** `engine.py`: run steps in order, resolve `~mask` inversion
   refs, validate types before execution (a dry pass), per-step RNG seeded by
   (map.seed, step id or index, seed_offset), a liveness pass that frees dead layers.
   *Accept:* ≥7 tests: missing ref names the step; dry pass catches a type error
   before any op runs; inserting a step with an `id` leaves later id'd steps'
   RNG unchanged; liveness frees.
-- [ ] **T6 Includes and macros.** Recipe `include:` merges style YAML (palette,
+- [x] **T6 Includes and macros.** Recipe `include:` merges style YAML (palette,
   materials, op defaults, macros). A macro is a named step list with `${param}`
   substitution, called as `{op: macro_name, ...}`. *Accept:* ≥6 tests: merge
   precedence (recipe wins), op defaults applied, macro expansion, unknown
@@ -51,18 +51,18 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## M1 — Geometry and masks
 
-- [ ] **T7 Geometry ops.** `rect, polygon, circle, ellipse, path(width, caps), union,
+- [x] **T7 Geometry ops.** `rect, polygon, circle, ellipse, path(width, caps), union,
   subtract, intersect, offset`. *Accept:* ≥3 tests per op group: exact areas in ft²,
   validity (`is_valid`), empty-result handling.
-- [ ] **T8 roughen_geom.** Densify to a `scale_ft/4` spacing, displace along the
+- [x] **T8 roughen_geom.** Densify to a `scale_ft/4` spacing, displace along the
   normals by opensimplex noise (amount_ft, scale_ft), repair with `buffer(0)`.
   *Accept:* ≥4 tests: deterministic per seed; area within ±10%; still valid;
   amount 0 is identity.
-- [ ] **T9 rasterize.** Geometry → Mask at working resolution with antialiasing
+- [x] **T9 rasterize.** Geometry → Mask at working resolution with antialiasing
   (render at the working px with Pillow at an extra ×2, then box-downsample to
   coverage). *Accept:* ≥4 tests: a 30×40 ft rect at 70 px/sq covers 420×560 px
   within 0.5%; edge pixels fractional; holes stay holes; an off-canvas shape is clipped.
-- [ ] **T10 Mask ops.** `grow, shrink` (distance-transform based, in ft), `blur`
+- [x] **T10 Mask ops.** `grow, shrink` (distance-transform based, in ft), `blur`
   (σ in ft), `threshold, invert, band(inner_ft, outer_ft), combine(max|min|mul|sub),
   roughen`(raster edge displacement). *Accept:* ≥3 tests each: grow by 5 ft
   widens a rect by 2×5 ft within one px; band area; idempotence where expected.
