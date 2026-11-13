@@ -37,16 +37,20 @@ steps:
   - {op: union, out: fields, of: [field_a, field_b]}
   - {op: stroke, src: fields, width: 2, color: "#5a5035", roughness: 1.5}
   # ---- roads, the market square
-  - {op: path, out: road_ew, points: [[-10, 330], [200, 318], [450, 300], [640, 292], [910, 268]], width: 24, smooth: 3}
-  - {op: path, out: road_ns, points: [[468, -10], [458, 150], [450, 300], [438, 450], [418, 610]], width: 20, smooth: 3}
+  - {op: path, out: road_ew, points: [[-10, 352], [140, 318], [300, 326], [450, 300], [600, 302], [760, 262], [910, 250]], width: 24, smooth: 3}
+  - {op: path, out: road_ns, points: [[488, -10], [470, 120], [452, 210], [450, 300], [428, 420], [440, 510], [410, 610]], width: 20, smooth: 3}
+  - {op: path, out: lane_nw, points: [[420, 275], [350, 215], [290, 140], [255, 40]], width: 13, smooth: 3}
+  - {op: path, out: lane_se, points: [[600, 302], [628, 380], [612, 452]], width: 12, smooth: 3}
   - {op: circle, out: square, center: [450, 300], r: 62}
-  - {op: union, out: streets, of: [road_ew, road_ns, square]}
+  - {op: union, out: streets, of: [road_ew, road_ns, lane_nw, lane_se, square]}
   - {op: roughen_geom, out: streets, src: streets, amount: 2.5, scale: 30, id: streets_rough}
   - {op: rasterize, out: streets_m, src: streets}
   - {op: fill, mask: streets_m, material: dirt_path, id: streets_dirt}
   - {op: stroke, src: streets, width: 1.5, dash: [10, 4, 2, 4], jitter: 0.5, opacity: 0.8}
-  - {op: path, out: road_lines_ew, points: [[-10, 330], [200, 318], [450, 300], [640, 292], [910, 268]], line: true, smooth: 3}
-  - {op: path, out: road_lines_ns, points: [[468, -10], [458, 150], [450, 300], [438, 450], [418, 610]], line: true, smooth: 3}
+  - {op: path, out: road_lines_ew, points: [[-10, 352], [140, 318], [300, 326], [450, 300], [600, 302], [760, 262], [910, 250]], line: true, smooth: 3}
+  - {op: path, out: road_lines_ns, points: [[488, -10], [470, 120], [452, 210], [450, 300], [428, 420], [440, 510], [410, 610]], line: true, smooth: 3}
+  - {op: path, out: lane_lines_nw, points: [[420, 275], [350, 215], [290, 140], [255, 40]], line: true, smooth: 3}
+  - {op: path, out: lane_lines_se, points: [[600, 302], [628, 380], [612, 452]], line: true, smooth: 3}
   # ---- the stream, under the east road, with its bridge
   - {op: rect, out: everywhere, x: 0, y: 0, w: 900, h: 600}
   - {op: rasterize, out: all_m, src: everywhere}
@@ -57,8 +61,9 @@ steps:
   - {op: rasterize, out: stream_keep, src: everywhere}
   - {op: path, out: stream_g2, points: [[705, -10], [690, 150], [722, 290], [700, 450], [735, 610]], width: 40, smooth: 3}
   - {op: union, out: keep_clear, of: [square, temple, stream_g2, fields]}
-  - {op: frontage, out: houses, roads: [road_lines_ew, road_lines_ns], road_width: 28, setback: 6,
-     width: [16, 30], depth: [16, 28], gap: [4, 12], fill: 0.95, avoid: keep_clear, id: lots}
+  - {op: frontage, out: houses, roads: [road_lines_ew, road_lines_ns, lane_lines_nw, lane_lines_se], road_width: 26,
+     setback: 4, setback_jitter: 7, rotate_jitter: 9, l_shape: 0.3,
+     width: [16, 30], depth: [16, 28], gap: [4, 14], fill: 0.9, avoid: keep_clear, id: lots}
   - {op: buildings, src: houses, id: houses}
   - {op: buildings, src: temple, roofs: ["#6b6f7c"], id: temple}
   # ---- woods to the north-east, scattered trees

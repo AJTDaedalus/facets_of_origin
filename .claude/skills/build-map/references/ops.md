@@ -735,7 +735,7 @@ Draw building footprints as gabled roofs seen from above: a ridge along the long
 
 ### `frontage` → Geometry
 
-Building footprints along both sides of street lines: each faces its street, `setback` feet back from a `road_width` road, random `width`/`depth`/`gap` ranges; `fill` is the share of frontage built up. Stays clear of every road, `avoid`, and other lots, and inside `within`.
+Building footprints along both sides of street lines: each faces its street, `setback` feet back from a `road_width` road, random `width`/`depth`/`gap` ranges; `fill` is the share of frontage built up; `rotate_jitter`/`setback_jitter` loosen the rows and `l_shape` adds cross-gabled wings. Stays clear of every road, `avoid`, and other lots, and inside `within`.
 
 | param | type | default |
 |---|---|---|
@@ -746,6 +746,9 @@ Building footprints along both sides of street lines: each faces its street, `se
 | `depth` | list[float] | `[16.0, 28.0]` |
 | `gap` | list[float] | `[4.0, 14.0]` |
 | `fill` | float | `0.85` |
+| `rotate_jitter` | float | `0.0` |
+| `setback_jitter` | float | `0.0` |
+| `l_shape` | float | `0.0` |
 | `within` | str \| None | — |
 | `avoid` | str \| None | — |
 

@@ -26,6 +26,9 @@ class FrontageP(ParamModel):
     depth: list[float] = PField([16.0, 28.0], min_length=2, max_length=2)
     gap: list[float] = PField([4.0, 14.0], min_length=2, max_length=2)
     fill: Unit = 0.85
+    rotate_jitter: float = PField(0.0, ge=0, le=45)
+    setback_jitter: float = PField(0.0, ge=0)
+    l_shape: Unit = 0.0
     within: Ref | None = None
     avoid: Ref | None = None
 
@@ -33,7 +36,7 @@ class FrontageP(ParamModel):
 @op("frontage", params=FrontageP, inputs={"roads": Geometry, "within": Geometry, "avoid": Geometry},
     output=Geometry, group="8 town")
 def frontage(ctx, p, roads, within=None, avoid=None):
-    """Building footprints along both sides of street lines: each faces its street, `setback` feet back from a `road_width` road, random `width`/`depth`/`gap` ranges; `fill` is the share of frontage built up. Stays clear of every road, `avoid`, and other lots, and inside `within`."""
+    """Building footprints along both sides of street lines: each faces its street, `setback` feet back from a `road_width` road, random `width`/`depth`/`gap` ranges; `fill` is the share of frontage built up; `rotate_jitter`/`setback_jitter` loosen the rows and `l_shape` adds cross-gabled wings. Stays clear of every road, `avoid`, and other lots, and inside `within`."""
     rng = ctx.rng
     road_lines = [l for r in roads for l in lines_of(r.geom)]
     keep_out = shapely.unary_union([l.buffer(p.road_width / 2 + 0.5) for l in road_lines])
@@ -55,14 +58,28 @@ def frontage(ctx, p, roads, within=None, avoid=None):
                 b = np.array(ln.interpolate(min(mid + 1, L)).coords[0])
                 t = (b - a) / (np.linalg.norm(b - a) or 1)
                 n = np.array([-t[1], t[0]]) * side
-                base = c + n * (p.road_width / 2 + p.setback)
+                sb = p.setback + (rng.uniform(0, p.setback_jitter) if p.setback_jitter else 0.0)
+                base = c + n * (p.road_width / 2 + sb)
                 rect = Polygon([base - t * w / 2, base + t * w / 2, base + t * w / 2 + n * d, base - t * w / 2 + n * d])
-                if (rng.random() < p.fill and area.contains(rect) and not rect.intersects(keep_out)
-                        and not rect.buffer(1.5).intersects(union)):
-                    placed.append(rect)
-                    union = union.union(rect)
+                parts = [rect]
+                if p.l_shape and rng.random() < p.l_shape:
+                    ww = w * rng.uniform(0.35, 0.5)
+                    end = rng.choice([-1, 1])
+                    wbase = base + t * end * (w / 2 - ww / 2) + n * d * 0.8
+                    wing = Polygon([wbase - t * ww / 2, wbase + t * ww / 2, wbase + t * ww / 2 + n * d * 0.7,
+                                    wbase - t * ww / 2 + n * d * 0.7])
+                    parts.append(wing)
+                if p.rotate_jitter:
+                    ang = rng.uniform(-p.rotate_jitter, p.rotate_jitter)
+                    ctr = rect.centroid
+                    parts = [affinity.rotate(q, ang, origin=ctr) for q in parts]
+                whole = shapely.unary_union(parts)
+                if (rng.random() < p.fill and area.contains(whole) and not whole.intersects(keep_out)
+                        and not whole.buffer(1.5).intersects(union)):
+                    placed.extend(parts)
+                    union = union.union(whole)
                 pos += w + rng.uniform(*p.gap)
-    return Geometry(shapely.MultiPolygon(placed) if placed else shapely.MultiPolygon())
+    return Geometry(shapely.GeometryCollection(placed) if placed else shapely.MultiPolygon())
 
 
 class BuildingsP(ParamModel):

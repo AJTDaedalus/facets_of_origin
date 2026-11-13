@@ -258,3 +258,8 @@ initiative).
   is exactly this kind of call. Gap: the layout is too regular (straight streets,
   houses in rows); Phandalin is organic. That's task C5.
 - mapgen tests: **300 passed**.
+- **C5 (organic layout):** `frontage` gets rotate/setback jitter and L-shaped
+  cross-gabled wings; the town proof now has curving streets and two lanes. Final:
+  Q1 0.740 ✓, Q2 0.034 ✓, Q3 0.120 ✗, Q4 0.051 ✓, Q5s 0.259 ✓; rubric ≈3.8
+  (legibility 4, surface 3.5, depth 3.5, line 4, palette 4, grid n/a, buildings 4,
+  shelf 3.5). mapgen **303 passed**.

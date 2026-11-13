@@ -54,6 +54,29 @@ class TestFrontage:
         assert all(not p.intersects(plaza) and p.bounds[2] <= 300.01 for p in g.geoms)
 
 
+class TestOrganic:
+    def _lots(self, **kw):
+        return layer(ROAD + [{"op": "frontage", "out": "lots", "roads": ["road"], "road_width": 20, "id": "f", **kw}],
+                     "lots", **TOWN).geom
+
+    def test_rotate_jitter_tilts_buildings(self):
+        import math
+        def angles(g):
+            out = []
+            for p in g.geoms:
+                c = list(p.minimum_rotated_rectangle.exterior.coords)
+                out.append(round(math.degrees(math.atan2(c[1][1] - c[0][1], c[1][0] - c[0][0])) % 90, 1))
+            return set(out)
+        assert len(angles(self._lots(rotate_jitter=12))) > len(angles(self._lots())) 
+
+    def test_l_shape_adds_wings(self):
+        assert len(self._lots(l_shape=1.0).geoms) > len(self._lots(l_shape=0.0).geoms) * 1.2
+
+    def test_wings_clear_of_road(self):
+        road = shapely.geometry.LineString([(0, 150), (400, 150)]).buffer(10)
+        assert all(not p.intersects(road) for p in self._lots(l_shape=1.0, rotate_jitter=10).geoms)
+
+
 class TestBuildings:
     def test_buildings_paint_roofs(self):
         store, col = run([{"op": "canvas", "out": "canvas", "color": "#ffffff"}, *ROAD,

@@ -243,7 +243,8 @@ the engine (DESIGN §8). City maps follow region maps.
   ink, per-building roof colour. *(2 tests)*
 - [x] **C4 Proof F (town).** `maps/recipes/proof_town.map.yaml`, measured against
   C6 Phandalin (LOG).
-- [ ] **C5 Organic layout (next).** Curved streets with branching lanes, irregular
-  plots, L-shaped buildings, walls and hedges. This closes the "too regular" gap.
+- [x] **C5 Organic layout.** `frontage` gets `rotate_jitter`, `setback_jitter` and
+  `l_shape` (cross-gabled wings); the town proof uses curved streets and branching
+  lanes. *(3 tests)* Walls and hedges are left for later.
 
 **The web-app map view (Phase 3)** needs its own BRIEF under the 5e-in-the-app initiative.
