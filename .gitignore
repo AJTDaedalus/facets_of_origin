@@ -53,3 +53,9 @@ software/tests/_output/
 
 # Generated print packets (conversions/dnd5e/oraga_night/tools/build_print.py); rebuild, never commit
 conversions/dnd5e/oraga_night/print/
+
+# Oraga art: kept local, not in git (owner, 2026-11-13: 129 MB of PNGs)
+conversions/dnd5e/oraga_night/art/
+
+# Private reference images (third-party source)
+references/house_raunu.jpeg
