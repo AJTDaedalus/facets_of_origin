@@ -71,3 +71,19 @@ Running execution log for `docs/TASKS_mapgen.md`. Newest at the bottom.
   Defect noted for T30: rough walls spike at very sharp polygon corners (mitred
   buffer).
 - Tests: **222 passed**.
+
+## 2026-11-13 — M6 (T27–T29)
+
+- **T27:** `mapgen/quality.py`: Q1–Q5 (Q5 split into Q5s mean saturation and
+  Q5h hue families) on images normalised to 50 px/square with crop + exclude
+  boxes; `q6` grid/wall contrast ratio for our renders.
+- **T28:** `comparators.yaml` (C1–C7). Grid scales measured by spectral
+  periodicity of edge energy and checked by eye on full-res crops with tick
+  marks: C1 82, C2 150, C3 150 (10-ft squares), C4 77, C5 55 px/sq (the x-axis
+  spectrum picked the half period; y and the eye give 55). C6 from its scale bar;
+  C7 normalised by width. `python -m mapgen quality --baseline --research
+  docs/RESEARCH_mapgen_comparators.md` wrote `quality_bands.yaml` and the
+  RESEARCH table (numbers only; ~60 s to read the packs). The live-comparator
+  test ran here (packs present) and matches the recorded values.
+- **T29:** `make_sheet` / `python -m mapgen sheet` (refuses any path inside the repo).
+- Tests: **239 passed**.

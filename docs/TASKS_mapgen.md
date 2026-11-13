@@ -149,18 +149,18 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## M6 — Quality bar
 
-- [ ] **T27 Metrics.** `quality.py`: normalise to 50 px/square, crop box, compute
+- [x] **T27 Metrics.** `quality.py`: normalise to 50 px/square, crop box, compute
   Q1–Q5 (DESIGN §7.2); Q6 for our own renders using the grid mask. *Accept:*
   ≥3 tests per metric on synthetic images (flat grey has Q2≈0; a checkerboard has
   high Q4; a two-colour image has 2 hue clusters).
-- [ ] **T28 Comparator manifest and baseline.** `comparators.yaml` for C1–C7 (zip
+- [x] **T28 Comparator manifest and baseline.** `comparators.yaml` for C1–C7 (zip
   path, member, category, px_per_square measured by counting grid lines over
   ≥10 squares, crop box excluding frame/legend). A script computes metrics and
   writes per-category bands to `docs/RESEARCH_mapgen_comparators.md` (numbers +
   method only) and `mapgen/quality_bands.yaml`. *Accept:* the test computing live
   comparator metrics skips without `MAPGEN_REF_DIR`; the bands file is loaded by
   `quality` and has every Phase-1 category; nothing image-derived but numbers is committed.
-- [ ] **T29 Contact sheet.** `python -m mapgen sheet <our.png> --vs C2` → side-by-side
+- [x] **T29 Contact sheet.** `python -m mapgen sheet <our.png> --vs C2` → side-by-side
   at matched scale, written only to a scratch path given by `--out` (refuses a
   path inside the repo). *Accept:* ≥3 tests (with a synthetic comparator): the
   output shape, matched scale, refusal of a repo path.
