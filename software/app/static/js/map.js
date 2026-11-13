@@ -123,6 +123,7 @@ function onTokenDown(ev) {
   ev.preventDefault();
   el.setPointerCapture(ev.pointerId);
   MAPUI.dragging = true;
+  const mapAtStart = m.id;
   const box = () => MAPUI.el.getBoundingClientRect();   // the image's own box, so scrolling can't skew it
   let last = { x: ev.clientX, y: ev.clientY }, moved = false;
   el.onpointermove = e => {
@@ -140,7 +141,9 @@ function onTokenDown(ev) {
     MAPUI.dragging = false;
     // pointerup commits where the pointer is; a lost capture (e.g. the board was re-rendered
     // under the drag) commits the last position seen; only an explicit cancel discards it
-    const commit = e.type === 'pointerup' || (e.type === 'lostpointercapture' && moved);
+    // a drop onto a map that has since been swapped or taken down is discarded
+    const sameMap = state.map && state.map.id === mapAtStart;
+    const commit = sameMap && (e.type === 'pointerup' || (e.type === 'lostpointercapture' && moved));
     if (commit) {
       const px = e.type === 'pointerup' ? e.clientX : last.x;
       const py = e.type === 'pointerup' ? e.clientY : last.y;

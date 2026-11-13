@@ -355,3 +355,23 @@ class TestVerifyRound:
         assert [x["id"] for x in m["maps"]] == [MAP_ID] and m["truncated"] is False
         monkeypatch.setattr(ws, "_MAX_DIRS", 1)
         assert first(call(t.mm, {"type": "map_list"}), "map_list")["truncated"] is True
+
+
+
+class TestFollowUps:
+    def test_folders_named_art_or_print_are_scanned(self, t, maps_dir):
+        mid = write_map(maps_dir, "x", {"resolution": GOOD_RES, "image": PNG})
+        (maps_dir / "art" / "mapgen").mkdir(parents=True)
+        (maps_dir / "art" / "mapgen" / "y.dd2vtt").write_text(json.dumps({"resolution": GOOD_RES, "image": PNG}))
+        (maps_dir / "art" / "mapgen" / "y.meta.json").write_text(json.dumps({"title": "y", "width_ft": 10,
+                                                                             "height_ft": 10, "feet_per_square": 5}))
+        ids = [m["id"] for m in first(call(t.mm, {"type": "map_list"}), "map_list")["maps"]]
+        assert "art/mapgen/y.dd2vtt" in ids
+
+    def test_deleting_a_session_forgets_its_throttle_records(self, t, client):
+        from app.api import websocket as ws
+        set_map(t)
+        call(t.mm, {"type": "token_move", "token": "pc:Zahna", "x": 1, "y": 1})
+        assert any(k[0] == t.sid for k in ws._last_move)
+        r = client.delete(f"/api/sessions/{t.sid}", headers={"Authorization": f"Bearer {t.mm_token}"})
+        assert r.status_code == 200 and not any(k[0] == t.sid for k in ws._last_move)

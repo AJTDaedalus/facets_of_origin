@@ -301,7 +301,7 @@ const HANDLE = {
     if (!state.feed.length) (d.roll_log || []).slice(-20).forEach(r => feedRoll(r.player_name, r, true));
     const first = !$('.tab.on');
     if (first) switchTab(isMM() ? 'play' : (state.me ? 'play' : 'build'));
-    else renderTab();
+    else refresh();                      // drag-safe: deferred while a map token is being dragged
   },
   error(m) { notify(m.message, 'error', 7000); },
   pong() {},

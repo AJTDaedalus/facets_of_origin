@@ -100,3 +100,46 @@ Scratch reproductions are in `/tmp/claude-0/-root-facets-of-origin/eb46f7a0-189d
 | R13 (partial) | A macro call that passes `out` to a macro whose body never uses `${out}` raises `RecipeError`. A macro that does use `${out}` works as before. Tested both ways. |
 
 Tests: full suite (excluding e2e) **2267 passed**; e2e **13 passed**.
+
+---
+
+## Round 2 verification (commit `e3fb2d8`, independent verifier, 2026-11-13)
+
+Checked against the code. Reproductions are in the session scratchpad: `capture2.py` loads the real
+`map.js` and `style.css` with stubbed globals, and the board WebSocket checks ran from a temporary
+test file under `software/tests/`, deleted afterwards. The only tracked file touched is this section.
+
+**Test runs:** `tests/mapgen tests/test_map_board.py tests/test_websocket.py`: **656 passed**. `tests/e2e/test_ui_flows.py`: **13 passed**.
+
+### Status
+
+| ID | Status | Evidence |
+|---|---|---|
+| N1 / R6 | **RESOLVED** | `capture2.py` (real map.js): a `refresh(['play'])` during a drag is deferred (`dragging true, pending true`). A direct `renderTab()` mid-drag, which the `state` handler still does on reconnect or `next_session`, now drops capture. `lostpointercapture` then commits the last position (`sent [{token_move … x 5.5, y 4.5}]`), clears `dragging`, and runs the pending refresh. Nothing stays stuck. The `done` guard stops the implicit `lostpointercapture` after `pointerup` from committing twice. The e2e test covers the deferred path. |
+| N2 | **RESOLVED** | After `fog_set` the MM gets `['fog_state']` and P1 gets `['board_patch']`. No message carries the image. `map_state` posts "The map is up" only when the map id changes. |
+| N3 | **RESOLVED** | A foe moved twice inside the fog: P1 receives nothing (`[]`). Moving into an unrevealed area: nothing. Reveal: a `board_patch` with the foe. Moving from visible to hidden: one `token_removed`. |
+| N4 | **RESOLVED** | Eight player moves in one burst: the MM gets x = `[0.0, 7.0]` (leading plus trailing, final position kept). Throttle keys are (session, token). A pending flush followed by `map_clear`, or by `map_set` with tokens reset, sends nothing and doesn't bring the token back (`_broadcast_move` re-reads `session.active_map` and returns when the token is absent). No exception or unraisable warning appeared. |
+| N5 | **RESOLVED** (note R2-2) | A scan of this checkout takes 0.003 s, is not truncated, and finds no maps (none rendered). `truncated` reaches the MM as a notice. |
+| N6 | **RESOLVED** | `touch-action: none` is on `.map-token` only. |
+| N7 | **RESOLVED** | The e2e test asserts `img > box + 50` before comparing the fog. |
+| R13 | **RESOLVED** | `out` on a macro call raises unless the macro body contains `${out}`. Body values are the only place `_subst` substitutes (param defaults are not substituted), and nested calls pass `out: ${out}` through the parent body, so the check has no false positive for macros that pass `out` along. No macro in the repo uses `${out}` today, and no recipe passes `out` to a macro. |
+
+### Remaining notes from round 2 (all low, none blocking)
+
+- **R2-1 (low): flush tasks are fire-and-forget.** `asyncio.get_running_loop().create_task(flush())` in `_token_move` keeps no reference. In practice the sleeping task is kept alive through its timer handle, and `_broadcast_move` can't raise (manager sends swallow errors), so I saw no leak or lost exception. A module-level `set()` of tasks with `add_done_callback(discard)` would follow the asyncio docs. `_last_move` is cleared on `map_set` and `map_clear`, but not when a session ends with a map still up. That's one small dict per token, so it's negligible.
+- **R2-2 (low): the scan prunes the names `print` and `art` at any depth.** Today these match only the gitignored `conversions/dnd5e/oraga_night/print/` and `/art/` (painted art, PDFs), which is the intent. But a recipe kept in, say, `maps/art/` or `adventures/x/print/` would render to `…/art/mapgen/` and never appear in `map_list`, and since this isn't a cap hit, `truncated` stays false. Prefer anchored paths (e.g. skip `conversions/*/*/art` relative to `maps_dir`), or document the reserved names in the build-map skill.
+- **R2-3 (low): a `state` message mid-drag ends the drag early.** The `state` handler calls `renderTab()` directly rather than `refresh()`, on reconnect and after `next_session`'s `_push_state`. The move commits at the last seen square and the board stays consistent, so the user only has to drag again. Routing that call through `refresh()` would defer it like everything else.
+- **R2-4 (low): a map change mid-drag commits against the old map.** `finish()` closes over the old `m` and the old `MAPUI.el` box. If the MM swaps or clears the map while a player is dragging, the drop sends a `token_move` sized for the old map: on the new map the token reappears, clamped; after a clear the player sees a "No map on the board" error. Fix: in `finish()`, skip the commit when `state.map` is not `m` or the map id changed.
+
+### Verdict
+
+No R- or N-finding remains open, and no medium-or-higher regression came in with `e3fb2d8`. R2-1 to R2-4 are low-severity polish and can be follow-ups. **Clean to merge.** Both suites are green (656 + 13).
+
+### Round 2 follow-ups: resolved before merge (2026-11-13)
+
+- **Trailing tasks:** strong references kept in `_move_tasks` (discarded when done). Throttle records are cleared when a session is deleted (tested).
+- **Pruned names:** `print` and `art` removed from the scan's skip set (the scan is fast now). A map folder named `art` is listed (tested).
+- **Reconnect mid-drag:** the `state` handler re-renders through `refresh()`, which defers during a drag.
+- **Map change mid-drag:** the drop is discarded if the map id changed since the drag began.
+
+Tests: full suite (excluding e2e) **2269 passed**; e2e **13 passed**.

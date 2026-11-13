@@ -1451,13 +1451,14 @@ import re as _re
 from app.game.session import player_map_view, token_visible_to_players
 
 _SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".pytest_cache", "data",
-              "_test_data", "_output", "print", "art"}
+              "_test_data", "_output"}
 _MAX_DIRS = 100_000
 _MAP_CACHE: dict = {"root": None, "maps": {}, "truncated": False}
 _B64 = _re.compile(r"^[A-Za-z0-9+/]+={0,2}$")
 _MAGIC = ((b"\x89PNG", "png"), (b"\xff\xd8\xff", "jpeg"), (b"RIFF", "webp"))
-_MOVE_GAP = 0.033            # seconds; token_move throttle per player
+_MOVE_GAP = 0.033            # seconds; token_move coalescing window per token
 _last_move: dict = {}
+_move_tasks: set = set()     # strong refs to trailing-broadcast tasks (asyncio keeps only weak ones)
 
 
 def _scan_maps_sync(root: Path) -> tuple[dict[str, Path], bool]:
@@ -1701,7 +1702,9 @@ async def _token_move(ctx: Ctx) -> None:
         entry["pending"] = False
         entry["t"] = time.monotonic()
         await _broadcast_move(sid, session, token, entry["visible"])
-    asyncio.get_running_loop().create_task(flush())
+    task = asyncio.get_running_loop().create_task(flush())
+    _move_tasks.add(task)
+    task.add_done_callback(_move_tasks.discard)
 
 
 def _forget_moves(session_id: str) -> None:
