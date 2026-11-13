@@ -10,7 +10,7 @@ from pydantic import Field as PField
 from shapely.geometry import LineString, Point as SPoint, Polygon, box
 
 from ..color import composite_inplace, composite_patch, resolve_color
-from ..layers import Image, Mask
+from ..layers import Geometry, Image, Mask
 from ..registry import ParamModel, op
 from .common import Point, PosFt, Ref, Unit
 from .masks import Patch, rasterize_patch
@@ -18,7 +18,11 @@ from .paint import stroke_geometry_alpha
 
 Corner = Union[Literal["ne", "nw", "se", "sw"], Point]
 FONT_FILES = {False: ["DejaVuSerif.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"],
-              True: ["DejaVuSerif-Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"]}
+              True: ["DejaVuSerif-Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"],
+              "italic": ["DejaVuSerif-Italic.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Italic.ttf",
+                         "DejaVuSerif.ttf"],
+              "bolditalic": ["DejaVuSerif-BoldItalic.ttf",
+                             "/usr/share/fonts/truetype/dejavu/DejaVuSerif-BoldItalic.ttf", "DejaVuSerif-Bold.ttf"]}
 
 
 @lru_cache(maxsize=64)
@@ -327,3 +331,80 @@ def legend(ctx, p, into):
         name = ctx.collector.legend.get(k, k).capitalize()
         tx = x_icon + p.size * 1.1 + len(name) * p.size * 0.31
         draw_text(ctx, into.data, name, (tx, y), p.size, p.color, halo=None)
+
+
+class PathLabelP(ParamModel):
+    into: Ref = "canvas"
+    text: str = PField(min_length=1)
+    points: list[Point] | None = None
+    src: Ref | None = None
+    size: PosFt = 2.0
+    spacing: float = PField(1.0, gt=0.3, le=4)
+    offset: float = 0.0
+    color: Any = "ink"
+    halo: Any = "parchment"
+    halo_ft: float = PField(0.25, ge=0)
+    style: Literal["regular", "bold", "italic", "bolditalic"] = "italic"
+    align: Literal["start", "center", "end"] = "center"
+
+
+@op("path_label", params=PathLabelP, inputs={"into": Image, "src": Geometry}, group="7 overlay")
+def path_label(ctx, p, into, src=None):
+    """Text set along a line (rivers, roads, mountain ranges, forests): each letter follows the curve. Give `points` (smoothed) or a line geometry `src`; `offset` shifts it sideways; `spacing` loosens the letters."""
+    from shapely.geometry import LineString as LS
+    from ..recipe import RecipeError
+    if p.points:
+        from .geometry import _chaikin
+        line = LS(_chaikin(p.points, 3)) if len(p.points) > 2 else LS(p.points)
+    elif src is not None:
+        g = src.geom
+        line = g if g.geom_type == "LineString" else max(getattr(g, "geoms", [g]), key=lambda x: x.length)
+        if line.geom_type != "LineString":
+            line = line.exterior if hasattr(line, "exterior") else line
+    else:
+        raise RecipeError("path_label needs `points` or a line `src`")
+    if p.offset:
+        line = line.offset_curve(p.offset)
+    fr = ctx.frame
+    key = {"regular": False, "bold": True}.get(p.style, p.style)
+    fpx = int(round(fr.px(p.size)))
+    f = None
+    for fn in FONT_FILES[key]:
+        try:
+            f = ImageFont.truetype(fn, max(fpx, 6))
+            break
+        except OSError:
+            continue
+    f = f or font(fpx)
+    widths = [f.getlength(ch) / fr.scale * p.spacing for ch in p.text]
+    total = sum(widths)
+    L = line.length
+    start = {"start": 0.0, "center": max((L - total) / 2, 0), "end": max(L - total, 0)}[p.align]
+    # read left-to-right: flip the line if it runs westward
+    a0, a1 = line.coords[0], line.coords[-1]
+    if a1[0] < a0[0]:
+        line = LS(list(line.coords)[::-1])
+    col = resolve_color(ctx.style, p.color)
+    try:
+        hc = resolve_color(ctx.style, p.halo) if p.halo is not None else None
+    except Exception:
+        hc = resolve_color(ctx.style, "#efe6cf")
+    pos = start
+    hp = int(fr.px(p.halo_ft)) if hc is not None else 0
+    for ch, w in zip(p.text, widths):
+        mid = min(pos + w / 2, L)
+        c = np.array(line.interpolate(mid).coords[0])
+        a = np.array(line.interpolate(max(mid - w / 2, 0)).coords[0])
+        b = np.array(line.interpolate(min(mid + w / 2, L)).coords[0])
+        ang = np.degrees(np.arctan2(b[1] - a[1], b[0] - a[0]))
+        if ch.strip():
+            l, t, r, bt = f.getbbox(ch)
+            pad = hp + 3
+            img = PImage.new("L", (r - l + 2 * pad, bt - t + 2 * pad), 0)
+            ImageDraw.Draw(img).text((pad - l, pad - t), ch, font=f, fill=255)
+            rot = img.rotate(-ang, resample=PImage.BICUBIC, expand=True)
+            if hc is not None and hp > 0:
+                halo = rot.filter(ImageFilter.MaxFilter(hp * 2 + 1)).filter(ImageFilter.GaussianBlur(0.6))
+                _place(into.data, np.asarray(halo, np.float32) / 255, c * fr.scale, hc, 0.85)
+            _place(into.data, np.asarray(rot, np.float32) / 255, c * fr.scale, col)
+        pos += w

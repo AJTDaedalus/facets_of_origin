@@ -201,7 +201,7 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
   list and the regenerate line. *Accept:* the no-diff test of `ops.md` against
   `python -m mapgen ops --markdown`; a dry run: the skill builds a fresh owner
   description end to end in ≤5 iterations (logged).
-- [~] **T35 Wrap-up.** CLAUDE.md Reference Trigger Index row ("Build a map →
+- [~] **T35 Wrap-up.** *(all done except the PR, which waits for the owner's review and a push go-ahead; full suite 2154 passing 2026-11-13)* CLAUDE.md Reference Trigger Index row ("Build a map →
   `/build-map`"); full suite run from `software/` with the pass/fail count in the LOG;
   PR to `main` via `gh`, after scanning main..branch for private canon (memory rule).
 

@@ -690,6 +690,25 @@ A key box listing the props and features used so far, with a small icon for each
 | `fill` | Any | `"parchment"` |
 | `exclude` | list[str] | `[]` |
 
+### `path_label` → paints in place
+
+Text set along a line (rivers, roads, mountain ranges, forests): each letter follows the curve. Give `points` (smoothed) or a line geometry `src`; `offset` shifts it sideways; `spacing` loosens the letters.
+
+| param | type | default |
+|---|---|---|
+| `into` | str | `"canvas"` |
+| `text` | str | **required** |
+| `points` | list[Annotated[list[float], FieldInfo(annotation=None, required=True, metadata=[MinLen(min_length=2), MaxLen(max_length=2)])]] \| None | — |
+| `src` | str \| None | — |
+| `size` | float | `2.0` |
+| `spacing` | float | `1.0` |
+| `offset` | float | `0.0` |
+| `color` | Any | `"ink"` |
+| `halo` | Any | `"parchment"` |
+| `halo_ft` | float | `0.25` |
+| `style` | Literal['regular', 'bold', 'italic', 'bolditalic'] | `"italic"` |
+| `align` | Literal['start', 'center', 'end'] | `"center"` |
+
 ### `scale_bar` → paints in place
 
 The "1 square = 5 feet" note at a corner.

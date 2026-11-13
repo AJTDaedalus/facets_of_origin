@@ -218,6 +218,11 @@ macros:
     steps:
       - {op: field_to_mask, out: "${name}_m", src: "${src}", lo: "${level}", hi: "${level}"}
       - {op: combine, out: "${name}_m", of: ["${name}_m", "${within}"], mode: min}
+      - {op: grow, out: "${name}_mass", src: "${name}_m", by: 1.2}
+      - {op: blur, out: "${name}_mass", src: "${name}_mass", sigma: 1.0}
+      - {op: fill, mask: "${name}_mass", color: "#8a7558", opacity: 0.55, blend: multiply, id: "${name}_shade"}
+      - {op: hatch, mask: "${name}_mass", spacing: 0.9, length: 1.0, width: 0.06, lines: 3, angle: 60, angle_jitter: 30,
+         color: "#4a3c2c", opacity: 0.5, id: "${name}_hatch"}
       - {op: scatter, kind: mountain, mask: "${name}_m", density: "${density}", spacing: "${spacing}", size: "${size}",
          size_jitter: 0.3, rotate_jitter: 0, shadow: 0.3, sort_y: true, id: "${name}_glyphs"}
 

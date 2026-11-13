@@ -65,6 +65,15 @@ steps:
   - {op: prop, kind: town, at: [35, 53], size: 1.2, id: town1}
   - {op: prop, kind: town, at: [41, 15], size: 1.2, id: town2}
   - {op: prop, kind: ruin_marker, at: [29, 66], size: 1.0, id: ruin}
+  # ---- labels: plain descriptive words only (the description gives no names)
+  - {op: path_label, text: "the river", points: [[22, 45.3], [28, 42.6], [34, 36], [40, 38.5]], size: 1.4,
+     style: italic, color: "#24485a", offset: -1.0}
+  - {op: path_label, text: "the forest", points: [[27, 30], [33, 27], [41, 31]], size: 2.0, style: bolditalic,
+     color: "#1e3018", halo: "#9fb47c"}
+  - {op: path_label, text: "the mountains", points: [[47, 58], [52, 50], [50, 40]], size: 1.9, style: bolditalic,
+     color: "#3b2c1e"}
+  - {op: path_label, text: "the sea", points: [[3, 28], [4, 40]], size: 2.4, style: italic, color: "#1f4253",
+     halo: "#9cbfc5"}
   # ---- hexes, frame, keys
   - {op: grid, shape: hex, orientation: pointy, alpha: 0.3, weight: 0.08, color: "#2b2620"}
   - {op: paper, strength: 0.1, scale: 40}

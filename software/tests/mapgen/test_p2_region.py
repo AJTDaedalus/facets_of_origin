@@ -139,3 +139,34 @@ class TestRivers:
         a, _, _ = self._rivers(threshold=0.02)
         b, _, _ = self._rivers(threshold=0.02)
         assert a.equals(b)
+
+
+class TestPathLabel:
+    def _canvas(self, **kw):
+        store, _ = run([{"op": "canvas", "out": "canvas", "color": "#ffffff"},
+                        {"op": "path_label", "text": "Long River", "size": 3, "halo": None, "color": "#000000",
+                         **kw}], **MI)
+        return store.get("canvas").data[..., 0]
+
+    def test_letters_follow_the_line(self):
+        c = self._canvas(points=[[4, 20], [20, 12], [36, 20]])
+        ys, xs = np.nonzero(c < 0.5)
+        assert len(xs) > 50
+        from shapely.geometry import LineString
+        from mapgen.ops.geometry import _chaikin
+        ln = LineString(_chaikin([[4, 20], [20, 12], [36, 20]], 3))
+        d = [ln.distance(Point(x / 4, y / 4)) for x, y in zip(xs[::7], ys[::7])]
+        assert max(d) < 3
+
+    def test_straight_vs_curved_differ(self):
+        assert not np.array_equal(self._canvas(points=[[4, 20], [36, 20]]),
+                                  self._canvas(points=[[4, 20], [20, 12], [36, 20]]))
+
+    def test_westward_line_still_reads_left_to_right(self):
+        a = self._canvas(points=[[4, 20], [36, 20]])
+        b = self._canvas(points=[[36, 20], [4, 20]])
+        assert np.array_equal(a, b)
+
+    def test_needs_a_line(self):
+        with pytest.raises(RecipeError):
+            self._canvas()

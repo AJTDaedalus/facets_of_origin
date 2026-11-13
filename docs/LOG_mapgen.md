@@ -263,3 +263,17 @@ initiative).
   Q1 0.740 ✓, Q2 0.034 ✓, Q3 0.120 ✗, Q4 0.051 ✓, Q5s 0.259 ✓; rubric ≈3.8
   (legibility 4, surface 3.5, depth 3.5, line 4, palette 4, grid n/a, buildings 4,
   shelf 3.5). mapgen **303 passed**.
+
+## 2026-11-13 — region polish and the full suite
+
+- `path_label` (text along a curve, left-to-right whatever the line's direction,
+  halo, italic/bold styles, offset) and shaded relief masses in `mountain_range`
+  (brown multiply plus hatching under the glyphs). The region proof labels its
+  features with plain descriptive words only.
+- Region metrics barely move (Q1 0.768, Q2 0.075, Q3 0.115, Q4 0.147, Q5s 0.330).
+  The gap is texture density across the whole map, not labels. Rubric ≈3.8
+  (labels help the shelf test).
+- **Full suite** (`software/`, excluding e2e): **2153 passed, 1 failed**. The
+  failure was the generated-catalogue check, because the run started between
+  adding `path_label` and regenerating `ops.md`. It's regenerated now and mapgen
+  passes **307**, so the suite stands at 2154 passing.
