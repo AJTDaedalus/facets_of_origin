@@ -75,7 +75,6 @@ steps:
   - {op: path_label, text: "the sea", points: [[3, 28], [4, 40]], size: 2.4, style: italic, color: "#1f4253",
      halo: "#9cbfc5"}
   # ---- hexes, frame, keys
-  - {op: grid, shape: hex, orientation: pointy, alpha: 0.3, weight: 0.08, color: "#2b2620"}
   - {op: paper, strength: 0.1, scale: 40}
   - {op: vignette, strength: 0.18}
   - {op: frame, margin: 0.4, weight: 0.35}

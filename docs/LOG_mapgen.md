@@ -345,3 +345,21 @@ Merged into `feat/lean-facets` as `7b7a249`. Full suite 2269 passed, e2e 13 pass
 Still open for the owner, by nature: the canon Crystal Court (yardstick and TP74
 colour), and a live Foundry import (the format is pinned by conformance tests
 against the importer's parser).
+
+## 2026-11-13 — owner feedback: more detail, shading lines, no grid
+
+Owner: "more detail would be good, but a great start! Shading lines seem to be the
+biggest difference. I prefer no gridlines on my maps."
+- New `ops/linework.py`:
+  - `shade_lines`: strokes perpendicular to an edge, longest where shadow falls
+    (south-east by default), shorter on lit edges, inside or outside a mask
+  - `cracks`: branching hairline cracks
+  - `stipple`: dots that thin out from an edge
+  11 tests.
+- Style: `floor_fill` adds wall hatching and cracks; `cave_floor` adds longer
+  hatching and grit; `stream` gets inked bank strokes; `brush`, `forest_mass` and
+  `coastline` get edge hatching; tree canopies get shading strokes on their
+  shadow side. **`finish` no longer draws a grid**, and the grid is gone from every
+  proof recipe (the `grid` op stays available; `.dd2vtt` keeps `pixels_per_grid`
+  so VTT grids still align).
+- Renders for review: `E:\mapgen_review\v2\` (plus comparison sheets, kept local).

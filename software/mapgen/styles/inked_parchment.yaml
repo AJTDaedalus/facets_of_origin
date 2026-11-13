@@ -90,12 +90,14 @@ macros:
 
   floor_fill:
     doc: "Fill a floor geometry with a material, plus soft inner shadow and occlusion; makes mask `${name}`."
-    params: {src: room, name: floor, material: flagstone, shadow: 0.45, width: 2.5, falloff: 1.2}
+    params: {src: room, name: floor, material: flagstone, shadow: 0.45, width: 2.5, falloff: 1.2, hatch: 2.0, cracks: 0.15}
     steps:
       - {op: rasterize, out: "${name}", src: "${src}"}
       - {op: fill, mask: "${name}", material: "${material}", id: "${name}_mat"}
-      - {op: occlusion, mask: "${name}", falloff: "${falloff}", strength: 0.35}
+      - {op: occlusion, mask: "${name}", falloff: "${falloff}", strength: 0.3}
       - {op: shadow, mask: "${name}", mode: inner, width: "${width}", offset: [0.6, 0.8], strength: "${shadow}", blur: 0.4}
+      - {op: cracks, mask: "${name}", density: "${cracks}", width: 0.07, opacity: 0.6, id: "${name}_cracks"}
+      - {op: shade_lines, mask: "${name}", length: "${hatch}", spacing: 0.28, width: 0.09, opacity: 0.85, id: "${name}_hatch"}
 
   stone_room:
     doc: "A single dressed-stone room from a floor geometry — hatched surround, floor, shadow, stone walls named `${wall}`."
@@ -119,7 +121,9 @@ macros:
     steps:
       - {op: rasterize, out: "${name}_pre", src: "${src}"}
       - {op: beyond, floor: "${name}_pre", depth: "${depth}", name: "${name}_beyond"}
-      - {op: floor_fill, src: "${src}", name: "${name}", material: "${material}", shadow: 0.6, width: 5, falloff: 2.2}
+      - {op: floor_fill, src: "${src}", name: "${name}", material: "${material}", shadow: 0.5, width: 5, falloff: 2.2,
+         hatch: 3.0, cracks: 0.25}
+      - {op: stipple, mask: "${name}", density: 6, falloff: 2.5, size: 0.08, opacity: 0.55, id: "${name}_grit"}
       - {op: scatter, kind: pebbles, mask: "${name}", density: 0.5, spacing: 3, size: 1.2, shadow: 0.15, id: "${name}_pebbles"}
 
   cave_walls:
@@ -144,6 +148,8 @@ macros:
       - {op: shrink, out: "${name}_inner", src: "${name}", by: 0.8}
       - {op: combine, out: "${name}_flow", of: ["${name}_flow", "${name}_inner"], mode: min}
       - {op: fill, mask: "${name}_flow", color: "#eef4f4", opacity: 0.7}
+      - {op: shade_lines, mask: "${name}", length: 1.0, spacing: 0.22, width: 0.07, color: "#1f3a45", opacity: 0.75,
+         shadow: null, id: "${name}_bank"}
       - {op: stroke, src: "${name}", weight: medium, opacity: 0.9}
 
   ground_patches:
@@ -174,6 +180,8 @@ macros:
       - {op: shadow, mask: "${name}", mode: drop, offset: [0.6, 0.7], blur: 0.7, strength: 0.45}
       - {op: fill, mask: "${name}", material: thicket, id: "${name}_fill"}
       - {op: shadow, mask: "${name}", mode: inner, width: 2.2, offset: [-0.4, -0.5], strength: 0.45, blur: 0.5}
+      - {op: shade_lines, mask: "${name}", length: 1.4, spacing: 0.3, width: 0.06, color: "#26301f", opacity: 0.6,
+         id: "${name}_hatch"}
       - {op: stroke, src: "${name}_g", weight: heavy, roughness: 0.15}
       - {op: offset, out: "${name}_halo", src: "${name}_g", by: 1.1}
       - {op: stroke, src: "${name}_halo", width: 0.16, dash: [1.2, 0.5, 0.25, 0.5], jitter: 0.6, opacity: 0.95}
@@ -199,6 +207,9 @@ macros:
       - {op: invert, out: "${name}_sea", src: "${name}_land"}
       - {op: hatch, mask: "${name}_sea", spacing: 0.7, length: 1.1, width: 0.05, lines: 2, angle: 90, angle_jitter: 25,
          color: "#2f5566", opacity: 0.45, id: "${name}_sea_hatch"}
+      - {op: rasterize, out: "${name}_landm", src: "${land}"}
+      - {op: shade_lines, mask: "${name}_landm", side: outside, length: 0.9, spacing: 0.35, width: 0.05, shadow: null,
+         color: "#2f5566", opacity: 0.55, id: "${name}_shore_hatch"}
       - {op: stroke, src: "${land}", weight: heavy}
 
   forest_mass:
@@ -210,6 +221,8 @@ macros:
       - {op: shadow, mask: "${name}", mode: drop, offset: [0.3, 0.4], blur: 0.4, strength: 0.5}
       - {op: fill, mask: "${name}", material: forest_canopy, id: "${name}_canopy"}
       - {op: shadow, mask: "${name}", mode: inner, width: 1.2, offset: [-0.3, -0.3], strength: 0.35}
+      - {op: shade_lines, mask: "${name}", length: 1.0, spacing: 0.3, width: 0.06, color: "#1d2a17", opacity: 0.6,
+         id: "${name}_hatch"}
       - {op: stroke, src: "${name}_g", weight: medium}
 
   mountain_range:
@@ -227,10 +240,9 @@ macros:
          size_jitter: 0.3, rotate_jitter: 0, shadow: 0.3, sort_y: true, id: "${name}_glyphs"}
 
   finish:
-    doc: "Grid on the walkable mask, parchment grain, a light vignette and a double frame."
+    doc: "Parchment grain, a light vignette and a double frame. No grid: the VTT draws its own (add {op: grid} if a printed grid is wanted)."
     params: {floor: floor, alpha: 0.28}
     steps:
-      - {op: grid, mask: "${floor}", alpha: "${alpha}"}
       - {op: paper, strength: 0.12, scale: 40}
       - {op: vignette, strength: 0.18}
       - {op: frame, margin: 0.5, weight: 0.35}

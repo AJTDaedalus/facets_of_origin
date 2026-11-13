@@ -59,7 +59,6 @@ steps:
   - {op: scatter, kind: tree, mask: brush, avoid: [keep_clear], density: 0.55, spacing: 7, size: 10, shadow: 0.6, id: trees}
   - {op: scatter, kind: bush, mask: edges, avoid: [keep_clear, brush], density: 0.12, spacing: 5, size: 4.5, id: bushes}
   - {op: scatter, kind: bush, mask: clearing_hard, avoid: [keep_clear], density: 0.06, spacing: 6, size: 3.5, id: brush_in}
-  - {op: grid, alpha: 0.26, weight: 0.08, color: "#1f1b16"}
   - {op: paper, strength: 0.08, scale: 40}
   - {op: vignette, strength: 0.2}
   - {op: frame, margin: 0.5, weight: 0.35}
