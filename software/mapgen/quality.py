@@ -16,7 +16,6 @@ import yaml
 from PIL import Image as PImage, ImageDraw
 from scipy import ndimage
 
-PImage.MAX_IMAGE_PIXELS = None
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
 MANIFEST = HERE / "comparators.yaml"
@@ -134,7 +133,13 @@ def load_comparator(cid: str, base: Path | None = None) -> tuple[PImage.Image, d
     base = Path(base) if base else ref_dir()
     with zipfile.ZipFile(base / c["pack"]) as z:
         data = z.read(c["member"])
-    return PImage.open(io.BytesIO(data)).convert("RGB"), c
+    old = PImage.MAX_IMAGE_PIXELS
+    PImage.MAX_IMAGE_PIXELS = 400_000_000        # the owner's print-scale packs; scoped to this load
+    try:
+        img = PImage.open(io.BytesIO(data)).convert("RGB")
+    finally:
+        PImage.MAX_IMAGE_PIXELS = old
+    return img, c
 
 
 def comparator_metrics(cid: str, base: Path | None = None) -> dict:

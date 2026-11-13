@@ -66,6 +66,21 @@ class TestCrystalCourtCanon:
     def test_walls_enclose_floor(self, court):
         assert court[1]["line_of_sight"] and court[0]["los_length_ft"] > 2 * (120 + 140) - 60
 
+    def test_no_light_sources_beyond_canon(self, court):
+        # the palace's lights are a plot point (they die at midnight); the map invents none
+        assert court[0]["lights"] == [] and court[1]["lights"] == []
+
+    def test_east_stair_door_matches_the_svg(self, court):
+        stair = [p for p in court[0]["portals"] if p["position"][0] == pytest.approx(130)]
+        (x0, y0), (x1, y1) = stair[0]["bounds"]
+        assert abs(y1 - y0) == pytest.approx(10)              # build_maps geometry(): east_door_w = 10
+
+    def test_terrace_is_the_terrace_width(self, court, facts):
+        assert court[0]["geometry"]["terrace"]["w"] == pytest.approx(facts["terraces"]["wide"])
+
+    def test_fog_areas_declared(self, court):
+        assert court[0]["fog_areas"] == ["court_floor", "west_aisle", "east_aisle", "garden_walk", "stairwell"]
+
     def test_no_props_beyond_canon(self, court):
         assert not (set(court[0]["legend"]) - {"door", "double_door", "stairs"})
 

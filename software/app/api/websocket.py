@@ -1437,26 +1437,54 @@ async def _clock_delete(ctx: Ctx) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Map board (mapgen Phase 3 v1, docs/BRIEF_mapgen_phase3.md). Plumbing only:
-# no movement rules, no line of sight, no fog. Positions are in grid squares.
+# Map board (mapgen Phase 3 v1, docs/BRIEF_mapgen_phase3.md). Plumbing only: no
+# movement rules, no line of sight. Positions are in grid squares. Fog is opt-in;
+# players' payloads omit unrevealed area names and foes standing in the fog, but
+# the map image itself reaches every client (a visual screen for the picture).
 # ---------------------------------------------------------------------------
 
-_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv"}
+import base64 as _b64
+import math as _math
+import os as _os
+import re as _re
+
+from app.game.session import player_map_view, token_visible_to_players
+
+_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".pytest_cache", "data"}
+_MAX_DIRS = 20000
+_MAP_CACHE: dict = {"root": None, "maps": {}}
+_B64 = _re.compile(r"^[A-Za-z0-9+/]+={0,2}$")
+_MAGIC = ((b"\x89PNG", "png"), (b"\xff\xd8\xff", "jpeg"), (b"RIFF", "webp"))
+_MOVE_GAP = 0.033            # seconds; token_move throttle per player
+_last_move: dict = {}
 
 
-def _scan_maps() -> dict[str, Path]:
-    """Rendered maps under settings.maps_dir: relative posix id -> .dd2vtt path."""
+def _scan_maps_sync(root: Path) -> dict[str, Path]:
+    """`**/mapgen/*.dd2vtt` under root, pruning hidden/vendor folders as it walks."""
+    found: dict[str, Path] = {}
+    seen = 0
+    for dirpath, dirnames, filenames in _os.walk(root, followlinks=False):
+        dirnames[:] = sorted(d for d in dirnames if d not in _SKIP_DIRS and not d.startswith("."))
+        seen += 1
+        if seen > _MAX_DIRS or len(found) >= 200:
+            break
+        if _os.path.basename(dirpath) != "mapgen":
+            continue
+        for fn in sorted(filenames):
+            if fn.endswith(".dd2vtt"):
+                path = Path(dirpath) / fn
+                found[path.relative_to(root).as_posix()] = path
+    return found
+
+
+async def _scan_maps(refresh: bool = False) -> dict[str, Path]:
+    """Cached scan (refreshed by map_list), run off the event loop."""
     from app.config import settings
     root = Path(settings.maps_dir).resolve()
-    found: dict[str, Path] = {}
-    for p in sorted(root.glob("**/mapgen/*.dd2vtt")):
-        rel = p.relative_to(root)
-        if any(part in _SKIP_DIRS for part in rel.parts):
-            continue
-        found[rel.as_posix()] = p
-        if len(found) >= 200:
-            break
-    return found
+    if refresh or _MAP_CACHE["root"] != root:
+        _MAP_CACHE["maps"] = await asyncio.to_thread(_scan_maps_sync, root)
+        _MAP_CACHE["root"] = root
+    return _MAP_CACHE["maps"]
 
 
 def _map_meta(path: Path) -> dict:
@@ -1468,35 +1496,82 @@ def _map_meta(path: Path) -> dict:
         return {}
 
 
-def _map_title(path: Path) -> str:
-    return str(_map_meta(path).get("title") or path.stem)
+def _map_title(meta: dict, path: Path) -> str:
+    t = meta.get("title")
+    return str(t)[:200] if isinstance(t, str) and t else path.stem
+
+
+def _num(v, lo: float, hi: float) -> float | None:
+    if isinstance(v, bool) or not isinstance(v, (int, float)):
+        return None
+    v = float(v)
+    return v if _math.isfinite(v) and lo <= v <= hi else None
+
+
+def _meta_squares(meta: dict) -> dict | None:
+    fps = _num(meta.get("feet_per_square"), 1e-3, 1e6)
+    w, h = _num(meta.get("width_ft"), 0, 1e7), _num(meta.get("height_ft"), 0, 1e7)
+    if fps and w and h:
+        return {"x": round(w / fps, 4), "y": round(h / fps, 4)}
+    return None
 
 
 def _fog_areas(meta: dict) -> dict:
-    """Named shapes with area from the recipe's meta.json, as [x0, y0, x1, y1] in squares."""
-    fps = float(meta.get("feet_per_square") or 5) or 5
+    """Areas the MM can reveal, as [x0, y0, x1, y1] in squares: the recipe's `fog_areas` if it
+    declares them, else named shapes of at least 4 squares."""
+    fps = _num(meta.get("feet_per_square"), 1e-3, 1e6) or 5.0
+    geo = meta.get("geometry") if isinstance(meta.get("geometry"), dict) else {}
+    declared = meta.get("fog_areas") if isinstance(meta.get("fog_areas"), list) else []
+    names = [n for n in declared if isinstance(n, str) and n in geo] if declared else list(geo)
     out = {}
-    for name, g in (meta.get("geometry") or {}).items():
-        try:
-            if float(g.get("area", 0)) <= 0:
-                continue
-            b = [round(float(v) / fps, 3) for v in g["bounds"]]
-        except (TypeError, ValueError, KeyError, AttributeError):
+    for name in names:
+        g = geo.get(name)
+        if not isinstance(g, dict):
             continue
-        out[str(name)[:64]] = b
+        area = _num(g.get("area"), 0, 1e12) or 0
+        if not declared and area < 4 * fps * fps:
+            continue
+        b = g.get("bounds")
+        if not (isinstance(b, list) and len(b) == 4 and all(_num(v, -1e7, 1e7) is not None for v in b)):
+            continue
+        out[str(name)[:64]] = [round(float(v) / fps, 3) for v in b]
         if len(out) >= 60:
             break
     return out
 
 
-def _float(msg: dict, key: str, lo: float, hi: float) -> float:
+def _load_board(path: Path, mid: str) -> dict:
+    """Read and validate a .dd2vtt into a board dict; WSError on anything malformed or hostile."""
     try:
-        v = float(msg.get(key))
-    except (TypeError, ValueError):
-        raise WSError(f"'{key}' must be a number.")
-    if v != v:  # NaN
-        raise WSError(f"'{key}' must be a number.")
-    return round(max(lo, min(hi, v)), 3)
+        data = json.loads(path.read_text())
+        res = data["resolution"]
+        size = res["map_size"]
+        x, y = _num(size["x"], 0.5, 2000), _num(size["y"], 0.5, 2000)
+        ppg = _num(res.get("pixels_per_grid", 70), 10, 1000)
+        image = data["image"]
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        raise WSError(f"Map {mid!r} is not a readable .dd2vtt file.")
+    if x is None or y is None or ppg is None:
+        raise WSError(f"Map {mid!r} has an invalid size.")
+    if not isinstance(image, str) or len(image) > 60_000_000 or not _B64.match(image):
+        raise WSError(f"Map {mid!r} has an invalid image.")
+    try:
+        head = _b64.b64decode(image[:64] + "=" * (-len(image[:64]) % 4))
+    except ValueError:
+        raise WSError(f"Map {mid!r} has an invalid image.")
+    kind = next((k for magic, k in _MAGIC if head.startswith(magic)), None)
+    if kind is None:
+        raise WSError(f"Map {mid!r} image is not PNG, JPEG or WebP.")
+    meta = _map_meta(path)
+    return {"id": mid, "title": _map_title(meta, path), "squares": {"x": x, "y": y}, "pixels_per_grid": ppg,
+            "image": f"data:image/{kind};base64,{image}", "tokens": {},
+            "fog": {"enabled": False, "revealed": [], "areas": _fog_areas(meta)}}
+
+
+async def _push_board(ctx: Ctx) -> None:
+    board = ctx.session.active_map
+    await manager.broadcast_split(ctx.session_id, {"type": "map_state", "map": board},
+                                  {"type": "map_state", "map": player_map_view(board)})
 
 
 async def _drop_token(ctx: Ctx, token: str) -> None:
@@ -1508,44 +1583,45 @@ async def _drop_token(ctx: Ctx, token: str) -> None:
 
 @on("map_list", mm_only=True)
 async def _map_list(ctx: Ctx) -> None:
-    """The rendered maps the MM can put on the board."""
+    """The rendered maps the MM can put on the board (rescans the maps folder)."""
     maps = []
-    for mid, path in _scan_maps().items():
-        try:
-            size = json.loads(path.read_text()).get("resolution", {}).get("map_size", {})
-        except (OSError, ValueError):
-            continue
-        maps.append({"id": mid, "title": _map_title(path), "squares": size})
+    for mid, path in (await _scan_maps(refresh=True)).items():
+        meta = _map_meta(path)
+        squares = _meta_squares(meta)
+        if squares is None:
+            continue                       # not a mapgen render (no meta.json): skip rather than parse MBs
+        maps.append({"id": mid, "title": _map_title(meta, path), "squares": squares})
     await manager.send_to(ctx.websocket, {"type": "map_list", "maps": maps})
 
 
 @on("map_set", mm_only=True)
 async def _map_set(ctx: Ctx) -> None:
-    """Put a rendered map on the board for everyone (tokens start off the board)."""
+    """Put a rendered map on the board for everyone (tokens start off the board; fog off)."""
     mid = _str(ctx.msg, "id", 400)
-    path = _scan_maps().get(mid)
+    maps = await _scan_maps()
+    if mid not in maps:
+        maps = await _scan_maps(refresh=True)
+    path = maps.get(mid)
     if path is None:
         raise WSError(f"No map {mid!r}: render one with `python -m mapgen render`.")
-    try:
-        data = json.loads(path.read_text())
-        res = data["resolution"]
-        image = data["image"]
-    except (OSError, ValueError, KeyError):
-        raise WSError(f"Map {mid!r} is not a readable .dd2vtt file.")
-    ctx.session.active_map = {
-        "id": mid, "title": _map_title(path),
-        "squares": {"x": res["map_size"]["x"], "y": res["map_size"]["y"]},
-        "pixels_per_grid": res.get("pixels_per_grid", 70),
-        "image": "data:image/png;base64," + image, "tokens": {},
-        # Fog is a visual screen only: the whole image still reaches every client.
-        "fog": {"enabled": False, "revealed": [], "areas": _fog_areas(_map_meta(path))}}
-    await manager.broadcast(ctx.session_id, {"type": "map_state", "map": ctx.session.active_map})
+    ctx.session.active_map = await asyncio.to_thread(_load_board, path, mid)
+    await _push_board(ctx)
 
 
 @on("map_clear", mm_only=True)
 async def _map_clear(ctx: Ctx) -> None:
     ctx.session.active_map = None
     await manager.broadcast(ctx.session_id, {"type": "map_state", "map": None})
+
+
+def _float(msg: dict, key: str, lo: float, hi: float) -> float:
+    try:
+        v = float(msg.get(key))
+    except (TypeError, ValueError):
+        raise WSError(f"'{key}' must be a number.")
+    if not _math.isfinite(v):
+        raise WSError(f"'{key}' must be a number.")
+    return round(max(lo, min(hi, v)), 3)
 
 
 def _check_token(ctx: Ctx, token: str) -> None:
@@ -1558,47 +1634,49 @@ def _check_token(ctx: Ctx, token: str) -> None:
         raise WSError("You can only move your own token.")
 
 
-@on("token_move")
-async def _token_move(ctx: Ctx) -> None:
-    """Place or move a token (squares from the north-west corner, clamped to the map)."""
-    board = ctx.session.active_map
-    if board is None:
-        raise WSError("No map on the board.")
-    token = _str(ctx.msg, "token", 200)
-    _check_token(ctx, token)
-    x = _float(ctx.msg, "x", 0.0, float(board["squares"]["x"]))
-    y = _float(ctx.msg, "y", 0.0, float(board["squares"]["y"]))
-    board["tokens"][token] = {"x": x, "y": y}
-    await manager.broadcast(ctx.session_id, {"type": "token_moved", "token": token, "x": x, "y": y})
-
-
-@on("token_remove", mm_only=True)
-async def _token_remove(ctx: Ctx) -> None:
-    if ctx.session.active_map is None:
-        raise WSError("No map on the board.")
-    await _drop_token(ctx, _str(ctx.msg, "token", 200))
-
-
 def _board(ctx: Ctx) -> dict:
     if ctx.session.active_map is None:
         raise WSError("No map on the board.")
     return ctx.session.active_map
 
 
-async def _push_fog(ctx: Ctx) -> None:
-    await manager.broadcast(ctx.session_id, {"type": "fog_state", "fog": ctx.session.active_map["fog"]})
+@on("token_move")
+async def _token_move(ctx: Ctx) -> None:
+    """Place or move a token (squares from the north-west corner, clamped to the map)."""
+    board = _board(ctx)
+    token = _str(ctx.msg, "token", 200)
+    _check_token(ctx, token)
+    x = _float(ctx.msg, "x", 0.0, float(board["squares"]["x"]))
+    y = _float(ctx.msg, "y", 0.0, float(board["squares"]["y"]))
+    now = time.monotonic()
+    key = (ctx.session_id, ctx.identity)
+    if now - _last_move.get(key, 0.0) < _MOVE_GAP:
+        return                                     # throttled: drop silently (after validation)
+    _last_move[key] = now
+    board["tokens"][token] = {"x": x, "y": y}
+    moved = {"type": "token_moved", "token": token, "x": x, "y": y}
+    if token_visible_to_players(board, token):
+        await manager.broadcast(ctx.session_id, moved)
+    else:
+        await manager.broadcast_split(ctx.session_id, moved, {"type": "token_removed", "token": token})
+
+
+@on("token_remove", mm_only=True)
+async def _token_remove(ctx: Ctx) -> None:
+    _board(ctx)
+    await _drop_token(ctx, _str(ctx.msg, "token", 200))
 
 
 @on("fog_set", mm_only=True)
 async def _fog_set(ctx: Ctx) -> None:
-    """Turn the fog on or off for the map on the board (visual only; off by default)."""
+    """Turn the fog on or off for the map on the board (off by default)."""
     _board(ctx)["fog"]["enabled"] = _bool(ctx.msg, "enabled")
-    await _push_fog(ctx)
+    await _push_board(ctx)
 
 
 @on("fog_reveal", mm_only=True)
 async def _fog_reveal(ctx: Ctx) -> None:
-    """Reveal or hide one named area of the map (from the recipe's named shapes)."""
+    """Reveal or hide one area of the map (the recipe's fog_areas, or its larger named shapes)."""
     fog = _board(ctx)["fog"]
     area = _str(ctx.msg, "area", 64)
     if area not in fog["areas"]:
@@ -1606,4 +1684,4 @@ async def _fog_reveal(ctx: Ctx) -> None:
     shown = set(fog["revealed"])
     (shown.add if _bool(ctx.msg, "revealed") else shown.discard)(area)
     fog["revealed"] = sorted(shown)
-    await _push_fog(ctx)
+    await _push_board(ctx)

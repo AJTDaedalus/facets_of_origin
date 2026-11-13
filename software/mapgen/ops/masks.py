@@ -75,10 +75,23 @@ def rasterize_patch(frame, g, line_width_ft: float = 0.5) -> Patch | None:
     def ring(coords):
         return [((x * s - x0) * aa - 0.5, (y * s - y0) * aa - 0.5) for x, y in coords]
 
-    for pg in polygons_of(g):
-        d.polygon(ring(pg.exterior.coords), fill=255)
-        for hole in pg.interiors:
-            d.polygon(ring(hole.coords), fill=0)
+    polys = polygons_of(g)
+    if len(polys) > 1 and any(len(pg.interiors) for pg in polys):
+        # each part on its own layer, combined by max, so a later part's hole can't erase
+        # an island drawn earlier (shapely does not guarantee part order)
+        from PIL import ImageChops
+        for pg in polys:
+            layer = PImage.new("L", img.size, 0)
+            ld = ImageDraw.Draw(layer)
+            ld.polygon(ring(pg.exterior.coords), fill=255)
+            for hole in pg.interiors:
+                ld.polygon(ring(hole.coords), fill=0)
+            img = ImageChops.lighter(img, layer)
+    else:
+        for pg in polys:
+            d.polygon(ring(pg.exterior.coords), fill=255)
+            for hole in pg.interiors:
+                d.polygon(ring(hole.coords), fill=0)
     a = np.asarray(img, np.float32).reshape(h, aa, w, aa).mean(axis=(1, 3)) / 255.0
     return Patch(a.astype(np.float32), y0, x0)
 

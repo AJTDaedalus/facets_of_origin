@@ -1523,4 +1523,4 @@ Reviews: docs/REVIEW_oraga_polish_A.md, docs/REVIEW_oraga_polish_B.md.
   - **M3 first pass:** battle maps (owner: "pick whichever is easier to scope"). Region and city maps reuse the engine in Phase 2.
   - **M4 canon proof:** the Crystal Court, not B7, because B7 has no canon dimensions. Recipes for canon places may only draw what the text or `facts.yaml` states.
   - **M5 quality bar:** seven comparator maps from the owner's own WotC packs (Redbrand Hideout, Cragmaw Hideout, Thundertree, Carnath Roadhouse, Dragon Hatchery; Phandalin and North Sword Coast for Phase 2). They're used only as yardsticks: numeric metric bands plus a side-by-side rubric. Never copied, traced or committed; only paths, scales and numbers go in the repo, and tests skip when the packs are absent.
-  - **M6 new dependency:** `opensimplex` (MIT) for noise.
+  - **M6 dependencies:** planned `opensimplex` was dropped (pure Python without numba: ~30 s per octave at 2000²); noise is a vectorised numpy Perlin in `mapgen/noise.py`. Declared in `software/requirements.txt`: numpy, scipy, shapely, Pillow, contourpy (all permissive).

@@ -15,6 +15,8 @@ from .recipe import RecipeError, load_recipe
 
 
 def to_pil(canvas: np.ndarray, out_size) -> PImage.Image:
+    if min(out_size) < 1:
+        raise RecipeError(f"the map renders to {out_size[0]}×{out_size[1]} px: make it bigger or raise px_per_square")
     a = canvas[..., 3:4]
     rgb = np.divide(canvas[..., :3], a, out=np.ones_like(canvas[..., :3]), where=a > 1e-6)
     # flatten onto white where not opaque
@@ -43,6 +45,8 @@ def uvtt(frame, collector, png_bytes: bytes) -> dict:
             los.append([_pt(x, y, fps) for x, y in cs])
     portals = []
     for p in collector.portals:
+        if p.get("secret"):
+            continue                              # stays a wall in the VTT (see secret_door)
         portals.append({"position": _pt(*p["position"], fps),
                         "bounds": [_pt(*b, fps) for b in p["bounds"]],
                         "rotation": p["rotation"], "closed": p["closed"], "freestanding": p["freestanding"]})
@@ -80,7 +84,11 @@ def meta(recipe, frame, collector) -> dict:
             raise RecipeError(f"measure: no geometry named '{name}' (name the step's `out`)")
         info = geoms[name]
         measures[name] = {"declared": declared, "actual": {k: info[k] for k in ("w", "h", "area", "length")}}
+    for a in recipe.fog_areas:
+        if a not in collector.geometry:
+            raise RecipeError(f"fog_areas: no geometry named '{a}'")
     return {
+        "fog_areas": list(recipe.fog_areas),
         "title": recipe.map.title, "width_ft": recipe.map.width_ft, "height_ft": recipe.map.height_ft,
         "feet_per_square": recipe.map.feet_per_square, "px_per_square": frame.pps, "seed": recipe.map.seed,
         "draft": frame.draft, "measures": measures, "geometry": geoms,

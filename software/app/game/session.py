@@ -280,8 +280,40 @@ class GameSession:
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
             "combat": self.combat.to_dict() if self.combat else None,
             "level_up_ready": player_name in self.level_up_ready,
-            "map": self.active_map,
+            "map": player_map_view(self.active_map),
         }
+
+
+def _in_revealed(fog: dict, pos: dict) -> bool:
+    for a in fog.get("revealed", []):
+        b = fog["areas"].get(a)
+        if b and b[0] <= pos["x"] <= b[2] and b[1] <= pos["y"] <= b[3]:
+            return True
+    return False
+
+
+def token_visible_to_players(board: dict, token: str) -> bool:
+    """With fog on, players don't receive foes standing outside the revealed areas."""
+    fog = board.get("fog") or {}
+    if not fog.get("enabled") or not token.startswith("foe:"):
+        return True
+    pos = board["tokens"].get(token)
+    return pos is not None and _in_revealed(fog, pos)
+
+
+def player_map_view(board: dict | None) -> dict | None:
+    """The map board as players get it: no unrevealed area names, no foes hidden in the fog."""
+    if board is None:
+        return None
+    fog = board.get("fog") or {"enabled": False, "revealed": [], "areas": {}}
+    view = dict(board)
+    if fog.get("enabled"):
+        view["fog"] = {"enabled": True, "revealed": list(fog["revealed"]),
+                       "areas": {a: fog["areas"][a] for a in fog["revealed"] if a in fog["areas"]}}
+    else:
+        view["fog"] = {"enabled": False, "revealed": [], "areas": {}}
+    view["tokens"] = {t: p for t, p in board["tokens"].items() if token_visible_to_players(board, t)}
+    return view
 
 
 def _player_enemy_view(enemy: Enemy, ruleset) -> dict:

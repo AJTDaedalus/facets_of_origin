@@ -87,7 +87,8 @@ class TestOpenings:
     def test_secret_door(self):
         store, col = go(WALL + [{"op": "secret_door", "wall": "w", "at": [5, 15], "width": 5}])
         assert col.portals[0]["secret"] is True and col.portals[0]["closed"] is True
-        assert total_len(col.los) == pytest.approx(95, rel=0.01)
+        # the wall keeps blocking sight in the VTT data (UVTT has no secret flag)
+        assert total_len(col.los) == pytest.approx(100, rel=0.01)
 
     def test_window_keeps_los_and_draws(self):
         store, col = go(WALL + [{"op": "window", "wall": "w", "at": [20, 25]}])

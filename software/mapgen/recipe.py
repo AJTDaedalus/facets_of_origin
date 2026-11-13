@@ -66,6 +66,7 @@ class Recipe(BaseModel):
     map: MapHeader
     steps: list[Step] = Field(default_factory=list)
     measure: dict[str, dict[str, float]] = Field(default_factory=dict)
+    fog_areas: list[str] = Field(default_factory=list)   # named geometries the map board may reveal
     style: Style = Field(default_factory=Style)
     source: str | None = None
 
@@ -134,6 +135,8 @@ def _load_style(includes: list[str], base: Path, seen: tuple = ()) -> dict:
             data = yaml.safe_load(path.read_text()) or {}
         except yaml.YAMLError as e:
             raise RecipeError(f"YAML error in include {name}: {e}") from None
+        if not isinstance(data, dict):
+            raise RecipeError(f"include {name} must be a mapping (palette:, materials:, macros: ...)")
         if data.get("include"):
             merged = _merge_style(merged, _load_style(data["include"], path.parent, seen + (path,)))
         merged = _merge_style(merged, data)
@@ -196,9 +199,13 @@ def _expand(steps: list[dict], style: Style, depth: int = 0, parent: str | None 
             macro = style.macros[op]
             env = dict(macro.get("params") or {})
             call_id = step.pop("id", None)
+            call_offset = int(step.pop("seed_offset", 0) or 0)
             step.pop("op")
             env.update(step)
             body = _subst(copy.deepcopy(macro.get("steps") or []), env, op)
+            if call_offset:
+                for b in body:
+                    b["seed_offset"] = int(b.get("seed_offset", 0) or 0) + call_offset
             cid = call_id if call_id is not None else (f"{parent}/{i}" if parent else f"{op}@{len(out)}")
             out.extend(_expand(body, style, depth + 1, parent=cid))
         else:

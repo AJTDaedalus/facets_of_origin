@@ -337,8 +337,8 @@ def test_map_board_shared_and_tokens_drag(table):
     expect(mm.locator("[data-ui=map_pick]")).to_be_visible(timeout=T)
     expect(mm.locator("[data-ui=map_pick] option")).to_contain_text("Golden Stone Room")
     mm.click("[data-map=set]")
-    expect(z.locator(".map-board img")).to_be_visible(timeout=T)
-    z.wait_for_function("() => { const i = document.querySelector('.map-board img'); return i && i.complete && i.naturalWidth > 0; }",
+    expect(z.locator(".map-canvas img")).to_be_visible(timeout=T)
+    z.wait_for_function("() => { const i = document.querySelector('.map-canvas img'); return i && i.complete && i.naturalWidth > 0; }",
                         timeout=T)   # the image really decoded (CSP allows data: images)
     z.click("[data-place='pc:Zahna']")
     tok = z.locator(".map-token.pc.can")
@@ -346,7 +346,7 @@ def test_map_board_shared_and_tokens_drag(table):
     expect(mm.locator(".map-token[data-token='pc:Zahna']")).to_be_visible(timeout=T)
     before = mm.locator(".map-token[data-token='pc:Zahna']").get_attribute("style")
     box = tok.bounding_box()
-    board = z.locator(".map-board").bounding_box()
+    board = z.locator(".map-canvas").bounding_box()
     z.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
     z.mouse.down()
     z.mouse.move(board["x"] + board["width"] * 0.25, board["y"] + board["height"] * 0.3, steps=6)
@@ -362,6 +362,17 @@ def test_map_board_shared_and_tokens_drag(table):
     expect(z.locator(".map-fog mask rect")).to_have_count(1)
     mm.check("[data-fog-area=room]")
     expect(z.locator(".map-fog mask rect")).to_have_count(2, timeout=T)
+    # R1: the fog covers the whole image even when the board is taller than its scroll box
+    dims = z.evaluate("""() => { const i = document.querySelector('.map-canvas img');
+        const f = document.querySelector('.map-fog'); const s = document.querySelector('.map-scroll');
+        return {img: i.getBoundingClientRect().height, fog: f.getBoundingClientRect().height,
+                box: s.getBoundingClientRect().height}; }""")
+    assert abs(dims["fog"] - dims["img"]) < 2, dims
+    # and a token's position is relative to the image, not the scroll box
+    pos = z.evaluate("""() => { const c = document.querySelector('.map-canvas').getBoundingClientRect();
+        const t = document.querySelector(".map-token[data-token='pc:Zahna']").getBoundingClientRect();
+        return {rel: ((t.top + t.height / 2) - c.top) / c.height}; }""")
+    assert 0 <= pos["rel"] <= 1, pos
     _shot(z, "map_board_fog_player")
     mm.click("[data-fog=toggle]")
     expect(z.locator(".map-fog")).to_have_count(0, timeout=T)

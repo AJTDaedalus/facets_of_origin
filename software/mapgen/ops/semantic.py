@@ -107,7 +107,9 @@ def wall(ctx, p, into, src, exclude=None):
         kept = [k for k in cut if k.length > 1e-6]
     if not band.is_empty:
         patch = rasterize_patch(ctx.frame, band)
-        if p.material:
+        if patch is None:
+            pass                                  # wall lies entirely off the map: nothing to paint
+        elif p.material:
             m = np.zeros(ctx.frame.shape, np.float32)
             m[patch.slices] = patch.alpha
             composite_inplace(into.data, render_material(ctx, p.material, m, ctx.seed), m)
@@ -148,7 +150,9 @@ def partition(ctx, p, into, src):
     geom = shapely.unary_union(lines)
     band = polygonal(geom.buffer(t / 2, cap_style=2, join_style=2))
     patch = rasterize_patch(ctx.frame, band)
-    if p.material:
+    if patch is None:
+        pass
+    elif p.material:
         m = np.zeros(ctx.frame.shape, np.float32)
         m[patch.slices] = patch.alpha
         composite_inplace(into.data, render_material(ctx, p.material, m, ctx.seed), m)
@@ -168,6 +172,7 @@ def partition(ctx, p, into, src):
 class OpeningP(ParamModel):
     into: Ref = "canvas"
     wall: str
+    mark: bool = False
     at: Point
     width: PosFt | None = None
     color: Any = None
@@ -212,7 +217,10 @@ def _rect(q, tng, nrm, w, d0, d1):
 
 
 def _cut_los(ctx, q, tng, w):
-    gap = LineString([q - tng * w / 2, q + tng * w / 2]).buffer(0.08, cap_style=2)
+    # The cut is a thin strip along the door, stopping 1e-3 ft short of each jamb so a wall
+    # that meets the jamb (e.g. a perpendicular partition) keeps its endpoint on the door.
+    half = max(w / 2 - 1e-3, 0)
+    gap = LineString([q - tng * half, q + tng * half]).buffer(0.08, cap_style=2)
     new = []
     for ln in ctx.collector.los:
         if ln.intersects(gap):
@@ -271,18 +279,18 @@ def double_door(ctx, p, into):
 
 @op("secret_door", params=OpeningP, inputs={"into": Image}, group="5 semantic")
 def secret_door(ctx, p, into):
-    """A secret door: the wall stays drawn, an `S` marks it; emits a closed, secret portal."""
+    """A secret door. The wall stays drawn and keeps blocking sight in the VTT data (Universal VTT has no secret flag, so exporting it as a door would show players a door). It's recorded in meta.json. `mark: true` paints the red `S` (for a DM-only print; the image goes to players)."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 4.0)
-    from .overlay import draw_text
-    draw_text(ctx, into.data, "S", _draw_q(rec, q, nrm) + nrm * t / 2, max(t * 1.6, 1.6), col(ctx, p.color or "secret", "secret"),
-              bold=True, halo=None)
-    _cut_los(ctx, q, tng, w)
+    if p.mark:
+        from .overlay import draw_text
+        draw_text(ctx, into.data, "S", _draw_q(rec, q, nrm) + nrm * t / 2, max(t * 1.6, 1.6),
+                  col(ctx, p.color or "secret", "secret"), bold=True, halo=None)
     _portal(ctx, "secret_door", q, tng, w, True, secret=True)
 
 
 @op("portcullis", params=OpeningP, inputs={"into": Image}, group="5 semantic")
 def portcullis(ctx, p, into):
-    """Bars across a wall gap (a row of dots); sight passes, so the LOS is cut and a closed portal emitted."""
+    """Bars across a wall gap (a row of dots). The wall's LOS is cut and a closed portal emitted, so in a VTT it behaves as a door: it blocks sight until opened. Real bars would let sight through; Universal VTT can't express that."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 5.0)
     dq = _draw_q(rec, q, nrm)
     gap = _rect(dq, tng, nrm, w, -0.02, t + 0.02)

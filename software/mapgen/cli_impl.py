@@ -13,6 +13,9 @@ def cmd_render(args) -> int:
     except RecipeError as e:
         print(f"mapgen: {e}", file=sys.stderr)
         return 2
+    except Exception as e:                        # never a raw traceback for a recipe author
+        print(f"mapgen: internal error rendering {args.recipe}: {type(e).__name__}: {e}", file=sys.stderr)
+        return 3
     for k in ("png", "dd2vtt", "meta"):
         if k in r:
             print(f"{k}: {r[k]}")

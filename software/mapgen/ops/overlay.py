@@ -160,7 +160,12 @@ def grid(ctx, p, into, mask=None):
         d = np.minimum(d, sq - d)
         return np.clip(hw + 0.5 - d, 0, 1)
 
-    a = np.maximum(lines(w)[None, :], lines(h)[:, None])
+    lx, ly = lines(w), lines(h)
+    if w % sq < 1e-6 or abs(w % sq - sq) < 1e-6:
+        lx[-1] = max(lx[-1], 1.0)                 # the far edge of the last square
+    if h % sq < 1e-6 or abs(h % sq - sq) < 1e-6:
+        ly[-1] = max(ly[-1], 1.0)
+    a = np.maximum(lx[None, :], ly[:, None])
     if mask is not None:
         a = a * mask.data
     ctx.collector.masks["grid"] = a
@@ -358,6 +363,8 @@ def path_label(ctx, p, into, src=None):
         line = LS(_chaikin(p.points, 3)) if len(p.points) > 2 else LS(p.points)
     elif src is not None:
         g = src.geom
+        if g.is_empty:
+            raise RecipeError("path_label: the source geometry is empty")
         line = g if g.geom_type == "LineString" else max(getattr(g, "geoms", [g]), key=lambda x: x.length)
         if line.geom_type != "LineString":
             line = line.exterior if hasattr(line, "exterior") else line
@@ -365,6 +372,8 @@ def path_label(ctx, p, into, src=None):
         raise RecipeError("path_label needs `points` or a line `src`")
     if p.offset:
         line = line.offset_curve(p.offset)
+    if line.is_empty or line.length == 0:
+        raise RecipeError("path_label: the line has no length")
     fr = ctx.frame
     key = {"regular": False, "bold": True}.get(p.style, p.style)
     fpx = int(round(fr.px(p.size)))

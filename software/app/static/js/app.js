@@ -355,9 +355,13 @@ const HANDLE = {
 
   map_list(m) { state.mapList = m.maps; if (!m.maps.length) notify('No rendered maps found. Run python -m mapgen render <recipe>.', 'warn'); refresh(['play']); },
   map_state(m) { state.map = m.map; if (m.map) feedSys(`The map is up: ${esc(m.map.title)}.`); refresh(['play']); },
-  token_moved(m) { if (state.map) { state.map.tokens[m.token] = { x: m.x, y: m.y }; refresh(['play']); } },
-  token_removed(m) { if (state.map) { delete state.map.tokens[m.token]; refresh(['play']); } },
-  fog_state(m) { if (state.map) { state.map.fog = m.fog; refresh(['play']); } },
+  token_moved(m) {
+    if (!state.map) return;
+    const isNew = !state.map.tokens[m.token];
+    state.map.tokens[m.token] = { x: m.x, y: m.y };
+    mapRefresh(isNew);                   // a newly placed token leaves the tray: full refresh
+  },
+  token_removed(m) { if (state.map) { delete state.map.tokens[m.token]; mapRefresh(true); } },
   enemy_library(m) { state.library = m.library; notify(m.loaded.length ? `Loaded ${m.loaded.length} Bestiary cards.` : 'The library already holds the Bestiary.', 'success'); refresh(); },
   enemy_damage(m) { if (m.result.bloodied_now) notify(`${m.name} is Bloodied.`, 'warn'); },
   danger(m) { state.danger = m.danger; refresh(['play']); },

@@ -60,7 +60,7 @@ conversions/dnd5e/oraga_night/art/
 # Private reference images (third-party source)
 references/house_raunu.jpeg
 
-# mapgen outputs are generated from recipes (python -m mapgen render <recipe>)
-**/mapgen/*.png
-**/mapgen/*.dd2vtt
-**/mapgen/*.meta.json
+# mapgen outputs are generated from recipes (python -m mapgen render <recipe>).
+# Anchored to the recipe trees so the software/mapgen/ package is never matched.
+maps/**/mapgen/
+conversions/**/mapgen/

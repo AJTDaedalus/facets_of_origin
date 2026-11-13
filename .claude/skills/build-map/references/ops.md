@@ -430,6 +430,7 @@ A door in a named wall, snapped to the wall edge nearest `at` (default 5 ft wide
 |---|---|---|
 | `into` | str | `"canvas"` |
 | `wall` | str | **required** |
+| `mark` | bool | `False` |
 | `at` | list[float] | **required** |
 | `width` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `color` | Any | — |
@@ -446,6 +447,7 @@ Two door leaves meeting in the middle (default 8 ft); one portal.
 |---|---|---|
 | `into` | str | `"canvas"` |
 | `wall` | str | **required** |
+| `mark` | bool | `False` |
 | `at` | list[float] | **required** |
 | `width` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `color` | Any | — |
@@ -476,6 +478,7 @@ An open doorway or arch: the wall is cut and filled with floor colour/material; 
 |---|---|---|
 | `into` | str | `"canvas"` |
 | `wall` | str | **required** |
+| `mark` | bool | `False` |
 | `at` | list[float] | **required** |
 | `width` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `color` | Any | — |
@@ -502,12 +505,13 @@ An interior wall along a line (or a polygon's outline), centred on it, `thicknes
 
 ### `portcullis` → paints in place
 
-Bars across a wall gap (a row of dots); sight passes, so the LOS is cut and a closed portal emitted.
+Bars across a wall gap (a row of dots). The wall's LOS is cut and a closed portal emitted, so in a VTT it behaves as a door: it blocks sight until opened. Real bars would let sight through; Universal VTT can't express that.
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
 | `wall` | str | **required** |
+| `mark` | bool | `False` |
 | `at` | list[float] | **required** |
 | `width` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `color` | Any | — |
@@ -518,12 +522,13 @@ Bars across a wall gap (a row of dots); sight passes, so the LOS is cut and a cl
 
 ### `secret_door` → paints in place
 
-A secret door: the wall stays drawn, an `S` marks it; emits a closed, secret portal.
+A secret door. The wall stays drawn and keeps blocking sight in the VTT data (Universal VTT has no secret flag, so exporting it as a door would show players a door). It's recorded in meta.json. `mark: true` paints the red `S` (for a DM-only print; the image goes to players).
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
 | `wall` | str | **required** |
+| `mark` | bool | `False` |
 | `at` | list[float] | **required** |
 | `width` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `color` | Any | — |
@@ -578,6 +583,7 @@ A window: a pale pane across the wall with a centre line. Walls still block move
 |---|---|---|
 | `into` | str | `"canvas"` |
 | `wall` | str | **required** |
+| `mark` | bool | `False` |
 | `at` | list[float] | **required** |
 | `width` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `color` | Any | — |

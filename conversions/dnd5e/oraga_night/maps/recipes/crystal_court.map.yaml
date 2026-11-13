@@ -22,6 +22,8 @@ map:
   seed: 74
   include: [styles/inked_parchment.yaml]
 
+fog_areas: [court_floor, west_aisle, east_aisle, garden_walk, stairwell]
+
 measure:
   court_floor: {w: 80, h: 140}        # court.width x court.length
   west_aisle: {w: 20, h: 140}         # court.aisle_deep
@@ -38,7 +40,7 @@ steps:
   - {op: fill, mask: void_m, color: "#3a2436", opacity: 0.6, id: void_mottle}
 
   # ---- the garden walk and the upper terrace beyond the north wall (map VIII-4 continues it)
-  - {op: rect, out: terrace, x: 0, y: 0, w: 150, h: 10}
+  - {op: rect, out: terrace, x: 10, y: 0, w: 120, h: 10}     # gw*2 + W = 120 ft, as map_court
   - {op: rasterize, out: terrace_m, src: terrace}
   - {op: fill, mask: terrace_m, material: garden, id: terrace_grass}
   - {op: rect, out: garden_walk, x: 10, y: 10, w: 120, h: 10}
@@ -110,7 +112,7 @@ steps:
   - {op: double_door, wall: shell, at: [10, 99], width: 10, color: "#e9cfe0"}           # to B4, west_doors.b4
   - {op: door, wall: shell, at: [10, 61.5], width: 5, color: "#e9cfe0"}                 # service door to B10
   - {op: double_door, wall: east_doors, at: [110, 125], width: 10, color: "#e9cfe0"}    # the east doors
-  - {op: door, wall: stair_w, at: [130, 125], width: 8, color: "#e9cfe0"}               # foot of the east stair
+  - {op: door, wall: stair_w, at: [130, 125], width: 10, color: "#e9cfe0"}              # foot of the east stair (east_door_w)
 
   # ---- piers carrying the galleries: seven a side on the floor's edge lines
   - {op: rect, out: p1, x: 29, y: 151, w: 2, h: 2}
@@ -157,7 +159,6 @@ steps:
   - {op: rasterize, out: wards_m, src: wards}
   - {op: fill, mask: wards_m, color: "#ffd2ec"}
   - {op: stroke, src: wards, weight: fine, color: "#120a10"}
-  - {op: light, at: [70, 30], radius: 30, color: "#f0a8d4", intensity: 0.7, glow: true, glow_radius: 14}
 
   # ---- grid, keys, frame
   - {op: combine, out: walkable, of: [ground_m, stairwell_m, walk_m], mode: max}

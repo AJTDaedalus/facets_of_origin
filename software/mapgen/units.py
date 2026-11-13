@@ -16,6 +16,9 @@ class Frame:
         self.unit = header.unit
         out_w = round(header.width_ft / self.fps * self.pps)
         out_h = round(header.height_ft / self.fps * self.pps)
+        if out_w < 1 or out_h < 1:
+            from .recipe import RecipeError
+            raise RecipeError(f"map renders to {out_w}×{out_h} px: make it bigger or raise px_per_square")
         self.out_size = (out_w, out_h)                 # (w, h) of the exported PNG
         self.shape = (out_h * self.ss, out_w * self.ss)  # (h, w) working arrays
         self.scale = self.pps * self.ss / self.fps      # working px per foot

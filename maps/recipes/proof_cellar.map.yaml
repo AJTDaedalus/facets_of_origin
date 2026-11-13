@@ -14,6 +14,8 @@ map:
   seed: 55
   include: [styles/inked_parchment.yaml]
 
+fog_areas: [guard_room, storeroom, barracks, hall_ew, hall_ns]
+
 measure:
   guard_room: {w: 24, h: 18}
   storeroom: {w: 22, h: 16}
