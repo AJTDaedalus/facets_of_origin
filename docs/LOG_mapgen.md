@@ -331,3 +331,17 @@ our export:
 - Note: the importer sets a light's alpha to 0.05 × intensity, so our default
   intensity 0.7 imports as a faint light. Recipes wanting a strong Foundry light
   can set intensity up to 1; the cap stays at 1, as in the source format.
+
+## 2026-11-13 — merged (PR #35)
+
+Owner rule (2026-11-13): when told to work independently, push, open the PR, have
+a critical review agent review it, fix what's fixable, and merge once tests and
+review pass. PR #35 went through:
+- an independent critical review (`docs/REVIEW_pr35.md`: 1 high, 5 medium, 9 low,
+  2 suspected), all resolved or documented (S1 kept, with reasons);
+- verification round 1 (`docs/REVIEW_pr35_verify.md`): 2 partial, 7 new (N1–N7), all fixed;
+- verification round 2: clean to merge; its 4 low follow-ups were fixed before the merge.
+Merged into `feat/lean-facets` as `7b7a249`. Full suite 2269 passed, e2e 13 passed.
+Still open for the owner, by nature: the canon Crystal Court (yardstick and TP74
+colour), and a live Foundry import (the format is pinned by conformance tests
+against the importer's parser).
