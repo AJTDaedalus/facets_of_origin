@@ -4,11 +4,11 @@
 
 ## Method
 
-Each map is cropped to its body (legend, title, compass and scale note excluded), rescaled to 50 px per grid square (by the measured px/square in `software/mapgen/comparators.yaml`; the region map by width), and measured:
+Each map is cropped to its body (legend, title, compass and scale note excluded), rescaled to 10 px per foot (50 px per 5-ft square; from the measured px/square and feet/square in `software/mapgen/comparators.yaml`; the region map by width), and measured:
 
 - **Q1** tonal range: luminance P98 − P2
 - **Q2** fine detail: mean local σ of luminance in 5-px windows
-- **Q3** mid-scale variation: σ of per-square mean luminance
+- **Q3** mid-scale variation: σ of mean luminance per 5-ft cell
 - **Q4** ink density: fraction of pixels with Sobel magnitude/8 > 0.1
 - **Q5s** mean HSV saturation; **Q5h** hue families (18 bins with > 2% of pixels, s > 0.15)
 - **Q6** (ours only) grid-line contrast ÷ wall-line contrast
@@ -21,7 +21,7 @@ Bands are [min × 0.85, max × 1.15] over a category's comparators.
 |---|---|---|---|---|---|---|---|---|
 | C1 | Redbrand Hideout (DM version) | built_interior | 0.9366 | 0.1143 | 0.1347 | 0.278 | 0.1522 | 3 |
 | C2 | Cragmaw Hideout (player version) | cave | 0.8295 | 0.0748 | 0.1231 | 0.164 | 0.1586 | 7 |
-| C3 | Ruins of Thundertree (player version) | outdoor | 0.9266 | 0.1123 | 0.1272 | 0.2779 | 0.1875 | 7 |
+| C3 | Ruins of Thundertree (player version) | outdoor | 0.9322 | 0.0867 | 0.1576 | 0.1641 | 0.2076 | 7 |
 | C4 | Carnath Roadhouse, level 1 | built_interior | 0.7473 | 0.0635 | 0.1269 | 0.128 | 0.2489 | 3 |
 | C5 | Dragon Hatchery | cave | 0.6997 | 0.06 | 0.1421 | 0.0861 | 0.159 | 2 |
 | C6 | Phandalin (player version) | town | 0.862 | 0.0335 | 0.1705 | 0.0528 | 0.2578 | 8 |
@@ -33,6 +33,6 @@ Bands are [min × 0.85, max × 1.15] over a category's comparators.
 |---|---|---|---|---|---|
 | built_interior | 0.6352–1.0771 | 0.054–0.1314 | 0.1079–0.1549 | 0.1088–0.3197 | 0.1294–0.2862 |
 | cave | 0.5947–0.9539 | 0.051–0.086 | 0.1046–0.1634 | 0.0732–0.1886 | 0.1348–0.1828 |
-| outdoor | 0.7876–1.0656 | 0.0955–0.1291 | 0.1081–0.1463 | 0.2362–0.3196 | 0.1594–0.2156 |
+| outdoor | 0.7924–1.072 | 0.0737–0.0997 | 0.134–0.1812 | 0.1395–0.1887 | 0.1765–0.2387 |
 | town | 0.7327–0.9913 | 0.0285–0.0385 | 0.1449–0.1961 | 0.0449–0.0607 | 0.2191–0.2965 |
 | region | 0.7972–1.0786 | 0.0987–0.1335 | 0.1172–0.1586 | 0.2627–0.3555 | 0.2572–0.348 |

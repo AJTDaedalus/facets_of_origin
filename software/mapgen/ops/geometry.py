@@ -9,7 +9,7 @@ from pydantic import Field as PField
 from shapely import affinity
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point as SPoint, Polygon, box
 
-from ..layers import Geometry
+from ..layers import Geometry, Mask
 from ..noise import fbm_at
 from ..recipe import RecipeError
 from ..registry import ParamModel, op
@@ -201,3 +201,31 @@ def roughen_geom(ctx, p, src):
     else:
         raise RecipeError(f"roughen_geom cannot handle {g.geom_type}")
     return Geometry(out)
+
+
+class TraceP(ParamModel):
+    src: Ref
+    level: float = PField(0.5, gt=0, lt=1)
+    simplify: NonNegFt = 0.15
+    min_area: NonNegFt = 1.0
+
+
+@op("trace", params=TraceP, inputs={"src": Mask}, output=Geometry, group="1 geometry")
+def trace(ctx, p, src):
+    """Mask → polygons (marching squares at `level`), simplified by `simplify` feet; drops pieces under `min_area` ft². Lets a noise-made region be inked, dashed or walled like a drawn shape."""
+    import contourpy
+    data = np.pad(src.data, 1)
+    gen = contourpy.contour_generator(z=data, fill_type="OuterOffset")
+    polys, offs = gen.filled(p.level, 2.0)
+    out = []
+    s = ctx.frame.scale
+    for pts, off in zip(polys, offs):
+        rings = [(pts[off[i]:off[i + 1]] - 1 + 0.5) / s for i in range(len(off) - 1)]
+        rings = [r for r in rings if len(r) >= 4]
+        if rings:
+            out.append(polygonal(Polygon(rings[0], rings[1:])))
+    g = polygonal(shapely.unary_union(out)) if out else Polygon()
+    if p.simplify:
+        g = polygonal(g.simplify(p.simplify))
+    parts = [x for x in getattr(g, "geoms", [g]) if x.area >= p.min_area]
+    return Geometry(polygonal(shapely.unary_union(parts)) if parts else Polygon())

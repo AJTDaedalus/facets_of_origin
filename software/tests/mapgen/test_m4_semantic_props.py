@@ -52,6 +52,11 @@ class TestWall:
         _, col = go([{"op": "wall", "src": "room", "emit_los": False}])
         assert col.los == []
 
+    def test_exclude_leaves_wall_open(self):
+        _, col = go([{"op": "rect", "out": "gap", "x": 15, "y": 20, "w": 10, "h": 10},
+                     {"op": "wall", "src": "room", "exclude": "gap"}])
+        assert total_len(col.los) == pytest.approx(90, rel=0.01)
+
     def test_wall_needs_polygon(self):
         with pytest.raises(RecipeError, match="polygon"):
             go([{"op": "path", "out": "l", "points": [[0, 0], [5, 5]], "line": True},

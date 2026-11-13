@@ -21,6 +21,7 @@ from .common import signed_distance
 class _M(BaseModel):
     model_config = ConfigDict(extra="forbid")
     type: str
+    grain: float = PField(0.0, ge=0, le=0.5)
 
 
 class FlatM(_M):
@@ -33,7 +34,6 @@ class RampNoiseM(_M):
     octaves: int = PField(4, ge=1, le=8)
     contrast: float = PField(1.0, gt=0)
     kind: Literal["fbm", "ridged", "billow"] = "fbm"
-    grain: float = PField(0.0, ge=0, le=0.5)
 
 
 class DirtM(RampNoiseM):
@@ -85,8 +85,10 @@ class GrassM(_M):
     colors: list[Any] = PField(min_length=1)
     scale: float = PField(4.0, gt=0)
     speckle: float = PField(0.08, ge=0, le=1)
-    tufts: float = PField(0.25, ge=0, le=2)
+    tufts: float = PField(0.25, ge=0, le=3)
     tuft_color: Any = None
+    light_tufts: float = PField(0.0, ge=0, le=3)
+    light_color: Any = None
 
 
 class WaterM(_M):
@@ -323,6 +325,12 @@ def _render(ctx, name, m, mask, seed):
                              3, seed + 4, angle=-75, angle_jitter=40)
             tc = resolve_color(st, m.tuft_color)[:3] if m.tuft_color else cols[0][:3] * 0.75
             rgb = rgb * (1 - 0.7 * ta[..., None]) + tc * 0.7 * ta[..., None]
+        if m.light_tufts > 0:
+            region = np.ones(shape, np.float32)
+            la = hatch_alpha(shape, region, fr.px(1.6 / m.light_tufts), fr.px(0.4), max(fr.px(0.05), 1),
+                             3, seed + 6, angle=-70, angle_jitter=50)
+            lc = resolve_color(st, m.light_color)[:3] if m.light_color else np.minimum(cols[-1][:3] * 1.18, 1)
+            rgb = rgb * (1 - 0.6 * la[..., None]) + lc * 0.6 * la[..., None]
         return rgb.astype(np.float32)
 
     if m.type == "water":

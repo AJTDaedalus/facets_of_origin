@@ -79,6 +79,7 @@ class StrokeP(ParamModel):
     rough_scale: PosFt = 4.0
     double: NonNegFt = 0.0
     dash: list[float] | None = None
+    jitter: Unit = 0.0
     side: Literal["center", "inside", "outside"] = "center"
 
 
@@ -111,7 +112,8 @@ def lines_of(g):
 
 
 def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, double=0.0,
-                          dash=None, side="center", seed=0, patch=False):
+                          dash=None, side="center", seed=0, patch=False, jitter=0.0):
+    rng = np.random.default_rng(seed + 991)
     lines = lines_of(g)
     if side != "center" and isinstance(g, (Polygon, MultiPolygon)):
         g2 = g.buffer(width_ft / 2 if side == "outside" else -width_ft / 2, join_style=2)
@@ -129,16 +131,23 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
             if v.is_empty:
                 continue
             if dash:
-                on, off = dash[0], dash[1] if len(dash) > 1 else dash[0]
-                pos, L = 0.0, v.length
+                pattern = list(dash) if len(dash) % 2 == 0 else list(dash) * 2
+                pos, L, k = 0.0, v.length, 0
                 while pos < L:
-                    out.append(substring(v, pos, min(pos + on, L)))
+                    on, off = pattern[k % len(pattern)], pattern[(k + 1) % len(pattern)]
+                    if jitter:
+                        on *= 1 + rng.uniform(-jitter, jitter)
+                        off *= 1 + rng.uniform(-jitter, jitter)
+                    wmul = 1 + rng.uniform(-jitter, jitter) * 0.8 if jitter else 1.0
+                    out.append((substring(v, pos, min(pos + on, L)), wmul))
                     pos += on + off
+                    k += 2
             else:
-                out.append(v)
+                out.append((v, 1.0))
     if not out:
         return None if patch else np.zeros(ctx.frame.shape, np.float32)
-    geom = shapely.unary_union([o.buffer(width_ft / 2, cap_style=2 if dash else 1, quad_segs=8) for o in out
+    cap = 1 if (not dash or jitter) else 2
+    geom = shapely.unary_union([o.buffer(width_ft * wm / 2, cap_style=cap, quad_segs=8) for o, wm in out
                                 if o.length > 0])
     if patch:
         return rasterize_patch(ctx.frame, geom)
@@ -147,11 +156,12 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
 
 @op("stroke", params=StrokeP, inputs={"into": Image, "src": (Mask, Geometry)}, group="4 paint")
 def stroke(ctx, p, into, src):
-    """Ink a line along a mask's edge or a geometry's outline: width in feet or a style `weight` (heavy/medium/fine), `roughness` wobble, `double` lines `double` feet apart, `dash: [on, off]` (geometry only), `side`."""
+    """Ink a line along a mask's edge or a geometry's outline: width in feet or a style `weight` (heavy/medium/fine), `roughness` wobble, `double` lines `double` feet apart, `dash: [on, off, ...]` (geometry only; `jitter` 0..1 randomises dash lengths and widths for a hand-inked look), `side`."""
     w = _width_ft(ctx, p)
     fr = ctx.frame
     if isinstance(src, Geometry):
-        a = stroke_geometry_alpha(ctx, src.geom, w, p.roughness, p.rough_scale, p.double, p.dash, p.side, ctx.seed)
+        a = stroke_geometry_alpha(ctx, src.geom, w, p.roughness, p.rough_scale, p.double, p.dash, p.side, ctx.seed,
+                                  jitter=p.jitter)
     else:
         if p.dash:
             raise RecipeError("dash needs a Geometry source, not a Mask")

@@ -7,7 +7,7 @@ coarse lattice (8 samples per wavelength) and spline-upsampled.
 from __future__ import annotations
 
 import numpy as np
-from scipy import ndimage
+from PIL import Image as PImage
 
 _ANG = np.arange(16) * (2 * np.pi / 16)
 _GX = np.cos(_ANG).astype(np.float32)
@@ -66,18 +66,13 @@ def noise_grid(shape: tuple[int, int], scale_px: float, seed: int) -> np.ndarray
     ox, oy = _offsets(seed)
     step = scale_px / SAMPLES_PER_WAVE
     if step > 1.5:
-        ch, cw = int(np.ceil(h / step)) + 2, int(np.ceil(w / step)) + 2
-        xs = (np.arange(cw) * step) / scale_px + ox
-        ys = (np.arange(ch) * step) / scale_px + oy
+        # sample a coarse lattice at the pixel centres Pillow's resize assumes, then bicubic-upsample
+        cw, ch = max(2, int(np.ceil(w / step))), max(2, int(np.ceil(h / step)))
+        xs = (np.arange(cw) + 0.5) * (w / cw) / scale_px + ox
+        ys = (np.arange(ch) + 0.5) * (h / ch) / scale_px + oy
         coarse = perlin(xs[None, :], ys[:, None], seed)
-        yy = (np.arange(h, dtype=np.float32) + 0.5) / step
-        xx = (np.arange(w, dtype=np.float32) + 0.5) / step
-        # separable cubic upsample: rows then columns
-        tmp = ndimage.map_coordinates(coarse, np.meshgrid(yy, np.arange(cw), indexing="ij"),
-                                      order=3, mode="nearest")
-        out = ndimage.map_coordinates(tmp, np.meshgrid(np.arange(h), xx, indexing="ij"),
-                                      order=3, mode="nearest")
-        return out.astype(np.float32)
+        img = PImage.fromarray(coarse.astype(np.float32), mode="F").resize((w, h), PImage.BICUBIC)
+        return np.asarray(img, np.float32)
     xs = (np.arange(w) + 0.5) / scale_px + ox
     ys = (np.arange(h) + 0.5) / scale_px + oy
     return perlin(xs[None, :], ys[:, None], seed)

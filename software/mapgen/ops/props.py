@@ -21,8 +21,8 @@ from .paint import stroke_geometry_alpha
 
 COLORS = {"wood": "#8a6440", "wood_light": "#a77f55", "wood_dark": "#5e412a", "cloth": "#9c3b32",
           "linen": "#e8e0cc", "metal": "#77736c", "stone_light": "#c2bbad", "stone": "#9d968a",
-          "stone_dark": "#6f695f", "foliage": "#4b6a34", "foliage_light": "#6f9046",
-          "foliage_dark": "#2f4722", "fire": "#f0a040", "rug": "#7b3f3a", "rug_trim": "#c9a45c"}
+          "stone_dark": "#6f695f", "foliage": "#4c5a44", "foliage_light": "#66755c",
+          "foliage_dark": "#2f4722", "foliage_top": "#8a977a", "fire": "#f0a040", "rug": "#7b3f3a", "rug_trim": "#c9a45c"}
 
 INK_FINE, INK_MED = 0.08, 0.13
 
@@ -105,6 +105,16 @@ def p_rubble(s, rng):
     return parts
 
 
+def p_pebbles(s, rng):
+    parts = []
+    for _ in range(int(rng.integers(2, 5))):
+        r = s * rng.uniform(0.07, 0.16)
+        c = rng.uniform(-s * 0.35, s * 0.35, 2)
+        g = affinity.translate(_blob(r, int(rng.integers(3, 5)), rng, 0.3, 10), *c)
+        parts.append((g, rng.choice(["stone_light", "stone"]), INK_FINE * 0.8))
+    return parts
+
+
 def p_stalagmite(s, rng):
     return [(_blob(s / 2, 5, rng, 0.25), "stone", INK_MED),
             (_blob(s * 0.32, 4, rng, 0.25), "stone_light", INK_FINE),
@@ -117,10 +127,26 @@ def p_boulder(s, rng):
     return [(b, "stone", INK_MED), (hl, "stone_light", 0)]
 
 
+def _canopy(r, lobes, rng):
+    parts = [SPoint(0, 0).buffer(r * 0.7)]
+    for i in range(lobes):
+        a = 2 * np.pi * i / lobes + rng.uniform(-0.15, 0.15)
+        d = r * rng.uniform(0.66, 0.76)
+        parts.append(SPoint(d * np.cos(a), d * np.sin(a)).buffer(r * rng.uniform(0.2, 0.28)))
+    return shapely.unary_union(parts)
+
+
 def p_tree(s, rng):
-    c = _scallop(s / 2, int(rng.integers(7, 11)), rng)
-    inner = affinity.translate(_scallop(s * 0.3, int(rng.integers(5, 8)), rng), -s * 0.08, -s * 0.08)
-    return [(c, "foliage", INK_MED), (inner, "foliage_light", 0)]
+    c = _canopy(s / 2, int(rng.integers(13, 18)), rng)
+    mid = affinity.translate(_canopy(s * 0.36, int(rng.integers(9, 12)), rng), -s * 0.05, -s * 0.06)
+    top = affinity.translate(_canopy(s * 0.2, int(rng.integers(6, 9)), rng), -s * 0.1, -s * 0.11)
+    cx, cy = -s * 0.04, -s * 0.05
+    branches = []
+    for i in range(int(rng.integers(5, 8))):
+        a = 2 * np.pi * i / 6 + rng.uniform(-0.3, 0.3)
+        L = s * rng.uniform(0.12, 0.2)
+        branches.append((LineString([(cx, cy), (cx + L * np.cos(a), cy + L * np.sin(a))]), None, INK_FINE * 0.55))
+    return [(c, "foliage", INK_MED * 2.0), (mid, "foliage_light", INK_FINE * 0.9), (top, "foliage_top", 0)] + branches
 
 
 def p_bush(s, rng):
@@ -167,7 +193,7 @@ def p_banner(s, rng):
 
 PROPS = {"table": (p_table, 4.0), "round_table": (p_round_table, 4.0), "chair": (p_chair, 1.5),
          "bed": (p_bed, 6.0), "bunk": (p_bunk, 6.0), "crate": (p_crate, 2.5), "barrel": (p_barrel, 2.5),
-         "chest": (p_chest, 3.0), "rubble": (p_rubble, 3.0), "stalagmite": (p_stalagmite, 3.0),
+         "chest": (p_chest, 3.0), "rubble": (p_rubble, 3.0), "pebbles": (p_pebbles, 1.2), "stalagmite": (p_stalagmite, 3.0),
          "boulder": (p_boulder, 4.0), "tree": (p_tree, 12.0), "bush": (p_bush, 4.0), "bridge": (p_bridge, 10.0),
          "brazier": (p_brazier, 2.0), "pillar": (p_pillar, 2.5), "statue": (p_statue, 5.0), "rug": (p_rug, 8.0),
          "banner": (p_banner, 4.0)}
@@ -195,7 +221,7 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     solid = [g for g, ck, _ in placed if ck and g.geom_type in ("Polygon", "MultiPolygon")]
     foot = shapely.unary_union(solid) if solid else Polygon()
     if shadow > 0 and not foot.is_empty:
-        off = s * 0.06 + 0.15
+        off = s * (0.1 if kind in ("tree", "bush") else 0.06) + 0.15
         sh = affinity.translate(foot, off, off * 1.1)
         p = rasterize_patch(ctx.frame, sh.buffer(s * 0.03))
         if p is not None:

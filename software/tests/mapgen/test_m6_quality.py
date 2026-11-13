@@ -56,6 +56,13 @@ class TestMetrics:
         a, b = Q.metrics(NOISE, px_per_square=50), Q.metrics(big, px_per_square=100)
         assert a["Q4"] == pytest.approx(b["Q4"], rel=0.2)
 
+    def test_normalises_per_foot(self):
+        # a 10-ft square at 100 px is the same scale as a 5-ft square at 50 px
+        big = NOISE.resize((400, 400), PImage.NEAREST)
+        a = Q.metrics(NOISE, px_per_square=50)
+        b = Q.metrics(big, px_per_square=200, feet_per_square=10)
+        assert a["Q4"] == pytest.approx(b["Q4"], rel=0.2)
+
     def test_crop_and_exclude(self):
         a = np.full((200, 200), 0.5)
         a[:, 100:] = np.random.default_rng(1).random((200, 100))

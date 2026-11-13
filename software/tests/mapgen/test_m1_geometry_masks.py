@@ -217,3 +217,30 @@ class TestMaskOps:
         with pytest.raises(RecipeError, match="Mask"):
             run([{"op": "rect", "out": "a", "x": 0, "y": 0, "w": 1, "h": 1},
                  {"op": "blur", "out": "b", "src": "a", "sigma": 1}])
+
+
+class TestTrace:
+    def _t(self, extra, **kw):
+        steps = [{"op": "rect", "out": "a", "x": 10, "y": 10, "w": 20, "h": 20},
+                 {"op": "rect", "out": "h", "x": 15, "y": 15, "w": 5, "h": 5},
+                 {"op": "subtract", "out": "d", "a": "a", "b": ["h"]},
+                 {"op": "rasterize", "out": "m", "src": "d"}] + extra
+        return layer(steps, "t", **BIG).geom
+
+    def test_area_round_trips(self):
+        g = self._t([{"op": "trace", "out": "t", "src": "m"}])
+        assert g.area == pytest.approx(375, rel=0.03)
+
+    def test_keeps_holes(self):
+        from shapely.geometry import Point as P
+        g = self._t([{"op": "trace", "out": "t", "src": "m"}])
+        assert not g.contains(P(17.5, 17.5)) and g.contains(P(12, 12))
+
+    def test_min_area_drops_specks(self):
+        g = self._t([{"op": "trace", "out": "t", "src": "m", "min_area": 1000}])
+        assert g.is_empty
+
+    def test_needs_mask(self):
+        with pytest.raises(RecipeError, match="Mask"):
+            run([{"op": "rect", "out": "a", "x": 0, "y": 0, "w": 1, "h": 1},
+                 {"op": "trace", "out": "t", "src": "a"}], **BIG)

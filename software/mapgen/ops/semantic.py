@@ -57,15 +57,17 @@ class WallP(ParamModel):
     fill: Any = "wall"
     material: str | None = None
     weight: str | None = "heavy"
+    outer_weight: str | None = "fine"
     ink: Any = "ink"
     roughness: NonNegFt | None = None
     gaps: float = PField(0.3, ge=0, le=0.9)
     emit_los: bool = True
+    exclude: Ref | None = None
 
 
-@op("wall", params=WallP, inputs={"into": Image, "src": Geometry}, group="5 semantic")
-def wall(ctx, p, into, src):
-    """Walls around a floor polygon (the walkable area): a band `thickness` feet outside its edge, filled and inked. Styles: dressed (true lines), rough (cave rock, wobbly outer edge), ruined (noise gaps). Emits line-of-sight walls and registers `name` for doors."""
+@op("wall", params=WallP, inputs={"into": Image, "src": Geometry, "exclude": Geometry}, group="5 semantic")
+def wall(ctx, p, into, src, exclude=None):
+    """Walls around a floor polygon (the walkable area): a band `thickness` feet outside its edge, filled and inked. Styles: dressed (true lines), rough (cave rock, wobbly outer edge), ruined (noise gaps). Emits line-of-sight walls and registers `name` for doors. `exclude` (a geometry) leaves a stretch open, e.g. a cave mouth."""
     floor = polygonal(src.geom)
     if floor.is_empty:
         raise RecipeError("wall needs a polygon (the floor it surrounds)")
@@ -97,6 +99,12 @@ def wall(ctx, p, into, src):
         kept = _split_lines(merged)
         cover = shapely.unary_union([k.buffer(t * 1.05, cap_style=2) for k in kept]) if kept else Polygon()
         band = polygonal(band.intersection(cover))
+    if exclude is not None and not exclude.geom.is_empty:
+        band = polygonal(band.difference(exclude.geom))
+        cut = []
+        for k in kept:
+            cut.extend(_split_lines(k.difference(exclude.geom)))
+        kept = [k for k in cut if k.length > 1e-6]
     if not band.is_empty:
         patch = rasterize_patch(ctx.frame, band)
         if p.material:
@@ -105,10 +113,14 @@ def wall(ctx, p, into, src):
             composite_inplace(into.data, render_material(ctx, p.material, m, ctx.seed), m)
         else:
             composite_patch(into.data, patch, col(ctx, p.fill, "wall")[:3])
+        inkc = resolve_color(ctx.style, p.ink)[:3]
+        if p.outer_weight:
+            w = _width_ft(ctx, type("W", (), {"width": None, "weight": p.outer_weight})())
+            composite_patch(into.data, stroke_geometry_alpha(ctx, band, w, patch=True), inkc)
         if p.weight:
             w = _width_ft(ctx, type("W", (), {"width": None, "weight": p.weight})())
-            a = stroke_geometry_alpha(ctx, band, w, roughness=0.0, patch=True)
-            composite_patch(into.data, a, resolve_color(ctx.style, p.ink)[:3])
+            edge = shapely.unary_union(kept) if kept else LineString()
+            composite_patch(into.data, stroke_geometry_alpha(ctx, edge, w, patch=True), inkc)
     ctx.collector.walls[p.name] = {"floor": floor, "band": band, "thickness": t, "lines": kept}
     if p.emit_los:
         ctx.collector.los.extend(kept)

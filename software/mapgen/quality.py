@@ -21,7 +21,8 @@ HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
 MANIFEST = HERE / "comparators.yaml"
 BANDS = HERE / "quality_bands.yaml"
-NORM_PPS = 50
+NORM_PPS = 50          # px per 5-ft square after normalisation (10 px per foot)
+NORM_PPF = NORM_PPS / 5
 SHEET_LABEL_H = 28
 METRICS = ("Q1", "Q2", "Q3", "Q4", "Q5s", "Q5h")
 
@@ -30,8 +31,10 @@ def _lum(rgb):
     return (rgb[..., 0] * 0.299 + rgb[..., 1] * 0.587 + rgb[..., 2] * 0.114).astype(np.float32)
 
 
-def prepare(img: PImage.Image, px_per_square=None, crop=None, exclude=None, normalize_width=None):
-    """Crop, build the valid mask and rescale to NORM_PPS px per square. Returns (rgb 0..1, valid)."""
+def prepare(img: PImage.Image, px_per_square=None, crop=None, exclude=None, normalize_width=None,
+            feet_per_square: float = 5):
+    """Crop, build the valid mask and rescale to NORM_PPF px per foot (NORM_PPS per 5-ft square).
+    Returns (rgb 0..1, valid)."""
     img = img.convert("RGB")
     W, H = img.size
     valid = np.ones((H, W), bool)
@@ -45,7 +48,7 @@ def prepare(img: PImage.Image, px_per_square=None, crop=None, exclude=None, norm
     if normalize_width:
         f = normalize_width / w
     elif px_per_square:
-        f = NORM_PPS / float(px_per_square)
+        f = NORM_PPF / (float(px_per_square) / float(feet_per_square))
     else:
         f = 1.0
     if abs(f - 1) > 1e-6:
@@ -72,8 +75,9 @@ def _hsv_sat_hue(rgb):
     return s, h / 6.0
 
 
-def metrics(img: PImage.Image, px_per_square=None, crop=None, exclude=None, normalize_width=None) -> dict:
-    rgb, valid = prepare(img, px_per_square, crop, exclude, normalize_width)
+def metrics(img: PImage.Image, px_per_square=None, crop=None, exclude=None, normalize_width=None,
+            feet_per_square: float = 5) -> dict:
+    rgb, valid = prepare(img, px_per_square, crop, exclude, normalize_width, feet_per_square)
     L = _lum(rgb)
     v = valid
     if not v.any():
@@ -135,7 +139,8 @@ def load_comparator(cid: str, base: Path | None = None) -> tuple[PImage.Image, d
 
 def comparator_metrics(cid: str, base: Path | None = None) -> dict:
     img, c = load_comparator(cid, base)
-    return metrics(img, c.get("px_per_square"), c.get("crop"), c.get("exclude"), c.get("normalize_width"))
+    return metrics(img, c.get("px_per_square"), c.get("crop"), c.get("exclude"), c.get("normalize_width"),
+                   c.get("feet_per_square", 5))
 
 
 def bands_from(values: dict, ids: list[str], widen: float = 0.15) -> dict:
@@ -179,11 +184,11 @@ def _write_research(path: Path, man, values, bands):
              "Numbers only: the comparator maps are the owner's local WotC packs and are never copied.*", "",
              "## Method", "",
              f"Each map is cropped to its body (legend, title, compass and scale note excluded), rescaled to "
-             f"{NORM_PPS} px per grid square (by the measured px/square in `software/mapgen/comparators.yaml`; "
-             "the region map by width), and measured:", "",
+             f"{NORM_PPF:g} px per foot ({NORM_PPS} px per 5-ft square; from the measured px/square and feet/square "
+             "in `software/mapgen/comparators.yaml`; the region map by width), and measured:", "",
              "- **Q1** tonal range: luminance P98 − P2",
              "- **Q2** fine detail: mean local σ of luminance in 5-px windows",
-             "- **Q3** mid-scale variation: σ of per-square mean luminance",
+             "- **Q3** mid-scale variation: σ of mean luminance per 5-ft cell",
              "- **Q4** ink density: fraction of pixels with Sobel magnitude/8 > 0.1",
              "- **Q5s** mean HSV saturation; **Q5h** hue families (18 bins with > 2% of pixels, s > 0.15)",
              "- **Q6** (ours only) grid-line contrast ÷ wall-line contrast", "",
@@ -209,13 +214,14 @@ def _inside_repo(p: Path) -> bool:
 
 
 def make_sheet(ours: PImage.Image, ours_pps, theirs: PImage.Image, theirs_pps, out: Path,
-               theirs_crop=None, labels=("mapgen", "comparator"), max_h: int = 1400) -> Path:
+               theirs_crop=None, labels=("mapgen", "comparator"), max_h: int = 1400,
+               ours_fps: float = 5, theirs_fps: float = 5) -> Path:
     """Ours beside a same-size region of the comparator, both at NORM_PPS px/square."""
     out = Path(out)
     if _inside_repo(out):
         raise ValueError("refusing to write a contact sheet inside the repo (comparator images stay out of git)")
-    a, _ = prepare(ours, ours_pps)
-    b, _ = prepare(theirs, theirs_pps, crop=theirs_crop)
+    a, _ = prepare(ours, ours_pps, feet_per_square=ours_fps)
+    b, _ = prepare(theirs, theirs_pps, crop=theirs_crop, feet_per_square=theirs_fps)
     A = PImage.fromarray((a * 255).astype(np.uint8))
     B = PImage.fromarray((b * 255).astype(np.uint8))
     if A.size[1] > max_h:
@@ -248,11 +254,13 @@ def cli_quality(args) -> int:
     if not args.png:
         print("mapgen quality: give a PNG or --baseline")
         return 2
-    pps = args.px_per_square
-    if pps is None and args.recipe:
+    pps, fps = args.px_per_square, 5
+    if args.recipe:
         from .recipe import load_recipe
-        pps = load_recipe(args.recipe).map.px_per_square
-    m = metrics(PImage.open(args.png), pps or 70)
+        hdr = load_recipe(args.recipe).map
+        pps = pps or hdr.px_per_square
+        fps = hdr.feet_per_square
+    m = metrics(PImage.open(args.png), pps or 70, feet_per_square=fps)
     print(json.dumps(m))
     if args.category:
         res = check_bands(m, load_bands(), args.category)
@@ -266,6 +274,7 @@ def cli_quality(args) -> int:
 def cli_sheet(args) -> int:
     theirs, c = load_comparator(args.vs)
     make_sheet(PImage.open(args.png), args.px_per_square or 70, theirs, c.get("px_per_square"),
-               Path(args.out), theirs_crop=c.get("crop"), labels=("mapgen", f"{args.vs} {c['title']}"))
+               Path(args.out), theirs_crop=c.get("crop"), labels=("mapgen", f"{args.vs} {c['title']}"),
+               theirs_fps=c.get("feet_per_square", 5))
     print(args.out)
     return 0
