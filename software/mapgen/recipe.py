@@ -200,6 +200,8 @@ def _expand(steps: list[dict], style: Style, depth: int = 0, parent: str | None 
             env = dict(macro.get("params") or {})
             call_id = step.pop("id", None)
             call_offset = int(step.pop("seed_offset", 0) or 0)
+            if "out" in step and "${out}" not in yaml.safe_dump(macro.get("steps") or []):
+                raise RecipeError(f"macro '{op}' doesn't take 'out' (it names its own layers; see its params)")
             step.pop("op")
             env.update(step)
             body = _subst(copy.deepcopy(macro.get("steps") or []), env, op)

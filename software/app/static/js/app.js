@@ -265,7 +265,12 @@ function renderTab() {
 
 /** Re-render only if the page shown depends on what changed. */
 function refresh(parts) {
-  if (!parts || parts.includes(state.tab)) renderTab();
+  if (!parts || parts.includes(state.tab)) {
+    // A map-token drag in progress: re-rendering the play tab would detach the board and drop
+    // the pointer capture. Defer until the drag ends (map.js runs the pending refresh).
+    if (state.tab === 'play' && typeof MAPUI !== 'undefined' && MAPUI.dragging) MAPUI.pendingRefresh = true;
+    else renderTab();
+  }
   const me = state.me;
   $('#build-dot').classList.toggle('hidden', !(me && me.level_up_ready));
 }
@@ -353,8 +358,20 @@ const HANDLE = {
   enemy_updated(m) { state.enemies[m.enemy.key] = m.enemy; refresh(['play']); },
   enemy_removed(m) { delete state.enemies[m.key]; refresh(['play']); },
 
-  map_list(m) { state.mapList = m.maps; if (!m.maps.length) notify('No rendered maps found. Run python -m mapgen render <recipe>.', 'warn'); refresh(['play']); },
-  map_state(m) { state.map = m.map; if (m.map) feedSys(`The map is up: ${esc(m.map.title)}.`); refresh(['play']); },
+  map_list(m) {
+    state.mapList = m.maps;
+    if (!m.maps.length) notify('No rendered maps found. Run python -m mapgen render <recipe>.', 'warn');
+    if (m.truncated) notify('The map folder scan stopped early: some maps may be missing (see the server log).', 'warn');
+    refresh(['play']);
+  },
+  map_state(m) {
+    const isNew = m.map && (!state.map || state.map.id !== m.map.id);
+    state.map = m.map;
+    if (isNew) feedSys(`The map is up: ${esc(m.map.title)}.`);
+    refresh(['play']);
+  },
+  fog_state(m) { if (state.map) { state.map.fog = m.fog; refresh(['play']); } },          // MM: controls change
+  board_patch(m) { if (state.map) { state.map.fog = m.fog; state.map.tokens = m.tokens; mapRefresh(false); } },
   token_moved(m) {
     if (!state.map) return;
     const isNew = !state.map.tokens[m.token];

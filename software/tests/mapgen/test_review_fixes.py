@@ -286,3 +286,19 @@ class TestThinlyTestedOps:
         ya = np.nonzero((a[..., 0] < 0.5).any(axis=1))[0].mean()
         yb = np.nonzero((b[..., 0] < 0.5).any(axis=1))[0].mean()
         assert abs(ya - yb) > 10
+
+
+
+class TestMacroOut:
+    STYLE = "macros:\n  speck:\n    params: {}\n    steps:\n      - {op: noise, out: n, scale: 5}\n"
+    STYLE_OUT = "macros:\n  speck:\n    params: {out: n}\n    steps:\n      - {op: noise, out: '${out}', scale: 5}\n"
+
+    def test_out_on_a_macro_that_ignores_it_is_an_error(self, write_recipe, tmp_path):
+        (tmp_path / "s.yaml").write_text(self.STYLE)
+        with pytest.raises(RecipeError, match="doesn't take 'out'"):
+            load_recipe(write_recipe({"map": header(include=["s.yaml"]), "steps": [{"op": "speck", "out": "x"}]}))
+
+    def test_out_on_a_macro_that_uses_it(self, write_recipe, tmp_path):
+        (tmp_path / "s.yaml").write_text(self.STYLE_OUT)
+        r = load_recipe(write_recipe({"map": header(include=["s.yaml"]), "steps": [{"op": "speck", "out": "x"}]}))
+        assert r.steps[0].out == "x"

@@ -354,8 +354,23 @@ def test_map_board_shared_and_tokens_drag(table):
     mm.wait_for_function(
         "b => { const t = document.querySelector(\".map-token[data-token='pc:Zahna']\"); return t && t.getAttribute('style') !== b; }",
         arg=before, timeout=T)
+    # N1: a re-render arriving mid-drag (the MM placing another token) must not lose the move
+    before2 = mm.locator(".map-token[data-token='pc:Zahna']").get_attribute("style")
+    box = z.locator(".map-token.pc.can").bounding_box()
+    z.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    z.mouse.down()
+    z.mouse.move(board["x"] + board["width"] * 0.6, board["y"] + board["height"] * 0.3, steps=4)
+    mm.click("[data-place='pc:Mordai']")       # a newly placed token forces a play-tab refresh everywhere
+    expect(z.locator(".map-token[data-token='pc:Mordai']")).to_have_count(0)   # deferred while Zahna drags
+    z.wait_for_timeout(300)
+    z.mouse.move(board["x"] + board["width"] * 0.65, board["y"] + board["height"] * 0.35, steps=4)
+    z.mouse.up()
+    mm.wait_for_function(
+        "b => { const t = document.querySelector(\".map-token[data-token='pc:Zahna']\"); return t && t.getAttribute('style') !== b; }",
+        arg=before2, timeout=T)
+    expect(z.locator(".map-token[data-token='pc:Mordai']")).to_have_count(1, timeout=T)  # the deferred refresh ran
     # players cannot drag someone else's token: Mordai's (if placed) is not .can on Zahna's page
-    expect(z.locator(".map-token.can")).to_have_count(1)
+    expect(z.locator(".map-token.can")).to_have_count(1)   # Mordai's token is on the board but not Zahna's to drag
     # fog (opt-in, visual only): the MM turns it on and reveals the room
     mm.click("[data-fog=toggle]")
     expect(z.locator(".map-fog")).to_be_attached(timeout=T)
@@ -367,6 +382,7 @@ def test_map_board_shared_and_tokens_drag(table):
         const f = document.querySelector('.map-fog'); const s = document.querySelector('.map-scroll');
         return {img: i.getBoundingClientRect().height, fog: f.getBoundingClientRect().height,
                 box: s.getBoundingClientRect().height}; }""")
+    assert dims["img"] > dims["box"] + 50, dims          # the board really is taller than its scroll box
     assert abs(dims["fog"] - dims["img"]) < 2, dims
     # and a token's position is relative to the image, not the scroll box
     pos = z.evaluate("""() => { const c = document.querySelector('.map-canvas').getBoundingClientRect();

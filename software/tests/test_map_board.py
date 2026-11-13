@@ -168,8 +168,8 @@ class TestFog:
         set_map(t)
         assert t.session.active_map["fog"]["enabled"] is False
         call(t.mm, {"type": "fog_set", "enabled": True})
-        m = [x for x in call(t.p1) if x["type"] == "map_state"][-1]
-        assert m["map"]["fog"]["enabled"] is True
+        m = [x for x in call(t.p1) if x["type"] == "board_patch"][-1]
+        assert m["fog"]["enabled"] is True
 
     def test_reveal_and_hide(self, t):
         set_map(t)
@@ -299,3 +299,59 @@ class TestScan:
                                       "pier": {"bounds": [0, 0, 50, 50], "area": 2500}}})
         call(t.mm, {"type": "map_set", "id": mid})
         assert list(t.session.active_map["fog"]["areas"]) == ["hall"]
+
+
+
+class TestVerifyRound:
+    """Second review round (docs/REVIEW_pr35_verify.md N2-N5)."""
+
+    def test_fog_changes_never_resend_the_image(self, t):
+        set_map(t)
+        call(t.p1); call(t.mm)
+        mm = call(t.mm, {"type": "fog_set", "enabled": True})
+        p1 = call(t.p1)
+        assert kinds(mm).count("fog_state") == 1 and "map_state" not in kinds(mm) + kinds(p1)
+        assert all("image" not in json.dumps(m) for m in mm + p1)
+        assert first(p1, "board_patch")["fog"]["enabled"] is True
+
+    def test_hidden_foe_moves_are_silent_for_players(self, t):
+        import time as _t
+        set_map(t)
+        key = t.spawn()
+        call(t.mm, {"type": "fog_set", "enabled": True})
+        _t.sleep(0.05)
+        call(t.mm, {"type": "token_move", "token": f"foe:{key}", "x": 14, "y": 3})    # in the fog from the start
+        _t.sleep(0.05)
+        mm = call(t.mm, {"type": "token_move", "token": f"foe:{key}", "x": 15, "y": 4})
+        _t.sleep(0.05)
+        p1 = call(t.p1)
+        assert "token_moved" in kinds(mm + call(t.mm))
+        assert not any(m.get("token") == f"foe:{key}" for m in p1)
+
+    def test_last_position_of_a_burst_always_arrives(self, t):
+        import time as _t
+        set_map(t)
+        for i in range(6):
+            t.p1.send_json({"type": "token_move", "token": "pc:Player1", "x": i + 1, "y": 1})
+        call(t.p1)
+        _t.sleep(0.1)
+        got = [m for m in call(t.mm) if m["type"] == "token_moved"]
+        assert got and got[-1]["x"] == 6.5 or got[-1]["x"] == 6.0
+        assert t.session.active_map["tokens"]["pc:Player1"]["x"] == 6.0
+
+    def test_throttle_is_per_token(self, t):
+        set_map(t)
+        key = t.spawn()
+        t.mm.send_json({"type": "token_move", "token": "pc:Zahna", "x": 1, "y": 1})
+        t.mm.send_json({"type": "token_move", "token": f"foe:{key}", "x": 2, "y": 2})
+        moved = {m["token"] for m in call(t.mm) if m["type"] == "token_moved"}
+        assert moved == {"pc:Zahna", f"foe:{key}"}
+
+    def test_test_data_is_pruned_and_truncation_reported(self, t, maps_dir, monkeypatch):
+        from app.api import websocket as ws
+        (maps_dir / "software" / "tests" / "_test_data" / "mapgen").mkdir(parents=True)
+        (maps_dir / "software" / "tests" / "_test_data" / "mapgen" / "x.dd2vtt").write_text("{}")
+        m = first(call(t.mm, {"type": "map_list"}), "map_list")
+        assert [x["id"] for x in m["maps"]] == [MAP_ID] and m["truncated"] is False
+        monkeypatch.setattr(ws, "_MAX_DIRS", 1)
+        assert first(call(t.mm, {"type": "map_list"}), "map_list")["truncated"] is True

@@ -1450,31 +1450,34 @@ import re as _re
 
 from app.game.session import player_map_view, token_visible_to_players
 
-_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".pytest_cache", "data"}
-_MAX_DIRS = 20000
-_MAP_CACHE: dict = {"root": None, "maps": {}}
+_SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv", ".pytest_cache", "data",
+              "_test_data", "_output", "print", "art"}
+_MAX_DIRS = 100_000
+_MAP_CACHE: dict = {"root": None, "maps": {}, "truncated": False}
 _B64 = _re.compile(r"^[A-Za-z0-9+/]+={0,2}$")
 _MAGIC = ((b"\x89PNG", "png"), (b"\xff\xd8\xff", "jpeg"), (b"RIFF", "webp"))
 _MOVE_GAP = 0.033            # seconds; token_move throttle per player
 _last_move: dict = {}
 
 
-def _scan_maps_sync(root: Path) -> dict[str, Path]:
-    """`**/mapgen/*.dd2vtt` under root, pruning hidden/vendor folders as it walks."""
+def _scan_maps_sync(root: Path) -> tuple[dict[str, Path], bool]:
+    """`**/mapgen/*.dd2vtt` under root, pruning hidden/vendor/test-data folders as it walks.
+    Returns (maps, truncated)."""
     found: dict[str, Path] = {}
     seen = 0
     for dirpath, dirnames, filenames in _os.walk(root, followlinks=False):
         dirnames[:] = sorted(d for d in dirnames if d not in _SKIP_DIRS and not d.startswith("."))
         seen += 1
         if seen > _MAX_DIRS or len(found) >= 200:
-            break
+            logger.warning("map scan of %s stopped early (%d dirs, %d maps)", root, seen, len(found))
+            return found, True
         if _os.path.basename(dirpath) != "mapgen":
             continue
         for fn in sorted(filenames):
             if fn.endswith(".dd2vtt"):
                 path = Path(dirpath) / fn
                 found[path.relative_to(root).as_posix()] = path
-    return found
+    return found, False
 
 
 async def _scan_maps(refresh: bool = False) -> dict[str, Path]:
@@ -1482,7 +1485,7 @@ async def _scan_maps(refresh: bool = False) -> dict[str, Path]:
     from app.config import settings
     root = Path(settings.maps_dir).resolve()
     if refresh or _MAP_CACHE["root"] != root:
-        _MAP_CACHE["maps"] = await asyncio.to_thread(_scan_maps_sync, root)
+        _MAP_CACHE["maps"], _MAP_CACHE["truncated"] = await asyncio.to_thread(_scan_maps_sync, root)
         _MAP_CACHE["root"] = root
     return _MAP_CACHE["maps"]
 
@@ -1574,6 +1577,15 @@ async def _push_board(ctx: Ctx) -> None:
                                   {"type": "map_state", "map": player_map_view(board)})
 
 
+async def _push_fog(ctx: Ctx) -> None:
+    """Fog changed: the MM gets the full fog; players get a small patch (their fog view and the
+    tokens they may now see). Never the image again."""
+    board = ctx.session.active_map
+    pv = player_map_view(board)
+    await manager.broadcast_split(ctx.session_id, {"type": "fog_state", "fog": board["fog"]},
+                                  {"type": "board_patch", "fog": pv["fog"], "tokens": pv["tokens"]})
+
+
 async def _drop_token(ctx: Ctx, token: str) -> None:
     board = ctx.session.active_map
     if board and token in board["tokens"]:
@@ -1591,7 +1603,8 @@ async def _map_list(ctx: Ctx) -> None:
         if squares is None:
             continue                       # not a mapgen render (no meta.json): skip rather than parse MBs
         maps.append({"id": mid, "title": _map_title(meta, path), "squares": squares})
-    await manager.send_to(ctx.websocket, {"type": "map_list", "maps": maps})
+    await manager.send_to(ctx.websocket, {"type": "map_list", "maps": maps,
+                                          "truncated": bool(_MAP_CACHE.get("truncated"))})
 
 
 @on("map_set", mm_only=True)
@@ -1605,12 +1618,14 @@ async def _map_set(ctx: Ctx) -> None:
     if path is None:
         raise WSError(f"No map {mid!r}: render one with `python -m mapgen render`.")
     ctx.session.active_map = await asyncio.to_thread(_load_board, path, mid)
+    _forget_moves(ctx.session_id)
     await _push_board(ctx)
 
 
 @on("map_clear", mm_only=True)
 async def _map_clear(ctx: Ctx) -> None:
     ctx.session.active_map = None
+    _forget_moves(ctx.session_id)
     await manager.broadcast(ctx.session_id, {"type": "map_state", "map": None})
 
 
@@ -1640,25 +1655,58 @@ def _board(ctx: Ctx) -> dict:
     return ctx.session.active_map
 
 
+async def _broadcast_move(session_id: str, session, token: str, was_visible: bool) -> None:
+    board = session.active_map
+    if board is None or token not in board["tokens"]:
+        return
+    pos = board["tokens"][token]
+    moved = {"type": "token_moved", "token": token, "x": pos["x"], "y": pos["y"]}
+    now_visible = token_visible_to_players(board, token)
+    if now_visible:
+        await manager.broadcast(session_id, moved)
+    elif was_visible:
+        await manager.broadcast_split(session_id, moved, {"type": "token_removed", "token": token})
+    else:                                          # unseen before and after: players hear nothing
+        await manager.send_to_identity(session_id, "mm", moved)
+
+
 @on("token_move")
 async def _token_move(ctx: Ctx) -> None:
-    """Place or move a token (squares from the north-west corner, clamped to the map)."""
+    """Place or move a token (squares from the north-west corner, clamped to the map).
+    Bursts are coalesced per token: at most one broadcast per 33 ms, and the last position always goes out."""
     board = _board(ctx)
     token = _str(ctx.msg, "token", 200)
     _check_token(ctx, token)
     x = _float(ctx.msg, "x", 0.0, float(board["squares"]["x"]))
     y = _float(ctx.msg, "y", 0.0, float(board["squares"]["y"]))
-    now = time.monotonic()
-    key = (ctx.session_id, ctx.identity)
-    if now - _last_move.get(key, 0.0) < _MOVE_GAP:
-        return                                     # throttled: drop silently (after validation)
-    _last_move[key] = now
+    key = (ctx.session_id, token)
+    entry = _last_move.setdefault(key, {"t": 0.0, "pending": False, "visible": True})
+    if not entry["pending"]:
+        # a token not yet on the board was invisible to players
+        entry["visible"] = token in board["tokens"] and token_visible_to_players(board, token)
     board["tokens"][token] = {"x": x, "y": y}
-    moved = {"type": "token_moved", "token": token, "x": x, "y": y}
-    if token_visible_to_players(board, token):
-        await manager.broadcast(ctx.session_id, moved)
-    else:
-        await manager.broadcast_split(ctx.session_id, moved, {"type": "token_removed", "token": token})
+    now = time.monotonic()
+    wait = _MOVE_GAP - (now - entry["t"])
+    if wait <= 0 and not entry["pending"]:
+        entry["t"] = now
+        await _broadcast_move(ctx.session_id, ctx.session, token, entry["visible"])
+        return
+    if entry["pending"]:
+        return                                     # a trailing broadcast is already scheduled
+    entry["pending"] = True
+    session, sid = ctx.session, ctx.session_id
+
+    async def flush():
+        await asyncio.sleep(max(wait, 0))
+        entry["pending"] = False
+        entry["t"] = time.monotonic()
+        await _broadcast_move(sid, session, token, entry["visible"])
+    asyncio.get_running_loop().create_task(flush())
+
+
+def _forget_moves(session_id: str) -> None:
+    for k in [k for k in _last_move if k[0] == session_id]:
+        del _last_move[k]
 
 
 @on("token_remove", mm_only=True)
@@ -1671,7 +1719,7 @@ async def _token_remove(ctx: Ctx) -> None:
 async def _fog_set(ctx: Ctx) -> None:
     """Turn the fog on or off for the map on the board (off by default)."""
     _board(ctx)["fog"]["enabled"] = _bool(ctx.msg, "enabled")
-    await _push_board(ctx)
+    await _push_fog(ctx)
 
 
 @on("fog_reveal", mm_only=True)
@@ -1684,4 +1732,4 @@ async def _fog_reveal(ctx: Ctx) -> None:
     shown = set(fog["revealed"])
     (shown.add if _bool(ctx.msg, "revealed") else shown.discard)(area)
     fog["revealed"] = sorted(shown)
-    await _push_board(ctx)
+    await _push_fog(ctx)

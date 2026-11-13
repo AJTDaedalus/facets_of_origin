@@ -7,7 +7,7 @@
 // multi-MB image is decoded once. Token moves patch the token layer only; a drag in progress
 // is never interrupted by an incoming update.
 
-const MAPUI = { id: null, src: null, el: null, fog: null, layer: null, dragging: false };
+const MAPUI = { id: null, src: null, el: null, fog: null, layer: null, dragging: false, pendingRefresh: false };
 const SVGNS = 'http://www.w3.org/2000/svg';
 
 function mapTokens() {
@@ -124,25 +124,38 @@ function onTokenDown(ev) {
   el.setPointerCapture(ev.pointerId);
   MAPUI.dragging = true;
   const box = () => MAPUI.el.getBoundingClientRect();   // the image's own box, so scrolling can't skew it
+  let last = { x: ev.clientX, y: ev.clientY }, moved = false;
   el.onpointermove = e => {
+    last = { x: e.clientX, y: e.clientY };
+    moved = true;
     const r = box();
     el.style.left = `${Math.max(0, Math.min(100, (e.clientX - r.left) / r.width * 100))}%`;
     el.style.top = `${Math.max(0, Math.min(100, (e.clientY - r.top) / r.height * 100))}%`;
   };
+  let done = false;
   const finish = e => {
-    el.onpointermove = null; el.onpointerup = null; el.onpointercancel = null;
+    if (done) return;
+    done = true;
+    el.onpointermove = null; el.onpointerup = null; el.onpointercancel = null; el.onlostpointercapture = null;
     MAPUI.dragging = false;
-    if (e.type === 'pointerup') {
+    // pointerup commits where the pointer is; a lost capture (e.g. the board was re-rendered
+    // under the drag) commits the last position seen; only an explicit cancel discards it
+    const commit = e.type === 'pointerup' || (e.type === 'lostpointercapture' && moved);
+    if (commit) {
+      const px = e.type === 'pointerup' ? e.clientX : last.x;
+      const py = e.type === 'pointerup' ? e.clientY : last.y;
       const r = box();
       const sq = r.width / Number(m.squares.x);
-      send({ type: 'token_move', token: el.dataset.token,
-        x: Math.floor((e.clientX - r.left) / sq) + 0.5, y: Math.floor((e.clientY - r.top) / sq) + 0.5 });
-    } else {
-      updateBoard();
+      const x = Math.max(0.5, Math.min(Number(m.squares.x) - 0.5, Math.floor((px - r.left) / sq) + 0.5));
+      const y = Math.max(0.5, Math.min(Number(m.squares.y) - 0.5, Math.floor((py - r.top) / sq) + 0.5));
+      send({ type: 'token_move', token: el.dataset.token, x, y });
     }
+    if (MAPUI.pendingRefresh) { MAPUI.pendingRefresh = false; refresh(['play']); }
+    else if (!commit) updateBoard();
   };
   el.onpointerup = finish;
   el.onpointercancel = finish;
+  el.onlostpointercapture = finish;
 }
 
 /** Patch the board in place (token moves, fog) without rebuilding the play tab. */
