@@ -22,7 +22,9 @@ from .paint import stroke_geometry_alpha
 COLORS = {"wood": "#8a6440", "wood_light": "#a77f55", "wood_dark": "#5e412a", "cloth": "#9c3b32",
           "linen": "#e8e0cc", "metal": "#77736c", "stone_light": "#c2bbad", "stone": "#9d968a",
           "stone_dark": "#6f695f", "foliage": "#4c5a44", "foliage_light": "#66755c",
-          "foliage_dark": "#2f4722", "foliage_top": "#8a977a", "fire": "#f0a040", "rug": "#7b3f3a", "rug_trim": "#c9a45c"}
+          "foliage_dark": "#2f4722", "foliage_top": "#8a977a", "fire": "#f0a040", "rug": "#7b3f3a", "rug_trim": "#c9a45c",
+          "upland_light": "#e3d3a6", "upland_dark": "#a9925f", "ink_fill": "#1c1814",
+          "mtn_light": "#cfc2ae", "mtn_dark": "#7d6a58"}
 
 INK_FINE, INK_MED = 0.08, 0.13
 
@@ -199,12 +201,76 @@ def p_banner(s, rng):
             (LineString([(-s / 2, s * 0.06), (s / 2, s * 0.06)]), None, INK_FINE * 0.6)]
 
 
+def p_mountain(s, rng):
+    ax = rng.uniform(-0.12, 0.12) * s
+    A = (ax, -0.42 * s)
+    L, R = (-s / 2, 0.28 * s), (s / 2, 0.28 * s)
+    F = (ax + rng.uniform(0.02, 0.14) * s, 0.28 * s)
+    left = Polygon([A, L, F])
+    right = Polygon([A, F, R])
+    hatch = []
+    for t in np.linspace(0.08, 0.92, int(rng.integers(7, 11))):
+        px, py = A[0] + (R[0] - A[0]) * t, A[1] + (R[1] - A[1]) * t
+        ln = LineString([(px, py), (px - 0.08 * s, py + 0.35 * s)]).intersection(right)
+        if not ln.is_empty and ln.length > 0:
+            hatch.append((ln, None, INK_FINE * 0.7))
+    return [(left, "mtn_light", 0), (right, "mtn_dark", 0), (Polygon([A, L, R]).exterior, None, INK_MED),
+            (LineString([A, F]), None, INK_FINE)] + hatch
+
+
+def p_hill(s, rng):
+    """A round dome seen from above, shaded and radially hatched on its south-east side."""
+    dome = _blob(s / 2, 5, rng, 0.08, 40)
+    shade = dome.intersection(affinity.translate(SPoint(0, 0).buffer(s / 2), s * 0.22, s * 0.22))
+    top = affinity.translate(SPoint(0, 0).buffer(s * 0.16), -s * 0.08, -s * 0.08)
+    hatch = []
+    for i in range(int(rng.integers(8, 13))):
+        a = rng.uniform(-0.35, 2.0)            # mostly the lower-right half
+        r0, r1 = s * rng.uniform(0.18, 0.28), s * 0.48
+        hatch.append((LineString([(r0 * np.cos(a), r0 * np.sin(a)), (r1 * np.cos(a), r1 * np.sin(a))]),
+                      None, INK_FINE * 0.75))
+    return [(dome, "upland_light", INK_FINE), (shade, "upland_dark", 0), (top, "linen", 0)] + hatch
+
+
+def p_peak(s, rng):
+    return [(Polygon([(0, -s / 2), (s / 2, s / 2), (-s / 2, s / 2)]), "linen", INK_MED)]
+
+
+def p_city(s, rng):
+    return [(SPoint(0, 0).buffer(s / 2), "linen", INK_MED), (SPoint(0, 0).buffer(s * 0.3), "ink_fill", 0)]
+
+
+def p_town(s, rng):
+    return [(SPoint(0, 0).buffer(s / 2), "linen", INK_MED * 1.2)]
+
+
+def p_village(s, rng):
+    return [(SPoint(0, 0).buffer(s / 2), "ink_fill", 0)]
+
+
+def p_ruin_marker(s, rng):
+    return [(box(-s / 2, -s / 2, s / 2, s / 2), "ink_fill", 0)]
+
+
+def p_conifer(s, rng):
+    pts = []
+    for i in range(16):
+        a = -np.pi / 2 + 2 * np.pi * i / 16
+        r = s / 2 if i % 2 == 0 else s * 0.3
+        pts.append((r * np.cos(a), r * np.sin(a)))
+    return [(Polygon(pts), "foliage", INK_FINE)]
+
+
+MARKERS = {"peak", "city", "town", "village", "ruin_marker"}
+
 PROPS = {"table": (p_table, 4.0), "round_table": (p_round_table, 4.0), "chair": (p_chair, 1.5),
          "bed": (p_bed, 6.0), "bunk": (p_bunk, 6.0), "crate": (p_crate, 2.5), "barrel": (p_barrel, 2.5),
          "chest": (p_chest, 3.0), "rubble": (p_rubble, 3.0), "pebbles": (p_pebbles, 1.2), "stalagmite": (p_stalagmite, 3.0),
          "boulder": (p_boulder, 4.0), "tree": (p_tree, 12.0), "bush": (p_bush, 4.0), "bridge": (p_bridge, 10.0),
          "brazier": (p_brazier, 2.0), "pillar": (p_pillar, 2.5), "statue": (p_statue, 5.0), "rug": (p_rug, 8.0),
-         "banner": (p_banner, 4.0)}
+         "banner": (p_banner, 4.0), "mountain": (p_mountain, 4.0), "hill": (p_hill, 3.0), "peak": (p_peak, 1.2),
+         "city": (p_city, 1.6), "town": (p_town, 1.1), "village": (p_village, 0.7), "ruin_marker": (p_ruin_marker, 0.9),
+         "conifer": (p_conifer, 1.5)}
 
 PropKind = Literal[tuple(PROPS)]  # type: ignore[valid-type]
 
@@ -219,6 +285,8 @@ def _color(ctx, key):
 def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, ink="ink"):
     fn, default = PROPS[kind]
     s = size or default
+    if kind in MARKERS:
+        shadow = 0.0
     rng = np.random.default_rng(seed)
     parts = fn(s, rng)
     placed = []
@@ -329,11 +397,12 @@ class ScatterP(ParamModel):
     size_jitter: Unit = 0.25
     rotate_jitter: float = PField(180.0, ge=0, le=360)
     shadow: Unit = 0.35
+    sort_y: bool = False
 
 
 @op("scatter", params=ScatterP, inputs={"into": Image, "mask": Mask, "avoid": Mask}, group="6 props")
 def scatter(ctx, p, into, mask=None, avoid=None):
-    """Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks."""
+    """Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly."""
     fr = ctx.frame
     rng = ctx.rng
     allowed = np.ones(fr.shape, bool) if mask is None else mask.data >= 0.5
@@ -359,6 +428,8 @@ def scatter(ctx, p, into, mask=None, avoid=None):
             keep = np.sort(rng.choice(len(pts), target, replace=False))
             pts = [pts[i] for i in keep]
     base = p.size or PROPS[p.kind][1]
+    if p.sort_y:
+        pts = sorted(pts, key=lambda q: (q[1], q[0]))
     for i, (x, y) in enumerate(pts):
         s = base * (1 + rng.uniform(-p.size_jitter, p.size_jitter))
         rot = rng.uniform(-p.rotate_jitter / 2, p.rotate_jitter / 2)

@@ -11,7 +11,7 @@ REPO = Path(__file__).resolve().parents[3]
 COURT = REPO / "conversions/dnd5e/oraga_night/maps/recipes/crystal_court.map.yaml"
 FACTS = REPO / "conversions/dnd5e/oraga_night/facts.yaml"
 PROOFS = [COURT, REPO / "maps/recipes/proof_cave.map.yaml", REPO / "maps/recipes/proof_ruins.map.yaml",
-          REPO / "maps/recipes/proof_cellar.map.yaml"]
+          REPO / "maps/recipes/proof_cellar.map.yaml", REPO / "maps/recipes/proof_region.map.yaml"]
 
 
 @pytest.fixture(scope="module")
@@ -74,7 +74,9 @@ class TestCrystalCourtCanon:
 def test_generic_proofs_render(recipe, tmp_path):
     r = render_recipe(recipe, out_dir=tmp_path, draft=True)
     d = json.loads(Path(r["dd2vtt"]).read_text())
-    assert d["line_of_sight"] and d["image"]
+    assert d["image"]
+    if "region" not in recipe.stem:
+        assert d["line_of_sight"]          # battle maps have walls; region maps don't
 
 
 def test_skill_op_catalogue_is_current():

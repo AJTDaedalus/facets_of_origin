@@ -52,6 +52,14 @@ materials:
                    vein_scale: 5, vein_width: 0.07}
   crystal_wall:   {type: ramp_noise, colors: ["#1f141e", "#3a2636", "#5e3f57"], scale: 3, octaves: 4, kind: ridged,
                    contrast: 1.2, grain: 0.05, veins: 0.6, vein_color: "#c99ab8", vein_scale: 2.5, vein_width: 0.08}
+  sea:            {type: water, shallow: "#a9c6c8", deep: "#5d8ea0", depth: 9, ripples: 2.2, ripple_color: "#e6f0ef", grain: 0.03}
+  lowland:        {type: grass, colors: ["#8aa060", "#b2bf80", "#dcdcaa"], scale: 12, speckle: 0.4, tufts: 3, grain: 0.1,
+                   tuft_length: 0.4, tuft_width: 0.06, tuft_color: "#4c5733", light_tufts: 2.5, light_color: "#eeeccc"}
+  upland:         {type: grass, colors: ["#bba875", "#d0c08f", "#e4d8b2"], scale: 8, speckle: 0.4, tufts: 2.4, grain: 0.1,
+                   tuft_length: 0.35, tuft_width: 0.06, tuft_color: "#7a6a45", light_tufts: 1.5}
+  marsh:          {type: grass, colors: ["#7f907a", "#97a68c", "#aab89d"], scale: 6, speckle: 0.3, tufts: 1.2, grain: 0.06,
+                   tuft_length: 0.5, tuft_width: 0.08}
+  forest_canopy:  {type: cobble, colors: ["#4f6e40", "#668a4f", "#7fa060"], size: 0.5, mortar_color: "#26361f", dome: 0.5, grain: 0.06}
   garden:         {type: grass, colors: ["#506b3a", "#678448", "#7f9a59"], scale: 8, speckle: 0.08, tufts: 0.3}
 
 defaults:
@@ -164,6 +172,49 @@ macros:
       - {op: stroke, src: "${name}_g", weight: heavy, roughness: 0.15}
       - {op: offset, out: "${name}_halo", src: "${name}_g", by: 1.1}
       - {op: stroke, src: "${name}_halo", width: 0.16, dash: [1.2, 0.5, 0.25, 0.5], jitter: 0.6, opacity: 0.95}
+
+  coastline:
+    doc: "Ink a coast (a land geometry): heavy shoreline, a pale shallows band and offshore wave lines."
+    params: {land: land, name: coast, waves: 3, spacing: 0.9}
+    steps:
+      - {op: rasterize, out: "${name}_land", src: "${land}"}
+      - {op: band, out: "${name}_shallows", src: "${name}_land", inner: 0, outer: 2.5}
+      - {op: blur, out: "${name}_shallows", src: "${name}_shallows", sigma: 0.8}
+      - {op: fill, mask: "${name}_shallows", color: "#cfe0dc", opacity: 0.55}
+      - {op: offset, out: "${name}_w1", src: "${land}", by: "${spacing}"}
+      - {op: stroke, src: "${name}_w1", width: 0.12, opacity: 0.7, color: "#3d6475"}
+      - {op: offset, out: "${name}_w2", src: "${land}", by: 2.0}
+      - {op: stroke, src: "${name}_w2", width: 0.1, dash: [1.5, 0.8], jitter: 0.4, opacity: 0.5, color: "#3d6475"}
+      - {op: offset, out: "${name}_w3", src: "${land}", by: 3.4}
+      - {op: stroke, src: "${name}_w3", width: 0.08, dash: [1.0, 1.4], jitter: 0.5, opacity: 0.35, color: "#3d6475"}
+      - {op: offset, out: "${name}_w4", src: "${land}", by: 5.0}
+      - {op: stroke, src: "${name}_w4", width: 0.07, dash: [2.4, 1.2], jitter: 0.5, opacity: 0.3, color: "#3d6475"}
+      - {op: offset, out: "${name}_w5", src: "${land}", by: 7.0}
+      - {op: stroke, src: "${name}_w5", width: 0.07, dash: [3.0, 1.8], jitter: 0.5, opacity: 0.25, color: "#3d6475"}
+      - {op: invert, out: "${name}_sea", src: "${name}_land"}
+      - {op: hatch, mask: "${name}_sea", spacing: 0.7, length: 1.1, width: 0.05, lines: 2, angle: 90, angle_jitter: 25,
+         color: "#2f5566", opacity: 0.45, id: "${name}_sea_hatch"}
+      - {op: stroke, src: "${land}", weight: heavy}
+
+  forest_mass:
+    doc: "A forest drawn as a mass of tree crowns: canopy texture, drop shadow, inked scalloped edge. `src` is a polygon geometry."
+    params: {src: forest, name: forest}
+    steps:
+      - {op: roughen_geom, out: "${name}_g", src: "${src}", amount: 0.35, scale: 1.2, id: "${name}_rough"}
+      - {op: rasterize, out: "${name}", src: "${name}_g"}
+      - {op: shadow, mask: "${name}", mode: drop, offset: [0.3, 0.4], blur: 0.4, strength: 0.5}
+      - {op: fill, mask: "${name}", material: forest_canopy, id: "${name}_canopy"}
+      - {op: shadow, mask: "${name}", mode: inner, width: 1.2, offset: [-0.3, -0.3], strength: 0.35}
+      - {op: stroke, src: "${name}_g", weight: medium}
+
+  mountain_range:
+    doc: "Mountain glyphs wherever height field `src` is above `level` (inside `within`), drawn north to south."
+    params: {src: height, level: 0.6, within: land_m, name: mountains, size: 4, density: 1.2, spacing: 2.6}
+    steps:
+      - {op: field_to_mask, out: "${name}_m", src: "${src}", lo: "${level}", hi: "${level}"}
+      - {op: combine, out: "${name}_m", of: ["${name}_m", "${within}"], mode: min}
+      - {op: scatter, kind: mountain, mask: "${name}_m", density: "${density}", spacing: "${spacing}", size: "${size}",
+         size_jitter: 0.3, rotate_jitter: 0, shadow: 0.3, sort_y: true, id: "${name}_glyphs"}
 
   finish:
     doc: "Grid on the walkable mask, parchment grain, a light vignette and a double frame."

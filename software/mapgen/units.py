@@ -13,6 +13,7 @@ class Frame:
         self.pps = DRAFT_PX_PER_SQUARE if draft else header.px_per_square
         self.ss = 1 if draft else header.supersample
         self.fps = header.feet_per_square
+        self.unit = header.unit
         out_w = round(header.width_ft / self.fps * self.pps)
         out_h = round(header.height_ft / self.fps * self.pps)
         self.out_size = (out_w, out_h)                 # (w, h) of the exported PNG

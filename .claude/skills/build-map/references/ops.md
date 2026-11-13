@@ -218,6 +218,17 @@ Distance in feet from a mask's edge: outside (0 inside), inside (0 outside), or 
 | `src` | str | **required** |
 | `side` | Literal['outside', 'inside', 'signed'] | `"outside"` |
 
+### `erode` → Field
+
+Thermal erosion: material slides from steeper than `talus` (field units per pixel) to lower neighbours. Mass-conserving; softens noise into weathered terrain.
+
+| param | type | default |
+|---|---|---|
+| `src` | str | **required** |
+| `iterations` | int | `20` |
+| `talus` | float | `0.004` |
+| `rate` | float | `0.25` |
+
 ### `field_to_mask` → Mask
 
 Mask = 0 below `lo`, 1 above `hi`, ramped between (lo == hi gives a hard cut).
@@ -237,6 +248,17 @@ Mask = 0 below `lo`, 1 above `hi`, ramped between (lo == hi gives a hard cut).
 | `kind` | Literal['linear', 'radial'] | `"linear"` |
 | `start` | list[float] | **required** |
 | `end` | list[float] | **required** |
+
+### `isolines` → Geometry
+
+Contour lines of a field at `levels` (or every `interval`) → line Geometry. For terrain contours, coastlines (sea level) and depth lines.
+
+| param | type | default |
+|---|---|---|
+| `src` | str | **required** |
+| `levels` | list[float] \| None | — |
+| `interval` | float \| None | — |
+| `simplify` | float | `0.0` |
 
 ### `mix` → Field
 
@@ -271,6 +293,20 @@ Map in_range → out_range, clamped, with an optional smoothstep or power curve.
 | `out_range` | list[float] | `[0.0, 1.0]` |
 | `curve` | Literal['linear', 'smooth', 'pow'] | `"linear"` |
 | `gamma` | float | `1.0` |
+
+### `rivers` → Geometry
+
+Rivers from a height field: fill depressions, route water downhill (D8), keep cells draining more than `threshold` of the map, trace them to the sea (height < `sea_level`) or the edge. Polygons tapered `width` [source, mouth] in map units, or centre lines with `line: true`.
+
+| param | type | default |
+|---|---|---|
+| `src` | str | **required** |
+| `sea_level` | float | `0.0` |
+| `threshold` | float | `0.01` |
+| `resolution` | int | `256` |
+| `width` | list[float] | `[0.3, 2.0]` |
+| `line` | bool | `False` |
+| `smooth` | int | `2` |
 
 
 ## Paint
@@ -560,7 +596,7 @@ Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
-| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner'] | **required** |
+| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer'] | **required** |
 | `at` | list[float] | **required** |
 | `size` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `rotate` | float | `0.0` |
@@ -569,12 +605,12 @@ Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate
 
 ### `scatter` → paints in place
 
-Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks.
+Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly.
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
-| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner'] | **required** |
+| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer'] | **required** |
 | `mask` | str \| None | — |
 | `region` | list[Annotated[list[float], FieldInfo(annotation=None, required=True, metadata=[MinLen(min_length=2), MaxLen(max_length=2)])]] \| None | — |
 | `avoid` | list[str] | `[]` |
@@ -584,6 +620,7 @@ Scatter props by Poisson disk inside a mask and/or a region polygon: `density` p
 | `size_jitter` | float | `0.25` |
 | `rotate_jitter` | float | `180.0` |
 | `shadow` | float | `0.35` |
+| `sort_y` | bool | `False` |
 
 
 ## Overlay
@@ -613,7 +650,7 @@ A double-ruled border around the map, `margin` feet in from the edge.
 
 ### `grid` → paints in place
 
-Square grid at the map's grid size, optionally clipped to a mask (e.g. only on walkable floor). Lines sit on pixel columns so they stay crisp.
+Square grid at the map's grid size (lines on pixel columns, crisp), or a hex grid (`shape: hex`, flat or pointy, `feet_per_square` across the flats). Optionally clipped to a mask.
 
 | param | type | default |
 |---|---|---|
@@ -622,6 +659,8 @@ Square grid at the map's grid size, optionally clipped to a mask (e.g. only on w
 | `color` | Any | `"ink"` |
 | `alpha` | float | `0.3` |
 | `weight` | float | `0.06` |
+| `shape` | Literal['square', 'hex'] | `"square"` |
+| `orientation` | Literal['flat', 'pointy'] | `"flat"` |
 
 ### `label` → paints in place
 
@@ -742,6 +781,24 @@ Dense undergrowth masses inside mask `within`, minus `clear`: dark fill, drop sh
 
 Params: `name`='brush', `within`='edges', `clear`='clear', `scale`=9, `cover`=0.0
 
+### `coastline`
+
+Ink a coast (a land geometry): heavy shoreline, a pale shallows band and offshore wave lines.
+
+Params: `land`='land', `name`='coast', `waves`=3, `spacing`=0.9
+
+### `forest_mass`
+
+A forest drawn as a mass of tree crowns: canopy texture, drop shadow, inked scalloped edge. `src` is a polygon geometry.
+
+Params: `src`='forest', `name`='forest'
+
+### `mountain_range`
+
+Mountain glyphs wherever height field `src` is above `level` (inside `within`), drawn north to south.
+
+Params: `src`='height', `level`=0.6, `within`='land_m', `name`='mountains', `size`=4, `density`=1.2, `spacing`=2.6
+
 ### `finish`
 
 Grid on the walkable mask, parchment grain, a light vignette and a double frame.
@@ -770,4 +827,9 @@ Params: `floor`='floor', `alpha`=0.28
 | `water` | water |
 | `crystal_floor` | ramp_noise |
 | `crystal_wall` | ramp_noise |
+| `sea` | water |
+| `lowland` | grass |
+| `upland` | grass |
+| `marsh` | grass |
+| `forest_canopy` | cobble |
 | `garden` | grass |

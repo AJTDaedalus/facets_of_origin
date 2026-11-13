@@ -199,3 +199,44 @@ rubric bar on my reading; the owner's eye is the final gate. The ESCALATION abov
 (court yardstick, TP74 palette) still stands; its question (c) about the grid is
 answered provisionally by the quiet grid now passing all bands on B, C and D.
 Tests: mapgen **263 passed**.
+
+## 2026-11-13 — Phase 2 region maps (R1–R7) and the court colour variant
+
+- **Court colour (for escalation question b):** a TP74 glow variant was rendered
+  next to the committed dusky one, at
+  `/tmp/claude-0/-root-facets-of-origin/eb46f7a0-189d-4dd6-848a-6d5e583a84cc/scratchpad/final/court_palette_compare.png`
+  (left: committed, Q5s 0.25; right: glow, Q5s 0.43). No recipe change: this is
+  the owner's call.
+- **R1:** header `unit: ft|mi` (ft keeps 5/10-ft squares; mi allows any hex
+  size), hex grid (flat/pointy, sized across the flats), scale note "1 hex = 5 miles".
+- **R2:** `isolines` (contourpy lines at levels or an interval), `erode` (thermal,
+  exactly mass-conserving).
+- **R3:** `rivers`: priority-flood depression fill, D8 receivers, accumulation;
+  rivers end at the sea, the edge or a larger river, and taper wider downstream.
+  New module `ops/terrain.py`.
+- **R4:** glyphs `mountain` (lit and shaded faces, hatching), `hill` (radially
+  hatched dome), `peak`, `city`, `town`, `village`, `ruin_marker`, `conifer`;
+  markers cast no shadow. `scatter sort_y` for north-to-south overlap.
+- **R5:** materials `sea`, `lowland`, `upland`, `marsh`, `forest_canopy` (dome-shaded
+  cells read as tree crowns); macros `coastline` (shore ink, shallows, five wave
+  lines, sea hatching), `forest_mass`, `mountain_range`. `quality --category
+  region` compares at the comparator's width.
+- **R6:** `maps/recipes/proof_region.map.yaml` from the generic description; it
+  renders in 2 minutes at 1500 px wide. The first measurement ran at 600 px wide,
+  and upscaling for comparison erased the fine detail, so the resolution was raised
+  to print scale (125 px per hex).
+
+| Proof | Q1 | Q2 | Q3 | Q4 | Q5s | Rubric (self) |
+|---|---|---|---|---|---|---|
+| E region (C7 North Sword Coast) | 0.770 ✗ (≥0.797) | 0.077 ✗ (≥0.099) | 0.109 ✗ (≥0.117) | 0.154 ✗ (≥0.263) | 0.319 ✓ | ≈3.7 |
+
+  Rubric: legibility 4.5, surface 3.5, depth 3.5, line 3.5, palette 4, grid 4,
+  glyphs 3.5, shelf 3.5. It's legible and reads as a hand-drawn region map; the
+  Schley region map is far denser (fine hatching on every surface, labels along
+  curves). Next levers: curved labels, mountain-range shading masses under the
+  glyphs, forest edge trees, marsh glyphs.
+- **R7:** cookbook region section; ops.md regenerated; mapgen **289 passed**.
+
+**City maps (2b)** and the **web-app map view (3)** are next. Both need owner
+input on priority (see BRIEF Phase 3: it belongs to the wider 5e-in-the-app
+initiative).

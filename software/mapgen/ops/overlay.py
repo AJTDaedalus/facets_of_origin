@@ -83,19 +83,70 @@ def corner_xy(ctx, at, half_w, half_h):
     return [x, y]
 
 
+def scale_text(frame, collector) -> str:
+    cell = "hex" if collector.grid_shape == "hex" else "square"
+    n = frame.fps
+    n = int(n) if float(n).is_integer() else n
+    word = {"ft": "feet", "mi": "miles"}[frame.unit]
+    if n == 1:
+        word = word[:-1] if word == "miles" else "foot"
+    return f"1 {cell} = {n} {word}"
+
+
+def hex_centres(width, height, size, orientation="flat"):
+    """Hex centres covering a width × height area; `size` is the flat-to-flat distance."""
+    R = size / np.sqrt(3)
+    pts = []
+    if orientation == "flat":
+        dx, dy = 1.5 * R, size
+        for c in range(-1, int(width / dx) + 2):
+            for r in range(-1, int(height / dy) + 2):
+                pts.append((c * dx, r * dy + (dy / 2 if c % 2 else 0)))
+    else:
+        dx, dy = size, 1.5 * R
+        for r in range(-1, int(height / dy) + 2):
+            for c in range(-1, int(width / dx) + 2):
+                pts.append((c * dx + (dx / 2 if r % 2 else 0), r * dy))
+    return pts
+
+
+def hex_lines(width, height, size, orientation="flat"):
+    import shapely
+    R = size / np.sqrt(3)
+    off = 0 if orientation == "flat" else np.pi / 6
+    ang = np.arange(6) * np.pi / 3 + off
+    rings = []
+    for x, y in hex_centres(width, height, size, orientation):
+        rings.append(LineString([(x + R * np.cos(a), y + R * np.sin(a)) for a in list(ang) + [ang[0]]]))
+    return shapely.unary_union(rings)
+
+
 class GridP(ParamModel):
     into: Ref = "canvas"
     mask: Ref | None = None
     color: Any = "ink"
     alpha: Unit = 0.3
     weight: PosFt = 0.06
+    shape: Literal["square", "hex"] = "square"
+    orientation: Literal["flat", "pointy"] = "flat"
 
 
 @op("grid", params=GridP, inputs={"into": Image, "mask": Mask}, group="7 overlay")
 def grid(ctx, p, into, mask=None):
-    """Square grid at the map's grid size, optionally clipped to a mask (e.g. only on walkable floor). Lines sit on pixel columns so they stay crisp."""
+    """Square grid at the map's grid size (lines on pixel columns, crisp), or a hex grid (`shape: hex`, flat or pointy, `feet_per_square` across the flats). Optionally clipped to a mask."""
     fr = ctx.frame
     h, w = fr.shape
+    ctx.collector.grid_shape = p.shape
+    if p.shape == "hex":
+        from .masks import rasterize_geom
+        a = rasterize_geom(fr, hex_lines(fr.width_ft, fr.height_ft, fr.fps, p.orientation),
+                           max(p.weight, 1.0 / fr.scale))
+        if mask is not None:
+            a = a * mask.data
+        ctx.collector.masks["grid"] = a
+        c = resolve_color(ctx.style, p.color)
+        composite_inplace(into.data, c[:3], (a * p.alpha).astype(np.float32))
+        return
     sq = fr.square_px
     hw = max(fr.px(p.weight) / 2, 0.5)
 
@@ -156,7 +207,7 @@ class ScaleBarP(ParamModel):
 @op("scale_bar", params=ScaleBarP, inputs={"into": Image}, group="7 overlay")
 def scale_bar(ctx, p, into):
     """The "1 square = 5 feet" note at a corner."""
-    t = p.text or f"1 square = {ctx.frame.fps} feet"
+    t = p.text or scale_text(ctx.frame, ctx.collector)
     wft = len(t) * p.size * 0.32
     c = corner_xy(ctx, p.at, wft, p.size)
     draw_text(ctx, into.data, t, c, p.size, p.color)

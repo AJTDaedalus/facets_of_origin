@@ -260,7 +260,13 @@ def cli_quality(args) -> int:
         hdr = load_recipe(args.recipe).map
         pps = pps or hdr.px_per_square
         fps = hdr.feet_per_square
-    m = metrics(PImage.open(args.png), pps or 70, feet_per_square=fps)
+    nw = None
+    if args.category:
+        man = load_manifest()
+        ids = man["categories"].get(args.category, [])
+        widths = {man["comparators"][i].get("normalize_width") for i in ids}
+        nw = next(iter(widths)) if len(widths) == 1 else None
+    m = metrics(PImage.open(args.png), pps or 70, feet_per_square=fps, normalize_width=nw)
     print(json.dumps(m))
     if args.category:
         res = check_bands(m, load_bands(), args.category)

@@ -119,3 +119,47 @@ Interior walls with doors are `partition`s. Don't draw furniture the text doesn'
 | Grid fights the floor | Lower its `alpha`, or clip it with `mask:` |
 | Door snaps to a corner | The edge you meant isn't a wall boundary (the rooms were unioned): add a `partition` |
 | Render too slow | Use `--draft` while iterating; a full render at 70 px/sq takes about 1 s per 100 ft² of map |
+
+## Region maps (miles and hexes)
+
+Set `unit: mi` in the header. Then `width_ft`/`height_ft` are miles and
+`feet_per_square` is the hex size in miles (the field names are kept from battle
+maps). Render at about 125 px per hex, which is print resolution; `--draft` is
+fine for layout. Full example: `maps/recipes/proof_region.map.yaml`.
+
+```yaml
+map: {title: The Coast, unit: mi, width_ft: 60, height_ft: 80, feet_per_square: 5, px_per_square: 125,
+      include: [styles/inked_parchment.yaml]}
+steps:
+  - {op: canvas, out: canvas, material: sea}
+  - {op: polygon, out: coast_shape, points: [...]}              # draw the coast you want
+  - {op: roughen_geom, out: land, src: coast_shape, amount: 1.1, scale: 4}
+  - {op: rasterize, out: land_m, src: land}
+  # height = distance inland + noise + hand-placed ridges, then weathered
+  - {op: distance, out: inland, src: land_m, side: inside}
+  - {op: remap, out: inland, src: inland, in_range: [0, 38], out_range: [0.05, 0.55]}
+  - {op: path, out: ridge_line, points: [...], width: 9}
+  - {op: rasterize, out: ridge_m, src: ridge_line}
+  - {op: blur, out: ridge_m, src: ridge_m, sigma: 3.5}
+  - {op: mix, out: height, of: [inland, ridge_m], weights: [1, 0.5]}
+  - {op: mix, out: height, of: [height, land_m], mode: mul}      # sea = 0
+  - {op: erode, out: height, src: height, iterations: 15}
+  - {op: fill, mask: land_m, material: lowland}
+  - {op: coastline, land: land}                                  # shore ink, shallows, waves, sea hatching
+  - {op: forest_mass, src: forest_polygon}
+  - {op: rivers, out: creeks, src: height, sea_level: 0.03, threshold: 0.012, width: [0.15, 0.45]}
+  - {op: mountain_range, src: height, level: 0.56, within: land_m}
+  - {op: scatter, kind: hill, mask: hill_band, density: 2.4, spacing: 1.9, size: 2.3, sort_y: true}
+  - {op: prop, kind: city, at: [x, y]}                           # also town, village, ruin_marker, peak
+  - {op: grid, shape: hex, orientation: pointy, alpha: 0.3}
+  - {op: legend, at: sw}
+```
+
+- **Rivers:** draw the river a story needs as a `path`, and let `rivers` add the
+  tributaries from the height field. They run downhill, end at the sea, the map
+  edge or a larger river, and widen downstream.
+- **Contour lines:** `isolines` on the height field (`interval: 0.1`), then
+  `stroke` them fine.
+- **Overlap:** `sort_y: true` on glyph scatters draws north to south, so nearer
+  mountains overlap farther ones.
+- **Metrics:** `quality --category region` compares at the comparator's width (1500 px).

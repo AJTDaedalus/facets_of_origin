@@ -207,5 +207,31 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ---
 
-**Phase 2 (region/city) and Phase 3 (web app)** are decomposed after T33 passes
-and the owner has reviewed it (DESIGN §8).
+## Phase 2 — region maps (decomposed 2026-11-13 while T33 awaits the owner)
+
+The owner asked for "both battle maps and world/region/city maps"; Phase 2 reuses
+the engine (DESIGN §8). City maps follow region maps.
+
+- [x] **R1 Units and hexes.** Header `unit: ft|mi` (ft keeps 5/10-ft squares; mi
+  allows any size), `grid shape: hex` (flat or pointy), and a scale note that says
+  "1 hex = 5 miles". *Accept:* ≥5 tests: mi header valid, ft still rejects 7,
+  hex lines sit on hex edges, scale text, square grid unchanged.
+- [x] **R2 Terrain fields.** `isolines` (Field → contour lines at levels),
+  `erode` (thermal erosion, mass-conserving). *Accept:* ≥3 tests each.
+- [x] **R3 Rivers.** `rivers`: priority-flood depression filling, D8 flow,
+  accumulation, threshold → tapered river polygons (or centre lines), from height to
+  sea level. *Accept:* ≥5 tests: rivers run downhill, reach the sea or the edge,
+  width grows downstream, deterministic, threshold controls count.
+- [x] **R4 Glyphs.** Props `mountain`, `hill`, `peak`, `city`, `town`, `village`,
+  `ruin_marker`, `conifer`. *Accept:* the existing all-props test covers them.
+- [x] **R5 Region style.** Materials `sea`, `lowland`, `upland`, `marsh`; macros
+  `coastline` (heavy coast ink plus offshore ripple lines), `forest_mass`,
+  `mountain_range` (glyphs scattered by height). *Accept:* each macro renders in a test.
+- [x] **R6 Proof E (region).** Generic description: "a coastal region about 60×80
+  miles in 5-mile hexes: sea to the west, a river from eastern mountains to the
+  coast, a large central forest, hills, a coastal city at the river mouth, two
+  towns, a ruin, a road east from the city." *Accept:* renders; metrics vs the C7
+  band (normalised by width); rubric logged.
+- [x] **R7 Skill and docs.** Cookbook region section; regenerated ops.md; LOG.
+
+**City maps (Phase 2b) and the web-app map view (Phase 3)** are decomposed after R6.

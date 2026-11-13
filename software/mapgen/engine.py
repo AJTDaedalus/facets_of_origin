@@ -33,6 +33,7 @@ class Collector:
     footprints: list = field(default_factory=list)   # prop footprints (feet)
     scatter_points: dict = field(default_factory=dict)
     legend_drawn: list = field(default_factory=list)
+    grid_shape: str = "square"
 
 
 @dataclass

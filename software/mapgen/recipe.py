@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 MAX_MACRO_DEPTH = 12
@@ -23,11 +23,19 @@ class MapHeader(BaseModel):
     title: str = "Untitled map"
     width_ft: float = Field(gt=0, le=5000)
     height_ft: float = Field(gt=0, le=5000)
-    feet_per_square: Literal[5, 10] = 5
+    unit: Literal["ft", "mi"] = "ft"
+    feet_per_square: float = Field(5, gt=0)   # grid size in `unit` (name kept for battle maps)
     px_per_square: int = Field(70, ge=10, le=300)
     supersample: int = Field(2, ge=1, le=4)
     seed: int = 0
     include: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _battle_grid(self):
+        if self.unit == "ft" and self.feet_per_square not in (5, 10):
+            raise ValueError("feet_per_square must be 5 or 10 for a battle map (unit: ft); "
+                             "use unit: mi for region maps")
+        return self
 
 
 class Step(BaseModel):
