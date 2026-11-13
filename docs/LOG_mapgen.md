@@ -277,3 +277,5 @@ initiative).
   failure was the generated-catalogue check, because the run started between
   adding `path_label` and regenerating `ops.md`. It's regenerated now and mapgen
   passes **307**, so the suite stands at 2154 passing.
+
+- **Phase 3 brief drafted:** `docs/BRIEF_mapgen_phase3.md` (an in-app map board is recommended; four owner questions). No code until the owner answers.
