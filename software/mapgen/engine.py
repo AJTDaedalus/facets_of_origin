@@ -29,6 +29,10 @@ class Collector:
     legend: dict = field(default_factory=dict)       # kind -> label
     geometry: dict = field(default_factory=dict)     # name -> shapely geom (feet)
     masks: dict = field(default_factory=dict)        # named masks kept for metrics (e.g. grid)
+    walls: dict = field(default_factory=dict)        # wall name -> {floor, band, thickness}
+    footprints: list = field(default_factory=list)   # prop footprints (feet)
+    scatter_points: dict = field(default_factory=dict)
+    legend_drawn: list = field(default_factory=list)
 
 
 @dataclass
@@ -146,6 +150,8 @@ class Engine:
                 if result is None:
                     raise RecipeError(f"{self._where(i + 1, step)}: op returned no layer")
                 store.put(step.out, result)
+                if isinstance(result, Geometry):
+                    self.collector.geometry[step.out] = result.geom
             if not keep_all:
                 for name, idx in last.items():
                     if idx == i and name not in KEEP and name in store:

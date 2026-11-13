@@ -1,0 +1,9 @@
+map: {title: Golden Clearing, width_ft: 32, height_ft: 32, px_per_square: 20, supersample: 1, seed: 8}
+steps:
+  - {op: canvas, out: canvas, color: "#7d9450"}
+  - {op: noise, out: n, scale: 8, id: n}
+  - {op: field_to_mask, out: dark, src: n, lo: 0.0, hi: 0.4}
+  - {op: fill, mask: dark, color: "#56703a", opacity: 0.6}
+  - {op: prop, kind: tree, at: [8, 8], id: t1}
+  - {op: prop, kind: tree, at: [24, 22], size: 10, id: t2}
+  - {op: prop, kind: bush, at: [20, 8], id: b1}

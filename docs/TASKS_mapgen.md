@@ -104,45 +104,45 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## M4 — Semantic, props, overlay
 
-- [ ] **T19 wall.** From Geometry: wall band (thickness ft, centred/outer), styles
+- [x] **T19 wall.** From Geometry: wall band (thickness ft, centred/outer), styles
   `dressed` (straight, block texture), `rough` (cave, roughened), `ruined` (gaps by
   noise, rubble); paints ink + fill; **emits LOS polylines** (in feet) into the
   export collector. *Accept:* ≥6 tests: LOS covers the full boundary length
   within 1%; ruined walls emit gaps; holes (pillars) emit closed loops.
-- [ ] **T20 Openings.** `door, double_door, window, secret_door, portcullis` placed by
+- [x] **T20 Openings.** `door, double_door, window, secret_door, portcullis` placed by
   `{wall: id, at: [x,y]}` (snapped to the nearest wall edge), carve the wall, draw
   the symbol, split the LOS segment, emit a portal (closed state, rotation).
   `stairs(direction)`, `light(radius_ft, colour, intensity, glow paint optional)`.
   *Accept:* ≥3 tests per op: the portal sits on the right square; the LOS gap equals
   the door width; a secret door is a portal with `closed: true` that renders an `S`.
-- [ ] **T21 Prop library.** `props.py` with a drawing-function registry; kinds
+- [x] **T21 Prop library.** `props.py` with a drawing-function registry; kinds
   per DESIGN §2.4 (19). Each prop: fill + ink outline at style weights + cast
   shadow, size in ft, rotation. *Accept:* every kind renders inside its bounds,
   is deterministic, and differs from an empty canvas (parametrised test over all
   kinds); `prop` op places it at ft coordinates.
-- [ ] **T22 scatter.** Poisson-disk sampling (Bridson) in a mask/region, density
+- [x] **T22 scatter.** Poisson-disk sampling (Bridson) in a mask/region, density
   per square, min spacing ft, random rotation/scale jitter, `avoid` masks.
   *Accept:* ≥5 tests: no two points closer than spacing; all inside the mask;
   count tracks density ±20%; deterministic.
-- [ ] **T23 Overlay.** `grid(mask clip, alpha, weight)`, `compass`, `scale_bar`
+- [x] **T23 Overlay.** `grid(mask clip, alpha, weight)`, `compass`, `scale_bar`
   ("1 square = 5 feet"), `title`, `label`, `frame`, `legend` (auto from the ops
   used). *Accept:* ≥3 tests each: grid lines at exact multiples of px/square;
   grid clip respected; the legend lists only the kinds present.
 
 ## M5 — Outputs and CLI
 
-- [ ] **T24 Export.** PNG (LANCZOS down from working res), `.dd2vtt` (DESIGN §3),
+- [x] **T24 Export.** PNG (LANCZOS down from working res), `.dd2vtt` (DESIGN §3),
   `.meta.json` (named geometries + recipe `measure:` block). *Accept:* ≥6 tests:
   dd2vtt matches a pinned minimal schema (hand-written fixture in
   `tests/mapgen/fixtures/uvtt_min.json`); coordinates are in squares; image
   base64 round-trips to the PNG; meta lists the declared measures.
   *Owner check (non-blocking):* import one proof into Foundry (Universal
   Battlemap Importer) or Roll20 and confirm the walls line up.
-- [ ] **T25 CLI.** `python -m mapgen render <recipe> [--out DIR] [--draft]
+- [x] **T25 CLI.** `python -m mapgen render <recipe> [--out DIR] [--draft]
   [--only-png]`, `python -m mapgen ops [--markdown]`. *Accept:* ≥5 tests via
   subprocess or the main(argv) function: render writes 3 files; draft is smaller;
   `ops --markdown` contains every registered op; bad recipe exits 2 with the step named.
-- [ ] **T26 Goldens.** Three tiny recipes in `tests/mapgen/goldens/` (stone room
+- [x] **T26 Goldens.** Three tiny recipes in `tests/mapgen/goldens/` (stone room
   with a door, cave with water, grass clearing with trees) at 20 px/sq; hash
   compare; `--update-goldens` pytest option. *Accept:* goldens pass twice in a row
   (determinism across processes); changing one op param fails the right golden.

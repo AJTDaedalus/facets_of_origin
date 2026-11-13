@@ -30,26 +30,66 @@ def polygons_of(g):
     return []
 
 
-def rasterize_geom(frame, g, line_width_ft: float = 0.5) -> np.ndarray:
-    """Antialiased coverage of a geometry at the frame's working resolution."""
-    if isinstance(g, (LineString, MultiLineString)) or (
-            hasattr(g, "geoms") and any(isinstance(x, (LineString, MultiLineString)) for x in g.geoms)):
+class Patch:
+    """Coverage for a sub-rectangle of the frame: alpha (h, w) placed at (y0, x0)."""
+    __slots__ = ("alpha", "y0", "x0")
+
+    def __init__(self, alpha, y0, x0):
+        self.alpha, self.y0, self.x0 = alpha, y0, x0
+
+    @property
+    def slices(self):
+        h, w = self.alpha.shape
+        return slice(self.y0, self.y0 + h), slice(self.x0, self.x0 + w)
+
+
+def _lineish(g):
+    if isinstance(g, (LineString, MultiLineString)):
+        return True
+    return hasattr(g, "geoms") and any(isinstance(x, (LineString, MultiLineString)) for x in g.geoms)
+
+
+def rasterize_patch(frame, g, line_width_ft: float = 0.5) -> Patch | None:
+    """Antialiased coverage of a geometry, rendered only over its bounding box."""
+    if g.is_empty:
+        return None
+    if _lineish(g):
         g = g.buffer(line_width_ft / 2, quad_segs=8)
-    h, w = frame.shape
+        if g.is_empty:
+            return None
+    H, W = frame.shape
+    s = frame.scale
+    minx, miny, maxx, maxy = g.bounds
+    x0 = max(int(np.floor(minx * s)) - 2, 0)
+    y0 = max(int(np.floor(miny * s)) - 2, 0)
+    x1 = min(int(np.ceil(maxx * s)) + 2, W)
+    y1 = min(int(np.ceil(maxy * s)) + 2, H)
+    if x1 <= x0 or y1 <= y0:
+        return None
+    w, h = x1 - x0, y1 - y0
     aa = 4 if h * w <= 2_000_000 else 2
     img = PImage.new("L", (w * aa, h * aa), 0)
     d = ImageDraw.Draw(img)
-    s = frame.scale * aa
+    sa = s * aa
 
     def ring(coords):
-        return [(x * s - 0.5, y * s - 0.5) for x, y in coords]
+        return [((x * s - x0) * aa - 0.5, (y * s - y0) * aa - 0.5) for x, y in coords]
 
     for pg in polygons_of(g):
         d.polygon(ring(pg.exterior.coords), fill=255)
         for hole in pg.interiors:
             d.polygon(ring(hole.coords), fill=0)
     a = np.asarray(img, np.float32).reshape(h, aa, w, aa).mean(axis=(1, 3)) / 255.0
-    return a.astype(np.float32)
+    return Patch(a.astype(np.float32), y0, x0)
+
+
+def rasterize_geom(frame, g, line_width_ft: float = 0.5) -> np.ndarray:
+    """Antialiased coverage of a geometry at the frame's working resolution."""
+    out = np.zeros(frame.shape, np.float32)
+    p = rasterize_patch(frame, g, line_width_ft)
+    if p is not None:
+        out[p.slices] = p.alpha
+    return out
 
 
 class RasterizeP(ParamModel):

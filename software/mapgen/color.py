@@ -81,3 +81,13 @@ def composite_inplace(img: np.ndarray, src_rgb, alpha: np.ndarray, mode: str = "
     if not isinstance(src_rgb, np.ndarray) or src_rgb.ndim == 1:
         src_rgb = np.broadcast_to(np.asarray(src_rgb, np.float32)[:3], img.shape[:2] + (3,))
     img[...] = blend(img, src_rgb, alpha, mode)
+
+
+def composite_patch(img: np.ndarray, patch, src_rgb, opacity: float = 1.0, mode: str = "normal") -> None:
+    """Composite a flat colour through a :class:`mapgen.ops.masks.Patch`."""
+    if patch is None:
+        return
+    ys, xs = patch.slices
+    sub = img[ys, xs]
+    rgb = np.broadcast_to(np.asarray(src_rgb, np.float32)[:3], sub.shape[:2] + (3,))
+    img[ys, xs] = blend(sub, rgb, (patch.alpha * opacity).astype(np.float32), mode)

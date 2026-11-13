@@ -1,1 +1,278 @@
-"""overlay ops."""
+"""Overlay ops (T23): grid, compass, scale bar, title, labels, frame, legend."""
+from __future__ import annotations
+
+from functools import lru_cache
+from typing import Any, Literal, Union
+
+import numpy as np
+from PIL import Image as PImage, ImageDraw, ImageFilter, ImageFont
+from pydantic import Field as PField
+from shapely.geometry import LineString, Point as SPoint, Polygon, box
+
+from ..color import composite_inplace, composite_patch, resolve_color
+from ..layers import Image, Mask
+from ..registry import ParamModel, op
+from .common import Point, PosFt, Ref, Unit
+from .masks import Patch, rasterize_patch
+from .paint import stroke_geometry_alpha
+
+Corner = Union[Literal["ne", "nw", "se", "sw"], Point]
+FONT_FILES = {False: ["DejaVuSerif.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"],
+              True: ["DejaVuSerif-Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"]}
+
+
+@lru_cache(maxsize=64)
+def font(px: int, bold: bool = False):
+    for f in FONT_FILES[bold]:
+        try:
+            return ImageFont.truetype(f, max(px, 6))
+        except OSError:
+            continue
+    return ImageFont.load_default(size=max(px, 6))
+
+
+def text_alpha(text, px, bold=False, halo_px=0):
+    f = font(int(round(px)), bold)
+    l, t, r, b = f.getbbox(text)
+    pad = int(halo_px) + 2
+    img = PImage.new("L", (r - l + 2 * pad, b - t + 2 * pad), 0)
+    ImageDraw.Draw(img).text((pad - l, pad - t), text, font=f, fill=255)
+    a = np.asarray(img, np.float32) / 255
+    halo = None
+    if halo_px > 0:
+        k = int(halo_px) * 2 + 1
+        halo = np.asarray(img.filter(ImageFilter.MaxFilter(k)).filter(ImageFilter.GaussianBlur(0.6)), np.float32) / 255
+    return a, halo
+
+
+def _place(img, alpha, center_px, color, opacity=1.0):
+    H, W = img.shape[:2]
+    h, w = alpha.shape
+    y0 = int(round(center_px[1] - h / 2))
+    x0 = int(round(center_px[0] - w / 2))
+    ys0, xs0 = max(y0, 0), max(x0, 0)
+    ys1, xs1 = min(y0 + h, H), min(x0 + w, W)
+    if ys1 <= ys0 or xs1 <= xs0:
+        return
+    sub = alpha[ys0 - y0:ys1 - y0, xs0 - x0:xs1 - x0]
+    composite_patch(img, Patch(sub, ys0, xs0), color[:3], opacity * float(color[3]))
+
+
+def draw_text(ctx, img, text, at_ft, size_ft, color, bold=False, halo="parchment", halo_ft=0.25):
+    fr = ctx.frame
+    px = fr.px(size_ft)
+    hp = fr.px(halo_ft) if halo is not None else 0
+    a, h = text_alpha(text, px, bold, hp)
+    c = (at_ft[0] * fr.scale, at_ft[1] * fr.scale)
+    if h is not None:
+        try:
+            hc = resolve_color(ctx.style, halo)
+        except Exception:
+            hc = resolve_color(ctx.style, "#efe6cf")
+        _place(img, h, c, hc, 0.9)
+    _place(img, a, c, color if isinstance(color, np.ndarray) else resolve_color(ctx.style, color))
+
+
+def corner_xy(ctx, at, half_w, half_h):
+    if isinstance(at, list):
+        return at
+    fr = ctx.frame
+    m = fr.fps * 0.6
+    x = m + half_w if at[1] == "w" else fr.width_ft - m - half_w
+    y = m + half_h if at[0] == "n" else fr.height_ft - m - half_h
+    return [x, y]
+
+
+class GridP(ParamModel):
+    into: Ref = "canvas"
+    mask: Ref | None = None
+    color: Any = "ink"
+    alpha: Unit = 0.3
+    weight: PosFt = 0.06
+
+
+@op("grid", params=GridP, inputs={"into": Image, "mask": Mask}, group="7 overlay")
+def grid(ctx, p, into, mask=None):
+    """Square grid at the map's grid size, optionally clipped to a mask (e.g. only on walkable floor). Lines sit on pixel columns so they stay crisp."""
+    fr = ctx.frame
+    h, w = fr.shape
+    sq = fr.square_px
+    hw = max(fr.px(p.weight) / 2, 0.5)
+
+    def lines(n):
+        c = np.arange(n, dtype=np.float32)
+        d = np.mod(c, sq)
+        d = np.minimum(d, sq - d)
+        return np.clip(hw + 0.5 - d, 0, 1)
+
+    a = np.maximum(lines(w)[None, :], lines(h)[:, None])
+    if mask is not None:
+        a = a * mask.data
+    ctx.collector.masks["grid"] = a
+    c = resolve_color(ctx.style, p.color)
+    composite_inplace(into.data, c[:3], (a * p.alpha).astype(np.float32))
+
+
+class CompassP(ParamModel):
+    into: Ref = "canvas"
+    at: Corner = "ne"
+    size: PosFt = 6.0
+    color: Any = "ink"
+    fill: Any = "parchment"
+
+
+@op("compass", params=CompassP, inputs={"into": Image}, group="7 overlay")
+def compass(ctx, p, into):
+    """A compass rose with N, at a corner (ne/nw/se/sw) or [x, y] feet."""
+    c = corner_xy(ctx, p.at, p.size / 2, p.size / 2 + p.size * 0.15)
+    cx, cy = c
+    r = p.size * 0.42
+    ink = resolve_color(ctx.style, p.color)
+    try:
+        light = resolve_color(ctx.style, p.fill)
+    except Exception:
+        light = resolve_color(ctx.style, "#efe6cf")
+    img = into.data
+    ring = SPoint(cx, cy).buffer(r * 0.55)
+    composite_patch(img, stroke_geometry_alpha(ctx, ring, 0.08, patch=True), ink[:3])
+    for i, ang in enumerate(np.arange(4) * np.pi / 2 - np.pi / 2):
+        tip = (cx + np.cos(ang) * r, cy + np.sin(ang) * r)
+        l = (cx + np.cos(ang - np.pi / 2) * r * 0.16, cy + np.sin(ang - np.pi / 2) * r * 0.16)
+        rr = (cx + np.cos(ang + np.pi / 2) * r * 0.16, cy + np.sin(ang + np.pi / 2) * r * 0.16)
+        for half, colr in ((Polygon([tip, l, (cx, cy)]), ink), (Polygon([tip, rr, (cx, cy)]), light)):
+            composite_patch(img, rasterize_patch(ctx.frame, half), colr[:3])
+            composite_patch(img, stroke_geometry_alpha(ctx, half, 0.05, patch=True), ink[:3])
+    draw_text(ctx, img, "N", (cx, cy - r - p.size * 0.12), p.size * 0.22, ink, bold=True)
+
+
+class ScaleBarP(ParamModel):
+    into: Ref = "canvas"
+    at: Corner = "nw"
+    size: PosFt = 1.6
+    text: str | None = None
+    color: Any = "ink"
+
+
+@op("scale_bar", params=ScaleBarP, inputs={"into": Image}, group="7 overlay")
+def scale_bar(ctx, p, into):
+    """The "1 square = 5 feet" note at a corner."""
+    t = p.text or f"1 square = {ctx.frame.fps} feet"
+    wft = len(t) * p.size * 0.32
+    c = corner_xy(ctx, p.at, wft, p.size)
+    draw_text(ctx, into.data, t, c, p.size, p.color)
+
+
+class TitleP(ParamModel):
+    into: Ref = "canvas"
+    text: str
+    position: Literal["top", "bottom"] = "bottom"
+    size: PosFt = 3.0
+    color: Any = "ink"
+    fill: Any = "parchment"
+    box: bool = True
+
+
+@op("title", params=TitleP, inputs={"into": Image}, group="7 overlay")
+def title(ctx, p, into):
+    """Map title in a double-ruled cartouche at the top or bottom edge."""
+    fr = ctx.frame
+    wft = len(p.text) * p.size * 0.62 + p.size * 2
+    hft = p.size * 1.8
+    cx = fr.width_ft / 2
+    cy = (fr.fps * 0.6 + hft / 2) if p.position == "top" else fr.height_ft - fr.fps * 0.6 - hft / 2
+    if p.box:
+        r = box(cx - wft / 2, cy - hft / 2, cx + wft / 2, cy + hft / 2)
+        try:
+            f = resolve_color(ctx.style, p.fill)
+        except Exception:
+            f = resolve_color(ctx.style, "#efe6cf")
+        composite_patch(into.data, rasterize_patch(fr, r), f[:3], 0.95)
+        ink = resolve_color(ctx.style, p.color)[:3]
+        composite_patch(into.data, stroke_geometry_alpha(ctx, r, 0.14, patch=True), ink)
+        composite_patch(into.data, stroke_geometry_alpha(ctx, r.buffer(-p.size * 0.18, join_style=2), 0.06, patch=True), ink)
+    draw_text(ctx, into.data, p.text, (cx, cy), p.size, p.color, bold=True, halo=None)
+
+
+class LabelP(ParamModel):
+    into: Ref = "canvas"
+    text: str
+    at: Point
+    size: PosFt = 2.0
+    color: Any = "ink"
+    bold: bool = False
+    halo: Any = "parchment"
+    circle: bool = False
+
+
+@op("label", params=LabelP, inputs={"into": Image}, group="7 overlay")
+def label(ctx, p, into):
+    """Text centred at `at` with a parchment halo; `circle: true` puts it in a ring (room keys)."""
+    if p.circle:
+        ring = SPoint(p.at).buffer(p.size * 0.75)
+        try:
+            f = resolve_color(ctx.style, p.halo)
+        except Exception:
+            f = resolve_color(ctx.style, "#efe6cf")
+        composite_patch(into.data, rasterize_patch(ctx.frame, ring), f[:3])
+        composite_patch(into.data, stroke_geometry_alpha(ctx, ring, 0.1, patch=True),
+                        resolve_color(ctx.style, p.color)[:3])
+    draw_text(ctx, into.data, p.text, p.at, p.size, p.color, p.bold, None if p.circle else p.halo)
+
+
+class FrameP(ParamModel):
+    into: Ref = "canvas"
+    margin: float = PField(0.0, ge=0)
+    color: Any = "ink"
+    weight: PosFt = 0.3
+
+
+@op("frame", params=FrameP, inputs={"into": Image}, group="7 overlay")
+def frame(ctx, p, into):
+    """A double-ruled border around the map, `margin` feet in from the edge."""
+    fr = ctx.frame
+    m = p.margin + p.weight / 2
+    r = box(m, m, fr.width_ft - m, fr.height_ft - m)
+    ink = resolve_color(ctx.style, p.color)[:3]
+    composite_patch(into.data, stroke_geometry_alpha(ctx, r, p.weight, patch=True), ink)
+    inner = r.buffer(-p.weight * 2.2, join_style=2)
+    if not inner.is_empty:
+        composite_patch(into.data, stroke_geometry_alpha(ctx, inner, p.weight * 0.3, patch=True), ink)
+
+
+class LegendP(ParamModel):
+    into: Ref = "canvas"
+    at: Corner = "sw"
+    size: PosFt = 1.4
+    color: Any = "ink"
+    fill: Any = "parchment"
+    exclude: list[str] = []
+
+
+@op("legend", params=LegendP, inputs={"into": Image}, group="7 overlay")
+def legend(ctx, p, into):
+    """A key box listing the props and features used so far, with a small icon for each prop."""
+    from .props import PROPS, draw_prop
+    kinds = sorted(k for k in ctx.collector.legend if k not in p.exclude)
+    ctx.collector.legend_drawn = kinds
+    if not kinds:
+        return
+    row = p.size * 1.7
+    wft = p.size * 2.2 + max(len(k) for k in kinds) * p.size * 0.62 + p.size
+    hft = row * len(kinds) + p.size
+    cx, cy = corner_xy(ctx, p.at, wft / 2, hft / 2)
+    r = box(cx - wft / 2, cy - hft / 2, cx + wft / 2, cy + hft / 2)
+    try:
+        f = resolve_color(ctx.style, p.fill)
+    except Exception:
+        f = resolve_color(ctx.style, "#efe6cf")
+    composite_patch(into.data, rasterize_patch(ctx.frame, r), f[:3], 0.95)
+    composite_patch(into.data, stroke_geometry_alpha(ctx, r, 0.1, patch=True), resolve_color(ctx.style, p.color)[:3])
+    for i, k in enumerate(kinds):
+        y = cy - hft / 2 + p.size / 2 + row * (i + 0.5)
+        x_icon = cx - wft / 2 + p.size * 1.2
+        if k in PROPS:
+            draw_prop(ctx, into.data, k, (x_icon, y), p.size * 1.1, 0, 7, shadow=0.0)
+            ctx.collector.legend.setdefault(k, k)
+        name = ctx.collector.legend.get(k, k).capitalize()
+        tx = x_icon + p.size * 1.1 + len(name) * p.size * 0.31
+        draw_text(ctx, into.data, name, (tx, y), p.size, p.color, halo=None)

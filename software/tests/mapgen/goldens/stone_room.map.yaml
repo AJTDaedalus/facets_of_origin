@@ -1,0 +1,10 @@
+map: {title: Golden Stone Room, width_ft: 32, height_ft: 32, px_per_square: 20, supersample: 1, seed: 3}
+steps:
+  - {op: canvas, out: canvas, color: "#d8cfbb"}
+  - {op: rect, out: room, x: 6, y: 6, w: 20, h: 20}
+  - {op: rasterize, out: floor, src: room}
+  - {op: fill, mask: floor, color: "#bdb6a8"}
+  - {op: shadow, mask: floor, width: 2, strength: 0.4}
+  - {op: wall, src: room, name: w, thickness: 1.5, fill: "#8f877a"}
+  - {op: door, wall: w, at: [16, 6], width: 4}
+  - {op: grid, mask: floor}

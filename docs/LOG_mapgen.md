@@ -41,3 +41,33 @@ Running execution log for `docs/TASKS_mapgen.md`. Newest at the bottom.
   `paper`, `vignette`. Roughness got a 2× gain so `amount`/`roughness` read as
   feet of wobble (fbm rarely nears ±1).
 - Tests: **149 passed**.
+
+## 2026-11-13 — M4 + M5 (T19–T26)
+
+- **Patch rasterization:** `rasterize_patch` renders only a geometry's bounding
+  box, so props and openings don't allocate a full frame each (a 120×160 ft map
+  at 70 px/sq ×2 is 15 M px).
+- **T19:** `wall`: band outside the floor (dressed / rough / ruined with
+  noise-chosen gaps), filled and inked, LOS from the kept edges, registered by
+  name for openings.
+- **T20:** `door`, `double_door`, `secret_door` (red S, secret portal),
+  `portcullis`, `window` (LOS kept: UVTT has no window type, so walls still
+  block), `opening` (floor fill, LOS cut, no portal), `stairs`, `light`
+  (+ glow). Openings snap to the nearest edge of the named wall, with the normal
+  pointing away from the floor.
+- **T21–T22:** 19 props built from shapely parts (fill + ink + soft shadow);
+  `scatter` with Bridson Poisson disk, mask/region/avoid, count = density ×
+  squares.
+- **T23:** `grid` (lines on pixel columns, optional clip, mask kept for Q6),
+  `compass`, `scale_bar`, `title` cartouche, `label` (halo or ring), `frame`,
+  `legend`. DejaVu Serif via Pillow.
+- **T24–T26:** `export.render_recipe` → PNG (LANCZOS from working res),
+  `.dd2vtt` (format 0.3, units in squares, base64 image), `.meta.json` (declared
+  vs actual measures, all named geometry). CLI `render` / `ops [--markdown]`
+  (exit 2 with the step named). Three goldens hashed on pixels; update with
+  `MAPGEN_UPDATE_GOLDENS=1`; stable across processes with different
+  PYTHONHASHSEED.
+- Visual check of the goldens (scratchpad): correct but plain (no style yet).
+  Defect noted for T30: rough walls spike at very sharp polygon corners (mitred
+  buffer).
+- Tests: **222 passed**.

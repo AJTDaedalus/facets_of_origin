@@ -1,0 +1,11 @@
+map: {title: Golden Cave, width_ft: 32, height_ft: 32, px_per_square: 20, supersample: 1, seed: 5}
+steps:
+  - {op: canvas, out: canvas, color: "#cfc6b2"}
+  - {op: polygon, out: cave, points: [[4, 6], [26, 4], [29, 18], [22, 28], [6, 26]], id: cave}
+  - {op: roughen_geom, out: cave_r, src: cave, amount: 1.0, scale: 5, id: rough}
+  - {op: rasterize, out: floor, src: cave_r}
+  - {op: fill, mask: floor, color: "#b9b2a3"}
+  - {op: circle, out: pool, center: [16, 16], r: 5}
+  - {op: rasterize, out: water, src: pool}
+  - {op: fill, mask: water, color: "#7fa9b6", id: water}
+  - {op: wall, src: cave_r, name: w, style: rough, thickness: 1.2, id: wall}

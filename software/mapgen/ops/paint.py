@@ -17,7 +17,7 @@ from ..recipe import RecipeError
 from ..registry import ParamModel, op
 from .common import NonNegFt, Point, PosFt, Ref, Unit, signed_distance
 from .geometry import _rough_ring
-from .masks import rasterize_geom
+from .masks import rasterize_geom, rasterize_patch
 from .materials import hatch_alpha, render_material
 
 Blend = Literal["normal", "multiply", "screen", "overlay", "darken", "lighten"]
@@ -111,7 +111,7 @@ def lines_of(g):
 
 
 def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, double=0.0,
-                          dash=None, side="center", seed=0) -> np.ndarray:
+                          dash=None, side="center", seed=0, patch=False):
     lines = lines_of(g)
     if side != "center" and isinstance(g, (Polygon, MultiPolygon)):
         g2 = g.buffer(width_ft / 2 if side == "outside" else -width_ft / 2, join_style=2)
@@ -137,9 +137,11 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
             else:
                 out.append(v)
     if not out:
-        return np.zeros(ctx.frame.shape, np.float32)
+        return None if patch else np.zeros(ctx.frame.shape, np.float32)
     geom = shapely.unary_union([o.buffer(width_ft / 2, cap_style=2 if dash else 1, quad_segs=8) for o in out
                                 if o.length > 0])
+    if patch:
+        return rasterize_patch(ctx.frame, geom)
     return rasterize_geom(ctx.frame, geom)
 
 
