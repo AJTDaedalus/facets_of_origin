@@ -1,0 +1,75 @@
+# Proof F (Phase 2b, town maps): a generic town, built from this description only (the assistant's own):
+#   "A small hill town about 900×600 ft: a crossroads with a market square and a temple on it,
+#    a stream with a bridge on the east road, houses along the roads, fields to the south,
+#    woods to the north-east."
+map:
+  title: Crossford
+  width_ft: 900
+  height_ft: 600
+  feet_per_square: 50
+  px_per_square: 166      # 3.3 px per foot, the comparator's print scale
+  supersample: 1
+  seed: 61
+  include: [styles/inked_parchment.yaml]
+
+steps:
+  - {op: canvas, out: canvas, material: town_grass, id: land}
+  # ---- rolling ground: hill shading and contour lines from a soft height field
+  - {op: rect, out: ground_rect, x: 0, y: 0, w: 900, h: 600}
+  - {op: rasterize, out: all_ground, src: ground_rect}
+  - {op: noise, out: relief, scale: 200, octaves: 3, id: relief}
+  - {op: field_to_mask, out: lows, src: relief, lo: 0.1, hi: -0.45}
+  - {op: field_to_mask, out: highs, src: relief, lo: 0.0, hi: 0.5}
+  - {op: fill, mask: highs, color: "#f7f8ee", opacity: 0.95, id: hill_light}
+  - {op: invert, out: lows, src: highs}
+  - {op: fill, mask: lows, color: "#75846c", opacity: 0.5, blend: multiply, id: hill_dark}
+  - {op: hatch, mask: all_ground, spacing: 11, length: 6, width: 0.7, lines: 3, angle: -70, angle_jitter: 40,
+     color: "#2f3a27", opacity: 0.7, id: grass_strokes}
+  - {op: isolines, out: contours, src: relief, interval: 0.07, simplify: 2}
+  - {op: stroke, src: contours, width: 1.1, dash: [12, 4, 3, 4], jitter: 0.6, opacity: 0.75, color: "#33402a"}
+  # ---- fields to the south
+  - {op: polygon, out: field_a, points: [[60, 470], [330, 440], [360, 600], [40, 600]]}
+  - {op: polygon, out: field_b, points: [[500, 470], [660, 455], [690, 600], [480, 600]]}
+  - {op: rasterize, out: field_a_m, src: field_a}
+  - {op: fill, mask: field_a_m, material: field_tilled, id: field_a}
+  - {op: rasterize, out: field_b_m, src: field_b}
+  - {op: fill, mask: field_b_m, material: field_green, id: field_b}
+  - {op: union, out: fields, of: [field_a, field_b]}
+  - {op: stroke, src: fields, width: 2, color: "#5a5035", roughness: 1.5}
+  # ---- roads, the market square
+  - {op: path, out: road_ew, points: [[-10, 330], [200, 318], [450, 300], [640, 292], [910, 268]], width: 24, smooth: 3}
+  - {op: path, out: road_ns, points: [[468, -10], [458, 150], [450, 300], [438, 450], [418, 610]], width: 20, smooth: 3}
+  - {op: circle, out: square, center: [450, 300], r: 62}
+  - {op: union, out: streets, of: [road_ew, road_ns, square]}
+  - {op: roughen_geom, out: streets, src: streets, amount: 2.5, scale: 30, id: streets_rough}
+  - {op: rasterize, out: streets_m, src: streets}
+  - {op: fill, mask: streets_m, material: dirt_path, id: streets_dirt}
+  - {op: stroke, src: streets, width: 1.5, dash: [10, 4, 2, 4], jitter: 0.5, opacity: 0.8}
+  - {op: path, out: road_lines_ew, points: [[-10, 330], [200, 318], [450, 300], [640, 292], [910, 268]], line: true, smooth: 3}
+  - {op: path, out: road_lines_ns, points: [[468, -10], [458, 150], [450, 300], [438, 450], [418, 610]], line: true, smooth: 3}
+  # ---- the stream, under the east road, with its bridge
+  - {op: rect, out: everywhere, x: 0, y: 0, w: 900, h: 600}
+  - {op: rasterize, out: all_m, src: everywhere}
+  - {op: stream, points: [[705, -10], [690, 150], [722, 290], [700, 450], [735, 610]], width: 16, name: stream, clip: all_m}
+  - {op: prop, kind: bridge, at: [718, 287], size: 34, rotate: -3, id: bridge}
+  # ---- the temple on the north side of the square, then houses along the roads
+  - {op: rect, out: temple, x: 425, y: 186, w: 54, h: 70}
+  - {op: rasterize, out: stream_keep, src: everywhere}
+  - {op: path, out: stream_g2, points: [[705, -10], [690, 150], [722, 290], [700, 450], [735, 610]], width: 40, smooth: 3}
+  - {op: union, out: keep_clear, of: [square, temple, stream_g2, fields]}
+  - {op: frontage, out: houses, roads: [road_lines_ew, road_lines_ns], road_width: 28, setback: 6,
+     width: [16, 30], depth: [16, 28], gap: [4, 12], fill: 0.95, avoid: keep_clear, id: lots}
+  - {op: buildings, src: houses, id: houses}
+  - {op: buildings, src: temple, roofs: ["#6b6f7c"], id: temple}
+  # ---- woods to the north-east, scattered trees
+  - {op: scatter, kind: tree, region: [[760, 10], [895, 5], [895, 230], [800, 210], [750, 120]], avoid: [stream],
+     density: 4, spacing: 16, size: 26, shadow: 0.55, sort_y: true, id: woods}
+  - {op: rasterize, out: houses_m, src: houses}
+  - {op: grow, out: built, src: houses_m, by: 10}
+  - {op: combine, out: no_trees, of: [built, streets_m, field_a_m, field_b_m, stream], mode: max}
+  - {op: scatter, kind: tree, avoid: [no_trees], density: 0.18, spacing: 45, size: 22, shadow: 0.5, sort_y: true, id: trees}
+  - {op: paper, strength: 0.08, scale: 300}
+  - {op: vignette, strength: 0.18}
+  - {op: frame, margin: 4, weight: 3}
+  - {op: compass, at: nw, size: 50}
+  - {op: title, text: Crossford, position: top, size: 22}

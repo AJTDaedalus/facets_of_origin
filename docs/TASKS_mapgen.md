@@ -234,4 +234,16 @@ the engine (DESIGN §8). City maps follow region maps.
   band (normalised by width); rubric logged.
 - [x] **R7 Skill and docs.** Cookbook region section; regenerated ops.md; LOG.
 
-**City maps (Phase 2b) and the web-app map view (Phase 3)** are decomposed after R6.
+## Phase 2b — town maps (2026-11-13)
+
+- [x] **C1 Town scale.** `feet_per_square` 25/50/100 allowed for `unit: ft`. *(tests: test_p2b_city.py)*
+- [x] **C2 frontage.** Building lots along street lines: facing the street,
+  setback, size and gap ranges, fill, avoid/within, no overlaps. *(5 tests)*
+- [x] **C3 buildings.** Gabled roofs from footprints: ridge, shaded half, shadow,
+  ink, per-building roof colour. *(2 tests)*
+- [x] **C4 Proof F (town).** `maps/recipes/proof_town.map.yaml`, measured against
+  C6 Phandalin (LOG).
+- [ ] **C5 Organic layout (next).** Curved streets with branching lanes, irregular
+  plots, L-shaped buildings, walls and hedges. This closes the "too regular" gap.
+
+**The web-app map view (Phase 3)** needs its own BRIEF under the 5e-in-the-app initiative.

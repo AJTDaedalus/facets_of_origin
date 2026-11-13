@@ -163,3 +163,26 @@ steps:
 - **Overlap:** `sort_y: true` on glyph scatters draws north to south, so nearer
   mountains overlap farther ones.
 - **Metrics:** `quality --category region` compares at the comparator's width (1500 px).
+
+## Town maps
+
+Use `unit: ft` with `feet_per_square: 50` (or 25 or 100), and usually no grid.
+Render at about 3.3 px per foot (`px_per_square: 166` at 50 ft) to match print
+town maps, with `supersample: 1`, because these maps are large. Full example:
+`maps/recipes/proof_town.map.yaml`.
+
+```yaml
+  - {op: canvas, out: canvas, material: lowland}
+  - {op: noise, out: relief, scale: 380, octaves: 3}
+  - {op: isolines, out: contours, src: relief, interval: 0.12}
+  - {op: stroke, src: contours, width: 1.2, dash: [14, 5, 3, 5], jitter: 0.5, opacity: 0.55}
+  - {op: path, out: road, points: [...], width: 24, smooth: 3}       # streets as polygons for paint
+  - {op: path, out: road_line, points: [...], line: true, smooth: 3}  # the same street as a line for lots
+  - {op: frontage, out: houses, roads: [road_line], road_width: 28, avoid: keep_clear}
+  - {op: buildings, src: houses}                                     # gabled roofs, shadows, ink
+  - {op: buildings, src: temple, roofs: ["#6b6f7c"]}                 # a landmark in its own colour
+  - {op: fill, mask: field_m, material: field_tilled}                # also field_green
+```
+
+`frontage` keeps lots clear of every road, of `avoid`, and of each other. Put
+squares, landmarks, water and fields in `avoid`, and use `within` for a walled town.

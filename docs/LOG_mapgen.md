@@ -240,3 +240,21 @@ Tests: mapgen **263 passed**.
 **City maps (2b)** and the **web-app map view (3)** are next. Both need owner
 input on priority (see BRIEF Phase 3: it belongs to the wider 5e-in-the-app
 initiative).
+
+## 2026-11-13 — Phase 2b town maps (C1–C4)
+
+- `feet_per_square` 25/50/100 for town maps; `ops/city.py`: `frontage` (lots
+  along streets) and `buildings` (gabled roofs); `field_tilled`/`field_green`
+  (planks as plough rows) and `town_grass` materials; cookbook town section.
+- **Proof F** `maps/recipes/proof_town.map.yaml`, generic description in the
+  header, 900×600 ft at 3.3 px/ft (the comparator's scale). A full render takes about 2 minutes.
+
+| Proof | Q1 | Q2 | Q3 | Q4 | Q5s | Rubric (self) |
+|---|---|---|---|---|---|---|
+| F town (C6 Phandalin) | 0.740 ✓ | 0.034 ✓ | 0.118 ✗ (≥0.145) | 0.052 ✓ | 0.255 ✓ | ≈3.6 |
+
+  Five tuning rounds. Round 4 got every metric within 5% but turned the map
+  dark green, so I backed off: Q3 is out and the look is kept. The rubric's job
+  is exactly this kind of call. Gap: the layout is too regular (straight streets,
+  houses in rows); Phandalin is organic. That's task C5.
+- mapgen tests: **300 passed**.

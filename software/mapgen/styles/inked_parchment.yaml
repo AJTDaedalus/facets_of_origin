@@ -60,6 +60,11 @@ materials:
   marsh:          {type: grass, colors: ["#7f907a", "#97a68c", "#aab89d"], scale: 6, speckle: 0.3, tufts: 1.2, grain: 0.06,
                    tuft_length: 0.5, tuft_width: 0.08}
   forest_canopy:  {type: cobble, colors: ["#4f6e40", "#668a4f", "#7fa060"], size: 0.5, mortar_color: "#26361f", dome: 0.5, grain: 0.06}
+  field_tilled:   {type: planks, colors: ["#a18a5c", "#b49d6c", "#c4ad7c"], width: 6, length: 2000, angle: 8,
+                   seam: 0.7, seam_color: "#7d6a45", grain: 0.5}
+  field_green:    {type: planks, colors: ["#8d9c5f", "#a0ae6e", "#b2bd80"], width: 7, length: 2000, angle: -12,
+                   seam: 0.7, seam_color: "#6b7848", grain: 0.5}
+  town_grass:     {type: ramp_noise, colors: ["#8a9c7c", "#a7b897", "#c7d2b4"], scale: 120, octaves: 5, grain: 0.07}
   garden:         {type: grass, colors: ["#506b3a", "#678448", "#7f9a59"], scale: 8, speckle: 0.08, tufts: 0.3}
 
 defaults:

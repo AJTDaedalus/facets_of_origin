@@ -717,6 +717,39 @@ Map title in a double-ruled cartouche at the top or bottom edge.
 | `box` | bool | `True` |
 
 
+## Town
+
+### `buildings` → paints in place
+
+Draw building footprints as gabled roofs seen from above: a ridge along the long side, the south/east half shaded, a cast shadow and ink outline. Roof colours are picked per building from `roofs`.
+
+| param | type | default |
+|---|---|---|
+| `into` | str | `"canvas"` |
+| `src` | str | **required** |
+| `roofs` | list[Any] | `["#9b4a35", "#7e5a3f", "#6e6f7a", "#8a7a5c", "#a35f3c"]` |
+| `shade` | float | `0.35` |
+| `shadow` | float | `0.45` |
+| `ink` | Any | `"ink"` |
+| `ridge` | bool | `True` |
+
+### `frontage` → Geometry
+
+Building footprints along both sides of street lines: each faces its street, `setback` feet back from a `road_width` road, random `width`/`depth`/`gap` ranges; `fill` is the share of frontage built up. Stays clear of every road, `avoid`, and other lots, and inside `within`.
+
+| param | type | default |
+|---|---|---|
+| `roads` | list[str] | **required** |
+| `road_width` | float | `20.0` |
+| `setback` | float | `3.0` |
+| `width` | list[float] | `[18.0, 34.0]` |
+| `depth` | list[float] | `[16.0, 28.0]` |
+| `gap` | list[float] | `[4.0, 14.0]` |
+| `fill` | float | `0.85` |
+| `within` | str \| None | — |
+| `avoid` | str \| None | — |
+
+
 ## Macros (styles/inked_parchment.yaml)
 
 Include the style (`include: [styles/inked_parchment.yaml]`) and call a macro like an op.
@@ -832,4 +865,7 @@ Params: `floor`='floor', `alpha`=0.28
 | `upland` | grass |
 | `marsh` | grass |
 | `forest_canopy` | cobble |
+| `field_tilled` | planks |
+| `field_green` | planks |
+| `town_grass` | ramp_noise |
 | `garden` | grass |

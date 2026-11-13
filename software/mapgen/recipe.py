@@ -32,9 +32,9 @@ class MapHeader(BaseModel):
 
     @model_validator(mode="after")
     def _battle_grid(self):
-        if self.unit == "ft" and self.feet_per_square not in (5, 10):
-            raise ValueError("feet_per_square must be 5 or 10 for a battle map (unit: ft); "
-                             "use unit: mi for region maps")
+        if self.unit == "ft" and self.feet_per_square not in (5, 10, 25, 50, 100):
+            raise ValueError("feet_per_square must be 5 or 10 for a battle map, or 25/50/100 for a town map "
+                             "(unit: ft); use unit: mi for region maps")
         return self
 
 
