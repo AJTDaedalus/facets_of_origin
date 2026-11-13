@@ -1,0 +1,85 @@
+# Comparator maps for the mapgen quality bar (docs/DESIGN_mapgen.md §7).
+#
+# These are the owner's own WotC map packs. They are copyrighted: mapgen only
+# READS them in memory (from the zip) to compute numbers and contact sheets.
+# Never extract them into the repo, never sample textures from them, never commit
+# an image derived from them. Paths are relative to MAPGEN_REF_DIR
+# (default "/mnt/e/books/DandD 5E"). Tests that need them skip when it's absent.
+#
+# px_per_square: measured 2026-11-13 by spectral periodicity of edge energy and
+# checked by eye on full-resolution crops with tick marks (T28).
+# crop / exclude: fractions of the image [x0, y0, x1, y1]; exclude boxes cover
+# legends, titles, compasses and scale notes.
+
+ref_dir_default: "/mnt/e/books/DandD 5E"
+
+comparators:
+  C1:
+    title: Redbrand Hideout (DM version)
+    pack: "0 Core books-20170418T114925Z-001/0 Core books/Lost Mine of Phandelver Maps.zip"
+    member: "RedbrandHideout_DMVersion-(ZF-1513-85707-1-002).jpg"
+    category: built_interior
+    feet_per_square: 5
+    px_per_square: 82
+    crop: [0.05, 0.08, 0.95, 0.93]
+    exclude: [[0.79, 0.0, 1.0, 0.47], [0.33, 0.05, 0.67, 0.12], [0.25, 0.78, 0.33, 0.95]]
+  C2:
+    title: Cragmaw Hideout (player version)
+    pack: "0 Core books-20170418T114925Z-001/0 Core books/Lost Mine of Phandelver Maps.zip"
+    member: "CragmawHideout_PlayerVersion-(ZF-1793-50924-1-002).jpg"
+    category: cave
+    feet_per_square: 5
+    px_per_square: 150
+    crop: [0.04, 0.05, 0.96, 0.94]
+    exclude: [[0.0, 0.55, 0.2, 1.0], [0.72, 0.82, 0.9, 0.95], [0.87, 0.06, 0.95, 0.22], [0.04, 0.05, 0.2, 0.1]]
+  C3:
+    title: Ruins of Thundertree (player version)
+    pack: "0 Core books-20170418T114925Z-001/0 Core books/Lost Mine of Phandelver Maps.zip"
+    member: "RuinsofThundertree_PlayerVersion-(ZF-3391-94327-1-002).jpg"
+    category: outdoor
+    feet_per_square: 10
+    px_per_square: 150
+    crop: [0.04, 0.05, 0.96, 0.94]
+    exclude: [[0.0, 0.57, 0.2, 1.0], [0.33, 0.9, 0.66, 0.96], [0.2, 0.78, 0.28, 0.95]]
+  C4:
+    title: Carnath Roadhouse, level 1
+    pack: "1 Tyranny of Dragons-20170418T114929Z-001/1 Tyranny of Dragons/Hoard of the Dragon Queen/Hoard of the Dragon Queen Maps.zip"
+    member: "Hoard of the Dragon Queen HQ Maps/Player Versions/Carnath_Roadhouse.jpg"
+    category: built_interior
+    feet_per_square: 5
+    px_per_square: 77
+    crop: [0.03, 0.12, 0.49, 0.86]
+    exclude: []
+  C5:
+    title: Dragon Hatchery
+    pack: "1 Tyranny of Dragons-20170418T114929Z-001/1 Tyranny of Dragons/Hoard of the Dragon Queen/Hoard of the Dragon Queen Maps.zip"
+    member: "Hoard of the Dragon Queen HQ Maps/Player Versions/Dragon_Hatchery.jpg"
+    category: cave
+    feet_per_square: 5
+    px_per_square: 55
+    crop: [0.08, 0.12, 0.94, 0.9]
+    exclude: [[0.0, 0.0, 0.36, 0.35], [0.88, 0.0, 1.0, 0.6]]
+  C6:
+    title: Phandalin (player version)
+    pack: "0 Core books-20170418T114925Z-001/0 Core books/Lost Mine of Phandelver Maps.zip"
+    member: "Phandalin_PlayerVersion-(ZF-1793-50924-1-001).jpg"
+    category: town
+    feet_per_square: 5
+    px_per_square: 16.6     # no grid: from the 500-ft scale bar (3.33 px/ft)
+    crop: [0.04, 0.05, 0.96, 0.94]
+    exclude: [[0.7, 0.05, 0.93, 0.13], [0.45, 0.86, 0.93, 0.95], [0.07, 0.66, 0.15, 0.82]]
+  C7:
+    title: North Sword Coast (player version)
+    pack: "0 Core books-20170418T114925Z-001/0 Core books/Lost Mine of Phandelver Maps.zip"
+    member: "NorthSwordCoast_PlayerVersion-(ZF-1793-50924-1-003).jpg"
+    category: region
+    normalize_width: 1500   # hex map, no squares: compare at a fixed width
+    crop: [0.04, 0.03, 0.96, 0.97]
+    exclude: [[0.0, 0.68, 0.14, 1.0], [0.84, 0.0, 1.0, 0.1]]
+
+categories:
+  built_interior: [C1, C4]
+  cave: [C2, C5]
+  outdoor: [C3]
+  town: [C6]
+  region: [C7]

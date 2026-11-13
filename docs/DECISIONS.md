@@ -1515,3 +1515,12 @@ Reviews: docs/REVIEW_oraga_polish_A.md, docs/REVIEW_oraga_polish_B.md.
   - **Notes for a later pass:**
     - (a) The S14 play-note odds come from the research simulator run with the 2024 pregens at the new HP. Re-run once the harness models the 2014 pregens.
     - (b) Table I–1's minutes are still the three-player budget, and chapter I says so. Replace them with a real four-player table's times.
+
+### Map building, `mapgen` (2026-11-13)
+  - **Context:** `docs/BRIEF_mapgen.md`, `DESIGN_mapgen.md`, `TASKS_mapgen.md`. The owner wants to describe a map and have Claude build it as a GIMP-like pipeline, for battle maps first and region/city maps later.
+  - **M1 architecture:** a declarative recipe (YAML, coordinates in feet) runs on a deterministic numpy/Pillow/scipy/shapely engine, and Claude authors the recipes through a `/build-map` skill with a render → look → revise loop. Rejected: image generation (no scale, no walls), adopting a random generator such as dungeongen or watabou (no authored layouts), raw SVG (no noise or fields), and headless GIMP (fragile; not installed).
+  - **M2 output:** PNG plus Universal VTT (`.dd2vtt`) plus `meta.json`. Walls and portals come from the same geometry that paints them, so they can't disagree.
+  - **M3 first pass:** battle maps (owner: "pick whichever is easier to scope"). Region and city maps reuse the engine in Phase 2.
+  - **M4 canon proof:** the Crystal Court, not B7, because B7 has no canon dimensions. Recipes for canon places may only draw what the text or `facts.yaml` states.
+  - **M5 quality bar:** seven comparator maps from the owner's own WotC packs (Redbrand Hideout, Cragmaw Hideout, Thundertree, Carnath Roadhouse, Dragon Hatchery; Phandalin and North Sword Coast for Phase 2). They're used only as yardsticks: numeric metric bands plus a side-by-side rubric. Never copied, traced or committed; only paths, scales and numbers go in the repo, and tests skip when the packs are absent.
+  - **M6 dependencies:** planned `opensimplex` was dropped (pure Python without numba: ~30 s per octave at 2000²); noise is a vectorised numpy Perlin in `mapgen/noise.py`. Declared in `software/requirements.txt`: numpy, scipy, shapely, Pillow, contourpy (all permissive).

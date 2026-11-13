@@ -55,6 +55,10 @@ class Settings(BaseSettings):
     data_dir: Path = Path("data")
     """Directory for persistent data (session snapshots, future DB files)."""
 
+    maps_dir: Path = Path(__file__).resolve().parents[2]
+    """Where the map board looks for rendered maps (`**/mapgen/*.dd2vtt`, from `python -m mapgen render`).
+    Defaults to the repository root."""
+
     db_path: Path = Path("data/facets.db")
     """SQLite database path (planned for v0.2 persistence)."""
 

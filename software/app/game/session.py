@@ -97,6 +97,9 @@ class GameSession:
     #: MM-only `spark_flow_nudge` prompt in the WS layer — a tool prompt,
     #: not a rule (see `SPARK_FLOW_NUDGE_SECONDS` in `app/api/websocket.py`).
     spark_flow: dict[str, dict] = field(default_factory=dict)
+    #: The map board (mapgen Phase 3 v1): {id, title, squares, pixels_per_grid, image, tokens} or None.
+    #: Tokens are "pc:<player>" / "foe:<enemy key>" -> {x, y} in grid squares.
+    active_map: dict | None = None
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
@@ -252,6 +255,7 @@ class GameSession:
             "combat": self.combat.to_dict() if self.combat else None,
             "session_number": self.session_number,
             "level_up_ready": sorted(self.level_up_ready),
+            "map": self.active_map,
             # MM dial only: deliberately absent from the player state.
             "danger": self.active_danger(),
         }
@@ -276,7 +280,40 @@ class GameSession:
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
             "combat": self.combat.to_dict() if self.combat else None,
             "level_up_ready": player_name in self.level_up_ready,
+            "map": player_map_view(self.active_map),
         }
+
+
+def _in_revealed(fog: dict, pos: dict) -> bool:
+    for a in fog.get("revealed", []):
+        b = fog["areas"].get(a)
+        if b and b[0] <= pos["x"] <= b[2] and b[1] <= pos["y"] <= b[3]:
+            return True
+    return False
+
+
+def token_visible_to_players(board: dict, token: str) -> bool:
+    """With fog on, players don't receive foes standing outside the revealed areas."""
+    fog = board.get("fog") or {}
+    if not fog.get("enabled") or not token.startswith("foe:"):
+        return True
+    pos = board["tokens"].get(token)
+    return pos is not None and _in_revealed(fog, pos)
+
+
+def player_map_view(board: dict | None) -> dict | None:
+    """The map board as players get it: no unrevealed area names, no foes hidden in the fog."""
+    if board is None:
+        return None
+    fog = board.get("fog") or {"enabled": False, "revealed": [], "areas": {}}
+    view = dict(board)
+    if fog.get("enabled"):
+        view["fog"] = {"enabled": True, "revealed": list(fog["revealed"]),
+                       "areas": {a: fog["areas"][a] for a in fog["revealed"] if a in fog["areas"]}}
+    else:
+        view["fog"] = {"enabled": False, "revealed": [], "areas": {}}
+    view["tokens"] = {t: p for t, p in board["tokens"].items() if token_visible_to_players(board, t)}
+    return view
 
 
 def _player_enemy_view(enemy: Enemy, ruleset) -> dict:

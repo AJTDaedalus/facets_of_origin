@@ -1,0 +1,68 @@
+# Proof C (docs/TASKS_mapgen.md T32): a generic outdoor map, built from this description only:
+#   "100×70 ft at 5-ft grid: a dirt path crosses a clearing; two ruined stone cottages,
+#    one roofless with a fallen wall; tree clumps and brush on the edges."
+map:
+  title: The Ruined Cottages
+  width_ft: 100
+  height_ft: 70
+  feet_per_square: 5
+  px_per_square: 70
+  supersample: 2
+  seed: 34
+  include: [styles/inked_parchment.yaml]
+
+measure:
+  cottage_a: {w: 20, h: 15}
+  cottage_b: {w: 18, h: 14}
+
+steps:
+  - {op: canvas, out: canvas, material: earth, id: ground}
+  # meadow grass over most of the ground, thinner in the trampled clearing
+  - {op: ground_patches, name: grass, material: meadow, scale: 14, cover: 0.0, edge: 0.14}
+  - {op: ellipse, out: clearing_g, center: [50, 35], rx: 33, ry: 19}
+  - {op: roughen_geom, out: clearing_g, src: clearing_g, amount: 3, scale: 12, id: clearing_rough}
+  - {op: rasterize, out: clearing_hard, src: clearing_g}
+  # the dirt path, west to east
+  - {op: path, out: path_g, points: [[-3, 44], [18, 41], [40, 33], [62, 34], [80, 27], [103, 25]], width: 6, smooth: 3}
+  - {op: roughen_geom, out: path_g, src: path_g, amount: 0.7, scale: 5, id: path_rough}
+  - {op: rasterize, out: path_m, src: path_g}
+  - {op: fill, mask: path_m, material: dirt_path, id: path_dirt}
+  - {op: stroke, src: path_g, width: 0.16, dash: [1.4, 0.5, 0.25, 0.5], jitter: 0.6, opacity: 0.95}
+  # cottage A: roofless, its south wall fallen outward into rubble
+  - {op: rect, out: cottage_a, x: 18, y: 10, w: 20, h: 15}
+  - {op: rasterize, out: a_floor, src: cottage_a}
+  - {op: fill, mask: a_floor, material: flagstone_irregular, id: a_flags}
+  - {op: noise, out: a_moss_n, scale: 4, id: a_moss}
+  - {op: field_to_mask, out: a_moss, src: a_moss_n, lo: 0.0, hi: 0.35}
+  - {op: combine, out: a_moss, of: [a_moss, a_floor], mode: min}
+  - {op: fill, mask: a_moss, material: grass, opacity: 0.85, id: a_grass}
+  - {op: rect, out: a_fallen, x: 21, y: 23, w: 13, h: 5}
+  - {op: wall, src: cottage_a, name: wall_a, style: ruined, gaps: 0.18, thickness: 1.5, material: wall_stone,
+     exclude: a_fallen, id: wall_a}
+  - {op: scatter, kind: rubble, region: [[19, 22], [36, 22], [38, 31], [17, 31]], avoid: [path_m], density: 2.2,
+     spacing: 1.8, size: 3.2, id: a_rubble}
+  - {op: shadow, mask: a_floor, mode: inner, width: 2, offset: [0.5, 0.6], strength: 0.35}
+  # cottage B: walls standing to the eaves, broken in places, door onto the path
+  - {op: rect, out: cottage_b, x: 58, y: 42, w: 18, h: 14}
+  - {op: rasterize, out: b_floor, src: cottage_b}
+  - {op: fill, mask: b_floor, material: flagstone_irregular, id: b_flags}
+  - {op: shadow, mask: b_floor, mode: inner, width: 2.5, offset: [0.5, 0.6], strength: 0.45}
+  - {op: wall, src: cottage_b, name: wall_b, style: ruined, gaps: 0.08, thickness: 1.5, material: wall_stone, id: wall_b}
+  - {op: opening, wall: wall_b, at: [64, 42], width: 4, floor_material: flagstone_irregular}
+  - {op: scatter, kind: rubble, mask: b_floor, density: 0.5, spacing: 3, size: 2.5, id: b_rubble}
+  # tree clumps and brush on the edges
+  - {op: combine, out: built, of: [a_floor, b_floor, path_m], mode: max}
+  - {op: grow, out: keep_clear, src: built, by: 7}
+  - {op: grow, out: brush_clear, src: built, by: 2.5}
+  - {op: invert, out: edges, src: clearing_hard}
+  - {op: brush, name: brush, within: edges, clear: brush_clear, scale: 16, cover: -0.15}
+  - {op: scatter, kind: tree, mask: brush, avoid: [keep_clear], density: 0.55, spacing: 7, size: 10, shadow: 0.6, id: trees}
+  - {op: scatter, kind: bush, mask: edges, avoid: [keep_clear, brush], density: 0.12, spacing: 5, size: 4.5, id: bushes}
+  - {op: scatter, kind: bush, mask: clearing_hard, avoid: [keep_clear], density: 0.06, spacing: 6, size: 3.5, id: brush_in}
+  - {op: grid, alpha: 0.26, weight: 0.08, color: "#1f1b16"}
+  - {op: paper, strength: 0.08, scale: 40}
+  - {op: vignette, strength: 0.2}
+  - {op: frame, margin: 0.5, weight: 0.35}
+  - {op: compass, at: ne, size: 6}
+  - {op: scale_bar, at: nw}
+  - {op: title, text: The Ruined Cottages, position: bottom, size: 2.4}

@@ -1,0 +1,85 @@
+# Proof E (docs/TASKS_mapgen.md R6): a generic region map, built from this description only:
+#   "a coastal region about 60×80 miles in 5-mile hexes: sea to the west, a river from eastern
+#    mountains to the coast, a large central forest, hills, a coastal city at the river mouth,
+#    two towns, a ruin, a road east from the city."
+map:
+  title: The Coast
+  unit: mi
+  width_ft: 60          # miles (unit: mi)
+  height_ft: 80
+  feet_per_square: 5    # 5-mile hexes
+  px_per_square: 125   # 1500 px wide: print-map resolution, like the comparator
+  supersample: 2
+  seed: 90
+  include: [styles/inked_parchment.yaml]
+
+steps:
+  - {op: canvas, out: canvas, material: sea, id: sea}
+  # ---- land: the coast is drawn; relief comes from distance inland, noise and an eastern ridge
+  - {op: polygon, out: coast_shape, points: [[17, -2], [14, 10], [19, 18], [15, 28], [18, 36], [13, 46], [16, 56],
+      [20, 64], [15, 74], [18, 82], [62, 82], [62, -2]]}
+  - {op: roughen_geom, out: land, src: coast_shape, amount: 1.1, scale: 4, id: coast_rough}
+  - {op: rasterize, out: land_m, src: land}
+  - {op: distance, out: inland, src: land_m, side: inside}
+  - {op: remap, out: inland, src: inland, in_range: [0, 38], out_range: [0.05, 0.55]}
+  - {op: noise, out: relief_n, scale: 22, id: relief}
+  - {op: remap, out: relief_n, src: relief_n, in_range: [-1, 1], out_range: [-0.12, 0.12]}
+  - {op: path, out: ridge_line, points: [[50, 4], [53, 24], [49, 44], [54, 62], [51, 80]], width: 9, smooth: 2}
+  - {op: rasterize, out: ridge_m, src: ridge_line}
+  - {op: blur, out: ridge_m, src: ridge_m, sigma: 3.5}
+  - {op: mix, out: height, of: [inland, relief_n, ridge_m], weights: [1.0, 1.0, 0.5]}
+  - {op: mix, out: height, of: [height, land_m], mode: mul}
+  - {op: erode, out: height, src: height, iterations: 15, talus: 0.003}
+  - {op: fill, mask: land_m, material: lowland, id: lowland}
+  - {op: field_to_mask, out: upland_m, src: height, lo: 0.38, hi: 0.56}
+  - {op: combine, out: upland_m, of: [upland_m, land_m], mode: min}
+  - {op: fill, mask: upland_m, material: upland, opacity: 0.85, id: upland}
+  # ---- the coast
+  - {op: coastline, land: land}
+  # ---- the central forest
+  - {op: polygon, out: forest_shape, points: [[25, 25], [37, 21], [45, 29], [43, 44], [33, 50], [24, 42]]}
+  - {op: roughen_geom, out: forest, src: forest_shape, amount: 2.0, scale: 6, id: forest_shape_rough}
+  - {op: forest_mass, src: forest}
+  # ---- water: tributaries from the height field, and the main river to the city
+  - {op: rivers, out: creeks, src: height, sea_level: 0.03, threshold: 0.012, width: [0.15, 0.45], resolution: 200, id: creeks}
+  - {op: rasterize, out: creeks_m, src: creeks}
+  - {op: combine, out: creeks_m, of: [creeks_m, land_m], mode: min}
+  - {op: fill, mask: creeks_m, color: "#6f9bab"}
+  - {op: path, out: river, points: [[50, 40], [43, 42], [35, 37], [28, 44], [21, 46], [14, 47.5]], width: 0.9, smooth: 3}
+  - {op: roughen_geom, out: river, src: river, amount: 0.25, scale: 2.5, id: river_rough}
+  - {op: rasterize, out: river_m, src: river}
+  - {op: fill, mask: river_m, color: "#6f9bab"}
+  - {op: stroke, src: river, weight: fine, color: "#2f5363"}
+  # ---- hills and mountains
+  - {op: field_to_mask, out: hill_m, src: height, lo: 0.34, hi: 0.34}
+  - {op: field_to_mask, out: hill_top, src: height, lo: 0.5, hi: 0.5}
+  - {op: combine, out: hill_m, of: [hill_m, hill_top], mode: sub}
+  - {op: combine, out: hill_m, of: [hill_m, land_m], mode: min}
+  - {op: scatter, kind: hill, mask: hill_m, avoid: [forest, river_m], density: 2.4, spacing: 1.9, size: 2.3,
+     rotate_jitter: 0, size_jitter: 0.25, sort_y: true, id: hills}
+  - {op: mountain_range, src: height, level: 0.56, within: land_m, size: 3.6, density: 3.0, spacing: 1.8}
+  # ---- the road east from the city, settlements
+  - {op: path, out: road, points: [[16, 47.5], [25, 50], [35, 53], [44, 51], [52, 55], [62, 56]], line: true, smooth: 2}
+  - {op: stroke, src: road, width: 0.25, dash: [0.9, 0.6], color: "#8c2f1f"}
+  - {op: prop, kind: city, at: [16.2, 47.2], size: 1.8, id: city}
+  - {op: prop, kind: town, at: [35, 53], size: 1.2, id: town1}
+  - {op: prop, kind: town, at: [41, 15], size: 1.2, id: town2}
+  - {op: prop, kind: ruin_marker, at: [29, 66], size: 1.0, id: ruin}
+  # ---- labels: plain descriptive words only (the description gives no names)
+  - {op: path_label, text: "the river", points: [[22, 45.3], [28, 42.6], [34, 36], [40, 38.5]], size: 1.4,
+     style: italic, color: "#24485a", offset: -1.0}
+  - {op: path_label, text: "the forest", points: [[27, 30], [33, 27], [41, 31]], size: 2.0, style: bolditalic,
+     color: "#1e3018", halo: "#9fb47c"}
+  - {op: path_label, text: "the mountains", points: [[47, 58], [52, 50], [50, 40]], size: 1.9, style: bolditalic,
+     color: "#3b2c1e"}
+  - {op: path_label, text: "the sea", points: [[3, 28], [4, 40]], size: 2.4, style: italic, color: "#1f4253",
+     halo: "#9cbfc5"}
+  # ---- hexes, frame, keys
+  - {op: grid, shape: hex, orientation: pointy, alpha: 0.3, weight: 0.08, color: "#2b2620"}
+  - {op: paper, strength: 0.1, scale: 40}
+  - {op: vignette, strength: 0.18}
+  - {op: frame, margin: 0.4, weight: 0.35}
+  - {op: compass, at: ne, size: 6}
+  - {op: scale_bar, at: [10, 3], size: 1.4}
+  - {op: legend, at: sw, size: 1.3}
+  - {op: title, text: The Coast, position: bottom, size: 2.2}

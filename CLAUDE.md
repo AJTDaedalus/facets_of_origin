@@ -93,12 +93,16 @@ The line is `player_handbook/` (the PHB), `mm_manual/` (the MM Manual), and
 `bestiary/Finding_Aids.md`, every stat block inside a `bestiary/B*.md` marker,
 and — in adventures — every `<!-- statline: id -->` block on a scene card and
 every `<!-- pregen: slug -->` block in a module's character chapter. Each has a
-no-diff invariant in `software/tests/test_docs_consistency.py`.
+no-diff invariant in `software/tests/test_docs_consistency.py`. Also generated:
+`.claude/skills/build-map/references/ops.md` (no-diff test in
+`software/tests/mapgen/test_m7_proofs.py`) and every map output under a
+`mapgen/` folder (git-ignored; rebuilt from its `*.map.yaml` recipe).
 
 Regenerate from `software/`:
 `python tools/build_index.py` · `python tools/build_table_register.py` ·
 `python -m tools.build_bestiary` · `python -m tools.build_scene_cards` ·
-`python -m tools.build_toolbox` (MM6's tables, from `software/facets/base/tables.yaml`)
+`python -m tools.build_toolbox` (MM6's tables, from `software/facets/base/tables.yaml`) ·
+`python -m mapgen ops --markdown > ../.claude/skills/build-map/references/ops.md`
 
 **Style guide.** `style/STYLE_GUIDE.md` (untracked, local) is the house style for
 all three books. `docs/RESEARCH_style_audit.md` is the audit against it and
@@ -227,3 +231,4 @@ GPLv3 — see `LICENSE.txt`.
 | Propose new mechanics | `research/dice_system_analysis.md` — 2d6 system rationale, open design questions |
 | Implement a settled mechanic | Software-PHB Sync workflow above + `facets/base/facet.yaml` |
 | Use World Anvil MCP or API | `references/worldanvil-mcp.md` — working config, pitfalls, verification |
+| Build or fix a battle map | `/build-map` skill (`.claude/skills/build-map/`) — recipe → `software/mapgen` → PNG + `.dd2vtt`; design in `docs/DESIGN_mapgen.md` |

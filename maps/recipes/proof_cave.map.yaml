@@ -1,0 +1,51 @@
+# Proof B (docs/TASKS_mapgen.md T32): a generic cave, built from this description only:
+#   "60×40 ft natural cave; a stream cuts north–south with a plank footbridge; rubble in
+#    the west lobe; three stalagmites; the entrance opens south onto forest edge."
+map:
+  title: The Stream Cave
+  width_ft: 70
+  height_ft: 58
+  feet_per_square: 5
+  px_per_square: 70
+  supersample: 2
+  seed: 21
+  include: [styles/inked_parchment.yaml]
+
+measure:
+  cave: {w: 60, h: 40}
+
+steps:
+  - {op: base}
+  # the cave: two lobes, west and east, with a mouth to the south
+  - {op: polygon, out: cave_shape, id: cave_shape, points: [[6, 13], [11, 7], [21, 8], [28, 5], [38, 6], [46, 9], [55, 7],
+      [63, 12], [65, 23], [62, 33], [55, 39], [45, 41], [40, 45], [38, 53], [29, 53], [28, 45], [21, 42], [11, 39], [5, 31], [5, 21]]}
+  - {op: roughen_geom, out: cave, src: cave_shape, amount: 1.1, scale: 6, id: cave_rough}
+  # the forest edge to the south, and the cave mouth that opens onto it
+  - {op: polygon, out: forest_shape, points: [[0, 47], [14, 45], [27, 48], [40, 47.5], [54, 45], [70, 47], [70, 58], [0, 58]]}
+  - {op: roughen_geom, out: forest, src: forest_shape, amount: 0.9, scale: 5, id: forest_rough}
+  - {op: cave_floor, src: cave}
+  - {op: rasterize, out: forest_m, src: forest}
+  - {op: fill, mask: forest_m, material: thicket, id: grass}
+  - {op: stroke, src: forest, weight: fine, opacity: 0.6, roughness: 0.2}
+  - {op: combine, out: walk, of: [floor, forest_m], mode: max}
+  # the stream: out of the north rock, down through the mouth and away south (drawn under the walls)
+  - {op: stream, points: [[33, 3], [30, 14], [34, 24], [31, 34], [34, 46], [32, 60]], width: 5, name: stream, clip: walk}
+  - {op: cave_walls, src: cave, wall: rock, exclude: forest}
+  - {op: prop, kind: bridge, at: [33.5, 22], size: 10, rotate: 4, id: bridge}
+  # west lobe rubble, three stalagmites in the east lobe
+  - {op: scatter, kind: rubble, region: [[7, 14], [20, 10], [24, 20], [20, 36], [8, 33]], avoid: [stream],
+     density: 0.9, spacing: 2.6, size: 3, id: rubble}
+  - {op: prop, kind: stalagmite, at: [48, 16], size: 3.2, id: st1}
+  - {op: prop, kind: stalagmite, at: [56, 27], size: 2.6, id: st2}
+  - {op: prop, kind: stalagmite, at: [45, 32], size: 3.6, id: st3}
+  # trees and brush along the forest edge
+  - {op: scatter, kind: tree, region: [[0, 50], [26, 51], [26, 58], [0, 58]], avoid: [stream], density: 0.5, spacing: 8,
+     size: 11, id: trees_w}
+  - {op: scatter, kind: tree, region: [[40, 50], [70, 49], [70, 58], [40, 58]], avoid: [stream], density: 0.5, spacing: 8,
+     size: 11, id: trees_e}
+  - {op: scatter, kind: bush, region: [[2, 48], [68, 48], [68, 53], [2, 53]], avoid: [stream], density: 0.35, spacing: 4,
+     id: bushes}
+  - {op: finish, floor: walk}
+  - {op: compass, at: ne, size: 6}
+  - {op: scale_bar, at: nw}
+  - {op: title, text: The Stream Cave, position: bottom, size: 2.4}

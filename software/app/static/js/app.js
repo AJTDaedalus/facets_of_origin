@@ -265,7 +265,12 @@ function renderTab() {
 
 /** Re-render only if the page shown depends on what changed. */
 function refresh(parts) {
-  if (!parts || parts.includes(state.tab)) renderTab();
+  if (!parts || parts.includes(state.tab)) {
+    // A map-token drag in progress: re-rendering the play tab would detach the board and drop
+    // the pointer capture. Defer until the drag ends (map.js runs the pending refresh).
+    if (state.tab === 'play' && typeof MAPUI !== 'undefined' && MAPUI.dragging) MAPUI.pendingRefresh = true;
+    else renderTab();
+  }
   const me = state.me;
   $('#build-dot').classList.toggle('hidden', !(me && me.level_up_ready));
 }
@@ -289,14 +294,14 @@ const HANDLE = {
       ruleset: d.ruleset, chars: d.all_characters || {}, enemies: d.active_enemies || {},
       library: d.enemy_library || {}, clocks: d.threat_clocks || {}, combat: d.combat,
       danger: d.danger || null, sessionNumber: d.session_number || state.sessionNumber,
-      sessionName: d.session_name || state.sessionName,
+      sessionName: d.session_name || state.sessionName, map: d.map || null,
     });
     state.me = isMM() ? null : (d.your_character || null);
     $('#hdr-session').textContent = state.sessionName || '';
     if (!state.feed.length) (d.roll_log || []).slice(-20).forEach(r => feedRoll(r.player_name, r, true));
     const first = !$('.tab.on');
     if (first) switchTab(isMM() ? 'play' : (state.me ? 'play' : 'build'));
-    else renderTab();
+    else refresh();                      // drag-safe: deferred while a map token is being dragged
   },
   error(m) { notify(m.message, 'error', 7000); },
   pong() {},
@@ -352,6 +357,28 @@ const HANDLE = {
   enemy_spawned(m) { state.enemies[m.enemy.key] = m.enemy; feedPush('foe', `<b>${esc(m.enemy.name)}</b> enters the fight.`); refresh(['play']); },
   enemy_updated(m) { state.enemies[m.enemy.key] = m.enemy; refresh(['play']); },
   enemy_removed(m) { delete state.enemies[m.key]; refresh(['play']); },
+
+  map_list(m) {
+    state.mapList = m.maps;
+    if (!m.maps.length) notify('No rendered maps found. Run python -m mapgen render <recipe>.', 'warn');
+    if (m.truncated) notify('The map folder scan stopped early: some maps may be missing (see the server log).', 'warn');
+    refresh(['play']);
+  },
+  map_state(m) {
+    const isNew = m.map && (!state.map || state.map.id !== m.map.id);
+    state.map = m.map;
+    if (isNew) feedSys(`The map is up: ${esc(m.map.title)}.`);
+    refresh(['play']);
+  },
+  fog_state(m) { if (state.map) { state.map.fog = m.fog; refresh(['play']); } },          // MM: controls change
+  board_patch(m) { if (state.map) { state.map.fog = m.fog; state.map.tokens = m.tokens; mapRefresh(false); } },
+  token_moved(m) {
+    if (!state.map) return;
+    const isNew = !state.map.tokens[m.token];
+    state.map.tokens[m.token] = { x: m.x, y: m.y };
+    mapRefresh(isNew);                   // a newly placed token leaves the tray: full refresh
+  },
+  token_removed(m) { if (state.map) { delete state.map.tokens[m.token]; mapRefresh(true); } },
   enemy_library(m) { state.library = m.library; notify(m.loaded.length ? `Loaded ${m.loaded.length} Bestiary cards.` : 'The library already holds the Bestiary.', 'success'); refresh(); },
   enemy_damage(m) { if (m.result.bloodied_now) notify(`${m.name} is Bloodied.`, 'warn'); },
   danger(m) { state.danger = m.danger; refresh(['play']); },

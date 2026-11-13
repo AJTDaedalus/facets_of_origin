@@ -111,6 +111,8 @@ async def delete_session(session_id: str):
     """
     if not session_store.delete_session(session_id):
         raise HTTPException(status_code=404, detail="Session not found.")
+    from app.api.websocket import _forget_moves
+    _forget_moves(session_id)              # the map board's per-token throttle records
     return {"deleted": session_id}
 
 

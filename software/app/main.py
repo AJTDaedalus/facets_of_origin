@@ -55,6 +55,7 @@ async def security_headers(request, call_next):
         "default-src 'self'; "
         "script-src 'self' 'unsafe-inline'; "   # inline scripts needed for first-draft vanilla JS
         "style-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data:; "                 # the map board ships its rendered map as a data: image
         "connect-src 'self' ws: wss:;"
     )
     return response

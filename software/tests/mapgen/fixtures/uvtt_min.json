@@ -1,0 +1,8 @@
+{
+  "_comment": "Minimal Universal VTT shape mapgen must emit (hand-written from the public format: Dungeondraft/Roll20/Foundry importers). Values are types, not data.",
+  "required": ["format", "resolution", "line_of_sight", "portals", "lights", "image"],
+  "resolution": {"required": ["map_origin", "map_size", "pixels_per_grid"]},
+  "point": ["x", "y"],
+  "portal": ["position", "bounds", "rotation", "closed", "freestanding"],
+  "light": ["position", "range", "intensity", "color", "shadows"]
+}
