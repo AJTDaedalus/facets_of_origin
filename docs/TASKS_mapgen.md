@@ -187,7 +187,7 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
   stone cottages, one roofless with a fallen wall; tree clumps and brush on the
   edges." Built **through the skill workflow** (T34 draft first if ready, else by
   hand). *Accept:* both render; dd2vtt valid; checked by the T33 gate.
-- [!] **T33 Quality gate.** *(2026-11-13: B, C and the added D pass all bands at ≈4.0 self-scored; A escalated to the owner, see LOG; awaiting owner review)* For A (category: built interior → C1/C4 bands),
+- [x] **T33 Quality gate.** *(2026-11-13: B, C and the added D pass all bands at ≈4.0 self-scored; merged via PR #35 under the owner's independent-work rule. The canon Crystal Court's yardstick and TP74 colour stay open for the owner as a taste/canon question (LOG ESCALATION). Owner visual feedback is welcome any time and goes into follow-up PRs.)* For A (category: built interior → C1/C4 bands),
   B (cave → C2/C5) and C (outdoor → C3): run `quality`, build contact sheets,
   score the rubric for ours and the comparator, tune the style/material params,
   repeat. Log every iteration's metrics + scores. *Accept:* all Q1–Q5 in band, Q6
@@ -201,7 +201,7 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
   list and the regenerate line. *Accept:* the no-diff test of `ops.md` against
   `python -m mapgen ops --markdown`; a dry run: the skill builds a fresh owner
   description end to end in ≤5 iterations (logged).
-- [~] **T35 Wrap-up.** *(all done except the PR, which waits for the owner's review and a push go-ahead; full suite 2154 passing 2026-11-13)* CLAUDE.md Reference Trigger Index row ("Build a map →
+- [x] **T35 Wrap-up.** *(PR #35 merged into feat/lean-facets 2026-11-13 after an independent review and two verification rounds: docs/REVIEW_pr35.md, docs/REVIEW_pr35_verify.md; full suite 2269 passed, e2e 13 passed)* CLAUDE.md Reference Trigger Index row ("Build a map →
   `/build-map`"); full suite run from `software/` with the pass/fail count in the LOG;
   PR to `main` via `gh`, after scanning main..branch for private canon (memory rule).
 
