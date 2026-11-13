@@ -15,6 +15,7 @@ from ..recipe import RecipeError
 from ..registry import ParamModel, op
 from .common import NonNegFt, Point, PosFt, Ref, polygonal
 
+ROUGH_GAIN = 2.0   # fbm rarely nears ±1; this makes `amount` read as feet of wobble
 JOIN = {"round": 1, "mitre": 2, "bevel": 3}
 CAP = {"round": 1, "flat": 2, "square": 3}
 
@@ -167,7 +168,7 @@ def _rough_ring(coords, amount, scale, seed, closed=True):
     ln = np.linalg.norm(norm, axis=1, keepdims=True)
     norm = np.divide(norm, ln, out=np.zeros_like(norm), where=ln > 0)
     d = fbm_at(pts[:, 0], pts[:, 1], scale, seed)
-    out = pts + norm * (d[:, None] * amount)
+    out = pts + norm * (d[:, None] * amount * ROUGH_GAIN)
     if not closed:
         out[0], out[-1] = pts[0], pts[-1]
     if closed:

@@ -21,3 +21,23 @@ Running execution log for `docs/TASKS_mapgen.md`. Newest at the bottom.
   rect at 70 px/sq covers 420×560 px within 0.5%), mask ops on a signed distance
   field (grow, shrink, blur, threshold, invert, band, combine, roughen).
 - Tests: `python -m pytest tests/mapgen -q` → **79 passed**.
+
+## 2026-11-13 — M2 + M3 (T11–T18)
+
+- **T11–T12:** `noise` op (fbm/ridged/billow, scale in feet), `gradient`
+  (linear/radial), `distance` (outside/inside/signed, feet), `remap` (linear,
+  smooth, pow), `field_to_mask`, `mix`. Test note: Perlin has a broad low-pass
+  spectrum, so "frequency tracks scale" is tested on the power-weighted spectral
+  centroid (scale 8 vs 32 gives a ratio of ~4.7), not the argmax.
+- **T13:** `mapgen/color.py`: hex/palette/list colours with palette aliasing,
+  colour ramps, premultiplied compositing with normal/multiply/screen/overlay/
+  darken/lighten. `canvas` and `fill` (colour or material, opacity, blend).
+- **T14–T16:** materials `flat`, `ramp_noise`, `dirt`, `bedrock_hatch`,
+  `flagstone` (jittered-grid Voronoi with F1/F2 mortar, or ashlar), `planks`,
+  `cobble`, `grass` (with tufts), `water` (depth from the shore, ripples). A
+  shared `grain` adds fine grit so no surface is digitally flat (Q2).
+- **T17–T18:** `stroke` (mask edge by SDF, or geometry outline with dash/double/
+  roughness/side), `shadow` (inner/drop), `occlusion`, `hatch` (stroke clusters),
+  `paper`, `vignette`. Roughness got a 2× gain so `amount`/`roughness` read as
+  feet of wobble (fbm rarely nears ±1).
+- Tests: **149 passed**.

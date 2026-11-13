@@ -69,34 +69,34 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## M2 — Fields
 
-- [ ] **T11 Noise.** `noise(kind fbm|ridged|billow, scale_ft, octaves, persistence,
+- [x] **T11 Noise.** `noise(kind fbm|ridged|billow, scale_ft, octaves, persistence,
   lacunarity)` using `opensimplex.noise2array`, normalised to −1..1. *Accept:*
   ≥5 tests: deterministic; seed changes the output; range; the FFT peak shifts with
   scale_ft; runtime < 2 s at 2000² (mark `slow` if not).
-- [ ] **T12 Other fields.** `gradient(linear|radial)`, `distance(from mask, ft)`,
+- [x] **T12 Other fields.** `gradient(linear|radial)`, `distance(from mask, ft)`,
   `remap(in, out, curve)`, `field_to_mask(lo, hi)`. *Accept:* ≥3 tests each.
 
 ## M3 — Paint and materials
 
-- [ ] **T13 Canvas and fill.** `canvas`, `fill(color|material, mask, opacity,
+- [x] **T13 Canvas and fill.** `canvas`, `fill(color|material, mask, opacity,
   blend normal|multiply|screen|overlay)`, compositing of premultiplied RGBA.
   *Accept:* ≥6 tests: an opaque fill through a half mask gives a 50% mix; the blend
   modes match the reference formulas on 1-px images; `~mask` works.
-- [ ] **T14 Style file v0 and materials A.** `styles/inked_parchment.yaml` with
+- [x] **T14 Style file v0 and materials A.** `styles/inked_parchment.yaml` with
   palette + ink weights; materials `flat`, `ramp_noise`, `dirt`, `bedrock_hatch`.
   *Accept:* ≥3 tests per material: deterministic; Q2 local σ above a floor
   (no flat fill); colours inside the ramp.
-- [ ] **T15 Materials B.** `flagstone` (jittered-grid Voronoi via `scipy.spatial`,
+- [x] **T15 Materials B.** `flagstone` (jittered-grid Voronoi via `scipy.spatial`,
   mortar lines, per-stone tone jitter, stone size in ft), `planks` (direction,
   width, staggered seams), `cobble`. *Accept:* ≥3 tests each: mortar fraction in
   a band; stone count ≈ area / stone area ±25%; plank seams align to direction.
-- [ ] **T16 Materials C.** `grass` (noise + speckle + tufts), `water` (depth from
+- [x] **T16 Materials C.** `grass` (noise + speckle + tufts), `water` (depth from
   distance-to-shore, ripple lines). *Accept:* ≥3 tests each.
-- [ ] **T17 stroke.** Mask or Geometry edge → ink line: width (ft or style weight
+- [x] **T17 stroke.** Mask or Geometry edge → ink line: width (ft or style weight
   name), roughness, `double` (two parallel lines), dash pattern. *Accept:* ≥5 tests:
   line pixels lie within width of the edge; dash duty cycle; roughness 0 is
   straight; geometry and mask sources agree within 1 px.
-- [ ] **T18 Shadow, occlusion, hatch, paper.** `shadow(drop|inner, offset, blur,
+- [x] **T18 Shadow, occlusion, hatch, paper.** `shadow(drop|inner, offset, blur,
   strength)`, `occlusion(from walls, falloff_ft)`, `hatch(band outside a mask:
   block hatching à la stone-mass, line spacing, angle jitter)`, `paper` (parchment
   grain, 2-scale fbm multiply), `vignette`. *Accept:* ≥3 tests each: shadow

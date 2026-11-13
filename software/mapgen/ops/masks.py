@@ -164,4 +164,4 @@ def roughen(ctx, p, src):
     """Raster edge wobble: displace the mask edge by noise (amount feet, feature size `scale` feet)."""
     sd = signed_distance(src.data)
     n = fbm(ctx.frame.shape, ctx.frame.px(p.scale), ctx.seed, p.octaves)
-    return Mask(soft_step(sd + n * ctx.frame.px(p.amount)))
+    return Mask(soft_step(sd + n * 2.0 * ctx.frame.px(p.amount)))
