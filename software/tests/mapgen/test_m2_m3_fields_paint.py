@@ -21,6 +21,8 @@ STYLE = {"palette": {"ink": "#202020", "paper": "#e0d8c0", "stone": "ink"},
              "boards": {"type": "planks", "colors": ["#7a5534", "#9b7048"], "width": 1.0, "length": 6, "angle": 0},
              "cobbles": {"type": "cobble", "colors": ["#7d7a72", "#a29e94"], "size": 1.0},
              "lawn": {"type": "grass", "colors": ["#56703a", "#7d9450"], "scale": 3},
+             "veined": {"type": "ramp_noise", "colors": ["#505050", "#606060"], "scale": 4, "veins": 0.9,
+                        "vein_color": "#f0f0f0", "vein_dark": "#101010", "vein_scale": 4},
              "pond": {"type": "water", "shallow": "#9cc3cf", "deep": "#3d6f85", "depth": 4},
          }}
 
@@ -224,6 +226,10 @@ class TestMaterials:
                     {"op": "rasterize", "out": "m", "src": "p"},
                     {"op": "fill", "mask": "m", "material": "pond"}])
         assert c[40, 40, :3].mean() < c[40, 6, :3].mean()
+
+    def test_veins_add_lines(self):
+        plain = local_std(_mat("rock"))
+        assert local_std(_mat("veined")) > 0.03 and _mat("veined")[..., 0].max() > 0.6
 
     def test_grass_is_green(self):
         c = _mat("lawn")

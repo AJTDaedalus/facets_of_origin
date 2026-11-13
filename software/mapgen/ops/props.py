@@ -116,9 +116,16 @@ def p_pebbles(s, rng):
 
 
 def p_stalagmite(s, rng):
-    return [(_blob(s / 2, 5, rng, 0.25), "stone", INK_MED),
-            (_blob(s * 0.32, 4, rng, 0.25), "stone_light", INK_FINE),
-            (affinity.translate(_blob(s * 0.12, 3, rng, 0.2), -s * 0.05, -s * 0.05), "linen", 0)]
+    base = _blob(s / 2, 7, rng, 0.1, 48)
+    mid = affinity.translate(_blob(s * 0.34, 6, rng, 0.12, 36), -s * 0.04, -s * 0.05)
+    tip = affinity.translate(_blob(s * 0.13, 5, rng, 0.1, 24), -s * 0.07, -s * 0.08)
+    cracks = []
+    for i in range(int(rng.integers(4, 7))):
+        a = rng.uniform(0, 2 * np.pi)
+        r0, r1 = s * 0.18, s * rng.uniform(0.36, 0.46)
+        cracks.append((LineString([(r0 * np.cos(a), r0 * np.sin(a)), (r1 * np.cos(a + 0.15), r1 * np.sin(a + 0.15))]),
+                       None, INK_FINE * 0.6))
+    return [(base, "stone_dark", INK_MED), (mid, "stone", INK_FINE * 0.7), (tip, "stone_light", 0)] + cracks
 
 
 def p_boulder(s, rng):

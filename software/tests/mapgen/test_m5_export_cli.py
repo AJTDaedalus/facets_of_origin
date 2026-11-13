@@ -78,6 +78,14 @@ class TestExport:
         assert m["measures"]["room"]["actual"]["w"] == pytest.approx(20)
         assert m["geometry"]["room"]["area"] == pytest.approx(200)
 
+    def test_meta_with_partition(self, write_recipe, tmp_out):
+        rec = dict(ROOM, steps=ROOM["steps"] + [
+            {"op": "path", "out": "split", "points": [[15, 5], [15, 15]], "line": True},
+            {"op": "partition", "src": "split", "name": "mid"}])
+        r = render_recipe(write_recipe(rec, name="p.map.yaml"), out_dir=tmp_out)
+        m = json.loads(Path(r["meta"]).read_text())
+        assert m["walls"]["mid"]["floor"] is None and m["walls"]["mid"]["line"]["length"] == pytest.approx(10)
+
     def test_measure_of_missing_geometry_errors(self, write_recipe, tmp_out):
         bad = dict(ROOM, measure={"nothing": {"w": 1}})
         with pytest.raises(Exception, match="nothing"):

@@ -108,6 +108,19 @@ class TestOpenings:
         assert c[18, 80, 1] > 0.9 and c[18, 80, 0] < 0.2       # 0.5 ft into the wall band
         assert col.portals == []
 
+    def test_partition_door(self):
+        store, col = go([{"op": "path", "out": "split", "points": [[20, 5], [20, 25]], "line": True},
+                         {"op": "partition", "src": "split", "name": "mid"},
+                         {"op": "door", "wall": "mid", "at": [20.4, 15], "width": 4}])
+        assert total_len(col.los) == pytest.approx(16, rel=0.01)
+        assert col.portals[0]["position"] == [pytest.approx(20), pytest.approx(15)]
+        c = store.get("canvas").data
+        assert c[60, 80, 0] < 0.98          # door leaf drawn across the partition
+
+    def test_partition_needs_line(self):
+        with pytest.raises(RecipeError):
+            go([{"op": "partition", "src": "nope"}])
+
     def test_unknown_wall(self):
         with pytest.raises(RecipeError, match="wall 'nope'"):
             go(WALL + [{"op": "door", "wall": "nope", "at": [20, 5]}])

@@ -87,3 +87,90 @@ Running execution log for `docs/TASKS_mapgen.md`. Newest at the bottom.
   test ran here (packs present) and matches the recorded values.
 - **T29:** `make_sheet` / `python -m mapgen sheet` (refuses any path inside the repo).
 - Tests: **239 passed**.
+
+## 2026-11-13 — M7 (T30–T35)
+
+- **T30:** `styles/inked_parchment.yaml`: palette, ink weights (bold/heavy/medium/
+  fine), 18 materials (incl. `crystal_floor`/`crystal_wall` with veins, `meadow`,
+  `thicket`, `earth`), and macros `base`, `beyond`, `floor_fill`, `stone_room`,
+  `cave`(=`cave_floor`+`cave_walls`), `stream`, `ground_patches`, `brush`, `finish`.
+  New engine pieces found while building the proofs: `trace` (mask → polygons via
+  contourpy, holes kept), `partition` (interior wall that takes doors), wall
+  `exclude` and `outer_weight`, stroke `jitter`, the `pebbles` prop, and ramp `veins`.
+- **Dependencies:** mapgen's imports (numpy, scipy, shapely, Pillow, contourpy)
+  weren't declared anywhere; they're now pinned in `software/requirements.txt`. All
+  are permissively licensed.
+- **Metric fix:** metrics now normalise per **foot** (10 px/ft). Before that,
+  10-ft-square Thundertree compared at half scale. The baseline was re-run; only C3
+  changed.
+- **Performance:** noise upsampling moved from `map_coordinates` to Pillow bicubic
+  (cave render 38 s → 23 s). A full render runs at about 1 s per 100 ft² at 70 px/sq.
+- **T31:** `conversions/dnd5e/oraga_night/maps/recipes/crystal_court.map.yaml`, canon
+  only (facts.yaml plus what `build_maps.map_court` draws; TP74 colour).
+  `tests/mapgen/test_m7_proofs.py` checks floor, aisles, terrace width, dais and its
+  distance from the doors, musicians' gallery, main-door width and west-door stations
+  against facts.yaml (no literals), and that no props beyond doors/stairs are drawn.
+- **T32:** `maps/recipes/proof_cave.map.yaml`, `maps/recipes/proof_ruins.map.yaml`,
+  each built from the TASKS description only, by the render → look → critique →
+  revise loop the skill describes.
+- **T34:** `.claude/skills/build-map/` (SKILL.md, generated `references/ops.md`
+  with a no-diff test, `cookbook.md`, `rubric.md`).
+- **T35 (partial):** CLAUDE.md generated-files list, regenerate line and trigger row.
+  Full suite from `software/` (excluding e2e): **2109 passed**; mapgen alone **262
+  passed**. The PR waits for the owner's T33 review.
+
+### T33 quality gate — results (final renders, 2026-11-13)
+
+| Proof | Category (comparator) | Q1 | Q2 | Q3 | Q4 | Q5s | Q6 | Rubric (self) |
+|---|---|---|---|---|---|---|---|---|
+| B cave | cave (C2 Cragmaw) | 0.759 ✓ | 0.077 ✓ | 0.112 ✓ | 0.168 ✓ | 0.170 ✓ | 0.49 ✓ | ≈3.8 (comparator 5) |
+| C ruins | outdoor (C3 Thundertree) | 0.793 ✓ | 0.068 ✗ (≥0.074) | 0.174 ✓ | 0.130 ✗ (≥0.140) | 0.186 ✓ | 0.47 ✓ | ≈3.9 |
+| A court | built_interior (C1 Redbrand) | 0.663 ✓ | 0.043 ✗ (≥0.054) | 0.123 ✓ | 0.051 ✗ (≥0.109) | 0.250 ✓ | 0.47 ✓ | ≈3.2 |
+
+Rubric detail (self-scored by vision from the contact sheets; owner to confirm):
+- **Cave:** legibility 4, surface 4, depth 4, line 3.5, palette 4, grid 4, props 3.5,
+  shelf 3.5. Weakest: props and the wall band (plain next to Schley's).
+- **Ruins:** 4, 4, 4, 4, 4, 4, 3.5, 3.5. Weakest: the path's tone sits too close to
+  bare earth; trees are a step below Schley's.
+- **Court:** legibility 4, surface 3.5, depth 2.5, line 3, palette 3, grid 3.5,
+  props 3, shelf 3.
+
+The ruins pass all five Q bands with a Thundertree-strength grid (alpha 0.7), but
+then Q6 = 1.07. With a quiet grid (alpha 0.26, kept) Q6 = 0.47, while Q2/Q4 fall
+5–7% short. The grid was carrying that ink. Adding ground detail instead didn't
+recover it (tried and reverted).
+
+No proof reaches the ≥ 4.0 rubric bar. The cave and ruins are close. The court
+is not.
+
+## ESCALATION (T33 → owner; per TASKS "category below 3.5 after 3 rounds")
+
+**What was attempted:** three tuning rounds on the Crystal Court (veined crystal
+material, desaturation, heavier walls, darker grid, then a quieter grid).
+Q2 (fine detail) and Q4 (ink density) stay well under the built-interior band,
+and the rubric is ≈3.2.
+
+**What's specifically wrong:**
+1. **The yardstick doesn't fit.** The built-interior comparators (Redbrand,
+   Carnath) are stone dungeons packed with furniture and block texture. The canon
+   Crystal Court is a 120×140 ft empty ballroom with no furniture or mortar joints
+   (TP60/TP74), so it can't reach their detail density without inventing content.
+2. **Canon palette vs metrics.** Pushing Q5s into band desaturated the floor from
+   TP74's "deep, dusky purple-pink glowing out of violet-charcoal shadow" toward
+   grey mauve marble. I stopped there, not drifting further from canon.
+
+**Questions for the owner:**
+- (a) Is the court judged on its own (canon look, legibility, VTT data) and dropped
+  from the metric bands? Or should we pick a different canon interior with
+  furniture text as the built-interior proof?
+- (b) Should the court's floor go back to stronger purple-pink glow (TP74 over
+  Q5s)?
+- (c) Grid: Thundertree-loud (passes Q1–Q5, fails Q6) or quiet (passes Q6, misses
+  Q2/Q4 slightly)? The VTT can draw its own grid either way.
+- (d) Do the cave and ruins clear your eye at ≈3.8–3.9, or what's missing first:
+  props, trees, wall texture?
+
+Review images (scratchpad, never committed, since the sheets contain comparator crops):
+`/tmp/claude-0/-root-facets-of-origin/eb46f7a0-189d-4dd6-848a-6d5e583a84cc/scratchpad/final/`
+(`proof_cave.png`, `proof_ruins.png`, `crystal_court.png`, and `sheet_*.png` beside the
+comparators). Rebuild any time with `cd software && python -m mapgen render <recipe>`.

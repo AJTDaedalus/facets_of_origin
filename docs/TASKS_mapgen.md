@@ -167,12 +167,12 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## M7 — Style, proofs, skill
 
-- [ ] **T30 Style preset + macros.** Fill out `inked_parchment.yaml`: defaults per op
+- [x] **T30 Style preset + macros.** Fill out `inked_parchment.yaml`: defaults per op
   and macros `stone_room(rect, door_sides)`, `cave_room(points)`,
   `corridor(path, width)`, `stream(path, width)`, `tree_clump(region, count)`.
   *Accept:* each macro renders in a golden-sized test; the macros are documented in
   `ops --markdown`.
-- [ ] **T31 Proof A, canon: the Crystal Court.** Recipe
+- [x] **T31 Proof A, canon: the Crystal Court.** Recipe
   `conversions/dnd5e/oraga_night/maps/recipes/crystal_court.map.yaml` built only
   from `facts.yaml` and the chapter V/VIII text that `maps/build_maps.py`
   `map_court` already encodes (floor 80×140, aisles 20 ft, dais, main doors 10 ft,
@@ -180,28 +180,28 @@ Status: `[ ]` open · `[~]` in progress · `[x]` done · `[!]` blocked
   function draws; ask the owner before adding any. *Accept:* a test reads
   facts.yaml and asserts the meta.json measures (no literals); the dd2vtt walls
   enclose the floor; the render is checked by the T33 gate.
-- [ ] **T32 Proofs B and C, generic.** (B) Cave, owner-neutral description: "60×40 ft
+- [x] **T32 Proofs B and C, generic.** (B) Cave, owner-neutral description: "60×40 ft
   natural cave; a stream cuts north–south with a plank footbridge; rubble in the
   west lobe; three stalagmites; the entrance opens south onto forest edge." (C)
   Outdoor: "100×70 ft at 5-ft grid: a dirt path crosses a clearing; two ruined
   stone cottages, one roofless with a fallen wall; tree clumps and brush on the
   edges." Built **through the skill workflow** (T34 draft first if ready, else by
   hand). *Accept:* both render; dd2vtt valid; checked by the T33 gate.
-- [ ] **T33 Quality gate.** For A (category: built interior → C1/C4 bands),
+- [!] **T33 Quality gate.** For A (category: built interior → C1/C4 bands),
   B (cave → C2/C5) and C (outdoor → C3): run `quality`, build contact sheets,
   score the rubric for ours and the comparator, tune the style/material params,
   repeat. Log every iteration's metrics + scores. *Accept:* all Q1–Q5 in band, Q6
   < 0.5, rubric average ≥ 4.0 with no score below 3 for each proof; then
   **stop for owner review** of the three PNGs beside their comparators. If after 3
   tuning rounds a category stays below 3.5, escalate per CLAUDE.md with the gap named.
-- [ ] **T34 Skill.** `.claude/skills/build-map/SKILL.md` (workflow from DESIGN §4,
+- [x] **T34 Skill.** `.claude/skills/build-map/SKILL.md` (workflow from DESIGN §4,
   canon rule, iteration cap 5, rubric), `references/ops.md` (generated),
   `references/cookbook.md` (the macros + the three proofs as worked examples),
   `references/rubric.md`. Add `references/ops.md` to the CLAUDE.md generated-files
   list and the regenerate line. *Accept:* the no-diff test of `ops.md` against
   `python -m mapgen ops --markdown`; a dry run: the skill builds a fresh owner
   description end to end in ≤5 iterations (logged).
-- [ ] **T35 Wrap-up.** CLAUDE.md Reference Trigger Index row ("Build a map →
+- [~] **T35 Wrap-up.** CLAUDE.md Reference Trigger Index row ("Build a map →
   `/build-map`"); full suite run from `software/` with the pass/fail count in the LOG;
   PR to `main` via `gh`, after scanning main..branch for private canon (memory rule).
 

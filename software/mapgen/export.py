@@ -84,7 +84,9 @@ def meta(recipe, frame, collector) -> dict:
         "title": recipe.map.title, "width_ft": recipe.map.width_ft, "height_ft": recipe.map.height_ft,
         "feet_per_square": recipe.map.feet_per_square, "px_per_square": frame.pps, "seed": recipe.map.seed,
         "draft": frame.draft, "measures": measures, "geometry": geoms,
-        "walls": {k: {"floor": _geom_info(v["floor"]), "thickness": v["thickness"]} for k, v in collector.walls.items()},
+        "walls": {k: {"floor": _geom_info(v["floor"]) if v.get("floor") is not None else None,
+                      "line": _geom_info(v["line"]) if v.get("line") is not None else None,
+                      "thickness": v["thickness"]} for k, v in collector.walls.items()},
         "portals": collector.portals, "lights": collector.lights, "legend": sorted(collector.legend),
         "los_segments": len(collector.los), "los_length_ft": round(sum(l.length for l in collector.los), 3),
     }

@@ -1,0 +1,171 @@
+# Proof A (docs/TASKS_mapgen.md T31): map VIII-3, the Crystal Court (B2) and its aisles (B3), as a VTT battle map.
+#
+# Canon only. Every measured shape comes from ../../facts.yaml `maps.court` (and `terraces.wide`,
+# `east_wing.cleared_corridor`) through the same layout maps/build_maps.py `geometry()` and
+# `map_court()` already draw: piers at the same seven stations, the dais and its high table, the
+# four dais and two door ward-points, main/garden/west/east doors, the two gallery stairs, the
+# east stair and the start of the cleared corridor, the overhead galleries and the rails.
+# Nothing else is drawn: no furniture, banners or dancers (ask the owner before adding any).
+# Colour follows the approved palace art canon (TP74: seamless grown crystal, no mortar joints,
+# dusky purple-pink out of violet-charcoal shadow). Wall thickness is a drawing choice, as in the SVG.
+#
+# Coordinates: facts.yaml puts the origin at the south-west corner of the Court floor with y
+# running north (main doors at y = 0, dais end at y = 140). mapgen runs y south from the
+# north-west corner, so every point here is (X, Y) = (x + 30, 160 - y).
+map:
+  title: The Crystal Court
+  width_ft: 150
+  height_ft: 172
+  feet_per_square: 5
+  px_per_square: 50
+  supersample: 2
+  seed: 74
+  include: [styles/inked_parchment.yaml]
+
+measure:
+  court_floor: {w: 80, h: 140}        # court.width x court.length
+  west_aisle: {w: 20, h: 140}         # court.aisle_deep
+  east_aisle: {w: 20, h: 140}
+  dais: {w: 30, h: 15}                # court.dais_across
+  musicians_gallery: {w: 80, h: 15}   # court.musicians_gallery_deep
+  east_stair: {w: 10, h: 24}          # cleared_corridor.wide; 12 ft rise at a 2:1 run
+  cleared_corridor_start: {w: 10, h: 18}
+
+steps:
+  - {op: canvas, out: canvas, color: "#241722", id: void}
+  - {op: noise, out: void_n, scale: 30, id: void_noise}
+  - {op: field_to_mask, out: void_m, src: void_n, lo: -1, hi: 1}
+  - {op: fill, mask: void_m, color: "#3a2436", opacity: 0.6, id: void_mottle}
+
+  # ---- the garden walk and the upper terrace beyond the north wall (map VIII-4 continues it)
+  - {op: rect, out: terrace, x: 0, y: 0, w: 150, h: 10}
+  - {op: rasterize, out: terrace_m, src: terrace}
+  - {op: fill, mask: terrace_m, material: garden, id: terrace_grass}
+  - {op: rect, out: garden_walk, x: 10, y: 10, w: 120, h: 10}
+  - {op: rasterize, out: walk_m, src: garden_walk}
+  - {op: fill, mask: walk_m, material: crystal_floor, id: walk_floor}
+  - {op: path, out: walk_rail, points: [[10, 10], [130, 10]], line: true}
+  - {op: stroke, src: walk_rail, width: 0.5, color: "#e6b8d4"}
+  - {op: stroke, src: walk_rail, width: 0.2, dash: [0.6, 1.4], color: ink}
+
+  # ---- ground level: the Court floor and both aisles
+  - {op: rect, out: court_floor, x: 30, y: 20, w: 80, h: 140}
+  - {op: rect, out: west_aisle, x: 10, y: 20, w: 20, h: 140}
+  - {op: rect, out: east_aisle, x: 110, y: 20, w: 20, h: 140}
+  - {op: union, out: ground, of: [court_floor, west_aisle, east_aisle]}
+  - {op: rasterize, out: ground_m, src: ground}
+  - {op: fill, mask: ground_m, material: crystal_floor, id: ground_floor}
+  - {op: rasterize, out: court_m, src: court_floor}
+  - {op: noise, out: glow_n, scale: 22, id: glow}
+  - {op: field_to_mask, out: glow_m, src: glow_n, lo: 0.0, hi: 0.9}
+  - {op: combine, out: glow_m, of: [glow_m, court_m], mode: min}
+  - {op: fill, mask: glow_m, color: "#a8668f", opacity: 0.3, blend: screen, id: floor_glow}
+  - {op: occlusion, mask: ground_m, falloff: 2.5, strength: 0.45}
+  - {op: shadow, mask: ground_m, mode: inner, width: 5, offset: [0.8, 1.0], strength: 0.5, blur: 0.6}
+
+  # ---- the east stair (12 ft up to gallery level) and the start of the cleared corridor to B9
+  - {op: rect, out: east_stair, x: 130, y: 106, w: 10, h: 24}
+  - {op: rect, out: cleared_corridor_start, x: 130, y: 88, w: 10, h: 18}
+  - {op: union, out: stairwell, of: [east_stair, cleared_corridor_start]}
+  - {op: rasterize, out: stairwell_m, src: stairwell}
+  - {op: fill, mask: stairwell_m, material: crystal_floor, id: stairwell_floor}
+  - {op: stairs, x: 130, y: 106, w: 10, h: 24, down: s, color: "#5e3554", shade: 0.5}
+  - {op: rasterize, out: corridor_m, src: cleared_corridor_start}
+  - {op: fill, mask: corridor_m, color: "#e3c9ea", opacity: 0.18, id: upper_tint}
+
+  # ---- the two gallery stairs, one in each aisle at the main-doors end (12 ft up)
+  - {op: stairs, x: 10.5, y: 133, w: 8, h: 24, down: s, color: "#5e3554", shade: 0.5}
+  - {op: stairs, x: 121.5, y: 133, w: 8, h: 24, down: s, color: "#5e3554", shade: 0.5}
+
+  # ---- the dais (3 ft high) and the high table
+  - {op: rect, out: dais, x: 55, y: 25, w: 30, h: 15}
+  - {op: rasterize, out: dais_m, src: dais}
+  - {op: shadow, mask: dais_m, mode: drop, offset: [0.6, 0.9], blur: 0.6, strength: 0.6, color: shadow}
+  - {op: fill, mask: dais_m, material: crystal_wall, id: dais_floor}
+  - {op: fill, mask: dais_m, color: "#d48ab8", opacity: 0.25, blend: screen}
+  - {op: stroke, src: dais, weight: medium}
+  - {op: rect, out: high_table, x: 60, y: 28.5, w: 20, h: 3.5}
+  - {op: rasterize, out: table_m, src: high_table}
+  - {op: fill, mask: table_m, color: "#e8d6e4", id: table_cloth}
+  - {op: stroke, src: high_table, weight: fine}
+
+  # ---- the walls: one shell round the Court and aisles, the stairwell, the east passage
+  - {op: union, out: shell_floor, of: [ground, stairwell]}
+  - {op: wall, src: shell_floor, name: shell, thickness: 3, material: crystal_wall, weight: bold,
+     outer_weight: heavy, ink: "#0c070b"}
+  # the stairwell's west wall (door at the foot of the stair) and the walled passage under the east gallery
+  - {op: path, out: stair_wall, points: [[130, 88], [130, 130]], line: true}
+  - {op: partition, src: stair_wall, name: stair_w, thickness: 1.5, material: crystal_wall, ink: "#120a10"}
+  - {op: path, out: passage_walls, points: [[110, 120], [130, 120]], line: true}
+  - {op: partition, src: passage_walls, name: passage_n, thickness: 1, material: crystal_wall, ink: "#120a10"}
+  - {op: path, out: passage_walls_s, points: [[110, 130], [130, 130]], line: true}
+  - {op: partition, src: passage_walls_s, name: passage_s, thickness: 1, material: crystal_wall, ink: "#120a10"}
+  - {op: path, out: east_doors_line, points: [[110, 120], [110, 130]], line: true}
+  - {op: partition, src: east_doors_line, name: east_doors, thickness: 0.6, material: crystal_wall, ink: "#120a10"}
+
+  # ---- doors (double unless the text says otherwise)
+  - {op: double_door, wall: shell, at: [70, 160], width: 10, color: "#e9cfe0"}          # main doors (court.main_doors)
+  - {op: double_door, wall: shell, at: [43, 20], width: 10, color: "#e9cfe0"}           # garden doors
+  - {op: double_door, wall: shell, at: [97, 20], width: 10, color: "#e9cfe0"}
+  - {op: double_door, wall: shell, at: [10, 99], width: 10, color: "#e9cfe0"}           # to B4, west_doors.b4
+  - {op: door, wall: shell, at: [10, 61.5], width: 5, color: "#e9cfe0"}                 # service door to B10
+  - {op: double_door, wall: east_doors, at: [110, 125], width: 10, color: "#e9cfe0"}    # the east doors
+  - {op: door, wall: stair_w, at: [130, 125], width: 8, color: "#e9cfe0"}               # foot of the east stair
+
+  # ---- piers carrying the galleries: seven a side on the floor's edge lines
+  - {op: rect, out: p1, x: 29, y: 151, w: 2, h: 2}
+  - {op: rect, out: p2, x: 29, y: 133, w: 2, h: 2}
+  - {op: rect, out: p3, x: 29, y: 112, w: 2, h: 2}
+  - {op: rect, out: p4, x: 29, y: 93, w: 2, h: 2}
+  - {op: rect, out: p5, x: 29, y: 74, w: 2, h: 2}
+  - {op: rect, out: p6, x: 29, y: 55, w: 2, h: 2}
+  - {op: rect, out: p7, x: 29, y: 36, w: 2, h: 2}
+  - {op: rect, out: q1, x: 109, y: 151, w: 2, h: 2}
+  - {op: rect, out: q2, x: 109, y: 133, w: 2, h: 2}
+  - {op: rect, out: q3, x: 109, y: 112, w: 2, h: 2}
+  - {op: rect, out: q4, x: 109, y: 93, w: 2, h: 2}
+  - {op: rect, out: q5, x: 109, y: 74, w: 2, h: 2}
+  - {op: rect, out: q6, x: 109, y: 55, w: 2, h: 2}
+  - {op: rect, out: q7, x: 109, y: 36, w: 2, h: 2}
+  - {op: union, out: piers, of: [p1, p2, p3, p4, p5, p6, p7, q1, q2, q3, q4, q5, q6, q7]}
+  - {op: rasterize, out: piers_m, src: piers}
+  - {op: shadow, mask: piers_m, mode: drop, offset: [0.5, 0.7], blur: 0.4, strength: 0.6}
+  - {op: fill, mask: piers_m, material: crystal_wall, id: pier_fill}
+  - {op: stroke, src: piers, weight: fine, color: "#120a10"}
+
+  # ---- overhead: the banquet galleries over the aisles and the musicians' gallery over the main doors
+  - {op: rect, out: musicians_gallery, x: 30, y: 145, w: 80, h: 15}
+  - {op: union, out: overhead, of: [west_aisle, east_aisle, musicians_gallery]}
+  - {op: rasterize, out: overhead_m, src: overhead}
+  - {op: fill, mask: overhead_m, color: "#e3c9ea", opacity: 0.08}
+  - {op: stroke, src: overhead, width: 0.18, dash: [1.5, 0.8], color: "#e8c4dc", opacity: 0.85}
+  # the gallery rails, 12 ft above the floor's long sides (broken for the east doors)
+  - {op: path, out: rail_w, points: [[30, 20], [30, 160]], line: true}
+  - {op: path, out: rail_e1, points: [[110, 20], [110, 120]], line: true}
+  - {op: path, out: rail_e2, points: [[110, 130], [110, 160]], line: true}
+  - {op: union, out: rails, of: [rail_w, rail_e1, rail_e2]}
+  - {op: stroke, src: rails, width: 0.35, color: "#e6b8d4", double: 0.6}
+
+  # ---- ward-points: four on the dais (Table V-2), two beside the main doors (Table V-3)
+  - {op: polygon, out: wd1, points: [[56.8, 29.6], [57.45, 30.25], [56.8, 30.9], [56.15, 30.25]]}
+  - {op: polygon, out: wd2, points: [[59.2, 29.6], [59.85, 30.25], [59.2, 30.9], [58.55, 30.25]]}
+  - {op: polygon, out: wd3, points: [[80.8, 29.6], [81.45, 30.25], [80.8, 30.9], [80.15, 30.25]]}
+  - {op: polygon, out: wd4, points: [[83.2, 29.6], [83.85, 30.25], [83.2, 30.9], [82.55, 30.25]]}
+  - {op: polygon, out: wd5, points: [[62, 156.95], [62.65, 157.6], [62, 158.25], [61.35, 157.6]]}
+  - {op: polygon, out: wd6, points: [[78, 156.95], [78.65, 157.6], [78, 158.25], [77.35, 157.6]]}
+  - {op: union, out: wards, of: [wd1, wd2, wd3, wd4, wd5, wd6]}
+  - {op: rasterize, out: wards_m, src: wards}
+  - {op: fill, mask: wards_m, color: "#ffd2ec"}
+  - {op: stroke, src: wards, weight: fine, color: "#120a10"}
+  - {op: light, at: [70, 30], radius: 30, color: "#f0a8d4", intensity: 0.7, glow: true, glow_radius: 14}
+
+  # ---- grid, keys, frame
+  - {op: combine, out: walkable, of: [ground_m, stairwell_m, walk_m], mode: max}
+  - {op: grid, mask: walkable, color: "#120a10", alpha: 0.25, weight: 0.07}
+  - {op: label, text: B2, at: [70, 84], size: 6, bold: true, color: "#f6e3ef", halo: "#2a1828"}
+  - {op: label, text: B3, at: [20, 88], size: 4.5, bold: true, color: "#f6e3ef", halo: "#2a1828"}
+  - {op: label, text: B3, at: [120, 88], size: 4.5, bold: true, color: "#f6e3ef", halo: "#2a1828"}
+  - {op: vignette, strength: 0.25}
+  - {op: frame, margin: 0.5, weight: 0.4, color: "#120a10"}
+  - {op: compass, at: [141, 150], size: 9, color: "#f3d9ea", fill: "#3a2436"}
+  - {op: scale_bar, at: [138, 166], size: 2.4, color: "#f3d9ea", text: "1 square = 5 ft"}

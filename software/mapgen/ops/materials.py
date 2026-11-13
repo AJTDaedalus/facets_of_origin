@@ -34,6 +34,11 @@ class RampNoiseM(_M):
     octaves: int = PField(4, ge=1, le=8)
     contrast: float = PField(1.0, gt=0)
     kind: Literal["fbm", "ridged", "billow"] = "fbm"
+    veins: float = PField(0.0, ge=0, le=1)
+    vein_color: Any = None
+    vein_dark: Any = None
+    vein_scale: float = PField(6.0, gt=0)
+    vein_width: float = PField(0.06, gt=0, le=0.5)
 
 
 class DirtM(RampNoiseM):
@@ -217,6 +222,15 @@ def _render(ctx, name, m, mask, seed):
         n = fbm(shape, fr.px(m.scale), seed, m.octaves, kind=m.kind)
         t = np.clip(0.5 + 0.5 * n * m.contrast, 0, 1)
         rgb = ramp(_cols(st, m.colors), t)
+        if m.veins > 0:
+            for k, (cname, sc) in enumerate(((m.vein_color, 1.0), (m.vein_dark, 0.55))):
+                if cname is None:
+                    continue
+                v = fbm(shape, fr.px(m.vein_scale * sc), seed + 40 + k, 4, kind="fbm")
+                line = np.clip(1 - np.abs(v) / m.vein_width, 0, 1) ** 1.5
+                fade = 0.5 + 0.5 * fbm(shape, fr.px(m.vein_scale * 3), seed + 50 + k, 2)
+                a = (line * np.clip(fade * 1.4 - 0.2, 0, 1) * m.veins)[..., None]
+                rgb = rgb * (1 - a) + resolve_color(st, cname)[:3] * a
         if m.type == "dirt" and m.speckle > 0:
             rng = np.random.default_rng(seed + 1)
             dots = (rng.random(shape) < m.speckle * 0.15).astype(np.float32)

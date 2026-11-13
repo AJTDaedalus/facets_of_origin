@@ -121,9 +121,46 @@ def wall(ctx, p, into, src, exclude=None):
             w = _width_ft(ctx, type("W", (), {"width": None, "weight": p.weight})())
             edge = shapely.unary_union(kept) if kept else LineString()
             composite_patch(into.data, stroke_geometry_alpha(ctx, edge, w, patch=True), inkc)
-    ctx.collector.walls[p.name] = {"floor": floor, "band": band, "thickness": t, "lines": kept}
+    ctx.collector.walls[p.name] = {"floor": floor, "band": band, "thickness": t, "lines": kept, "d0": 0.0}
     if p.emit_los:
         ctx.collector.los.extend(kept)
+
+
+class PartitionP(ParamModel):
+    into: Ref = "canvas"
+    src: Ref
+    name: str = "partition"
+    thickness: PosFt = 0.75
+    fill: Any = "wall"
+    material: str | None = None
+    weight: str | None = "medium"
+    ink: Any = "ink"
+    emit_los: bool = True
+
+
+@op("partition", params=PartitionP, inputs={"into": Image, "src": Geometry}, group="5 semantic")
+def partition(ctx, p, into, src):
+    """An interior wall along a line (or a polygon's outline), centred on it, `thickness` feet. Emits LOS and registers `name`, so doors can be set in it."""
+    lines = [LineString(l.coords) for l in lines_of(src.geom)]
+    if not lines:
+        raise RecipeError("partition needs a line or polygon")
+    t = p.thickness
+    geom = shapely.unary_union(lines)
+    band = polygonal(geom.buffer(t / 2, cap_style=2, join_style=2))
+    patch = rasterize_patch(ctx.frame, band)
+    if p.material:
+        m = np.zeros(ctx.frame.shape, np.float32)
+        m[patch.slices] = patch.alpha
+        composite_inplace(into.data, render_material(ctx, p.material, m, ctx.seed), m)
+    else:
+        composite_patch(into.data, patch, col(ctx, p.fill, "wall")[:3])
+    if p.weight:
+        w = _width_ft(ctx, type("W", (), {"width": None, "weight": p.weight})())
+        composite_patch(into.data, stroke_geometry_alpha(ctx, band, w, patch=True), resolve_color(ctx.style, p.ink)[:3])
+    ctx.collector.walls[p.name] = {"floor": None, "line": geom, "band": band, "thickness": t, "lines": lines,
+                                   "d0": -t / 2}
+    if p.emit_los:
+        ctx.collector.los.extend(lines)
 
 
 # ---------- openings ----------
@@ -145,7 +182,7 @@ def _locate(ctx, p, default_w):
     if rec is None:
         raise RecipeError(f"wall '{p.wall}' is not defined (give the wall op name: {p.wall})")
     floor, t = rec["floor"], rec["thickness"]
-    bnd = floor.boundary
+    bnd = floor.boundary if floor is not None else rec["line"]
     P = SPoint(p.at)
     d = bnd.project(P)
     q = np.array(bnd.interpolate(d).coords[0])
@@ -156,15 +193,22 @@ def _locate(ctx, p, default_w):
         tng = np.array([1.0, 0.0])
     tng = tng / np.linalg.norm(tng)
     nrm = np.array([-tng[1], tng[0]])
-    if floor.contains(SPoint(q + nrm * 0.1)):
+    if floor is not None and floor.contains(SPoint(q + nrm * 0.1)):
         nrm = -nrm
     w = p.width or default_w
     return rec, q, tng, nrm, w, t
 
 
+def _draw_q(rec, q, nrm):
+    return q + nrm * rec.get("d0", 0.0)
+
+
 def _rect(q, tng, nrm, w, d0, d1):
     hw = tng * w / 2
     return Polygon([q - hw + nrm * d0, q + hw + nrm * d0, q + hw + nrm * d1, q - hw + nrm * d1])
+
+
+
 
 
 def _cut_los(ctx, q, tng, w):
@@ -200,8 +244,9 @@ def _ink(ctx, img, g, width, color="ink"):
 def door(ctx, p, into):
     """A door in a named wall, snapped to the wall edge nearest `at` (default 5 ft wide = one square... use 3–5). Draws a door leaf across the wall, cuts the LOS and emits a portal."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 4.0)
-    leaf = _rect(q, tng, nrm, w * 0.9, t * 0.2, t * 0.8)
-    gap = _rect(q, tng, nrm, w, -0.02, t + 0.02)
+    dq = _draw_q(rec, q, nrm)
+    leaf = _rect(dq, tng, nrm, w * 0.9, t * 0.2, t * 0.8)
+    gap = _rect(dq, tng, nrm, w, -0.02, t + 0.02)
     _fill_poly(ctx, into.data, gap, col(ctx, p.floor_color or p.color or "door", "door"))
     _fill_poly(ctx, into.data, leaf, col(ctx, p.color or "door", "door"))
     _ink(ctx, into.data, leaf, 0.12, p.ink)
@@ -213,10 +258,11 @@ def door(ctx, p, into):
 def double_door(ctx, p, into):
     """Two door leaves meeting in the middle (default 8 ft); one portal."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 8.0)
-    gap = _rect(q, tng, nrm, w, -0.02, t + 0.02)
+    dq = _draw_q(rec, q, nrm)
+    gap = _rect(dq, tng, nrm, w, -0.02, t + 0.02)
     _fill_poly(ctx, into.data, gap, col(ctx, p.floor_color or p.color or "door", "door"))
     for s in (-1, 1):
-        leaf = _rect(q + tng * s * w / 4, tng, nrm, w * 0.45, t * 0.2, t * 0.8)
+        leaf = _rect(dq + tng * s * w / 4, tng, nrm, w * 0.45, t * 0.2, t * 0.8)
         _fill_poly(ctx, into.data, leaf, col(ctx, p.color or "door", "door"))
         _ink(ctx, into.data, leaf, 0.12, p.ink)
     _cut_los(ctx, q, tng, w)
@@ -228,7 +274,7 @@ def secret_door(ctx, p, into):
     """A secret door: the wall stays drawn, an `S` marks it; emits a closed, secret portal."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 4.0)
     from .overlay import draw_text
-    draw_text(ctx, into.data, "S", q + nrm * t / 2, max(t * 1.6, 1.6), col(ctx, p.color or "secret", "secret"),
+    draw_text(ctx, into.data, "S", _draw_q(rec, q, nrm) + nrm * t / 2, max(t * 1.6, 1.6), col(ctx, p.color or "secret", "secret"),
               bold=True, halo=None)
     _cut_los(ctx, q, tng, w)
     _portal(ctx, "secret_door", q, tng, w, True, secret=True)
@@ -238,11 +284,12 @@ def secret_door(ctx, p, into):
 def portcullis(ctx, p, into):
     """Bars across a wall gap (a row of dots); sight passes, so the LOS is cut and a closed portal emitted."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 5.0)
-    gap = _rect(q, tng, nrm, w, -0.02, t + 0.02)
+    dq = _draw_q(rec, q, nrm)
+    gap = _rect(dq, tng, nrm, w, -0.02, t + 0.02)
     _fill_poly(ctx, into.data, gap, col(ctx, p.floor_color or "door", "door"))
     n = max(3, int(w / 0.7))
     for i in range(n):
-        c = q - tng * w / 2 + tng * w * (i + 0.5) / n + nrm * t / 2
+        c = dq - tng * w / 2 + tng * w * (i + 0.5) / n + nrm * t / 2
         _fill_poly(ctx, into.data, SPoint(c).buffer(0.18), resolve_color(ctx.style, p.ink))
     _cut_los(ctx, q, tng, w)
     _portal(ctx, "portcullis", q, tng, w, True)
@@ -252,10 +299,11 @@ def portcullis(ctx, p, into):
 def window(ctx, p, into):
     """A window: a pale pane across the wall with a centre line. Walls still block movement and sight in VTT data."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 3.0)
-    pane = _rect(q, tng, nrm, w, t * 0.25, t * 0.75)
+    dq = _draw_q(rec, q, nrm)
+    pane = _rect(dq, tng, nrm, w, t * 0.25, t * 0.75)
     _fill_poly(ctx, into.data, pane, col(ctx, p.color or "window", "window"))
     _ink(ctx, into.data, pane, 0.08, p.ink)
-    _ink(ctx, into.data, LineString([q - tng * w / 2 + nrm * t / 2, q + tng * w / 2 + nrm * t / 2]), 0.06, p.ink)
+    _ink(ctx, into.data, LineString([dq - tng * w / 2 + nrm * t / 2, dq + tng * w / 2 + nrm * t / 2]), 0.06, p.ink)
     ctx.collector.legend.setdefault("window", "window")
 
 
@@ -263,14 +311,15 @@ def window(ctx, p, into):
 def opening(ctx, p, into):
     """An open doorway or arch: the wall is cut and filled with floor colour/material; LOS cut, no portal."""
     rec, q, tng, nrm, w, t = _locate(ctx, p, 5.0)
-    gap = _rect(q, tng, nrm, w, -0.05, t + 0.1)
+    dq = _draw_q(rec, q, nrm)
+    gap = _rect(dq, tng, nrm, w, -0.05, t + 0.1)
     if p.floor_material:
         m = rasterize_geom(ctx.frame, gap)
         composite_inplace(into.data, render_material(ctx, p.floor_material, m, ctx.seed), m)
     else:
         _fill_poly(ctx, into.data, gap, col(ctx, p.floor_color or "floor", "door"))
     for s in (-1, 1):
-        e = q + tng * s * w / 2
+        e = dq + tng * s * w / 2
         _ink(ctx, into.data, LineString([e, e + nrm * t]), 0.14, p.ink)
     _cut_los(ctx, q, tng, w)
 

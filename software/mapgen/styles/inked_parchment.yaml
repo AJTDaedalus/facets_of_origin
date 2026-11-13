@@ -47,10 +47,11 @@ materials:
   earth:          {type: dirt, colors: ["#d2c7ab", "#e6dfca", "#f6f1e3"], scale: 18, octaves: 5, grain: 0.05, speckle: 0.05}
   dirt_path:      {type: dirt, colors: ["#cbb995", "#ddcfae", "#ebe2c9"], scale: 6, grain: 0.06, speckle: 0.08}
   water:          {type: water, shallow: water_shallow, deep: water_deep, depth: 4.0, ripples: 1.1, grain: 0.03}
-  crystal_floor:  {type: ramp_noise, colors: ["#4a2c45", "#6b3a5e", "#8a4a72"], scale: 10, octaves: 5, kind: ridged,
-                   contrast: 0.9, grain: 0.04}
-  crystal_wall:   {type: ramp_noise, colors: ["#2c1a2c", "#4b2645", "#7a3c66"], scale: 4, octaves: 4, kind: ridged,
-                   contrast: 1.1, grain: 0.03}
+  crystal_floor:  {type: ramp_noise, colors: ["#3b2c39", "#594556", "#7a6274", "#9b8394"], scale: 9, octaves: 5, kind: ridged,
+                   contrast: 1.3, grain: 0.09, veins: 0.95, vein_color: "#f4dcea", vein_dark: "#140c12",
+                   vein_scale: 5, vein_width: 0.07}
+  crystal_wall:   {type: ramp_noise, colors: ["#1f141e", "#3a2636", "#5e3f57"], scale: 3, octaves: 4, kind: ridged,
+                   contrast: 1.2, grain: 0.05, veins: 0.6, vein_color: "#c99ab8", vein_scale: 2.5, vein_width: 0.08}
   garden:         {type: grass, colors: ["#506b3a", "#678448", "#7f9a59"], scale: 8, speckle: 0.08, tufts: 0.3}
 
 defaults:
