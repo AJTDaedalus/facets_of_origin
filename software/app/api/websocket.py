@@ -1459,12 +1459,34 @@ def _scan_maps() -> dict[str, Path]:
     return found
 
 
-def _map_title(path: Path) -> str:
+def _map_meta(path: Path) -> dict:
     meta = path.with_name(path.name[: -len(".dd2vtt")] + ".meta.json")
     try:
-        return str(json.loads(meta.read_text()).get("title") or path.stem)
+        data = json.loads(meta.read_text())
+        return data if isinstance(data, dict) else {}
     except (OSError, ValueError):
-        return path.stem
+        return {}
+
+
+def _map_title(path: Path) -> str:
+    return str(_map_meta(path).get("title") or path.stem)
+
+
+def _fog_areas(meta: dict) -> dict:
+    """Named shapes with area from the recipe's meta.json, as [x0, y0, x1, y1] in squares."""
+    fps = float(meta.get("feet_per_square") or 5) or 5
+    out = {}
+    for name, g in (meta.get("geometry") or {}).items():
+        try:
+            if float(g.get("area", 0)) <= 0:
+                continue
+            b = [round(float(v) / fps, 3) for v in g["bounds"]]
+        except (TypeError, ValueError, KeyError, AttributeError):
+            continue
+        out[str(name)[:64]] = b
+        if len(out) >= 60:
+            break
+    return out
 
 
 def _float(msg: dict, key: str, lo: float, hi: float) -> float:
@@ -1514,7 +1536,9 @@ async def _map_set(ctx: Ctx) -> None:
         "id": mid, "title": _map_title(path),
         "squares": {"x": res["map_size"]["x"], "y": res["map_size"]["y"]},
         "pixels_per_grid": res.get("pixels_per_grid", 70),
-        "image": "data:image/png;base64," + image, "tokens": {}}
+        "image": "data:image/png;base64," + image, "tokens": {},
+        # Fog is a visual screen only: the whole image still reaches every client.
+        "fog": {"enabled": False, "revealed": [], "areas": _fog_areas(_map_meta(path))}}
     await manager.broadcast(ctx.session_id, {"type": "map_state", "map": ctx.session.active_map})
 
 
@@ -1553,3 +1577,33 @@ async def _token_remove(ctx: Ctx) -> None:
     if ctx.session.active_map is None:
         raise WSError("No map on the board.")
     await _drop_token(ctx, _str(ctx.msg, "token", 200))
+
+
+def _board(ctx: Ctx) -> dict:
+    if ctx.session.active_map is None:
+        raise WSError("No map on the board.")
+    return ctx.session.active_map
+
+
+async def _push_fog(ctx: Ctx) -> None:
+    await manager.broadcast(ctx.session_id, {"type": "fog_state", "fog": ctx.session.active_map["fog"]})
+
+
+@on("fog_set", mm_only=True)
+async def _fog_set(ctx: Ctx) -> None:
+    """Turn the fog on or off for the map on the board (visual only; off by default)."""
+    _board(ctx)["fog"]["enabled"] = _bool(ctx.msg, "enabled")
+    await _push_fog(ctx)
+
+
+@on("fog_reveal", mm_only=True)
+async def _fog_reveal(ctx: Ctx) -> None:
+    """Reveal or hide one named area of the map (from the recipe's named shapes)."""
+    fog = _board(ctx)["fog"]
+    area = _str(ctx.msg, "area", 64)
+    if area not in fog["areas"]:
+        raise WSError(f"No area {area!r} on this map.")
+    shown = set(fog["revealed"])
+    (shown.add if _bool(ctx.msg, "revealed") else shown.discard)(area)
+    fog["revealed"] = sorted(shown)
+    await _push_fog(ctx)

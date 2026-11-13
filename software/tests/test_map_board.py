@@ -24,7 +24,10 @@ def maps_dir(tmp_path, monkeypatch):
         "format": 0.3, "resolution": {"map_origin": {"x": 0, "y": 0}, "map_size": {"x": 16, "y": 12},
                                       "pixels_per_grid": 70},
         "line_of_sight": [], "portals": [], "lights": [], "image": img}))
-    (out / "cellar.meta.json").write_text(json.dumps({"title": "The Bandit Cellar"}))
+    (out / "cellar.meta.json").write_text(json.dumps({"title": "The Bandit Cellar", "geometry": {
+        "guard_room": {"type": "Polygon", "bounds": [10, 10, 30, 25], "area": 300.0},
+        "storeroom": {"type": "Polygon", "bounds": [50, 10, 70, 25], "area": 300.0},
+        "a_line": {"type": "LineString", "bounds": [0, 0, 5, 0], "area": 0.0}}}))
     (tmp_path / ".git" / "mapgen").mkdir(parents=True)
     (tmp_path / ".git" / "mapgen" / "hidden.dd2vtt").write_text("{}")
     monkeypatch.setattr(settings, "maps_dir", tmp_path)
@@ -137,3 +140,37 @@ class TestCSP:
         assert "img-src 'self' data:" in csp
         script = [d for d in csp.split(";") if d.strip().startswith("script-src")][0]
         assert "data:" not in script and "default-src 'self'" in csp
+
+
+
+class TestFog:
+    def test_areas_come_from_named_shapes(self, t):
+        set_map(t)
+        areas = t.session.active_map["fog"]["areas"]
+        assert set(areas) == {"guard_room", "storeroom"}          # lines have no area
+        assert areas["guard_room"] == [2.0, 2.0, 6.0, 5.0]         # feet -> 5-ft squares
+
+    def test_fog_off_by_default_then_on(self, t):
+        set_map(t)
+        assert t.session.active_map["fog"]["enabled"] is False
+        call(t.mm, {"type": "fog_set", "enabled": True})
+        m = [x for x in call(t.p1) if x["type"] == "fog_state"][-1]
+        assert m["fog"]["enabled"] is True
+
+    def test_reveal_and_hide(self, t):
+        set_map(t)
+        call(t.mm, {"type": "fog_reveal", "area": "guard_room", "revealed": True})
+        assert t.session.active_map["fog"]["revealed"] == ["guard_room"]
+        call(t.mm, {"type": "fog_reveal", "area": "guard_room", "revealed": False})
+        assert t.session.active_map["fog"]["revealed"] == []
+
+    def test_unknown_area(self, t):
+        set_map(t)
+        assert "No area" in error_text(call(t.mm, {"type": "fog_reveal", "area": "attic", "revealed": True}))
+
+    def test_players_cannot_lift_fog(self, t):
+        set_map(t)
+        assert "Mirror Master" in error_text(call(t.p1, {"type": "fog_set", "enabled": False}))
+
+    def test_fog_needs_a_map(self, t):
+        assert "No map" in error_text(call(t.mm, {"type": "fog_set", "enabled": True}))

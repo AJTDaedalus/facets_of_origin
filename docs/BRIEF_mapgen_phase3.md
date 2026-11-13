@@ -67,7 +67,7 @@ default below changes with a one-line edit if the owner answers differently:
   handlers removes it cleanly.
 - Q2 (whose tokens?): both PCs and active enemies; players move only their own
   token, and an enemy's token leaves when it leaves the tracker.
-- Q3 (fog?): **none**. Not built, pending the answer.
+- Q3 (fog?): **opt-in, room by room, off by default** (W4). It's a visual screen, not hidden data; true server-side masking would be a later step if wanted.
 - Q4 (wider 5e brief?): unanswered. The board is system-neutral plumbing.
 
 Details: `docs/LOG_mapgen.md` (Phase 3 v1).

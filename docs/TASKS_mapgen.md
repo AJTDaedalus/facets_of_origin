@@ -258,4 +258,8 @@ the engine (DESIGN §8). City maps follow region maps.
   remove. CSP allows `img-src 'self' data:` for the embedded map image (pinned by a test).
 - [x] **W3 Browser test.** `tests/e2e/test_ui_flows.py::test_map_board_shared_and_tokens_drag`:
   real Chromium, the MM shows a map, a player places and drags their token, the MM sees it move.
-- [ ] **W4 Fog of war / room reveal.** Waits for owner Q3.
+- [x] **W4 Fog of war / room reveal (opt-in default).** Off until the MM turns it
+  on; areas are the recipe's named shapes (from meta.json, converted to squares);
+  the MM reveals or hides each one; players see darkness elsewhere, and foes in
+  the fog are hidden from them. **Visual only:** the whole image still reaches
+  every client. *(6 WS tests + the e2e flow)*

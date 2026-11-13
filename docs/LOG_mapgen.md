@@ -299,3 +299,17 @@ Built as a minimal, rules-free v1 on reversible defaults (see the status note in
   a test), and the e2e test now requires the image to actually decode.
 - **Tests:** test_map_board.py 18; e2e 13 passed (including the new board flow);
   **full suite 2176 passed** (excluding e2e).
+
+## 2026-11-13 — Phase 3 W4: opt-in fog by named area
+
+- WS `fog_set` and `fog_reveal` (MM only); `active_map.fog` = {enabled (default
+  off), revealed, areas}. Areas are the recipe's named shapes with area, from
+  `meta.json`, in squares. Client: SVG fog with holes for revealed areas
+  (opaque for players, translucent for the MM), foes in fog hidden from
+  players, MM toggle and area checkboxes.
+- **Bug caught by the browser test:** the toolbox already used a `data-reveal`
+  attribute, so the MM's toolbox wiring grabbed the fog checkboxes and threw a
+  page error. Renamed to `data-fog-area`.
+- **Limitation (documented):** fog is visual only; the full image reaches every
+  client.
+- Tests: board 24; e2e 13; **full suite 2184 passed**.

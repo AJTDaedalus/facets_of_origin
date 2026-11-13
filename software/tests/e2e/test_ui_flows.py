@@ -356,6 +356,15 @@ def test_map_board_shared_and_tokens_drag(table):
         arg=before, timeout=T)
     # players cannot drag someone else's token: Mordai's (if placed) is not .can on Zahna's page
     expect(z.locator(".map-token.can")).to_have_count(1)
+    # fog (opt-in, visual only): the MM turns it on and reveals the room
+    mm.click("[data-fog=toggle]")
+    expect(z.locator(".map-fog")).to_be_attached(timeout=T)
+    expect(z.locator(".map-fog mask rect")).to_have_count(1)
+    mm.check("[data-fog-area=room]")
+    expect(z.locator(".map-fog mask rect")).to_have_count(2, timeout=T)
+    _shot(z, "map_board_fog_player")
+    mm.click("[data-fog=toggle]")
+    expect(z.locator(".map-fog")).to_have_count(0, timeout=T)
     _shot(mm, "map_board_mm")
 
 

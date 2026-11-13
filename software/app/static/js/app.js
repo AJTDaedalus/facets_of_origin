@@ -357,6 +357,7 @@ const HANDLE = {
   map_state(m) { state.map = m.map; if (m.map) feedSys(`The map is up: ${esc(m.map.title)}.`); refresh(['play']); },
   token_moved(m) { if (state.map) { state.map.tokens[m.token] = { x: m.x, y: m.y }; refresh(['play']); } },
   token_removed(m) { if (state.map) { delete state.map.tokens[m.token]; refresh(['play']); } },
+  fog_state(m) { if (state.map) { state.map.fog = m.fog; refresh(['play']); } },
   enemy_library(m) { state.library = m.library; notify(m.loaded.length ? `Loaded ${m.loaded.length} Bestiary cards.` : 'The library already holds the Bestiary.', 'success'); refresh(); },
   enemy_damage(m) { if (m.result.bloodied_now) notify(`${m.name} is Bloodied.`, 'warn'); },
   danger(m) { state.danger = m.danger; refresh(['play']); },

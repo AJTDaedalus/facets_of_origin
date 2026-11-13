@@ -24,8 +24,15 @@ function mapBoardHtml() {
     return mm ? `<div class="panel"><h3>Map</h3>${controls}<div class="small muted">No map up. Render one with <code>python -m mapgen render</code>, then pick it here.</div></div>` : '';
   }
   const placed = m.tokens || {};
+  const fog = m.fog || { enabled: false, revealed: [], areas: {} };
+  const inReveal = p => fog.revealed.some(a => {
+    const b = fog.areas[a];
+    return b && p.x >= b[0] && p.x <= b[2] && p.y >= b[1] && p.y <= b[3];
+  });
+  // Players don't see foes standing in the fog (a visual screen, not hidden data).
+  const visible = t => mm || !fog.enabled || t.kind !== 'foe' || inReveal(placed[t.id]);
   const toks = mapTokens();
-  const onBoard = toks.filter(t => placed[t.id]).map(t => {
+  const onBoard = toks.filter(t => placed[t.id] && visible(t)).map(t => {
     const p = placed[t.id];
     const left = (p.x / m.squares.x) * 100;
     const top = (p.y / m.squares.y) * 100;
@@ -37,8 +44,19 @@ function mapBoardHtml() {
   const tray = toks.filter(t => !placed[t.id] && (mm || t.mine)).map(t =>
     `<button class="btn small" data-place="${esc(t.id)}">Place ${esc(t.label)}</button>`).join('');
   const hint = mm ? 'Drag tokens. Shift-click a token to take it off the board.' : 'Drag your own token.';
-  return `<div class="panel map-panel"><h3>${esc(m.title)}</h3>${controls}
-    <div class="map-board" data-board><img src="${m.image}" alt="${esc(m.title)}" draggable="false">${onBoard}</div>
+  const holes = fog.revealed.map(a => fog.areas[a]).filter(Boolean)
+    .map(b => `<rect x="${b[0]}" y="${b[1]}" width="${b[2] - b[0]}" height="${b[3] - b[1]}" fill="black"/>`).join('');
+  const fogSvg = fog.enabled ? `<svg class="map-fog" viewBox="0 0 ${m.squares.x} ${m.squares.y}" preserveAspectRatio="none">
+      <defs><mask id="fogmask"><rect width="100%" height="100%" fill="white"/>${holes}</mask></defs>
+      <rect width="100%" height="100%" fill="#0b0c10" opacity="${mm ? 0.45 : 0.96}" mask="url(#fogmask)"/></svg>` : '';
+  const areaNames = Object.keys(fog.areas || {});
+  const fogControls = mm ? `<div class="row gap wrap map-fog-controls">
+      <button class="btn small ${fog.enabled ? 'on' : ''}" data-fog="toggle">Fog: ${fog.enabled ? 'on' : 'off'}</button>
+      ${fog.enabled ? areaNames.map(a => `<label class="chip"><input type="checkbox" data-fog-area="${esc(a)}" ${fog.revealed.includes(a) ? 'checked' : ''}> ${esc(a.replace(/_/g, ' '))}</label>`).join('') : ''}
+      ${fog.enabled && !areaNames.length ? '<span class="small muted">This map has no named areas to reveal (name shapes with <code>out</code> in its recipe).</span>' : ''}
+    </div>` : '';
+  return `<div class="panel map-panel"><h3>${esc(m.title)}</h3>${controls}${fogControls}
+    <div class="map-board" data-board><img src="${m.image}" alt="${esc(m.title)}" draggable="false">${fogSvg}${onBoard}</div>
     ${tray ? `<div class="row gap wrap map-tray">${tray}</div>` : ''}
     <div class="small muted">${hint}</div></div>`;
 }
@@ -53,6 +71,10 @@ function wireMapBoard(root) {
   $$('[data-ui="map_pick"]', root).forEach(s => s.onchange = () => { ui.map_pick = s.value; });
   const m = state.map;
   if (!m) return;
+  $$('[data-fog]', root).forEach(b => b.onclick = () =>
+    send({ type: 'fog_set', enabled: !(m.fog && m.fog.enabled) }));
+  $$('[data-fog-area]', root).forEach(c => c.onchange = () =>
+    send({ type: 'fog_reveal', area: c.dataset.fogArea, revealed: c.checked }));
   $$('[data-place]', root).forEach(b => b.onclick = () =>
     send({ type: 'token_move', token: b.dataset.place, x: m.squares.x / 2, y: m.squares.y / 2 }));
   const board = $('[data-board]', root);
