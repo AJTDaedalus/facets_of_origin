@@ -45,7 +45,7 @@ steps:
      size: 11, id: trees_e}
   - {op: scatter, kind: bush, region: [[2, 48], [68, 48], [68, 53], [2, 53]], avoid: [stream], density: 0.35, spacing: 4,
      id: bushes}
-  - {op: finish, floor: walk}
+  - {op: finish}
   - {op: compass, at: ne, size: 6}
   - {op: scale_bar, at: nw}
   - {op: title, text: The Stream Cave, position: bottom, size: 2.4}

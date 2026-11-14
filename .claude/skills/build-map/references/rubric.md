@@ -10,7 +10,7 @@ fingertip). For a contact sheet, score the comparator too so the gap is visible.
 | 3 | **Depth** | Shadows and occlusion separate floor, wall, raised and sunken | Everything sits on one plane |
 | 4 | **Line** | Ink weights rank (walls heaviest, detail finest); natural edges wobble, built edges are true | One line weight everywhere, or ruler-straight caves |
 | 5 | **Palette** | Cohesive and period-plausible, close to its category's references (or the canon art brief) | Garish, muddy or monochrome |
-| 6 | **Grid** | Present, aligned, readable, subordinate to the walls | Missing, or louder than the walls |
+| 6 | **Grid** | **None by default** (owner preference; the VTT draws its own). If one is printed on request: aligned and subordinate to the walls | A grid printed when nobody asked, or one louder than the walls |
 | 7 | **Props** | Recognisable at one square and drawn in the map's line style | Blobs, or clip-art in a different style |
 | 8 | **Shelf test** | Could sit in a published module beside the comparator | Clearly a programmer's diagram |
 

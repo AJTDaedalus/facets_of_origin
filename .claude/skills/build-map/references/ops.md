@@ -322,7 +322,7 @@ A new opaque image filled with a colour or material. Name it `canvas` for the fi
 
 ### `cracks` → paints in place
 
-Branching hairline cracks inside a mask: `density` cracks per grid square, each a wandering line about `length` feet long (steps of `step` feet, turning up to `wobble` degrees), forking with chance `branch`.
+Branching hairline cracks inside a mask: `density` cracks per grid square, each a wandering line about `length` feet long (steps of `step` feet, turning up to `wobble` degrees), forking with chance `branch` over its length.
 
 | param | type | default |
 |---|---|---|
@@ -393,7 +393,7 @@ Parchment: low-frequency blotches plus fine grain, multiplied over the image (op
 
 ### `shade_lines` → paints in place
 
-Hatching along a mask's edge: short ink strokes perpendicular to the edge, every `spacing` feet, up to `length` feet long (randomised by `jitter`). With `shadow` (the direction shadows fall, default south-east), strokes are longest on edges facing into the shadow and shrink to `min_share` of the length on lit edges. `side: inside` shades the floor along its walls; `outside` shades beyond an edge (cliffs, banks).
+Hatching along a mask's edge: short ink strokes perpendicular to the edge, every `spacing` feet, up to `length` feet long (randomised by `jitter`). `shadow` is the direction shadows fall (default south-east, light from the north-west): a stroke pointing along it is full length, one pointing against it shrinks to `min_share`. For a sunken area (a floor) use `side: inside` with the default; for a raised mass (forest, brush, hill) use `side: inside` with `shadow: [-0.6, -0.8]`; `side: outside` shades beyond an edge (cliffs, banks); `shadow: null` makes every edge full length.
 
 | param | type | default |
 |---|---|---|
@@ -428,7 +428,7 @@ Inner shadow (darkens inside the mask near its edge, over `width` feet; `offset`
 
 ### `stipple` → paints in place
 
-Ink dots: `density` per square foot at the mask's edge, thinning to nothing `falloff` feet in (or spread evenly with `falloff: null`). Grit along walls, dust round rubble, texture on rock.
+Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. Grit along walls, dust round rubble, texture on rock.
 
 | param | type | default |
 |---|---|---|
@@ -879,7 +879,7 @@ Params: `src`='cave', `wall`='wall', `thickness`=1.2, `exclude`=None
 
 Water along a smoothed path `width` feet wide, clipped to the walkable mask `clip`, with an inked bank; makes mask `${name}`.
 
-Params: `points`=[[0, 0], [10, 10]], `width`=6, `name`='stream', `clip`='floor'
+Params: `points`=[[0, 0], [10, 10]], `width`=6, `name`='stream', `clip`='floor', `bank`=1.0
 
 ### `ground_patches`
 
@@ -915,7 +915,7 @@ Params: `src`='height', `level`=0.6, `within`='land_m', `name`='mountains', `siz
 
 Parchment grain, a light vignette and a double frame. No grid: the VTT draws its own (add {op: grid} if a printed grid is wanted).
 
-Params: `floor`='floor', `alpha`=0.28
+Params: none
 
 
 ## Materials (styles/inked_parchment.yaml)

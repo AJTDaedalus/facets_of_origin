@@ -4,6 +4,13 @@ Published hand-inked maps carry their depth in strokes, not soft gradients:
   shade_lines - short strokes perpendicular to an edge (walls, cliffs, banks), longer in shadow
   cracks      - branching hairline cracks across a floor or rock surface
   stipple     - ink dots that thin out away from an edge (grit, rubble dust)
+
+Lighting convention (the whole style uses it): light from the north-west, so shadows fall
+south-east, i.e. `shadow: [0.6, 0.8]`. A sunken area (a floor inside walls) is shaded inside
+its north and west edges; a raised mass (a forest, brush, a hill) is shaded inside its south
+and east edges, which is `shadow: [-0.6, -0.8]` with `side: inside`.
+
+Every op works on the mask's bounding box (plus a margin), not the full frame.
 """
 from __future__ import annotations
 
@@ -13,14 +20,28 @@ import numpy as np
 from PIL import Image as PImage, ImageDraw
 from pydantic import Field as PField
 
-from ..color import composite_inplace, resolve_color
+from ..color import composite_patch, resolve_color
 from ..layers import Image, Mask
 from ..registry import ParamModel, op
 from .common import Point, PosFt, Ref, Unit, signed_distance
+from .masks import Patch
+
+
+def _crop(m: np.ndarray, margin_px: float, outside: bool = False):
+    """(y0, x0, y1, x1) of the area the op needs, or None if there's nothing to do."""
+    h, w = m.shape
+    if outside:
+        if (m >= 0.5).all():
+            return None
+    ys, xs = np.nonzero(m > 0.01)
+    if not len(ys):
+        return None
+    mg = int(np.ceil(margin_px)) + 2
+    return (max(ys.min() - mg, 0), max(xs.min() - mg, 0), min(ys.max() + 1 + mg, h), min(xs.max() + 1 + mg, w))
 
 
 def _edges_px(mask: np.ndarray):
-    """Contour polylines of a mask at 0.5, in working pixel coordinates (x, y)."""
+    """Contour polylines of a mask at 0.5, in pixel coordinates (x, y) of the array given."""
     import contourpy
     gen = contourpy.contour_generator(z=mask)
     return [seg for seg in gen.lines(0.5) if len(seg) >= 2]
@@ -32,6 +53,12 @@ def _resample(seg: np.ndarray, step: float, rng) -> np.ndarray:
         return seg[:1]
     t = np.arange(rng.uniform(0, step), d[-1], step)
     return np.c_[np.interp(t, d, seg[:, 0]), np.interp(t, d, seg[:, 1])]
+
+
+def _composite(ctx, into, alpha_sub: np.ndarray, box, color, opacity: float) -> None:
+    y0, x0 = box[0], box[1]
+    col = resolve_color(ctx.style, color)
+    composite_patch(into.data, Patch((alpha_sub * opacity).astype(np.float32), y0, x0), col[:3])
 
 
 class ShadeLinesP(ParamModel):
@@ -51,10 +78,14 @@ class ShadeLinesP(ParamModel):
 
 @op("shade_lines", params=ShadeLinesP, inputs={"into": Image, "mask": Mask}, group="4 paint")
 def shade_lines(ctx, p, into, mask):
-    """Hatching along a mask's edge: short ink strokes perpendicular to the edge, every `spacing` feet, up to `length` feet long (randomised by `jitter`). With `shadow` (the direction shadows fall, default south-east), strokes are longest on edges facing into the shadow and shrink to `min_share` of the length on lit edges. `side: inside` shades the floor along its walls; `outside` shades beyond an edge (cliffs, banks)."""
+    """Hatching along a mask's edge: short ink strokes perpendicular to the edge, every `spacing` feet, up to `length` feet long (randomised by `jitter`). `shadow` is the direction shadows fall (default south-east, light from the north-west): a stroke pointing along it is full length, one pointing against it shrinks to `min_share`. For a sunken area (a floor) use `side: inside` with the default; for a raised mass (forest, brush, hill) use `side: inside` with `shadow: [-0.6, -0.8]`; `side: outside` shades beyond an edge (cliffs, banks); `shadow: null` makes every edge full length."""
     fr = ctx.frame
     rng = ctx.rng
-    m = mask.data
+    box = _crop(mask.data, fr.px(p.length) + 2, outside=p.side == "outside")
+    if box is None:
+        return
+    y0, x0, y1, x1 = box
+    m = mask.data[y0:y1, x0:x1]
     sd = signed_distance(m)
     gy, gx = np.gradient(sd)
     h, w = m.shape
@@ -76,8 +107,6 @@ def shade_lines(ctx, p, into, mask):
             dirv = -out if p.side == "inside" else out
             share = 1.0
             if sh is not None:
-                # shadow falls along `sh`: strokes on the floor next to a wall whose interior
-                # side faces along the shadow direction are long; lit edges get short ones
                 share = p.min_share + (1 - p.min_share) * max(0.0, float(np.dot(dirv, sh)))
             a = np.deg2rad(rng.uniform(-p.angle_jitter, p.angle_jitter))
             ca, sa = np.cos(a), np.sin(a)
@@ -88,8 +117,7 @@ def shade_lines(ctx, p, into, mask):
             d.line([(x, y), (x + dv[0] * L, y + dv[1] * L)], fill=255, width=lw)
     a = np.asarray(img, np.float32) / 255.0
     region = m if p.side == "inside" else (1.0 - m)
-    col = resolve_color(ctx.style, p.color)
-    composite_inplace(into.data, col[:3], (a * region * p.opacity).astype(np.float32))
+    _composite(ctx, into, a * region, box, p.color, p.opacity)
 
 
 class CracksP(ParamModel):
@@ -107,10 +135,14 @@ class CracksP(ParamModel):
 
 @op("cracks", params=CracksP, inputs={"into": Image, "mask": Mask}, group="4 paint")
 def cracks(ctx, p, into, mask):
-    """Branching hairline cracks inside a mask: `density` cracks per grid square, each a wandering line about `length` feet long (steps of `step` feet, turning up to `wobble` degrees), forking with chance `branch`."""
+    """Branching hairline cracks inside a mask: `density` cracks per grid square, each a wandering line about `length` feet long (steps of `step` feet, turning up to `wobble` degrees), forking with chance `branch` over its length."""
     fr = ctx.frame
     rng = ctx.rng
-    m = mask.data
+    box = _crop(mask.data, 1)
+    if box is None:
+        return
+    y0, x0, y1, x1 = box
+    m = mask.data[y0:y1, x0:x1]
     h, w = m.shape
     inside = np.argwhere(m >= 0.5)
     if not len(inside):
@@ -122,8 +154,8 @@ def cracks(ctx, p, into, mask):
     lw = max(1, int(round(fr.px(p.width))))
     step = fr.px(p.step)
     for _ in range(n):
-        y0, x0 = inside[int(rng.integers(len(inside)))]
-        stack = [(float(x0), float(y0), rng.uniform(0, 2 * np.pi), fr.px(p.length) * rng.uniform(0.5, 1.2))]
+        yy, xx = inside[int(rng.integers(len(inside)))]
+        stack = [(float(xx), float(yy), rng.uniform(0, 2 * np.pi), fr.px(p.length) * rng.uniform(0.5, 1.2))]
         while stack:
             x, y, ang, left = stack.pop()
             while left > 0:
@@ -136,8 +168,7 @@ def cracks(ctx, p, into, mask):
                 if rng.random() < p.branch * step / max(fr.px(p.length), 1):
                     stack.append((x, y, ang + rng.choice([-1, 1]) * rng.uniform(0.5, 1.1), left * 0.5))
     a = np.asarray(img, np.float32) / 255.0
-    col = resolve_color(ctx.style, p.color)
-    composite_inplace(into.data, col[:3], (a * m * p.opacity).astype(np.float32))
+    _composite(ctx, into, a * m, box, p.color, p.opacity)
 
 
 class StippleP(ParamModel):
@@ -153,32 +184,37 @@ class StippleP(ParamModel):
 
 @op("stipple", params=StippleP, inputs={"into": Image, "mask": Mask}, group="4 paint")
 def stipple(ctx, p, into, mask):
-    """Ink dots: `density` per square foot at the mask's edge, thinning to nothing `falloff` feet in (or spread evenly with `falloff: null`). Grit along walls, dust round rubble, texture on rock."""
+    """Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. Grit along walls, dust round rubble, texture on rock."""
     fr = ctx.frame
     rng = ctx.rng
-    m = mask.data
-    h, w = m.shape
-    sd = signed_distance(m) / fr.scale
-    dist = np.maximum(-sd, 0) if p.side == "inside" else np.maximum(sd, 0)
-    region = (m >= 0.5) if p.side == "inside" else (m < 0.5)
+    outside = p.side == "outside"
+    box = _crop(mask.data, fr.px(p.falloff or 0) + 2, outside=outside) if not (outside and not p.falloff) \
+        else (0, 0) + mask.data.shape
+    if box is None:
+        return
+    y0, x0, y1, x1 = box
+    m = mask.data[y0:y1, x0:x1]
+    region = (m >= 0.5) if not outside else (m < 0.5)
     if p.falloff:
-        prob_map = np.clip(1 - dist / p.falloff, 0, 1) * region
+        sd = signed_distance(m) / fr.scale
+        dist = np.maximum(-sd, 0) if not outside else np.maximum(sd, 0)
+        weight = np.clip(1 - dist / p.falloff, 0, 1) * region
     else:
-        prob_map = region.astype(np.float32)
-    area_ft2 = h * w / (fr.scale ** 2)
-    n = int(p.density * area_ft2 * float(prob_map.mean()) * 2)
+        weight = region.astype(np.float32)
+    total = float(weight.sum())
+    if total <= 0:
+        return
+    n = int(round(p.density * total / (fr.scale ** 2)))       # dots = density × weighted ft²
     if n <= 0:
         return
-    ys = rng.integers(0, h, n * 2)
-    xs = rng.integers(0, w, n * 2)
-    keep = rng.random(n * 2) < prob_map[ys, xs]
-    ys, xs = ys[keep][:n], xs[keep][:n]
-    img = PImage.new("L", (w, h), 0)
+    flat = weight.ravel() / total
+    idx = rng.choice(flat.size, size=n, replace=True, p=flat)
+    ys, xs = np.divmod(idx, m.shape[1])
+    img = PImage.new("L", (m.shape[1], m.shape[0]), 0)
     d = ImageDraw.Draw(img)
     r = max(fr.px(p.size) / 2, 0.6)
     for x, y in zip(xs, ys):
         rr = r * rng.uniform(0.6, 1.3)
         d.ellipse([x - rr, y - rr, x + rr, y + rr], fill=255)
     a = np.asarray(img, np.float32) / 255.0
-    col = resolve_color(ctx.style, p.color)
-    composite_inplace(into.data, col[:3], (a * p.opacity).astype(np.float32))
+    _composite(ctx, into, a, box, p.color, p.opacity)

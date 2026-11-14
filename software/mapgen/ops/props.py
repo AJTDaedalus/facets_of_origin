@@ -294,6 +294,8 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     s = size or default
     if kind in MARKERS:
         shadow = 0.0
+    if kind in ("tree", "bush"):
+        rotate = 0.0          # round canopies: rotating would only swing their shading off the south-east
     rng = np.random.default_rng(seed)
     parts = fn(s, rng)
     placed = []

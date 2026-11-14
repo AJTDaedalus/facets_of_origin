@@ -58,6 +58,12 @@ Run everything from `software/`.
 
 ## Rules of thumb
 
+- **Shading convention:** light from the north-west, shadows fall south-east. A sunken area
+  (a floor inside walls) is shaded inside its north and west edges (`shade_lines` default; inner
+  `shadow` with a negative offset such as `[-0.6, -0.8]`). A raised mass (forest, brush, hill)
+  is shaded inside its south and east edges (`shade_lines` with `shadow: [-0.6, -0.8]`; inner `shadow`
+  with a positive offset). Ink line-work carries the depth: the owner wants hatching, not soft gradients.
+
 - **Coordinates are feet**, origin north-west, y runs **south**. If a source uses
   y-north, flip once and say so in the header comment.
 - **Name things you'll measure or reference:** the `out` of a room geometry,
@@ -69,7 +75,8 @@ Run everything from `software/`.
   Interior walls between rooms are `partition` (centred on a line). `exclude`
   leaves a wall open (a cave mouth onto a forest).
 - **Order matters:** ground → floors → water/paths → walls → openings → props →
-  grid → overlay. Water drawn before walls tucks under them; clip it to the
+  line-work (`shade_lines`, `cracks`, `stipple`) → overlay. No grid unless asked: the owner
+  prefers gridless maps and the VTT draws its own. Water drawn before walls tucks under them; clip it to the
   walkable mask (`stream ... clip: walk`).
 - **Draft renders are quick:** a few seconds. A full render of a 100×70 ft map
   takes about a minute.

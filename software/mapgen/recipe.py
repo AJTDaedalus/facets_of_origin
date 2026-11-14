@@ -203,6 +203,11 @@ def _expand(steps: list[dict], style: Style, depth: int = 0, parent: str | None 
             if "out" in step and "${out}" not in yaml.safe_dump(macro.get("steps") or []):
                 raise RecipeError(f"macro '{op}' doesn't take 'out' (it names its own layers; see its params)")
             step.pop("op")
+            declared = set((macro.get("params") or {}).keys())
+            unknown = sorted(set(step) - declared)
+            if unknown:
+                raise RecipeError(f"macro '{op}' doesn't take {', '.join(unknown)} (its params: "
+                                  f"{', '.join(sorted(declared)) or 'none'})")
             env.update(step)
             body = _subst(copy.deepcopy(macro.get("steps") or []), env, op)
             if call_offset:

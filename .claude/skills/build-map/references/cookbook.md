@@ -89,7 +89,6 @@ A cave mouth onto the outside: draw the outside region, then
   # brush at the edges, trees standing in it, a clear margin round buildings
   - {op: brush, name: brush, within: edges, clear: clear, scale: 16, cover: -0.15}
   - {op: scatter, kind: tree, mask: brush, avoid: [clear], density: 0.55, spacing: 7, size: 10, shadow: 0.6}
-  - {op: grid, alpha: 0.7, weight: 0.09, color: "#1f1b16"}
 ```
 
 `cover` sets how much ground a noise region takes: lower values cover more
@@ -116,7 +115,8 @@ Interior walls with doors are `partition`s. Don't draw furniture the text doesn'
 | Trees swallow a building | `grow` the buildings' mask by about half a tree's size and pass it as `avoid` |
 | Walls look like black sausages | `weight: bold` inside, `outer_weight: fine`, a lighter wall material |
 | Floor looks flat | More `contrast`, add `grain`, a wider inner `shadow` (4–5 ft in caves) |
-| Grid fights the floor | Lower its `alpha`, or clip it with `mask:` |
+| Looks flat or "digital" | Add line-work: `shade_lines` along walls and edges, `cracks` on floors, `stipple` grit near walls |
+| A grid appears | Remove the `grid` step: maps are gridless by default (the VTT draws its own) |
 | Door snaps to a corner | The edge you meant isn't a wall boundary (the rooms were unioned): add a `partition` |
 | Render too slow | Use `--draft` while iterating; a full render at 70 px/sq takes about 1 s per 100 ft² of map |
 
@@ -151,7 +151,6 @@ steps:
   - {op: mountain_range, src: height, level: 0.56, within: land_m}
   - {op: scatter, kind: hill, mask: hill_band, density: 2.4, spacing: 1.9, size: 2.3, sort_y: true}
   - {op: prop, kind: city, at: [x, y]}                           # also town, village, ruin_marker, peak
-  - {op: grid, shape: hex, orientation: pointy, alpha: 0.3}
   - {op: legend, at: sw}
 ```
 
@@ -166,7 +165,7 @@ steps:
 
 ## Town maps
 
-Use `unit: ft` with `feet_per_square: 50` (or 25 or 100), and usually no grid.
+Use `unit: ft` with `feet_per_square: 50` (or 25 or 100). Like every map, no grid.
 Render at about 3.3 px per foot (`px_per_square: 166` at 50 ft) to match print
 town maps, with `supersample: 1`, because these maps are large. Full example:
 `maps/recipes/proof_town.map.yaml`.
