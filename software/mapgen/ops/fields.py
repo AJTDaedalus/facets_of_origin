@@ -18,13 +18,60 @@ class NoiseP(ParamModel):
     octaves: int = PField(4, ge=1, le=8)
     persistence: float = PField(0.5, gt=0, le=1)
     lacunarity: float = PField(2.0, ge=1.2, le=4)
+    stretch: float = PField(1.0, ge=1.0, le=12)
+    angle: float = 0.0
+
+
+def directional(shape, scale_px, seed, stretch=1.0, angle=0.0, **kw) -> np.ndarray:
+    """fbm whose features run `stretch` times longer along `angle` (degrees, 0 = east, 90 = south):
+    isotropic noise on a squashed, rotated lattice, sampled back onto the pixel grid."""
+    if stretch == 1.0:
+        return fbm(shape, scale_px, seed, **kw)
+    from scipy import ndimage
+    h, w = shape
+    th = np.deg2rad(angle)
+    c, s_ = np.cos(th), np.sin(th)
+    d = float(np.hypot(h, w))
+    gu, gv = int(np.ceil(d / stretch)) + 4, int(np.ceil(d)) + 4      # lattice: u along the grain, v across
+    lattice = fbm((gv, gu), scale_px, seed, **kw)
+    ys, xs = np.mgrid[0:h, 0:w].astype(np.float32)
+    xs -= w / 2
+    ys -= h / 2
+    u = (xs * c + ys * s_) / stretch + gu / 2
+    v = (-xs * s_ + ys * c) + gv / 2
+    return ndimage.map_coordinates(lattice, [v, u], order=1, mode="nearest").astype(np.float32)
 
 
 @op("noise", params=NoiseP, output=Field, group="3 fields")
 def noise(ctx, p):
-    """Fractal gradient noise in −1..1. `scale` is the largest feature size in feet; kinds fbm (clouds), ridged (veins, ridges), billow (puffy)."""
-    return Field(fbm(ctx.frame.shape, ctx.frame.px(p.scale), ctx.seed, p.octaves,
-                     p.persistence, p.lacunarity, p.kind))
+    """Fractal gradient noise in −1..1. `scale` is the largest feature size in feet; kinds fbm (clouds), ridged (veins, ridges), billow (puffy). `stretch` > 1 draws the features that many times longer along `angle` (degrees, 0 = east, 90 = south): wind ripples, drifting mist, wood grain, strata."""
+    return Field(directional(ctx.frame.shape, ctx.frame.px(p.scale), ctx.seed, p.stretch, p.angle,
+                             octaves=p.octaves, persistence=p.persistence, lacunarity=p.lacunarity, kind=p.kind))
+
+
+class WarpP(ParamModel):
+    src: Ref
+    amount: PosFt = 2.0
+    scale: PosFt = 8.0
+    octaves: int = PField(3, ge=1, le=6)
+    drift: Point = [0.0, 0.0]
+
+
+@op("warp", params=WarpP, inputs={"src": (Field, Mask)}, output="same", group="3 fields")
+def warp(ctx, p, src):
+    """Domain warp: drag a field or mask through a noise flow, each pixel moved up to `amount` feet by noise with features `scale` feet across; `drift` [dx, dy] (feet) adds a steady push, so shapes smear downwind. Curls mist into wisps, makes shorelines and stains swirl. Returns the same kind of layer it was given."""
+    from scipy import ndimage
+    h, w = ctx.frame.shape
+    a = ctx.frame.px(p.amount)
+    sc = ctx.frame.px(p.scale)
+    dx = fbm((h, w), sc, ctx.seed, octaves=p.octaves) * a
+    dy = fbm((h, w), sc, ctx.seed ^ 0x5F3759DF, octaves=p.octaves) * a
+    ys, xs = np.mgrid[0:h, 0:w].astype(np.float32)
+    # sampling upstream of the drift pushes the pattern downstream
+    xs -= dx + ctx.frame.px(p.drift[0])
+    ys -= dy + ctx.frame.px(p.drift[1])
+    out = ndimage.map_coordinates(src.data, [ys, xs], order=1, mode="nearest").astype(np.float32)
+    return type(src)(out)
 
 
 class GradientP(ParamModel):

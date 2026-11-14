@@ -250,6 +250,19 @@ def make_sheet(ours: PImage.Image, ours_pps, theirs: PImage.Image, theirs_pps, o
 
 # ---------- CLI ----------
 
+def render_under_atmosphere(recipe_path):
+    """The recipe rendered without its `atmosphere: true` paint steps, as a PIL image, or None when it
+    has none. Seeds are keyed by step, so everything else draws exactly as in the full render."""
+    from .engine import Engine
+    from .export import to_pil
+    from .recipe import load_recipe
+    recipe = load_recipe(recipe_path)
+    if not any(st.atmosphere for st in recipe.steps):
+        return None
+    eng = Engine(recipe, skip_atmosphere=True)
+    return to_pil(eng.run().get("canvas").data, eng.frame.out_size)
+
+
 def cli_quality(args) -> int:
     if getattr(args, "baseline", False):
         research = Path(args.research) if args.research else None
@@ -273,6 +286,12 @@ def cli_quality(args) -> int:
         nw = next(iter(widths)) if len(widths) == 1 else None
     m = metrics(PImage.open(args.png), pps or 70, feet_per_square=fps, normalize_width=nw)
     print(json.dumps(m))
+    if args.recipe and not getattr(args, "as_drawn", False):
+        under = render_under_atmosphere(args.recipe)
+        if under is not None:
+            # mood layers (mist, dimming) are meant to flatten contrast; the bands judge the map beneath them
+            m = metrics(under, pps or 70, feet_per_square=fps, normalize_width=nw)
+            print("under atmosphere: " + json.dumps(m))
     if args.category:
         res = check_bands(m, load_bands(), args.category)
         bad = [k for k, (_, _, ok) in res.items() if not ok]

@@ -22,6 +22,8 @@ def build_parser() -> argparse.ArgumentParser:
     q.add_argument("--category", required=False)
     q.add_argument("--px-per-square", type=float, default=None)
     q.add_argument("--recipe", default=None, help="recipe of the PNG (gives scale and grid mask)")
+    q.add_argument("--as-drawn", action="store_true",
+                   help="judge the PNG as drawn, even if the recipe marks atmosphere steps")
     s = sub.add_parser("sheet", help="side-by-side contact sheet with a comparator")
     s.add_argument("png")
     s.add_argument("--vs", required=True)

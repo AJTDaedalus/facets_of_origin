@@ -514,7 +514,7 @@ def _merge_line_runs(placed):
     return out
 
 
-def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, ink="ink"):
+def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, ink="ink", record=True):
     fn, default = PROPS[kind]
     s = size or default
     if kind in MARKERS:
@@ -558,8 +558,10 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
         if iw:
             composite_patch(img, stroke_geometry_alpha(ctx, g, iw, patch=True), inkc)
     ctx.collector.legend.setdefault(kind, kind.replace("_", " "))
-    if not foot.is_empty:
+    if record and not foot.is_empty:                  # legend icons are not on the map
         ctx.collector.footprints.append(foot)
+        step = getattr(ctx, "step", None)
+        ctx.collector.footprint_tags.append((getattr(step, "id", None), kind))
     return foot
 
 
@@ -675,3 +677,28 @@ def scatter(ctx, p, into, mask=None, avoid=None):
         draw_prop(ctx, into.data, p.kind, (x, y), s, rot, ctx.seed + 31 * i + 1, p.shadow)
     key = ctx.step.id if ctx.step and ctx.step.id else f"#{ctx.index}"
     ctx.collector.scatter_points[key] = [(round(x, 4), round(y, 4)) for x, y in pts]
+
+
+class FootprintsP(ParamModel):
+    of: list[str] = PField(default_factory=list)
+    kinds: list[PropKind] = PField(default_factory=list)   # type: ignore[valid-type]
+    grow: float = PField(0.0, ge=0, le=50)
+
+
+@op("footprints", params=FootprintsP, output=Mask, group="6 props")
+def footprints(ctx, p):
+    """Mask of the props drawn so far: all of them, or only those from the steps whose `id` is in `of` and/or of the given `kinds`, grown by `grow` feet. Feed it to `scatter` `avoid` (scatters that keep clear of each other), or blur it to pool mist, grime or snow around props."""
+    if p.of:
+        earlier = {st.id for st in ctx.recipe.steps[:ctx.index]}
+        missing = [i for i in p.of if i not in earlier]
+        if missing:
+            raise RecipeError(f"footprints: no earlier step has id {', '.join(missing)}")
+    picked = [g for g, (sid, kind) in zip(ctx.collector.footprints, ctx.collector.footprint_tags)
+              if (not p.of or sid in p.of) and (not p.kinds or kind in p.kinds)]
+    if not picked:
+        return Mask(np.zeros(ctx.frame.shape, np.float32))
+    g = shapely.unary_union(picked)
+    if p.grow:
+        g = g.buffer(p.grow)
+    from .masks import rasterize_geom
+    return Mask(rasterize_geom(ctx.frame, g))

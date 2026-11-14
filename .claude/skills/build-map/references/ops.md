@@ -272,7 +272,7 @@ Weighted sum (or max/min/product) of fields or masks → Field.
 
 ### `noise` → Field
 
-Fractal gradient noise in −1..1. `scale` is the largest feature size in feet; kinds fbm (clouds), ridged (veins, ridges), billow (puffy).
+Fractal gradient noise in −1..1. `scale` is the largest feature size in feet; kinds fbm (clouds), ridged (veins, ridges), billow (puffy). `stretch` > 1 draws the features that many times longer along `angle` (degrees, 0 = east, 90 = south): wind ripples, drifting mist, wood grain, strata.
 
 | param | type | default |
 |---|---|---|
@@ -281,6 +281,8 @@ Fractal gradient noise in −1..1. `scale` is the largest feature size in feet; 
 | `octaves` | int | `4` |
 | `persistence` | float | `0.5` |
 | `lacunarity` | float | `2.0` |
+| `stretch` | float | `1.0` |
+| `angle` | float | `0.0` |
 
 ### `remap` → Field
 
@@ -307,6 +309,18 @@ Rivers from a height field: fill depressions, route water downhill (D8), keep ce
 | `width` | list[float] | `[0.3, 2.0]` |
 | `line` | bool | `False` |
 | `smooth` | int | `2` |
+
+### `warp` → same as input
+
+Domain warp: drag a field or mask through a noise flow, each pixel moved up to `amount` feet by noise with features `scale` feet across; `drift` [dx, dy] (feet) adds a steady push, so shapes smear downwind. Curls mist into wisps, makes shorelines and stains swirl. Returns the same kind of layer it was given.
+
+| param | type | default |
+|---|---|---|
+| `src` | str | **required** |
+| `amount` | float | `2.0` |
+| `scale` | float | `8.0` |
+| `octaves` | int | `3` |
+| `drift` | list[float] | `[0.0, 0.0]` |
 
 
 ## Paint
@@ -654,6 +668,16 @@ A window: a pale pane across the wall with a centre line. Walls still block move
 
 
 ## Props
+
+### `footprints` → Mask
+
+Mask of the props drawn so far: all of them, or only those from the steps whose `id` is in `of` and/or of the given `kinds`, grown by `grow` feet. Feed it to `scatter` `avoid` (scatters that keep clear of each other), or blur it to pool mist, grime or snow around props.
+
+| param | type | default |
+|---|---|---|
+| `of` | list[str] | `PydanticUndefined` |
+| `kinds` | list[Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer']] | `PydanticUndefined` |
+| `grow` | float | `0.0` |
 
 ### `prop` → paints in place
 

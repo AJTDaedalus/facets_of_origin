@@ -107,6 +107,33 @@ every measured shape and list it under `measure:`, then add a test that reads
 `facts.yaml` and compares (see `software/tests/mapgen/test_m7_proofs.py`).
 Interior walls with doors are `partition`s. Don't draw furniture the text doesn't state.
 
+## Mood, mist and weather
+
+Full example: `maps/recipes/mist_coast.map.yaml`.
+
+- **The recipe's own colours and materials:** put `palette:`, `materials:` or `ink:` at the top
+  level of the recipe, beside `map:`. They win over the included style, entry by entry.
+- **Grain and drift:** give `noise` `stretch` (features that many times longer) and `angle`
+  (0 = east, 90 = south) for wind ripples, drifting fog, strata or wood grain. `warp` drags any field
+  or mask through a noise flow; its `drift` smears it downwind.
+- **Hugging the props:** `footprints` is a mask of the props drawn so far (by `of` step ids or
+  `kinds`). Band it for a ring of mist, snow or grime round each stone, subtract it so the stones stand
+  out of the fog, or pass it to a later `scatter` as `avoid`.
+- **Mark mood layers `atmosphere: true`** (dimming, mist, rain, darkness). `quality --recipe` then also
+  measures the map with them left out and checks the bands on that, so fog can't hide thin line-work
+  underneath. Steps that only make layers still run; only paint is dropped.
+
+```yaml
+  - {op: noise, out: mist_a, scale: 12, stretch: 2.5, angle: 170, id: mist_a}
+  - {op: warp, out: mist_a, src: mist_a, amount: 2.5, scale: 6, drift: [-3, 0.5], id: mist_curl}
+  - {op: footprints, out: stones_m, kinds: [boulder, rubble]}
+  - {op: band, out: stone_pool, src: stones_m, inner: 0.3, outer: 2.2}
+  - {op: mix, out: mist_f, of: [mist_a, stone_pool], weights: [1, 0.45]}
+  - {op: field_to_mask, out: mist_m, src: mist_f, lo: -0.1, hi: 0.6}
+  - {op: combine, out: mist_m, of: [mist_m, stones_m], mode: sub}
+  - {op: fill, mask: mist_m, color: "#cfe7ee", blend: screen, opacity: 0.6, atmosphere: true, id: mist}
+```
+
 ## Fixing common defects
 
 | Defect | Fix |

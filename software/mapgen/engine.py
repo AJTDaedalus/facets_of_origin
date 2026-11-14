@@ -31,6 +31,7 @@ class Collector:
     masks: dict = field(default_factory=dict)        # named masks kept for metrics (e.g. grid)
     walls: dict = field(default_factory=dict)        # wall name -> {floor, band, thickness}
     footprints: list = field(default_factory=list)   # prop footprints (feet)
+    footprint_tags: list = field(default_factory=list)   # (step id or None, kind), aligned with footprints
     scatter_points: dict = field(default_factory=dict)
     legend_drawn: list = field(default_factory=list)
     grid_shape: str = "square"
@@ -64,13 +65,15 @@ def _accepts(expected, actual) -> bool:
 
 
 class Engine:
-    def __init__(self, recipe: Recipe, registry: OpRegistry | None = None, draft: bool = False):
+    def __init__(self, recipe: Recipe, registry: OpRegistry | None = None, draft: bool = False,
+                 skip_atmosphere: bool = False):
         if registry is None:
             from .ops import REGISTRY as registry  # noqa: N811  (loads every op module)
         self.recipe = recipe
         self.registry = registry
         self.frame = Frame(recipe.map, draft=draft)
         self.collector = Collector()
+        self.skip_atmosphere = skip_atmosphere   # paint steps marked `atmosphere: true` are left out
 
     def _where(self, i: int, step: Step) -> str:
         sid = f" [{step.id}]" if step.id else ""
@@ -140,19 +143,22 @@ class Engine:
             ctx.index, ctx.step = i, step
             ctx.seed = step_seed(self.recipe.map.seed, key, step.seed_offset)
             ctx.rng = np.random.default_rng(ctx.seed)
-            inputs = {}
-            for pname, ref in refs.items():
-                inputs[pname] = [store.get(r) for r in ref] if isinstance(ref, list) else store.get(ref)
-            try:
-                result = spec.fn(ctx, params, **inputs)
-            except RecipeError as e:
-                raise RecipeError(f"{self._where(i + 1, step)}: {e}") from None
-            if spec.output is not None:
-                if result is None:
-                    raise RecipeError(f"{self._where(i + 1, step)}: op returned no layer")
-                store.put(step.out, result)
-                if isinstance(result, Geometry):
-                    self.collector.geometry[step.out] = result.geom
+            # an atmosphere paint step is left out on request; layers other steps make still exist
+            skipped = self.skip_atmosphere and step.atmosphere and spec.output is None
+            if not skipped:
+                inputs = {}
+                for pname, ref in refs.items():
+                    inputs[pname] = [store.get(r) for r in ref] if isinstance(ref, list) else store.get(ref)
+                try:
+                    result = spec.fn(ctx, params, **inputs)
+                except RecipeError as e:
+                    raise RecipeError(f"{self._where(i + 1, step)}: {e}") from None
+                if spec.output is not None:
+                    if result is None:
+                        raise RecipeError(f"{self._where(i + 1, step)}: op returned no layer")
+                    store.put(step.out, result)
+                    if isinstance(result, Geometry):
+                        self.collector.geometry[step.out] = result.geom
             if not keep_all:
                 for name, idx in last.items():
                     if idx == i and name not in KEEP and name in store:

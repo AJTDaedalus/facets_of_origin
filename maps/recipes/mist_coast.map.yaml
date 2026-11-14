@@ -1,0 +1,98 @@
+# Generic outdoor battle map (owner request 2026-11-14), homebrew, no canon:
+#   "A battlemap of an eerie, white sand coast with occasional black stones washed up. A nearly
+#    glowing mist covers the sands and the water, slightly transparent, dancing between the stones
+#    and waves. It looks cold and threatening in the dim light."
+# 60×40 ft, 5 ft squares. Sea to the east, white sand to the west, a wet-sand band and surf at the
+# waterline, black stones scattered on the sand and in the shallows, pale mist over everything.
+map:
+  title: The Pale Strand
+  width_ft: 60
+  height_ft: 40
+  feet_per_square: 5
+  px_per_square: 70
+  supersample: 2
+  seed: 1114
+  include: [styles/inked_parchment.yaml]
+
+palette:
+  # the black stones: every stone prop on this map draws from these
+  stone_light: "#4a4d52"
+  stone: "#2a2c30"
+  stone_dark: "#141518"
+
+materials:
+  white_sand: {type: dirt, colors: ["#dadddb", "#ebeeec", "#fafbfa"], scale: 9, octaves: 5, grain: 0.06, speckle: 0.07}
+  wet_sand:   {type: dirt, colors: ["#9ea5a6", "#b2b8b8", "#c4c9c8"], scale: 6, octaves: 4, grain: 0.05, speckle: 0.04}
+  cold_sea:   {type: water, shallow: "#7d9399", deep: "#34505a", depth: 12, ripples: 2.0, ripple_color: "#c9d6d8", grain: 0.04}
+
+steps:
+  - {op: base}
+  - {op: fill, material: cold_sea, id: sea_fill}
+  # ---- the shore: sand west of a wandering waterline, with a small spit at mid-map
+  - {op: polygon, out: shore_shape, points: [[0, 0], [41, 0], [38, 8], [40, 14], [46, 19], [43, 23], [37, 27], [36, 34], [33, 40], [0, 40]]}
+  - {op: roughen_geom, out: land, src: shore_shape, amount: 1.2, scale: 5}
+  - {op: rasterize, out: land_m, src: land}
+  - {op: fill, mask: land_m, material: white_sand, id: sand_fill}
+  - {op: rect, out: frame_r, x: 0, y: 0, w: 60, h: 40}
+  - {op: subtract, out: sea, a: frame_r, b: [land]}
+  - {op: rasterize, out: sea_m, src: sea}
+  # wet sand along the waterline, feathered inland
+  - {op: band, out: wet_m, src: sea_m, inner: 0, outer: 3.5, side: outside}     # from the sea, so only the waterline
+  - {op: blur, out: wet_m, src: wet_m, sigma: 1.0}
+  - {op: fill, mask: wet_m, material: wet_sand, opacity: 0.85, id: wet_fill}
+  # wind ripples in the dry sand: fine dashed contour lines of a stretched noise
+  - {op: noise, out: dunes, scale: 5, octaves: 2, stretch: 3, angle: 80, id: dune_noise}   # long ripples, wind off the sea
+  - {op: isolines, out: ripples, src: dunes, interval: 0.2}
+  - {op: intersect, out: ripples_land, of: [ripples, land]}
+  - {op: stroke, src: ripples_land, width: 0.06, dash: [1.6, 0.9], jitter: 0.5, opacity: 0.3, color: "#5d6466"}
+  - {op: stipple, mask: land_m, density: 2.5, falloff: null, size: 0.06, opacity: 0.35, color: "#4c5254", id: sand_grit}
+  - {op: stipple, mask: wet_m, density: 4, falloff: 2.0, size: 0.07, opacity: 0.45, id: wet_grit}
+  # the beach shelving into the water: short strokes on the sand side of the waterline
+  - {op: band, out: shore_side, src: sea_m, inner: 0, outer: 2.5, side: outside}
+  - {op: shade_lines, mask: shore_side, side: inside, length: 1.0, spacing: 0.3, width: 0.05, shadow: null, opacity: 0.4,
+     color: "#3c4447", id: shore_strokes}
+  # surf, foam and wave lines
+  - {op: coastline, land: land, waves: 4, spacing: 0.8}
+  # surf foam: a bright broken line at the waterline and a fainter second wash further out
+  - {op: band, out: foam_m, src: land_m, inner: 0, outer: 1.3}
+  - {op: noise, out: foam_n, scale: 3, octaves: 3, id: foam_noise}
+  - {op: field_to_mask, out: foam_gaps, src: foam_n, lo: -0.35, hi: 0.1}
+  - {op: combine, out: foam_m, of: [foam_m, foam_gaps], mode: min}
+  - {op: blur, out: foam_m, src: foam_m, sigma: 0.25}
+  - {op: fill, mask: foam_m, color: "#eef4f3", opacity: 0.8, id: foam}
+  - {op: offset, out: wash_line, src: land, by: 2.6}
+  - {op: stroke, src: wash_line, width: 0.14, dash: [2.2, 1.0], jitter: 0.6, color: "#e4eeee", opacity: 0.7}
+  # ---- the black stones: scattered on the sand, clustered at the tideline, a few in the shallows
+  - {op: scatter, kind: boulder, mask: land_m, density: 0.12, spacing: 6, size: 2.6, size_jitter: 0.45, shadow: 0.5, id: stones_sand}
+  - {op: scatter, kind: pebbles, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.9, spacing: 1.8, size: 1.8, shadow: 0.5, id: pebbles_tide}
+  - {op: band, out: shallows_m, src: land_m, inner: 0.5, outer: 5}
+  - {op: scatter, kind: boulder, mask: shallows_m, density: 0.25, spacing: 5, size: 3.0, size_jitter: 0.5, shadow: 0.3, id: stones_surf}
+  - {op: scatter, kind: rubble, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.08, spacing: 7, size: 2.4, shadow: 0.4, id: stone_heaps}
+  # ---- dim, cold light
+  - {op: fill, color: "#4a5a70", blend: multiply, opacity: 0.42, atmosphere: true, id: dim}
+  # ---- the mist: broad banks drifting inland off the sea, curled into wisps by a warp, thickest where it
+  # pools round the stones and along the surf; screen-blended so it glows faintly. Marked atmosphere, so
+  # `quality` also judges the map beneath it.
+  - {op: noise, out: mist_a, scale: 12, octaves: 4, stretch: 2.5, angle: 170, id: mist_a}
+  - {op: noise, out: mist_b, scale: 5, kind: billow, octaves: 3, stretch: 3, angle: 165, id: mist_b}
+  - {op: mix, out: mist_f, of: [mist_a, mist_b], weights: [0.8, 0.3]}
+  - {op: warp, out: mist_f, src: mist_f, amount: 2.5, scale: 6, drift: [-3, 0.5], id: mist_curl}
+  - {op: footprints, out: stones_m, kinds: [boulder, rubble]}
+  - {op: band, out: stone_pool, src: stones_m, inner: 0.3, outer: 2.2}          # a ring round each stone, not over it
+  - {op: blur, out: stone_pool, src: stone_pool, sigma: 0.8}
+  - {op: band, out: surf_pool, src: sea_m, inner: 0, outer: 2.0, side: both}
+  - {op: blur, out: surf_pool, src: surf_pool, sigma: 1.0}
+  - {op: mix, out: mist_f, of: [mist_f, stone_pool, surf_pool], weights: [1, 0.45, 0.35]}
+  - {op: field_to_mask, out: mist_m, src: mist_f, lo: -0.1, hi: 0.6}
+  - {op: combine, out: mist_m, of: [mist_m, stones_m], mode: sub}                # stones stand up out of it
+  - {op: fill, mask: mist_m, color: "#cfe7ee", blend: screen, opacity: 0.6, atmosphere: true, id: mist_banks}
+  - {op: blur, out: mist_glow, src: mist_m, sigma: 2.5}
+  - {op: fill, mask: mist_glow, color: "#a9d4e0", blend: screen, opacity: 0.3, atmosphere: true, id: mist_glow}
+  - {op: warp, out: wisp_f, src: mist_b, amount: 1.5, scale: 3, drift: [-1.5, 0], id: wisp_curl}
+  - {op: field_to_mask, out: wisp_m, src: wisp_f, lo: 0.25, hi: 0.6}
+  - {op: fill, mask: wisp_m, color: "#eef8fa", blend: screen, opacity: 0.4, atmosphere: true, id: mist_wisps}
+  - {op: finish}
+  - {op: vignette, strength: 0.45, start: 0.35}
+  - {op: compass, at: ne, size: 5}
+  - {op: scale_bar, at: nw}
+  - {op: title, text: The Pale Strand, position: bottom, size: 2.2}
