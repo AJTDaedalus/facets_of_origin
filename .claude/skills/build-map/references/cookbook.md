@@ -115,7 +115,12 @@ Full example: `maps/recipes/mist_coast.map.yaml`.
   level of the recipe, beside `map:`. They win over the included style, entry by entry.
 - **Grain and drift:** give `noise` `stretch` (features that many times longer) and `angle`
   (0 = east, 90 = south) for wind ripples, drifting fog, strata or wood grain. `warp` drags any field
-  or mask through a noise flow; its `drift` smears it downwind.
+  or mask through a noise flow; its `drift` smears it downwind. For swirls, blur the mask first, then
+  `warp` with `curl: true, iterations: 4-5` (eddies like smoke), and optionally a second `warp` with
+  `iterations: 2` to fold the edges into filaments.
+- **Surf:** a broken foam line at the break plus billow-noise lace behind it, `combine` with the sea so
+  it stays on the water, a `shadow` (`mode: drop`) south-east under it, and a fine stroke on its edge.
+- **Shelving beach:** `stipple` from the sea mask (`side: outside`, `falloff` 5-7 ft): densest at the water.
 - **Hugging the props:** `footprints` is a mask of the props drawn so far (by `of` step ids or
   `kinds`). Band it for a ring of mist, snow or grime round each stone, subtract it so the stones stand
   out of the fog, or pass it to a later `scatter` as `avoid`.
@@ -125,7 +130,7 @@ Full example: `maps/recipes/mist_coast.map.yaml`.
 
 ```yaml
   - {op: noise, out: mist_a, scale: 12, stretch: 2.5, angle: 170, id: mist_a}
-  - {op: warp, out: mist_a, src: mist_a, amount: 2.5, scale: 6, drift: [-3, 0.5], id: mist_curl}
+  - {op: warp, out: mist_a, src: mist_a, amount: 4, scale: 9, curl: true, iterations: 5, drift: [-2.5, 0.4], id: mist_curl}
   - {op: footprints, out: stones_m, kinds: [boulder, rubble]}
   - {op: band, out: stone_pool, src: stones_m, inner: 0.3, outer: 2.2}
   - {op: mix, out: mist_f, of: [mist_a, stone_pool], weights: [1, 0.45]}

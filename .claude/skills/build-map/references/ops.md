@@ -312,7 +312,7 @@ Rivers from a height field: fill depressions, route water downhill (D8), keep ce
 
 ### `warp` → same as input
 
-Domain warp: drag a field or mask through a noise flow, each pixel moved up to `amount` feet by noise with features `scale` feet across; `drift` [dx, dy] (feet) adds a steady push, so shapes smear downwind. Curls mist into wisps, makes shorelines and stains swirl. Returns the same kind of layer it was given.
+Domain warp: drag a field or mask through a noise flow, each pixel moved up to `amount` feet by noise with features `scale` feet across; `drift` [dx, dy] (feet) adds a steady push, so shapes smear downwind. `iterations` > 1 warps the warp (nested domain warping: each pass uses fresh noise), which folds shapes into filaments. `curl: true` instead follows the curl of the noise, a swirling flow that neither bunches nor thins, traced in `iterations` steps along its streamlines, so shapes curl into eddies like smoke. Smooth (blurred) inputs swirl best. Returns the same kind of layer it was given.
 
 | param | type | default |
 |---|---|---|
@@ -321,6 +321,8 @@ Domain warp: drag a field or mask through a noise flow, each pixel moved up to `
 | `scale` | float | `8.0` |
 | `octaves` | int | `3` |
 | `drift` | list[float] | `[0.0, 0.0]` |
+| `iterations` | int | `1` |
+| `curl` | bool | `False` |
 
 
 ## Paint

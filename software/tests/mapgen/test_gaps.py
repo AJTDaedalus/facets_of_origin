@@ -142,6 +142,40 @@ class TestWarp:
             run([{"op": "rect", "out": "r", "x": 1, "y": 1, "w": 2, "h": 2}, {"op": "warp", "out": "w", "src": "r"}], **H)
 
 
+def _edge(m):
+    b = m > 0.5
+    return int((b[1:] != b[:-1]).sum() + (b[:, 1:] != b[:, :-1]).sum())
+
+
+class TestWarpSwirl:
+    def _w(self, **kw):
+        steps = [{"op": "circle", "out": "c", "center": [20, 15], "r": 8},
+                 {"op": "rasterize", "out": "m", "src": "c"},
+                 {"op": "warp", "out": "w", "src": "m", "id": "w", "scale": 6, **kw}]
+        store, _ = run(steps, **H)
+        return store.get("m").data, store.get("w").data
+
+    def test_curl_moves_the_shape_but_keeps_its_area(self):
+        m, w = self._w(curl=True, amount=3, iterations=4)
+        assert np.abs(m - w).sum() > 200                       # it moved
+        assert abs(w.sum() - m.sum()) / m.sum() < 0.06         # divergence-free: no bunching or thinning
+
+    def test_nested_iterations_fold_the_edge(self):
+        m, one = self._w(amount=2, iterations=1)
+        _, three = self._w(amount=2, iterations=3)
+        assert _edge(three) - _edge(m) > 1.5 * (_edge(one) - _edge(m))   # extra edge: more folding
+
+    def test_one_iteration_is_the_plain_warp(self):
+        _, a = self._w(amount=2)
+        _, b = self._w(amount=2, iterations=1)
+        assert np.array_equal(a, b)
+
+    def test_curl_deterministic_and_bounded(self):
+        assert np.array_equal(self._w(curl=True)[1], self._w(curl=True)[1])
+        with pytest.raises(RecipeError):
+            self._w(iterations=9)
+
+
 # ---------------------------------------------------------------- 3 footprints
 def fp_steps(extra):
     return [WHITE,

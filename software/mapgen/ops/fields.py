@@ -55,22 +55,42 @@ class WarpP(ParamModel):
     scale: PosFt = 8.0
     octaves: int = PField(3, ge=1, le=6)
     drift: Point = [0.0, 0.0]
+    iterations: int = PField(1, ge=1, le=6)
+    curl: bool = False
 
 
 @op("warp", params=WarpP, inputs={"src": (Field, Mask)}, output="same", group="3 fields")
 def warp(ctx, p, src):
-    """Domain warp: drag a field or mask through a noise flow, each pixel moved up to `amount` feet by noise with features `scale` feet across; `drift` [dx, dy] (feet) adds a steady push, so shapes smear downwind. Curls mist into wisps, makes shorelines and stains swirl. Returns the same kind of layer it was given."""
+    """Domain warp: drag a field or mask through a noise flow, each pixel moved up to `amount` feet by noise with features `scale` feet across; `drift` [dx, dy] (feet) adds a steady push, so shapes smear downwind. `iterations` > 1 warps the warp (nested domain warping: each pass uses fresh noise), which folds shapes into filaments. `curl: true` instead follows the curl of the noise, a swirling flow that neither bunches nor thins, traced in `iterations` steps along its streamlines, so shapes curl into eddies like smoke. Smooth (blurred) inputs swirl best. Returns the same kind of layer it was given."""
     from scipy import ndimage
     h, w = ctx.frame.shape
     a = ctx.frame.px(p.amount)
     sc = ctx.frame.px(p.scale)
-    dx = fbm((h, w), sc, ctx.seed, octaves=p.octaves) * a
-    dy = fbm((h, w), sc, ctx.seed ^ 0x5F3759DF, octaves=p.octaves) * a
     ys, xs = np.mgrid[0:h, 0:w].astype(np.float32)
+    px, py = xs.copy(), ys.copy()
+    if p.curl:
+        n = fbm((h, w), sc, ctx.seed, octaves=p.octaves)
+        gy, gx = np.gradient(ndimage.gaussian_filter(n, max(sc / 16, 0.5)))
+        vx, vy = gy, -gx                                   # curl of a scalar potential: divergence-free
+        vmax = float(np.percentile(np.hypot(vx, vy), 99)) or 1.0
+        step = a / p.iterations / vmax
+        for _ in range(p.iterations):                      # trace each sample back along the streamline
+            px -= ndimage.map_coordinates(vx, [py, px], order=1, mode="nearest") * step
+            py -= ndimage.map_coordinates(vy, [py, px], order=1, mode="nearest") * step
+    else:
+        for k in range(p.iterations):
+            seed = ctx.seed if k == 0 else (ctx.seed * 31 + k * 7919) & 0x7FFFFFFF
+            dx = fbm((h, w), sc, seed, octaves=p.octaves) * a
+            dy = fbm((h, w), sc, seed ^ 0x5F3759DF, octaves=p.octaves) * a
+            if k:                                          # nested: the new offset is read at the warped point
+                dx = ndimage.map_coordinates(dx, [py, px], order=1, mode="nearest")
+                dy = ndimage.map_coordinates(dy, [py, px], order=1, mode="nearest")
+            px -= dx
+            py -= dy
     # sampling upstream of the drift pushes the pattern downstream
-    xs -= dx + ctx.frame.px(p.drift[0])
-    ys -= dy + ctx.frame.px(p.drift[1])
-    out = ndimage.map_coordinates(src.data, [ys, xs], order=1, mode="nearest").astype(np.float32)
+    px -= ctx.frame.px(p.drift[0])
+    py -= ctx.frame.px(p.drift[1])
+    out = ndimage.map_coordinates(src.data, [py, px], order=1, mode="nearest").astype(np.float32)
     return type(src)(out)
 
 

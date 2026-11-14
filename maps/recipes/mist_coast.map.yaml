@@ -54,7 +54,7 @@ steps:
   - {op: intersect, out: ripples_land, of: [ripples, land]}
   - {op: stroke, src: ripples_land, width: 0.06, dash: [1.6, 0.9], jitter: 0.5, opacity: 0.25, color: "#5d6466"}
   - {op: stipple, mask: land_m, density: 2.5, falloff: null, size: 0.06, opacity: 0.35, color: "#4c5254", id: sand_grit}
-  - {op: stipple, mask: wet_m, density: 4, falloff: 2.5, size: 0.07, opacity: 0.4, id: wet_grit}
+  - {op: stipple, mask: sea_m, side: outside, density: 16, falloff: 7, size: 0.06, opacity: 0.5, color: "#3f4749", id: shore_stipple}   # densest at the water
   # swash marks: the wobbly lines each spent wave leaves on the wet sand
   - {op: offset, out: swash1_o, src: sea, by: 1.1}
   - {op: roughen_geom, out: swash1, src: swash1_o, amount: 0.45, scale: 2.5}
@@ -67,15 +67,24 @@ steps:
   - {op: stroke, src: swash3, width: 0.05, dash: [1.8, 2.0], jitter: 0.7, color: "#4a5254", opacity: 0.28}
   # the waterline itself: a medium, wobbling ink line (not the heavy coast stroke)
   - {op: stroke, src: land_m, width: 0.14, opacity: 0.9}                    # the mask's edge: the waterline only
-  # surf: a bright broken foam band at the waterline, lace behind it
-  - {op: band, out: foam_m, src: land_m, inner: 0, outer: 1.4}
+  # surf: a dense broken line at the break and scraps of lace behind it that thin out seaward. Foam sits
+  # on the water, so it casts a soft shadow south-east onto it (light from the north-west).
+  - {op: band, out: foam_break, src: land_m, inner: 0, outer: 0.9}
   - {op: noise, out: foam_n, scale: 2.5, octaves: 3, stretch: 2, angle: 100, id: foam_noise}
-  - {op: field_to_mask, out: foam_gaps, src: foam_n, lo: -0.4, hi: 0.05}
-  - {op: combine, out: foam_m, of: [foam_m, foam_gaps], mode: min}
-  - {op: warp, out: foam_m, src: foam_m, amount: 0.5, scale: 2, id: foam_curl}
-  - {op: blur, out: foam_m, src: foam_m, sigma: 0.2}
-  - {op: fill, mask: foam_m, color: "#eef4f3", opacity: 0.85, id: foam}
-  - {op: stipple, mask: foam_m, density: 6, falloff: 1.2, side: outside, size: 0.07, color: "#e8f0f0", opacity: 0.7, id: foam_lace}
+  - {op: field_to_mask, out: foam_gaps, src: foam_n, lo: -0.25, hi: 0.1}
+  - {op: combine, out: foam_break, of: [foam_break, foam_gaps], mode: min}
+  - {op: band, out: lace_zone, src: land_m, inner: 0.6, outer: 3.2}
+  - {op: blur, out: lace_zone, src: lace_zone, sigma: 0.6}
+  - {op: noise, out: lace_n, scale: 2.0, kind: billow, octaves: 3, id: lace_noise}
+  - {op: field_to_mask, out: lace_m, src: lace_n, lo: 0.05, hi: 0.25}
+  - {op: combine, out: lace_m, of: [lace_m, lace_zone], mode: mul}
+  - {op: combine, out: foam_m, of: [foam_break, lace_m], mode: max}
+  - {op: warp, out: foam_m, src: foam_m, amount: 0.6, scale: 2.5, curl: true, iterations: 3, id: foam_curl}
+  - {op: combine, out: foam_m, of: [foam_m, sea_m], mode: min}                    # foam only on the water
+  - {op: shadow, mask: foam_m, mode: drop, offset: [0.25, 0.3], blur: 0.25, strength: 0.4, color: "#0d1a1f"}
+  - {op: fill, mask: foam_m, color: "#eef4f3", opacity: 0.9, id: foam}
+  - {op: stroke, src: foam_m, width: 0.04, color: "#5f7378", opacity: 0.5}        # a fine edge so the scraps read
+  - {op: stipple, mask: foam_break, density: 8, falloff: 1.6, side: outside, size: 0.06, color: "#e8f0f0", opacity: 0.6, id: foam_spray}
   # incoming waves: broken crest lines parallel to the shore, each with a dark trough line on its seaward
   # side (the water's shading), fading and spreading further out
   - {op: offset, out: w1_o, src: land, by: 2.2}
@@ -115,7 +124,6 @@ steps:
   - {op: noise, out: mist_a, scale: 12, octaves: 4, stretch: 2.5, angle: 170, id: mist_a}
   - {op: noise, out: mist_b, scale: 5, kind: billow, octaves: 3, stretch: 3, angle: 165, id: mist_b}
   - {op: mix, out: mist_f, of: [mist_a, mist_b], weights: [0.8, 0.3]}
-  - {op: warp, out: mist_f, src: mist_f, amount: 2.5, scale: 6, drift: [-3, 0.5], id: mist_curl}
   - {op: footprints, out: stones_m, kinds: [boulder, rubble]}
   - {op: band, out: stone_pool, src: stones_m, inner: 0.3, outer: 2.2}          # a ring round each stone, not over it
   - {op: blur, out: stone_pool, src: stone_pool, sigma: 0.8}
@@ -123,12 +131,15 @@ steps:
   - {op: blur, out: surf_pool, src: surf_pool, sigma: 1.0}
   - {op: mix, out: mist_f, of: [mist_f, stone_pool, surf_pool], weights: [1, 0.45, 0.15]}
   - {op: field_to_mask, out: mist_m, src: mist_f, lo: -0.3, hi: 0.45}
+  - {op: blur, out: mist_m, src: mist_m, sigma: 0.6}                            # smooth inputs swirl best
+  - {op: warp, out: mist_m, src: mist_m, amount: 4, scale: 9, curl: true, iterations: 5, drift: [-2.5, 0.4], id: mist_curl}
+  - {op: warp, out: mist_m, src: mist_m, amount: 1.2, scale: 4, iterations: 2, id: mist_fold}
   - {op: combine, out: mist_m, of: [mist_m, stones_m], mode: sub}                # stones stand up out of it
   - {op: fill, color: "#9fc4cf", blend: screen, opacity: 0.12, atmosphere: true, id: mist_ground}      # a low haze everywhere
   - {op: fill, mask: mist_m, color: "#d4ecf2", blend: screen, opacity: 0.72, atmosphere: true, id: mist_banks}
   - {op: blur, out: mist_glow, src: mist_m, sigma: 3.5}
   - {op: fill, mask: mist_glow, color: "#a6dbe6", blend: screen, opacity: 0.45, atmosphere: true, id: mist_glow}
-  - {op: warp, out: wisp_f, src: mist_b, amount: 1.5, scale: 3, drift: [-1.5, 0], id: wisp_curl}
+  - {op: warp, out: wisp_f, src: mist_b, amount: 2.5, scale: 4, curl: true, iterations: 5, drift: [-1.5, 0], id: wisp_curl}
   - {op: field_to_mask, out: wisp_m, src: wisp_f, lo: 0.25, hi: 0.6}
   - {op: fill, mask: wisp_m, color: "#f0fafc", blend: screen, opacity: 0.55, atmosphere: true, id: mist_wisps}
   - {op: finish}
