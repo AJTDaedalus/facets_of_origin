@@ -363,3 +363,10 @@ biggest difference. I prefer no gridlines on my maps."
   proof recipe (the `grid` op stays available; `.dd2vtt` keeps `pixels_per_grid`
   so VTT grids still align).
 - Renders for review: `E:\mapgen_review\v2\` (plus comparison sheets, kept local).
+
+## 2026-11-13 — detail round (owner: "run it")
+
+- **Props:** every solid prop part gets diagonal hatching in its south-east crescent (`shade_crescent`, computed after rotation, so it's always the shadow side), except trees (own shading), rugs, banners, pebbles, rubble and markers. New detail lines: barrel staves, blanket folds, chest boards, crate boards, boulder cracks, pillar fluting.
+- **Walls:** `cave_walls` adds rock texture inside the wall band (cracks + grit); `stone_room` adds weathering (fine cracks + grit); `wall_stone` mortar is darker (inked joints).
+- **Weights:** ink is heavier: bold 0.75, heavy 0.52, medium 0.3, fine 0.12; prop inks +25%.
+- Tests: `test_detail.py` (12); trees golden re-recorded. Full suite 2309 passed. Renders: `E:\mapgen_review\v4\`.
