@@ -648,7 +648,7 @@ A window: a pale pane across the wall with a centre line. Walls still block move
 
 ### `prop` → paints in place
 
-Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow.
+Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east.
 
 | param | type | default |
 |---|---|---|
@@ -879,7 +879,7 @@ Params: `src`='cave', `wall`='wall', `thickness`=1.2, `exclude`=None
 
 Water along a smoothed path `width` feet wide, clipped to the walkable mask `clip`, with an inked bank; makes mask `${name}`.
 
-Params: `points`=[[0, 0], [10, 10]], `width`=6, `name`='stream', `clip`='floor', `bank`=1.0
+Params: `points`=[[0, 0], [10, 10]], `width`=6, `name`='stream', `clip`='floor', `bank`=1.0, `bank_spacing`=0.22
 
 ### `ground_patches`
 

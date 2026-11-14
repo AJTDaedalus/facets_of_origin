@@ -135,7 +135,7 @@ macros:
 
   stream:
     doc: "Water along a smoothed path `width` feet wide, clipped to the walkable mask `clip`, with an inked bank; makes mask `${name}`."
-    params: {points: [[0, 0], [10, 10]], width: 6, name: stream, clip: floor, bank: 1.0}
+    params: {points: [[0, 0], [10, 10]], width: 6, name: stream, clip: floor, bank: 1.0, bank_spacing: 0.22}
     steps:
       - {op: path, out: "${name}_g", points: "${points}", width: "${width}", smooth: 3}
       - {op: roughen_geom, out: "${name}_g", src: "${name}_g", amount: 0.5, scale: 5}
@@ -148,7 +148,7 @@ macros:
       - {op: shrink, out: "${name}_inner", src: "${name}", by: 0.8}
       - {op: combine, out: "${name}_flow", of: ["${name}_flow", "${name}_inner"], mode: min}
       - {op: fill, mask: "${name}_flow", color: "#eef4f4", opacity: 0.7}
-      - {op: shade_lines, mask: "${name}", length: "${bank}", spacing: 0.22, width: 0.07, color: "#1f3a45", opacity: 0.75,
+      - {op: shade_lines, mask: "${name}", length: "${bank}", spacing: "${bank_spacing}", width: 0.07, color: "#1f3a45", opacity: 0.75,
          shadow: null, id: "${name}_bank"}
       - {op: stroke, src: "${name}", weight: medium, opacity: 0.9}
 

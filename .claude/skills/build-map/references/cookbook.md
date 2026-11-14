@@ -26,7 +26,7 @@ measure:                 # optional: sizes tests can check (named geometries)
 steps:
   - {op: base}           # parchment canvas named `canvas`
   # ... geometry, floors, walls, props ...
-  - {op: finish, floor: floor}
+  - {op: finish}
   - {op: compass, at: ne}
   - {op: scale_bar, at: nw}
   - {op: title, text: Name, position: bottom}

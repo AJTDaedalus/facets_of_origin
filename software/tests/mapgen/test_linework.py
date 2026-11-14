@@ -189,3 +189,35 @@ class TestMacroParams:
         r = parse_recipe({"map": header(), "steps": [{"op": "stream", "points": [[0, 0], [5, 5]], "bank": 0.5}]},
                          style=Style(**yaml.safe_load(STYLE_FILE.read_text())))
         assert any(s.op == "shade_lines" and s.params()["length"] == 0.5 for s in r.steps)
+
+
+class TestCookbookSnippets:
+    """Every `- {op: ...}` line in the skill's cookbook must parse against the real style (V1)."""
+
+    def test_cookbook_steps_parse(self):
+        import re
+        book = Path(__file__).resolve().parents[3] / ".claude" / "skills" / "build-map" / "references" / "cookbook.md"
+        style = Style(**yaml.safe_load(STYLE_FILE.read_text()))
+        lines = [l.strip()[2:] for l in book.read_text().splitlines()
+                 if re.match(r"^\s+- \{op: ", l) and "..." not in l and "[x, y]" not in l]
+        assert len(lines) > 15
+        for line in lines:
+            step = yaml.safe_load(line)
+            parse_recipe({"map": header(), "steps": [step]}, style=style)
+
+    def test_bank_spacing_is_a_param(self):
+        r = parse_recipe({"map": header(), "steps": [{"op": "stream", "points": [[0, 0], [5, 5]], "bank_spacing": 2.0}]},
+                         style=Style(**yaml.safe_load(STYLE_FILE.read_text())))
+        assert any(s.op == "shade_lines" and s.params()["spacing"] == 2.0 for s in r.steps)
+
+    def test_bushes_still_rotate(self):
+        a = styled([{"op": "canvas", "out": "canvas", "color": "#ffffff"},
+                    {"op": "prop", "kind": "bush", "at": [20, 15], "size": 6, "id": "b"}])
+        b = styled([{"op": "canvas", "out": "canvas", "color": "#ffffff"},
+                    {"op": "prop", "kind": "bush", "at": [20, 15], "size": 6, "rotate": 137, "id": "b"}])
+        assert not np.array_equal(a, b)
+
+    def test_macro_using_out_without_declaring_it(self):
+        st = Style(macros={"m": {"steps": [{"op": "noise", "out": "${out}", "scale": 5}]}})
+        r = parse_recipe({"map": header(), "steps": [{"op": "m", "out": "x"}]}, style=st)
+        assert r.steps[0].out == "x"

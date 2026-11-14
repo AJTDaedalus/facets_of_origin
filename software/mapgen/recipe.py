@@ -204,6 +204,8 @@ def _expand(steps: list[dict], style: Style, depth: int = 0, parent: str | None 
                 raise RecipeError(f"macro '{op}' doesn't take 'out' (it names its own layers; see its params)")
             step.pop("op")
             declared = set((macro.get("params") or {}).keys())
+            if "${out}" in yaml.safe_dump(macro.get("steps") or []):
+                declared.add("out")
             unknown = sorted(set(step) - declared)
             if unknown:
                 raise RecipeError(f"macro '{op}' doesn't take {', '.join(unknown)} (its params: "

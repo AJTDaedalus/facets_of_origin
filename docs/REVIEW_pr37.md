@@ -272,3 +272,51 @@ One shading convention for the whole style, documented in `linework.py`, SKILL.m
 | R12 | Documented: every line-work step inside the style's macros carries an `id`, and the cookbook already tells authors to give scatter and noise steps one. |
 
 Tests: full suite (excluding e2e) **2293 passed**.
+
+## Verification of d069055 (2026-11-13, independent reviewer)
+
+Checked against the code at `d069055`, re-running the original measurements. `cd software && python3 -m pytest tests/mapgen -q`: **389 passed**. Every repo recipe (6) and golden (4) parses and plans under the new strict macro-param check.
+
+### Per finding
+
+| ID | Verdict | Evidence |
+|---|---|---|
+| R1 | **RESOLVED** | Count is now `round(density × Σweight / scale²)`, sampled with `rng.choice(p=weight)` over the cropped region. Re-run, 10×10 ft room, density 2: `falloff: null` gives **163 / 163 / 163** dots in 12 / 40 / 120 ft frames (was 258 / 57 / 9; 200 intended, the shortfall is overlapping dots). With `falloff: 2.5` it is 72 / 72 / 72, against ≈83 analytically. Outside + `falloff: null` with the mask on the frame border: 380 dots vs 400 expected, and 0 ink inside the mask. |
+| R2 | **RESOLVED** | Room bands (N, S, W, E): inner shadow `[-0.6, -0.8]` = 0.314 / 0.058 / 0.265 / 0.087; `shade_lines` default = 0.175 / 0.085 / 0.142 / 0.083. Both now darken N/W. Court, cellar and ruins recipe offsets were flipped the same way. |
+| R3 | **RESOLVED** | Raised convention: inner `[0.4, 0.5]` = 0.066 / 0.242 / 0.066 / 0.242; `shade_lines shadow: [-0.6, -0.8]` = 0.024 / 0.236 / 0.035 / 0.196. Both darken S/E, matching the drop shadows and the tree crescent. Applied in `brush` and `forest_mass`. |
+| R4 | **RESOLVED** (one note) | `draw_prop` forces `rotate = 0` for `tree`/`bush` (`props.py:297-298`). Note V2. |
+| R5 | **RESOLVED for small masks** | `_crop` uses the bbox of `m > 0.01` plus a margin, and `composite_patch` composites only the window. A mask that fills most of the frame (a court or cave floor) gets no saving: still two EDTs and a ~10 Mpx blend per op, ~7–11 s for `stipple` on the 3000×3440 test frame. Acceptable (Low); the EDT-free normals idea is still open. |
+| R6 | **RESOLVED**, with one regression (V1) | Rubric 6, SKILL order line, DESIGN §2.5 / §7.2 / §7.3 and the cookbook grid lines are all updated. |
+| R7 | **RESOLVED** | `finish` has `params: {}`; both recipes updated. |
+| R8 | **RESOLVED** | `walkable` and the "grid" comment are gone from `crystal_court.map.yaml`. The court change is still styling only (shadow offset sign, no new features). |
+| R9 | **RESOLVED** | +13 tests (absolute density, outside with shadow, hole, border, crack length/branching, macro wiring, tree orientation, param validation) and a `linework_room` golden. |
+| R10 | **RESOLVED** | `coastline` hatches from `${name}_land`. |
+| R11 | **PARTIAL** | `stream` gained `bank` (stroke length) only. `spacing: 0.22` ft is still hard-coded, i.e. 0.73 px at town scale, so strokes still merge into a band. `proof_town` doesn't pass `bank`. Low: expose `bank_spacing` too, or leave it until a town needs it. |
+| R12 | **RESOLVED** (documented) | Macro-internal steps are already id-prefixed by `_expand`. Id-less recipe steps still re-roll when steps are inserted, by design. |
+
+### Regressions and edge cases in d069055
+
+- **V1 (Medium, confirmed): the cookbook's starter template now fails to parse.**
+  `.claude/skills/build-map/references/cookbook.md:29` still has `- {op: finish, floor: floor}`, and the new strict check rejects it: `RecipeError: macro 'finish' doesn't take floor (its params: none)`. It is the first template the build-map skill copies from. Fix: change it to `- {op: finish}`. A grep finds no other callers that pass removed params (code, recipes, docs).
+- **V2 (Low): an explicit `rotate` on a tree/bush is now silently ignored.** For example `{op: prop, kind: tree, rotate: 30}` renders unrotated. `ops.md` (prop: "rotated `rotate` degrees") doesn't say so. Bushes have no shading crescent, so suppressing their rotation only costs shape variety. Either note it in the `prop`/`scatter` docs or keep rotation for `bush`.
+- **Strict macro-param check (`recipe.py:206-210`)**: `id` and `seed_offset` are popped before the check. Nested calls work, since inner steps get a parent-prefixed `id` that is popped too (checked with `stone_room` → `floor_fill`, and `cave` → `cave_floor` → `floor_fill`). All `${var}` used in every macro body are declared in its `params`, so no macro is unusable. One latent edge: a macro that uses `${out}` without declaring `out` would pass the earlier `out` check and then be rejected here. No such macro exists; declaring `out` in `params` is the existing convention (`test_review_fixes.py:294`).
+- **`_crop` edge cases (all clean):**
+  - `side: outside` with the mask touching the frame border: strokes on the three free sides, none inside, none past the border.
+  - A 0.3 ft mask through all three ops, inside and outside: no error.
+  - Empty and full masks through every op/side, including `stipple side: outside, falloff: null`: no error. The full-frame box for outside + `falloff: null` is the right choice.
+  - The margin (stroke length + 2 px + 2) keeps contours away from crop edges, so the one-sided `np.gradient` at crop borders doesn't matter.
+- **Flipped shadow offsets**: consistent across `floor_fill`, the three recipes and the court (sunken = negative offset), and `brush`/`forest_mass` (raised = positive). Drop-shadow offsets were left positive, which is correct.
+- **Docs**: the new shading-convention text in `linework.py`, SKILL.md and `ops.md` agrees with the code.
+
+### Verdict
+
+**Not quite clean.** One required fix before merge: **V1** (cookbook line 29, `{op: finish, floor: floor}` → `{op: finish}`). Optional: V2 (document or narrow the tree/bush rotate override) and the R11 bank spacing. Everything else is resolved.
+
+### Verification follow-ups: resolved before merge (2026-11-13)
+
+- **V1:** the cookbook starter now uses `{op: finish}`. A new test parses every `- {op: …}` line in the cookbook against the real style, so a stale template fails the suite.
+- **R11:** `stream` takes `bank_spacing` as well as `bank`, so town-scale recipes can space the bank strokes out (tested).
+- **V2:** only trees ignore `rotate` (their shading crescent); bushes rotate again (tested). The `prop` docstring says so.
+- **Latent edge:** a macro whose body uses `${out}` accepts `out` without declaring it (tested).
+
+Tests: full suite (excluding e2e) **2297 passed**.
