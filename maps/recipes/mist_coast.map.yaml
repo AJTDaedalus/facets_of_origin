@@ -202,6 +202,3 @@ steps:
   - {op: fill, mask: wisp_m, color: "#f0fafc", blend: screen, opacity: 0.55, atmosphere: true, id: mist_wisps}
   - {op: finish}
   - {op: vignette, strength: 0.55, start: 0.3, atmosphere: true}
-  - {op: compass, at: ne, size: 5}
-  - {op: scale_bar, at: nw}
-  - {op: title, text: The Pale Strand, position: bottom, size: 2.2}
