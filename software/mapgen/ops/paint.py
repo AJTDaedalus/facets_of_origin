@@ -81,6 +81,27 @@ class StrokeP(ParamModel):
     dash: list[float] | None = None
     jitter: Unit = 0.0
     side: Literal["center", "inside", "outside"] = "center"
+    taper: Unit = 0.0
+    clip: Ref | None = None
+
+
+def _tapered(ln, width_ft, taper):
+    """A line as a polygon that swells to `width_ft` in the middle and thins to (1 - taper) of it at the ends."""
+    L = ln.length
+    n = int(min(max(L / max(width_ft, 0.05), 8), 200))
+    if L <= 0:
+        return Polygon()
+    verts = np.asarray(ln.coords)
+    at = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(verts, axis=0), axis=1))]) / L
+    t = np.unique(np.clip(np.concatenate([np.linspace(0, 1, n + 1), at]), 0, 1))   # keep every corner
+    pts = np.array([ln.interpolate(x, normalized=True).coords[0] for x in t])
+    tang = np.gradient(pts, axis=0)
+    norm = np.stack([-tang[:, 1], tang[:, 0]], axis=1)
+    ln_ = np.linalg.norm(norm, axis=1, keepdims=True)
+    norm = np.divide(norm, ln_, out=np.zeros_like(norm), where=ln_ > 0)
+    hw = width_ft / 2 * ((1 - taper) + taper * np.sin(np.pi * t))[:, None]
+    poly = Polygon(np.vstack([pts + norm * hw, (pts - norm * hw)[::-1]]))
+    return poly if poly.is_valid else poly.buffer(0)
 
 
 def _width_ft(ctx, p) -> float:
@@ -114,7 +135,7 @@ def lines_of(g):
 
 
 def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, double=0.0,
-                          dash=None, side="center", seed=0, patch=False, jitter=0.0):
+                          dash=None, side="center", seed=0, patch=False, jitter=0.0, taper=0.0):
     rng = np.random.default_rng(seed + 991)
     lines = lines_of(g)
     if side != "center" and isinstance(g, (Polygon, MultiPolygon)):
@@ -150,7 +171,9 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
         return None if patch else np.zeros(ctx.frame.shape, np.float32)
     cap = 1 if (not dash or jitter) else 2
     pieces = [(o, wm) for o, wm in out if o.length > 0]
-    if all(wm == 1.0 for _, wm in pieces):
+    if taper > 0:
+        geom = shapely.unary_union([_tapered(o, width_ft * wm, taper) for o, wm in pieces])
+    elif all(wm == 1.0 for _, wm in pieces):
         lines = [o for o, _ in pieces]
         geom = shapely.MultiLineString(lines).buffer(width_ft / 2, cap_style=cap, quad_segs=8) if lines else Polygon()
     else:
@@ -160,17 +183,19 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
     return rasterize_geom(ctx.frame, geom)
 
 
-@op("stroke", params=StrokeP, inputs={"into": Image, "src": (Mask, Geometry)}, group="4 paint")
-def stroke(ctx, p, into, src):
-    """Ink a line along a mask's edge or a geometry's outline: width in feet or a style `weight` (heavy/medium/fine), `roughness` wobble, `double` lines `double` feet apart, `dash: [on, off, ...]` (geometry only; `jitter` 0..1 randomises dash lengths and widths for a hand-inked look), `side`."""
+@op("stroke", params=StrokeP, inputs={"into": Image, "src": (Mask, Geometry), "clip": Mask}, group="4 paint")
+def stroke(ctx, p, into, src, clip=None):
+    """Ink a line along a mask's edge or a geometry's outline: width in feet or a style `weight` (heavy/medium/fine), `roughness` wobble, `double` lines `double` feet apart, `dash: [on, off, ...]` (geometry only; `jitter` 0..1 randomises dash lengths and widths for a hand-inked look), `side`. `taper` 0..1 (geometry only) swells each line or dash in the middle and thins its ends, like a brush or dip pen. `clip` (a mask) fades the ink where the mask is low: ink only the shadowed side of ripples, or keep crests off the sand."""
     w = _width_ft(ctx, p)
     fr = ctx.frame
     if isinstance(src, Geometry):
         a = stroke_geometry_alpha(ctx, src.geom, w, p.roughness, p.rough_scale, p.double, p.dash, p.side, ctx.seed,
-                                  jitter=p.jitter)
+                                  jitter=p.jitter, taper=p.taper)
     else:
         if p.dash:
             raise RecipeError("dash needs a Geometry source, not a Mask")
+        if p.taper:
+            raise RecipeError("taper needs a Geometry source, not a Mask")
         sd = signed_distance(src.data)
         if p.roughness > 0:
             sd = sd + fbm(fr.shape, fr.px(p.rough_scale), ctx.seed, 3) * 2.0 * fr.px(p.roughness)
@@ -180,6 +205,8 @@ def stroke(ctx, p, into, src):
         a = np.zeros(fr.shape, np.float32)
         for cc in centers:
             a = np.maximum(a, np.clip(hw + 0.5 - np.abs(sd - cc), 0, 1))
+    if clip is not None:
+        a = a * np.clip(clip.data, 0, 1)
     col = resolve_color(ctx.style, p.color)
     composite_inplace(into.data, col[:3], (a * p.opacity * col[3]).astype(np.float32))
 

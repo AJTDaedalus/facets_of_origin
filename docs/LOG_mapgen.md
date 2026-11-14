@@ -371,3 +371,46 @@ biggest difference. I prefer no gridlines on my maps."
 - **Weights:** ink is heavier: bold 0.75, heavy 0.52, medium 0.3, fine 0.12; prop inks +25%.
 - Tests: `test_detail.py` (12); trees golden re-recorded. Full suite 2309 passed. Renders: `E:\mapgen_review\v4\`.
 - Review (`docs/REVIEW_pr38.md`, 14 findings) resolved: `wall_band` op; outlined-parts-only shading; thickness-based crescents; vectorised hatching (~2.6 ms per prop); unique wall names; mile-scale ink. The canon court gets heavier ink (styling only). Full suite 2319 passed.
+
+## 2026-11-14: tool gaps from the misty coast (owner: "take on each gap")
+
+The gaps below surfaced while building `maps/recipes/mist_coast.map.yaml` from the owner's description.
+
+1. **Recipe-level style.** `palette:`, `materials:` and `ink:` can sit at the top of a recipe and merge over its includes (`RECIPE_STYLE_KEYS` in `recipe.py`).
+2. **Directional noise and warp.**
+   - `noise` takes `stretch` and `angle`. It samples an isotropic lattice onto rotated, squashed coordinates. With `stretch` 1 the output is byte-identical to before.
+   - The new `warp` op drags a Field or Mask through a noise flow, with an optional `drift`, and returns the same type.
+3. **Prop footprints.**
+   - The new `footprints` op makes a mask of the props drawn so far, filtered by step id (`of`) or `kinds`, with optional `grow`.
+   - The collector now tags each footprint with its step and kind.
+   - Legend icons are no longer recorded as footprints.
+4. **Atmosphere steps.**
+   - A step can carry `atmosphere: true`; a macro call passes it to every step in its body.
+   - `Engine(skip_atmosphere=True)` drops those steps' paint but keeps the layers they make. Seeds stay keyed per step.
+   - `quality --recipe` checks the bands on the render under the atmosphere. `--as-drawn` opts out.
+   - The owner's packs hold no misty or coastal battle map (searched 2026-11-14), so this replaces a comparator rather than inventing one.
+
+Tests: `tests/mapgen/test_gaps.py` adds 33. mapgen suite 515 passed; full suite, excluding e2e, 2419 passed. The cookbook has a new section, "Mood, mist and weather", and `ops.md` was regenerated.
+
+## 2026-11-14 — Coast styling: sand, lace, crests
+
+The owner said the sand looked weak and asked about the lace and crests. I researched shader write-ups and drawing guides first. New engine pieces, each with tests in `tests/mapgen/test_coast_tools.py` (30):
+- `cells`: Worley noise, giving distance to the cell border or the centre, for foam lace.
+- `facing`: a mask of the slopes that face a direction, so ripple strokes ink only their shadow sides.
+- `stroke`: `clip` (a mask) and `taper` (swells each line or dash in the middle).
+- `stipple`: `weight` (a mask that scales density per pixel), for clumped grain.
+- `roughen_geom`: `mode: cusps` (outward scallops with sharp horns), for beach cusps.
+
+Recipe changes in `mist_coast`:
+- cusped waterline, berm with scarp, wrack line, shadow-side ripples, clumped grain
+- scour and tails on the stones
+- a Worley lace net that fades seaward
+- smoothed, tapered crests with lip shadows
+
+The land shape now extends past the frame, because cusping the frame slivers made a rectangle of bands.
+
+Metrics under atmosphere:
+- Q4 ink rose from 0.093 to 0.100 but is still below its band.
+- Q2, Q3 and Q5s are still out, as before.
+
+No goldens changed. The mapgen suite has 549 passing.

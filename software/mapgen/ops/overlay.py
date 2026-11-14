@@ -331,7 +331,7 @@ def legend(ctx, p, into):
         y = cy - hft / 2 + p.size / 2 + row * (i + 0.5)
         x_icon = cx - wft / 2 + p.size * 1.2
         if k in PROPS:
-            draw_prop(ctx, into.data, k, (x_icon, y), p.size * 1.1, 0, 7, shadow=0.0)
+            draw_prop(ctx, into.data, k, (x_icon, y), p.size * 1.1, 0, 7, shadow=0.0, record=False)
             ctx.collector.legend.setdefault(k, k)
         name = ctx.collector.legend.get(k, k).capitalize()
         tx = x_icon + p.size * 1.1 + len(name) * p.size * 0.31

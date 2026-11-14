@@ -45,6 +45,7 @@ class Step(BaseModel):
     out: str | None = None
     id: str | None = None
     seed_offset: int = 0
+    atmosphere: bool = False      # a mood layer (mist, dimming): `quality` also measures the map without it
 
     def params(self) -> dict[str, Any]:
         return dict(self.model_extra or {})
@@ -79,6 +80,9 @@ def _fmt_validation(e: ValidationError, prefix: str = "") -> str:
     return "; ".join(parts)
 
 
+RECIPE_STYLE_KEYS = ("palette", "materials", "ink")
+
+
 def parse_recipe(data: Any, style: Style | None = None, source: str | None = None) -> Recipe:
     """Validate a recipe dict. Macros and defaults from ``style`` are applied."""
     if not isinstance(data, dict):
@@ -87,6 +91,15 @@ def parse_recipe(data: Any, style: Style | None = None, source: str | None = Non
         raise RecipeError("recipe has no 'map' header")
     data = dict(data)
     style = style or Style()
+    local = {k: data.pop(k) for k in RECIPE_STYLE_KEYS if k in data}
+    if local:                                     # a recipe's own palette/materials/ink win over its includes
+        for k, v in local.items():
+            if not isinstance(v, dict):
+                raise RecipeError(f"'{k}' must be a mapping")
+        try:
+            style = Style(**_merge_style(style.model_dump(), local))
+        except ValidationError as e:
+            raise RecipeError(_fmt_validation(e)) from None
     raw_steps = data.get("steps") or []
     if not isinstance(raw_steps, list):
         raise RecipeError("'steps' must be a list")
@@ -200,6 +213,7 @@ def _expand(steps: list[dict], style: Style, depth: int = 0, parent: str | None 
             env = dict(macro.get("params") or {})
             call_id = step.pop("id", None)
             call_offset = int(step.pop("seed_offset", 0) or 0)
+            call_atmos = bool(step.pop("atmosphere", False))
             if "out" in step and "${out}" not in yaml.safe_dump(macro.get("steps") or []):
                 raise RecipeError(f"macro '{op}' doesn't take 'out' (it names its own layers; see its params)")
             step.pop("op")
@@ -215,6 +229,9 @@ def _expand(steps: list[dict], style: Style, depth: int = 0, parent: str | None 
             if call_offset:
                 for b in body:
                     b["seed_offset"] = int(b.get("seed_offset", 0) or 0) + call_offset
+            if call_atmos:
+                for b in body:
+                    b["atmosphere"] = True
             cid = call_id if call_id is not None else (f"{parent}/{i}" if parent else f"{op}@{len(out)}")
             out.extend(_expand(body, style, depth + 1, parent=cid))
         else:

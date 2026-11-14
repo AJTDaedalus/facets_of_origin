@@ -180,11 +180,13 @@ class StippleP(ParamModel):
     side: Literal["inside", "outside"] = "inside"
     color: Any = "ink"
     opacity: Unit = 0.6
+    weight: Ref | None = None
 
 
-@op("stipple", params=StippleP, inputs={"into": Image, "mask": Mask}, group="4 paint")
-def stipple(ctx, p, into, mask):
-    """Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. Grit along walls, dust round rubble, texture on rock."""
+@op("stipple", params=StippleP, inputs={"into": Image, "mask": Mask, "weight": Mask}, group="4 paint")
+def stipple(ctx, p, into, mask, weight=None):
+    """Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. `weight` (a mask, 0..1) also scales the density pixel by pixel: feed it a noise mask to clump the dots, dense in hollows and shadow, sparse on crests. Grit along walls, dust round rubble, texture on rock and sand."""
+    w_mask = weight
     fr = ctx.frame
     rng = ctx.rng
     outside = p.side == "outside"
@@ -201,6 +203,8 @@ def stipple(ctx, p, into, mask):
         weight = np.clip(1 - dist / p.falloff, 0, 1) * region
     else:
         weight = region.astype(np.float32)
+    if w_mask is not None:
+        weight = weight * np.clip(w_mask.data[y0:y1, x0:x1], 0, 1)
     total = float(weight.sum())
     if total <= 0:
         return

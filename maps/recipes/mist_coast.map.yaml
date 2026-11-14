@@ -1,0 +1,204 @@
+# Generic outdoor battle map (owner request 2026-11-14), homebrew, no canon:
+#   "A battlemap of an eerie, white sand coast with occasional black stones washed up. A nearly
+#    glowing mist covers the sands and the water, slightly transparent, dancing between the stones
+#    and waves. It looks cold and threatening in the dim light."
+# 60×40 ft, 5 ft squares. Sea to the east, white sand to the west, a wet-sand band and surf at the
+# waterline, black stones scattered on the sand and in the shallows, pale mist over everything.
+map:
+  title: The Pale Strand
+  width_ft: 60
+  height_ft: 40
+  feet_per_square: 5
+  px_per_square: 70
+  supersample: 2
+  seed: 1114
+  include: [styles/inked_parchment.yaml]
+
+palette:
+  # the black stones: every stone prop on this map draws from these
+  stone_light: "#4a4d52"
+  stone: "#2a2c30"
+  stone_dark: "#141518"
+
+materials:
+  white_sand: {type: dirt, colors: ["#dadddb", "#ebeeec", "#fafbfa"], scale: 9, octaves: 5, grain: 0.06, speckle: 0.07}
+  wet_sand:   {type: dirt, colors: ["#9ea5a6", "#b2b8b8", "#c4c9c8"], scale: 6, octaves: 4, grain: 0.05, speckle: 0.04}
+  cold_sea:   {type: water, shallow: "#7d9399", deep: "#34505a", depth: 12, ripples: 2.0, ripple_color: "#c9d6d8", grain: 0.04}
+
+steps:
+  - {op: base}
+  - {op: fill, material: cold_sea, id: sea_fill}
+  # ---- the shore: sand west of a wandering waterline, with a small spit at mid-map. Waves cut the
+  # waterline into a row of beach cusps: crescent bays with sharp horns pointing out to sea.
+  - {op: polygon, out: shore_shape, points: [[-5, -5], [42, -5], [41, 0], [38, 8], [40, 14], [46, 19], [43, 23], [37, 27], [36, 34], [33, 40], [32, 45], [-5, 45]]}   # past the frame, so roughening leaves no slivers of sea at the map's edges
+  - {op: roughen_geom, out: land, src: shore_shape, amount: 1.2, scale: 5}
+  - {op: rect, out: frame_r, x: 0, y: 0, w: 60, h: 40}
+  - {op: subtract, out: sea_smooth, a: frame_r, b: [land]}
+  - {op: roughen_geom, out: sea, src: sea_smooth, mode: cusps, amount: 0.5, period: 4.5, jitter: 0.35, id: cusps}
+  - {op: subtract, out: beach, a: frame_r, b: [sea]}
+  - {op: rasterize, out: land_m, src: beach}
+  - {op: rasterize, out: sea_m, src: sea}
+  - {op: fill, mask: land_m, material: white_sand, id: sand_fill}
+  # ---- the waterline, built up in soft layers rather than one hard edge
+  # the shallows: a pale wash fading out from the beach over five feet
+  - {op: band, out: shallows_wash, src: land_m, inner: 0, outer: 5}
+  - {op: blur, out: shallows_wash, src: shallows_wash, sigma: 1.6}
+  - {op: fill, mask: shallows_wash, color: "#8ea4a8", opacity: 0.55, id: shallows_fill}
+  # wet sand: darkest at the water, fading up the beach
+  - {op: band, out: wet_m, src: sea_m, inner: 0, outer: 4.5, side: outside}     # from the sea, so only the waterline
+  - {op: blur, out: wet_m, src: wet_m, sigma: 1.8}
+  - {op: fill, mask: wet_m, material: wet_sand, opacity: 0.8, id: wet_fill}
+  - {op: band, out: wet_edge, src: sea_m, inner: 0, outer: 1.5, side: outside}
+  - {op: blur, out: wet_edge, src: wet_edge, sigma: 0.6}
+  - {op: fill, mask: wet_edge, color: "#7f898b", opacity: 0.35, id: wet_dark}
+  - {op: cracks, mask: wet_edge, density: 0.05, length: 1.6, step: 0.2, wobble: 25, branch: 0.5, width: 0.035, color: "#4a5254", opacity: 0.25, id: rills}
+  # ---- the berm: the low ridge of dry sand at the high-tide line, its seaward face cut into a little
+  # scarp. A raised mass, so hatched inside its south and east edges; the scarp gets a broken line.
+  - {op: band, out: berm_m, src: sea_m, inner: 6.5, outer: 11, side: outside}
+  - {op: roughen, out: berm_m, src: berm_m, amount: 0.8, scale: 4}
+  - {op: band, out: scarp_shade, src: berm_m, inner: 0, outer: 0.9}
+  - {op: combine, out: scarp_shade, of: [scarp_shade, wet_m], mode: sub}
+  - {op: blur, out: scarp_shade, src: scarp_shade, sigma: 0.3}
+  - {op: fill, mask: scarp_shade, color: "#8f9799", opacity: 0.3, id: scarp_fill}
+  - {op: shade_lines, mask: berm_m, side: inside, shadow: [-0.6, -0.8], length: 1.1, spacing: 0.28, width: 0.04, color: "#4c5254", opacity: 0.5}
+  - {op: offset, out: scarp_o, src: sea, by: 6.5}
+  - {op: roughen_geom, out: scarp, src: scarp_o, amount: 0.5, scale: 3}
+  - {op: stroke, src: scarp, width: 0.09, dash: [2.8, 0.7], jitter: 0.6, taper: 0.8, color: "#3f4749", opacity: 0.6, clip: land_m}
+  # ---- wind ripples: contour lines of a stretched noise, inked only on their shadowed (south-east
+  # facing) sides, so each reads as a little ridge. Heavier on the berm, gone on the wet sand.
+  - {op: noise, out: dunes, scale: 2.4, octaves: 2, stretch: 4, angle: 80, id: dune_noise}   # long ripples, wind off the sea
+  - {op: facing, out: lee_m, src: dunes, lo: 0.1, hi: 0.6}
+  - {op: band, out: dry_m, src: sea_m, inner: 3.5, outer: 80, side: outside}
+  - {op: blur, out: dry_m, src: dry_m, sigma: 1.2}
+  - {op: combine, out: rip_clip, of: [lee_m, dry_m], mode: mul}
+  - {op: mix, out: rip_strength, of: [dry_m, berm_m], weights: [0.55, 0.45]}
+  - {op: field_to_mask, out: rip_strength, src: rip_strength, lo: 0, hi: 1}
+  - {op: combine, out: rip_clip, of: [rip_clip, rip_strength], mode: mul}
+  - {op: isolines, out: ripples, src: dunes, interval: 0.14}
+  - {op: stroke, src: ripples, width: 0.08, dash: [1.3, 0.5], jitter: 0.5, taper: 0.85, color: "#4a5153", opacity: 0.55, clip: rip_clip}
+  # ---- grain: clumped stipple (dense in clumps and in the ripples' shadows, sparse on their crests),
+  # thickening toward the water
+  - {op: noise, out: clump_n, scale: 2.2, octaves: 3, id: clump_noise}
+  - {op: field_to_mask, out: clump_m, src: clump_n, lo: -0.15, hi: 0.45}
+  - {op: stipple, mask: land_m, density: 7, falloff: null, size: 0.055, opacity: 0.4, color: "#4c5254", weight: clump_m, id: sand_grit}
+  - {op: stipple, mask: land_m, density: 9, falloff: null, size: 0.05, opacity: 0.35, color: "#4c5254", weight: rip_clip, id: ripple_grit}
+  - {op: stipple, mask: sea_m, side: outside, density: 16, falloff: 7, size: 0.06, opacity: 0.5, color: "#3f4749", id: shore_stipple}   # densest at the water
+  # ---- the wrack line: a broken dark band of weed and drift at the foot of the berm
+  - {op: band, out: wrack_zone, src: sea_m, inner: 5.4, outer: 6.2, side: outside}
+  - {op: noise, out: wrack_n, scale: 3, octaves: 3, stretch: 5, angle: 100, id: wrack_noise}
+  - {op: field_to_mask, out: wrack_m, src: wrack_n, lo: -0.3, hi: -0.05}
+  - {op: combine, out: wrack_m, of: [wrack_m, wrack_zone], mode: mul}
+  - {op: roughen, out: wrack_m, src: wrack_m, amount: 0.3, scale: 1}
+  - {op: fill, mask: wrack_m, color: "#3a4244", opacity: 0.35, id: wrack_fill}
+  - {op: hatch, mask: wrack_m, spacing: 0.35, length: 0.45, width: 0.04, lines: 1, angle_jitter: 180, color: "#1c2123", opacity: 0.7, id: wrack_weed}
+  - {op: stipple, mask: wrack_m, density: 14, falloff: 0.8, side: outside, size: 0.05, color: "#2f3638", opacity: 0.5, id: wrack_bits}
+  # swash marks: the wobbly lines each spent wave leaves on the wet sand, scalloped like the waterline
+  - {op: offset, out: swash1_o, src: sea, by: 1.1}
+  - {op: roughen_geom, out: swash1, src: swash1_o, amount: 0.3, scale: 2.5}
+  - {op: stroke, src: swash1, width: 0.08, dash: [3.5, 0.8], jitter: 0.6, taper: 0.8, color: "#4a5254", opacity: 0.55}
+  - {op: offset, out: swash2_o, src: sea, by: 2.4}
+  - {op: roughen_geom, out: swash2, src: swash2_o, amount: 0.6, scale: 3}
+  - {op: stroke, src: swash2, width: 0.07, dash: [2.5, 1.4], jitter: 0.7, taper: 0.8, color: "#4a5254", opacity: 0.4}
+  - {op: offset, out: swash3_o, src: sea, by: 3.8}
+  - {op: roughen_geom, out: swash3, src: swash3_o, amount: 0.8, scale: 3.5}
+  - {op: stroke, src: swash3, width: 0.06, dash: [1.8, 2.0], jitter: 0.7, taper: 0.8, color: "#4a5254", opacity: 0.28}
+  # the waterline itself: a medium, wobbling ink line (not the heavy coast stroke)
+  - {op: stroke, src: land_m, width: 0.14, opacity: 0.9}                    # the mask's edge: the waterline only
+  # surf: a dense broken line at the break, then a net of foam lace (the cell borders of Worley noise)
+  # that breaks up and thins seaward. Foam sits on the water, so it casts a soft shadow south-east.
+  - {op: band, out: foam_break, src: land_m, inner: 0, outer: 0.9}
+  - {op: noise, out: foam_n, scale: 2.5, octaves: 3, stretch: 2, angle: 100, id: foam_noise}
+  - {op: field_to_mask, out: foam_gaps, src: foam_n, lo: -0.25, hi: 0.1}
+  - {op: combine, out: foam_break, of: [foam_break, foam_gaps], mode: min}
+  - {op: cells, out: lace_c, scale: 1.1, jitter: 0.9, id: lace_cells}
+  - {op: remap, out: lace_e, src: lace_c, in_range: [0.01, 0.06], out_range: [1, 0]}
+  - {op: field_to_mask, out: lace_net, src: lace_e, lo: 0.3, hi: 0.7}
+  - {op: band, out: lace_zone, src: land_m, inner: 0.5, outer: 4.0}
+  - {op: blur, out: lace_zone, src: lace_zone, sigma: 0.9}
+  - {op: distance, out: sea_d, src: land_m}
+  - {op: noise, out: lace_n, scale: 1.8, octaves: 3, id: lace_noise}
+  - {op: remap, out: sea_fade, src: sea_d, in_range: [0.5, 4.0], out_range: [0.45, -0.25]}
+  - {op: mix, out: lace_keep, of: [lace_n, sea_fade]}
+  - {op: field_to_mask, out: lace_keep, src: lace_keep, lo: 0.0, hi: 0.25}
+  - {op: combine, out: lace_m, of: [lace_net, lace_zone, lace_keep], mode: mul}
+  - {op: combine, out: foam_m, of: [foam_break, lace_m], mode: max}
+  - {op: warp, out: foam_m, src: foam_m, amount: 0.4, scale: 2.5, curl: true, iterations: 3, id: foam_curl}
+  - {op: combine, out: foam_m, of: [foam_m, sea_m], mode: min}                    # foam only on the water
+  - {op: shadow, mask: foam_m, mode: drop, offset: [0.2, 0.25], blur: 0.2, strength: 0.45, color: "#0d1a1f"}
+  - {op: fill, mask: foam_m, color: "#eef4f3", opacity: 0.92, id: foam}
+  - {op: stroke, src: foam_break, width: 0.04, color: "#5f7378", opacity: 0.5}     # a fine edge on the break
+  - {op: stipple, mask: foam_break, density: 8, falloff: 1.6, side: outside, size: 0.06, color: "#e8f0f0", opacity: 0.6, id: foam_spray}
+  # incoming waves: tapered crest strokes that follow the shore near the beach and straighten offshore
+  # (each offset is closed by a radius growing with distance, so the spit's corners fade out), with a
+  # thin shadow line just under each lip on its shore side
+  - {op: offset, out: w1_a, src: land, by: 5.2}
+  - {op: offset, out: w1_o, src: w1_a, by: -3}
+  - {op: roughen_geom, out: w1, src: w1_o, amount: 0.25, scale: 7}
+  - {op: stroke, src: w1, width: 0.2, dash: [6.0, 1.0], jitter: 0.6, taper: 0.9, color: "#e6eff0", opacity: 0.85, clip: sea_m}
+  - {op: offset, out: l1, src: w1, by: -0.22}
+  - {op: stroke, src: l1, width: 0.07, dash: [5.0, 2.0], jitter: 0.6, taper: 0.9, color: "#16262c", opacity: 0.45, clip: sea_m}
+  - {op: offset, out: w2_a, src: land, by: 10}
+  - {op: offset, out: w2_o, src: w2_a, by: -6}
+  - {op: roughen_geom, out: w2, src: w2_o, amount: 0.35, scale: 8}
+  - {op: stroke, src: w2, width: 0.17, dash: [5.0, 1.6], jitter: 0.7, taper: 0.9, color: "#dce8ea", opacity: 0.7}
+  - {op: offset, out: l2, src: w2, by: -0.22}
+  - {op: stroke, src: l2, width: 0.06, dash: [4.0, 2.4], jitter: 0.7, taper: 0.9, color: "#16262c", opacity: 0.38}
+  - {op: offset, out: w3_a, src: land, by: 16}
+  - {op: offset, out: w3_o, src: w3_a, by: -9.5}
+  - {op: roughen_geom, out: w3, src: w3_o, amount: 0.45, scale: 9}
+  - {op: stroke, src: w3, width: 0.14, dash: [4.0, 2.2], jitter: 0.7, taper: 0.9, color: "#d2e0e3", opacity: 0.55}
+  - {op: offset, out: l3, src: w3, by: -0.2}
+  - {op: stroke, src: l3, width: 0.05, dash: [3.0, 3.0], jitter: 0.7, taper: 0.9, color: "#16262c", opacity: 0.3}
+  - {op: offset, out: w4_a, src: land, by: 23}
+  - {op: offset, out: w4_o, src: w4_a, by: -13.5}
+  - {op: roughen_geom, out: w4, src: w4_o, amount: 0.55, scale: 10}
+  - {op: stroke, src: w4, width: 0.11, dash: [3.0, 2.8], jitter: 0.8, taper: 0.9, color: "#c8d8db", opacity: 0.4}
+  - {op: offset, out: w5_a, src: land, by: 31}
+  - {op: offset, out: w5_o, src: w5_a, by: -18}
+  - {op: roughen_geom, out: w5, src: w5_o, amount: 0.65, scale: 11}
+  - {op: stroke, src: w5, width: 0.09, dash: [2.4, 3.4], jitter: 0.8, taper: 0.9, color: "#c8d8db", opacity: 0.3}
+  # open water: short fine swell strokes
+  - {op: band, out: open_sea, src: land_m, inner: 7, outer: 40}
+  - {op: hatch, mask: open_sea, spacing: 1.1, length: 0.8, width: 0.04, lines: 2, angle: 95, angle_jitter: 12,
+     color: "#0f1d22", opacity: 0.3, id: swell_hatch}
+  # ---- the black stones: scattered on the sand, clustered at the tideline, a few in the shallows
+  - {op: scatter, kind: boulder, mask: land_m, density: 0.12, spacing: 6, size: 2.6, size_jitter: 0.45, shadow: 0.5, id: stones_sand}
+  - {op: scatter, kind: pebbles, mask: wrack_zone, density: 0.5, spacing: 2.2, size: 1.4, shadow: 0.4, id: pebbles_wrack}
+  - {op: scatter, kind: pebbles, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.9, spacing: 1.8, size: 1.8, shadow: 0.5, id: pebbles_tide}
+  - {op: band, out: shallows_m, src: land_m, inner: 0.5, outer: 5}
+  - {op: scatter, kind: boulder, mask: shallows_m, density: 0.25, spacing: 5, size: 3.0, size_jitter: 0.5, shadow: 0.3, id: stones_surf}
+  - {op: scatter, kind: rubble, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.08, spacing: 7, size: 2.4, shadow: 0.4, id: stone_heaps}
+  # washed up, not dropped: a scour hollow on each beached stone's sea side, a sand tail in its lee
+  - {op: footprints, out: beached, of: [stones_sand, stone_heaps]}
+  - {op: combine, out: beached, of: [beached, land_m], mode: min}
+  - {op: shadow, mask: beached, mode: drop, offset: [-0.9, 0.1], blur: 0.35, strength: 0.55, color: "#f7f9f8"}
+  - {op: shadow, mask: beached, mode: drop, offset: [0.3, 0.05], blur: 0.12, strength: 0.4, color: "#2f3638"}
+  - {op: stipple, mask: beached, side: outside, density: 22, falloff: 0.9, size: 0.05, color: "#3f4749", opacity: 0.45, id: scour_grit}
+  # ---- dim, cold light
+  - {op: fill, color: "#3c4a60", blend: multiply, opacity: 0.55, atmosphere: true, id: dim}
+  # ---- the mist: broad banks drifting inland off the sea, curled into wisps by a warp, thickest where it
+  # pools round the stones and along the surf; screen-blended so it glows faintly. Marked atmosphere, so
+  # `quality` also judges the map beneath it.
+  - {op: noise, out: mist_a, scale: 12, octaves: 4, stretch: 2.5, angle: 170, id: mist_a}
+  - {op: noise, out: mist_b, scale: 5, kind: billow, octaves: 3, stretch: 3, angle: 165, id: mist_b}
+  - {op: mix, out: mist_f, of: [mist_a, mist_b], weights: [0.8, 0.3]}
+  - {op: footprints, out: stones_m, kinds: [boulder, rubble]}
+  - {op: band, out: stone_pool, src: stones_m, inner: 0.3, outer: 2.2}          # a ring round each stone, not over it
+  - {op: blur, out: stone_pool, src: stone_pool, sigma: 0.8}
+  - {op: band, out: surf_pool, src: sea_m, inner: 0, outer: 2.0, side: both}
+  - {op: blur, out: surf_pool, src: surf_pool, sigma: 1.0}
+  - {op: mix, out: mist_f, of: [mist_f, stone_pool, surf_pool], weights: [1, 0.45, 0.15]}
+  - {op: field_to_mask, out: mist_m, src: mist_f, lo: -0.3, hi: 0.45}
+  - {op: blur, out: mist_m, src: mist_m, sigma: 0.6}                            # smooth inputs swirl best
+  - {op: warp, out: mist_m, src: mist_m, amount: 4, scale: 9, curl: true, iterations: 5, drift: [-2.5, 0.4], id: mist_curl}
+  - {op: warp, out: mist_m, src: mist_m, amount: 1.2, scale: 4, iterations: 2, id: mist_fold}
+  - {op: combine, out: mist_m, of: [mist_m, stones_m], mode: sub}                # stones stand up out of it
+  - {op: fill, color: "#9fc4cf", blend: screen, opacity: 0.12, atmosphere: true, id: mist_ground}      # a low haze everywhere
+  - {op: fill, mask: mist_m, color: "#d4ecf2", blend: screen, opacity: 0.72, atmosphere: true, id: mist_banks}
+  - {op: blur, out: mist_glow, src: mist_m, sigma: 3.5}
+  - {op: fill, mask: mist_glow, color: "#a6dbe6", blend: screen, opacity: 0.45, atmosphere: true, id: mist_glow}
+  - {op: warp, out: wisp_f, src: mist_b, amount: 2.5, scale: 4, curl: true, iterations: 5, drift: [-1.5, 0], id: wisp_curl}
+  - {op: field_to_mask, out: wisp_m, src: wisp_f, lo: 0.25, hi: 0.6}
+  - {op: fill, mask: wisp_m, color: "#f0fafc", blend: screen, opacity: 0.55, atmosphere: true, id: mist_wisps}
+  - {op: finish}
+  - {op: vignette, strength: 0.55, start: 0.3, atmosphere: true}
