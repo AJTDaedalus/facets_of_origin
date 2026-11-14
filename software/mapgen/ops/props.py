@@ -27,7 +27,8 @@ COLORS = {"wood": "#8a6440", "wood_light": "#a77f55", "wood_dark": "#5e412a", "c
           "mtn_light": "#cfc2ae", "mtn_dark": "#7d6a58"}
 
 INK_FINE, INK_MED = 0.1, 0.16
-NO_AUTO_SHADE = {"tree", "rug", "banner", "pebbles", "rubble"}
+DETAIL = 0.075            # detail lines (staves, boards, folds, cracks): at least a pixel at VTT scale
+NO_AUTO_SHADE = {"tree", "rug", "banner", "pebbles", "rubble", "mountain", "hill"}   # flat, or shades itself
 
 
 def _blob(r, lobes, rng, rough=0.18, n=64):
@@ -68,7 +69,7 @@ def p_bed(s, rng):
     frame = box(-s / 2, -w / 2, s / 2, w / 2)
     blanket = box(-s / 2 + s * 0.3, -w / 2 + 0.04 * s, s / 2 - 0.03 * s, w / 2 - 0.04 * s)
     pillow = box(-s / 2 + s * 0.05, -w / 2 + w * 0.15, -s / 2 + s * 0.24, w / 2 - w * 0.15)
-    folds = [(LineString([(x, -w / 2 + 0.06 * s), (x + s * 0.03, w / 2 - 0.06 * s)]), None, INK_FINE * 0.5)
+    folds = [(LineString([(x, -w / 2 + 0.06 * s), (x + s * 0.03, w / 2 - 0.06 * s)]), None, DETAIL)
              for x in np.linspace(-s / 2 + s * 0.42, s / 2 - s * 0.1, 3)]
     return [(frame, "wood", INK_MED), (blanket, "cloth", INK_FINE), (pillow, "linen", INK_FINE)] + folds
 
@@ -84,14 +85,13 @@ def p_crate(s, rng):
     b = box(-s / 2, -s / 2, s / 2, s / 2)
     i = box(-s * 0.38, -s * 0.38, s * 0.38, s * 0.38)
     x = [LineString([(-s * 0.38, -s * 0.38), (s * 0.38, s * 0.38)]), LineString([(-s * 0.38, s * 0.38), (s * 0.38, -s * 0.38)])]
-    boards = [(LineString([(-s / 2, y), (s / 2, y)]).difference(i), None, INK_FINE * 0.5) for y in (-s * 0.44, s * 0.44)]
-    return [(b, "wood_light", INK_MED), (i.exterior, None, INK_FINE)] + [(l, None, INK_FINE) for l in x] + \
-        [bd for bd in boards if not bd[0].is_empty]
+    boards = [(LineString([(-s / 2, y), (s / 2, y)]), None, DETAIL) for y in (-s * 0.44, s * 0.44)]
+    return [(b, "wood_light", INK_MED), (i.exterior, None, INK_FINE)] + [(l, None, INK_FINE) for l in x] + boards
 
 
 def p_barrel(s, rng):
     staves = [(LineString([(np.cos(a) * s * 0.36, np.sin(a) * s * 0.36), (np.cos(a) * s * 0.5, np.sin(a) * s * 0.5)]),
-               None, INK_FINE * 0.6) for a in np.linspace(0, 2 * np.pi, 12, endpoint=False)]
+               None, DETAIL) for a in np.linspace(0, 2 * np.pi, 12, endpoint=False)]
     return [(SPoint(0, 0).buffer(s / 2), "wood", INK_MED),
             (SPoint(0, 0).buffer(s * 0.36), "wood_light", INK_FINE),
             (SPoint(0, 0).buffer(s * 0.18).exterior, None, INK_FINE * 0.8)] + staves
@@ -99,8 +99,8 @@ def p_barrel(s, rng):
 
 def p_chest(s, rng):
     w = s * 0.6
-    boards = [(LineString([(-s / 2, y), (s / 2, y)]), None, INK_FINE * 0.5) for y in (-w * 0.32, w * 0.32)]
-    return boards + [(box(-s / 2, -w / 2, s / 2, w / 2), "wood_dark", INK_MED),
+    boards = [(LineString([(-s / 2, y), (s / 2, y)]), None, DETAIL) for y in (-w * 0.32, w * 0.32)]
+    return [(box(-s / 2, -w / 2, s / 2, w / 2), "wood", INK_MED)] + boards + [
             (box(-s / 2, -w * 0.12, s / 2, w * 0.12), "metal", INK_FINE),
             (box(-s * 0.08, -w * 0.18, s * 0.08, w * 0.18), "fire", INK_FINE)]
 
@@ -146,7 +146,7 @@ def p_boulder(s, rng):
         a0 = rng.uniform(0, 2 * np.pi)
         p0 = (np.cos(a0) * s * 0.45, np.sin(a0) * s * 0.45)
         p1 = (p0[0] * 0.3 + rng.uniform(-0.1, 0.1) * s, p0[1] * 0.3 + rng.uniform(-0.1, 0.1) * s)
-        cracks.append((LineString([p0, p1]).intersection(b), None, INK_FINE * 0.6))
+        cracks.append((LineString([p0, p1]).intersection(b), None, DETAIL))
     return [(b, "stone", INK_MED), (hl, "stone_light", 0)] + [c for c in cracks if not c[0].is_empty]
 
 
@@ -201,7 +201,7 @@ def p_brazier(s, rng):
 
 def p_pillar(s, rng):
     flutes = [(LineString([(np.cos(a) * s * 0.36, np.sin(a) * s * 0.36), (np.cos(a) * s * 0.5, np.sin(a) * s * 0.5)]),
-               None, INK_FINE * 0.5) for a in np.linspace(0, 2 * np.pi, 16, endpoint=False)]
+               None, DETAIL) for a in np.linspace(0, 2 * np.pi, 16, endpoint=False)]
     return [(SPoint(0, 0).buffer(s / 2), "stone_light", INK_MED), (SPoint(0, 0).buffer(s * 0.36).exterior, None, INK_FINE)] + flutes
 
 
@@ -307,21 +307,32 @@ def _color(ctx, key):
 
 def shade_crescent(g):
     """Diagonal hatch lines in the south-east crescent of a solid part (light from the north-west),
-    computed in map coordinates so a rotated prop is still shaded south-east."""
+    computed in map coordinates so a rotated prop is still shaded south-east. The crescent's depth
+    follows the part's thickness, not its area; thin parts (rails, slivers) get none."""
     if g.is_empty or g.area <= 0:
         return None
-    size = np.sqrt(g.area)
-    k = size * 0.2
+    rr = g.minimum_rotated_rectangle
+    cs = list(rr.exterior.coords)[:4]
+    e1 = float(np.hypot(cs[1][0] - cs[0][0], cs[1][1] - cs[0][1]))
+    e2 = float(np.hypot(cs[2][0] - cs[1][0], cs[2][1] - cs[1][1]))
+    short, long_ = min(e1, e2), max(e1, e2)
+    if long_ <= 0 or short / long_ < 0.25:
+        return None
+    k = min(0.2 * np.sqrt(g.area), 0.3 * short)
     cres = g.difference(affinity.translate(g, -k, -k))
     if cres.is_empty or cres.area < g.area * 0.03:
         return None
-    minx, miny, maxx, maxy = g.bounds
-    gap = max(size * 0.09, 0.12)
+    gap = max(np.sqrt(g.area) * 0.09, 0.12)
+    minx, miny, maxx, maxy = cres.bounds
+    h = (maxy - miny) + 0.02
+    # lines x = x0 + (maxy - y): only offsets that can cross the crescent's bounding box
+    t0, t1 = minx - h, maxx
+    starts = np.arange(t0, t1 + gap, gap)
+    cands = [LineString([(x0, maxy + 0.01), (x0 + h, miny - 0.01)]) for x0 in starts]
+    hits = shapely.intersection(np.array(cands, dtype=object), cres)
     lines = []
-    span = (maxx - minx) + (maxy - miny)
-    for t in np.arange(-span, span, gap):
-        ln = LineString([(minx + t, maxy + 0.01), (minx + t + (maxy - miny) + 0.02, miny - 0.01)]).intersection(cres)
-        for piece in getattr(ln, "geoms", [ln]):
+    for hit in hits:
+        for piece in getattr(hit, "geoms", [hit]):
             if piece.geom_type == "LineString" and piece.length > gap * 0.4:
                 lines.append(piece)
     return shapely.MultiLineString(lines) if lines else None
@@ -363,7 +374,7 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
         if ck and g.geom_type in ("Polygon", "MultiPolygon"):
             c = _color(ctx, ck)
             composite_patch(img, rasterize_patch(ctx.frame, g), c[:3], float(c[3]))
-            if kind not in NO_AUTO_SHADE and kind not in MARKERS:
+            if iw and kind not in NO_AUTO_SHADE and kind not in MARKERS:   # outlined parts only
                 hatch = shade_crescent(g)
                 if hatch is not None:
                     composite_patch(img, stroke_geometry_alpha(ctx, hatch, INK_FINE * 0.5, patch=True), inkc, 0.8)

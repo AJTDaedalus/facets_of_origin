@@ -370,3 +370,4 @@ biggest difference. I prefer no gridlines on my maps."
 - **Walls:** `cave_walls` adds rock texture inside the wall band (cracks + grit); `stone_room` adds weathering (fine cracks + grit); `wall_stone` mortar is darker (inked joints).
 - **Weights:** ink is heavier: bold 0.75, heavy 0.52, medium 0.3, fine 0.12; prop inks +25%.
 - Tests: `test_detail.py` (12); trees golden re-recorded. Full suite 2309 passed. Renders: `E:\mapgen_review\v4\`.
+- Review (`docs/REVIEW_pr38.md`, 14 findings) resolved: `wall_band` op; outlined-parts-only shading; thickness-based crescents; vectorised hatching (~2.6 ms per prop); unique wall names; mile-scale ink. The canon court gets heavier ink (styling only). Full suite 2319 passed.

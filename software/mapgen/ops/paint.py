@@ -90,7 +90,9 @@ def _width_ft(ctx, p) -> float:
     w = p.weight or "medium"
     if w not in weights:
         raise RecipeError(f"unknown ink weight {w!r} (have {', '.join(weights)})")
-    return float(weights[w])
+    # style weights are in feet; on a mile-scale map a "heavy" line would be half a mile wide
+    scale = 0.25 if getattr(ctx.frame, "unit", "ft") == "mi" else 1.0
+    return float(weights[w]) * scale
 
 
 def lines_of(g):
@@ -147,8 +149,12 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
     if not out:
         return None if patch else np.zeros(ctx.frame.shape, np.float32)
     cap = 1 if (not dash or jitter) else 2
-    geom = shapely.unary_union([o.buffer(width_ft * wm / 2, cap_style=cap, quad_segs=8) for o, wm in out
-                                if o.length > 0])
+    pieces = [(o, wm) for o, wm in out if o.length > 0]
+    if all(wm == 1.0 for _, wm in pieces):
+        lines = [o for o, _ in pieces]
+        geom = shapely.MultiLineString(lines).buffer(width_ft / 2, cap_style=cap, quad_segs=8) if lines else Polygon()
+    else:
+        geom = shapely.unary_union([o.buffer(width_ft * wm / 2, cap_style=cap, quad_segs=8) for o, wm in pieces])
     if patch:
         return rasterize_patch(ctx.frame, geom)
     return rasterize_geom(ctx.frame, geom)

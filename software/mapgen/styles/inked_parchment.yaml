@@ -107,7 +107,7 @@ macros:
       - {op: beyond, floor: "${name}_pre", depth: "${depth}", name: "${name}_beyond"}
       - {op: floor_fill, src: "${src}", name: "${name}", material: "${material}"}
       - {op: wall, src: "${src}", name: "${wall}", thickness: "${thickness}", material: wall_stone, weight: heavy}
-      - {op: band, out: "${wall}_band", src: "${name}", inner: 0.1, outer: "${thickness}"}
+      - {op: wall_band, out: "${wall}_band", wall: "${wall}", inset: 0.08}
       - {op: cracks, mask: "${wall}_band", density: 1.5, length: 0.8, step: 0.15, wobble: 45, width: 0.05, opacity: 0.45,
          id: "${wall}_stone_cracks"}
       - {op: stipple, mask: "${wall}_band", density: 5, falloff: null, size: 0.06, opacity: 0.4, id: "${wall}_stone_grit"}
@@ -136,8 +136,7 @@ macros:
     steps:
       - {op: wall, src: "${src}", name: "${wall}", style: rough, thickness: "${thickness}", material: cave_rock,
          weight: bold, outer_weight: fine, exclude: "${exclude}"}
-      - {op: rasterize, out: "${wall}_inside", src: "${src}"}
-      - {op: band, out: "${wall}_band", src: "${wall}_inside", inner: 0.15, outer: "${thickness}"}
+      - {op: wall_band, out: "${wall}_band", wall: "${wall}", inset: 0.1}
       - {op: cracks, mask: "${wall}_band", density: 3, length: 1.0, step: 0.2, wobble: 50, width: 0.06, opacity: 0.55,
          id: "${wall}_rock_cracks"}
       - {op: stipple, mask: "${wall}_band", density: 10, falloff: null, size: 0.07, opacity: 0.5, id: "${wall}_rock_grit"}
