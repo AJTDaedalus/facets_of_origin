@@ -320,6 +320,23 @@ A new opaque image filled with a colour or material. Name it `canvas` for the fi
 | `color` | Any | — |
 | `material` | str \| None | — |
 
+### `cracks` → paints in place
+
+Branching hairline cracks inside a mask: `density` cracks per grid square, each a wandering line about `length` feet long (steps of `step` feet, turning up to `wobble` degrees), forking with chance `branch` over its length.
+
+| param | type | default |
+|---|---|---|
+| `into` | str | `"canvas"` |
+| `mask` | str | **required** |
+| `density` | float | `0.15` |
+| `length` | float | `3.0` |
+| `step` | float | `0.35` |
+| `wobble` | float | `35.0` |
+| `branch` | float | `0.25` |
+| `width` | float | `0.05` |
+| `color` | Any | `"ink"` |
+| `opacity` | float | `0.5` |
+
 ### `fill` → paints in place
 
 Paint a colour or material through a mask (default: everywhere), with opacity and a blend mode.
@@ -374,6 +391,25 @@ Parchment: low-frequency blotches plus fine grain, multiplied over the image (op
 | `grain` | float | `0.3` |
 | `color` | Any | — |
 
+### `shade_lines` → paints in place
+
+Hatching along a mask's edge: short ink strokes perpendicular to the edge, every `spacing` feet, up to `length` feet long (randomised by `jitter`). `shadow` is the direction shadows fall (default south-east, light from the north-west): a stroke pointing along it is full length, one pointing against it shrinks to `min_share`. For a sunken area (a floor) use `side: inside` with the default; for a raised mass (forest, brush, hill) use `side: inside` with `shadow: [-0.6, -0.8]`; `side: outside` shades beyond an edge (cliffs, banks); `shadow: null` makes every edge full length.
+
+| param | type | default |
+|---|---|---|
+| `into` | str | `"canvas"` |
+| `mask` | str | **required** |
+| `side` | Literal['inside', 'outside'] | `"inside"` |
+| `length` | float | `2.0` |
+| `spacing` | float | `0.35` |
+| `width` | float | `0.06` |
+| `jitter` | float | `0.5` |
+| `angle_jitter` | float | `10.0` |
+| `shadow` | Optional[Annotated[list[float], FieldInfo(annotation=None, required=True, metadata=[MinLen(min_length=2), MaxLen(max_length=2)])]] | `[0.6, 0.8]` |
+| `min_share` | float | `0.3` |
+| `color` | Any | `"ink"` |
+| `opacity` | float | `0.75` |
+
 ### `shadow` → paints in place
 
 Inner shadow (darkens inside the mask near its edge, over `width` feet; `offset` moves the light) or drop shadow (the mask's shape, offset and blurred, under/around it).
@@ -389,6 +425,21 @@ Inner shadow (darkens inside the mask near its edge, over `width` feet; `offset`
 | `strength` | float | `0.5` |
 | `color` | Any | `"shadow"` |
 | `outside_only` | bool | `True` |
+
+### `stipple` → paints in place
+
+Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. Grit along walls, dust round rubble, texture on rock.
+
+| param | type | default |
+|---|---|---|
+| `into` | str | `"canvas"` |
+| `mask` | str | **required** |
+| `density` | float | `3.0` |
+| `size` | float | `0.08` |
+| `falloff` | float \| None | `2.5` |
+| `side` | Literal['inside', 'outside'] | `"inside"` |
+| `color` | Any | `"ink"` |
+| `opacity` | float | `0.6` |
 
 ### `stroke` → paints in place
 
@@ -597,7 +648,7 @@ A window: a pale pane across the wall with a centre line. Walls still block move
 
 ### `prop` → paints in place
 
-Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow.
+Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east.
 
 | param | type | default |
 |---|---|---|
@@ -798,7 +849,7 @@ Params: `floor`='floor', `depth`=4, `name`='beyond'
 
 Fill a floor geometry with a material, plus soft inner shadow and occlusion; makes mask `${name}`.
 
-Params: `src`='room', `name`='floor', `material`='flagstone', `shadow`=0.45, `width`=2.5, `falloff`=1.2
+Params: `src`='room', `name`='floor', `material`='flagstone', `shadow`=0.45, `width`=2.5, `falloff`=1.2, `hatch`=2.0, `cracks`=0.15
 
 ### `stone_room`
 
@@ -828,7 +879,7 @@ Params: `src`='cave', `wall`='wall', `thickness`=1.2, `exclude`=None
 
 Water along a smoothed path `width` feet wide, clipped to the walkable mask `clip`, with an inked bank; makes mask `${name}`.
 
-Params: `points`=[[0, 0], [10, 10]], `width`=6, `name`='stream', `clip`='floor'
+Params: `points`=[[0, 0], [10, 10]], `width`=6, `name`='stream', `clip`='floor', `bank`=1.0, `bank_spacing`=0.22
 
 ### `ground_patches`
 
@@ -862,9 +913,9 @@ Params: `src`='height', `level`=0.6, `within`='land_m', `name`='mountains', `siz
 
 ### `finish`
 
-Grid on the walkable mask, parchment grain, a light vignette and a double frame.
+Parchment grain, a light vignette and a double frame. No grid: the VTT draws its own (add {op: grid} if a printed grid is wanted).
 
-Params: `floor`='floor', `alpha`=0.28
+Params: none
 
 
 ## Materials (styles/inked_parchment.yaml)

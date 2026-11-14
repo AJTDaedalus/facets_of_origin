@@ -36,7 +36,7 @@ steps:
   - {op: rasterize, out: hall_m2, src: hall_ns}
   - {op: combine, out: halls, of: [hall_m, hall_m2], mode: max}
   - {op: fill, mask: halls, material: flagstone_irregular, id: hall_floor}
-  - {op: shadow, mask: floor, mode: inner, width: 2.5, offset: [0.6, 0.8], strength: 0.35}
+  - {op: shadow, mask: floor, mode: inner, width: 2.5, offset: [-0.6, -0.8], strength: 0.35}
   - {op: stairs, x: 9, y: 9.5, w: 5, h: 10, down: n, id: stairs}
   - {op: wall, src: cellar, name: w, thickness: 2, material: wall_stone, weight: bold, outer_weight: heavy}
   # doors where the corridor meets each room
@@ -71,7 +71,7 @@ steps:
   - {op: prop, kind: bunk, at: [51, 50.5], size: 6, rotate: 180, id: b4}
   - {op: prop, kind: chest, at: [36, 45], size: 3, rotate: 90, id: b_chest}
   - {op: scatter, kind: pebbles, mask: floor, density: 0.3, spacing: 3, size: 1.2, shadow: 0.1, id: grit}
-  - {op: finish, floor: floor, alpha: 0.16}
+  - {op: finish}
   - {op: label, text: "1", bold: true, at: [14, 22], size: 2.4, circle: true, color: key_red, halo: parchment}
   - {op: label, text: "2", bold: true, at: [65, 21], size: 2.4, circle: true, color: key_red, halo: parchment}
   - {op: label, text: "3", bold: true, at: [41, 46], size: 2.4, circle: true, color: key_red, halo: parchment}

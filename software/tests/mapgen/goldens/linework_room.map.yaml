@@ -1,0 +1,10 @@
+map: {title: Golden Line-work, width_ft: 30, height_ft: 30, px_per_square: 20, supersample: 1, seed: 12}
+steps:
+  - {op: canvas, out: canvas, color: "#d8cfbb"}
+  - {op: rect, out: room, x: 5, y: 5, w: 20, h: 20}
+  - {op: rasterize, out: floor, src: room}
+  - {op: fill, mask: floor, color: "#bdb6a8"}
+  - {op: shade_lines, mask: floor, length: 2.5, id: hatch}
+  - {op: cracks, mask: floor, density: 0.5, id: cracks}
+  - {op: stipple, mask: floor, density: 4, falloff: 2, id: grit}
+  - {op: shade_lines, mask: floor, side: outside, length: 1.5, shadow: null, id: outer}

@@ -41,12 +41,12 @@ steps:
      exclude: a_fallen, id: wall_a}
   - {op: scatter, kind: rubble, region: [[19, 22], [36, 22], [38, 31], [17, 31]], avoid: [path_m], density: 2.2,
      spacing: 1.8, size: 3.2, id: a_rubble}
-  - {op: shadow, mask: a_floor, mode: inner, width: 2, offset: [0.5, 0.6], strength: 0.35}
+  - {op: shadow, mask: a_floor, mode: inner, width: 2, offset: [-0.5, -0.6], strength: 0.35}
   # cottage B: walls standing to the eaves, broken in places, door onto the path
   - {op: rect, out: cottage_b, x: 58, y: 42, w: 18, h: 14}
   - {op: rasterize, out: b_floor, src: cottage_b}
   - {op: fill, mask: b_floor, material: flagstone_irregular, id: b_flags}
-  - {op: shadow, mask: b_floor, mode: inner, width: 2.5, offset: [0.5, 0.6], strength: 0.45}
+  - {op: shadow, mask: b_floor, mode: inner, width: 2.5, offset: [-0.5, -0.6], strength: 0.45}
   - {op: wall, src: cottage_b, name: wall_b, style: ruined, gaps: 0.08, thickness: 1.5, material: wall_stone, id: wall_b}
   - {op: opening, wall: wall_b, at: [64, 42], width: 4, floor_material: flagstone_irregular}
   - {op: scatter, kind: rubble, mask: b_floor, density: 0.5, spacing: 3, size: 2.5, id: b_rubble}
@@ -59,7 +59,6 @@ steps:
   - {op: scatter, kind: tree, mask: brush, avoid: [keep_clear], density: 0.55, spacing: 7, size: 10, shadow: 0.6, id: trees}
   - {op: scatter, kind: bush, mask: edges, avoid: [keep_clear, brush], density: 0.12, spacing: 5, size: 4.5, id: bushes}
   - {op: scatter, kind: bush, mask: clearing_hard, avoid: [keep_clear], density: 0.06, spacing: 6, size: 3.5, id: brush_in}
-  - {op: grid, alpha: 0.26, weight: 0.08, color: "#1f1b16"}
   - {op: paper, strength: 0.08, scale: 40}
   - {op: vignette, strength: 0.2}
   - {op: frame, margin: 0.5, weight: 0.35}

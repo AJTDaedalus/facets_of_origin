@@ -105,7 +105,6 @@ steps:
   - {op: wall, in: cave, style: rough, emit_los: true}
   - {op: prop, kind: bridge, at: [29,14], rotate: 80, length_ft: 12}
   - {op: scatter, kind: rubble, mask: floor, region: [[5,10],[18,30]], density: 0.08}
-  - {op: grid, mask: floor}
   - {op: compass, at: ne}
 ```
 
@@ -149,7 +148,8 @@ What the reference maps do (§7), and the op that answers each:
 | Floor texture never flat: flagstones, planks, cave grit | materials with per-cell tone jitter + fbm modulation |
 | Water with depth ramp and ripple strokes | `water` material + `stroke` of offset contours |
 | Tree canopies: scalloped clumps, rim shadow, inner highlight | `tree`/`bush` props built from noise-scalloped circles + cast shadow |
-| Grid present but subordinate | `grid` alpha ~0.25–0.35, fine weight, clipped to walkable mask |
+| Grid | **None by default** (owner, 2026-11-13: "I prefer no gridlines on my maps"); `grid` exists for a printed grid on request |
+| Ink shading lines (hatching along walls, cliffs, banks; cracks; grit) | `shade_lines`, `cracks`, `stipple` (`ops/linework.py`); light from the NW, shadows fall SE |
 | Legend, compass, title, "1 square = 5 feet" | `legend`, `compass`, `title`, `scale_bar` |
 
 **What we can and can't reach (honest estimate):**
@@ -273,7 +273,7 @@ cropped by a manifest box):
 | Q3 | Mid-scale variation: σ of per-square mean luminance | no blotch/weathering, monotone floors |
 | Q4 | Ink density: fraction of pixels with Sobel magnitude > t | too few or too many lines |
 | Q5 | Palette: mean saturation and hue-cluster count (k-means, k ≤ 8, clusters > 2%) | garish or monochrome palettes |
-| Q6 | Grid subordination: ratio of grid-line contrast to wall-line contrast (ours only; we know where the grid is) | grid shouting over walls |
+| Q6 | Grid subordination (only if a grid is printed on request): ratio of grid-line contrast to wall-line contrast | grid shouting over walls |
 
 **Bands:** for each category, `[min, max]` across its comparators, widened by
 15%. A proof passes a metric if it lands in its category band. Bands are recorded
@@ -291,7 +291,7 @@ Contact sheet: our map beside the comparator of its category, at the same scale
 3. **Depth:** shadows/occlusion separate floor, wall, raised and sunken
 4. **Line:** ink weight hierarchy; natural edges organic, built edges true
 5. **Palette:** cohesive, period-plausible, matches the category's references
-6. **Grid:** present, aligned, subordinate
+6. **Grid:** none by default; if printed on request, aligned and subordinate
 7. **Props:** recognisable at 1 square, consistent with the line style
 8. **Shelf test:** could sit in a published module beside the comparator
 

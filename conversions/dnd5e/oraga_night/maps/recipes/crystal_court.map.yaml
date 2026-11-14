@@ -63,7 +63,8 @@ steps:
   - {op: combine, out: glow_m, of: [glow_m, court_m], mode: min}
   - {op: fill, mask: glow_m, color: "#a8668f", opacity: 0.3, blend: screen, id: floor_glow}
   - {op: occlusion, mask: ground_m, falloff: 2.5, strength: 0.45}
-  - {op: shadow, mask: ground_m, mode: inner, width: 5, offset: [0.8, 1.0], strength: 0.5, blur: 0.6}
+  - {op: shadow, mask: ground_m, mode: inner, width: 5, offset: [-0.8, -1.0], strength: 0.5, blur: 0.6}
+  - {op: shade_lines, mask: ground_m, length: 3.5, spacing: 0.45, width: 0.09, color: "#12080f", opacity: 0.6, id: court_hatch}
 
   # ---- the east stair (12 ft up to gallery level) and the start of the cleared corridor to B9
   - {op: rect, out: east_stair, x: 130, y: 106, w: 10, h: 24}
@@ -160,9 +161,7 @@ steps:
   - {op: fill, mask: wards_m, color: "#ffd2ec"}
   - {op: stroke, src: wards, weight: fine, color: "#120a10"}
 
-  # ---- grid, keys, frame
-  - {op: combine, out: walkable, of: [ground_m, stairwell_m, walk_m], mode: max}
-  - {op: grid, mask: walkable, color: "#120a10", alpha: 0.25, weight: 0.07}
+  # ---- keys, frame
   - {op: label, text: B2, at: [70, 84], size: 6, bold: true, color: "#f6e3ef", halo: "#2a1828"}
   - {op: label, text: B3, at: [20, 88], size: 4.5, bold: true, color: "#f6e3ef", halo: "#2a1828"}
   - {op: label, text: B3, at: [120, 88], size: 4.5, bold: true, color: "#f6e3ef", halo: "#2a1828"}

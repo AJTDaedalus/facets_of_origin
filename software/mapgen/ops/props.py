@@ -156,7 +156,14 @@ def p_tree(s, rng):
         a = 2 * np.pi * i / n + rng.uniform(-0.3, 0.3)
         L = s * rng.uniform(0.12, 0.24)
         branches.append((LineString([(cx, cy), (cx + L * np.cos(a), cy + L * np.sin(a))]), None, INK_FINE * 0.55))
-    return [(c, "foliage", INK_MED * 2.0), (mid, "foliage_light", INK_FINE * 0.9), (top, "foliage_top", INK_FINE * 0.6)] + branches
+    crescent = c.difference(affinity.translate(c, -s * 0.16, -s * 0.16))
+    shading = []
+    for k in np.linspace(-0.5, 0.5, 11):
+        ln = LineString([(k * s - s * 0.3, s * 0.6), (k * s + s * 0.3, -s * 0.6)]).intersection(crescent)
+        for piece in getattr(ln, "geoms", [ln]):
+            if not piece.is_empty and piece.length > s * 0.03:
+                shading.append((piece, None, INK_FINE * 0.55))
+    return [(c, "foliage", INK_MED * 2.0), (mid, "foliage_light", INK_FINE * 0.9), (top, "foliage_top", INK_FINE * 0.6)] + branches + shading
 
 
 def p_bush(s, rng):
@@ -287,6 +294,8 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     s = size or default
     if kind in MARKERS:
         shadow = 0.0
+    if kind == "tree":
+        rotate = 0.0          # its shading crescent must stay south-east (light from the north-west)
     rng = np.random.default_rng(seed)
     parts = fn(s, rng)
     placed = []
@@ -336,7 +345,7 @@ class PropP(ParamModel):
 
 @op("prop", params=PropP, inputs={"into": Image}, group="6 props")
 def prop(ctx, p, into):
-    """Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow."""
+    """Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east."""
     draw_prop(ctx, into.data, p.kind, p.at, p.size, p.rotate, ctx.seed, p.shadow, p.ink)
 
 
