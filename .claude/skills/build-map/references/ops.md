@@ -626,6 +626,15 @@ Walls around a floor polygon (the walkable area): a band `thickness` feet outsid
 | `emit_los` | bool | `True` |
 | `exclude` | str \| None | — |
 
+### `wall_band` → Mask
+
+The band a named `wall` or `partition` actually painted (rough edge, ruined gaps and excluded mouths included), as a Mask: for texturing the wall itself. `inset` trims that many feet off every edge.
+
+| param | type | default |
+|---|---|---|
+| `wall` | str | **required** |
+| `inset` | float | `0.0` |
+
 ### `window` → paints in place
 
 A window: a pale pane across the wall with a centre line. Walls still block movement and sight in VTT data.

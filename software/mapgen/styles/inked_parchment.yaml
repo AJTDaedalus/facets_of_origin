@@ -21,10 +21,10 @@ palette:
   key_red: "#9c2a1f"
 
 ink:
-  bold: 0.62
-  heavy: 0.42
-  medium: 0.24
-  fine: 0.1
+  bold: 0.75
+  heavy: 0.52
+  medium: 0.3
+  fine: 0.12
 
 materials:
   parchment:      {type: ramp_noise, colors: ["#cfc6ad", "#dfd7c2", "#e9e3d1"], scale: 45, octaves: 5, grain: 0.035}
@@ -34,7 +34,7 @@ materials:
   flagstone_irregular: {type: flagstone, pattern: voronoi, colors: ["#958f83", "#ada79a", "#bfb9ac"], size: 2.2,
                    mortar: 0.14, mortar_color: "#6c665b", bevel: 0.14, mottle: 0.3, grain: 0.05}
   wall_stone:     {type: flagstone, pattern: ashlar, colors: ["#847d70", "#9b9486", "#a8a194"], size: 1.25, ratio: 1.7,
-                   mortar: 0.1, mortar_color: "#5a544a", bevel: 0.15, mottle: 0.25, grain: 0.04}
+                   mortar: 0.12, mortar_color: "#3e3a33", bevel: 0.18, mottle: 0.25, grain: 0.04}
   cave_floor:     {type: dirt, colors: ["#958d80", "#b2ab9c", "#cdc7b8", "#d9d4c6"], scale: 11, octaves: 5, contrast: 1.35, grain: 0.07,
                    speckle: 0.06, speckle_color: "#7d7565"}
   cave_rock:      {type: ramp_noise, colors: ["#8f887b", "#a8a193", "#b8b1a3"], scale: 5, octaves: 4, kind: ridged, grain: 0.06}
@@ -107,6 +107,10 @@ macros:
       - {op: beyond, floor: "${name}_pre", depth: "${depth}", name: "${name}_beyond"}
       - {op: floor_fill, src: "${src}", name: "${name}", material: "${material}"}
       - {op: wall, src: "${src}", name: "${wall}", thickness: "${thickness}", material: wall_stone, weight: heavy}
+      - {op: wall_band, out: "${wall}_band", wall: "${wall}", inset: 0.08}
+      - {op: cracks, mask: "${wall}_band", density: 1.5, length: 0.8, step: 0.15, wobble: 45, width: 0.05, opacity: 0.45,
+         id: "${wall}_stone_cracks"}
+      - {op: stipple, mask: "${wall}_band", density: 5, falloff: null, size: 0.06, opacity: 0.4, id: "${wall}_stone_grit"}
 
   cave:
     doc: "A natural cave from a rough polygon geometry — hatched rock beyond, cave floor, rough walls named `${wall}`. `exclude` (a geometry) leaves a mouth open. Use cave_floor + cave_walls separately to draw water or paths between them."
@@ -132,6 +136,10 @@ macros:
     steps:
       - {op: wall, src: "${src}", name: "${wall}", style: rough, thickness: "${thickness}", material: cave_rock,
          weight: bold, outer_weight: fine, exclude: "${exclude}"}
+      - {op: wall_band, out: "${wall}_band", wall: "${wall}", inset: 0.1}
+      - {op: cracks, mask: "${wall}_band", density: 3, length: 1.0, step: 0.2, wobble: 50, width: 0.06, opacity: 0.55,
+         id: "${wall}_rock_cracks"}
+      - {op: stipple, mask: "${wall}_band", density: 10, falloff: null, size: 0.07, opacity: 0.5, id: "${wall}_rock_grit"}
 
   stream:
     doc: "Water along a smoothed path `width` feet wide, clipped to the walkable mask `clip`, with an inked bank; makes mask `${name}`."

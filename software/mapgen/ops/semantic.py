@@ -10,7 +10,7 @@ from shapely.geometry import LineString, MultiLineString, Point as SPoint, Polyg
 from shapely.ops import linemerge
 
 from ..color import composite_inplace, composite_patch, resolve_color
-from ..layers import Geometry, Image
+from ..layers import Geometry, Image, Mask
 from ..noise import fbm_at
 from ..recipe import RecipeError
 from ..registry import ParamModel, op
@@ -123,6 +123,8 @@ def wall(ctx, p, into, src, exclude=None):
             w = _width_ft(ctx, type("W", (), {"width": None, "weight": p.weight})())
             edge = shapely.unary_union(kept) if kept else LineString()
             composite_patch(into.data, stroke_geometry_alpha(ctx, edge, w, patch=True), inkc)
+    if p.name in ctx.collector.walls:
+        raise RecipeError(f"a wall or partition named '{p.name}' already exists: give each wall its own name")
     ctx.collector.walls[p.name] = {"floor": floor, "band": band, "thickness": t, "lines": kept, "d0": 0.0}
     if p.emit_los:
         ctx.collector.los.extend(kept)
@@ -161,6 +163,8 @@ def partition(ctx, p, into, src):
     if p.weight:
         w = _width_ft(ctx, type("W", (), {"width": None, "weight": p.weight})())
         composite_patch(into.data, stroke_geometry_alpha(ctx, band, w, patch=True), resolve_color(ctx.style, p.ink)[:3])
+    if p.name in ctx.collector.walls:
+        raise RecipeError(f"a wall or partition named '{p.name}' already exists: give each wall its own name")
     ctx.collector.walls[p.name] = {"floor": None, "line": geom, "band": band, "thickness": t, "lines": lines,
                                    "d0": -t / 2}
     if p.emit_los:
@@ -398,3 +402,21 @@ def light(ctx, p, into):
     hexc = "#%02x%02x%02x" % tuple(int(round(v * 255)) for v in c[:3])
     ctx.collector.lights.append({"position": [float(p.at[0]), float(p.at[1])], "range": float(p.radius),
                                  "intensity": float(p.intensity), "color": hexc, "shadows": True})
+
+
+
+class WallBandP(ParamModel):
+    wall: str
+    inset: NonNegFt = 0.0
+
+
+@op("wall_band", params=WallBandP, output=Mask, group="5 semantic")
+def wall_band(ctx, p):
+    """The band a named `wall` or `partition` actually painted (rough edge, ruined gaps and excluded mouths included), as a Mask: for texturing the wall itself. `inset` trims that many feet off every edge."""
+    rec = ctx.collector.walls.get(p.wall)
+    if rec is None:
+        raise RecipeError(f"wall '{p.wall}' is not defined yet")
+    band = rec["band"]
+    if p.inset and not band.is_empty:
+        band = polygonal(band.buffer(-p.inset))
+    return Mask(rasterize_geom(ctx.frame, band))
