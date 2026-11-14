@@ -51,8 +51,7 @@ def _scallop(r, lobes, rng):
 # ---- wood detail helpers (owner feedback 2026-11-14: crates, bridges look less detailed) ----
 # Published props carry depth in bevelled frames (light NW face, dark SE face), grain lines
 # and knots on every plank, nail heads, and uneven planks. These build that in prop-local feet.
-FACET_TONES = {"wood": ("wood_light", "wood_dark"), "wood_light": ("linen", "wood"),
-               "stone_light": ("linen", "stone"), "metal": ("stone_light", "stone_dark")}
+FACET_SHADE = (0.22, 0.38)   # bevel faces: max lighten toward white (NW), darken toward black (SE)
 
 
 def _grain(x0, y0, x1, y1, rng, n=None, knots=True):
@@ -178,7 +177,7 @@ def p_barrel(s, rng):
         xs = np.linspace(-r, r, 11)
         ys = y + r * 0.02 * np.sin(xs * 2.5 / r + rng.uniform(0, 6))
         g = LineString(np.c_[xs, ys]).intersection(lid.buffer(-r * 0.06))
-        if not g.is_empty:
+        if g.geom_type in ("LineString", "MultiLineString"):
             grain.append((g, None, DETAIL))
     seams = [(LineString([(-r * 0.66, y), (r * 0.66, y)]).intersection(lid), None, INK_FINE * 0.5)
              for y in (-r * 0.33, r * 0.33)]
@@ -195,7 +194,7 @@ def p_chest(s, rng):
     h, hw = s / 2, w / 2
     faces, lid, mitres = _bevel_box(-h, -hw, h, hw, w * 0.12, "wood")
     li_x, li_y = h - w * 0.12, hw - w * 0.12
-    parts = [(box(-h, -hw, h, hw), "wood", 0)] + faces + [(lid, "wood", INK_FINE)]
+    parts = [(box(-h, -hw, h, hw), "wood", 0)] + faces + [(lid, "wood_light", INK_FINE)]
     for k in range(3):
         y0 = -li_y + 2 * li_y * k / 3
         parts += _grain(-li_x, y0, li_x, y0 + 2 * li_y / 3, rng, n=1, knots=False)
@@ -298,21 +297,26 @@ def p_bridge(s, rng):
     hw = w / 2
     parts = [(box(-s / 2, -hw, s / 2, hw), "wood_dark", 0)]           # shows through the gaps
     x = -s / 2
-    gap = max(s * 0.008, 0.05)
+    k = min(1.0, s / 6)                   # planks, gaps and posts shrink with a small bridge
+    gap = max(s * 0.008, 0.05 * k)
+    deck = box(-s / 2, -hw, s / 2, hw)
     while x < s / 2 - 1e-6:
-        pw = rng.uniform(0.55, 0.95)
-        if s / 2 - x - pw < 0.45:             # the last plank runs to the end of the deck
+        pw = rng.uniform(0.55, 0.95) * k
+        if s / 2 - x - pw < 0.45 * k:         # the last plank runs to the end of the deck
             pw = s / 2 - x
         lo, hi = -hw * rng.uniform(0.9, 1.0), hw * rng.uniform(0.9, 1.0)
-        pl = _plank(lo, x + gap / 2, hi, x + pw - gap / 2, rng, rag=0.04)
-        pl = affinity.affine_transform(pl, [0, 1, 1, 0, 0, 0])        # plank runs across the deck (along y)
+        pl = _plank(lo, x + gap / 2, hi, x + pw - gap / 2, rng, rag=0.04 * k)
+        pl = affinity.affine_transform(pl, [0, 1, 1, 0, 0, 0]).intersection(deck)   # runs across the deck; ragged ends stay on it
+        if pl.is_empty or pl.geom_type != "Polygon":
+            x += pw
+            continue
         parts.append((pl, "wood_light", INK_FINE * 0.8))
         g = _grain(lo, x + gap, hi, x + pw - gap, rng, n=2, knots=True)
         parts += [(affinity.affine_transform(gl, [0, 1, 1, 0, 0, 0]), c, iw) for gl, c, iw in g]
         if rng.random() < 0.7:
             parts += _nails([(x + pw / 2, lo * 0.85), (x + pw / 2, hi * 0.85)], s * 0.12)
         x += pw
-    post_r = max(w * 0.07, 0.18)
+    post_r = min(max(w * 0.07, 0.18), w * 0.2)
     for y in (-hw, hw):
         rope = LineString([(-s / 2, y), (s / 2, y)])
         parts.append((rope.buffer(post_r * 0.45, cap_style=2), "linen", INK_FINE * 0.7))
@@ -480,17 +484,18 @@ def shade_crescent(g):
 _SE = np.array([0.6, 0.8])
 
 
-def _facet_tone(base, g, at):
+def _facet_tone(base_rgba, g, at):
     """A bevel face's colour from the way it faces in map coordinates (light from the north-west):
-    faces toward the south-east take the dark tone, toward the north-west the light one."""
-    light, dark = FACET_TONES.get(base, (base, base))
+    blended continuously toward black as it turns south-east and toward white as it turns
+    north-west, so no face jumps tone at a threshold and a side face keeps the base colour."""
     c = g.centroid
     v = np.array([c.x - at[0], c.y - at[1]])
     n = np.linalg.norm(v)
-    if n < 1e-9:
-        return base
-    d = float(np.dot(v / n, _SE))
-    return dark if d > 0.35 else light if d < -0.35 else base
+    rgb = np.asarray(base_rgba[:3], float)
+    if n > 1e-9:
+        d = float(np.dot(v / n, _SE))
+        rgb = rgb * (1 - FACET_SHADE[1] * d) if d > 0 else rgb + (1 - rgb) * FACET_SHADE[0] * -d
+    return tuple(rgb) + (float(base_rgba[3]),)
 
 
 def _merge_line_runs(placed):
@@ -543,10 +548,8 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     inkc = resolve_color(ctx.style, ink)[:3]
     placed = _merge_line_runs(placed)
     for g, ck, iw in placed:
-        if ck and ck.startswith("facet:"):
-            ck = _facet_tone(ck[6:], g, at)
         if ck and g.geom_type in ("Polygon", "MultiPolygon"):
-            c = _color(ctx, ck)
+            c = _facet_tone(_color(ctx, ck[6:]), g, at) if ck.startswith("facet:") else _color(ctx, ck)
             composite_patch(img, rasterize_patch(ctx.frame, g), c[:3], float(c[3]))
             if iw and kind not in NO_AUTO_SHADE and kind not in MARKERS:   # outlined parts only
                 hatch = shade_crescent(g)

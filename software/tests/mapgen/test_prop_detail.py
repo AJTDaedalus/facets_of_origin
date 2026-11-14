@@ -21,18 +21,27 @@ def parts(kind, size=None, seed=1):
     return fn(size or default, np.random.default_rng(seed))
 
 
+WOOD = (0.54, 0.39, 0.25, 1.0)
+
+
 class TestFacetTone:
-    def test_south_east_face_is_dark(self):
-        face = box(1, 1, 2, 2)                                  # centroid south-east of the prop centre
-        assert P._facet_tone("wood", face, (0, 0)) == "wood_dark"
+    def test_south_east_face_is_darker_than_base(self):
+        tone = P._facet_tone(WOOD, box(1, 1, 2, 2), (0, 0))
+        assert all(t < b for t, b in zip(tone[:3], WOOD[:3]))
 
-    def test_north_west_face_is_light(self):
-        assert P._facet_tone("wood", box(-2, -2, -1, -1), (0, 0)) == "wood_light"
+    def test_north_west_face_is_lighter_than_base(self):
+        tone = P._facet_tone(WOOD, box(-2, -2, -1, -1), (0, 0))
+        assert all(t > b for t, b in zip(tone[:3], WOOD[:3]))
 
-    def test_side_face_keeps_base_and_unknown_base_falls_back(self):
-        assert P._facet_tone("wood", box(1, -2, 2, -1), (0, 0)) == "wood"        # north-east: across the light
-        assert P._facet_tone("rug", box(1, 1, 2, 2), (0, 0)) == "rug"
-        assert P._facet_tone("wood", box(-1, -1, 1, 1), (0, 0)) == "wood"        # centred: no direction
+    def test_side_or_centred_face_keeps_base(self):
+        assert np.allclose(P._facet_tone(WOOD, box(-1, -1, 1, 1), (0, 0)), WOOD)
+        across = P._facet_tone(WOOD, shapely.Point(0.8, -0.6).buffer(0.1), (0, 0))   # perpendicular to the light
+        assert np.allclose(across, WOOD, atol=1e-6)
+
+    def test_tone_changes_continuously_with_direction(self):
+        lum = [sum(P._facet_tone(WOOD, shapely.Point(np.cos(a), np.sin(a)).buffer(0.1), (0, 0))[:3])
+               for a in np.linspace(0, 2 * np.pi, 361)]
+        assert max(abs(a - b) for a, b in zip(lum, lum[1:])) < 0.02                 # no jump at any angle
 
     @pytest.mark.parametrize("rotate", [0, 90, 180, 270])
     def test_crate_dark_face_stays_south_east_when_rotated(self, rotate):
@@ -41,7 +50,15 @@ class TestFacetTone:
         # bevel band centres: 8 ft crate at 8 px/ft -> 64 px, faces ~1 ft deep inside the edge
         south = lum[120 + 60 // 2 - 2:120 + 32 - 2, 150:170].mean()             # inside the south edge
         north = lum[120 - 32 + 2:120 - 32 + 8, 150:170].mean()                  # inside the north edge
-        assert south < north
+        assert south < north - 0.03
+
+    def test_crate_at_45_degrees_darkest_corner_is_south_east(self):
+        c = canvas([{"op": "prop", "kind": "crate", "at": [20, 15], "size": 8, "rotate": 45, "shadow": 0, "id": "p"}])
+        lum = c[..., :3].mean(-1)
+        # the diamond's corners are ~45 px from the centre (160, 120); sample just inside each tip's faces
+        se_tip = lum[120 + 34:120 + 40, 158:162].mean()           # south tip: two SE-ish faces meet
+        nw_tip = lum[120 - 40:120 - 34, 158:162].mean()           # north tip: two NW-ish faces meet
+        assert se_tip < nw_tip
 
 
 class TestMergeLineRuns:
@@ -82,7 +99,8 @@ class TestCrate:
 
     def test_deterministic_per_seed(self):
         a, b = parts("crate", 2.5, 7), parts("crate", 2.5, 7)
-        assert all(x[0].equals(y[0]) for x, y in zip(a, b))
+        assert len(a) == len(b)
+        assert all(x[0].equals(y[0]) and x[1:] == y[1:] for x, y in zip(a, b))
 
 
 class TestBridge:
@@ -105,9 +123,22 @@ class TestBridge:
         posts = [g for g, ck, _ in ps if ck == "wood" and g.geom_type == "Polygon"]
         assert len(posts) == 4
 
-    def test_short_bridge_still_builds(self):
-        ps = parts("bridge", 1.0, 0)
-        assert any(ck == "wood_light" for _, ck, _ in ps)
+    @pytest.mark.parametrize("seed", range(6))
+    def test_planks_stay_on_the_deck(self, seed):
+        s = 10
+        hw = s * 0.42 / 2
+        for g, ck, _ in parts("bridge", s, seed):
+            if ck == "wood_light":
+                minx, miny, maxx, maxy = g.bounds
+                assert -s / 2 - 1e-9 <= minx and maxx <= s / 2 + 1e-9 and -hw - 1e-9 <= miny and maxy <= hw + 1e-9
+
+    @pytest.mark.parametrize("s", [0.05, 0.3, 1.0, 3.0])
+    def test_small_bridges_are_valid_and_posts_fit(self, s):
+        ps = parts("bridge", s, 0)
+        planks = [g for g, ck, _ in ps if ck == "wood_light"]
+        assert planks and all(g.is_valid and g.area > 0 for g in planks)
+        posts = [g for g, ck, _ in ps if ck == "wood" and g.geom_type == "Polygon"]
+        assert all(2 * (g.bounds[3] - g.bounds[1]) / 2 <= s * 0.42 * 0.4 + 1e-9 for g in posts)
 
 
 class TestBarrelAndChest:
@@ -131,3 +162,18 @@ class TestBarrelAndChest:
         detailed = edges(canvas(step))
         monkeypatch.setitem(P.PROPS, "crate", (lambda s, rng: [(box(-s / 2, -s / 2, s / 2, s / 2), "wood", P.INK_MED)], 2.5))
         assert detailed > 3 * max(edges(canvas(step)), 1)
+
+
+DETAILED = ["crate", "barrel", "chest", "table", "bridge"]
+
+
+@pytest.mark.parametrize("kind", DETAILED)
+@pytest.mark.parametrize("size", [0.3, 1.0, 2.5, 10.0, 40.0])
+def test_every_part_is_valid_nonempty_geometry(kind, size):
+    for seed in range(8):
+        for g, ck, iw in parts(kind, size, seed):
+            assert not g.is_empty and g.is_valid, (kind, size, seed, ck)
+            if ck:
+                assert g.geom_type in ("Polygon", "MultiPolygon")
+            else:
+                assert g.geom_type in ("LineString", "MultiLineString", "LinearRing") and iw > 0
