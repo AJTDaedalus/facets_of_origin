@@ -323,18 +323,25 @@ def shade_crescent(g):
     if cres.is_empty or cres.area < g.area * 0.03:
         return None
     gap = max(np.sqrt(g.area) * 0.09, 0.12)
-    minx, miny, maxx, maxy = cres.bounds
-    h = (maxy - miny) + 0.02
-    # lines x = x0 + (maxy - y): only offsets that can cross the crescent's bounding box
-    t0, t1 = minx - h, maxx
-    starts = np.arange(t0, t1 + gap, gap)
-    cands = [LineString([(x0, maxy + 0.01), (x0 + h, miny - 0.01)]) for x0 in starts]
-    hits = shapely.intersection(np.array(cands, dtype=object), cres)
+    # hatch across the part's long axis (so strokes never run along its side), in a frame
+    # rotated so the strokes are vertical
+    dx, dy = (cs[1][0] - cs[0][0], cs[1][1] - cs[0][1]) if e1 >= e2 else (cs[2][0] - cs[1][0], cs[2][1] - cs[1][1])
+    axis = np.degrees(np.arctan2(dy, dx))
+    if long_ / max(short, 1e-9) < 1.3:
+        axis = -45.0                          # near-square parts: the classic diagonal hatch
+    origin = (0.0, 0.0)
+    rc = affinity.rotate(cres, -axis, origin=origin)
+    minx, miny, maxx, maxy = rc.bounds
+    xs = np.arange(minx + gap / 2, maxx, gap)
+    cands = [LineString([(x, miny - 0.01), (x, maxy + 0.01)]) for x in xs]
+    if not cands:
+        return None
+    hits = shapely.intersection(np.array(cands, dtype=object), rc)
     lines = []
     for hit in hits:
         for piece in getattr(hit, "geoms", [hit]):
             if piece.geom_type == "LineString" and piece.length > gap * 0.4:
-                lines.append(piece)
+                lines.append(affinity.rotate(piece, axis, origin=origin))
     return shapely.MultiLineString(lines) if lines else None
 
 

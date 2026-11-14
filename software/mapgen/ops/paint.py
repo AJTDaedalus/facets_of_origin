@@ -91,7 +91,7 @@ def _width_ft(ctx, p) -> float:
     if w not in weights:
         raise RecipeError(f"unknown ink weight {w!r} (have {', '.join(weights)})")
     # style weights are in feet; on a mile-scale map a "heavy" line would be half a mile wide
-    scale = 0.25 if getattr(ctx.frame, "unit", "ft") == "mi" else 1.0
+    scale = 0.5 if getattr(ctx.frame, "unit", "ft") == "mi" else 1.0
     return float(weights[w]) * scale
 
 

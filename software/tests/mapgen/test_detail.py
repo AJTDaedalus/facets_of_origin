@@ -77,6 +77,19 @@ class TestShadeCrescent:
         mp = MultiPolygon([box(0, 0, 3, 3), box(5, 5, 8, 8)])
         assert shade_crescent(mp) is not None
 
+    @pytest.mark.parametrize("angle", [0, 45, -45, 90, 30])
+    def test_elongated_parts_hatched_across_their_length(self, angle):
+        from shapely import affinity
+        part = affinity.rotate(box(0, 0, 10, 3), angle, origin=(0, 0))
+        h = shade_crescent(part)
+        assert h is not None
+        long_axis = np.radians(angle)
+        for ln in h.geoms:
+            (x0, y0), (x1, y1) = ln.coords[0], ln.coords[-1]
+            a = np.arctan2(y1 - y0, x1 - x0)
+            # strokes cross the long axis (never parallel to it)
+            assert abs(np.sin(a - long_axis)) > 0.7
+
     def test_degenerate(self):
         assert shade_crescent(box(0, 0, 0, 0)) is None
         assert shade_crescent(box(0, 0, 1e-4, 1e-4)) is None or True
@@ -151,4 +164,4 @@ class TestWallTexture:
         class F: unit = "mi"
         class C: frame = F(); style = type("S", (), {"ink": STYLE["ink"]})
         class P_: width = None; weight = "heavy"
-        assert _width_ft(C(), P_()) == pytest.approx(STYLE["ink"]["heavy"] * 0.25)
+        assert _width_ft(C(), P_()) == pytest.approx(STYLE["ink"]["heavy"] * 0.5)

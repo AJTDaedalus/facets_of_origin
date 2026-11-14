@@ -252,3 +252,83 @@ in area) gets no cracks or grit. This is cosmetic. R2's "use the wall's own band
 | — | Detail lines (staves, folds, boards, cracks, flutes) use `DETAIL = 0.075` ft, so they're at least a pixel at VTT scale. They were sub-pixel before, which is why R7's strip test first failed on barrel, chest and boulder. |
 
 Tests: full suite (excluding e2e) **2319 passed**.
+
+---
+
+## Verification of 50e71d0 (independent reviewer, 2026-11-13)
+
+Every item below was checked against the code at 50e71d0, re-running the original reproduction scripts.
+
+**Test suite:** `cd software && python3 -m pytest tests/mapgen -q`: **415 passed** (61 s).
+
+**Draft renders:** I draft-rendered all 6 recipes with `python3 -m mapgen render <r> --draft`: `proof_cave`, `proof_cellar`, `proof_region`, `proof_ruins`, `proof_town` and `crystal_court`. All 6 rendered with no errors.
+
+### R1 to R14
+
+| ID | Verdict | Evidence |
+|---|---|---|
+| R1 | **RESOLVED** | Chest drawn with vs without its board lines: 147 px differ, max difference 0.28 (it was 3 px and 0.026). The boards are visible on the contact sheet. |
+| R2 | **RESOLVED** | Excluded-mouth strip: 0 of 640 px non-white with `cave_walls`, the same as a bare `wall` (it was 270). The `wall_band` op reads `collector.walls[name]["band"]`, which already has `exclude` applied. |
+| R3 | **RESOLVED** | `mountain` and `hill` are in `NO_AUTO_SHADE`. The contact sheet shows only their own shading. |
+| R4 | **RESOLVED** | Shading now needs `iw` (an ink outline). On the brazier, only the outer metal disk is hatched; the fire and coal are not. Boulder `hl`, hill top and bush highlight are skipped. Two inner parts with an outline are still hatched (barrel lid, statue star). That matches the rule as written and is acceptable. |
+| R5 | **PARTIAL** | Thin parts are fixed. Rails at 10×0.5 return `None` at 0°, +45° and −45°. Parts with a short:long ratio of 0.25 or more still degenerate on the diagonals, because the crescent shift (−k, −k) runs along a NW–SE axis and the hatch direction (1, −1) runs along a SW–NE axis. On a 10×3 box: 26 lines at 0°, **3 lines at the SE end cap only** at +45°, and **4 long lines parallel to the side** at −45°. 10×5 behaves the same (24 / 4 / 4). On the contact sheet, a bridge rotated 45° is hatched only at its SE end. This matters because `scatter` rotates props randomly by default (`rotate_jitter: 180`), so beds, tables, chests and bridges often land on a diagonal. Not a blocker; worth a follow-up, e.g. pick the hatch angle per part, or measure the crescent depth along the part's short axis. |
+| R6 | **PARTIAL (improved)** | I re-ran the same 752-prop scatter, with shading vs without. Extra cost per prop: crate 5.6 ms, barrel 8.6, boulder 5.7, stalagmite 7.4, bed 13.6 (it was 12.7 / 18.0 / 18.4 / 19.9 / 22.1). Overall prop drawing is 1.6–3.8× slower than without shading (it was 2–4×). The author's figure of about 2.6 ms is not reproduced on this machine, though absolute timings are noisy here. The bed costs most because it still hatches 3 outlined parts (frame, blanket, pillow), and the frame's hatch is then painted over by the blanket. Not a blocker. |
+| R7 | **RESOLVED** | Each feature test now compares against a render with the feature patched out (hatcher removed, detail lines stripped, plain wall) and would fail if the feature were deleted. There are 4 direct `shade_crescent` tests, plus mouth, `wall_band` and duplicate-name tests. Gaps: no test covers the new stroke fast path (see below), and no `wall_band` test uses a partition or a ruined wall (I checked both by hand). |
+| R8 | **RESOLVED (documented)** | Recorded as intended. The court renders with no errors. The owner should still be told when the court is next re-rendered. |
+| R9, R13 | **RESOLVED** | `wall_band` uses the painted band itself, including the rough edge and mitred corners. |
+| R10 | **RESOLVED** | Two `cave_walls` with the same `wall:` name, and two `stone_room`s with the same name, now raise `RecipeError: … already exists`. |
+| R11 | **RESOLVED** | The no-op `difference` call is removed. |
+| R12 | **RESOLVED, with a note** | The ×0.25 scaling applies on `unit: mi` maps. Note that this is a much bigger change than undoing this PR's +25%. In `proof_region` at full resolution, the coastline (`heavy`) goes from 10.5 px (on `feat/lean-facets`) to 3.25 px, and the river ink (`fine`) from 2.5 px to 0.75 px, which is under a pixel. In the draft render the coastline is a thin line that is still visible, and the river ink edge is barely visible. Ask the owner to look at the region proof. If it's too light, a factor of about 0.5, or setting `ink:` in the region recipe, would restore it. |
+| R14 | **RESOLVED** | Hatch lines are only generated for offsets that can reach the crescent's bounding box (`[minx − h, maxx]`), and the intersection is vectorised. |
+
+### Regressions from 50e71d0
+
+**`wall_band` op.** No regressions found. Edge cases checked by script:
+
+| Case | Result |
+|---|---|
+| partition | correct band (sum 1002) |
+| partition, `inset` larger than half the thickness | empty mask, sum 0. `cracks` and `stipple` then do nothing, with no error |
+| ruined wall | band follows the gaps (2108 vs 5128 dressed) |
+| wall fully excluded | empty mask, no error |
+| `wall_band` before its wall | clean `RecipeError: … not defined yet` |
+| `stone_room` with `thickness: 0.15` and inset 0.08 | almost empty, no error |
+
+**Stroke fast path in `stroke_geometry_alpha`.** Buffering one MultiLineString gives a pixel-identical result to the old union of per-line buffers (max diff 0.0) in every case I tried:
+- overlapping and duplicate lines;
+- a polygon with a hole;
+- the hatch MultiLineString;
+- a self-touching line.
+
+Other inputs:
+- a GeometryCollection with an empty member works;
+- zero-length lines alone still return `None`;
+- dashed and jittered strokes (where `wm ≠ 1`) still take the old path, and dashed strokes without jitter have `wm == 1.0` and use the fast path with the same cap style.
+
+**Duplicate-name error.** No recipe in the repo reuses a wall name:
+- `proof_ruins`: `wall_a`, `wall_b`;
+- `proof_cellar`: `w` plus 3 uniquely named partitions;
+- `crystal_court`: `shell` plus 4 uniquely named partitions;
+- `proof_cave`: a single `cave_walls rock`;
+- the goldens and the build-map cookbook: unique names;
+- no `wall` or `partition` call without a name (which would default to `wall` / `partition`).
+
+The check runs *after* the wall is painted. That does no harm, because the error aborts the render.
+
+**`iw`-only rule and `DETAIL` width.** The contact sheet looks right: chest boards, barrel staves and boulder cracks now read clearly at 20 px/ft. `DETAIL` (0.075 ft) is still in absolute map units, so on a mile-scale map it would be 0.075 mi. No mile-scale prop currently uses detail lines (mountain and hill have none), so this has no effect today.
+
+### Verdict
+
+**Clean to merge.** Nothing blocks. Three follow-ups, none required for merge:
+1. R5: thick parts on a diagonal are still hatched only at an end cap, or with lines parallel to the edge.
+2. R6: shading still costs about 6–14 ms per prop. Shading only the outermost outlined part would help the bed.
+3. R12: ask the owner whether the region proof's 3× thinner coastline and sub-pixel river ink are acceptable.
+
+### Verification follow-ups: resolved before merge (2026-11-13)
+
+- **R5 (diagonals):** hatch strokes now run perpendicular to a part's long axis, in a frame rotated so they're vertical. Near-square parts keep the classic diagonal. Tested at 0°, 30°, 45°, −45° and 90°: strokes never run along a side.
+- **R12:** the mile-scale ink factor is 0.5, not 0.25, so the coastline and river outlines stay above a pixel. Tested.
+- **R6:** left as is (shading makes prop drawing 1.6–3.8× slower; acceptable for now, noted for a later pass).
+- **R8:** the owner will be told the court's lines are heavier when it's next rendered.
+
+Tests: full suite (excluding e2e) **2324 passed**.
