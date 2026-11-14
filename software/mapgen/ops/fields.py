@@ -62,6 +62,9 @@ def cells(ctx, p):
     fr = ctx.frame
     h, w = fr.shape
     s = fr.px(p.scale)
+    if s < 1:
+        from ..recipe import RecipeError
+        raise RecipeError(f"cells: scale {p.scale} ft is under one pixel on this map")
     nx, ny = int(np.ceil(w / s)) + 3, int(np.ceil(h / s)) + 3            # one spare ring of cells round the map
     gy, gx = np.mgrid[-1:ny - 1, -1:nx - 1].astype(np.float64)
     off = ctx.rng.uniform(-0.5, 0.5, size=(2,) + gx.shape) * p.jitter
@@ -84,6 +87,8 @@ class FacingP(ParamModel):
 @op("facing", params=FacingP, inputs={"src": Field}, output=Mask, group="3 fields")
 def facing(ctx, p, src):
     """Treat a field as height and select the slopes that face `toward` [dx, dy] (default south-east, the shadow side under north-west light): 0 where the downhill direction's cosine with `toward` is below `lo`, 1 above `hi`. `steep` (height per foot) also fades out gentle slopes. Clip ripple or crest strokes to it so only their shadowed sides are inked."""
+    if min(src.data.shape) < 2:                                        # too small to have a slope
+        return Mask(np.zeros(src.data.shape, np.float32))
     gy, gx = np.gradient(src.data.astype(np.float64))
     gx, gy = gx * ctx.frame.scale, gy * ctx.frame.scale                  # height per foot
     mag = np.hypot(gx, gy)
@@ -120,6 +125,8 @@ def warp(ctx, p, src):
     sc = ctx.frame.px(p.scale)
     ys, xs = np.mgrid[0:h, 0:w].astype(np.float32)
     px, py = xs.copy(), ys.copy()
+    if p.curl and min(h, w) < 2:                         # too small to have a flow
+        return type(src)(src.data.copy())
     if p.curl:
         n = fbm((h, w), sc, ctx.seed, octaves=p.octaves)
         gy, gx = np.gradient(ndimage.gaussian_filter(n, max(sc / 16, 0.5)))

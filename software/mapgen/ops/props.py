@@ -679,6 +679,11 @@ def scatter(ctx, p, into, mask=None, avoid=None):
     ctx.collector.scatter_points[key] = [(round(x, 4), round(y, 4)) for x, y in pts]
 
 
+def _names(step_id: str, wanted: str) -> bool:
+    """A step id answers to its own name, and a macro body step (`call/2`) also to its call's."""
+    return step_id == wanted or step_id.startswith(wanted + "/")
+
+
 class FootprintsP(ParamModel):
     of: list[str] = PField(default_factory=list)
     kinds: list[PropKind] = PField(default_factory=list)   # type: ignore[valid-type]
@@ -689,12 +694,12 @@ class FootprintsP(ParamModel):
 def footprints(ctx, p):
     """Mask of the props drawn so far: all of them, or only those from the steps whose `id` is in `of` and/or of the given `kinds`, grown by `grow` feet. Feed it to `scatter` `avoid` (scatters that keep clear of each other), or blur it to pool mist, grime or snow around props."""
     if p.of:
-        earlier = {st.id for st in ctx.recipe.steps[:ctx.index]}
-        missing = [i for i in p.of if i not in earlier]
+        earlier = [st.id for st in ctx.recipe.steps[:ctx.index] if st.id]
+        missing = [i for i in p.of if not any(_names(e, i) for e in earlier)]
         if missing:
             raise RecipeError(f"footprints: no earlier step has id {', '.join(missing)}")
     picked = [g for g, (sid, kind) in zip(ctx.collector.footprints, ctx.collector.footprint_tags)
-              if (not p.of or sid in p.of) and (not p.kinds or kind in p.kinds)]
+              if (not p.of or (sid and any(_names(sid, i) for i in p.of))) and (not p.kinds or kind in p.kinds)]
     if not picked:
         return Mask(np.zeros(ctx.frame.shape, np.float32))
     g = shapely.unary_union(picked)

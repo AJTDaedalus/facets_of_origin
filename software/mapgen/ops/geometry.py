@@ -167,6 +167,9 @@ def _cusp_ring(coords, amount, period, jitter, seed, closed=True):
         return coords
     seg = np.linalg.norm(np.diff(np.vstack([pts, pts[:1]]) if closed else pts, axis=0), axis=1)
     s = np.concatenate([[0.0], np.cumsum(seg)])[:len(pts)]
+    if closed and seg.sum() > 0:                           # a whole number of scallops round a ring: no seam
+        P = seg.sum()
+        s = s * max(round(P / period), 1) * period / P
     if jitter:
         s = s + fbm_at(pts[:, 0], pts[:, 1], period * 3, seed) * jitter * period
     d = amount * np.abs(np.sin(np.pi * s / period)) ** 0.6
@@ -226,8 +229,13 @@ def roughen_geom(ctx, p, src):
     g = shapely.segmentize(g, seg)
 
     def poly(pg):
-        pg = orient(pg, 1.0) if p.mode == "cusps" else pg          # outward = right of travel round a CCW ring
-        return Polygon(ring(pg.exterior.coords), [ring(h.coords) for h in pg.interiors])
+        if p.mode != "cusps":
+            return Polygon(ring(pg.exterior.coords), [ring(h.coords) for h in pg.interiors])
+        pg = orient(pg, 1.0)                                       # outward = right of travel round a CCW ring
+        out = Polygon(ring(pg.exterior.coords), [ring(h.coords) for h in pg.interiors]).buffer(0)
+        # a scalloped hole can pinch off slivers at its corners: keep only the real holes
+        keep = lambda q: Polygon(q.exterior, [h for h in q.interiors if Polygon(h).area > p.amount ** 2])
+        return MultiPolygon([keep(q) for q in out.geoms]) if out.geom_type == "MultiPolygon" else keep(out)
 
     if isinstance(g, Polygon):
         out = polygonal(poly(g))

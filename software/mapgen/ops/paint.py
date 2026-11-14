@@ -89,7 +89,11 @@ def _tapered(ln, width_ft, taper):
     """A line as a polygon that swells to `width_ft` in the middle and thins to (1 - taper) of it at the ends."""
     L = ln.length
     n = int(min(max(L / max(width_ft, 0.05), 8), 200))
-    t = np.linspace(0, 1, n + 1)
+    if L <= 0:
+        return Polygon()
+    verts = np.asarray(ln.coords)
+    at = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(verts, axis=0), axis=1))]) / L
+    t = np.unique(np.clip(np.concatenate([np.linspace(0, 1, n + 1), at]), 0, 1))   # keep every corner
     pts = np.array([ln.interpolate(x, normalized=True).coords[0] for x in t])
     tang = np.gradient(pts, axis=0)
     norm = np.stack([-tang[:, 1], tang[:, 0]], axis=1)

@@ -209,3 +209,55 @@ class TestCusps:
         circle = [{"op": "circle", "out": "s", "center": [20, 15], "r": 6}]
         g = rough(circle, mode="cusps", amount=1.0, period=1.5)
         assert g.is_valid and not g.is_empty
+
+
+class TestReviewFixes:
+    """PR #40 review (docs/REVIEW_pr40.md)."""
+
+    def test_r1_footprints_can_name_a_macro_call(self):
+        style = {"macros": {"rocks": {"params": {}, "steps": [
+            {"op": "scatter", "kind": "boulder", "density": 0.2, "spacing": 4, "size": 2}]}}}
+        steps = CANVAS + [{"op": "rocks", "id": "r1"}, {"op": "footprints", "out": "f", "of": ["r1"]}]
+        store, _ = run(steps, style=style, **H)
+        assert store.get("f").data.sum() > 0
+
+    def test_r1_prefix_does_not_match_a_longer_id(self):
+        steps = CANVAS + [{"op": "prop", "kind": "crate", "at": [20, 15], "size": 3, "id": "r10"},
+                          {"op": "prop", "kind": "crate", "at": [5, 5], "size": 3, "id": "r1"},
+                          {"op": "footprints", "out": "f", "of": ["r1"]}]
+        store, _ = run(steps, **H)
+        f = store.get("f").data
+        assert f[40, 40] > 0 and f[120, 160] == 0
+
+    def test_r2_sub_pixel_cells_are_refused(self):
+        with pytest.raises(RecipeError, match="cells"):
+            cells(scale=0.003)
+
+    def test_r3_long_tapered_polyline_keeps_its_corners(self):
+        import mapgen.ops.paint as P
+        ln = LineString([(0, 0), (500, 0), (500, 500), (0, 500)])
+        poly = P._tapered(ln, 0.3, 0.0001)
+        assert poly.buffer(1e-6).contains(shapely.Point(500, 0))
+
+    def test_r4_cusps_have_no_seam_jump(self):
+        g = rough([{"op": "rect", "out": "s", "x": 10, "y": 5, "w": 19, "h": 10}], mode="cusps", amount=1, period=4, jitter=0)
+        pts = np.asarray(g.exterior.coords)
+        gaps = np.linalg.norm(np.diff(pts, axis=0), axis=1)
+        assert gaps[-1] <= gaps[:-1].max() + 1e-6          # the seam is no worse than any other segment
+
+    def test_r5_cusps_keep_one_clean_hole(self):
+        steps = [{"op": "rect", "out": "o", "x": 10, "y": 5, "w": 20, "h": 15},
+                 {"op": "rect", "out": "i", "x": 17, "y": 10, "w": 6, "h": 5},
+                 {"op": "subtract", "out": "s", "a": "o", "b": ["i"]}]
+        for amt in (0.3, 0.8):
+            g = rough(steps, mode="cusps", amount=amt, period=2)
+            polys = list(g.geoms) if g.geom_type == "MultiPolygon" else [g]
+            assert sum(len(p.interiors) for p in polys) == 1 and g.is_valid
+
+    @pytest.mark.parametrize("op", ["facing", "warp"])
+    def test_r6_one_pixel_maps_do_not_crash(self, op):
+        tiny = dict(width_ft=0.1, height_ft=0.1, px_per_square=40, supersample=1)
+        step = {"op": "facing", "out": "o", "src": "n"} if op == "facing" else \
+            {"op": "warp", "out": "o", "src": "n", "curl": True}
+        out = layer([{"op": "noise", "out": "n", "id": "n"}, step], "o", **tiny).data
+        assert np.isfinite(out).all()
