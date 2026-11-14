@@ -36,32 +36,71 @@ steps:
   - {op: rect, out: frame_r, x: 0, y: 0, w: 60, h: 40}
   - {op: subtract, out: sea, a: frame_r, b: [land]}
   - {op: rasterize, out: sea_m, src: sea}
-  # wet sand along the waterline, feathered inland
-  - {op: band, out: wet_m, src: sea_m, inner: 0, outer: 3.5, side: outside}     # from the sea, so only the waterline
-  - {op: blur, out: wet_m, src: wet_m, sigma: 1.0}
-  - {op: fill, mask: wet_m, material: wet_sand, opacity: 0.85, id: wet_fill}
+  # ---- the waterline, built up in soft layers rather than one hard edge
+  # the shallows: a pale wash fading out from the beach over five feet
+  - {op: band, out: shallows_wash, src: land_m, inner: 0, outer: 5}
+  - {op: blur, out: shallows_wash, src: shallows_wash, sigma: 1.6}
+  - {op: fill, mask: shallows_wash, color: "#8ea4a8", opacity: 0.55, id: shallows_fill}
+  # wet sand: darkest at the water, fading up the beach
+  - {op: band, out: wet_m, src: sea_m, inner: 0, outer: 4.5, side: outside}     # from the sea, so only the waterline
+  - {op: blur, out: wet_m, src: wet_m, sigma: 1.8}
+  - {op: fill, mask: wet_m, material: wet_sand, opacity: 0.8, id: wet_fill}
+  - {op: band, out: wet_edge, src: sea_m, inner: 0, outer: 1.5, side: outside}
+  - {op: blur, out: wet_edge, src: wet_edge, sigma: 0.6}
+  - {op: fill, mask: wet_edge, color: "#7f898b", opacity: 0.35, id: wet_dark}
   # wind ripples in the dry sand: fine dashed contour lines of a stretched noise
   - {op: noise, out: dunes, scale: 5, octaves: 2, stretch: 3, angle: 80, id: dune_noise}   # long ripples, wind off the sea
   - {op: isolines, out: ripples, src: dunes, interval: 0.2}
   - {op: intersect, out: ripples_land, of: [ripples, land]}
-  - {op: stroke, src: ripples_land, width: 0.06, dash: [1.6, 0.9], jitter: 0.5, opacity: 0.3, color: "#5d6466"}
+  - {op: stroke, src: ripples_land, width: 0.06, dash: [1.6, 0.9], jitter: 0.5, opacity: 0.25, color: "#5d6466"}
   - {op: stipple, mask: land_m, density: 2.5, falloff: null, size: 0.06, opacity: 0.35, color: "#4c5254", id: sand_grit}
-  - {op: stipple, mask: wet_m, density: 4, falloff: 2.0, size: 0.07, opacity: 0.45, id: wet_grit}
-  # the beach shelving into the water: short strokes on the sand side of the waterline
-  - {op: band, out: shore_side, src: sea_m, inner: 0, outer: 2.5, side: outside}
-  - {op: shade_lines, mask: shore_side, side: inside, length: 1.0, spacing: 0.3, width: 0.05, shadow: null, opacity: 0.4,
-     color: "#3c4447", id: shore_strokes}
-  # surf, foam and wave lines
-  - {op: coastline, land: land, waves: 4, spacing: 0.8}
-  # surf foam: a bright broken line at the waterline and a fainter second wash further out
-  - {op: band, out: foam_m, src: land_m, inner: 0, outer: 1.3}
-  - {op: noise, out: foam_n, scale: 3, octaves: 3, id: foam_noise}
-  - {op: field_to_mask, out: foam_gaps, src: foam_n, lo: -0.35, hi: 0.1}
+  - {op: stipple, mask: wet_m, density: 4, falloff: 2.5, size: 0.07, opacity: 0.4, id: wet_grit}
+  # swash marks: the wobbly lines each spent wave leaves on the wet sand
+  - {op: offset, out: swash1_o, src: sea, by: 1.1}
+  - {op: roughen_geom, out: swash1, src: swash1_o, amount: 0.45, scale: 2.5}
+  - {op: stroke, src: swash1, width: 0.07, dash: [3.5, 0.8], jitter: 0.6, color: "#4a5254", opacity: 0.55}
+  - {op: offset, out: swash2_o, src: sea, by: 2.4}
+  - {op: roughen_geom, out: swash2, src: swash2_o, amount: 0.7, scale: 3}
+  - {op: stroke, src: swash2, width: 0.06, dash: [2.5, 1.4], jitter: 0.7, color: "#4a5254", opacity: 0.4}
+  - {op: offset, out: swash3_o, src: sea, by: 3.8}
+  - {op: roughen_geom, out: swash3, src: swash3_o, amount: 0.9, scale: 3.5}
+  - {op: stroke, src: swash3, width: 0.05, dash: [1.8, 2.0], jitter: 0.7, color: "#4a5254", opacity: 0.28}
+  # the waterline itself: a medium, wobbling ink line (not the heavy coast stroke)
+  - {op: stroke, src: land_m, width: 0.14, opacity: 0.9}                    # the mask's edge: the waterline only
+  # surf: a bright broken foam band at the waterline, lace behind it
+  - {op: band, out: foam_m, src: land_m, inner: 0, outer: 1.4}
+  - {op: noise, out: foam_n, scale: 2.5, octaves: 3, stretch: 2, angle: 100, id: foam_noise}
+  - {op: field_to_mask, out: foam_gaps, src: foam_n, lo: -0.4, hi: 0.05}
   - {op: combine, out: foam_m, of: [foam_m, foam_gaps], mode: min}
-  - {op: blur, out: foam_m, src: foam_m, sigma: 0.25}
-  - {op: fill, mask: foam_m, color: "#eef4f3", opacity: 0.8, id: foam}
-  - {op: offset, out: wash_line, src: land, by: 2.6}
-  - {op: stroke, src: wash_line, width: 0.14, dash: [2.2, 1.0], jitter: 0.6, color: "#e4eeee", opacity: 0.7}
+  - {op: warp, out: foam_m, src: foam_m, amount: 0.5, scale: 2, id: foam_curl}
+  - {op: blur, out: foam_m, src: foam_m, sigma: 0.2}
+  - {op: fill, mask: foam_m, color: "#eef4f3", opacity: 0.85, id: foam}
+  - {op: stipple, mask: foam_m, density: 6, falloff: 1.2, side: outside, size: 0.07, color: "#e8f0f0", opacity: 0.7, id: foam_lace}
+  # incoming waves: broken crest lines parallel to the shore, each with a dark trough line on its seaward
+  # side (the water's shading), fading and spreading further out
+  - {op: offset, out: w1_o, src: land, by: 2.2}
+  - {op: roughen_geom, out: w1, src: w1_o, amount: 0.25, scale: 7}
+  - {op: stroke, src: w1, width: 0.16, dash: [6.0, 1.0], jitter: 0.6, color: "#e6eff0", opacity: 0.8}
+  - {op: offset, out: t1, src: w1, by: 0.3}
+  - {op: stroke, src: t1, width: 0.08, dash: [3.0, 2.0], jitter: 0.6, color: "#16262c", opacity: 0.35}
+  - {op: offset, out: w2_o, src: land, by: 4.0}
+  - {op: roughen_geom, out: w2, src: w2_o, amount: 0.35, scale: 8}
+  - {op: stroke, src: w2, width: 0.13, dash: [5.0, 1.6], jitter: 0.7, color: "#dce8ea", opacity: 0.65}
+  - {op: offset, out: t2, src: w2, by: 0.3}
+  - {op: stroke, src: t2, width: 0.07, dash: [2.4, 2.4], jitter: 0.7, color: "#16262c", opacity: 0.3}
+  - {op: offset, out: w3_o, src: land, by: 6.5}
+  - {op: roughen_geom, out: w3, src: w3_o, amount: 0.45, scale: 9}
+  - {op: stroke, src: w3, width: 0.1, dash: [4.0, 2.2], jitter: 0.7, color: "#d2e0e3", opacity: 0.5}
+  - {op: offset, out: w4_o, src: land, by: 9.5}
+  - {op: roughen_geom, out: w4, src: w4_o, amount: 0.55, scale: 10}
+  - {op: stroke, src: w4, width: 0.08, dash: [3.0, 2.8], jitter: 0.8, color: "#c8d8db", opacity: 0.38}
+  - {op: offset, out: w5_o, src: land, by: 13}
+  - {op: roughen_geom, out: w5, src: w5_o, amount: 0.65, scale: 11}
+  - {op: stroke, src: w5, width: 0.07, dash: [2.4, 3.4], jitter: 0.8, color: "#c8d8db", opacity: 0.28}
+  # open water: short fine swell strokes
+  - {op: band, out: open_sea, src: land_m, inner: 7, outer: 40}
+  - {op: hatch, mask: open_sea, spacing: 1.1, length: 0.8, width: 0.04, lines: 2, angle: 95, angle_jitter: 12,
+     color: "#0f1d22", opacity: 0.3, id: swell_hatch}
   # ---- the black stones: scattered on the sand, clustered at the tideline, a few in the shallows
   - {op: scatter, kind: boulder, mask: land_m, density: 0.12, spacing: 6, size: 2.6, size_jitter: 0.45, shadow: 0.5, id: stones_sand}
   - {op: scatter, kind: pebbles, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.9, spacing: 1.8, size: 1.8, shadow: 0.5, id: pebbles_tide}
@@ -69,7 +108,7 @@ steps:
   - {op: scatter, kind: boulder, mask: shallows_m, density: 0.25, spacing: 5, size: 3.0, size_jitter: 0.5, shadow: 0.3, id: stones_surf}
   - {op: scatter, kind: rubble, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.08, spacing: 7, size: 2.4, shadow: 0.4, id: stone_heaps}
   # ---- dim, cold light
-  - {op: fill, color: "#4a5a70", blend: multiply, opacity: 0.42, atmosphere: true, id: dim}
+  - {op: fill, color: "#3c4a60", blend: multiply, opacity: 0.55, atmosphere: true, id: dim}
   # ---- the mist: broad banks drifting inland off the sea, curled into wisps by a warp, thickest where it
   # pools round the stones and along the surf; screen-blended so it glows faintly. Marked atmosphere, so
   # `quality` also judges the map beneath it.
@@ -82,17 +121,18 @@ steps:
   - {op: blur, out: stone_pool, src: stone_pool, sigma: 0.8}
   - {op: band, out: surf_pool, src: sea_m, inner: 0, outer: 2.0, side: both}
   - {op: blur, out: surf_pool, src: surf_pool, sigma: 1.0}
-  - {op: mix, out: mist_f, of: [mist_f, stone_pool, surf_pool], weights: [1, 0.45, 0.35]}
-  - {op: field_to_mask, out: mist_m, src: mist_f, lo: -0.1, hi: 0.6}
+  - {op: mix, out: mist_f, of: [mist_f, stone_pool, surf_pool], weights: [1, 0.45, 0.15]}
+  - {op: field_to_mask, out: mist_m, src: mist_f, lo: -0.3, hi: 0.45}
   - {op: combine, out: mist_m, of: [mist_m, stones_m], mode: sub}                # stones stand up out of it
-  - {op: fill, mask: mist_m, color: "#cfe7ee", blend: screen, opacity: 0.6, atmosphere: true, id: mist_banks}
-  - {op: blur, out: mist_glow, src: mist_m, sigma: 2.5}
-  - {op: fill, mask: mist_glow, color: "#a9d4e0", blend: screen, opacity: 0.3, atmosphere: true, id: mist_glow}
+  - {op: fill, color: "#9fc4cf", blend: screen, opacity: 0.12, atmosphere: true, id: mist_ground}      # a low haze everywhere
+  - {op: fill, mask: mist_m, color: "#d4ecf2", blend: screen, opacity: 0.72, atmosphere: true, id: mist_banks}
+  - {op: blur, out: mist_glow, src: mist_m, sigma: 3.5}
+  - {op: fill, mask: mist_glow, color: "#a6dbe6", blend: screen, opacity: 0.45, atmosphere: true, id: mist_glow}
   - {op: warp, out: wisp_f, src: mist_b, amount: 1.5, scale: 3, drift: [-1.5, 0], id: wisp_curl}
   - {op: field_to_mask, out: wisp_m, src: wisp_f, lo: 0.25, hi: 0.6}
-  - {op: fill, mask: wisp_m, color: "#eef8fa", blend: screen, opacity: 0.4, atmosphere: true, id: mist_wisps}
+  - {op: fill, mask: wisp_m, color: "#f0fafc", blend: screen, opacity: 0.55, atmosphere: true, id: mist_wisps}
   - {op: finish}
-  - {op: vignette, strength: 0.45, start: 0.35}
+  - {op: vignette, strength: 0.55, start: 0.3, atmosphere: true}
   - {op: compass, at: ne, size: 5}
   - {op: scale_bar, at: nw}
   - {op: title, text: The Pale Strand, position: bottom, size: 2.2}
