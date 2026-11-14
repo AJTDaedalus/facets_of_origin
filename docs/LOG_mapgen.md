@@ -391,3 +391,26 @@ The gaps below surfaced while building `maps/recipes/mist_coast.map.yaml` from t
    - The owner's packs hold no misty or coastal battle map (searched 2026-11-14), so this replaces a comparator rather than inventing one.
 
 Tests: `tests/mapgen/test_gaps.py` adds 33. mapgen suite 515 passed; full suite, excluding e2e, 2419 passed. The cookbook has a new section, "Mood, mist and weather", and `ops.md` was regenerated.
+
+## 2026-11-14 — Coast styling: sand, lace, crests
+
+The owner said the sand looked weak and asked about the lace and crests. I researched shader write-ups and drawing guides first. New engine pieces, each with tests in `tests/mapgen/test_coast_tools.py` (30):
+- `cells`: Worley noise, giving distance to the cell border or the centre, for foam lace.
+- `facing`: a mask of the slopes that face a direction, so ripple strokes ink only their shadow sides.
+- `stroke`: `clip` (a mask) and `taper` (swells each line or dash in the middle).
+- `stipple`: `weight` (a mask that scales density per pixel), for clumped grain.
+- `roughen_geom`: `mode: cusps` (outward scallops with sharp horns), for beach cusps.
+
+Recipe changes in `mist_coast`:
+- cusped waterline, berm with scarp, wrack line, shadow-side ripples, clumped grain
+- scour and tails on the stones
+- a Worley lace net that fades seaward
+- smoothed, tapered crests with lip shadows
+
+The land shape now extends past the frame, because cusping the frame slivers made a rectangle of bands.
+
+Metrics under atmosphere:
+- Q4 ink rose from 0.093 to 0.100 but is still below its band.
+- Q2, Q3 and Q5s are still out, as before.
+
+No goldens changed. The mapgen suite has 549 passing.

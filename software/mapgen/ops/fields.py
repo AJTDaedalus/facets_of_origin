@@ -49,6 +49,58 @@ def noise(ctx, p):
                              octaves=p.octaves, persistence=p.persistence, lacunarity=p.lacunarity, kind=p.kind))
 
 
+class CellsP(ParamModel):
+    scale: PosFt = 3.0
+    jitter: float = PField(0.9, ge=0, le=1)
+    metric: Literal["edge", "center"] = "edge"
+
+
+@op("cells", params=CellsP, output=Field, group="3 fields")
+def cells(ctx, p):
+    """Cellular (Worley) noise: random points about `scale` feet apart (`jitter` 0 is a regular grid), each pixel's distance in feet to the nearest cell border (`metric: edge`, half the gap between the nearest two points) or to its cell's point (`center`). Threshold small edge values into a net of thin lines: foam lace, cracked mud, scales, cobbles."""
+    from scipy.spatial import cKDTree
+    fr = ctx.frame
+    h, w = fr.shape
+    s = fr.px(p.scale)
+    nx, ny = int(np.ceil(w / s)) + 3, int(np.ceil(h / s)) + 3            # one spare ring of cells round the map
+    gy, gx = np.mgrid[-1:ny - 1, -1:nx - 1].astype(np.float64)
+    off = ctx.rng.uniform(-0.5, 0.5, size=(2,) + gx.shape) * p.jitter
+    pts = np.stack([(gx + 0.5 + off[0]).ravel() * s, (gy + 0.5 + off[1]).ravel() * s], axis=1)
+    ys, xs = np.mgrid[0:h, 0:w].astype(np.float64)
+    q = np.stack([xs.ravel() + 0.5, ys.ravel() + 0.5], axis=1)
+    d, _ = cKDTree(pts).query(q, k=2)
+    out = (d[:, 1] - d[:, 0]) / 2 if p.metric == "edge" else d[:, 0]
+    return Field((out / fr.scale).reshape(h, w).astype(np.float32))
+
+
+class FacingP(ParamModel):
+    src: Ref
+    toward: Point = [0.6, 0.8]
+    lo: float = PField(0.2, ge=-1, le=1)
+    hi: float = PField(0.7, ge=-1, le=1)
+    steep: PosFt | None = None
+
+
+@op("facing", params=FacingP, inputs={"src": Field}, output=Mask, group="3 fields")
+def facing(ctx, p, src):
+    """Treat a field as height and select the slopes that face `toward` [dx, dy] (default south-east, the shadow side under north-west light): 0 where the downhill direction's cosine with `toward` is below `lo`, 1 above `hi`. `steep` (height per foot) also fades out gentle slopes. Clip ripple or crest strokes to it so only their shadowed sides are inked."""
+    gy, gx = np.gradient(src.data.astype(np.float64))
+    gx, gy = gx * ctx.frame.scale, gy * ctx.frame.scale                  # height per foot
+    mag = np.hypot(gx, gy)
+    t = np.asarray(p.toward, float)
+    t = t / (np.linalg.norm(t) or 1.0)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        cos = np.where(mag > 1e-12, -(gx * t[0] + gy * t[1]) / mag, -2.0)
+    if p.hi <= p.lo:
+        m = (cos >= p.lo).astype(np.float64)
+    else:
+        m = np.clip((cos - p.lo) / (p.hi - p.lo), 0, 1)
+    m[mag <= 1e-12] = 0
+    if p.steep:
+        m *= np.clip(mag / p.steep, 0, 1)
+    return Mask(m.astype(np.float32))
+
+
 class WarpP(ParamModel):
     src: Ref
     amount: PosFt = 2.0

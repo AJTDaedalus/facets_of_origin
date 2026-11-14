@@ -81,7 +81,7 @@ Rectangle with its north-west corner at (x, y), w × h feet; optional rotation (
 
 ### `roughen_geom` → Geometry
 
-Hand-drawn wobble: densify the outline and push each vertex along its normal by noise (amount feet, feature size `scale` feet). Use for caves, cliffs, ruins and shorelines.
+Hand-drawn wobble: densify the outline and push each vertex along its normal by noise (amount feet, feature size `scale` feet). Use for caves, cliffs, ruins and shorelines. `mode: cusps` instead scallops the outline outward into crescents `period` feet long, up to `amount` feet deep, with sharp horns left on the original edge (`jitter` 0..1 makes them uneven): the beach cusps waves cut along a waterline. A line is pushed to the right of its direction.
 
 | param | type | default |
 |---|---|---|
@@ -89,6 +89,9 @@ Hand-drawn wobble: densify the outline and push each vertex along its normal by 
 | `amount` | float | `1.0` |
 | `scale` | float | `6.0` |
 | `octaves` | int | `3` |
+| `mode` | Literal['noise', 'cusps'] | `"noise"` |
+| `period` | float | `4.0` |
+| `jitter` | float | `0.3` |
 
 ### `subtract` → Geometry
 
@@ -209,6 +212,16 @@ Hard (or `softness`-ramped) threshold of a mask.
 
 ## Fields
 
+### `cells` → Field
+
+Cellular (Worley) noise: random points about `scale` feet apart (`jitter` 0 is a regular grid), each pixel's distance in feet to the nearest cell border (`metric: edge`, half the gap between the nearest two points) or to its cell's point (`center`). Threshold small edge values into a net of thin lines: foam lace, cracked mud, scales, cobbles.
+
+| param | type | default |
+|---|---|---|
+| `scale` | float | `3.0` |
+| `jitter` | float | `0.9` |
+| `metric` | Literal['edge', 'center'] | `"edge"` |
+
 ### `distance` → Field
 
 Distance in feet from a mask's edge: outside (0 inside), inside (0 outside), or signed (negative inside).
@@ -228,6 +241,18 @@ Thermal erosion: material slides from steeper than `talus` (field units per pixe
 | `iterations` | int | `20` |
 | `talus` | float | `0.004` |
 | `rate` | float | `0.25` |
+
+### `facing` → Mask
+
+Treat a field as height and select the slopes that face `toward` [dx, dy] (default south-east, the shadow side under north-west light): 0 where the downhill direction's cosine with `toward` is below `lo`, 1 above `hi`. `steep` (height per foot) also fades out gentle slopes. Clip ripple or crest strokes to it so only their shadowed sides are inked.
+
+| param | type | default |
+|---|---|---|
+| `src` | str | **required** |
+| `toward` | list[float] | `[0.6, 0.8]` |
+| `lo` | float | `0.2` |
+| `hi` | float | `0.7` |
+| `steep` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 
 ### `field_to_mask` → Mask
 
@@ -444,7 +469,7 @@ Inner shadow (darkens inside the mask near its edge, over `width` feet; `offset`
 
 ### `stipple` → paints in place
 
-Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. Grit along walls, dust round rubble, texture on rock.
+Ink dots: `density` per square foot at the mask's edge, thinning linearly to nothing `falloff` feet away (or an even `density` everywhere with `falloff: null`). The count is density × the weighted area, so it doesn't depend on the map's size. `weight` (a mask, 0..1) also scales the density pixel by pixel: feed it a noise mask to clump the dots, dense in hollows and shadow, sparse on crests. Grit along walls, dust round rubble, texture on rock and sand.
 
 | param | type | default |
 |---|---|---|
@@ -456,10 +481,11 @@ Ink dots: `density` per square foot at the mask's edge, thinning linearly to not
 | `side` | Literal['inside', 'outside'] | `"inside"` |
 | `color` | Any | `"ink"` |
 | `opacity` | float | `0.6` |
+| `weight` | str \| None | — |
 
 ### `stroke` → paints in place
 
-Ink a line along a mask's edge or a geometry's outline: width in feet or a style `weight` (heavy/medium/fine), `roughness` wobble, `double` lines `double` feet apart, `dash: [on, off, ...]` (geometry only; `jitter` 0..1 randomises dash lengths and widths for a hand-inked look), `side`.
+Ink a line along a mask's edge or a geometry's outline: width in feet or a style `weight` (heavy/medium/fine), `roughness` wobble, `double` lines `double` feet apart, `dash: [on, off, ...]` (geometry only; `jitter` 0..1 randomises dash lengths and widths for a hand-inked look), `side`. `taper` 0..1 (geometry only) swells each line or dash in the middle and thins its ends, like a brush or dip pen. `clip` (a mask) fades the ink where the mask is low: ink only the shadowed side of ripples, or keep crests off the sand.
 
 | param | type | default |
 |---|---|---|
@@ -475,6 +501,8 @@ Ink a line along a mask's edge or a geometry's outline: width in feet or a style
 | `dash` | list[float] \| None | — |
 | `jitter` | float | `0.0` |
 | `side` | Literal['center', 'inside', 'outside'] | `"center"` |
+| `taper` | float | `0.0` |
+| `clip` | str \| None | — |
 
 ### `vignette` → paints in place
 

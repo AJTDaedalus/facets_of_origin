@@ -118,8 +118,24 @@ Full example: `maps/recipes/mist_coast.map.yaml`.
   or mask through a noise flow; its `drift` smears it downwind. For swirls, blur the mask first, then
   `warp` with `curl: true, iterations: 4-5` (eddies like smoke), and optionally a second `warp` with
   `iterations: 2` to fold the edges into filaments.
-- **Surf:** a broken foam line at the break plus billow-noise lace behind it, `combine` with the sea so
-  it stays on the water, a `shadow` (`mode: drop`) south-east under it, and a fine stroke on its edge.
+- **Surf:** a broken foam line at the break plus a net of lace behind it: `cells` (scale ~1 ft), `remap`
+  small edge distances to 1, `field_to_mask`, then multiply by a band off the shore and a noise mask
+  that fades with `distance` from the beach, so the net breaks up seaward. `combine` with the sea so it
+  stays on the water, and a `shadow` (`mode: drop`) south-east under it.
+- **Wave crests:** offsets of the shore, each closed again (`offset` by D + R, then by −R, with R growing
+  with D) so the far crests forget the shore's corners. Stroke them white with `taper: 0.9`, and add
+  a thin dark line just on the shore side of each (the shadow under the lip). `clip: sea_m` keeps the
+  near ones off the sand.
+- **Sand that reads as sand:** (1) `roughen_geom` the sea with `mode: cusps` (period 4-5 ft, amount ~0.5)
+  for a scalloped waterline; build the beach as frame minus that sea, and draw the land shape past
+  the frame so no slivers of sea are left at the map's edges. (2) A berm: a band 6-11 ft up from the
+  sea, `shade_lines` with `shadow: [-0.6, -0.8]`, plus a tapered dashed scarp line. (3) A wrack line: a
+  thin noise-broken band at the berm's foot, dark fill, `hatch` with `angle_jitter: 180` for weed,
+  pebbles scattered along it. (4) Ripples: `isolines` of stretched noise stroked with `clip` set to
+  `facing` of the same noise (the shadow side only), times a dry-sand mask. (5) Grain: `stipple` with
+  a `weight` mask of noise, so the dots clump, and a second pass weighted by the ripple shadows.
+  (6) Beached stones: their `footprints` get a pale drop shadow on the lee side (a sand tail) and a dark
+  one on the sea side (a scour hollow).
 - **Shelving beach:** `stipple` from the sea mask (`side: outside`, `falloff` 5-7 ft): densest at the water.
 - **Hugging the props:** `footprints` is a mask of the props drawn so far (by `of` step ids or
   `kinds`). Band it for a ring of mist, snow or grime round each stone, subtract it so the stones stand

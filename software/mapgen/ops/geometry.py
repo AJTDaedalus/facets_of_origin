@@ -152,6 +152,36 @@ class RoughenGeomP(ParamModel):
     amount: NonNegFt = 1.0
     scale: PosFt = 6.0
     octaves: int = PField(3, ge=1, le=6)
+    mode: Literal["noise", "cusps"] = "noise"
+    period: PosFt = 4.0
+    jitter: float = PField(0.3, ge=0, le=1)
+
+
+def _cusp_ring(coords, amount, period, jitter, seed, closed=True):
+    """Push each vertex outward (right of the direction of travel) by a row of scallops `period` feet
+    long whose sharp horns stay on the original line: beach cusps along a waterline."""
+    pts = np.asarray(coords, float)
+    if closed:
+        pts = pts[:-1]
+    if len(pts) < 3 and closed:
+        return coords
+    seg = np.linalg.norm(np.diff(np.vstack([pts, pts[:1]]) if closed else pts, axis=0), axis=1)
+    s = np.concatenate([[0.0], np.cumsum(seg)])[:len(pts)]
+    if jitter:
+        s = s + fbm_at(pts[:, 0], pts[:, 1], period * 3, seed) * jitter * period
+    d = amount * np.abs(np.sin(np.pi * s / period)) ** 0.6
+    nxt = np.roll(pts, -1, axis=0) if closed else np.vstack([pts[1:], pts[-1:]])
+    prv = np.roll(pts, 1, axis=0) if closed else np.vstack([pts[:1], pts[:-1]])
+    tang = nxt - prv
+    norm = np.stack([tang[:, 1], -tang[:, 0]], axis=1)
+    ln = np.linalg.norm(norm, axis=1, keepdims=True)
+    norm = np.divide(norm, ln, out=np.zeros_like(norm), where=ln > 0)
+    out = pts + norm * d[:, None]
+    if not closed:
+        out[0], out[-1] = pts[0], pts[-1]
+    else:
+        out = np.vstack([out, out[:1]])
+    return out
 
 
 def _rough_ring(coords, amount, scale, seed, closed=True):
@@ -178,26 +208,35 @@ def _rough_ring(coords, amount, scale, seed, closed=True):
 
 @op("roughen_geom", params=RoughenGeomP, inputs={"src": Geometry}, output=Geometry, group="1 geometry")
 def roughen_geom(ctx, p, src):
-    """Hand-drawn wobble: densify the outline and push each vertex along its normal by noise (amount feet, feature size `scale` feet). Use for caves, cliffs, ruins and shorelines."""
+    """Hand-drawn wobble: densify the outline and push each vertex along its normal by noise (amount feet, feature size `scale` feet). Use for caves, cliffs, ruins and shorelines. `mode: cusps` instead scallops the outline outward into crescents `period` feet long, up to `amount` feet deep, with sharp horns left on the original edge (`jitter` 0..1 makes them uneven): the beach cusps waves cut along a waterline. A line is pushed to the right of its direction."""
+    from shapely.geometry.polygon import orient
     g = src.geom
     if p.amount == 0 or g.is_empty:
         return Geometry(g)
-    seg = max(p.scale / 6, 0.25)
+    if p.mode == "cusps":
+        seg = max(min(p.period / 16, 0.25), 0.02)
+
+        def ring(coords, closed=True):
+            return _cusp_ring(coords, p.amount, p.period, p.jitter, ctx.seed, closed)
+    else:
+        seg = max(p.scale / 6, 0.25)
+
+        def ring(coords, closed=True):
+            return _rough_ring(coords, p.amount, p.scale, ctx.seed, closed=closed)
     g = shapely.segmentize(g, seg)
 
     def poly(pg):
-        ext = _rough_ring(pg.exterior.coords, p.amount, p.scale, ctx.seed)
-        holes = [_rough_ring(h.coords, p.amount, p.scale, ctx.seed) for h in pg.interiors]
-        return Polygon(ext, holes)
+        pg = orient(pg, 1.0) if p.mode == "cusps" else pg          # outward = right of travel round a CCW ring
+        return Polygon(ring(pg.exterior.coords), [ring(h.coords) for h in pg.interiors])
 
     if isinstance(g, Polygon):
         out = polygonal(poly(g))
     elif isinstance(g, MultiPolygon):
         out = polygonal(MultiPolygon([poly(x) for x in g.geoms]))
     elif isinstance(g, LineString):
-        out = LineString(_rough_ring(g.coords, p.amount, p.scale, ctx.seed, closed=False))
+        out = LineString(ring(g.coords, closed=False))
     elif isinstance(g, MultiLineString):
-        out = MultiLineString([_rough_ring(x.coords, p.amount, p.scale, ctx.seed, closed=False) for x in g.geoms])
+        out = MultiLineString([ring(x.coords, closed=False) for x in g.geoms])
     else:
         raise RecipeError(f"roughen_geom cannot handle {g.geom_type}")
     return Geometry(out)
