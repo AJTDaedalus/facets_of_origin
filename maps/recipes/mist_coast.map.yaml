@@ -3,7 +3,7 @@
 #    glowing mist covers the sands and the water, slightly transparent, dancing between the stones
 #    and waves. It looks cold and threatening in the dim light."
 # 60×40 ft, 5 ft squares. Sea to the east, white sand to the west, a wet-sand band and surf at the
-# waterline, black stones scattered on the sand and in the shallows, pale mist over everything.
+# waterline, a few black stones at the water's edge and in the shallows, pale mist over everything.
 # Region look (owner concept art, references/mists_concept.jpg; docs/REFERENCE_mists_region_visual_brief.md):
 # near-monochrome greys with a faint green-yellow cast, grey sand pale only where wet, dark dunes inland,
 # a rough sea, mist lit from one source (north-east, off the map). Beach only: no camp, timber or palms.
@@ -159,15 +159,14 @@ steps:
      color: dune_ink, opacity: 0.3, id: swell_hatch}
   # whitecaps across the whole sea: the concept's water is rough, not calm
   - {op: rough_sea, land: land_m, from: 4.5, angle: 100, amount: 0.17, soft: 0.27, id: rough}
-  # ---- the black stones: scattered on the sand, clustered at the tideline, a few in the shallows
-  - {op: scatter, kind: boulder, mask: land_m, density: 0.12, spacing: 6, size: 2.6, size_jitter: 0.45, shadow: 0.5, id: stones_sand}
-  - {op: scatter, kind: pebbles, mask: wrack_zone, density: 0.5, spacing: 2.2, size: 1.4, shadow: 0.4, id: pebbles_wrack}
-  - {op: scatter, kind: pebbles, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.9, spacing: 1.8, size: 1.8, shadow: 0.5, id: pebbles_tide}
-  - {op: band, out: shallows_m, src: land_m, inner: 0.5, outer: 5}
-  - {op: scatter, kind: boulder, mask: shallows_m, density: 0.25, spacing: 5, size: 3.0, size_jitter: 0.5, shadow: 0.3, id: stones_surf}
-  - {op: scatter, kind: rubble, mask: wet_m, region: [[26, 0], [60, 0], [60, 40], [26, 40]], density: 0.08, spacing: 7, size: 2.4, shadow: 0.4, id: stone_heaps}
+  # ---- the black stones: rare, and only at the water's edge or in it (owner, 2026-11-15)
+  - {op: band, out: edge_zone, src: sea_m, inner: 0, outer: 2.2, side: outside}      # the last two feet of sand
+  - {op: scatter, kind: boulder, mask: edge_zone, density: 0.4, spacing: 9, size: 2.4, size_jitter: 0.4, shadow: 0.5, id: stones_edge}
+  - {op: band, out: shallows_m, src: land_m, inner: 0.5, outer: 6}
+  - {op: scatter, kind: boulder, mask: shallows_m, density: 0.1, spacing: 8, size: 2.8, size_jitter: 0.5, shadow: 0.3, id: stones_surf}
+  - {op: scatter, kind: pebbles, mask: edge_zone, density: 0.25, spacing: 4, size: 1.4, shadow: 0.4, id: pebbles_edge}
   # washed up, not dropped: a scour hollow on each beached stone's sea side, a sand tail in its lee
-  - {op: footprints, out: beached, of: [stones_sand, stone_heaps]}
+  - {op: footprints, out: beached, of: [stones_edge]}
   - {op: combine, out: beached, of: [beached, land_m], mode: min}
   - {op: shadow, mask: beached, mode: drop, offset: [-0.9, 0.1], blur: 0.35, strength: 0.55, color: "#f7f9f8"}
   - {op: shadow, mask: beached, mode: drop, offset: [0.3, 0.05], blur: 0.12, strength: 0.4, color: "#2f3638"}

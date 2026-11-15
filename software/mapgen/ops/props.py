@@ -558,23 +558,23 @@ def p_sack(s, rng):
 
 
 def p_boards(s, rng):
-    """A few loose planks, `s` feet long, laid side by side across a gap: uneven, overlapping, askew."""
+    """A few loose planks, `s` feet long, laid side by side across a gap: near enough square, a little ragged at the ends."""
     n = int(rng.integers(3, 6))
     w = min(0.9, s * 0.12)
     parts = []
     y = -(n - 1) * w * 0.5
     keys = ["wood", "wood_light", "wood_dark"]
     for i in range(n):
-        L = s * rng.uniform(0.82, 1.0)
+        L = s * rng.uniform(0.93, 1.0)
         x0 = rng.uniform(-s / 2, s / 2 - L)
-        bw = w * rng.uniform(0.75, 1.05)
+        bw = w * rng.uniform(0.88, 1.02)
         pl = box(x0, y - bw / 2, x0 + L, y + bw / 2)
-        pl = affinity.rotate(pl, rng.uniform(-3, 3), origin=(x0 + L / 2, y))
+        pl = affinity.rotate(pl, rng.uniform(-1.2, 1.2), origin=(x0 + L / 2, y))
         parts.append((pl, keys[int(rng.integers(0, 3))], INK_FINE))
         parts += _grain(x0 + L * 0.05, y - bw * 0.3, x0 + L * 0.95, y + bw * 0.3, rng, n=1, knots=False)
         for xn in (x0 + L * 0.06, x0 + L * 0.94):
             parts.append((SPoint(xn, y).buffer(w * 0.06), "ink_fill", 0))
-        y += w * rng.uniform(0.85, 1.15)
+        y += w * rng.uniform(0.97, 1.05)
     return parts
 
 

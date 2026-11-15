@@ -74,19 +74,20 @@ steps:
   - {op: polygon, out: cabin, points: [[124.11, 3.12], [133.58, 2.55], [140.53, 7.52], [136.65, 22.01], [119, 18.31]]}
   - {op: polygon, out: shops, points: [[120.23, 39.6], [136.8, 43.42], [137.7, 39.52], [146.47, 41.55], [138.44, 80.75], [112.13, 74.68], [114.61, 63.96], [110.45, 61.97], [114.08, 48.44], [117.98, 49.34]]}
   - {op: polygon, out: shed, points: [[82.76, 86.81], [98.35, 83.21], [99.1, 95.35], [85.91, 100.45]]}
-  # crooked passages: the tavern to the hall, the kitchen to the tavern, the guest wing down to the hall,
-  # and a narrow one from the hall's secret door to the back shed
-  - {op: path, out: pass_th, points: [[46, 63], [53, 61.5], [61, 60]], width: 5, cap: flat, smooth: 1}
-  - {op: path, out: pass_kt, points: [[31, 76], [30, 80], [29, 86]], width: 4, cap: flat, smooth: 1}
-  - {op: path, out: pass_gh, points: [[70, 22], [74, 29], [80, 38]], width: 4.5, cap: flat, smooth: 1}
-  - {op: path, out: pass_bs, points: [[92, 75], [91.5, 80], [91, 88]], width: 3, cap: flat, smooth: 1}
+  # covered passages, straight and all one width, each arriving in a common space: the tavern's taproom to
+  # the hall, the kitchen to the taproom, the guest wing's landing to the hall, and a narrow one from the
+  # hall's secret door to the back shed
+  - {op: path, out: pass_th, points: [[49.31, 61.48], [57.8, 60.78]], width: 4, cap: flat}
+  - {op: path, out: pass_kt, points: [[38.11, 75.17], [29.14, 82.78]], width: 4, cap: flat}
+  - {op: path, out: pass_gh, points: [[63.91, 24.77], [83.18, 35.08]], width: 4, cap: flat}
+  - {op: path, out: pass_bs, points: [[90.97, 77.54], [90.55, 85.01]], width: 3, cap: flat}
   - {op: polygon, out: porch, points: [[61.75, 80.68], [79.64, 78.42], [82.33, 88.26], [60.24, 87.8]]}
   - {op: union, out: built, of: [hall, tavern, kitchen, guest, bunk, cabin, shops, shed, pass_th, pass_kt, pass_gh, pass_bs, porch]}
   - {op: rasterize, out: built_m, src: built}
   - {op: grow, out: keep_clear, src: built_m, by: 6}
   - {op: grow, out: brush_clear, src: built_m, by: 3}
   # mud: in the gaps the plank walks cross, round the doors and along the eaves
-  - {op: path, out: mud_hs, points: [[103.95, 59.2], [108.25, 58.22], [112.54, 54.24]], width: 10, smooth: 2}
+  - {op: path, out: mud_hs, points: [[103.95, 59.2], [108.02, 59.2], [112.09, 56.19]], width: 10, smooth: 2}
   - {op: path, out: mud_bc, points: [[111.87, 14.06], [116.71, 13.39], [121.55, 10.72]], width: 8, smooth: 2}
   - {op: union, out: mud_g, of: [mud_hs, mud_bc]}
   - {op: roughen_geom, out: mud_g, src: mud_g, amount: 1.2, scale: 4, id: mud_rough}
@@ -156,10 +157,10 @@ steps:
   - {op: wall, src: cabin, name: w_cabin, thickness: 0.8, style: rough, material: wall_timber, roughness: 0.12}
   - {op: wall, src: shops, name: w_shops, thickness: 1, style: dressed, material: indigo_planks}
   - {op: wall, src: shed, name: w_shed, thickness: 0.8, style: rough, material: patch_planks, roughness: 0.12}
-  - {op: wall, src: pass_th, name: w_pass_th, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
-  - {op: wall, src: pass_kt, name: w_pass_kt, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
-  - {op: wall, src: pass_gh, name: w_pass_gh, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
-  - {op: wall, src: pass_bs, name: w_pass_bs, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_th, name: w_pass_th, thickness: 0.7, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_kt, name: w_pass_kt, thickness: 0.7, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_gh, name: w_pass_gh, thickness: 0.7, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_bs, name: w_pass_bs, thickness: 0.7, material: patch_planks, exclude: wings_x}
   # mismatched repairs in the walls
   - {op: polygon, out: rep0, points: [[65.1, 36.13], [73.09, 36.55], [72.83, 41.54], [64.84, 41.13]]}
   - {op: rasterize, out: rep0_m, src: rep0}
@@ -186,18 +187,18 @@ steps:
   - {op: fill, mask: rep3_m, material: wall_wattle, id: repair3}
   - {op: stroke, src: rep3_m, width: 0.08}
   # doorways through each wing's wall where a passage arrives
-  - {op: opening, wall: w_tavern, at: [46, 63], width: 5, floor_material: wood_floor_rough}
-  - {op: opening, wall: w_hall, at: [61, 60], width: 5, floor_material: hall_paint}
-  - {op: opening, wall: w_guest, at: [70, 22], width: 4.5, floor_material: guest_paint}
-  - {op: opening, wall: w_hall, at: [80, 38], width: 4.5, floor_material: hall_paint}
-  - {op: opening, wall: w_kitchen, at: [29, 86], width: 4, floor_material: flagstone_irregular}
-  - {op: opening, wall: w_tavern, at: [31, 76], width: 4, floor_material: wood_floor_rough}
+  - {op: opening, wall: w_tavern, at: [49.31, 61.48], width: 4, floor_material: wood_floor_rough}
+  - {op: opening, wall: w_hall, at: [57.8, 60.78], width: 4, floor_material: hall_paint}
+  - {op: opening, wall: w_guest, at: [63.91, 24.77], width: 4, floor_material: guest_paint}
+  - {op: opening, wall: w_hall, at: [83.18, 35.08], width: 4, floor_material: hall_paint}
+  - {op: opening, wall: w_kitchen, at: [29.14, 82.78], width: 4, floor_material: flagstone_irregular}
+  - {op: opening, wall: w_tavern, at: [38.11, 75.17], width: 4, floor_material: wood_floor_rough}
   # the plank walks: a door each side of the mud, a few loose boards between
   - {op: door, wall: w_hall, at: [103.95, 59.2], width: 3.5}
-  - {op: door, wall: w_shops, at: [112.54, 54.24], width: 3.5}
+  - {op: door, wall: w_shops, at: [112.09, 56.19], width: 3.5}
   - {op: door, wall: w_bunk, at: [111.87, 14.06], width: 3}
   - {op: door, wall: w_cabin, at: [121.55, 10.72], width: 3}
-  - {op: prop, kind: boards, at: [108.25, 56.72], size: 11.12, rotate: -30, shadow: 0.5, id: plank_walk0}
+  - {op: prop, kind: boards, at: [108.02, 57.7], size: 9.88, rotate: -20.3, shadow: 0.5, id: plank_walk0}
   - {op: prop, kind: boards, at: [116.71, 12.39], size: 11.44, rotate: -19, shadow: 0.5, id: plank_walk1}
   - {op: opening, wall: w_guest, at: [83.85, 16.81], width: 4, floor_material: guest_paint}
   - {op: opening, wall: w_bunk, at: [89.54, 16.99], width: 4, floor_material: wood_floor_rough}
@@ -205,11 +206,11 @@ steps:
   # outside doors, the front double door, and the secret door to the back shed
   - {op: double_door, wall: w_hall, at: [70, 76.44], width: 6}
   - {op: door, wall: w_tavern, at: [20.07, 47.41], width: 4}
-  - {op: door, wall: w_shops, at: [141.07, 64.93], width: 4}
+  - {op: door, wall: w_shops, at: [142.3, 63.17], width: 4}
   - {op: door, wall: w_kitchen, at: [20.97, 92.4], width: 3}
   - {op: door, wall: w_cabin, at: [127.82, 20.16], width: 3}
-  - {op: secret_door, wall: w_hall, at: [92, 75], width: 3}
-  - {op: opening, wall: w_shed, at: [91, 88], width: 3, floor_material: wood_floor_rough}
+  - {op: secret_door, wall: w_hall, at: [90.97, 77.54], width: 3}
+  - {op: opening, wall: w_shed, at: [90.55, 85.01], width: 3, floor_material: wood_floor_rough}
   - {op: door, wall: w_shed, at: [98.72, 89.28], width: 3}
   - {op: window, wall: w_tavern, at: [12.98, 54.47], width: 3}
   - {op: window, wall: w_tavern, at: [14.65, 66.35], width: 3}
@@ -238,9 +239,9 @@ steps:
   - {op: door, wall: p_g1, at: [52.71, 16.56], width: 2.5}
   - {op: door, wall: p_g2, at: [72.6, 18.65], width: 2.5}
   - {op: door, wall: p_g2, at: [80.55, 19.48], width: 2.5}
-  - {op: path, out: sp0, points: [[116.18, 57.14], [123, 58.71]], line: true}
+  - {op: path, out: sp0, points: [[132.9, 42.52], [129.97, 55.19]], line: true}
   - {op: partition, src: sp0, name: p_s0, thickness: 0.5, material: indigo_planks}
-  - {op: path, out: sp1, points: [[134.7, 61.41], [141.52, 62.99]], line: true}
+  - {op: path, out: sp1, points: [[127.72, 64.93], [124.8, 77.6]], line: true}
   - {op: partition, src: sp1, name: p_s1, thickness: 0.5, material: indigo_planks}
   # ---- line-work on every floor: hatching inside the north and west walls
   - {op: union, out: floors, of: [hall, tavern, kitchen, guest, bunk, cabin, shops, shed, pass_th, pass_kt, pass_gh, pass_bs]}
@@ -395,26 +396,27 @@ steps:
   - {op: prop, kind: chest, at: [137.6, 8.8], size: 2.4, rotate: 25, colors: {metal: "#2e2e2e"}, id: c_chest}
   - {op: prop, kind: rug, at: [128.93, 12.17], size: 6, rotate: 45, colors: {rug: "#2a1a2e", rug_trim: "#6a5420"}, id: c_rug}
   # ---- shop wing: stalls crammed with stock, counters, goods spilling into the aisle
-  - {op: prop, kind: counter, at: [126.42, 47.75], size: 5.59, rotate: 112.3, id: s_counter0}
-  - {op: prop, kind: shelf, at: [118.8, 50.26], size: 6.65, rotate: 105.9, colors: {cloth: "#5a2240"}, id: s_shelf0}
-  - {op: scatter, kind: barrel, region: [[121.7, 43.02], [125.21, 43.83], [122.51, 55.52], [119, 54.71]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock0}
-  - {op: scatter, kind: sack, region: [[124.92, 43.76], [126.86, 44.21], [124.17, 55.9], [122.22, 55.45]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks0}
-  - {op: prop, kind: rug, at: [131.19, 49.93], size: 4.5, rotate: 85.9, colors: {rug: "#5a2240", rug_trim: "#6a5a3a"}, id: s_mat0}
-  - {op: prop, kind: counter, at: [122.27, 68.2], size: 6.47, rotate: 87, id: s_counter1}
-  - {op: prop, kind: shelf, at: [114.75, 67.77], size: 8.37, rotate: 106.9, colors: {cloth: "#2c4a1e"}, id: s_shelf1}
-  - {op: scatter, kind: crate, region: [[117.65, 60.55], [121.16, 61.36], [118.46, 73.06], [114.95, 72.25]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock1}
-  - {op: scatter, kind: sack, region: [[120.87, 61.3], [122.82, 61.75], [120.12, 73.44], [118.17, 72.99]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks1}
-  - {op: prop, kind: rug, at: [126.94, 68.32], size: 4.5, rotate: 118.2, colors: {rug: "#2c4a1e", rug_trim: "#6a5a3a"}, id: s_mat1}
-  - {op: prop, kind: counter, at: [133.93, 53.43], size: 8.47, rotate: 111.5, id: s_counter2}
-  - {op: prop, kind: shelf, at: [142.24, 55.39], size: 8.12, rotate: 101.9, colors: {cloth: "#6a4416"}, id: s_shelf2}
-  - {op: scatter, kind: barrel, region: [[139.24, 47.06], [142.75, 47.87], [140.05, 59.57], [136.54, 58.76]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock2}
-  - {op: scatter, kind: sack, region: [[137.58, 46.68], [139.53, 47.13], [136.83, 58.82], [134.88, 58.37]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks2}
-  - {op: prop, kind: rug, at: [130.46, 53.11], size: 4.5, rotate: 117.5, colors: {rug: "#6a4416", rug_trim: "#6a5a3a"}, id: s_mat2}
-  - {op: prop, kind: counter, at: [131.7, 67.6], size: 6.38, rotate: 107.5, id: s_counter3}
-  - {op: prop, kind: shelf, at: [138.25, 72.67], size: 8.01, rotate: 104, colors: {cloth: "#1c3a5e"}, id: s_shelf3}
-  - {op: scatter, kind: crate, region: [[135.19, 64.6], [138.7, 65.41], [136, 77.11], [132.49, 76.3]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock3}
-  - {op: scatter, kind: sack, region: [[133.53, 64.22], [135.48, 64.67], [132.78, 76.36], [130.83, 75.91]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks3}
-  - {op: prop, kind: rug, at: [126.88, 68.58], size: 4.5, rotate: 84.3, colors: {rug: "#1c3a5e", rug_trim: "#6a5a3a"}, id: s_mat3}
+  # the plank walk and the east door both open onto an aisle; four stalls face it, counters along its edge
+  - {op: prop, kind: counter, at: [123.2, 52.81], size: 7.59, rotate: 17.1, id: s_counter0}
+  - {op: prop, kind: shelf, at: [127.04, 42.81], size: 9.74, rotate: 15.2, colors: {cloth: "#5a2240"}, id: s_shelf0}
+  - {op: scatter, kind: barrel, region: [[120.31, 43.72], [131.02, 46.19], [129.67, 52.04], [118.96, 49.57]], density: 0.6, spacing: 2.2, size: 1.8, id: s_stock0}
+  - {op: scatter, kind: sack, region: [[120.31, 43.72], [131.02, 46.19], [129.67, 52.04], [118.96, 49.57]], density: 0.35, spacing: 1.8, size: 1.6, id: s_sacks0}
+  - {op: prop, kind: rug, at: [121.16, 58.28], size: 4.5, rotate: 0.2, colors: {rug: "#5a2240", rug_trim: "#6a5a3a"}, id: s_mat0}
+  - {op: prop, kind: counter, at: [136.31, 56.31], size: 8.47, rotate: 5.9, id: s_counter1}
+  - {op: prop, kind: shelf, at: [139.69, 45.73], size: 11.03, rotate: 16, colors: {cloth: "#2c4a1e"}, id: s_shelf1}
+  - {op: scatter, kind: crate, region: [[132.97, 46.64], [143.69, 49.12], [142.34, 54.97], [131.62, 52.49]], density: 0.6, spacing: 2.2, size: 1.8, id: s_stock1}
+  - {op: scatter, kind: sack, region: [[132.97, 46.64], [143.69, 49.12], [142.34, 54.97], [131.62, 52.49]], density: 0.35, spacing: 1.8, size: 1.6, id: s_sacks1}
+  - {op: prop, kind: rug, at: [134.67, 61.41], size: 4.5, rotate: 24.4, colors: {rug: "#2c4a1e", rug_trim: "#6a5a3a"}, id: s_mat1}
+  - {op: prop, kind: counter, at: [120.24, 63.84], size: 10.47, rotate: 16.8, id: s_counter2}
+  - {op: prop, kind: shelf, at: [119.53, 74.74], size: 10.84, rotate: 12.2, colors: {cloth: "#6a4416"}, id: s_shelf2}
+  - {op: scatter, kind: barrel, region: [[115.36, 65.16], [126.08, 67.63], [124.73, 73.48], [114.01, 71]], density: 0.6, spacing: 2.2, size: 1.8, id: s_stock2}
+  - {op: scatter, kind: sack, region: [[115.36, 65.16], [126.08, 67.63], [124.73, 73.48], [114.01, 71]], density: 0.35, spacing: 1.8, size: 1.6, id: s_sacks2}
+  - {op: prop, kind: rug, at: [124.33, 59.02], size: 4.5, rotate: 23.9, colors: {rug: "#6a4416", rug_trim: "#6a5a3a"}, id: s_mat2}
+  - {op: prop, kind: counter, at: [134.02, 66.42], size: 8.38, rotate: 15, id: s_counter3}
+  - {op: prop, kind: shelf, at: [132.07, 77.63], size: 10.76, rotate: 13.8, colors: {cloth: "#1c3a5e"}, id: s_shelf3}
+  - {op: scatter, kind: crate, region: [[128.02, 68.08], [138.74, 70.56], [137.39, 76.4], [126.67, 73.93]], density: 0.6, spacing: 2.2, size: 1.8, id: s_stock3}
+  - {op: scatter, kind: sack, region: [[128.02, 68.08], [138.74, 70.56], [137.39, 76.4], [126.67, 73.93]], density: 0.35, spacing: 1.8, size: 1.6, id: s_sacks3}
+  - {op: prop, kind: rug, at: [134.94, 61.47], size: 4.5, rotate: -1, colors: {rug: "#1c3a5e", rug_trim: "#6a5a3a"}, id: s_mat3}
   - {op: scatter, kind: clutter, mask: shops_f, density: 0.3, spacing: 3, size: 2, id: s_clutter}
   # ---- the back shed: business nobody asks about
   - {op: prop, kind: table, at: [91.15, 92.05], size: 4.5, rotate: 2, id: b_table}
@@ -463,12 +465,24 @@ steps:
   - {op: light, at: [75.79, 16.97], radius: 18, color: "#ffc27a", intensity: 0.8}
   - {op: light, at: [100.98, 18.52], radius: 18, color: "#ffc27a", intensity: 0.8}
   - {op: light, at: [132.15, 15.62], radius: 18, color: "#ffc27a", intensity: 0.8}
-  - {op: light, at: [130.87, 51.29], radius: 18, color: "#ffc27a", intensity: 0.8}
-  - {op: light, at: [126.82, 68.83], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [120.08, 58.04], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [132.75, 60.96], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [124.99, 47.88], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [132.71, 72.24], radius: 18, color: "#ffc27a", intensity: 0.8}
   - {op: light, at: [91.15, 92.05], radius: 18, color: "#ffc27a", intensity: 0.8}
   - {op: light, at: [67.81, 81.26], radius: 18, color: "#ffc27a", intensity: 0.8}
   - {op: light, at: [75.79, 80.7], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [53.55, 61.13], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [33.62, 78.97], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [73.55, 29.92], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [90.76, 81.28], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [62.69, 44.02], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [99.22, 72.97], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [82.03, 38.02], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [21.15, 69.48], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [51.29, 20.43], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [106.92, 11.89], radius: 18, color: "#ffc27a", intensity: 0.8}
   - {op: light, at: [46, 92], radius: 18, color: "#ffc27a", intensity: 0.8}
-  - {op: darkness, strength: 0.62, color: "#120e18", pool: 0.62, warm: "#ffb36b", warmth: 0.35, atmosphere: true, id: dark}
+  - {op: darkness, strength: 0.42, color: "#120e18", pool: 0.85, warm: "#ffb36b", warmth: 0.3, atmosphere: true, id: dark}
   - {op: paper, strength: 0.06, scale: 40}
   - {op: vignette, strength: 0.35, atmosphere: true}
