@@ -414,3 +414,16 @@ Metrics under atmosphere:
 - Q2, Q3 and Q5s are still out, as before.
 
 No goldens changed. The mapgen suite has 549 passing.
+
+## 2026-11-15 — The Painted Lantern (forest tavern and gambling hall), and gap checks
+
+The owner asked for this map and made extending the toolset a standing part of the workflow. `SKILL.md` gains step 5 (a gap check on every brief) and step 7 (a cookbook entry after every map).
+
+The gap check for this brief added:
+- `colors` on `prop`/`scatter`, a per-step override for part colours.
+- Prop kinds: `card_table`, `dice_table`, `wheel`, `counter`, `stool`, `shelf`, `hearth`, with palette keys `felt` and `chip`.
+- Style materials: `wood_floor_rough`, `wall_timber`, `wall_wattle`, `rushes`.
+
+Tests: `tests/mapgen/test_tavern_tools.py` (51). No goldens changed. `ops.md` is regenerated, and the cookbook has a new section, "A building of many wings".
+
+Metrics (built_interior): Q1–Q4 are in band. Q5s is above its band, because the brief asked for bright colours.

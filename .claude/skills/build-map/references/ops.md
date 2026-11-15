@@ -706,31 +706,32 @@ Mask of the props drawn so far: all of them, or only those from the steps whose 
 | param | type | default |
 |---|---|---|
 | `of` | list[str] | `PydanticUndefined` |
-| `kinds` | list[Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer']] | `PydanticUndefined` |
+| `kinds` | list[Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer', 'card_table', 'dice_table', 'wheel', 'counter', 'stool', 'shelf', 'hearth']] | `PydanticUndefined` |
 | `grow` | float | `0.0` |
 
 ### `prop` → paints in place
 
-Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east.
+Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east. `colors` ({part: colour}) repaints named parts for this step only, e.g. `{felt: "#8a2030", rug: cloth}` (part names: wood, wood_light, wood_dark, cloth, linen, metal, rug, rug_trim, felt, chip, fire, stone...).
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
-| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer'] | **required** |
+| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer', 'card_table', 'dice_table', 'wheel', 'counter', 'stool', 'shelf', 'hearth'] | **required** |
 | `at` | list[float] | **required** |
 | `size` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `rotate` | float | `0.0` |
 | `shadow` | float | `0.35` |
 | `ink` | Any | `"ink"` |
+| `colors` | dict[str, Any] | `{}` |
 
 ### `scatter` → paints in place
 
-Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly.
+Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly. `colors` repaints named parts of every prop, as for `prop`.
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
-| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer'] | **required** |
+| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer', 'card_table', 'dice_table', 'wheel', 'counter', 'stool', 'shelf', 'hearth'] | **required** |
 | `mask` | str \| None | — |
 | `region` | list[Annotated[list[float], FieldInfo(annotation=None, required=True, metadata=[MinLen(min_length=2), MaxLen(max_length=2)])]] \| None | — |
 | `avoid` | list[str] | `[]` |
@@ -741,6 +742,7 @@ Scatter props by Poisson disk inside a mask and/or a region polygon: `density` p
 | `rotate_jitter` | float | `180.0` |
 | `shadow` | float | `0.35` |
 | `sort_y` | bool | `False` |
+| `colors` | dict[str, Any] | `{}` |
 
 
 ## Overlay
@@ -993,6 +995,10 @@ Params: none
 | `cave_floor` | dirt |
 | `cave_rock` | ramp_noise |
 | `wood_floor` | planks |
+| `wood_floor_rough` | planks |
+| `wall_timber` | ramp_noise |
+| `wall_wattle` | dirt |
+| `rushes` | grass |
 | `cobble` | cobble |
 | `grass` | grass |
 | `meadow` | grass |

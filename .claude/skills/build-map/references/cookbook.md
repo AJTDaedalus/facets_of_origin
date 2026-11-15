@@ -155,6 +155,27 @@ Full example: `maps/recipes/mist_coast.map.yaml`.
   - {op: fill, mask: mist_m, color: "#cfe7ee", blend: screen, opacity: 0.6, atmosphere: true, id: mist}
 ```
 
+## A building of many wings (inns, taverns, compounds)
+
+Full example: `maps/recipes/painted_lantern.map.yaml`.
+
+- **Wall each wing on its own** so the joins show: put wings flush, so the walls sit side by side, then cut
+  one `opening` through each wing's wall at the same spot (`floor_material` set to that wing's floor).
+  Give each wing its own wall material and thickness: `wall_wattle` (with `style: rough`) for the
+  oldest part, `wall_timber`, or a recipe-level painted one (`ramp_noise`, ridged, scale ~1.5).
+- **One floor per wing**, recipe-level for bright paint (`planks` in a loud colour), then fill a noise
+  mask of `wood_floor_rough` over it to wear the paint through where the crowds walk. `rushes` over
+  `wood_floor_rough` for an old taproom. `clay_floor` (`dirt`, terracotta) for a cheap shop floor.
+- **Colours per prop:** `prop` and `scatter` take `colors: {part: colour}`, which repaints named parts
+  for that step only. Felt on card tables, blankets on beds, rugs and banners per wing. Put the
+  defaults in the recipe `palette`.
+- **Gaming and shop props:** `card_table` (felt, cards, chips), `dice_table` (rail, felt, dice),
+  `wheel` (painted wedges), `counter` (long, mugs), `stool`, `shelf` (coloured goods), `hearth`.
+  Ring stools round a table by computing positions; a short generator script is fine, but the recipe
+  it writes is the source.
+- **Shady corners:** put `light` with `glow: true` over the busy tables and leave the corners unlit.
+  Reach a back room by a `secret_door`.
+
 ## Fixing common defects
 
 | Defect | Fix |
