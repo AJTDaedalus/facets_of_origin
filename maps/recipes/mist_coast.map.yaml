@@ -5,7 +5,7 @@
 # 60×40 ft, 5 ft squares. Sea to the east, white sand to the west, a wet-sand band and surf at the
 # waterline, a few black stones at the water's edge and in the shallows, pale mist over everything.
 # Region look (owner concept art, references/mists_concept.jpg; docs/REFERENCE_mists_region_visual_brief.md):
-# near-monochrome greys with a faint green-yellow cast, grey sand pale only where wet, dark dunes inland,
+# near-monochrome cold green-greys, white beach sand (the dark dunes lie further inland, out of this shot),
 # a rough sea, mist lit from one source (north-east, off the map). Beach only: no camp, timber or palms.
 map:
   title: The Pale Strand
@@ -30,7 +30,7 @@ steps:
   - {op: subtract, out: beach, a: frame_r, b: [sea]}
   - {op: rasterize, out: land_m, src: beach}
   - {op: rasterize, out: sea_m, src: sea}
-  - {op: fill, mask: land_m, material: ash_sand, id: sand_fill}
+  - {op: fill, mask: land_m, material: beach_sand, id: sand_fill}
   # ---- the waterline, built up in soft layers rather than one hard edge
   # the shallows: a pale wash fading out from the beach over five feet
   - {op: band, out: shallows_wash, src: land_m, inner: 0, outer: 5}
@@ -58,15 +58,15 @@ steps:
   - {op: stroke, src: scarp, width: 0.09, dash: [2.8, 0.7], jitter: 0.6, taper: 0.8, color: "#40423c", opacity: 0.6, clip: land_m}
   # ---- wind ripples: contour lines of a stretched noise, inked only on their shadowed (south-east
   # facing) sides, so each reads as a little ridge. Heavier on the berm, gone on the wet sand.
-  - {op: noise, out: dunes, scale: 2.4, octaves: 2, stretch: 4, angle: 80, id: dune_noise}   # long ripples, wind off the sea
-  - {op: facing, out: lee_m, src: dunes, lo: 0.1, hi: 0.6}
+  - {op: noise, out: ripple_n, scale: 2.4, octaves: 2, stretch: 4, angle: 80, id: dune_noise}   # long ripples, wind off the sea
+  - {op: facing, out: lee_m, src: ripple_n, lo: 0.1, hi: 0.6}
   - {op: band, out: dry_m, src: sea_m, inner: 3.5, outer: 80, side: outside}
   - {op: blur, out: dry_m, src: dry_m, sigma: 1.2}
   - {op: combine, out: rip_clip, of: [lee_m, dry_m], mode: mul}
   - {op: mix, out: rip_strength, of: [dry_m, berm_m], weights: [0.55, 0.45]}
   - {op: field_to_mask, out: rip_strength, src: rip_strength, lo: 0, hi: 1}
   - {op: combine, out: rip_clip, of: [rip_clip, rip_strength], mode: mul}
-  - {op: isolines, out: ripples, src: dunes, interval: 0.14}
+  - {op: isolines, out: ripples, src: ripple_n, interval: 0.14}
   - {op: stroke, src: ripples, width: 0.08, dash: [1.3, 0.5], jitter: 0.5, taper: 0.85, color: "#4a4c46", opacity: 0.55, clip: rip_clip}
   # ---- grain: clumped stipple (dense in clumps and in the ripples' shadows, sparse on their crests),
   # thickening toward the water
@@ -75,10 +75,6 @@ steps:
   - {op: stipple, mask: land_m, density: 7, falloff: null, size: 0.055, opacity: 0.4, color: "#4c4e48", weight: clump_m, id: sand_grit}
   - {op: stipple, mask: land_m, density: 9, falloff: null, size: 0.05, opacity: 0.35, color: "#4c4e48", weight: rip_clip, id: ripple_grit}
   - {op: stipple, mask: sea_m, side: outside, density: 16, falloff: 7, size: 0.06, opacity: 0.5, color: "#40423c", id: shore_stipple}   # densest at the water
-  # ---- dark hummocky dunes inland, well back from the berm
-  - {op: band, out: dune_zone, src: sea_m, inner: 13, outer: 90, side: outside}
-  - {op: combine, out: no_clear, of: [land_m, land_m], mode: sub}
-  - {op: dunes, within: dune_zone, clear: no_clear, scale: 6, cover: -0.02, id: dunes}
   # ---- the wrack line: a broken dark band of weed and drift at the foot of the berm
   - {op: band, out: wrack_zone, src: sea_m, inner: 5.4, outer: 6.2, side: outside}
   - {op: noise, out: wrack_n, scale: 3, octaves: 3, stretch: 5, angle: 100, id: wrack_noise}
@@ -172,7 +168,7 @@ steps:
   - {op: shadow, mask: beached, mode: drop, offset: [0.3, 0.05], blur: 0.12, strength: 0.4, color: "#2f3638"}
   - {op: stipple, mask: beached, side: outside, density: 22, falloff: 0.9, size: 0.05, color: "#40423c", opacity: 0.45, id: scour_grit}
   # ---- dim, cold light
-  - {op: fill, color: murk, blend: multiply, opacity: 0.55, atmosphere: true, id: dim}
+  - {op: fill, color: murk, blend: multiply, opacity: 0.42, atmosphere: true, id: dim}
   # ---- the mist: broad banks drifting inland off the sea, curled into wisps by a warp, thickest where it
   # pools round the stones and along the surf; screen-blended so it glows faintly. Marked atmosphere, so
   # `quality` also judges the map beneath it.
