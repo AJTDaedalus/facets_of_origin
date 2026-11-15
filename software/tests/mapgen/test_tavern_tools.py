@@ -301,3 +301,29 @@ class TestRasterizeSpeed:
         t = time.perf_counter()
         rasterize_geom(e.frame, g)
         assert time.perf_counter() - t < 3.0
+
+
+class TestReviewPR41:
+    """docs/REVIEW_pr41.md."""
+
+    def test_r1_overrides_accept_prop_part_names(self):
+        a = canvas([{"op": "prop", "kind": "rug", "at": [20, 15], "size": 8, "shadow": 0, "id": "p", "colors": {"rug": "cloth"}}])
+        b = canvas([{"op": "prop", "kind": "rug", "at": [20, 15], "size": 8, "shadow": 0, "id": "p", "colors": {"rug": P.COLORS["cloth"]}}])
+        assert np.array_equal(a, b)
+
+    def test_r1_unknown_name_still_errors(self):
+        with pytest.raises(RecipeError):
+            canvas([{"op": "prop", "kind": "rug", "at": [20, 15], "id": "p", "colors": {"rug": "no_such_name"}}])
+
+    @pytest.mark.parametrize("skew", [[90, 0], [-85, 0], [45, 45], [0, 89]])
+    def test_r4_degenerate_skew_is_refused(self, skew):
+        from tests.mapgen.helpers import layer
+        with pytest.raises(RecipeError):
+            layer([{"op": "rect", "out": "r", "x": 10, "y": 10, "w": 10, "h": 4},
+                   {"op": "transform", "out": "t", "src": "r", "skew": skew}], "t", **H)
+
+    def test_r4_moderate_skew_is_fine(self):
+        from tests.mapgen.helpers import layer
+        g = layer([{"op": "rect", "out": "r", "x": 10, "y": 10, "w": 10, "h": 4},
+                   {"op": "transform", "out": "t", "src": "r", "skew": [30, 10]}], "t", **H).geom
+        assert g.is_valid and g.area > 0

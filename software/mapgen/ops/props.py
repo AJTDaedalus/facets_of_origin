@@ -625,7 +625,13 @@ PropKind = Literal[tuple(PROPS)]  # type: ignore[valid-type]
 
 def _color(ctx, key, colors=None):
     if colors and key in colors:                   # a step's own colours win over the palette
-        return resolve_color(ctx.style, colors[key])
+        val = colors[key]
+        try:
+            return resolve_color(ctx.style, val)
+        except RecipeError:
+            if isinstance(val, str) and val in COLORS:  # a prop part name (cloth, wood_dark...) works too
+                return resolve_color(ctx.style, COLORS[val])
+            raise
     try:
         return resolve_color(ctx.style, key)
     except RecipeError:

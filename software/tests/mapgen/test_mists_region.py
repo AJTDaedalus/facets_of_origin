@@ -55,3 +55,23 @@ class TestRegionStyle:
                  {"op": "lit_mist", "mist": "mist_m", "center": [38, 2], "edge": [8, 2], "id": "lm"}]
         c = canvas(steps).mean(-1)
         assert c[16, 300] > c[220, 20] + 0.2
+
+
+class TestReviewPR41:
+    def test_r2_dunes_stay_inside_within_and_out_of_clear(self):
+        steps = [{"op": "rect", "out": "w", "x": 0, "y": 0, "w": 20, "h": 30},
+                 {"op": "rasterize", "out": "w_m", "src": "w"},
+                 {"op": "rect", "out": "c", "x": 0, "y": 10, "w": 20, "h": 8},
+                 {"op": "rasterize", "out": "c_m", "src": "c"}]
+        base = canvas(steps)
+        c = canvas(steps + [{"op": "dunes", "within": "w_m", "clear": "c_m", "cover": -0.4, "id": "d"}])
+        diff = np.abs(c - base).max(-1) > 0.02
+        assert diff[:, 162:].sum() == 0                     # nothing beyond x = 20 ft (+ 2 px)
+        assert diff[82:142, :150].sum() == 0               # nothing inside the clear band (10-18 ft, inset 2 px)
+        assert diff.sum() > 1000
+
+    def test_r3_lit_mist_doc_names_only_real_params(self):
+        m = STYLE["macros"]["lit_mist"]
+        import re
+        named = set(re.findall(r"`(\w+)`", m["doc"]))
+        assert named <= set(m["params"]) | {"atmosphere"}

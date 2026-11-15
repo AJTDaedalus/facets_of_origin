@@ -50,15 +50,19 @@ macros:
       - {op: trace, out: "${name}_g", src: "${name}", simplify: 0.2, min_area: 6}
       - {op: roughen_geom, out: "${name}_g", src: "${name}_g", amount: 0.5, scale: 2, id: "${name}_rough"}
       - {op: rasterize, out: "${name}", src: "${name}_g"}
+      - {op: combine, out: "${name}", of: ["${name}", "${within}"], mode: min}        # roughening wanders: clip again
+      - {op: combine, out: "${name}", of: ["${name}", "${clear}"], mode: sub}
       - {op: blur, out: "${name}_soft", src: "${name}", sigma: 0.8}
+      - {op: combine, out: "${name}_soft", of: ["${name}_soft", "${within}"], mode: min}
+      - {op: combine, out: "${name}_soft", of: ["${name}_soft", "${clear}"], mode: sub}
       - {op: fill, mask: "${name}_soft", material: dune_dark, opacity: 0.9, id: "${name}_fill"}
       - {op: shade_lines, mask: "${name}", side: inside, shadow: [-0.6, -0.8], length: 1.6, spacing: 0.24, width: 0.05,
          color: dune_ink, opacity: 0.75, id: "${name}_hatch"}
       - {op: offset, out: "${name}_crest", src: "${name}_g", by: -0.9}
-      - {op: stroke, src: "${name}_crest", width: 0.06, dash: [1.4, 0.6], jitter: 0.6, taper: 0.8, color: "#c4c6bb", opacity: 0.35}
+      - {op: stroke, src: "${name}_crest", width: 0.06, dash: [1.4, 0.6], jitter: 0.6, taper: 0.8, color: "#c4c6bb", opacity: 0.35, clip: "${name}"}
 
   lit_mist:
-    doc: "One light source seen through the mist: a broad glow round `center` (often just off the map) reaching `reach` feet, and the mist mask `mist` brightened near it and fading away from it. Mark the call `atmosphere: true`."
+    doc: "One light source seen through the mist: a broad glow round `center` (often just off the map) out to `edge` (any point on the glow's rim; set both together), and the mist mask `mist` brightened near it and fading away from it. `strength` sets the glow. Mark the call `atmosphere: true`."
     params: {mist: mist_m, center: [0, 0], edge: [40, 0], name: lit, strength: 0.8}
     steps:
       - {op: gradient, out: "${name}_d", kind: radial, start: "${center}", end: "${edge}"}

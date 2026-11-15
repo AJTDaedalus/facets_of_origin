@@ -5,7 +5,7 @@ from typing import Literal
 
 import numpy as np
 import shapely
-from pydantic import Field as PField
+from pydantic import Field as PField, model_validator
 from shapely import affinity
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point as SPoint, Polygon, box
 
@@ -154,6 +154,13 @@ class TransformP(ParamModel):
     move: Point = [0.0, 0.0]
     scale: float = PField(1.0, gt=0)
     skew: Point = [0.0, 0.0]
+
+    @model_validator(mode="after")
+    def _sane_skew(self):
+        ax, ay = (np.radians(a) for a in self.skew)
+        if max(abs(self.skew[0]), abs(self.skew[1])) > 75 or abs(1 - np.tan(ax) * np.tan(ay)) < 0.1:
+            raise ValueError("skew angles must stay within ±75° and not flatten the shape (tan x · tan y near 1)")
+        return self
 
 
 @op("transform", params=TransformP, inputs={"src": Geometry}, output=Geometry, group="1 geometry")
