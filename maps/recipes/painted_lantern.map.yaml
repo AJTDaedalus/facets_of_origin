@@ -1,23 +1,28 @@
-# Generic built map (owner request 2026-11-15), homebrew, no canon:
+# Generic built map (owner request 2026-11-15, revised the same day), homebrew, no canon:
 #   "A tavern/gambling hall in a forested area, without other buildings nearby. It started as a small
 #    tavern long ago and has been expanded many times, adding rooms for guests, a gambling hall, and
 #    shops, making it almost a small town. Each expansion had its own flair, so it seems like multiple
 #    buildings strapped together. Simple architecture, not quite tribal but not advanced. Lots of
-#    bright colours, but not an expensive venue. The gambling hall is the centre of attention, with many
+#    colours, but not an expensive venue. The gambling hall is the centre of attention, with many
 #    tables for cards and other games of chance. Nice, but people would look the other way at crime,
 #    unless it was violent."
-# 110x80 ft, 5 ft squares. Each wing has its own floor, wall material and colours, walled separately so
-# the joins show (walls side by side where wings meet, doorways cut through both):
-#   old tavern (west, wattle and daub, faded red and ochre) with its kitchen to the south;
-#   gambling hall (centre, red-painted timber, teal floor worn to the boards, the brightest wing);
-#   guest wing (north, plain timber, ochre floor, six rooms off a corridor);
-#   shop wing (east, blue-painted planks, terracotta floor, four stalls off an aisle);
-#   a back room behind the hall reached by a secret door (the business nobody asks about);
-#   a plank porch at the front, a forest clearing round it all, no other buildings.
+#   Owner notes on the first draft: shapes far too ordered, colours too bright ("it should use colors
+#   but still give off a dark vibe"), "a very chaotic place", "should be larger, it is a sprawling
+#   place", and "at least one place where you walk a bridge made of a few wooden boards between
+#   buildings".
+# 160x120 ft, 5 ft squares. Every wing is knocked askew and walled on its own; crooked passages and two
+# plank walks over mud join them. Deep, dirty colours under lamplight, dark corners (`darkness`).
+#   old tavern (west, L-shaped, wattle and daub) and its leaning kitchen;
+#   gambling hall (centre, oxblood timber, smoky-teal floor worn to the boards);
+#   guest wing (north, timber, rooms off a corridor) and a bunkhouse beyond it;
+#   a crooked cabin reached over planks from the bunkhouse;
+#   shop wing (east, indigo planks), reached from the hall over planks across the mud;
+#   a back shed behind the hall, through a secret door and a narrow passage;
+#   a skewed plank porch at the front; junk, mud and paths all round; forest, no other buildings.
 map:
   title: The Painted Lantern
-  width_ft: 110
-  height_ft: 80
+  width_ft: 160
+  height_ft: 120
   feet_per_square: 5
   px_per_square: 70
   supersample: 2
@@ -25,269 +30,445 @@ map:
   include: [styles/inked_parchment.yaml]
 
 palette:
-  cloth: "#c23b6e"        # blankets: a loud magenta by default; rooms override
-  rug: "#d4552e"
-  rug_trim: "#f2c230"
-  felt: "#1f8a5c"
-  chip: "#e8b820"
+  cloth: "#5a2240"
+  rug: "#6a2a22"
+  rug_trim: "#8f7330"
+  felt: "#1d4a35"
+  chip: "#9a7a30"
+  bottle: "#2f4a34"
+  spill: "#3a1418"
 
 materials:
-  hall_paint:  {type: planks, colors: ["#2a8c86", "#33a198", "#45b2a6"], width: 1.25, length: 7, seam: 0.08, seam_color: "#1b4f4b", grain: 0.35}
-  guest_paint: {type: planks, colors: ["#c08a2a", "#d39e35", "#e2b24a"], width: 1.4, length: 7, seam: 0.07, seam_color: "#6b4a14", grain: 0.15}
-  clay_floor:  {type: dirt, colors: ["#a9583a", "#bf6c47", "#d18459"], scale: 6, octaves: 4, grain: 0.07, speckle: 0.06}
-  red_timber:  {type: ramp_noise, colors: ["#7e2620", "#9a3228", "#b0402f"], scale: 1.5, octaves: 4, kind: ridged, grain: 0.06}
-  blue_planks: {type: ramp_noise, colors: ["#244f78", "#2f6390", "#3b74a3"], scale: 1.2, octaves: 4, kind: ridged, grain: 0.06}
-  porch_deck:  {type: planks, colors: ["#8a6a45", "#a07f56", "#b28f64"], width: 1.0, length: 2000, angle: 90, seam: 0.08, seam_color: "#4a3420", grain: 0.5}
+  hall_paint:   {type: planks, colors: ["#1d4646", "#245453", "#2c605e"], width: 1.25, length: 7, seam: 0.08, seam_color: "#0f2626", grain: 0.4}
+  guest_paint:  {type: planks, colors: ["#5e4a1e", "#6e5726", "#7c632d"], width: 1.4, length: 7, seam: 0.08, seam_color: "#33270e", grain: 0.3}
+  clay_floor:   {type: dirt, colors: ["#4e2a1e", "#5e3324", "#6e3d2b"], scale: 6, octaves: 4, grain: 0.07, speckle: 0.06}
+  oxblood:      {type: ramp_noise, colors: ["#3c1614", "#4e1d19", "#5e2520"], scale: 1.5, octaves: 4, kind: ridged, grain: 0.06}
+  indigo_planks: {type: ramp_noise, colors: ["#1a2438", "#212e46", "#293853"], scale: 1.2, octaves: 4, kind: ridged, grain: 0.06}
+  porch_deck:   {type: planks, colors: ["#5e4630", "#6e5439", "#7c6042"], width: 1.0, length: 2000, angle: 80, seam: 0.09, seam_color: "#2a1d12", grain: 0.5}
+  earth:        {type: dirt, colors: ["#6e624e", "#7e715b", "#8e8169"], scale: 18, octaves: 5, grain: 0.06, speckle: 0.06}
+  patch_planks: {type: planks, colors: ["#4a3a28", "#5a4732", "#3e3022"], width: 1.0, length: 3, seam: 0.1, seam_color: "#1e160e", grain: 0.5}
 
 steps:
-  # ---- the forest clearing: packed earth and meadow, trees and brush all round
+  # ---- the forest clearing: trampled earth, meadow, mud where the feet go
   - {op: canvas, out: canvas, material: earth, id: ground}
-  - {op: ground_patches, name: grass, material: meadow, scale: 14, cover: -0.1, edge: 0.14}
-  - {op: ellipse, out: clearing_g, center: [56, 40], rx: 54, ry: 38}
-  - {op: roughen_geom, out: clearing_g, src: clearing_g, amount: 4, scale: 14, id: clearing_rough}
+  - {op: ground_patches, name: grass, material: meadow, scale: 14, cover: -0.05, edge: 0.14}
+  - {op: ellipse, out: clearing_g, center: [80, 54], rx: 70, ry: 51}
+  - {op: roughen_geom, out: clearing_g, src: clearing_g, amount: 6, scale: 18, id: clearing_rough}
   - {op: rasterize, out: clearing_m, src: clearing_g}
-  # the track in from the south to the porch, and a footpath north from the old tavern door
-  - {op: path, out: track, points: [[40, 83], [44, 76], [50, 70]], width: 6, smooth: 3}
-  - {op: path, out: footpath, points: [[23, 35], [20, 24], [12, 10], [8, -3]], width: 3.5, smooth: 3}
-  - {op: union, out: paths, of: [track, footpath]}
-  - {op: roughen_geom, out: paths, src: paths, amount: 0.6, scale: 5, id: path_rough}
+  # tracks beaten in from every side
+  - {op: path, out: track, points: [[58, 123], [62, 108], [70, 96]], width: 6, smooth: 3}
+  - {op: path, out: foot_w, points: [[22, 50], [14, 36], [6, 20], [-3, 12]], width: 3.5, smooth: 3}
+  - {op: path, out: foot_e, points: [[150, 66], [158, 80], [163, 92]], width: 3.5, smooth: 3}
+  - {op: path, out: foot_k, points: [[24, 100], [16, 110], [10, 123]], width: 3, smooth: 3}
+  - {op: union, out: paths, of: [track, foot_w, foot_e, foot_k]}
+  - {op: roughen_geom, out: paths, src: paths, amount: 0.7, scale: 5, id: path_rough}
   - {op: rasterize, out: paths_m, src: paths}
   - {op: fill, mask: paths_m, material: dirt_path, id: path_dirt}
   - {op: stroke, src: paths, width: 0.14, dash: [1.4, 0.5, 0.25, 0.5], jitter: 0.6, opacity: 0.9}
-  # ---- the wings: each its own floor, walled on its own
-  - {op: rect, out: tavern, x: 14, y: 36, w: 20, h: 20}
-  - {op: rect, out: kitchen, x: 16, y: 59, w: 16, h: 9}
-  - {op: rect, out: hall, x: 36.5, y: 29, w: 39.5, h: 31}
-  - {op: rect, out: guest, x: 40, y: 8, w: 34, h: 19}
-  - {op: rect, out: shops, x: 78, y: 33, w: 20, h: 24}
-  - {op: rect, out: back, x: 62, y: 62, w: 14, h: 8}
-  - {op: rect, out: porch, x: 42, y: 61, w: 16, h: 7}
-  - {op: union, out: built, of: [tavern, kitchen, hall, guest, shops, back, porch]}
+  # ---- the wings, each drawn straight and then knocked askew (no two line up)
+  - {op: polygon, out: hall, points: [[62.95, 39.02], [76.93, 39.76], [77.19, 34.76], [89.18, 35.39], [88.91, 40.38], [100.9, 41.01], [104.68, 45.22], [103.22, 73.18], [96.96, 77.86], [63.01, 76.08], [57.33, 69.77], [58.64, 44.81]]}
+  - {op: polygon, out: tavern, points: [[12.15, 48.53], [22.05, 47.14], [21.49, 43.17], [30.41, 41.92], [30.96, 45.88], [37.89, 44.91], [39.01, 52.83], [47.92, 51.58], [50.98, 73.36], [25.23, 76.98], [24.4, 71.04], [15.49, 72.29]]}
+  - {op: polygon, out: kitchen, points: [[18.56, 85.81], [35.86, 80.85], [40.13, 92.11], [23.38, 98.99]]}
+  - {op: polygon, out: guest, points: [[49.09, 3.1], [66.99, 4.99], [67.36, 1.5], [78.3, 2.65], [77.93, 6.14], [84.9, 6.87], [84.3, 26.91], [47, 22.99]]}
+  - {op: polygon, out: bunk, points: [[88.5, 11.08], [107.93, 6.13], [115.11, 26.69], [91.8, 29.79]]}
+  - {op: polygon, out: cabin, points: [[124.11, 3.12], [133.58, 2.55], [140.53, 7.52], [136.65, 22.01], [119, 18.31]]}
+  - {op: polygon, out: shops, points: [[120.23, 39.6], [136.8, 43.42], [137.7, 39.52], [146.47, 41.55], [138.44, 80.75], [112.13, 74.68], [114.61, 63.96], [110.45, 61.97], [114.08, 48.44], [117.98, 49.34]]}
+  - {op: polygon, out: shed, points: [[82.76, 86.81], [98.35, 83.21], [99.1, 95.35], [85.91, 100.45]]}
+  # crooked passages: the tavern to the hall, the kitchen to the tavern, the guest wing down to the hall,
+  # and a narrow one from the hall's secret door to the back shed
+  - {op: path, out: pass_th, points: [[46, 63], [53, 61.5], [61, 60]], width: 5, cap: flat, smooth: 1}
+  - {op: path, out: pass_kt, points: [[31, 76], [30, 80], [29, 86]], width: 4, cap: flat, smooth: 1}
+  - {op: path, out: pass_gh, points: [[70, 22], [74, 29], [80, 38]], width: 4.5, cap: flat, smooth: 1}
+  - {op: path, out: pass_bs, points: [[92, 75], [91.5, 80], [91, 88]], width: 3, cap: flat, smooth: 1}
+  - {op: polygon, out: porch, points: [[61.75, 80.68], [79.64, 78.42], [82.33, 88.26], [60.24, 87.8]]}
+  - {op: union, out: built, of: [hall, tavern, kitchen, guest, bunk, cabin, shops, shed, pass_th, pass_kt, pass_gh, pass_bs, porch]}
   - {op: rasterize, out: built_m, src: built}
   - {op: grow, out: keep_clear, src: built_m, by: 6}
   - {op: grow, out: brush_clear, src: built_m, by: 3}
+  # mud: in the gaps the plank walks cross, round the doors and along the eaves
+  - {op: path, out: mud_hs, points: [[103.95, 59.2], [108.25, 58.22], [112.54, 54.24]], width: 10, smooth: 2}
+  - {op: path, out: mud_bc, points: [[111.87, 14.06], [116.71, 13.39], [121.55, 10.72]], width: 8, smooth: 2}
+  - {op: union, out: mud_g, of: [mud_hs, mud_bc]}
+  - {op: roughen_geom, out: mud_g, src: mud_g, amount: 1.2, scale: 4, id: mud_rough}
+  - {op: rasterize, out: mud_m, src: mud_g}
+  - {op: noise, out: mud_n, scale: 5, id: mud_noise}
+  - {op: field_to_mask, out: mud_spots, src: mud_n, lo: 0.35, hi: 0.55}
+  - {op: grow, out: eaves, src: built_m, by: 3}
+  - {op: combine, out: mud_spots, of: [mud_spots, eaves], mode: min}
+  - {op: combine, out: mud_all, of: [mud_m, mud_spots], mode: max}
+  - {op: blur, out: mud_all, src: mud_all, sigma: 0.4}
+  - {op: fill, mask: mud_all, material: mud, opacity: 0.9, id: mud_fill}
+  - {op: stipple, mask: mud_all, density: 10, falloff: 0.8, size: 0.06, color: "#2a2118", opacity: 0.6, id: mud_edge}
+  - {op: stroke, src: mud_all, width: 0.06, color: "#1e1810", opacity: 0.7}
+  # standing water in the ruts
+  - {op: noise, out: puddle_n, scale: 1.6, id: puddle_noise}
+  - {op: field_to_mask, out: puddles, src: puddle_n, lo: 0.3, hi: 0.32}
+  - {op: combine, out: puddles, of: [puddles, mud_m], mode: min}
+  - {op: fill, mask: puddles, material: water, opacity: 0.8, id: puddle_fill}
+  - {op: stroke, src: puddles, width: 0.05, color: "#1e1810", opacity: 0.8}
+  # ---- the forest
   - {op: invert, out: woods, src: clearing_m}
   - {op: brush, name: brush, within: woods, clear: brush_clear, scale: 16, cover: -0.25}
   - {op: combine, out: tree_avoid, of: [keep_clear, paths_m], mode: max}
-  - {op: scatter, kind: tree, mask: brush, avoid: [tree_avoid], density: 0.6, spacing: 7, size: 11, shadow: 0.6, sort_y: true, id: trees}
+  - {op: scatter, kind: tree, mask: brush, avoid: [tree_avoid], density: 0.55, spacing: 7, size: 11, shadow: 0.6, sort_y: true, id: trees}
   - {op: scatter, kind: bush, mask: clearing_m, avoid: [keep_clear, paths_m], density: 0.08, spacing: 6, size: 4, id: bushes}
-  - {op: scatter, kind: tree, mask: clearing_m, avoid: [tree_avoid], density: 0.03, spacing: 12, size: 10, shadow: 0.6, id: lone_trees}
-  # ---- floors, oldest first
+  - {op: scatter, kind: tree, mask: clearing_m, avoid: [tree_avoid], density: 0.03, spacing: 14, size: 10, shadow: 0.6, id: lone_trees}
+  # ---- floors
   - {op: floor_fill, src: tavern, name: tavern_f, material: wood_floor_rough, shadow: 0.5}
+  - {op: floor_fill, src: kitchen, name: kitchen_f, material: flagstone_irregular, shadow: 0.5}
+  - {op: floor_fill, src: hall, name: hall_f, material: hall_paint, shadow: 0.5}
+  - {op: floor_fill, src: guest, name: guest_f, material: guest_paint, shadow: 0.5}
+  - {op: floor_fill, src: bunk, name: bunk_f, material: wood_floor_rough, shadow: 0.5}
+  - {op: floor_fill, src: cabin, name: cabin_f, material: wood_floor, shadow: 0.5}
+  - {op: floor_fill, src: shops, name: shops_f, material: clay_floor, shadow: 0.5}
+  - {op: floor_fill, src: shed, name: shed_f, material: wood_floor_rough, shadow: 0.5}
+  - {op: floor_fill, src: pass_th, name: pass_th_f, material: patch_planks, shadow: 0.5}
+  - {op: floor_fill, src: pass_kt, name: pass_kt_f, material: patch_planks, shadow: 0.5}
+  - {op: floor_fill, src: pass_gh, name: pass_gh_f, material: patch_planks, shadow: 0.5}
+  - {op: floor_fill, src: pass_bs, name: pass_bs_f, material: patch_planks, shadow: 0.5}
+  # rushes on the old floor; the hall's cheap paint worn to the boards; repairs in odd boards
   - {op: noise, out: rush_n, scale: 4, id: rush_noise}
   - {op: field_to_mask, out: rush_m, src: rush_n, lo: 0.05, hi: 0.35}
   - {op: combine, out: rush_m, of: [rush_m, tavern_f], mode: min}
-  - {op: fill, mask: rush_m, material: rushes, opacity: 0.85, id: tavern_rushes}
-  - {op: floor_fill, src: kitchen, name: kitchen_f, material: flagstone_irregular, shadow: 0.5}
-  - {op: floor_fill, src: hall, name: hall_f, material: hall_paint, shadow: 0.4}
-  # cheap paint, worn through to the boards where the crowds walk
-  - {op: noise, out: wear_n, scale: 6, octaves: 4, id: wear_noise}
-  - {op: field_to_mask, out: wear_m, src: wear_n, lo: 0.15, hi: 0.4}
+  - {op: fill, mask: rush_m, material: rushes, opacity: 0.6, id: tavern_rushes}
+  - {op: noise, out: wear_n, scale: 7, octaves: 4, id: wear_noise}
+  - {op: field_to_mask, out: wear_m, src: wear_n, lo: 0.2, hi: 0.45}
   - {op: combine, out: wear_m, of: [wear_m, hall_f], mode: min}
-  - {op: fill, mask: wear_m, material: wood_floor_rough, opacity: 0.75, id: hall_wear}
-  - {op: floor_fill, src: guest, name: guest_f, material: guest_paint, shadow: 0.4}
-  - {op: floor_fill, src: shops, name: shops_f, material: clay_floor, shadow: 0.4}
-  - {op: floor_fill, src: back, name: back_f, material: wood_floor, shadow: 0.6}
+  - {op: fill, mask: wear_m, material: wood_floor_rough, opacity: 0.7, id: hall_wear}
+  - {op: noise, out: patch_n, scale: 3, id: patch_noise}
+  - {op: field_to_mask, out: patch_m, src: patch_n, lo: 0.55, hi: 0.56}
+  - {op: combine, out: floor_union, of: [hall_f, guest_f, shops_f, bunk_f], mode: max}
+  - {op: combine, out: patch_m, of: [patch_m, floor_union], mode: min}
+  - {op: fill, mask: patch_m, material: patch_planks, id: floor_patches}
+  - {op: stroke, src: patch_m, width: 0.06, opacity: 0.8}
   - {op: rasterize, out: porch_m, src: porch}
   - {op: fill, mask: porch_m, material: porch_deck, id: porch_deck}
   - {op: stroke, src: porch, width: 0.16}
   - {op: shade_lines, mask: porch_m, side: outside, length: 0.8, spacing: 0.3, width: 0.04, opacity: 0.6}
-  # ---- walls: wattle and daub, red timber, plain timber, blue planks
-  - {op: wall, src: tavern, name: w_tavern, thickness: 1.5, style: rough, roughness: 0.15, material: wall_wattle}
-  - {op: wall, src: kitchen, name: w_kitchen, thickness: 1, style: rough, roughness: 0.12, material: wall_wattle}
-  - {op: wall, src: hall, name: w_hall, thickness: 1, material: red_timber}
-  - {op: wall, src: guest, name: w_guest, thickness: 1, material: wall_timber}
-  - {op: wall, src: shops, name: w_shops, thickness: 1, material: blue_planks}
-  - {op: wall, src: back, name: w_back, thickness: 1, material: wall_timber}
-  # where wings meet: one doorway cut through each wing's wall
-  - {op: opening, wall: w_tavern, at: [35, 46], width: 5, floor_material: wood_floor_rough}
-  - {op: opening, wall: w_hall, at: [35.8, 46], width: 5, floor_material: hall_paint}
-  - {op: opening, wall: w_guest, at: [57, 27.5], width: 5, floor_material: guest_paint}
-  - {op: opening, wall: w_hall, at: [57, 28.3], width: 5, floor_material: hall_paint}
-  - {op: opening, wall: w_hall, at: [76.5, 45], width: 5, floor_material: hall_paint}
-  - {op: opening, wall: w_shops, at: [77.5, 45], width: 5, floor_material: clay_floor}
-  - {op: door, wall: w_tavern, at: [24, 57], width: 3.5}
-  - {op: door, wall: w_kitchen, at: [24, 58.5], width: 3.5}
-  - {op: double_door, wall: w_hall, at: [50, 60.5], width: 6}
-  - {op: door, wall: w_tavern, at: [24, 35], width: 4}
-  - {op: door, wall: w_shops, at: [98.5, 45], width: 4}
-  - {op: door, wall: w_kitchen, at: [15.5, 64], width: 3}
-  # the back room: a secret door in the hall's south wall, and a plain one out to the woods
-  - {op: secret_door, wall: w_hall, at: [70, 60.5], width: 3.5}
-  - {op: opening, wall: w_back, at: [70, 61.5], width: 3.5, floor_material: wood_floor}
-  - {op: door, wall: w_back, at: [76.5, 66], width: 3}
-  - {op: window, wall: w_tavern, at: [13.3, 43], width: 3}
-  - {op: window, wall: w_tavern, at: [13.3, 50], width: 3}
-  - {op: window, wall: w_guest, at: [39.5, 13], width: 3}
-  - {op: window, wall: w_guest, at: [74.5, 13], width: 3}
-  - {op: window, wall: w_shops, at: [88, 32.5], width: 3}
-  - {op: window, wall: w_shops, at: [88, 57.5], width: 3}
-  - {op: window, wall: w_hall, at: [36, 36], width: 3}
-  - {op: window, wall: w_hall, at: [63, 60.5], width: 3}
-  # ---- guest wing: a corridor with three rooms north and two south, a landing down to the hall
-  - {op: path, out: g_north, points: [[40, 16], [74, 16]], line: true}
-  - {op: partition, src: g_north, name: p_gn, thickness: 0.6, material: wall_timber}
-  - {op: path, out: g_south, points: [[40, 20], [52, 20]], line: true}
-  - {op: partition, src: g_south, name: p_gs1, thickness: 0.6, material: wall_timber}
-  - {op: path, out: g_south2, points: [[62, 20], [74, 20]], line: true}
-  - {op: partition, src: g_south2, name: p_gs2, thickness: 0.6, material: wall_timber}
-  - {op: path, out: g_v0, points: [[51.3, 8], [51.3, 16]], line: true}
-  - {op: partition, src: g_v0, name: p_gv0, thickness: 0.6, material: wall_timber}
-  - {op: path, out: g_v1, points: [[62.7, 8], [62.7, 16]], line: true}
-  - {op: partition, src: g_v1, name: p_gv1, thickness: 0.6, material: wall_timber}
-  - {op: path, out: g_s0, points: [[52, 20], [52, 27]], line: true}
-  - {op: partition, src: g_s0, name: p_gsv0, thickness: 0.6, material: wall_timber}
-  - {op: path, out: g_s1, points: [[62, 20], [62, 27]], line: true}
-  - {op: partition, src: g_s1, name: p_gsv1, thickness: 0.6, material: wall_timber}
-  - {op: door, wall: p_gn, at: [45.5, 16], width: 3}
-  - {op: door, wall: p_gn, at: [57, 16], width: 3}
-  - {op: door, wall: p_gn, at: [68.5, 16], width: 3}
-  - {op: door, wall: p_gs1, at: [46, 20], width: 3}
-  - {op: door, wall: p_gs2, at: [68, 20], width: 3}
-  # ---- shop wing: four stalls off a north-south aisle, split by low partitions
-  - {op: path, out: st0, points: [[78, 45], [84, 45]], line: true}
-  - {op: partition, src: st0, name: p_st0, thickness: 0.5, material: blue_planks}
-  - {op: path, out: st1, points: [[92, 45], [98, 45]], line: true}
-  - {op: partition, src: st1, name: p_st1, thickness: 0.5, material: blue_planks}
-  # ---- line-work on the floors: hatching inside the north and west walls of every wing
-  - {op: union, out: floors, of: [tavern, kitchen, hall, guest, shops, back]}
+  # ---- walls: wattle and daub, oxblood timber, plain timber, indigo planks, patched plank passages
+  - {op: union, out: wings_g, of: [hall, tavern, kitchen, guest, bunk, cabin, shops, shed]}
+  - {op: offset, out: wings_x, src: wings_g, by: 1.6}
+  - {op: wall, src: tavern, name: w_tavern, thickness: 1.5, style: rough, material: wall_wattle, roughness: 0.12}
+  - {op: wall, src: kitchen, name: w_kitchen, thickness: 1, style: rough, material: wall_wattle, roughness: 0.12}
+  - {op: wall, src: hall, name: w_hall, thickness: 1, style: dressed, material: oxblood}
+  - {op: wall, src: guest, name: w_guest, thickness: 1, style: dressed, material: wall_timber}
+  - {op: wall, src: bunk, name: w_bunk, thickness: 0.8, style: rough, material: wall_timber, roughness: 0.12}
+  - {op: wall, src: cabin, name: w_cabin, thickness: 0.8, style: rough, material: wall_timber, roughness: 0.12}
+  - {op: wall, src: shops, name: w_shops, thickness: 1, style: dressed, material: indigo_planks}
+  - {op: wall, src: shed, name: w_shed, thickness: 0.8, style: rough, material: patch_planks, roughness: 0.12}
+  - {op: wall, src: pass_th, name: w_pass_th, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_kt, name: w_pass_kt, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_gh, name: w_pass_gh, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
+  - {op: wall, src: pass_bs, name: w_pass_bs, thickness: 0.7, style: rough, roughness: 0.1, material: patch_planks, exclude: wings_x}
+  # mismatched repairs in the walls
+  - {op: polygon, out: rep0, points: [[65.1, 36.13], [73.09, 36.55], [72.83, 41.54], [64.84, 41.13]]}
+  - {op: rasterize, out: rep0_m, src: rep0}
+  - {op: wall_band, out: rep0_b, wall: w_hall}
+  - {op: combine, out: rep0_m, of: [rep0_m, rep0_b], mode: min}
+  - {op: fill, mask: rep0_m, material: patch_planks, id: repair0}
+  - {op: stroke, src: rep0_m, width: 0.08}
+  - {op: polygon, out: rep1, points: [[102.37, 51.1], [107.36, 51.36], [106.95, 59.35], [101.95, 59.09]]}
+  - {op: rasterize, out: rep1_m, src: rep1}
+  - {op: wall_band, out: rep1_b, wall: w_hall}
+  - {op: combine, out: rep1_m, of: [rep1_m, rep1_b], mode: min}
+  - {op: fill, mask: rep1_m, material: wall_wattle, id: repair1}
+  - {op: stroke, src: rep1_m, width: 0.08}
+  - {op: polygon, out: rep2, points: [[10.01, 54.89], [15.95, 54.05], [17.07, 61.97], [11.12, 62.81]]}
+  - {op: rasterize, out: rep2_m, src: rep2}
+  - {op: wall_band, out: rep2_b, wall: w_tavern}
+  - {op: combine, out: rep2_m, of: [rep2_m, rep2_b], mode: min}
+  - {op: fill, mask: rep2_m, material: patch_planks, id: repair2}
+  - {op: stroke, src: rep2_m, width: 0.08}
+  - {op: polygon, out: rep3, points: [[122.33, 74.98], [130.12, 76.78], [129, 81.65], [121.2, 79.85]]}
+  - {op: rasterize, out: rep3_m, src: rep3}
+  - {op: wall_band, out: rep3_b, wall: w_shops}
+  - {op: combine, out: rep3_m, of: [rep3_m, rep3_b], mode: min}
+  - {op: fill, mask: rep3_m, material: wall_wattle, id: repair3}
+  - {op: stroke, src: rep3_m, width: 0.08}
+  # doorways through each wing's wall where a passage arrives
+  - {op: opening, wall: w_tavern, at: [46, 63], width: 5, floor_material: wood_floor_rough}
+  - {op: opening, wall: w_hall, at: [61, 60], width: 5, floor_material: hall_paint}
+  - {op: opening, wall: w_guest, at: [70, 22], width: 4.5, floor_material: guest_paint}
+  - {op: opening, wall: w_hall, at: [80, 38], width: 4.5, floor_material: hall_paint}
+  - {op: opening, wall: w_kitchen, at: [29, 86], width: 4, floor_material: flagstone_irregular}
+  - {op: opening, wall: w_tavern, at: [31, 76], width: 4, floor_material: wood_floor_rough}
+  # the plank walks: a door each side of the mud, a few loose boards between
+  - {op: door, wall: w_hall, at: [103.95, 59.2], width: 3.5}
+  - {op: door, wall: w_shops, at: [112.54, 54.24], width: 3.5}
+  - {op: door, wall: w_bunk, at: [111.87, 14.06], width: 3}
+  - {op: door, wall: w_cabin, at: [121.55, 10.72], width: 3}
+  - {op: prop, kind: boards, at: [108.25, 56.72], size: 11.12, rotate: -30, shadow: 0.5, id: plank_walk0}
+  - {op: prop, kind: boards, at: [116.71, 12.39], size: 11.44, rotate: -19, shadow: 0.5, id: plank_walk1}
+  - {op: opening, wall: w_guest, at: [83.85, 16.81], width: 4, floor_material: guest_paint}
+  - {op: opening, wall: w_bunk, at: [89.54, 16.99], width: 4, floor_material: wood_floor_rough}
+  - {op: prop, kind: boards, at: [86.69, 16.9], size: 7, rotate: -2, id: plank_gb}
+  # outside doors, the front double door, and the secret door to the back shed
+  - {op: double_door, wall: w_hall, at: [70, 76.44], width: 6}
+  - {op: door, wall: w_tavern, at: [20.07, 47.41], width: 4}
+  - {op: door, wall: w_shops, at: [141.07, 64.93], width: 4}
+  - {op: door, wall: w_kitchen, at: [20.97, 92.4], width: 3}
+  - {op: door, wall: w_cabin, at: [127.82, 20.16], width: 3}
+  - {op: secret_door, wall: w_hall, at: [92, 75], width: 3}
+  - {op: opening, wall: w_shed, at: [91, 88], width: 3, floor_material: wood_floor_rough}
+  - {op: door, wall: w_shed, at: [98.72, 89.28], width: 3}
+  - {op: window, wall: w_tavern, at: [12.98, 54.47], width: 3}
+  - {op: window, wall: w_tavern, at: [14.65, 66.35], width: 3}
+  - {op: window, wall: w_hall, at: [58.12, 54.79], width: 3}
+  - {op: window, wall: w_guest, at: [61.03, 4.36], width: 3}
+  - {op: window, wall: w_guest, at: [48.05, 13.05], width: 3}
+  - {op: window, wall: w_shops, at: [132.9, 42.52], width: 3}
+  - {op: window, wall: w_bunk, at: [99.33, 9.17], width: 3}
+  - {op: window, wall: w_cabin, at: [138.72, 14.28], width: 3}
+  # ---- guest wing: a crooked corridor, rooms of every size; the bunkhouse is one long room
+  - {op: path, out: gp0, points: [[48.15, 12.06], [83.96, 15.82]], line: true}
+  - {op: partition, src: gp0, name: p_g0, thickness: 0.6, material: wall_timber}
+  - {op: path, out: gp1, points: [[47.73, 16.03], [59.67, 17.29]], line: true}
+  - {op: partition, src: gp1, name: p_g1, thickness: 0.6, material: wall_timber}
+  - {op: path, out: gp2, points: [[69.61, 18.33], [83.54, 19.8]], line: true}
+  - {op: partition, src: gp2, name: p_g2, thickness: 0.6, material: wall_timber}
+  - {op: path, out: gp3, points: [[58.04, 4.05], [57.1, 13]], line: true}
+  - {op: partition, src: gp3, name: p_g3, thickness: 0.6, material: wall_timber}
+  - {op: path, out: gp4, points: [[71.97, 5.51], [71.03, 14.46]], line: true}
+  - {op: partition, src: gp4, name: p_g4, thickness: 0.6, material: wall_timber}
+  - {op: path, out: gp5, points: [[76.58, 19.06], [75.84, 26.03]], line: true}
+  - {op: partition, src: gp5, name: p_g5, thickness: 0.6, material: wall_timber}
+  - {op: door, wall: p_g0, at: [52.13, 12.47], width: 2.5}
+  - {op: door, wall: p_g0, at: [64.06, 13.73], width: 2.5}
+  - {op: door, wall: p_g0, at: [79.98, 15.4], width: 2.5}
+  - {op: door, wall: p_g1, at: [52.71, 16.56], width: 2.5}
+  - {op: door, wall: p_g2, at: [72.6, 18.65], width: 2.5}
+  - {op: door, wall: p_g2, at: [80.55, 19.48], width: 2.5}
+  - {op: path, out: sp0, points: [[116.18, 57.14], [123, 58.71]], line: true}
+  - {op: partition, src: sp0, name: p_s0, thickness: 0.5, material: indigo_planks}
+  - {op: path, out: sp1, points: [[134.7, 61.41], [141.52, 62.99]], line: true}
+  - {op: partition, src: sp1, name: p_s1, thickness: 0.5, material: indigo_planks}
+  # ---- line-work on every floor: hatching inside the north and west walls
+  - {op: union, out: floors, of: [hall, tavern, kitchen, guest, bunk, cabin, shops, shed, pass_th, pass_kt, pass_gh, pass_bs]}
   - {op: rasterize, out: floors_m, src: floors}
   - {op: shade_lines, mask: floors_m, side: inside, length: 1.6, spacing: 0.32, width: 0.04, opacity: 0.55}
-  # ---- old tavern: a hearth on the west wall, the original bar, a few heavy tables
-  - {op: prop, kind: hearth, at: [16.2, 46], size: 6, rotate: 90, id: t_hearth}
-  - {op: prop, kind: counter, at: [29, 40], size: 8, rotate: 0, id: t_bar}
-  - {op: prop, kind: barrel, at: [25.5, 37.4], size: 1.9, id: t_keg0}
-  - {op: prop, kind: barrel, at: [28, 37.4], size: 1.9, id: t_keg1}
-  - {op: prop, kind: barrel, at: [30.5, 37.4], size: 1.9, id: t_keg2}
-  - {op: prop, kind: barrel, at: [33, 37.4], size: 1.9, id: t_keg3}
-  - {op: prop, kind: stool, at: [26, 42.3], size: 1.2, id: t_bst0}
-  - {op: prop, kind: stool, at: [28.5, 42.3], size: 1.2, id: t_bst1}
-  - {op: prop, kind: stool, at: [31, 42.3], size: 1.2, id: t_bst2}
-  - {op: prop, kind: table, at: [23.5, 44], size: 5, rotate: 0, id: t_tab0}
-  - {op: prop, kind: chair, at: [22, 41.8], size: 1.4, rotate: 0, id: t_ch0_0}
-  - {op: prop, kind: chair, at: [25, 41.8], size: 1.4, rotate: 0, id: t_ch0_1}
-  - {op: prop, kind: chair, at: [22, 46.2], size: 1.4, rotate: 180, id: t_ch0_2}
-  - {op: prop, kind: chair, at: [25, 46.2], size: 1.4, rotate: 180, id: t_ch0_3}
-  - {op: prop, kind: table, at: [23.5, 52], size: 5, rotate: 0, id: t_tab1}
-  - {op: prop, kind: chair, at: [22, 49.8], size: 1.4, rotate: 0, id: t_ch1_0}
-  - {op: prop, kind: chair, at: [25, 49.8], size: 1.4, rotate: 0, id: t_ch1_1}
-  - {op: prop, kind: chair, at: [22, 54.2], size: 1.4, rotate: 180, id: t_ch1_2}
-  - {op: prop, kind: chair, at: [25, 54.2], size: 1.4, rotate: 180, id: t_ch1_3}
-  - {op: prop, kind: table, at: [30, 51], size: 5, rotate: 90, id: t_tab2}
-  - {op: prop, kind: chair, at: [27.8, 49.5], size: 1.4, rotate: 270, id: t_ch2_0}
-  - {op: prop, kind: chair, at: [27.8, 52.5], size: 1.4, rotate: 270, id: t_ch2_1}
-  - {op: prop, kind: chair, at: [32.2, 49.5], size: 1.4, rotate: 90, id: t_ch2_2}
-  - {op: prop, kind: chair, at: [32.2, 52.5], size: 1.4, rotate: 90, id: t_ch2_3}
-  - {op: prop, kind: rug, at: [19.5, 46], size: 5, rotate: 90, colors: {rug: "#b8452e", rug_trim: "#d9a63a"}, id: t_rug}
-  - {op: light, at: [17, 46], radius: 25, color: "#ffb070", glow: true, glow_radius: 7}
-  # kitchen
-  - {op: prop, kind: hearth, at: [30, 63.5], size: 5, rotate: 270, id: k_hearth}
-  - {op: prop, kind: table, at: [22, 63.5], size: 6, id: k_table}
-  - {op: scatter, kind: barrel, region: [[17, 60], [21, 60], [21, 67], [17, 67]], density: 1.2, spacing: 2.1, size: 1.8, id: k_barrels}
-  - {op: prop, kind: shelf, at: [24, 66.9], size: 7, colors: {chip: "#e0e0d0", felt: "#7a9a3a"}, id: k_shelf}
-  # ---- the gambling hall: card tables in rows, dice tables, a wheel of chance on a rug, a long bar
-  - {op: prop, kind: rug, at: [56, 44], size: 14, colors: {rug: "#7a2a8a", rug_trim: "#f2c230"}, id: h_rug}
-  - {op: prop, kind: wheel, at: [56, 44], size: 5, colors: {cloth: "#d8322a", felt: "#1f6fb8", rug_trim: "#f2c230"}, id: h_wheel}
-  - {op: prop, kind: card_table, at: [43, 35], size: 5, colors: {felt: "#1f8a5c"}, id: h_card0}
-  - {op: prop, kind: stool, at: [46.4, 35], size: 1.2, rotate: 90, shadow: 0.3, id: h_cs0_0}
-  - {op: prop, kind: stool, at: [44.05, 38.23], size: 1.2, rotate: 162, shadow: 0.3, id: h_cs0_1}
-  - {op: prop, kind: stool, at: [40.25, 37], size: 1.2, rotate: 234, shadow: 0.3, id: h_cs0_2}
-  - {op: prop, kind: stool, at: [40.25, 33], size: 1.2, rotate: 306, shadow: 0.3, id: h_cs0_3}
-  - {op: prop, kind: stool, at: [44.05, 31.77], size: 1.2, rotate: 378, shadow: 0.3, id: h_cs0_4}
-  - {op: prop, kind: card_table, at: [43, 45], size: 5, colors: {felt: "#1f6fb8"}, id: h_card1}
-  - {op: prop, kind: stool, at: [46.25, 46], size: 1.2, rotate: 107.2, shadow: 0.3, id: h_cs1_0}
-  - {op: prop, kind: stool, at: [43.05, 48.4], size: 1.2, rotate: 179.2, shadow: 0.3, id: h_cs1_1}
-  - {op: prop, kind: stool, at: [39.78, 46.1], size: 1.2, rotate: 251.2, shadow: 0.3, id: h_cs1_2}
-  - {op: prop, kind: stool, at: [40.96, 42.28], size: 1.2, rotate: 323.2, shadow: 0.3, id: h_cs1_3}
-  - {op: prop, kind: stool, at: [44.96, 42.22], size: 1.2, rotate: 395.2, shadow: 0.3, id: h_cs1_4}
-  - {op: prop, kind: card_table, at: [45, 54.5], size: 5, colors: {felt: "#b8325a"}, id: h_card2}
-  - {op: prop, kind: stool, at: [47.81, 56.42], size: 1.2, rotate: 124.4, shadow: 0.3, id: h_cs2_0}
-  - {op: prop, kind: stool, at: [44.04, 57.76], size: 1.2, rotate: 196.4, shadow: 0.3, id: h_cs2_1}
-  - {op: prop, kind: stool, at: [41.6, 54.6], size: 1.2, rotate: 268.4, shadow: 0.3, id: h_cs2_2}
-  - {op: prop, kind: stool, at: [43.86, 51.3], size: 1.2, rotate: 340.4, shadow: 0.3, id: h_cs2_3}
-  - {op: prop, kind: stool, at: [47.69, 52.42], size: 1.2, rotate: 412.4, shadow: 0.3, id: h_cs2_4}
-  - {op: prop, kind: card_table, at: [69, 35], size: 5, colors: {felt: "#1f8a5c"}, id: h_card3}
-  - {op: prop, kind: stool, at: [71.11, 37.66], size: 1.2, rotate: 141.6, shadow: 0.3, id: h_cs3_0}
-  - {op: prop, kind: stool, at: [67.12, 37.83], size: 1.2, rotate: 213.6, shadow: 0.3, id: h_cs3_1}
-  - {op: prop, kind: stool, at: [65.72, 34.09], size: 1.2, rotate: 285.6, shadow: 0.3, id: h_cs3_2}
-  - {op: prop, kind: stool, at: [68.86, 31.6], size: 1.2, rotate: 357.6, shadow: 0.3, id: h_cs3_3}
-  - {op: prop, kind: stool, at: [72.19, 33.81], size: 1.2, rotate: 429.6, shadow: 0.3, id: h_cs3_4}
-  - {op: prop, kind: card_table, at: [69, 54], size: 5, colors: {felt: "#d07a1a"}, id: h_card4}
-  - {op: prop, kind: stool, at: [70.23, 57.17], size: 1.2, rotate: 158.8, shadow: 0.3, id: h_cs4_0}
-  - {op: prop, kind: stool, at: [66.37, 56.15], size: 1.2, rotate: 230.8, shadow: 0.3, id: h_cs4_1}
-  - {op: prop, kind: stool, at: [66.14, 52.16], size: 1.2, rotate: 302.8, shadow: 0.3, id: h_cs4_2}
-  - {op: prop, kind: stool, at: [69.87, 50.71], size: 1.2, rotate: 374.8, shadow: 0.3, id: h_cs4_3}
-  - {op: prop, kind: stool, at: [72.39, 53.81], size: 1.2, rotate: 446.8, shadow: 0.3, id: h_cs4_4}
-  - {op: prop, kind: card_table, at: [57, 55], size: 5, colors: {felt: "#1f6fb8"}, id: h_card5}
-  - {op: prop, kind: stool, at: [57.24, 58.39], size: 1.2, rotate: 175.9, shadow: 0.3, id: h_cs5_0}
-  - {op: prop, kind: stool, at: [53.85, 56.28], size: 1.2, rotate: 247.9, shadow: 0.3, id: h_cs5_1}
-  - {op: prop, kind: stool, at: [54.81, 52.4], size: 1.2, rotate: 319.9, shadow: 0.3, id: h_cs5_2}
-  - {op: prop, kind: stool, at: [58.8, 52.11], size: 1.2, rotate: 391.9, shadow: 0.3, id: h_cs5_3}
-  - {op: prop, kind: stool, at: [60.3, 55.82], size: 1.2, rotate: 463.9, shadow: 0.3, id: h_cs5_4}
-  - {op: prop, kind: dice_table, at: [56, 33.5], size: 7, rotate: 0, colors: {felt: "#1f6fb8"}, id: h_dice0}
-  - {op: prop, kind: dice_table, at: [69, 45], size: 7, rotate: 90, colors: {felt: "#b8325a"}, id: h_dice1}
-  - {op: prop, kind: counter, at: [37.9, 53.5], size: 9, rotate: 90, id: h_bar}
-  - {op: prop, kind: stool, at: [40, 50.5], size: 1.2, id: h_bst0}
-  - {op: prop, kind: stool, at: [40, 53], size: 1.2, id: h_bst1}
-  - {op: prop, kind: stool, at: [40, 55.5], size: 1.2, id: h_bst2}
-  - {op: prop, kind: banner, at: [46, 29.6], size: 4, colors: {cloth: "#d8322a"}, id: h_banner0}
-  - {op: prop, kind: banner, at: [66, 29.6], size: 4, colors: {cloth: "#f2c230"}, id: h_banner1}
-  - {op: prop, kind: brazier, at: [49, 38], size: 1.4, id: h_lamp0}
-  - {op: light, at: [49, 38], radius: 22, color: "#ffd08a", glow: true, glow_radius: 6}
-  - {op: prop, kind: brazier, at: [63, 38], size: 1.4, id: h_lamp1}
-  - {op: light, at: [63, 38], radius: 22, color: "#ffd08a", glow: true, glow_radius: 6}
-  - {op: prop, kind: brazier, at: [49, 50], size: 1.4, id: h_lamp2}
-  - {op: light, at: [49, 50], radius: 22, color: "#ffd08a", glow: true, glow_radius: 6}
-  - {op: prop, kind: brazier, at: [63, 50], size: 1.4, id: h_lamp3}
-  - {op: light, at: [63, 50], radius: 22, color: "#ffd08a", glow: true, glow_radius: 6}
-  # the corners stay dim: nobody looks too hard at who is talking to whom
-  # ---- guest rooms: a bed, a chest and a bright blanket each
-  - {op: prop, kind: bed, at: [44.1, 11.8], size: 6, rotate: 90, colors: {cloth: "#c23b6e"}, id: g_bed0}
-  - {op: prop, kind: chest, at: [48.8, 13.8], size: 2.2, id: g_chest0}
-  - {op: prop, kind: bed, at: [55.5, 11.8], size: 6, rotate: 90, colors: {cloth: "#1f6fb8"}, id: g_bed1}
-  - {op: prop, kind: chest, at: [60.2, 13.8], size: 2.2, id: g_chest1}
-  - {op: prop, kind: bed, at: [66.9, 11.8], size: 6, rotate: 90, colors: {cloth: "#e08a1a"}, id: g_bed2}
-  - {op: prop, kind: chest, at: [71.6, 13.8], size: 2.2, id: g_chest2}
-  - {op: prop, kind: bed, at: [44.5, 23.3], size: 6, rotate: 90, colors: {cloth: "#2f9a5c"}, id: g_bed3}
-  - {op: prop, kind: chest, at: [49.2, 21.7], size: 2.2, id: g_chest3}
-  - {op: prop, kind: bed, at: [66.5, 23.3], size: 6, rotate: 90, colors: {cloth: "#8a3ab8"}, id: g_bed4}
-  - {op: prop, kind: chest, at: [71.2, 21.7], size: 2.2, id: g_chest4}
-  - {op: prop, kind: rug, at: [57, 18], size: 6, rotate: 0, colors: {rug: "#2f6390", rug_trim: "#e2b24a"}, id: g_runner}
-  - {op: stairs, x: 53, y: 21, w: 8, h: 5, down: s}
-  # ---- shops: a counter across each stall's front, shelves behind, stock in crates and barrels
-  - {op: prop, kind: counter, at: [84.4, 39], size: 7, rotate: 90, id: s_counter0}
-  - {op: prop, kind: shelf, at: [78.7, 39], size: 8, rotate: 90, colors: {cloth: "#c23b6e"}, id: s_shelf0}
-  - {op: scatter, kind: barrel, region: [[79.5, 34.5], [82.5, 34.5], [82.5, 43.5], [79.5, 43.5]], density: 0.8, spacing: 2.4, size: 1.9, id: s_stock0}
-  - {op: prop, kind: rug, at: [88, 39], size: 4, rotate: 90, colors: {rug: "#c23b6e", rug_trim: "#f2e6c0"}, id: s_mat0}
-  - {op: prop, kind: counter, at: [84.4, 51], size: 7, rotate: 90, id: s_counter1}
-  - {op: prop, kind: shelf, at: [78.7, 51], size: 8, rotate: 90, colors: {cloth: "#2f9a5c"}, id: s_shelf1}
-  - {op: scatter, kind: crate, region: [[79.5, 46.5], [82.5, 46.5], [82.5, 55.5], [79.5, 55.5]], density: 0.8, spacing: 2.4, size: 1.9, id: s_stock1}
-  - {op: prop, kind: rug, at: [88, 51], size: 4, rotate: 90, colors: {rug: "#2f9a5c", rug_trim: "#f2e6c0"}, id: s_mat1}
-  - {op: prop, kind: counter, at: [91.6, 39], size: 7, rotate: 90, id: s_counter2}
-  - {op: prop, kind: shelf, at: [97.3, 39], size: 8, rotate: 90, colors: {cloth: "#e08a1a"}, id: s_shelf2}
-  - {op: scatter, kind: barrel, region: [[93.5, 34.5], [96.5, 34.5], [96.5, 43.5], [93.5, 43.5]], density: 0.8, spacing: 2.4, size: 1.9, id: s_stock2}
-  - {op: prop, kind: rug, at: [88, 39], size: 4, rotate: 90, colors: {rug: "#e08a1a", rug_trim: "#f2e6c0"}, id: s_mat2}
-  - {op: prop, kind: counter, at: [91.6, 51], size: 7, rotate: 90, id: s_counter3}
-  - {op: prop, kind: shelf, at: [97.3, 51], size: 8, rotate: 90, colors: {cloth: "#1f6fb8"}, id: s_shelf3}
-  - {op: scatter, kind: crate, region: [[93.5, 46.5], [96.5, 46.5], [96.5, 55.5], [93.5, 55.5]], density: 0.8, spacing: 2.4, size: 1.9, id: s_stock3}
-  - {op: prop, kind: rug, at: [88, 51], size: 4, rotate: 90, colors: {rug: "#1f6fb8", rug_trim: "#f2e6c0"}, id: s_mat3}
-  - {op: light, at: [88, 45], radius: 20, color: "#ffd08a", glow: true, glow_radius: 5}
-  # ---- the back room: one table, a strongbox, crates of who-knows-what
-  - {op: prop, kind: table, at: [68, 66], size: 4.5, id: b_table}
-  - {op: prop, kind: chair, at: [65.5, 66], size: 1.4, rotate: 270, id: b_ch0}
-  - {op: prop, kind: chair, at: [70.5, 66], size: 1.4, rotate: 90, id: b_ch1}
-  - {op: prop, kind: chair, at: [68, 64], size: 1.4, rotate: 0, id: b_ch2}
-  - {op: prop, kind: chest, at: [74, 63.6], size: 2.4, colors: {metal: "#3a3a3a"}, id: b_chest}
-  - {op: scatter, kind: crate, region: [[62.5, 66], [65, 66], [65, 69.5], [62.5, 69.5]], density: 1.5, spacing: 1.9, size: 1.8, id: b_crates}
-  - {op: light, at: [68, 66], radius: 10, color: "#ffb070", glow: true, glow_radius: 3}
-  # ---- the porch: benches and kegs either side of the doors
-  - {op: prop, kind: table, at: [45, 64.5], size: 5, rotate: 90, id: p_bench0}
-  - {op: prop, kind: table, at: [55, 64.5], size: 5, rotate: 90, id: p_bench1}
-  - {op: prop, kind: barrel, at: [43.4, 67], size: 1.9, id: p_keg0}
-  - {op: prop, kind: barrel, at: [56.6, 67], size: 1.9, id: p_keg1}
-  - {op: prop, kind: banner, at: [50, 67.7], size: 5, colors: {cloth: "#f2c230"}, id: p_sign}
-  # outside: a woodpile and empties by the kitchen door
-  - {op: scatter, kind: crate, region: [[9, 60], [13, 60], [13, 68], [9, 68]], density: 0.8, spacing: 2.2, size: 1.9, id: o_crates}
-  - {op: scatter, kind: barrel, region: [[99, 50], [103, 50], [103, 56], [99, 56]], density: 0.8, spacing: 2.2, size: 1.9, id: o_barrels}
-  - {op: paper, strength: 0.08, scale: 40}
-  - {op: vignette, strength: 0.25}
+  # ---- old tavern: hearth, the original bar, tables shoved wherever they fit
+  - {op: prop, kind: hearth, at: [16.29, 60.06], size: 6, rotate: 82, id: t_hearth}
+  - {op: prop, kind: counter, at: [31.52, 49.84], size: 9, rotate: -10.8, id: t_bar}
+  - {op: prop, kind: barrel, at: [26.04, 48.19], size: 1.8, rotate: -8, id: t_keg0}
+  - {op: prop, kind: barrel, at: [28.59, 47.83], size: 1.8, rotate: -8, id: t_keg1}
+  - {op: prop, kind: barrel, at: [31.23, 47.46], size: 1.8, rotate: -8, id: t_keg2}
+  - {op: prop, kind: barrel, at: [33.85, 47.09], size: 1.8, rotate: -8, id: t_keg3}
+  - {op: prop, kind: barrel, at: [36.42, 46.73], size: 1.8, rotate: -8, id: t_keg4}
+  - {op: prop, kind: stool, at: [27.84, 52.7], size: 1.2, rotate: -8, id: t_bst0}
+  - {op: prop, kind: stool, at: [31.37, 52.38], size: 1.2, rotate: -8, id: t_bst1}
+  - {op: prop, kind: stool, at: [34.28, 51.81], size: 1.2, rotate: -8, id: t_bst2}
+  - {op: prop, kind: table, at: [25.08, 58.85], size: 5.04, rotate: -24.6, id: t_tab0}
+  - {op: prop, kind: chair, at: [22.93, 61.09], size: 1.4, rotate: 199.8, id: t_ch0_0}
+  - {op: prop, kind: chair, at: [25.55, 61.35], size: 1.4, rotate: 178.7, id: t_ch0_1}
+  - {op: prop, kind: chair, at: [22.65, 57.02], size: 1.4, rotate: 352.4, id: t_ch0_2}
+  - {op: prop, kind: table, at: [25.53, 65.96], size: 4.54, rotate: -27.4, id: t_tab1}
+  - {op: prop, kind: chair, at: [23.11, 69.18], size: 1.4, rotate: 203.4, id: t_ch1_0}
+  - {op: prop, kind: chair, at: [22.83, 65.04], size: 1.4, rotate: 305.1, id: t_ch1_1}
+  - {op: prop, kind: table, at: [34.17, 61.79], size: 4.07, rotate: -29, id: t_tab2}
+  - {op: prop, kind: chair, at: [32.01, 63.53], size: 1.4, rotate: 262.9, id: t_ch2_0}
+  - {op: prop, kind: chair, at: [32.66, 59.38], size: 1.4, rotate: 322, id: t_ch2_1}
+  - {op: prop, kind: table, at: [43.63, 68.94], size: 4.64, rotate: -36.7, id: t_tab3}
+  - {op: prop, kind: chair, at: [40.33, 67.57], size: 1.4, rotate: 270.6, id: t_ch3_0}
+  - {op: prop, kind: chair, at: [42.12, 66], size: 1.4, rotate: 344.2, id: t_ch3_1}
+  - {op: prop, kind: chair, at: [46.09, 69.23], size: 1.4, rotate: 75.1, id: t_ch3_2}
+  - {op: prop, kind: table, at: [32.85, 72.45], size: 4.99, rotate: -40.6, id: t_tab4}
+  - {op: prop, kind: chair, at: [30.5, 71.9], size: 1.4, rotate: 253.2, id: t_ch4_0}
+  - {op: prop, kind: chair, at: [35.6, 69.7], size: 1.4, rotate: 391.4, id: t_ch4_1}
+  - {op: prop, kind: chair, at: [30.66, 71.05], size: 1.4, rotate: 262.9, id: t_ch4_2}
+  - {op: prop, kind: chair, at: [30.76, 72.93], size: 1.4, rotate: 220.9, id: t_ch4_3}
+  - {op: prop, kind: rug, at: [20.25, 59.51], size: 5, rotate: 90.4, id: t_rug}
+  - {op: scatter, kind: clutter, mask: tavern_f, density: 0.5, spacing: 3, size: 2.4, id: t_clutter}
+  - {op: prop, kind: hearth, at: [36.08, 87.03], size: 5, rotate: 254, id: k_hearth}
+  - {op: prop, kind: table, at: [27.91, 89.37], size: 6, rotate: -10.4, id: k_table}
+  - {op: scatter, kind: barrel, region: [[19.8, 86.49], [23.64, 85.39], [26.4, 95], [22.55, 96.11]], density: 1, spacing: 2.1, size: 1.8, id: k_barrels}
+  - {op: scatter, kind: sack, region: [[26.81, 92.81], [34.5, 90.6], [35.33, 93.48], [27.64, 95.69]], density: 1.6, spacing: 1.6, size: 1.8, id: k_sacks}
+  - {op: prop, kind: shelf, at: [27.43, 84.1], size: 7, rotate: -16, colors: {felt: "#4a5a2a", chip: "#8a8a7a"}, id: k_shelf}
+  # ---- the gambling hall: card tables jammed in at angles, dice, a wheel, a long bar, rugs askew
+  - {op: prop, kind: rug, at: [81.03, 56.99], size: 15, rotate: 11, colors: {rug: "#3e1c46", rug_trim: "#8f7330"}, id: h_rug}
+  - {op: prop, kind: rug, at: [65.48, 67.19], size: 7, rotate: -11, colors: {rug: "#5a2a1a", rug_trim: "#6a5a2a"}, id: h_rug2}
+  - {op: prop, kind: wheel, at: [81.03, 56.99], size: 5, rotate: 11.8, colors: {cloth: "#6e1e1a", felt: "#1c3a5e", rug_trim: "#8f7330", linen: "#b8ae94"}, id: h_wheel}
+  - {op: prop, kind: card_table, at: [83.31, 72.31], size: 4.78, rotate: 76, colors: {felt: "#1d4a35"}, id: h_card0}
+  - {op: prop, kind: stool, at: [86.43, 72.92], size: 1.2, rotate: 3, id: h_cs0_0}
+  - {op: prop, kind: stool, at: [83.7, 75.68], size: 1.2, rotate: 3, id: h_cs0_1}
+  - {op: prop, kind: stool, at: [80, 72.99], size: 1.2, rotate: 3, id: h_cs0_2}
+  - {op: prop, kind: stool, at: [81.23, 70.22], size: 1.2, rotate: 3, id: h_cs0_3}
+  - {op: prop, kind: stool, at: [85.5, 69.76], size: 1.2, rotate: 3, id: h_cs0_4}
+  - {op: prop, kind: card_table, at: [94.89, 63.63], size: 4.92, rotate: -73.5, colors: {felt: "#1c3a5e"}, id: h_card1}
+  - {op: prop, kind: stool, at: [98.23, 62.75], size: 1.2, rotate: 3, id: h_cs1_0}
+  - {op: prop, kind: stool, at: [95.94, 66.43], size: 1.2, rotate: 3, id: h_cs1_1}
+  - {op: prop, kind: stool, at: [90.5, 61.04], size: 1.2, rotate: 3, id: h_cs1_2}
+  - {op: prop, kind: stool, at: [95.48, 60.68], size: 1.2, rotate: 3, id: h_cs1_3}
+  - {op: prop, kind: card_table, at: [63.64, 50.86], size: 4.28, rotate: -40.6, colors: {felt: "#5a1e34"}, id: h_card2}
+  - {op: prop, kind: stool, at: [66.86, 52.02], size: 1.2, rotate: 3, id: h_cs2_0}
+  - {op: prop, kind: stool, at: [66.65, 54.49], size: 1.2, rotate: 3, id: h_cs2_1}
+  - {op: prop, kind: stool, at: [61.16, 52.55], size: 1.2, rotate: 3, id: h_cs2_2}
+  - {op: prop, kind: stool, at: [59.6, 52.42], size: 1.2, rotate: 3, id: h_cs2_3}
+  - {op: prop, kind: stool, at: [62.88, 47.71], size: 1.2, rotate: 3, id: h_cs2_4}
+  - {op: prop, kind: stool, at: [66.44, 49.26], size: 1.2, rotate: 3, id: h_cs2_5}
+  - {op: prop, kind: card_table, at: [89.78, 45.95], size: 4.89, rotate: -52.8, colors: {felt: "#1d4a35"}, id: h_card3}
+  - {op: prop, kind: stool, at: [93.21, 45.4], size: 1.2, rotate: 3, id: h_cs3_0}
+  - {op: prop, kind: stool, at: [89.92, 49.29], size: 1.2, rotate: 3, id: h_cs3_1}
+  - {op: prop, kind: stool, at: [84.83, 48.04], size: 1.2, rotate: 3, id: h_cs3_2}
+  - {op: prop, kind: stool, at: [88.92, 42.92], size: 1.2, rotate: 3, id: h_cs3_3}
+  - {op: prop, kind: card_table, at: [68.01, 60.29], size: 4.59, rotate: -60.7, colors: {felt: "#6a4416"}, id: h_card4}
+  - {op: prop, kind: stool, at: [71.8, 59.2], size: 1.2, rotate: 3, id: h_cs4_0}
+  - {op: prop, kind: stool, at: [66.41, 64.1], size: 1.2, rotate: 3, id: h_cs4_1}
+  - {op: prop, kind: stool, at: [67.28, 57.42], size: 1.2, rotate: 3, id: h_cs4_2}
+  - {op: prop, kind: card_table, at: [63.73, 68.28], size: 4.75, rotate: 75.4, colors: {felt: "#1c3a5e"}, id: h_card5}
+  - {op: prop, kind: stool, at: [67.02, 67.7], size: 1.2, rotate: 3, id: h_cs5_0}
+  - {op: prop, kind: stool, at: [65.04, 71.42], size: 1.2, rotate: 3, id: h_cs5_1}
+  - {op: prop, kind: stool, at: [60.69, 66.75], size: 1.2, rotate: 3, id: h_cs5_2}
+  - {op: prop, kind: stool, at: [64.69, 65.1], size: 1.2, rotate: 3, id: h_cs5_3}
+  - {op: prop, kind: card_table, at: [71.89, 70.85], size: 4.58, rotate: -4.9, colors: {felt: "#5a1e34"}, id: h_card6}
+  - {op: prop, kind: stool, at: [74.92, 71.5], size: 1.2, rotate: 3, id: h_cs6_0}
+  - {op: prop, kind: stool, at: [72.1, 75.49], size: 1.2, rotate: 3, id: h_cs6_1}
+  - {op: prop, kind: stool, at: [70.2, 73.22], size: 1.2, rotate: 3, id: h_cs6_2}
+  - {op: prop, kind: stool, at: [69.81, 68.7], size: 1.2, rotate: 3, id: h_cs6_3}
+  - {op: prop, kind: stool, at: [72.71, 67.94], size: 1.2, rotate: 3, id: h_cs6_4}
+  - {op: prop, kind: card_table, at: [76.52, 46.02], size: 4.13, rotate: 62.8, colors: {felt: "#2c4a1e"}, id: h_card7}
+  - {op: prop, kind: stool, at: [79.35, 47.52], size: 1.2, rotate: 3, id: h_cs7_0}
+  - {op: prop, kind: stool, at: [78.35, 48.55], size: 1.2, rotate: 3, id: h_cs7_1}
+  - {op: prop, kind: stool, at: [74, 47.6], size: 1.2, rotate: 3, id: h_cs7_2}
+  - {op: prop, kind: stool, at: [73.77, 44.92], size: 1.2, rotate: 3, id: h_cs7_3}
+  - {op: prop, kind: stool, at: [74.14, 43.78], size: 1.2, rotate: 3, id: h_cs7_4}
+  - {op: prop, kind: stool, at: [77.59, 43.01], size: 1.2, rotate: 3, id: h_cs7_5}
+  - {op: prop, kind: card_table, at: [97.52, 71.64], size: 4.21, rotate: -39.5, colors: {felt: "#1d4a35"}, id: h_card8}
+  - {op: prop, kind: stool, at: [102.09, 70.42], size: 1.2, rotate: 3, id: h_cs8_0}
+  - {op: prop, kind: stool, at: [98.56, 74.93], size: 1.2, rotate: 3, id: h_cs8_1}
+  - {op: prop, kind: stool, at: [94.61, 72.63], size: 1.2, rotate: 3, id: h_cs8_2}
+  - {op: prop, kind: stool, at: [97.62, 66.95], size: 1.2, rotate: 3, id: h_cs8_3}
+  - {op: prop, kind: card_table, at: [94.58, 55.02], size: 4.29, rotate: -25.4, colors: {felt: "#1d4a35"}, id: h_card9}
+  - {op: prop, kind: stool, at: [97.73, 56.44], size: 1.2, rotate: 3, id: h_cs9_0}
+  - {op: prop, kind: stool, at: [93.62, 58.38], size: 1.2, rotate: 3, id: h_cs9_1}
+  - {op: prop, kind: stool, at: [91.72, 56.04], size: 1.2, rotate: 3, id: h_cs9_2}
+  - {op: prop, kind: stool, at: [94.74, 51.11], size: 1.2, rotate: 3, id: h_cs9_3}
+  - {op: prop, kind: card_table, at: [68.39, 43.86], size: 4.79, rotate: -42.4, colors: {felt: "#1c3a5e"}, id: h_card10}
+  - {op: prop, kind: stool, at: [72.58, 43.99], size: 1.2, rotate: 3, id: h_cs10_0}
+  - {op: prop, kind: stool, at: [69.59, 48.49], size: 1.2, rotate: 3, id: h_cs10_1}
+  - {op: prop, kind: stool, at: [67.73, 47.22], size: 1.2, rotate: 3, id: h_cs10_2}
+  - {op: prop, kind: stool, at: [64.38, 41.81], size: 1.2, rotate: 3, id: h_cs10_3}
+  - {op: prop, kind: stool, at: [65.8, 41.61], size: 1.2, rotate: 3, id: h_cs10_4}
+  - {op: prop, kind: stool, at: [69.1, 40.52], size: 1.2, rotate: 3, id: h_cs10_5}
+  - {op: prop, kind: dice_table, at: [82.95, 39.57], size: 6.5, rotate: 6.5, colors: {felt: "#1c3a5e"}, id: h_dice0}
+  - {op: prop, kind: dice_table, at: [101.42, 50.05], size: 6.5, rotate: 88.7, colors: {felt: "#5a1e34"}, id: h_dice1}
+  - {op: prop, kind: counter, at: [59.71, 58.88], size: 11, rotate: 91.5, id: h_bar}
+  - {op: prop, kind: stool, at: [62.07, 54.71], size: 1.2, rotate: 3, id: h_bst0}
+  - {op: prop, kind: stool, at: [61.84, 57.63], size: 1.2, rotate: 3, id: h_bst1}
+  - {op: prop, kind: stool, at: [62.09, 60.14], size: 1.2, rotate: 3, id: h_bst2}
+  - {op: prop, kind: stool, at: [61.7, 63.02], size: 1.2, rotate: 3, id: h_bst3}
+  - {op: prop, kind: banner, at: [70.91, 40.04], size: 4, rotate: 3, colors: {cloth: "#5e1a16"}, id: h_banner0}
+  - {op: prop, kind: banner, at: [94.87, 41.3], size: 4, rotate: 3, colors: {cloth: "#6a5420"}, id: h_banner1}
+  - {op: prop, kind: banner, at: [103.04, 65.16], size: 4, rotate: 93, colors: {cloth: "#1c3a5e"}, id: h_banner2}
+  - {op: prop, kind: brazier, at: [74.17, 51.81], size: 1.3, rotate: 3, id: h_lamp0}
+  - {op: prop, kind: brazier, at: [88.96, 52.41], size: 1.3, rotate: 3, id: h_lamp1}
+  - {op: prop, kind: brazier, at: [72.96, 62.1], size: 1.3, rotate: 3, id: h_lamp2}
+  - {op: prop, kind: brazier, at: [87.13, 62.56], size: 1.3, rotate: 3, id: h_lamp3}
+  - {op: prop, kind: brazier, at: [66.44, 51.58], size: 1.3, rotate: 3, id: h_lamp4}
+  - {op: prop, kind: brazier, at: [96.77, 64.05], size: 1.3, rotate: 3, id: h_lamp5}
+  - {op: scatter, kind: clutter, mask: hall_f, density: 0.45, spacing: 2.6, size: 2.2, id: h_clutter}
+  - {op: scatter, kind: barrel, region: [[98.8, 42.9], [103.79, 43.17], [103.58, 47.16], [98.59, 46.9]], density: 1.5, spacing: 2, size: 1.8, id: h_kegs}
+  - {op: scatter, kind: crate, region: [[59.59, 45.86], [62.58, 46.01], [62.32, 51.01], [59.33, 50.85]], density: 1.4, spacing: 2, size: 1.8, id: h_crates}
+  # ---- guest rooms and bunkhouse
+  - {op: prop, kind: bed, at: [53, 8.3], size: 5.5, rotate: 94.2, colors: {cloth: "#5a2240"}, id: g_bed0}
+  - {op: prop, kind: bed, at: [64.77, 8.98], size: 5.5, rotate: 4.5, colors: {cloth: "#1c3a5e"}, id: g_bed1}
+  - {op: prop, kind: bed, at: [78.27, 10.31], size: 5.5, rotate: 97.8, colors: {cloth: "#6a4416"}, id: g_bed2}
+  - {op: prop, kind: bed, at: [53.69, 20.18], size: 5.5, rotate: 0.2, colors: {cloth: "#2c4a1e"}, id: g_bed3}
+  - {op: prop, kind: bed, at: [72.88, 22.57], size: 5.5, rotate: 5.6, colors: {cloth: "#4a2a5e"}, id: g_bed4}
+  - {op: prop, kind: bed, at: [79.72, 22.95], size: 5.5, rotate: 101.3, colors: {cloth: "#5e1a16"}, id: g_bed5}
+  - {op: prop, kind: chest, at: [56.36, 5.68], size: 2, rotate: -3.2, id: g_chest0}
+  - {op: prop, kind: chest, at: [69.25, 12.26], size: 2, rotate: -3.7, id: g_chest1}
+  - {op: prop, kind: chest, at: [82.7, 8.65], size: 2, rotate: 8, id: g_chest2}
+  - {op: prop, kind: chest, at: [57.6, 22.6], size: 2, rotate: 16.7, id: g_chest3}
+  - {op: prop, kind: rug, at: [65.84, 15.93], size: 9, rotate: 7.2, colors: {rug: "#1c3a5e", rug_trim: "#6a5420"}, id: g_runner}
+  - {op: scatter, kind: clutter, mask: guest_f, density: 0.25, spacing: 3, size: 1.8, id: g_clutter}
+  - {op: prop, kind: bunk, at: [93.52, 14.18], size: 5.5, rotate: 85, colors: {cloth: "#6a4416"}, id: bk_bunk0}
+  - {op: prop, kind: bunk, at: [98.42, 13.12], size: 5.5, rotate: 87.1, colors: {cloth: "#2c4a1e"}, id: bk_bunk1}
+  - {op: prop, kind: bunk, at: [102.7, 12.84], size: 5.5, rotate: 82.8, colors: {cloth: "#4a2a5e"}, id: bk_bunk2}
+  - {op: prop, kind: bunk, at: [95.57, 24.89], size: 5.5, rotate: 89.2, colors: {cloth: "#5e1a16"}, id: bk_bunk3}
+  - {op: prop, kind: bunk, at: [101.69, 24.27], size: 5.5, rotate: 81.5, colors: {cloth: "#5a2240"}, id: bk_bunk4}
+  - {op: prop, kind: bunk, at: [108.96, 21.39], size: 5.5, rotate: -19, colors: {cloth: "#1c3a5e"}, id: bk_bunk5}
+  - {op: scatter, kind: clutter, mask: bunk_f, density: 0.5, spacing: 2.6, size: 2, id: bk_clutter}
+  - {op: scatter, kind: sack, mask: bunk_f, density: 0.15, spacing: 3, size: 1.6, id: bk_sacks}
+  - {op: prop, kind: bed, at: [126.94, 8.02], size: 6, rotate: 15, colors: {cloth: "#3e1c46"}, id: c_bed}
+  - {op: prop, kind: table, at: [132.15, 15.62], size: 4, rotate: 35, id: c_desk}
+  - {op: prop, kind: chair, at: [130.73, 13.18], size: 1.4, rotate: 215, id: c_chair}
+  - {op: prop, kind: chest, at: [137.6, 8.8], size: 2.4, rotate: 25, colors: {metal: "#2e2e2e"}, id: c_chest}
+  - {op: prop, kind: rug, at: [128.93, 12.17], size: 6, rotate: 45, colors: {rug: "#2a1a2e", rug_trim: "#6a5420"}, id: c_rug}
+  # ---- shop wing: stalls crammed with stock, counters, goods spilling into the aisle
+  - {op: prop, kind: counter, at: [126.42, 47.75], size: 5.59, rotate: 112.3, id: s_counter0}
+  - {op: prop, kind: shelf, at: [118.8, 50.26], size: 6.65, rotate: 105.9, colors: {cloth: "#5a2240"}, id: s_shelf0}
+  - {op: scatter, kind: barrel, region: [[121.7, 43.02], [125.21, 43.83], [122.51, 55.52], [119, 54.71]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock0}
+  - {op: scatter, kind: sack, region: [[124.92, 43.76], [126.86, 44.21], [124.17, 55.9], [122.22, 55.45]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks0}
+  - {op: prop, kind: rug, at: [131.19, 49.93], size: 4.5, rotate: 85.9, colors: {rug: "#5a2240", rug_trim: "#6a5a3a"}, id: s_mat0}
+  - {op: prop, kind: counter, at: [122.27, 68.2], size: 6.47, rotate: 87, id: s_counter1}
+  - {op: prop, kind: shelf, at: [114.75, 67.77], size: 8.37, rotate: 106.9, colors: {cloth: "#2c4a1e"}, id: s_shelf1}
+  - {op: scatter, kind: crate, region: [[117.65, 60.55], [121.16, 61.36], [118.46, 73.06], [114.95, 72.25]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock1}
+  - {op: scatter, kind: sack, region: [[120.87, 61.3], [122.82, 61.75], [120.12, 73.44], [118.17, 72.99]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks1}
+  - {op: prop, kind: rug, at: [126.94, 68.32], size: 4.5, rotate: 118.2, colors: {rug: "#2c4a1e", rug_trim: "#6a5a3a"}, id: s_mat1}
+  - {op: prop, kind: counter, at: [133.93, 53.43], size: 8.47, rotate: 111.5, id: s_counter2}
+  - {op: prop, kind: shelf, at: [142.24, 55.39], size: 8.12, rotate: 101.9, colors: {cloth: "#6a4416"}, id: s_shelf2}
+  - {op: scatter, kind: barrel, region: [[139.24, 47.06], [142.75, 47.87], [140.05, 59.57], [136.54, 58.76]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock2}
+  - {op: scatter, kind: sack, region: [[137.58, 46.68], [139.53, 47.13], [136.83, 58.82], [134.88, 58.37]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks2}
+  - {op: prop, kind: rug, at: [130.46, 53.11], size: 4.5, rotate: 117.5, colors: {rug: "#6a4416", rug_trim: "#6a5a3a"}, id: s_mat2}
+  - {op: prop, kind: counter, at: [131.7, 67.6], size: 6.38, rotate: 107.5, id: s_counter3}
+  - {op: prop, kind: shelf, at: [138.25, 72.67], size: 8.01, rotate: 104, colors: {cloth: "#1c3a5e"}, id: s_shelf3}
+  - {op: scatter, kind: crate, region: [[135.19, 64.6], [138.7, 65.41], [136, 77.11], [132.49, 76.3]], density: 0.9, spacing: 2.2, size: 1.8, id: s_stock3}
+  - {op: scatter, kind: sack, region: [[133.53, 64.22], [135.48, 64.67], [132.78, 76.36], [130.83, 75.91]], density: 0.5, spacing: 1.8, size: 1.6, id: s_sacks3}
+  - {op: prop, kind: rug, at: [126.88, 68.58], size: 4.5, rotate: 84.3, colors: {rug: "#1c3a5e", rug_trim: "#6a5a3a"}, id: s_mat3}
+  - {op: scatter, kind: clutter, mask: shops_f, density: 0.3, spacing: 3, size: 2, id: s_clutter}
+  # ---- the back shed: business nobody asks about
+  - {op: prop, kind: table, at: [91.15, 92.05], size: 4.5, rotate: 2, id: b_table}
+  - {op: prop, kind: chair, at: [88.73, 93.12], size: 1.4, rotate: 247, id: b_ch0}
+  - {op: prop, kind: chair, at: [93.36, 90.93], size: 1.4, rotate: 82, id: b_ch1}
+  - {op: prop, kind: chair, at: [90.95, 89.84], size: 1.4, rotate: -3, id: b_ch2}
+  - {op: prop, kind: chest, at: [94.9, 86.06], size: 2.4, rotate: -21, colors: {metal: "#2e2e2e"}, id: b_chest}
+  - {op: scatter, kind: crate, region: [[84.41, 89.5], [87.33, 88.83], [89.35, 97.6], [86.43, 98.27]], density: 1.6, spacing: 1.8, size: 1.8, id: b_crates}
+  - {op: scatter, kind: sack, region: [[93.55, 93.55], [97.45, 92.65], [98.12, 95.57], [94.23, 96.47]], density: 1.4, spacing: 1.6, size: 1.6, id: b_sacks}
+  # ---- porch and the yard: benches, kegs, junk heaps, a woodpile, loose boards in the mud
+  - {op: prop, kind: table, at: [64.52, 84.49], size: 5, rotate: 81, id: p_bench0}
+  - {op: prop, kind: table, at: [76.99, 83.62], size: 5, rotate: 91, id: p_bench1}
+  - {op: prop, kind: barrel, at: [62.24, 87.66], size: 1.9, rotate: -4, id: p_keg0}
+  - {op: prop, kind: barrel, at: [79.31, 80.95], size: 1.9, rotate: -4, id: p_keg1}
+  - {op: prop, kind: banner, at: [71.32, 88.53], size: 5, rotate: -4, colors: {cloth: "#6a5420"}, id: p_sign}
+  - {op: scatter, kind: clutter, mask: porch_m, density: 0.6, spacing: 2.4, size: 2, id: p_clutter}
+  - {op: scatter, kind: crate, region: [[6, 80], [16, 80], [16, 92], [6, 92]], density: 0.9, spacing: 2.2, size: 1.9, id: o_junk0}
+  - {op: scatter, kind: sack, region: [[6, 80], [16, 80], [16, 92], [6, 92]], density: 0.4, spacing: 2, size: 1.6, id: o_sacks0}
+  - {op: scatter, kind: barrel, region: [[144, 70], [152, 70], [152, 82], [144, 82]], density: 0.9, spacing: 2.2, size: 1.9, id: o_junk1}
+  - {op: scatter, kind: sack, region: [[144, 70], [152, 70], [152, 82], [144, 82]], density: 0.4, spacing: 2, size: 1.6, id: o_sacks1}
+  - {op: scatter, kind: crate, region: [[106, 84], [116, 84], [116, 94], [106, 94]], density: 0.9, spacing: 2.2, size: 1.9, id: o_junk2}
+  - {op: scatter, kind: sack, region: [[106, 84], [116, 84], [116, 94], [106, 94]], density: 0.4, spacing: 2, size: 1.6, id: o_sacks2}
+  - {op: scatter, kind: barrel, region: [[44, 26], [52, 26], [52, 34], [44, 34]], density: 0.9, spacing: 2.2, size: 1.9, id: o_junk3}
+  - {op: scatter, kind: sack, region: [[44, 26], [52, 26], [52, 34], [44, 34]], density: 0.4, spacing: 2, size: 1.6, id: o_sacks3}
+  - {op: scatter, kind: boards, region: [[100, 98], [124, 98], [124, 108], [100, 108]], density: 0.12, spacing: 6, size: 6, id: o_boards}
+  - {op: scatter, kind: clutter, mask: clearing_m, avoid: [built_m], density: 0.03, spacing: 8, size: 2, id: o_litter}
+  - {op: scatter, kind: rubble, region: [[2, 70], [12, 70], [12, 80], [2, 80]], density: 0.6, spacing: 3, size: 2.5, id: o_woodpile}
+  # a fire pit in the yard, benches dragged round it
+  - {op: prop, kind: rubble, at: [46, 92], size: 4.5, shadow: 0.3, id: y_pit_stones}
+  - {op: prop, kind: brazier, at: [46, 92], size: 2.6, shadow: 0, id: y_fire}
+  - {op: prop, kind: boards, at: [41.5, 91], size: 4.5, rotate: 80, id: y_bench0}
+  - {op: prop, kind: boards, at: [49.5, 88.5], size: 4.5, rotate: 35, id: y_bench1}
+  - {op: prop, kind: boards, at: [48.5, 96.2], size: 4.5, rotate: 160, id: y_bench2}
+  # ---- lamps (VTT lights too), then the dark: pools of warm light, black corners, a cold night outside
+  - {op: light, at: [17.28, 59.92], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [31.66, 50.83], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [34.02, 67.67], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [33.67, 87.72], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [74.3, 51.63], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [88.29, 52.37], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [73.73, 62.62], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [87.71, 63.35], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [66.29, 51.72], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [96.7, 63.82], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [57.89, 15.09], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [75.79, 16.97], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [100.98, 18.52], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [132.15, 15.62], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [130.87, 51.29], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [126.82, 68.83], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [91.15, 92.05], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [67.81, 81.26], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [75.79, 80.7], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: light, at: [46, 92], radius: 18, color: "#ffc27a", intensity: 0.8}
+  - {op: darkness, strength: 0.62, color: "#120e18", pool: 0.62, warm: "#ffb36b", warmth: 0.35, atmosphere: true, id: dark}
+  - {op: paper, strength: 0.06, scale: 40}
+  - {op: vignette, strength: 0.35, atmosphere: true}

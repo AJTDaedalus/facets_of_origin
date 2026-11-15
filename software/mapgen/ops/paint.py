@@ -8,7 +8,6 @@ import shapely
 from pydantic import Field as PField, model_validator
 from scipy import ndimage
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Polygon
-from shapely.ops import substring
 
 from ..color import composite_inplace, resolve_color
 from ..layers import Geometry, Image, Mask
@@ -134,6 +133,28 @@ def lines_of(g):
     return []
 
 
+class _Cutter:
+    """Cuts pieces [a, b] (arc length) out of one line in linear time overall; `shapely.ops.substring`
+    walks the line from its start for every piece, which goes quadratic on long dashed outlines."""
+
+    def __init__(self, ln):
+        self.xy = np.asarray(ln.coords, float)
+        self.cum = np.concatenate([[0.0], np.cumsum(np.hypot(*np.diff(self.xy, axis=0).T))])
+
+    def _at(self, d):
+        i = int(np.clip(np.searchsorted(self.cum, d, side="right") - 1, 0, len(self.cum) - 2))
+        seg = self.cum[i + 1] - self.cum[i]
+        t = 0.0 if seg <= 0 else (d - self.cum[i]) / seg
+        return i, self.xy[i] + (self.xy[i + 1] - self.xy[i]) * t
+
+    def piece(self, a, b):
+        ia, pa = self._at(a)
+        ib, pb = self._at(b)
+        mid = self.xy[ia + 1:ib + 1]
+        pts = np.vstack([pa, mid, pb]) if len(mid) else np.vstack([pa, pb])
+        return LineString(pts)
+
+
 def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, double=0.0,
                           dash=None, side="center", seed=0, patch=False, jitter=0.0, taper=0.0):
     rng = np.random.default_rng(seed + 991)
@@ -155,6 +176,7 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
                 continue
             if dash:
                 pattern = list(dash) if len(dash) % 2 == 0 else list(dash) * 2
+                cut = _Cutter(v)
                 pos, L, k = 0.0, v.length, 0
                 while pos < L:
                     on, off = pattern[k % len(pattern)], pattern[(k + 1) % len(pattern)]
@@ -162,7 +184,7 @@ def stroke_geometry_alpha(ctx, g, width_ft, roughness=0.0, rough_scale=4.0, doub
                         on *= 1 + rng.uniform(-jitter, jitter)
                         off *= 1 + rng.uniform(-jitter, jitter)
                     wmul = 1 + rng.uniform(-jitter, jitter) * 0.8 if jitter else 1.0
-                    out.append((substring(v, pos, min(pos + on, L)), wmul))
+                    out.append((cut.piece(pos, min(pos + on, L)), wmul))
                     pos += on + off
                     k += 2
             else:

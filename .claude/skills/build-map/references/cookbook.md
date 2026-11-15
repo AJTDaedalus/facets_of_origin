@@ -173,8 +173,39 @@ Full example: `maps/recipes/painted_lantern.map.yaml`.
   `wheel` (painted wedges), `counter` (long, mugs), `stool`, `shelf` (coloured goods), `hearth`.
   Ring stools round a table by computing positions; a short generator script is fine, but the recipe
   it writes is the source.
-- **Shady corners:** put `light` with `glow: true` over the busy tables and leave the corners unlit.
-  Reach a back room by a `secret_door`.
+- **Dark but colourful:** keep the hues and drop their value: oxblood, bottle green, smoky teal,
+  tarnished mustard, dull indigo. Place the lamps (`light`, no glow), then one `darkness` step
+  (`strength` ~0.6, `pool` ~0.6, `warmth` ~0.35, `atmosphere: true`). Everything goes dark except warm
+  pools round the lamps, so the corners stay black. Override `earth` darker at recipe level for a
+  night yard.
+- **Chaos, not order** (owner, 2026-11-15: "far too ordered ... a very chaotic place"):
+  - Draw each wing straight, then knock it askew by 5-15°. Use the `transform` op, or compute the
+    points, then place props in the wing's own coordinates and rotate them the same way.
+  - Give wings bump-outs, slanted sides and lean-tos, never plain rectangles.
+  - Join wings with crooked plank passages (`path` floors walled with `exclude` = the wings grown by
+    the wall thickness), or with **plank walks over mud**: a door in each wall, a `mud` strip with
+    puddles (noise ∩ mud filled with `water`), and a `boards` prop from door to door.
+  - Pack tables by random rejection sampling (minimum spacing, keep-outs round rugs and bars), with
+    random rotation, and shove the odd stool back.
+  - `scatter` `clutter` over every floor, plus `sack`, crates and barrels in heaps. Add patch planks
+    on floors and repairs in walls: `wall_band` ∩ a region, filled with another material.
+
+## Region styles (a shared look across many maps)
+
+When the owner supplies concept art for a region, write a visual brief (`docs/REFERENCE_<region>_visual_brief.md`)
+and a region style (`software/mapgen/styles/<region>.yaml`) that includes `inked_parchment.yaml` and adds the
+region's palette, materials and macros. Every map in the region then puts `include: [styles/<region>.yaml]` in
+its header, so all of them share one look.
+
+- **Measure the concept, don't eyeball it:** mean RGB (the colour cast), mean saturation, and the 5th/95th
+  percentile of brightness (the value range). Compare your render with the same numbers. The comparator bands
+  in `quality` come from bright commercial maps and don't apply to a deliberately murky region.
+- **The mists region** (`styles/mists_region.yaml`, example `maps/recipes/mist_coast.map.yaml`):
+  - cold green-grey materials (`ash_sand`, `wet_ash`, `dune_dark`, `grey_sea`)
+  - `dunes`: dark hummocks inland, hatched as raised masses
+  - `rough_sea`: whitecaps across the open sea, plus swell strokes
+  - `lit_mist`: one light source through the mist, a radial glow that brightens the mist near it
+  - dim with `murk` (neutral, never blue), and keep haze off the stones so they stay near-black
 
 ## Fixing common defects
 

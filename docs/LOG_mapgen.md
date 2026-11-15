@@ -427,3 +427,39 @@ The gap check for this brief added:
 Tests: `tests/mapgen/test_tavern_tools.py` (51). No goldens changed. `ops.md` is regenerated, and the cookbook has a new section, "A building of many wings".
 
 Metrics (built_interior): Q1–Q4 are in band. Q5s is above its band, because the brief asked for bright colours.
+
+### Revision, same day
+
+The owner said the map was "far too ordered", the colours too bright ("use colors but still give off a dark vibe"), and that it should be "a very chaotic place", larger, and have at least one plank bridge between buildings.
+
+The gap check added:
+- `darkness` (lamp pools from the earlier `light`s) and `transform` (rotate/skew/scale/move a geometry).
+- Props `clutter`, `sack` and `boards`, with palette keys `bottle`, `spill` and `sack`.
+- The `mud` material.
+
+The map was rebuilt at 160×120 ft:
+- eight wings knocked askew with bump-outs, joined by crooked passages and three plank walks (two over mud)
+- tables packed at random, clutter everywhere
+- deep colours under lamplight
+
+`test_tavern_tools.py` now holds 84 tests.
+
+## 2026-11-15 — Mists region look, palm prop, dashed-stroke speed-up
+
+**Mists region.** The owner added concept art (`references/mists_concept.jpg`); the review is in `docs/REFERENCE_mists_region_visual_brief.md`. On the owner's ruling, the first map is the beach only, with no camp, stakes, palisades, piers or palms; palms stay in the toolset.
+
+New:
+- `styles/mists_region.yaml`: palette, four materials, and the macros `rough_sea`, `dunes` and `lit_mist`.
+- The `palm` prop.
+- `mist_coast` rebased onto the region style.
+- Tests: `test_mists_region.py` (8) and palm tests in `test_tavern_tools.py`.
+
+Measured against the concept:
+| | Concept | Coast now |
+|---|---|---|
+| Mean RGB | 0.42/0.45/0.44 | 0.39/0.41/0.39 |
+| Darkest 5% / brightest 5% (brightness) | 0.04/0.86 | 0.13/0.69 |
+
+The cast now matches; the value range is still narrower than the concept's.
+
+**Speed.** A profile of the tavern draft put 58% of the time in `stroke`. `shapely.ops.substring` walks the line from its start for every dash, so dashed strokes on long, dense outlines (forest-edge halos, paths) went quadratic. `_Cutter` in `paint.py` cuts every dash in one linear pass and matches `substring` to 1e-9.

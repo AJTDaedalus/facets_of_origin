@@ -58,10 +58,10 @@ class TestRecipeStyle:
         store, _ = render(r)
         assert store.get("canvas").data[10, 10, 2] > 0.9
 
-    def test_coast_recipe_loads_with_inline_style(self):
+    def test_coast_recipe_loads_the_region_style(self):
         p = Path(__file__).resolve().parents[3] / "maps" / "recipes" / "mist_coast.map.yaml"
-        r = load_recipe(p)
-        assert "white_sand" in r.style.materials and r.style.palette["stone"] == "#2a2c30"
+        r = load_recipe(p)       # the coast moved onto styles/mists_region.yaml (2026-11-15)
+        assert "ash_sand" in r.style.materials and "rough_sea" in r.style.macros and r.style.palette["stone"] == "#1a1e1d"
 
 
 # ---------------------------------------------------------------- 2 directional noise, warp

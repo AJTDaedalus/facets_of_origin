@@ -23,13 +23,14 @@ COLORS = {"wood": "#8a6440", "wood_light": "#a77f55", "wood_dark": "#5e412a", "c
           "linen": "#e8e0cc", "metal": "#77736c", "stone_light": "#c2bbad", "stone": "#9d968a",
           "stone_dark": "#6f695f", "foliage": "#4c5a44", "foliage_light": "#66755c",
           "foliage_dark": "#2f4722", "foliage_top": "#8a977a", "fire": "#f0a040", "rug": "#7b3f3a", "rug_trim": "#c9a45c",
-          "felt": "#2f6b4a", "chip": "#c9a45c",
+          "felt": "#2f6b4a", "chip": "#c9a45c", "bottle": "#3d5a3a", "spill": "#4a1e22", "sack": "#9a8560",
+          "palm": "#3b4a33", "palm_dark": "#1f281b",
           "upland_light": "#e3d3a6", "upland_dark": "#a9925f", "ink_fill": "#1c1814",
           "mtn_light": "#cfc2ae", "mtn_dark": "#7d6a58"}
 
 INK_FINE, INK_MED = 0.1, 0.16
 DETAIL = 0.075            # detail lines (staves, boards, folds, cracks): at least a pixel at VTT scale
-NO_AUTO_SHADE = {"tree", "rug", "banner", "pebbles", "rubble", "mountain", "hill"}   # flat, or shades itself
+NO_AUTO_SHADE = {"tree", "rug", "banner", "pebbles", "rubble", "mountain", "hill", "clutter", "palm"}   # flat, or shades itself
 
 
 def _blob(r, lobes, rng, rough=0.18, n=64):
@@ -514,6 +515,98 @@ def p_hearth(s, rng):
     return parts
 
 
+def p_clutter(s, rng):
+    """A random handful of small things dropped within `s` feet: mugs, bottles, cards, coins, a spill."""
+    r = s / 2
+    parts = []
+    def spot(margin):
+        a, d = rng.uniform(0, 2 * np.pi), rng.uniform(0, 1) ** 0.5 * max(r - margin, 0)
+        return np.cos(a) * d, np.sin(a) * d
+    if rng.random() < 0.6:                                   # a spill under everything
+        x, y = spot(r * 0.35)
+        sp = affinity.rotate(affinity.scale(SPoint(x, y).buffer(r * 0.3), 1.4, 0.8), rng.uniform(0, 180))
+        parts.append((sp.intersection(SPoint(0, 0).buffer(r)), "spill", 0))
+    u = max(s, 0.3) / 4                                      # item scale
+    for _ in range(int(rng.integers(4, 9))):
+        kind = rng.choice(["mug", "bottle", "card", "coin"], p=[0.3, 0.25, 0.3, 0.15])
+        if kind == "mug":
+            x, y = spot(u * 0.2)
+            parts += [(SPoint(x, y).buffer(u * 0.18), "metal", DETAIL), (SPoint(x, y).buffer(u * 0.09), "ink_fill", 0)]
+        elif kind == "bottle":
+            x, y = spot(u * 0.35)
+            b = affinity.rotate(box(x - u * 0.3, y - u * 0.09, x + u * 0.3, y + u * 0.09), rng.uniform(0, 180), origin=(x, y))
+            parts.append((b, "bottle", DETAIL))
+        elif kind == "card":
+            x, y = spot(u * 0.2)
+            c = affinity.rotate(box(x - u * 0.12, y - u * 0.17, x + u * 0.12, y + u * 0.17), rng.uniform(0, 180), origin=(x, y))
+            parts.append((c, "linen", DETAIL))
+        else:
+            x, y = spot(u * 0.1)
+            parts.append((SPoint(x, y).buffer(u * 0.07), "chip", 0))
+    return [(g, ck, iw) for g, ck, iw in parts if not g.is_empty and g.is_valid]
+
+
+def p_sack(s, rng):
+    """A lumpy sack, tied at the neck."""
+    n = 18
+    a = np.linspace(0, 2 * np.pi, n, endpoint=False)
+    rr = s / 2 * (0.82 + 0.18 * rng.uniform(-1, 1, n)) * (1 - 0.15 * np.cos(2 * a))
+    body = Polygon(np.stack([np.cos(a) * rr * 0.75, np.sin(a) * rr], axis=1)).buffer(0)
+    tie = LineString([(-s * 0.12, -s * 0.3), (s * 0.12, -s * 0.3)])
+    fold = LineString([(-s * 0.1, -s * 0.1), (s * 0.05, s * 0.2)])
+    return [(body, "sack", INK_FINE), (tie, None, DETAIL), (fold, None, DETAIL)]
+
+
+def p_boards(s, rng):
+    """A few loose planks, `s` feet long, laid side by side across a gap: uneven, overlapping, askew."""
+    n = int(rng.integers(3, 6))
+    w = min(0.9, s * 0.12)
+    parts = []
+    y = -(n - 1) * w * 0.5
+    keys = ["wood", "wood_light", "wood_dark"]
+    for i in range(n):
+        L = s * rng.uniform(0.82, 1.0)
+        x0 = rng.uniform(-s / 2, s / 2 - L)
+        bw = w * rng.uniform(0.75, 1.05)
+        pl = box(x0, y - bw / 2, x0 + L, y + bw / 2)
+        pl = affinity.rotate(pl, rng.uniform(-3, 3), origin=(x0 + L / 2, y))
+        parts.append((pl, keys[int(rng.integers(0, 3))], INK_FINE))
+        parts += _grain(x0 + L * 0.05, y - bw * 0.3, x0 + L * 0.95, y + bw * 0.3, rng, n=1, knots=False)
+        for xn in (x0 + L * 0.06, x0 + L * 0.94):
+            parts.append((SPoint(xn, y).buffer(w * 0.06), "ink_fill", 0))
+        y += w * rng.uniform(0.85, 1.15)
+    return parts
+
+
+def p_palm(s, rng):
+    """A palm seen from above: long thin fronds radiating from a dark crown, each with a midrib and a few
+    leaflet strokes. Like a tree, its shading always sits south-east."""
+    n = int(rng.integers(7, 11))
+    parts = []
+    base = rng.uniform(0, 2 * np.pi)
+    for i in range(n):
+        a = base + 2 * np.pi * i / n + rng.uniform(-0.25, 0.25)
+        L = s / 2 * rng.uniform(0.75, 1.0)
+        bend = rng.uniform(-0.25, 0.25)
+        t = np.linspace(0, 1, 9)
+        ang = a + bend * t ** 2
+        cx, cy = np.cos(ang) * L * t, np.sin(ang) * L * t
+        wdt = s * 0.07 * np.sin(np.pi * np.clip(t * 1.1, 0, 1)) + 1e-3
+        nx, ny = -np.sin(ang), np.cos(ang)
+        left = np.stack([cx + nx * wdt, cy + ny * wdt], 1)
+        right = np.stack([cx - nx * wdt, cy - ny * wdt], 1)[::-1]
+        frond = Polygon(np.vstack([left, right])).buffer(0)
+        if frond.is_empty:
+            continue
+        parts.append((frond, "palm_dark" if i % 3 == 0 else "palm", INK_FINE * 0.7))
+        parts.append((LineString(np.stack([cx, cy], 1)), None, DETAIL * 0.8))
+        for k in (3, 5, 7):
+            parts.append((LineString([(cx[k], cy[k]), (cx[k] + nx[k] * wdt[k] * 0.9 + np.cos(ang[k]) * wdt[k],
+                                                        cy[k] + ny[k] * wdt[k] * 0.9 + np.sin(ang[k]) * wdt[k])]), None, DETAIL * 0.6))
+    parts.append((SPoint(0, 0).buffer(s * 0.06), "palm_dark", INK_FINE))
+    return parts
+
+
 MARKERS = {"peak", "city", "town", "village", "ruin_marker"}
 
 PROPS = {"table": (p_table, 4.0), "round_table": (p_round_table, 4.0), "chair": (p_chair, 1.5),
@@ -525,7 +618,7 @@ PROPS = {"table": (p_table, 4.0), "round_table": (p_round_table, 4.0), "chair": 
          "city": (p_city, 1.6), "town": (p_town, 1.1), "village": (p_village, 0.7), "ruin_marker": (p_ruin_marker, 0.9),
          "conifer": (p_conifer, 1.5), "card_table": (p_card_table, 5.0), "dice_table": (p_dice_table, 6.0),
          "wheel": (p_wheel, 4.0), "counter": (p_counter, 10.0), "stool": (p_stool, 1.2), "shelf": (p_shelf, 6.0),
-         "hearth": (p_hearth, 5.0)}
+         "hearth": (p_hearth, 5.0), "clutter": (p_clutter, 3.0), "sack": (p_sack, 2.0), "boards": (p_boards, 8.0), "palm": (p_palm, 10.0)}
 
 PropKind = Literal[tuple(PROPS)]  # type: ignore[valid-type]
 
@@ -617,7 +710,7 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     s = size or default
     if kind in MARKERS:
         shadow = 0.0
-    if kind == "tree":
+    if kind in ("tree", "palm"):
         rotate = 0.0          # its shading crescent must stay south-east (light from the north-west)
     rng = np.random.default_rng(seed)
     parts = fn(s, rng)
@@ -629,7 +722,7 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     solid = [g for g, ck, _ in placed if ck and g.geom_type in ("Polygon", "MultiPolygon")]
     foot = shapely.unary_union(solid) if solid else Polygon()
     if shadow > 0 and not foot.is_empty:
-        off = s * (0.1 if kind in ("tree", "bush") else 0.06) + 0.15
+        off = s * (0.1 if kind in ("tree", "bush", "palm") else 0.06) + 0.15
         sh = affinity.translate(foot, off, off * 1.1)
         p = rasterize_patch(ctx.frame, sh.buffer(s * 0.03))
         if p is not None:
