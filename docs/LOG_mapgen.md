@@ -463,3 +463,11 @@ Measured against the concept:
 The cast now matches; the value range is still narrower than the concept's.
 
 **Speed.** A profile of the tavern draft put 58% of the time in `stroke`. `shapely.ops.substring` walks the line from its start for every dash, so dashed strokes on long, dense outlines (forest-edge halos, paths) went quadratic. `_Cutter` in `paint.py` cuts every dash in one linear pass and matches `substring` to 1e-9.
+
+### Revision 3, same day
+
+The owner asked for a lighter tavern, even walkways and logical connections; that was PR #41. Then: "more like one structure tacked together; they're very separate now".
+- The wings are now cut in age order along the older walls, with shared walls and one doorway through each join. The secret door to the back shed stays.
+- Only the cabin stands apart, over planks and mud.
+
+Coast: white `beach_sand` and no dunes; the owner says the dunes lie further inland, out of this shot. Rocks are rare and only at the water.

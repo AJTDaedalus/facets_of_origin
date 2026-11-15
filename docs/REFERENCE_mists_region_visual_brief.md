@@ -29,7 +29,8 @@ adds any.
    source blow out a little.
 3. **One light source per map,** placed off one edge: a broad radial glow, plus mist that is brighter
    on that side.
-4. **Dark dunes inland,** hatched heavily, with the pale beach only at the waterline.
+4. **White sand on the beach** (`beach_sand`). The dark dunes lie further inland (owner, 2026-11-15), so they
+   belong only on inland maps (`dunes` macro), never on a beach map.
 5. **Rough sea:** whitecaps across the whole sea and a wider band of broken surf.
 6. **Black timber:** stake lines, palisades, leaning poles, piers on pilings into the surf, posts awash.
    Palms at the back of the beach.

@@ -17,6 +17,7 @@ palette:
 
 materials:
   ash_sand:  {type: dirt, colors: ["#7f8884", "#949d98", "#a8b0ab"], scale: 8, octaves: 5, grain: 0.07, speckle: 0.09, speckle_color: "#535b58"}
+  beach_sand: {type: dirt, colors: ["#bcc4bf", "#ccd3cf", "#dbe1dd"], scale: 9, octaves: 5, grain: 0.06, speckle: 0.07, speckle_color: "#7f8884"}
   wet_ash:   {type: dirt, colors: ["#a2aca7", "#b4bdb8", "#c6cec9"], scale: 6, octaves: 4, grain: 0.05, speckle: 0.05}
   dune_dark: {type: dirt, colors: ["#262b2a", "#343a38", "#444b48"], scale: 6, octaves: 5, grain: 0.08, speckle: 0.08, speckle_color: "#151918"}
   grey_sea:  {type: water, shallow: "#8a9a95", deep: "#373f3d", depth: 12, ripples: 2.2, ripple_color: "#c8d2cd", grain: 0.05}

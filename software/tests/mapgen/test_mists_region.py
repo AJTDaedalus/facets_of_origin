@@ -30,7 +30,7 @@ class TestRegionStyle:
     def test_includes_the_parchment_style(self):
         assert "stone_room" in STYLE["macros"] and "flagstone" in STYLE["materials"]
 
-    @pytest.mark.parametrize("m", ["ash_sand", "wet_ash", "dune_dark", "grey_sea"])
+    @pytest.mark.parametrize("m", ["ash_sand", "beach_sand", "wet_ash", "dune_dark", "grey_sea"])
     def test_materials_are_near_grey_and_never_cyan(self, m):
         c = canvas([{"op": "fill", "material": m, "id": "f"}])
         r, g, b = c.reshape(-1, 3).mean(0)

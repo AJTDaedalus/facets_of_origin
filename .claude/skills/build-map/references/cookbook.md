@@ -182,9 +182,15 @@ Full example: `maps/recipes/painted_lantern.map.yaml`.
   - Draw each wing straight, then knock it askew by 5-15°. Use the `transform` op, or compute the
     points, then place props in the wing's own coordinates and rotate them the same way.
   - Give wings bump-outs, slanted sides and lean-tos, never plain rectangles.
-  - Join wings with crooked plank passages (`path` floors walled with `exclude` = the wings grown by
-    the wall thickness), or with **plank walks over mud**: a door in each wall, a `mud` strip with
-    puddles (noise ∩ mud filled with `water`), and a `boards` prop from door to door.
+  - **Tack newer wings onto older ones** (owner, 2026-11-15: "one structure tacked together", not
+    separate buildings). Work oldest first. Each newer wing reaches into the one it joins (add an
+    extension if needed), and is cut along everything older (`difference` with each older floor grown
+    by its wall thickness). Then wall it with `exclude` set to the older floors grown the same way, so
+    each join is the older building's wall alone. Put one `opening` (or `secret_door`) through that wall
+    at the join, and check it lands in a common space (corridor, landing, aisle, taproom), never in
+    someone's room.
+  - Keep a separate outbuilding for a **plank walk over mud**: a door in each wall, a `mud` strip with
+    puddles (noise ∩ mud filled with `water`), and a `boards` prop laid square from door to door.
   - Pack tables by random rejection sampling (minimum spacing, keep-outs round rugs and bars), with
     random rotation, and shove the odd stool back.
   - `scatter` `clutter` over every floor, plus `sack`, crates and barrels in heaps. Add patch planks
