@@ -113,6 +113,19 @@ Mask → polygons (marching squares at `level`), simplified by `simplify` feet; 
 | `simplify` | float | `0.15` |
 | `min_area` | float | `1.0` |
 
+### `transform` → Geometry
+
+Scale, skew [x°, y°], rotate (degrees, clockwise on the map since y runs south) about `about` (default: the shape's centroid), then `move` [dx, dy] feet. Knocks a wing askew so an add-on doesn't line up with the building it's bolted to.
+
+| param | type | default |
+|---|---|---|
+| `src` | str | **required** |
+| `rotate` | float | `0.0` |
+| `about` | Optional[Annotated[list[float], FieldInfo(annotation=None, required=True, metadata=[MinLen(min_length=2), MaxLen(max_length=2)])]] | — |
+| `move` | list[float] | `[0.0, 0.0]` |
+| `scale` | float | `1.0` |
+| `skew` | list[float] | `[0.0, 0.0]` |
+
 ### `union` → Geometry
 
 Union of several geometries.
@@ -517,6 +530,20 @@ Darken towards the corners.
 
 ## Semantic
 
+### `darkness` → paints in place
+
+Darken the map by `strength` (multiplied toward `color`), except in pools round every `light` placed before this step: each pool reaches `pool` × the light's range and fades out smoothly, scaled by its intensity. `mask` limits where it falls (e.g. indoors only). `warmth` tints the pools with `warm`. Mark it `atmosphere: true`. Gives a lamp-lit room with dark corners; the VTT lights are unchanged.
+
+| param | type | default |
+|---|---|---|
+| `into` | str | `"canvas"` |
+| `strength` | float | `0.6` |
+| `color` | Any | `"#14101a"` |
+| `pool` | float | `0.5` |
+| `mask` | str \| None | — |
+| `warm` | Any | `"#ffb060"` |
+| `warmth` | float | `0.0` |
+
 ### `door` → paints in place
 
 A door in a named wall, snapped to the wall edge nearest `at` (default 5 ft wide = one square... use 3–5). Draws a door leaf across the wall, cuts the LOS and emits a portal.
@@ -706,31 +733,32 @@ Mask of the props drawn so far: all of them, or only those from the steps whose 
 | param | type | default |
 |---|---|---|
 | `of` | list[str] | `PydanticUndefined` |
-| `kinds` | list[Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer']] | `PydanticUndefined` |
+| `kinds` | list[Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer', 'card_table', 'dice_table', 'wheel', 'counter', 'stool', 'shelf', 'hearth', 'clutter', 'sack', 'boards', 'palm']] | `PydanticUndefined` |
 | `grow` | float | `0.0` |
 
 ### `prop` → paints in place
 
-Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east.
+Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east. `colors` ({part: colour}) repaints named parts for this step only, e.g. `{felt: "#8a2030", rug: cloth}` (part names: wood, wood_light, wood_dark, cloth, linen, metal, rug, rug_trim, felt, chip, fire, stone...).
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
-| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer'] | **required** |
+| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer', 'card_table', 'dice_table', 'wheel', 'counter', 'stool', 'shelf', 'hearth', 'clutter', 'sack', 'boards', 'palm'] | **required** |
 | `at` | list[float] | **required** |
 | `size` | Optional[Annotated[float, FieldInfo(annotation=None, required=True, metadata=[Gt(gt=0)])]] | — |
 | `rotate` | float | `0.0` |
 | `shadow` | float | `0.35` |
 | `ink` | Any | `"ink"` |
+| `colors` | dict[str, Any] | `{}` |
 
 ### `scatter` → paints in place
 
-Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly.
+Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly. `colors` repaints named parts of every prop, as for `prop`.
 
 | param | type | default |
 |---|---|---|
 | `into` | str | `"canvas"` |
-| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer'] | **required** |
+| `kind` | Literal['table', 'round_table', 'chair', 'bed', 'bunk', 'crate', 'barrel', 'chest', 'rubble', 'pebbles', 'stalagmite', 'boulder', 'tree', 'bush', 'bridge', 'brazier', 'pillar', 'statue', 'rug', 'banner', 'mountain', 'hill', 'peak', 'city', 'town', 'village', 'ruin_marker', 'conifer', 'card_table', 'dice_table', 'wheel', 'counter', 'stool', 'shelf', 'hearth', 'clutter', 'sack', 'boards', 'palm'] | **required** |
 | `mask` | str \| None | — |
 | `region` | list[Annotated[list[float], FieldInfo(annotation=None, required=True, metadata=[MinLen(min_length=2), MaxLen(max_length=2)])]] \| None | — |
 | `avoid` | list[str] | `[]` |
@@ -741,6 +769,7 @@ Scatter props by Poisson disk inside a mask and/or a region polygon: `density` p
 | `rotate_jitter` | float | `180.0` |
 | `shadow` | float | `0.35` |
 | `sort_y` | bool | `False` |
+| `colors` | dict[str, Any] | `{}` |
 
 
 ## Overlay
@@ -993,6 +1022,11 @@ Params: none
 | `cave_floor` | dirt |
 | `cave_rock` | ramp_noise |
 | `wood_floor` | planks |
+| `wood_floor_rough` | planks |
+| `wall_timber` | ramp_noise |
+| `wall_wattle` | dirt |
+| `rushes` | grass |
+| `mud` | dirt |
 | `cobble` | cobble |
 | `grass` | grass |
 | `meadow` | grass |

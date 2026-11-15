@@ -26,6 +26,15 @@ the source: never edit a rendered PNG. Design: `docs/DESIGN_mapgen.md`.
 4. **Where files go.** Adventure maps: `<adventure>/maps/recipes/<name>.map.yaml`.
    Generic maps: `maps/recipes/<name>.map.yaml`. Outputs land in a `mapgen/`
    folder beside the recipe and are git-ignored (they rebuild from the recipe).
+5. **Gap check (every brief).** List each concept the brief needs: surfaces, structures,
+   props, colour schemes, effects, moods. Check each against `ops.md`, the style's
+   materials and palette, the prop kinds and `cookbook.md`. If something is missing or can
+   only be faked badly, **extend the toolset first**. That might be a new material (in
+   the style, or recipe-level if it's one-off), a prop kind, an op or param, or a cookbook
+   pattern. Each extension needs tests (TDD) and a regenerated `ops.md`. Expanding the
+   cookbook and materials is a normal part of this workflow, not scope creep. Do it
+   without asking unless it changes existing renders (golden diffs) or the shared style's
+   look.
 
 ## The loop
 
@@ -55,6 +64,9 @@ Run everything from `software/`.
 6. **Report:** the recipe path, the PNG and `.dd2vtt` paths, the metric line,
    your rubric scores, and the defects you couldn't fix. For a canon map, also
    list every feature with its source line, plus anything you left out pending a ruling.
+   List what the gap check added: new materials, props, ops, params and cookbook entries.
+7. **Cookbook:** after every map, add any new pattern that worked (a technique, a
+   material recipe, a layout trick) to `cookbook.md`, with the recipe as the full example.
 
 ## Rules of thumb
 

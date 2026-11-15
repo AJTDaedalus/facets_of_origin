@@ -79,14 +79,30 @@ def rasterize_patch(frame, g, line_width_ft: float = 0.5) -> Patch | None:
     if len(polys) > 1 and any(len(pg.interiors) for pg in polys):
         # each part on its own layer, combined by max, so a later part's hole can't erase
         # an island drawn earlier (shapely does not guarantee part order)
+        # Parts without holes only ever add coverage, so they go straight in. Each holed part gets a layer
+        # the size of its own bounding box (not the whole patch: thousands of full-size layers made one
+        # meadow outline take a minute and a half).
         from PIL import ImageChops
+        holed = []
         for pg in polys:
-            layer = PImage.new("L", img.size, 0)
+            if pg.interiors:
+                holed.append(pg)
+            else:
+                d.polygon(ring(pg.exterior.coords), fill=255)
+        for pg in holed:
+            ext = ring(pg.exterior.coords)
+            xs, ys = [q[0] for q in ext], [q[1] for q in ext]
+            bx0, by0 = max(int(np.floor(min(xs))) - 2, 0), max(int(np.floor(min(ys))) - 2, 0)
+            bx1, by1 = min(int(np.ceil(max(xs))) + 3, img.size[0]), min(int(np.ceil(max(ys))) + 3, img.size[1])
+            if bx1 <= bx0 or by1 <= by0:
+                continue
+            layer = PImage.new("L", (bx1 - bx0, by1 - by0), 0)
             ld = ImageDraw.Draw(layer)
-            ld.polygon(ring(pg.exterior.coords), fill=255)
+            ld.polygon([(x - bx0, y - by0) for x, y in ext], fill=255)
             for hole in pg.interiors:
-                ld.polygon(ring(hole.coords), fill=0)
-            img = ImageChops.lighter(img, layer)
+                ld.polygon([(x - bx0, y - by0) for x, y in ring(hole.coords)], fill=0)
+            box_ = (bx0, by0, bx1, by1)
+            img.paste(ImageChops.lighter(img.crop(box_), layer), box_)
     else:
         for pg in polys:
             d.polygon(ring(pg.exterior.coords), fill=255)

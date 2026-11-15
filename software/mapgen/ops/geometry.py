@@ -5,7 +5,7 @@ from typing import Literal
 
 import numpy as np
 import shapely
-from pydantic import Field as PField
+from pydantic import Field as PField, model_validator
 from shapely import affinity
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Point as SPoint, Polygon, box
 
@@ -145,6 +145,40 @@ class OffsetP(ParamModel):
 def offset(ctx, p, src):
     """Grow (by > 0) or shrink (by < 0) a geometry by `by` feet."""
     return Geometry(src.geom.buffer(p.by, join_style=JOIN[p.join], mitre_limit=5.0, quad_segs=16))
+
+
+class TransformP(ParamModel):
+    src: Ref
+    rotate: float = 0.0
+    about: Point | None = None
+    move: Point = [0.0, 0.0]
+    scale: float = PField(1.0, gt=0)
+    skew: Point = [0.0, 0.0]
+
+    @model_validator(mode="after")
+    def _sane_skew(self):
+        ax, ay = (np.radians(a) for a in self.skew)
+        if max(abs(self.skew[0]), abs(self.skew[1])) > 75 or abs(1 - np.tan(ax) * np.tan(ay)) < 0.1:
+            raise ValueError("skew angles must stay within ±75° and not flatten the shape (tan x · tan y near 1)")
+        return self
+
+
+@op("transform", params=TransformP, inputs={"src": Geometry}, output=Geometry, group="1 geometry")
+def transform(ctx, p, src):
+    """Scale, skew [x°, y°], rotate (degrees, clockwise on the map since y runs south) about `about` (default: the shape's centroid), then `move` [dx, dy] feet. Knocks a wing askew so an add-on doesn't line up with the building it's bolted to."""
+    g = src.geom
+    if g.is_empty:
+        return Geometry(g)
+    o = tuple(p.about) if p.about else g.centroid.coords[0]
+    if p.scale != 1:
+        g = affinity.scale(g, p.scale, p.scale, origin=o)
+    if p.skew != [0.0, 0.0]:
+        g = affinity.skew(g, p.skew[0], p.skew[1], origin=o)
+    if p.rotate:
+        g = affinity.rotate(g, p.rotate, origin=o)
+    if p.move != [0.0, 0.0]:
+        g = affinity.translate(g, p.move[0], p.move[1])
+    return Geometry(g)
 
 
 class RoughenGeomP(ParamModel):

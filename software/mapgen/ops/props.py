@@ -23,12 +23,14 @@ COLORS = {"wood": "#8a6440", "wood_light": "#a77f55", "wood_dark": "#5e412a", "c
           "linen": "#e8e0cc", "metal": "#77736c", "stone_light": "#c2bbad", "stone": "#9d968a",
           "stone_dark": "#6f695f", "foliage": "#4c5a44", "foliage_light": "#66755c",
           "foliage_dark": "#2f4722", "foliage_top": "#8a977a", "fire": "#f0a040", "rug": "#7b3f3a", "rug_trim": "#c9a45c",
+          "felt": "#2f6b4a", "chip": "#c9a45c", "bottle": "#3d5a3a", "spill": "#4a1e22", "sack": "#9a8560",
+          "palm": "#3b4a33", "palm_dark": "#1f281b",
           "upland_light": "#e3d3a6", "upland_dark": "#a9925f", "ink_fill": "#1c1814",
           "mtn_light": "#cfc2ae", "mtn_dark": "#7d6a58"}
 
 INK_FINE, INK_MED = 0.1, 0.16
 DETAIL = 0.075            # detail lines (staves, boards, folds, cracks): at least a pixel at VTT scale
-NO_AUTO_SHADE = {"tree", "rug", "banner", "pebbles", "rubble", "mountain", "hill"}   # flat, or shades itself
+NO_AUTO_SHADE = {"tree", "rug", "banner", "pebbles", "rubble", "mountain", "hill", "clutter", "palm"}   # flat, or shades itself
 
 
 def _blob(r, lobes, rng, rough=0.18, n=64):
@@ -420,6 +422,191 @@ def p_conifer(s, rng):
     return [(Polygon(pts), "foliage", INK_FINE)]
 
 
+# ---- tavern, gaming and shop props (2026-11-15)
+def p_card_table(s, rng):
+    """Round card table: wood rim, felt top, a scatter of cards and a couple of chip stacks."""
+    parts = [(SPoint(0, 0).buffer(s / 2), "wood", INK_MED), (SPoint(0, 0).buffer(s * 0.4), "felt", INK_FINE)]
+    for _ in range(int(rng.integers(3, 6))):
+        a, r = rng.uniform(0, 2 * np.pi), rng.uniform(0.05, 0.25) * s
+        card = affinity.rotate(box(-s * 0.045, -s * 0.065, s * 0.045, s * 0.065), rng.uniform(0, 180))
+        parts.append((affinity.translate(card, np.cos(a) * r, np.sin(a) * r), "linen", DETAIL))
+    for _ in range(int(rng.integers(2, 4))):
+        a, r = rng.uniform(0, 2 * np.pi), rng.uniform(0.15, 0.3) * s
+        parts.append((SPoint(np.cos(a) * r, np.sin(a) * r).buffer(s * 0.035), "chip", DETAIL))
+    return parts
+
+
+def p_dice_table(s, rng):
+    """Oblong dice table: a raised wood rail round a felt bed with a pass line and a pair of dice."""
+    w, h = s / 2, s * 0.25
+    rail = box(-w, -h, w, h)
+    felt = box(-w + s * 0.06, -h + s * 0.06, w - s * 0.06, h - s * 0.06)
+    line = box(-w + s * 0.14, -h + s * 0.13, w - s * 0.14, h - s * 0.13).exterior
+    parts = [(rail, "wood", INK_MED), (felt, "felt", INK_FINE), (line, None, DETAIL)]
+    for _ in range(2):
+        x, y = rng.uniform(-0.25, 0.25) * s, rng.uniform(-0.06, 0.06) * s
+        die = affinity.rotate(box(-s * 0.025, -s * 0.025, s * 0.025, s * 0.025), rng.uniform(0, 90))
+        parts.append((affinity.translate(die, x, y), "linen", DETAIL))
+    return parts
+
+
+WHEEL_COLORS = ("cloth", "rug_trim", "felt", "linen")
+
+
+def p_wheel(s, rng):
+    """A wheel of chance seen from above: painted wedges in a dark rim, a metal hub and a pointer."""
+    r = s * 0.45
+    parts = [(SPoint(0, 0).buffer(s / 2), "wood_dark", INK_MED)]
+    n = 12
+    for i in range(n):
+        a0, a1 = 2 * np.pi * i / n, 2 * np.pi * (i + 1) / n
+        arc = [(np.cos(a) * r, np.sin(a) * r) for a in np.linspace(a0, a1, 6)]
+        parts.append((Polygon([(0, 0)] + arc), WHEEL_COLORS[i % len(WHEEL_COLORS)], DETAIL))
+    parts.append((SPoint(0, 0).buffer(s * 0.08), "metal", INK_FINE))
+    parts.append((Polygon([(0, -s * 0.38), (-s * 0.05, -s * 0.52), (s * 0.05, -s * 0.52)]), "ink_fill", DETAIL))
+    return parts
+
+
+def p_counter(s, rng):
+    """A long bar or shop counter `s` feet long, up to 2.5 ft deep, with grain, a front lip and a few mugs."""
+    d = min(2.5, s * 0.25)
+    top = box(-s / 2, -d / 2, s / 2, d / 2)
+    parts = [(top, "wood_dark", INK_MED),
+             (LineString([(-s / 2, d / 2 - d * 0.18), (s / 2, d / 2 - d * 0.18)]), None, INK_FINE * 0.7)]
+    parts += _grain(-s / 2, -d / 2, s / 2, d / 2 - d * 0.18, rng, n=3)
+    for x in np.sort(rng.uniform(-0.42, 0.42, size=int(rng.integers(2, 5)))) * s:
+        parts.append((SPoint(x, -d * 0.1).buffer(d * 0.12), "metal", INK_FINE))
+    return parts
+
+
+def p_stool(s, rng):
+    return [(SPoint(0, 0).buffer(s / 2), "wood_light", INK_FINE), (SPoint(0, 0).buffer(s * 0.3).exterior, None, DETAIL)]
+
+
+GOODS_COLORS = ("cloth", "rug_trim", "felt", "linen", "chip", "metal")
+
+
+def p_shelf(s, rng):
+    """A shop shelf `s` feet long with a row of goods in mixed colours: boxes, bolts and jars."""
+    d = s * 0.2
+    parts = [(box(-s / 2, -d / 2, s / 2, d / 2), "wood", INK_MED)]
+    k = int(np.clip(s / 0.9, 3, 14))
+    order = list(rng.permutation(len(GOODS_COLORS)))
+    slot = s / k
+    for i in range(k):
+        cx = -s / 2 + slot * (i + 0.5)
+        key = GOODS_COLORS[order[i % len(order)]]
+        if rng.random() < 0.4:
+            g = SPoint(cx, 0).buffer(min(slot, d) * 0.32)
+        else:
+            g = box(cx - slot * 0.36, -d * 0.32, cx + slot * 0.36, d * 0.32)
+        parts.append((g, key, DETAIL))
+    return parts
+
+
+def p_hearth(s, rng):
+    """A stone hearth: a block of stone with a dark firebox and flames, joints drawn in."""
+    w, h = s / 2, s * 0.3
+    parts = [(box(-w, -h, w, h), "stone", INK_MED), (box(-w * 0.6, -h * 0.55, w * 0.6, h * 0.7), "ink_fill", INK_FINE)]
+    parts.append((Polygon([(np.cos(a) * w * 0.45, h * 0.15 + np.sin(a) * h * 0.4)
+                           for a in np.linspace(0, 2 * np.pi, 24, endpoint=False)]), "fire", 0))
+    for x in np.linspace(-w, w, 5)[1:-1]:
+        parts.append((LineString([(x, -h), (x, -h * 0.55)]), None, DETAIL))
+    return parts
+
+
+def p_clutter(s, rng):
+    """A random handful of small things dropped within `s` feet: mugs, bottles, cards, coins, a spill."""
+    r = s / 2
+    parts = []
+    def spot(margin):
+        a, d = rng.uniform(0, 2 * np.pi), rng.uniform(0, 1) ** 0.5 * max(r - margin, 0)
+        return np.cos(a) * d, np.sin(a) * d
+    if rng.random() < 0.6:                                   # a spill under everything
+        x, y = spot(r * 0.35)
+        sp = affinity.rotate(affinity.scale(SPoint(x, y).buffer(r * 0.3), 1.4, 0.8), rng.uniform(0, 180))
+        parts.append((sp.intersection(SPoint(0, 0).buffer(r)), "spill", 0))
+    u = max(s, 0.3) / 4                                      # item scale
+    for _ in range(int(rng.integers(4, 9))):
+        kind = rng.choice(["mug", "bottle", "card", "coin"], p=[0.3, 0.25, 0.3, 0.15])
+        if kind == "mug":
+            x, y = spot(u * 0.2)
+            parts += [(SPoint(x, y).buffer(u * 0.18), "metal", DETAIL), (SPoint(x, y).buffer(u * 0.09), "ink_fill", 0)]
+        elif kind == "bottle":
+            x, y = spot(u * 0.35)
+            b = affinity.rotate(box(x - u * 0.3, y - u * 0.09, x + u * 0.3, y + u * 0.09), rng.uniform(0, 180), origin=(x, y))
+            parts.append((b, "bottle", DETAIL))
+        elif kind == "card":
+            x, y = spot(u * 0.2)
+            c = affinity.rotate(box(x - u * 0.12, y - u * 0.17, x + u * 0.12, y + u * 0.17), rng.uniform(0, 180), origin=(x, y))
+            parts.append((c, "linen", DETAIL))
+        else:
+            x, y = spot(u * 0.1)
+            parts.append((SPoint(x, y).buffer(u * 0.07), "chip", 0))
+    return [(g, ck, iw) for g, ck, iw in parts if not g.is_empty and g.is_valid]
+
+
+def p_sack(s, rng):
+    """A lumpy sack, tied at the neck."""
+    n = 18
+    a = np.linspace(0, 2 * np.pi, n, endpoint=False)
+    rr = s / 2 * (0.82 + 0.18 * rng.uniform(-1, 1, n)) * (1 - 0.15 * np.cos(2 * a))
+    body = Polygon(np.stack([np.cos(a) * rr * 0.75, np.sin(a) * rr], axis=1)).buffer(0)
+    tie = LineString([(-s * 0.12, -s * 0.3), (s * 0.12, -s * 0.3)])
+    fold = LineString([(-s * 0.1, -s * 0.1), (s * 0.05, s * 0.2)])
+    return [(body, "sack", INK_FINE), (tie, None, DETAIL), (fold, None, DETAIL)]
+
+
+def p_boards(s, rng):
+    """A few loose planks, `s` feet long, laid side by side across a gap: near enough square, a little ragged at the ends."""
+    n = int(rng.integers(3, 6))
+    w = min(0.9, s * 0.12)
+    parts = []
+    y = -(n - 1) * w * 0.5
+    keys = ["wood", "wood_light", "wood_dark"]
+    for i in range(n):
+        L = s * rng.uniform(0.93, 1.0)
+        x0 = rng.uniform(-s / 2, s / 2 - L)
+        bw = w * rng.uniform(0.88, 1.02)
+        pl = box(x0, y - bw / 2, x0 + L, y + bw / 2)
+        pl = affinity.rotate(pl, rng.uniform(-1.2, 1.2), origin=(x0 + L / 2, y))
+        parts.append((pl, keys[int(rng.integers(0, 3))], INK_FINE))
+        parts += _grain(x0 + L * 0.05, y - bw * 0.3, x0 + L * 0.95, y + bw * 0.3, rng, n=1, knots=False)
+        for xn in (x0 + L * 0.06, x0 + L * 0.94):
+            parts.append((SPoint(xn, y).buffer(w * 0.06), "ink_fill", 0))
+        y += w * rng.uniform(0.97, 1.05)
+    return parts
+
+
+def p_palm(s, rng):
+    """A palm seen from above: long thin fronds radiating from a dark crown, each with a midrib and a few
+    leaflet strokes. Like a tree, its shading always sits south-east."""
+    n = int(rng.integers(7, 11))
+    parts = []
+    base = rng.uniform(0, 2 * np.pi)
+    for i in range(n):
+        a = base + 2 * np.pi * i / n + rng.uniform(-0.25, 0.25)
+        L = s / 2 * rng.uniform(0.75, 1.0)
+        bend = rng.uniform(-0.25, 0.25)
+        t = np.linspace(0, 1, 9)
+        ang = a + bend * t ** 2
+        cx, cy = np.cos(ang) * L * t, np.sin(ang) * L * t
+        wdt = s * 0.07 * np.sin(np.pi * np.clip(t * 1.1, 0, 1)) + 1e-3
+        nx, ny = -np.sin(ang), np.cos(ang)
+        left = np.stack([cx + nx * wdt, cy + ny * wdt], 1)
+        right = np.stack([cx - nx * wdt, cy - ny * wdt], 1)[::-1]
+        frond = Polygon(np.vstack([left, right])).buffer(0)
+        if frond.is_empty:
+            continue
+        parts.append((frond, "palm_dark" if i % 3 == 0 else "palm", INK_FINE * 0.7))
+        parts.append((LineString(np.stack([cx, cy], 1)), None, DETAIL * 0.8))
+        for k in (3, 5, 7):
+            parts.append((LineString([(cx[k], cy[k]), (cx[k] + nx[k] * wdt[k] * 0.9 + np.cos(ang[k]) * wdt[k],
+                                                        cy[k] + ny[k] * wdt[k] * 0.9 + np.sin(ang[k]) * wdt[k])]), None, DETAIL * 0.6))
+    parts.append((SPoint(0, 0).buffer(s * 0.06), "palm_dark", INK_FINE))
+    return parts
+
+
 MARKERS = {"peak", "city", "town", "village", "ruin_marker"}
 
 PROPS = {"table": (p_table, 4.0), "round_table": (p_round_table, 4.0), "chair": (p_chair, 1.5),
@@ -429,12 +616,22 @@ PROPS = {"table": (p_table, 4.0), "round_table": (p_round_table, 4.0), "chair": 
          "brazier": (p_brazier, 2.0), "pillar": (p_pillar, 2.5), "statue": (p_statue, 5.0), "rug": (p_rug, 8.0),
          "banner": (p_banner, 4.0), "mountain": (p_mountain, 4.0), "hill": (p_hill, 3.0), "peak": (p_peak, 1.2),
          "city": (p_city, 1.6), "town": (p_town, 1.1), "village": (p_village, 0.7), "ruin_marker": (p_ruin_marker, 0.9),
-         "conifer": (p_conifer, 1.5)}
+         "conifer": (p_conifer, 1.5), "card_table": (p_card_table, 5.0), "dice_table": (p_dice_table, 6.0),
+         "wheel": (p_wheel, 4.0), "counter": (p_counter, 10.0), "stool": (p_stool, 1.2), "shelf": (p_shelf, 6.0),
+         "hearth": (p_hearth, 5.0), "clutter": (p_clutter, 3.0), "sack": (p_sack, 2.0), "boards": (p_boards, 8.0), "palm": (p_palm, 10.0)}
 
 PropKind = Literal[tuple(PROPS)]  # type: ignore[valid-type]
 
 
-def _color(ctx, key):
+def _color(ctx, key, colors=None):
+    if colors and key in colors:                   # a step's own colours win over the palette
+        val = colors[key]
+        try:
+            return resolve_color(ctx.style, val)
+        except RecipeError:
+            if isinstance(val, str) and val in COLORS:  # a prop part name (cloth, wood_dark...) works too
+                return resolve_color(ctx.style, COLORS[val])
+            raise
     try:
         return resolve_color(ctx.style, key)
     except RecipeError:
@@ -514,12 +711,12 @@ def _merge_line_runs(placed):
     return out
 
 
-def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, ink="ink", record=True):
+def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, ink="ink", record=True, colors=None):
     fn, default = PROPS[kind]
     s = size or default
     if kind in MARKERS:
         shadow = 0.0
-    if kind == "tree":
+    if kind in ("tree", "palm"):
         rotate = 0.0          # its shading crescent must stay south-east (light from the north-west)
     rng = np.random.default_rng(seed)
     parts = fn(s, rng)
@@ -531,7 +728,7 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     solid = [g for g, ck, _ in placed if ck and g.geom_type in ("Polygon", "MultiPolygon")]
     foot = shapely.unary_union(solid) if solid else Polygon()
     if shadow > 0 and not foot.is_empty:
-        off = s * (0.1 if kind in ("tree", "bush") else 0.06) + 0.15
+        off = s * (0.1 if kind in ("tree", "bush", "palm") else 0.06) + 0.15
         sh = affinity.translate(foot, off, off * 1.1)
         p = rasterize_patch(ctx.frame, sh.buffer(s * 0.03))
         if p is not None:
@@ -549,7 +746,7 @@ def draw_prop(ctx, img, kind, at, size=None, rotate=0.0, seed=0, shadow=0.35, in
     placed = _merge_line_runs(placed)
     for g, ck, iw in placed:
         if ck and g.geom_type in ("Polygon", "MultiPolygon"):
-            c = _facet_tone(_color(ctx, ck[6:]), g, at) if ck.startswith("facet:") else _color(ctx, ck)
+            c = _facet_tone(_color(ctx, ck[6:], colors), g, at) if ck.startswith("facet:") else _color(ctx, ck, colors)
             composite_patch(img, rasterize_patch(ctx.frame, g), c[:3], float(c[3]))
             if iw and kind not in NO_AUTO_SHADE and kind not in MARKERS:   # outlined parts only
                 hatch = shade_crescent(g)
@@ -573,12 +770,13 @@ class PropP(ParamModel):
     rotate: float = 0.0
     shadow: Unit = 0.35
     ink: Any = "ink"
+    colors: dict[str, Any] = {}
 
 
 @op("prop", params=PropP, inputs={"into": Image}, group="6 props")
 def prop(ctx, p, into):
-    """Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east."""
-    draw_prop(ctx, into.data, p.kind, p.at, p.size, p.rotate, ctx.seed, p.shadow, p.ink)
+    """Place one prop at `at` (feet), `size` feet across its long side, rotated `rotate` degrees, with a soft cast shadow. Trees ignore `rotate`: their shading always sits south-east. `colors` ({part: colour}) repaints named parts for this step only, e.g. `{felt: "#8a2030", rug: cloth}` (part names: wood, wood_light, wood_dark, cloth, linen, metal, rug, rug_trim, felt, chip, fire, stone...)."""
+    draw_prop(ctx, into.data, p.kind, p.at, p.size, p.rotate, ctx.seed, p.shadow, p.ink, colors=p.colors)
 
 
 def poisson_disk(bounds, r, rng, k=20):
@@ -639,11 +837,12 @@ class ScatterP(ParamModel):
     rotate_jitter: float = PField(180.0, ge=0, le=360)
     shadow: Unit = 0.35
     sort_y: bool = False
+    colors: dict[str, Any] = {}
 
 
 @op("scatter", params=ScatterP, inputs={"into": Image, "mask": Mask, "avoid": Mask}, group="6 props")
 def scatter(ctx, p, into, mask=None, avoid=None):
-    """Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly."""
+    """Scatter props by Poisson disk inside a mask and/or a region polygon: `density` props per grid square, at least `spacing` feet apart, avoiding the `avoid` masks. `sort_y: true` draws north to south so glyphs (mountains, trees) overlap correctly. `colors` repaints named parts of every prop, as for `prop`."""
     fr = ctx.frame
     rng = ctx.rng
     allowed = np.ones(fr.shape, bool) if mask is None else mask.data >= 0.5
@@ -674,7 +873,7 @@ def scatter(ctx, p, into, mask=None, avoid=None):
     for i, (x, y) in enumerate(pts):
         s = base * (1 + rng.uniform(-p.size_jitter, p.size_jitter))
         rot = rng.uniform(-p.rotate_jitter / 2, p.rotate_jitter / 2)
-        draw_prop(ctx, into.data, p.kind, (x, y), s, rot, ctx.seed + 31 * i + 1, p.shadow)
+        draw_prop(ctx, into.data, p.kind, (x, y), s, rot, ctx.seed + 31 * i + 1, p.shadow, colors=p.colors)
     key = ctx.step.id if ctx.step and ctx.step.id else f"#{ctx.index}"
     ctx.collector.scatter_points[key] = [(round(x, 4), round(y, 4)) for x, y in pts]
 

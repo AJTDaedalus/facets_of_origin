@@ -405,6 +405,40 @@ def light(ctx, p, into):
 
 
 
+class DarknessP(ParamModel):
+    into: Ref = "canvas"
+    strength: Unit = 0.6
+    color: Any = "#14101a"
+    pool: float = PField(0.5, gt=0, le=2)
+    mask: Ref | None = None
+    warm: Any = "#ffb060"
+    warmth: Unit = 0.0
+
+
+@op("darkness", params=DarknessP, inputs={"into": Image, "mask": Mask}, group="5 semantic")
+def darkness(ctx, p, into, mask=None):
+    """Darken the map by `strength` (multiplied toward `color`), except in pools round every `light` placed before this step: each pool reaches `pool` × the light's range and fades out smoothly, scaled by its intensity. `mask` limits where it falls (e.g. indoors only). `warmth` tints the pools with `warm`. Mark it `atmosphere: true`. Gives a lamp-lit room with dark corners; the VTT lights are unchanged."""
+    fr = ctx.frame
+    h, w = fr.shape
+    y = (np.arange(h, dtype=np.float32) + 0.5)[:, None] / fr.scale
+    x = (np.arange(w, dtype=np.float32) + 0.5)[None, :] / fr.scale
+    lit = np.zeros((h, w), np.float32)
+    for L in ctx.collector.lights:
+        r = L["range"] * p.pool
+        if r <= 0:
+            continue
+        t = np.clip(1 - np.hypot(x - L["position"][0], y - L["position"][1]) / r, 0, 1)
+        lit = np.maximum(lit, (t * t * (3 - 2 * t)) * L.get("intensity", 1.0) / 0.8)
+    lit = np.clip(lit, 0, 1)
+    where = np.clip(mask.data, 0, 1) if mask is not None else 1.0
+    c = resolve_color(ctx.style, p.color)
+    composite_inplace(into.data, c[:3], (p.strength * (1 - lit) * where).astype(np.float32), "multiply")
+    if p.warmth > 0:
+        wc = resolve_color(ctx.style, p.warm)
+        ring = lit * (1 - lit) * 4                              # strongest part-way out, not a hot centre
+        composite_inplace(into.data, wc[:3], (p.warmth * np.maximum(ring, lit * 0.5) * where).astype(np.float32), "multiply")
+
+
 class WallBandP(ParamModel):
     wall: str
     inset: NonNegFt = 0.0

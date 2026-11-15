@@ -40,6 +40,14 @@ materials:
   cave_rock:      {type: ramp_noise, colors: ["#8f887b", "#a8a193", "#b8b1a3"], scale: 5, octaves: 4, kind: ridged, grain: 0.06}
   wood_floor:     {type: planks, colors: ["#87653f", "#9e7a50", "#ad8a5f"], width: 1.25, length: 7, seam: 0.07,
                    seam_color: "#4a3420", grain: 0.4}
+  wood_floor_rough: {type: planks, colors: ["#7a5a37", "#93714a", "#a9875c"], width: 1.6, length: 5, seam: 0.1,
+                   seam_color: "#3f2c19", grain: 0.6}
+  wall_timber:    {type: ramp_noise, colors: ["#5c4129", "#76563a", "#8c6a4a"], scale: 1.5, octaves: 4, kind: ridged, grain: 0.07}
+  wall_wattle:    {type: dirt, colors: ["#b9a888", "#cfc0a0", "#ddd1b6"], scale: 3, octaves: 4, grain: 0.08, speckle: 0.08}
+  rushes:         {type: grass, colors: ["#a89a62", "#bfb27a", "#d2c691"], scale: 3, speckle: 0.3, tufts: 2.0, light_tufts: 1.2,
+                   grain: 0.08, tuft_color: "#6f6338", tuft_length: 0.55, tuft_width: 0.07}
+  mud:            {type: dirt, colors: ["#3a3024", "#4d4030", "#5f513d"], scale: 4, octaves: 4, grain: 0.06, speckle: 0.1,
+                   speckle_color: "#7a6a52"}
   cobble:         {type: cobble, colors: ["#8b877e", "#a7a297", "#b5b0a5"], size: 1.1, mortar_color: "#5f5a51", dome: 0.3}
   grass:          {type: grass, colors: ["#5a6845", "#707f5a", "#87936e"], scale: 9, speckle: 0.1, tufts: 0.35}
   meadow:         {type: grass, colors: ["#737a5f", "#989e85", "#bcc0aa"], scale: 4, speckle: 0.4, tufts: 2.2, light_tufts: 1.6, grain: 0.09, tuft_color: "#3f4630", tuft_length: 0.65, tuft_width: 0.09}

@@ -155,6 +155,58 @@ Full example: `maps/recipes/mist_coast.map.yaml`.
   - {op: fill, mask: mist_m, color: "#cfe7ee", blend: screen, opacity: 0.6, atmosphere: true, id: mist}
 ```
 
+## A building of many wings (inns, taverns, compounds)
+
+Full example: `maps/recipes/painted_lantern.map.yaml`.
+
+- **Wall each wing on its own** so the joins show: put wings flush, so the walls sit side by side, then cut
+  one `opening` through each wing's wall at the same spot (`floor_material` set to that wing's floor).
+  Give each wing its own wall material and thickness: `wall_wattle` (with `style: rough`) for the
+  oldest part, `wall_timber`, or a recipe-level painted one (`ramp_noise`, ridged, scale ~1.5).
+- **One floor per wing**, recipe-level for bright paint (`planks` in a loud colour), then fill a noise
+  mask of `wood_floor_rough` over it to wear the paint through where the crowds walk. `rushes` over
+  `wood_floor_rough` for an old taproom. `clay_floor` (`dirt`, terracotta) for a cheap shop floor.
+- **Colours per prop:** `prop` and `scatter` take `colors: {part: colour}`, which repaints named parts
+  for that step only. Felt on card tables, blankets on beds, rugs and banners per wing. Put the
+  defaults in the recipe `palette`.
+- **Gaming and shop props:** `card_table` (felt, cards, chips), `dice_table` (rail, felt, dice),
+  `wheel` (painted wedges), `counter` (long, mugs), `stool`, `shelf` (coloured goods), `hearth`.
+  Ring stools round a table by computing positions; a short generator script is fine, but the recipe
+  it writes is the source.
+- **Dark but colourful:** keep the hues and drop their value: oxblood, bottle green, smoky teal,
+  tarnished mustard, dull indigo. Place the lamps (`light`, no glow), then one `darkness` step
+  (`strength` ~0.6, `pool` ~0.6, `warmth` ~0.35, `atmosphere: true`). Everything goes dark except warm
+  pools round the lamps, so the corners stay black. Override `earth` darker at recipe level for a
+  night yard.
+- **Chaos, not order** (owner, 2026-11-15: "far too ordered ... a very chaotic place"):
+  - Draw each wing straight, then knock it askew by 5-15°. Use the `transform` op, or compute the
+    points, then place props in the wing's own coordinates and rotate them the same way.
+  - Give wings bump-outs, slanted sides and lean-tos, never plain rectangles.
+  - Join wings with crooked plank passages (`path` floors walled with `exclude` = the wings grown by
+    the wall thickness), or with **plank walks over mud**: a door in each wall, a `mud` strip with
+    puddles (noise ∩ mud filled with `water`), and a `boards` prop from door to door.
+  - Pack tables by random rejection sampling (minimum spacing, keep-outs round rugs and bars), with
+    random rotation, and shove the odd stool back.
+  - `scatter` `clutter` over every floor, plus `sack`, crates and barrels in heaps. Add patch planks
+    on floors and repairs in walls: `wall_band` ∩ a region, filled with another material.
+
+## Region styles (a shared look across many maps)
+
+When the owner supplies concept art for a region, write a visual brief (`docs/REFERENCE_<region>_visual_brief.md`)
+and a region style (`software/mapgen/styles/<region>.yaml`) that includes `inked_parchment.yaml` and adds the
+region's palette, materials and macros. Every map in the region then puts `include: [styles/<region>.yaml]` in
+its header, so all of them share one look.
+
+- **Measure the concept, don't eyeball it:** mean RGB (the colour cast), mean saturation, and the 5th/95th
+  percentile of brightness (the value range). Compare your render with the same numbers. The comparator bands
+  in `quality` come from bright commercial maps and don't apply to a deliberately murky region.
+- **The mists region** (`styles/mists_region.yaml`, example `maps/recipes/mist_coast.map.yaml`):
+  - cold green-grey materials (`ash_sand`, `wet_ash`, `dune_dark`, `grey_sea`)
+  - `dunes`: dark hummocks inland, hatched as raised masses
+  - `rough_sea`: whitecaps across the open sea, plus swell strokes
+  - `lit_mist`: one light source through the mist, a radial glow that brightens the mist near it
+  - dim with `murk` (neutral, never blue), and keep haze off the stones so they stay near-black
+
 ## Fixing common defects
 
 | Defect | Fix |

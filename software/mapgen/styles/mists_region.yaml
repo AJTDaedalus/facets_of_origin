@@ -1,0 +1,73 @@
+# The mists region: shared look for every battle map in the region (owner concept art,
+# references/mists_concept.jpg; brief in docs/REFERENCE_mists_region_visual_brief.md).
+# Nearly monochrome cold green-greys (measured on the concept: mean RGB 0.42/0.45/0.44), near-black stone, luminous mist lit
+# from one side, grey sand that is pale only where wet, dark dunes inland, a rough grey sea.
+# A recipe uses it with `include: [styles/mists_region.yaml]` (it includes the inked parchment style).
+include: [inked_parchment.yaml]
+
+palette:
+  stone_light: "#353b39"
+  stone: "#1a1e1d"
+  stone_dark: "#080a0a"
+  mist: "#dde6e0"
+  mist_glow: "#f3f5e4"
+  foam: "#eef2ec"
+  murk: "#3e4644"        # the dimming multiply: neutral, never blue
+  dune_ink: "#0e1211"
+
+materials:
+  ash_sand:  {type: dirt, colors: ["#7f8884", "#949d98", "#a8b0ab"], scale: 8, octaves: 5, grain: 0.07, speckle: 0.09, speckle_color: "#535b58"}
+  wet_ash:   {type: dirt, colors: ["#a2aca7", "#b4bdb8", "#c6cec9"], scale: 6, octaves: 4, grain: 0.05, speckle: 0.05}
+  dune_dark: {type: dirt, colors: ["#262b2a", "#343a38", "#444b48"], scale: 6, octaves: 5, grain: 0.08, speckle: 0.08, speckle_color: "#151918"}
+  grey_sea:  {type: water, shallow: "#8a9a95", deep: "#373f3d", depth: 12, ripples: 2.2, ripple_color: "#c8d2cd", grain: 0.05}
+
+macros:
+  rough_sea:
+    doc: "Whitecaps across the open sea (broken white flecks with a fine edge and a soft shadow) plus short swell strokes, from `from` feet off the land mask `land` outward. `angle` is the swell's run, roughly along the shore (degrees, 90 = south). Lower `amount` (noise threshold, ~0.1-0.3) means more whitecaps; `soft` (a little above it) feathers their edges."
+    params: {land: land_m, name: sea, from: 4, angle: 100, amount: 0.2, soft: 0.3}
+    steps:
+      - {op: band, out: "${name}_open", src: "${land}", inner: "${from}", outer: 400}
+      - {op: noise, out: "${name}_wc_n", scale: 1.5, octaves: 3, stretch: 2.6, angle: "${angle}", id: "${name}_wc_noise"}
+      - {op: field_to_mask, out: "${name}_wc", src: "${name}_wc_n", lo: "${amount}", hi: "${soft}"}
+      - {op: noise, out: "${name}_wc_f", scale: 10, octaves: 2, id: "${name}_wc_fade"}
+      - {op: field_to_mask, out: "${name}_wc_fm", src: "${name}_wc_f", lo: -0.35, hi: 0.3}
+      - {op: combine, out: "${name}_wc", of: ["${name}_wc", "${name}_open", "${name}_wc_fm"], mode: mul}
+      - {op: warp, out: "${name}_wc", src: "${name}_wc", amount: 0.35, scale: 2, curl: true, iterations: 3, id: "${name}_wc_curl"}
+      - {op: shadow, mask: "${name}_wc", mode: drop, offset: [0.15, 0.2], blur: 0.15, strength: 0.4, color: dune_ink}
+      - {op: fill, mask: "${name}_wc", color: foam, opacity: 0.85, id: "${name}_wc_fill"}
+      - {op: stroke, src: "${name}_wc", width: 0.035, color: "#46504d", opacity: 0.55}
+      - {op: hatch, mask: "${name}_open", spacing: 1.0, length: 0.9, width: 0.04, lines: 2, angle: "${angle}", angle_jitter: 14,
+         color: dune_ink, opacity: 0.35, id: "${name}_swell"}
+
+  dunes:
+    doc: "Dark hummocky dunes inland: noise masses inside `within` (minus `clear`), dark fill, heavy south-east hatching (a raised mass), a dashed crest line. Makes mask `${name}`."
+    params: {name: dunes, within: land_m, clear: clear, scale: 7, cover: 0.05}
+    steps:
+      - {op: noise, out: "${name}_n", scale: "${scale}", octaves: 4, stretch: 1.8, angle: 80, id: "${name}_noise"}
+      - {op: field_to_mask, out: "${name}", src: "${name}_n", lo: "${cover}", hi: "${cover}"}
+      - {op: combine, out: "${name}", of: ["${name}", "${within}"], mode: min}
+      - {op: combine, out: "${name}", of: ["${name}", "${clear}"], mode: sub}
+      - {op: trace, out: "${name}_g", src: "${name}", simplify: 0.2, min_area: 6}
+      - {op: roughen_geom, out: "${name}_g", src: "${name}_g", amount: 0.5, scale: 2, id: "${name}_rough"}
+      - {op: rasterize, out: "${name}", src: "${name}_g"}
+      - {op: combine, out: "${name}", of: ["${name}", "${within}"], mode: min}        # roughening wanders: clip again
+      - {op: combine, out: "${name}", of: ["${name}", "${clear}"], mode: sub}
+      - {op: blur, out: "${name}_soft", src: "${name}", sigma: 0.8}
+      - {op: combine, out: "${name}_soft", of: ["${name}_soft", "${within}"], mode: min}
+      - {op: combine, out: "${name}_soft", of: ["${name}_soft", "${clear}"], mode: sub}
+      - {op: fill, mask: "${name}_soft", material: dune_dark, opacity: 0.9, id: "${name}_fill"}
+      - {op: shade_lines, mask: "${name}", side: inside, shadow: [-0.6, -0.8], length: 1.6, spacing: 0.24, width: 0.05,
+         color: dune_ink, opacity: 0.75, id: "${name}_hatch"}
+      - {op: offset, out: "${name}_crest", src: "${name}_g", by: -0.9}
+      - {op: stroke, src: "${name}_crest", width: 0.06, dash: [1.4, 0.6], jitter: 0.6, taper: 0.8, color: "#c4c6bb", opacity: 0.35, clip: "${name}"}
+
+  lit_mist:
+    doc: "One light source seen through the mist: a broad glow round `center` (often just off the map) out to `edge` (any point on the glow's rim; set both together), and the mist mask `mist` brightened near it and fading away from it. `strength` sets the glow. Mark the call `atmosphere: true`."
+    params: {mist: mist_m, center: [0, 0], edge: [40, 0], name: lit, strength: 0.8}
+    steps:
+      - {op: gradient, out: "${name}_d", kind: radial, start: "${center}", end: "${edge}"}
+      - {op: remap, out: "${name}_near", src: "${name}_d", in_range: [0, 1], out_range: [1, 0], curve: smooth}
+      - {op: field_to_mask, out: "${name}_near_m", src: "${name}_near", lo: 0, hi: 1}
+      - {op: fill, mask: "${name}_near_m", color: mist_glow, blend: screen, opacity: "${strength}", id: "${name}_glow"}
+      - {op: combine, out: "${name}_mist_near", of: ["${mist}", "${name}_near_m"], mode: mul}
+      - {op: fill, mask: "${name}_mist_near", color: mist_glow, blend: screen, opacity: 0.5, id: "${name}_mist_lift"}
